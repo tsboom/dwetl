@@ -1,0 +1,36 @@
+{
+    "title": "z30",
+    "type": "Aleph Table",
+    "library": "MAI50",
+    "fields": {
+        "Z30_REC_KEY": {
+            "input_type": "CHAR(15)",
+            "transformation": "LBRY_ITEM_SOURCE_SYSTEM_ID",
+            "mandatory": "True",
+            "data_quality_checks": {
+                "Missing Value": ["null", "spaces", "zeros"],
+                "Length": 15,
+                "Numeric": true,
+            },
+            "sub-components": {
+                "LBRY_ITEM_ADM_NO": {
+                    "sub_start":1,
+                    "sub_end":9,
+                    "data_quality_checks": {
+                        "Missing Value": ["spaces", "zeros"],
+                        "Length": 9
+                    }
+                },
+                "LBRY_ITEM_SEQ_NO": {
+                    "sub_start":0,
+                    "sub_end":15,
+                    "data_quality_checks": {
+                        "Missing Value": ["spaces", "zeros"],
+                        "Length": 6
+                    }
+                }
+            },
+
+        }
+    }
+}
