@@ -4,16 +4,32 @@ from sqlalchemy.dialects.postgresql import *
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
+import logging
+import database_credentials
+
+def create_db_engine():
+    # connect to database
+    engine = create_engine(database_credentials.DB_CONNECTION_STRING, echo=True)
+    return engine
+engine = create_db_engine()
+
+# set up logging file
+handler = logging.FileHandler('sqlalchemy.engine.log')
+handler.level = logging.DEBUG
+logging.getLogger('sqlalchemy.engine').addHandler(handler)
 
 
-# def create_db_engine():
-#     # connect to database
-#     engine = create_engine(DB_CONNECTION_STRING, echo=True)
-#     return engine
-#
-# DB_CONNECTION_STRING = 'postgresql+psycopg2://usmai_dw:B1gUmD4t9@pgcommondev.lib.umd.edu/usmai_dw_etl'
-#
+# reflect all tables at once to get tables into Table objects for sqlalchemy
+# https://docs.sqlalchemy.org/en/latest/core/reflection.html
+meta = MetaData()
+
+meta.reflect(bind=engine)
+z30_table = meta.tables['dw_stg_1_mai50_z30_test']
+pdb.set_trace()
+
+
 # # use automap to reflect existing db into model
+# https://docs.sqlalchemy.org/en/latest/orm/extensions/automap.html
 # Base = automap_base()
 #
 # engine = create_db_engine()

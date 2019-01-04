@@ -14,10 +14,6 @@ from database_config import *
 from database_credentials import *
 
 
-
-
-
-
 # download files
 #filename = 'data/mai50_z30_20181212_034002_data' #line 5600 is messed up
 filename = 'data/mai50_z30_20190102_034001_data'
@@ -87,39 +83,10 @@ dataframe = read_tsv_into_dataframe(filename)
 '''
 load file equivalent table
 '''
-def create_db_engine():
-    # connect to database
-    engine = create_engine(DB_CONNECTION_STRING, echo=False)
-    return engine
-
-
-# use automap to reflect existing db into model
-# https://docs.sqlalchemy.org/en/latest/orm/extensions/automap.html
-Base = automap_base()
-
-engine = create_db_engine()
-
-# reflect existing table from db
-Base.prepare(engine, reflect=True)
-pdb.set_trace()
-# assign reflected table to class name
-Z30 = Base.classes.dw_stg_1_mai50_z30
-
-session = Session(engine)
-# print (session.dw_stg_1_mai50_z30_collection)
 
 
 
-
-
-
-
-
-pdb.set_trace()
-
-#dataframe.to_sql('dw_stg_1_mai50_z30', engine, if_exists='replace')
-dataframe.to_sql('test_z30', engine, if_exists='replace')
-
+dataframe.to_sql('dw_stg_1_mai50_z30_test', engine, if_exists='replace', index=False)
 
 
 

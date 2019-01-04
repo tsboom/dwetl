@@ -11,6 +11,9 @@ import pdb
 database tests
 '''
 
+# test a bad connection
+
+
 # test db connection
 def test_db_connection():
     engine = dwetl.connect_to_db()
