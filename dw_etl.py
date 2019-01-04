@@ -11,6 +11,7 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 import psycopg2
 from database_config import *
+from database_credentials import *
 
 
 
@@ -91,7 +92,6 @@ def create_db_engine():
     engine = create_engine(DB_CONNECTION_STRING, echo=False)
     return engine
 
-DB_CONNECTION_STRING = 'postgresql+psycopg2://usmai_dw:B1gUmD4ta@pgcommondev.lib.umd.edu:5439/usmai_dw_etl'
 
 # use automap to reflect existing db into model
 # https://docs.sqlalchemy.org/en/latest/orm/extensions/automap.html
