@@ -1,46 +1,19 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import MetaData, Column, Integer, String, DateTime
 from sqlalchemy.dialects.postgresql import *
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
+from sqlalchemy.engine import reflection
 import logging
 import database_credentials
-
-def create_db_engine():
-    # connect to database
-    engine = create_engine(database_credentials.DB_CONNECTION_STRING, echo=True)
-    return engine
-engine = create_db_engine()
-
-# set up logging file
-handler = logging.FileHandler('sqlalchemy.engine.log')
-handler.level = logging.DEBUG
-logging.getLogger('sqlalchemy.engine').addHandler(handler)
+import pdb
 
 
-# reflect all tables at once to get tables into Table objects for sqlalchemy
-# https://docs.sqlalchemy.org/en/latest/core/reflection.html
-meta = MetaData()
 
-meta.reflect(bind=engine)
-z30_table = meta.tables['dw_stg_1_mai50_z30_test']
-pdb.set_trace()
-
-
-# # use automap to reflect existing db into model
-# https://docs.sqlalchemy.org/en/latest/orm/extensions/automap.html
-# Base = automap_base()
-#
-# engine = create_db_engine()
-#
-# # reflect existing table from db
-# Base.prepare(engine, reflect=True)
-#
-# # assign reflected table to class name
-# Z30 = Base.classes.dw_stg_1_mai50_z30
-
-
+'''
+I'm not manually defining tables for now
+'''
 # Base = declarative_base()
 #
 #

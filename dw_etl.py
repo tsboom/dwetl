@@ -8,10 +8,13 @@ import os
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.ext.automap import automap_base
-from sqlalchemy.orm import Session
-import psycopg2
-from database_config import *
-from database_credentials import *
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.engine import reflection
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy import MetaData
+import database_config
+import database_credentials
+import logging
 
 
 # download files
@@ -19,6 +22,45 @@ from database_credentials import *
 filename = 'data/mai50_z30_20190102_034001_data'
 # filename = os.path.join('data','mai50_z305_20181115_172016_1.tsv')
 tc_path = os.path.join('table_config', 'z30.json')
+
+'''
+set up SQLAlchemy to map to reflect existing tables in the database
+'''
+def create_db_engine():
+    # connect to database
+    engine = create_engine(database_credentials.DB_CONNECTION_STRING, echo=True)
+    return engine
+
+engine = create_db_engine()
+
+def set_up_db_logging():
+    # set up logging file
+    handler = logging.FileHandler('sqlalchemy.engine.log')
+    handler.level = logging.DEBUG
+    logging.getLogger('sqlalchemy.engine').addHandler(handler)
+
+
+set_up_db_logging()
+
+# Everything below was about reflecting all tables at once
+# # reflect all tables at once to get tables into Table objects for sqlalchemy
+# # https://docs.sqlalchemy.org/en/latest/core/reflection.html
+# meta = MetaData()
+#
+# meta.reflect(bind=engine)
+#
+# z30_table = meta.tables['dw_stg_1_mai50_z30_test']
+
+
+# Reflecting database with Automap (see chapter 10 of Essential SQLAlchemy 2nd edition)
+Base = automap_base()
+# reflect the entire database
+Base.prepare(engine, reflect=True)
+# # print a list of each table object
+# print(Base.classes.keys())
+
+# create class names for each base class that was automapped
+Z30 = Base.classes.dw_stg_1_mai50_z30_test
 
 
 # create job execution metadata record and other stuff (see file-equivalent table chart)
@@ -38,15 +80,15 @@ with open(filename) as f:
         pass
     footer = line.strip().split('\t')
 
-# def tsv_has_valid_headers(filename):
+# # def tsv_has_valid_headers(filename):
+# #
+# #
+# #
+# #
+# # def tsv_has_valid_footer(filename):
 #
 #
 #
-#
-# def tsv_has_valid_footer(filename):
-
-
-
 # columns are listed in header line 2. Ignore the first H field.
 columns = header_2[1:]
 
@@ -67,12 +109,13 @@ tsv_name_metadata = parse_tsv_filename(filename)
 
 
 
-# put data in dataframe ignore first header line and footer line
-def read_tsv_into_dataframe(filename):
-    dataframe = pd.read_csv(filename, engine='python', sep='\t', header=1, skipfooter=1, error_bad_lines=False)
-    return dataframe
-
-dataframe = read_tsv_into_dataframe(filename)
+# # put data in dataframe ignore first header line and footer line
+# def read_tsv_into_dataframe(filename):
+#     dataframe = pd.read_csv(filename, engine='python', sep='\t', header=1, skipfooter=1, error_bad_lines=False)
+#     return dataframe
+#
+# dataframe = read_tsv_into_dataframe(filename)
+# dataframe.to_sql('dw_stg_1_mai50_z30', engine, if_exists='append', index=False)
 
 
 # def tsv_has_valid_row_count(dataframe):
@@ -81,15 +124,47 @@ dataframe = read_tsv_into_dataframe(filename)
 
 
 '''
-load file equivalent table
+load tsv into file-equivalent table
 '''
 
+#create session
+Session = sessionmaker(bind=engine)
+session = Session()
 
+# determine if csv row is a footer
+def row_is_footer(row):
+    return row[0] == 'T'
 
-dataframe.to_sql('dw_stg_1_mai50_z30_test', engine, if_exists='replace', index=False)
+# parse values from csv row into dict
+def parse_row(row, columns_header):
+    if(row_is_footer(row)):
+        raise StopIteration()
+    else:
+        row_dict = {}
+        for i,field in enumerate(row):
+            row_dict[columns_header[i]] = field
+        return row_dict
 
+# read each line of the csv ignoring 2 headers and last line and write to the db
+with open(filename) as f:
+    reader = csv.reader(f, delimiter='\t')
+    header_1 = next(reader) # row 0
+    header_2 = next(reader) # row 1
 
-
+    # read all lines after lines one and two
+    try:
+        while True:
+            row_dict = parse_row(next(reader), header_2)
+            try:
+                # insert the row
+                record = Z30(**row_dict)
+                pdb.set_trace()
+                session.add(record)
+                session.commit()
+            except:
+                session.rollback()
+    except StopIteration:
+        pass
 
 
 '''
