@@ -1,0 +1,21 @@
+{ "target_table": "bibliographic_record_dimension",
+    "fields": [{
+            "BIB_REC_DIM_KEY": {
+                "target_data_type":"Bigint",
+                "target_attribute": "Bibiographic Record Dimension Key",
+                "mandatory": false,
+                "source_information": {
+                    "source_field": "",
+                    "source_type":"",
+                    "preprocessing": "Trim",
+                    "data_quality_checks": {
+                        "Missing Value": ["spaces", "zeros"],
+                        "Leading Spaces": false,
+                        "Uniqueness": "All Member Libraries"
+                    }
+                }
+
+            }
+        }]
+
+}

@@ -15,12 +15,12 @@ def is_numeric(input):
 
 
 # checks if provided length is true
-def is_good_length(input, length):
+def is_valid_length(input, length):
     if (len(input) == length):
         return True
 
 # checks range
-def is_good_range(number, a, z):
+def is_valid_range(number, a, z):
     if number in range(a, z):
         return True
 
