@@ -37,14 +37,6 @@ def has_missing_values(input):
 def trim(input):
     return input.strip()
 
-# checks if valid date
-def is_valid_date(string_date):
-    try:
-        if string_date == datetime.datetime.strptime(string_date, '%Y%m%d').strftime('%Y%m%d'):
-            return True
-    except ValueError:
-        raise ValueError(string_date + ": Date is invalid")
-
 # check if valid aleph year (1980 - Present)
 def is_valid_aleph_year(year):
     current_year = datetime.datetime.now().year
@@ -54,13 +46,11 @@ def is_valid_aleph_year(year):
     except ValueError:
         raise ValueError(year + ": Year is out of range.")
 
-# check first header row. Does it contain the format we need? filename?
-
-
-# check second header row. does it have the right number of columns?
-
-# check footer row . does it have right format?
-
-
-# check detail rows
-# are there more than zero detail records?
+# checks if valid date 1980-present
+def is_valid_aleph_date(string_date):
+    string_date_valid = datetime.datetime.strptime(string_date, '%Y%m%d').strftime('%Y%m%d')
+    try:
+        if string_date == string_date_valid and is_valid_aleph_year(string_date):
+            return True
+    except ValueError:
+        raise ValueError(string_date + ": Date is invalid")

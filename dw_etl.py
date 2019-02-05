@@ -29,7 +29,9 @@ set up SQLAlchemy to map to reflect existing tables in the database
 '''
 def create_db_engine():
     # connect to database
-    engine = create_engine(database_credentials.DB_CONNECTION_STRING, echo=True)
+    #engine = create_engine(database_credentials.DB_CONNECTION_STRING, echo=True)
+    engine = create_engine("postgresql+psycopg2://root:pass@localhost/usmai_dw_etl", echo=True)
+
     return engine
 
 engine = create_db_engine()
@@ -112,47 +114,47 @@ tsv_name_metadata = parse_tsv_filename(filename)
 '''
 load tsv into file-equivalent table
 '''
-def load_file_equivalent_table(filename, engine):
-    #create session
-    Session = sessionmaker(bind=engine)
-    session = Session()
 
-    # determine if csv row is a footer
-    def row_is_footer(row):
-        return row[0] == 'T'
+#create session
+Session = sessionmaker(bind=engine)
+session = Session()
 
-    # parse values from csv row into dict
-    def parse_row(row, columns_header):
-        if(row_is_footer(row)):
-            raise StopIteration()
-        else:
-            row_dict = {}
-            for i,field in enumerate(row):
-                row_dict[columns_header[i]] = field
-            return row_dict
+# determine if csv row is a footer
+def row_is_footer(row):
+    return row[0] == 'T'
 
-    # read each line of the csv ignoring 2 headers and last line and write to the db
-    with open(filename) as f:
-        reader = csv.reader(f, delimiter='\t')
-        header_1 = next(reader) # row 0
-        header_2 = next(reader) # row 1
+# parse values from csv row into dict
+def parse_row(row, columns_header):
+    if(row_is_footer(row)):
+        raise StopIteration()
+    else:
+        row_dict = {}
+        for i,field in enumerate(row):
+            row_dict[columns_header[i]] = field
+        return row_dict
 
-        # read all lines after lines one and two
-        try:
-            while True:
-                row_dict = parse_row(next(reader), header_2)
-                try:
-                    # insert the row
-                    record = Z30(**row_dict)
-                    session.add(record)
-                    session.commit()
-                except:
-                    # should I create a db exception here?
-                    session.rollback()
-        except StopIteration:
-            pass
+# read each line of the csv ignoring 2 headers and last line and write to the db
+with open(filename) as f:
+    reader = csv.reader(f, delimiter='\t')
+    header_1 = next(reader) # row 0
+    header_2 = next(reader) # row 1
 
-load_file_equivalent_table(filename, engine)
+    # read all lines after lines one and two
+    try:
+        while True:
+            row_dict = parse_row(next(reader), header_2)
+            try:
+                # insert the row
+                record = Z30(**row_dict)
+                session.add(record)
+                session.commit()
+            except:
+                # should I create a db exception here?
+                session.rollback()
+    except StopIteration:
+        pass
+
+
 
 '''
 transform
@@ -162,13 +164,10 @@ table_config = TableTransform.load_table_config(tc_path)
 print(json.dumps(table_config, indent=4))
 # Use a function which uses the table metadata config files and performs the transformations
 
-with open(filename as f):
+# with open(filename as f):
 
 
 # transform_field(df, table_config)
-
-
-# write to the intermediate database
 
 
 
