@@ -2,22 +2,65 @@
 #dependency transformations
 #valid value lookups
 
-#ifSuppressed
-def suppCheck(field):
-    if "SUPPRESSED" in field:
+
+'''
+specific transform functions that are used in more than one dimension
+'''
+
+# substring based on start and end index
+def substring(input, start, end):
+    substring = input[start:end]
+    return substring
+
+# return 'Standard'
+# LBRY_HOLDING_REC_TYPE_DESC
+# BIB_RECORD_REC_TYPE_DESC
+# LBRY_ITEM_LOC_REC_TYPE_DESC
+def output_standard():
+    return 'Standard'
+
+
+# Check to see if SUPPRESSED flag is there
+# LBRY_HOLDING_DISPLAY_SUPPRESSED_FLAG
+# BIB_REC_DISPLAY_SUPPRESSED_FLAG
+def is_suppressed(input):
+    if "SUPPRESSED" in input.upper():
         return "Y"
     else:
         return "N"
 
-#for these checks, should we standardize for upper or lower?
-#nice way to combine them all because they are all checks against z13u_user_defined_6 field
-#z13u_user_defined_3 also checked for suppressed. Problematic to have that check combined with the others?
-#ifAcqCreatedCircCreatedProvisional
-def z13u_check(field):
-    if "SUPPRESSED" in field.upper() or if "ACQ-CREATED" in field.upper() or "CIRC-CREATED" in field.upper() or "PROVISIONAL" in field.upper():
-        return "Y"
+
+
+
+'''
+bibliographic record dimension transform functions
+'''
+
+# source field Z13U_USER_DEFINED_6 specific transform
+# target fields:
+# BIB_REC_ACQUISITION_CREATED_FLAG
+# BIB_REC_CIRCULATION_CREATED_FLAG
+# BIB_REC_PROVISIONAL_STATUS_FLAG
+
+def is_acq_created(field):
+    if "ACQ-CREATED" in field.upper():
+        return 'Y'
     else:
-        return "N"
+        return 'N'
+
+def is_circ_created(field):
+    if "CIRC-CREATED" in field.upper():
+        return 'Y'
+    else:
+        return 'N'
+
+
+def is_provisional(field):
+    if "PROVISIONAL" in field.upper():
+        return 'Y'
+    else:
+        return 'N'
+
 
 #ref should be path to csv lookup table
 #works for z30_call_no_type and z30_call_no_2_type
@@ -32,8 +75,6 @@ def subLookUp(field, ref, start=0, end=None):
         for (key,value) in lookup_table:
                 if field[start:end] in key:
                     return value
-
-def look_up_
 
 
 def z13cond(field):

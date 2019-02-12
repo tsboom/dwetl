@@ -1,21 +1,805 @@
-{ "target_table": "bibliographic_record_dimension",
-    "fields": [{
-            "BIB_REC_DIM_KEY": {
-                "target_data_type":"Bigint",
-                "target_attribute": "Bibiographic Record Dimension Key",
-                "mandatory": false,
-                "source_information": {
-                    "source_field": "",
-                    "source_type":"",
-                    "preprocessing": "Trim",
-                    "data_quality_checks": {
-                        "Missing Value": ["spaces", "zeros"],
-                        "Leading Spaces": false,
-                        "Uniqueness": "All Member Libraries"
-                    }
-                }
-
-            }
-        }]
-
+{
+    "fields": [
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "N/A",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "Use sequential counter",
+                "action_specific": "N/A",
+                "aleph_table": "N/A",
+                "chg_proc_type": "N/A",
+                "source_col_name": "N/A",
+                "source_data_type": "N/A",
+                "source_format": "N/A",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Generate"
+            },
+            "target_attribute": "- Bibliographic Record Dimension Key",
+            "target_col_name": "BIB_REC_DIM_KEY",
+            "target_data_type": "Bigint"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "N/A",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "= 'Standard'",
+                "action_specific": "",
+                "aleph_table": "N/A",
+                "chg_proc_type": "N/A",
+                "source_col_name": "N/A",
+                "source_data_type": "N/A",
+                "source_format": "N/A",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record Type Description",
+            "target_col_name": "BIB_RECORD_REC_TYPE_DESC",
+            "target_data_type": "VarChar(50)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "",
+                "pre_detailed_instructions": "",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-Is",
+                "aleph_table": "Z00",
+                "chg_proc_type": "0",
+                "source_col_name": "Z00_DOC_NUMBER",
+                "source_data_type": "CHAR(9)",
+                "source_format": "",
+                "source_mandatory": null,
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record Identifier",
+            "target_col_name": "BIB_REC_ID",
+            "target_data_type": "Character(9)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "Generate",
+                "pre_detailed_instructions": "When loading the File Equivalent Tables, retrieve and parse from file name",
+                "pre_or_post_dq": "PRE"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-Is",
+                "aleph_table": "N/A",
+                "chg_proc_type": "N/A",
+                "source_col_name": "N/A",
+                "source_data_type": "N/A",
+                "source_format": "N/A",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record Aleph Library Code",
+            "target_col_name": "BIB_REC_ALEPH_LBRY_NAME",
+            "target_data_type": "Character(5)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "N/A",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-Is",
+                "aleph_table": "Z00",
+                "chg_proc_type": "1",
+                "source_col_name": "Z00_NO_LINES ",
+                "source_data_type": "NUMBER(4)",
+                "source_format": "",
+                "source_mandatory": null,
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record MARC Record Field Count",
+            "target_col_name": "BIB_REC_MARC_REC_FIELD_CNT",
+            "target_data_type": "SmallInt"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "N/A",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-Is",
+                "aleph_table": "Z00",
+                "chg_proc_type": "1",
+                "source_col_name": "Z00_DATA_LEN",
+                "source_data_type": "NUMBER(6)",
+                "source_format": "",
+                "source_mandatory": null,
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record MARC Record Data Content Length Count",
+            "target_col_name": "BIB_REC_MARC_REC_DATA_CONTENT_LEN_CNT",
+            "target_data_type": "SmallInt"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "N/A",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-Is",
+                "aleph_table": "Z00",
+                "chg_proc_type": "1",
+                "source_col_name": "Z00_DATA",
+                "source_data_type": "LONG",
+                "source_format": "",
+                "source_mandatory": null,
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record MARC Record Data Content Text",
+            "target_col_name": "BIB_REC_MARC_REC_DATA_CONTENT_TXT",
+            "target_data_type": "VarChar(45000)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "N/A",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-is",
+                "aleph_table": "Z13",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13_YEAR",
+                "source_data_type": "NUMBER(4)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record Publication Year Number",
+            "target_col_name": "BIB_REC_PUBLICATION_YEAR_NO",
+            "target_data_type": "SmallInt"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "Trim",
+                "pre_detailed_instructions": "Remove leading and trailing spaces",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-is",
+                "aleph_table": "Z13",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13_TITLE",
+                "source_data_type": "VARCHAR2(100)",
+                "source_format": "",
+                "source_mandatory": null,
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record Title",
+            "target_col_name": "BIB_REC_TITLE",
+            "target_data_type": "VarChar(100)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "Trim",
+                "pre_detailed_instructions": "Remove leading and trailing spaces",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-is",
+                "aleph_table": "Z13",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13_AUTHOR",
+                "source_data_type": "VARCHAR2(100)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record Author Name",
+            "target_col_name": "BIB_REC_AUTHOR_NAME",
+            "target_data_type": "VarChar(100)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "Trim",
+                "pre_detailed_instructions": "Remove leading and trailing spaces",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-is",
+                "aleph_table": "Z13",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13_IMPRINT",
+                "source_data_type": "VARCHAR2(100)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record Imprint Text",
+            "target_col_name": "BIB_REC_IMPRINT_TXT",
+            "target_data_type": "VarChar(100)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "Trim",
+                "pre_detailed_instructions": "Remove leading and trailing spaces",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-is",
+                "aleph_table": "Z13",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13_ISBN_ISSN_CODE",
+                "source_data_type": "CHAR(5)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record ISBN ISSN Source Code",
+            "target_col_name": "BIB_REC_ISBN_ISSN_SOURCE_CD",
+            "target_data_type": "VarChar(5)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "Trim",
+                "pre_detailed_instructions": "Remove leading and trailing spaces",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "If z13_isbn_issn_code begins with 020, then populate this field with the data from z13_isbn_issn. Else, treat as empty field.",
+                "action_specific": "Conditional",
+                "aleph_table": "Z13",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13_ISBN_ISSN",
+                "source_data_type": "VARCHAR2(100)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record ISBN Text",
+            "target_col_name": "BIB_REC_ISBN_TXT",
+            "target_data_type": "VarChar(100)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "Trim",
+                "pre_detailed_instructions": "Remove leading and trailing spaces",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "If z13_isbn_issn_code begins with 022, then populate this field with the data from z13_isbn_issn. Else, treat as empty field.",
+                "action_specific": "Conditional",
+                "aleph_table": "Z13",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13_ISBN_ISSN",
+                "source_data_type": "VARCHAR2(100)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record All Associated ISSNs Text",
+            "target_col_name": "BIB_REC_ALL_ASSOCIATED_ISSNs_TXT",
+            "target_data_type": "VarChar(100)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "Trim",
+                "pre_detailed_instructions": "Remove \"ocm\", \"ocn\", or \"on\" from beginning of string",
+                "pre_or_post_dq": "Post"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-is",
+                "aleph_table": "Z13U",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13U_USER_DEFINED_2",
+                "source_data_type": "VARCHAR2(500)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record OCLC Number",
+            "target_col_name": "BIB_REC_OCLC_NO",
+            "target_data_type": "VarChar(500)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "",
+                "pre_detailed_instructions": "",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-is",
+                "aleph_table": "Z13U",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13U_USER_DEFINED_3",
+                "source_data_type": "VARCHAR2(500)",
+                "source_format": "",
+                "source_mandatory": null,
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record MARC Record Leader Field Text",
+            "target_col_name": "BIB_REC_MARC_REC_LEADER_FIELD_TXT",
+            "target_data_type": "VarChar(500)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "",
+                "pre_detailed_instructions": "",
+                "pre_or_post_dq": ""
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "substr(z13u_user_defined_3,7,1)",
+                "action_specific": "Sub-String",
+                "aleph_table": "Z13U",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13U_USER_DEFINED_3",
+                "source_data_type": "VARCHAR2(500)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record Type Code",
+            "target_col_name": "BIB_REC_TYPE_CD",
+            "target_data_type": "Character(1)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "N/A",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "Look up description based on substr(z13u_user_defined_3,7,1)",
+                "action_specific": "Related Value",
+                "aleph_table": "Lookup (record_type_code.csv)",
+                "chg_proc_type": "N/A",
+                "source_col_name": "N/A",
+                "source_data_type": "N/A",
+                "source_format": "N/A",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Lookup"
+            },
+            "target_attribute": "- Bibliographic Record Type Description",
+            "target_col_name": "BIB_REC_TYPE_DESC",
+            "target_data_type": "VarChar(50)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "N/A",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "substr(z13u_user_defined_3,8,1)",
+                "action_specific": "Sub-String",
+                "aleph_table": "Z13U",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13U_USER_DEFINED_3",
+                "source_data_type": "VARCHAR2(500)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record Bibiolgraphic Level Code",
+            "target_col_name": "BIB_REC_BIB_LVL_CD",
+            "target_data_type": "Character(1)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "N/A",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "Look up description based on substr(z13u_user_defined_3,8,1)",
+                "action_specific": "Related Value",
+                "aleph_table": "Lookup (biblioraphic_level.csv)",
+                "chg_proc_type": "N/A",
+                "source_col_name": "N/A",
+                "source_data_type": "N/A",
+                "source_format": "N/A",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Lookup"
+            },
+            "target_attribute": "- Bibliographic Record Bibiolgraphic Level Description",
+            "target_col_name": "BIB_REC_BIB_LVL_DESC",
+            "target_data_type": null
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "N/A",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "substr(z13u_user_defined_3,18,1)",
+                "action_specific": "Sub-String",
+                "aleph_table": "Z13U",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13U_USER_DEFINED_3",
+                "source_data_type": "VARCHAR2(500)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record Encoding Level Code",
+            "target_col_name": "BIB_REC_ENCODING_LVL_CD",
+            "target_data_type": "Character(1)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "N/A",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "Look up description based on substr(z13u_user_defined_3,18,1)",
+                "action_specific": "Related Value",
+                "aleph_table": "Lookup (encoding_level.csv)",
+                "chg_proc_type": "N/A",
+                "source_col_name": "N/A",
+                "source_data_type": "N/A",
+                "source_format": "N/A",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Lookup"
+            },
+            "target_attribute": "- Bibliographic Record Encoding Level Description",
+            "target_col_name": "BIB_REC_ENCODING_LVL_DESC",
+            "target_data_type": null
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "N/A",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-is",
+                "aleph_table": "Z13U",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13U_USER_DEFINED_4",
+                "source_data_type": "VARCHAR2(500)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record MARC Record 008 Field Text",
+            "target_col_name": "BIB_REC_MARC REC_ 008_FIELD_TXT",
+            "target_data_type": "VarChar(500)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "Remove leading and trailing spaces",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "substr(z13u_user_defined_4,36,3)",
+                "action_specific": "Sub-String",
+                "aleph_table": "Z13U",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13U_USER_DEFINED_4",
+                "source_data_type": "VARCHAR2(500)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record Language Code",
+            "target_col_name": "BIB_REC_LANGUAGE_CD",
+            "target_data_type": "Character(3)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "Trim",
+                "pre_detailed_instructions": "",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-is",
+                "aleph_table": "Z13U",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13U_USER_DEFINED_5",
+                "source_data_type": "VARCHAR2(500)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record ISSN",
+            "target_col_name": "BIB_REC_ISSN",
+            "target_data_type": "VarChar(500)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "Trim",
+                "pre_detailed_instructions": "Remove leading and trailing spaces",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "If source field contains \"SUPPRESSED\" (case-insensitive) then target field=Y. Else, target field=N.",
+                "action_specific": "",
+                "aleph_table": "Z13U",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13U_USER_DEFINED_6",
+                "source_data_type": "VARCHAR2(500)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Substitute"
+            },
+            "target_attribute": "- Bibliographic Record Display Suppressed Flag",
+            "target_col_name": "BIB_REC_DISPLAY_SUPPRESSED_FLAG",
+            "target_data_type": "Character(1)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "Trim",
+                "pre_detailed_instructions": "Remove leading and trailing spaces",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "If source field contains \"ACQ-CREATED\" (case-insensitive) then target field=Y. Else, target field=N.",
+                "action_specific": "",
+                "aleph_table": "Z13U",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13U_USER_DEFINED_6",
+                "source_data_type": "VARCHAR2(500)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Substitute"
+            },
+            "target_attribute": "- Bibliographic Record Acquisition-Created Flag",
+            "target_col_name": "BIB_REC_ACQUISITION_CREATED_FLAG",
+            "target_data_type": "Character(1)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "Trim",
+                "pre_detailed_instructions": "Remove leading and trailing spaces",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "If source field contains \"CIRC-CREATED\" (case-insensitive) then target field=Y. Else, target field=N.",
+                "action_specific": "",
+                "aleph_table": "Z13U",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13U_USER_DEFINED_6",
+                "source_data_type": "VARCHAR2(500)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Substitute"
+            },
+            "target_attribute": "- Bibliographic Record Circulation-Created Flag",
+            "target_col_name": "BIB_REC_CIRCULATION_CREATED_FLAG",
+            "target_data_type": "Character(1)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "Trim",
+                "pre_detailed_instructions": "Remove leading and trailing spaces",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "If source field contains \"PROVISIONAL\" (case-insensitive) then target field=Y. Else, target field=N.",
+                "action_specific": "",
+                "aleph_table": "Z13U",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13U_USER_DEFINED_6",
+                "source_data_type": "VARCHAR2(500)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Substitute"
+            },
+            "target_attribute": "- Bibliographic Record Provisional Status Flag",
+            "target_col_name": "BIB_REC_PROVISIONAL_STATUS_FLAG",
+            "target_data_type": "Character(1)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "Conversion",
+                "pre_detailed_instructions": "To Postgres Date Datatype",
+                "pre_or_post_dq": "Post"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-is",
+                "aleph_table": "Z13",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13_OPEN_DATE",
+                "source_data_type": "NUMBER(8)",
+                "source_format": "YYMMDD",
+                "source_mandatory": null,
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record Create Date",
+            "target_col_name": "BIB_REC_CREATE_DT",
+            "target_data_type": "Date"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "Conversion",
+                "pre_detailed_instructions": "To Postgres Date Datatype",
+                "pre_or_post_dq": "Post"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-is",
+                "aleph_table": "Z13",
+                "chg_proc_type": "1",
+                "source_col_name": "Z13_UPDATE_DATE",
+                "source_data_type": "CHAR(8)",
+                "source_format": "YYMMDD",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Bibliographic Record Update Date",
+            "target_col_name": "BIB_REC_UPDT_DT",
+            "target_data_type": "Date"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "",
+                "pre_detailed_instructions": "",
+                "pre_or_post_dq": ""
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "*** define within ETL process ***",
+                "action_specific": "",
+                "aleph_table": "",
+                "chg_proc_type": "",
+                "source_col_name": "",
+                "source_data_type": "",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "transform_action": ""
+            },
+            "target_attribute": "- Bibliographic Record MARC Record Fields Key",
+            "target_col_name": "BIB_REC_MARC_REC_FIELDs_KEY",
+            "target_data_type": "Bigint"
+        }
+    ],
+    "target_dimension_name": "BIBLIOGRAPHIC RECORD DIMENSION"
 }

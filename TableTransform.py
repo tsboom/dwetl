@@ -2,7 +2,7 @@ import os
 import json
 import pdb
 
-#table_config_path = os.path.join('table_config','z30.json')
+table_config_path = os.path.join('table_config','bibliographic_record_dimension.json')
 
 def load_table_config(table_config_path):
     with open(table_config_path) as f:

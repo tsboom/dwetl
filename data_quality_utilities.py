@@ -15,8 +15,13 @@ def is_numeric(input):
 
 
 # checks if provided length is true
-def is_valid_length(input, length):
+def is_specified_length(input, length):
     if (len(input) == length):
+        return True
+
+# checks if less than or equal to specified length
+def is_less_than_eq_to_length(input, length):
+    if (len(input) <= length):
         return True
 
 # checks range
@@ -27,8 +32,7 @@ def is_valid_range(number, a, z):
 # checks to see if there are no nulls, all spaces, or all zeros
 def has_missing_values(input):
     # check for all zeros
-
-    if input == None or input.isspace() or int(input)== 0:
+    if input == None or input.isspace() or int(input) == 0:
         return True
 
 

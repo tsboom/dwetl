@@ -12,7 +12,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.engine import reflection
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy import MetaData
-import database_config
+# import database_config
 import database_credentials
 import logging
 import TableTransform
@@ -29,8 +29,7 @@ set up SQLAlchemy to map to reflect existing tables in the database
 '''
 def create_db_engine():
     # connect to database
-    #engine = create_engine(database_credentials.DB_CONNECTION_STRING, echo=True)
-    engine = create_engine("postgresql+psycopg2://root:pass@localhost/usmai_dw_etl", echo=True)
+    engine = create_engine(database_credentials.DB_CONNECTION_STRING, echo=True)
 
     return engine
 
@@ -42,17 +41,8 @@ def set_up_db_logging():
     handler.level = logging.DEBUG
     logging.getLogger('sqlalchemy.engine').addHandler(handler)
 
-
 set_up_db_logging()
 
-# Everything below was about reflecting all tables at once
-# # reflect all tables at once to get tables into Table objects for sqlalchemy
-# # https://docs.sqlalchemy.org/en/latest/core/reflection.html
-# meta = MetaData()
-#
-# meta.reflect(bind=engine)
-#
-# z30_table = meta.tables['dw_stg_1_mai50_z30_test']
 
 
 # Reflecting database with Automap (see chapter 10 of Essential SQLAlchemy 2nd edition)
@@ -64,6 +54,14 @@ Base.prepare(engine, reflect=True)
 
 # create class names for each base class that was automapped
 Z30 = Base.classes.dw_stg_1_mai50_z30_test
+
+# bib record dimension file-equivalent-tables
+mai01_z00 = Base.classes.dw_stg_1_mai01_z00_test
+mai39_z00 = Base.classes.dw_stg_1_mai39_z00_test
+mai01_z13 = Base.classes.dw_stg_1_mai01_z13_test
+mai39_z13 = Base.classes.dw_stg_1_mai39_z13_test
+mai01_z13U = Base.classes.dw_stg_1_mai01_z13u_test
+mai39_z13U = Base.classes.dw_stg_1_mai39_z13u_test
 
 
 # create job execution metadata record and other stuff (see file-equivalent table chart)
@@ -129,7 +127,7 @@ def parse_row(row, columns_header):
         raise StopIteration()
     else:
         row_dict = {}
-        for i,field in enumerate(row):
+        for i, field in enumerate(row):
             row_dict[columns_header[i]] = field
         return row_dict
 
