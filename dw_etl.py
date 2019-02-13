@@ -50,18 +50,20 @@ Base = automap_base()
 # reflect the entire database
 Base.prepare(engine, reflect=True)
 # # print a list of each table object
-# print(Base.classes.keys())
+print(Base.classes.keys())
+
+pdb.set_trace()
 
 # create class names for each base class that was automapped
-Z30 = Base.classes.dw_stg_1_mai50_z30_test
+mai50_z30 = Base.classes.dw_stg_1_mai50_z30_test
 
 # bib record dimension file-equivalent-tables
 mai01_z00 = Base.classes.dw_stg_1_mai01_z00_test
 mai39_z00 = Base.classes.dw_stg_1_mai39_z00_test
 mai01_z13 = Base.classes.dw_stg_1_mai01_z13_test
 mai39_z13 = Base.classes.dw_stg_1_mai39_z13_test
-mai01_z13U = Base.classes.dw_stg_1_mai01_z13u_test
-mai39_z13U = Base.classes.dw_stg_1_mai39_z13u_test
+mai01_z13u = Base.classes.dw_stg_1_mai01_z13u_test
+
 
 
 # create job execution metadata record and other stuff (see file-equivalent table chart)
@@ -143,7 +145,7 @@ with open(filename) as f:
             row_dict = parse_row(next(reader), header_2)
             try:
                 # insert the row
-                record = Z30(**row_dict)
+                record = mai50_z30(**row_dict)
                 session.add(record)
                 session.commit()
             except:
@@ -151,6 +153,11 @@ with open(filename) as f:
                 session.rollback()
     except StopIteration:
         pass
+
+'''
+create stg 2 tables
+'''
+
 
 
 
@@ -175,3 +182,5 @@ print(json.dumps(table_config, indent=4))
 
 
 # load to dimension dw database
+
+# load fact
