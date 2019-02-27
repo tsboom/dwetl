@@ -2,11 +2,14 @@ import pdb
 import re
 import csv
 import json
-import pandas as pd
 import sql
 import os
+from os import walk
+import logging
+import datetime
 import sqlalchemy
-from sqlalchemy import create_engine
+from sqlalchemy import inspect, create_engine
+from sqlalchemy import exc
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.engine import reflection
@@ -14,15 +17,33 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy import MetaData
 # import database_config
 import database_credentials
-import logging
+
 import TableTransform
+import extract
 
 
-# download files
-#filename = 'data/mai50_z30_20181212_034002_data' #line 5600 is messed up
-filename = 'data/mai50_z30_20190102_034001_data'
-# filename = os.path.join('data','mai50_z305_20181115_172016_1.tsv')
-tc_path = os.path.join('table_config', 'z30.json')
+
+logging.basicConfig(filename='dwetl.log', level=logging.DEBUG)
+logging.info('Started logging at ', datetime.datetime.now())
+
+'''
+set files for processing
+'''
+
+# use filenames in a specific directory to process
+# in this case i put the bib rec files in data/bib_rec
+files = []
+for (dirpath, dirnames, filenames) in walk('data/bib_rec'):
+    for file in filenames:
+        files.append(os.path.join(dirpath, file))
+
+def is_not_empty(file):
+    return os.stat(file).st_size > 0
+
+tsvs_to_process = [f for f in files if is_not_empty(f)]
+
+
+
 
 '''
 set up SQLAlchemy to map to reflect existing tables in the database
@@ -50,113 +71,46 @@ Base = automap_base()
 # reflect the entire database
 Base.prepare(engine, reflect=True)
 # # print a list of each table object
-print(Base.classes.keys())
+# print(Base.classes.keys())
 
-pdb.set_trace()
-
-# create class names for each base class that was automapped
-mai50_z30 = Base.classes.dw_stg_1_mai50_z30_test
-
-# bib record dimension file-equivalent-tables
-mai01_z00 = Base.classes.dw_stg_1_mai01_z00_test
-mai39_z00 = Base.classes.dw_stg_1_mai39_z00_test
-mai01_z13 = Base.classes.dw_stg_1_mai01_z13_test
-mai39_z13 = Base.classes.dw_stg_1_mai39_z13_test
-mai01_z13u = Base.classes.dw_stg_1_mai01_z13u_test
-
-
-
-# create job execution metadata record and other stuff (see file-equivalent table chart)
-
-'''
-preprocessing
-'''
-header_1 = ''
-header_2 = ''
-footer = ''
-
-with open(filename) as f:
-    reader = csv.reader(f, delimiter='\t')
-    header_1 = next(reader)
-    header_2 = next(reader)
-    for line in f:
-        pass
-    footer = line.strip().split('\t')
-
-# # def tsv_has_valid_headers(filename):
-# #
-# #
-# #
-# #
-# # def tsv_has_valid_footer(filename):
+# # create class names for each base class that was automapped
+# mai50_z30 = Base.classes.dw_stg_1_mai50_z30
 #
-#
-#
-# columns are listed in header line 2. Ignore the first H field.
-columns = header_2[1:]
+# # bib record dimension file-equivalent-tables
+bib_rec_stg1_tables = {
+    'mai01_z00': Base.classes.dw_stg_1_mai01_z00, #has data
+    'mai39_z00': Base.classes.dw_stg_1_mai39_z00, #has data
+    'mai01_z13': Base.classes.dw_stg_1_mai01_z13, #has data
+    'mai39_z13': Base.classes.dw_stg_1_mai39_z13, # file is empty
+    'mai01_z13u': Base.classes.dw_stg_1_mai01_z13u #has data
+}
 
-def parse_tsv_filename(filename):
-    # tsv filename is the fourth field in header 1. ignore subdirectory name
-    tsv_name = header_1[3][9:]
-    tsv_name_metadata = {}
-    parts = tsv_name.split('_')
-    tsv_name_metadata = {
-        'library':parts[0],
-        'table':parts[1],
-        'datetime':parts[2]+parts[3]
-    }
-    #the counter doesn't exist in the current filename
-    return tsv_name_metadata
 
-tsv_name_metadata = parse_tsv_filename(filename)
+logging.info('Successfully mapped postgres tables to Base classes.')
+# doesn't exist
+# mai39_z13u = Base.classes.dw_stg_1_mai39_z13u
+#
+# # inspect table that was created for debugging
+# insp = inspect(engine)
+# insp.get_columns('dw_stg_1_mai01_z13u')
+
 
 
 '''
-load tsv into file-equivalent table
+
+extract data and load file-equivalent table for all TSVs that are configured
+
 '''
+for filename in tsvs_to_process:
+    extract.load_file_equivalent_table(filename, engine, bib_rec_stg1_tables)
 
-#create session
-Session = sessionmaker(bind=engine)
-session = Session()
-
-# determine if csv row is a footer
-def row_is_footer(row):
-    return row[0] == 'T'
-
-# parse values from csv row into dict
-def parse_row(row, columns_header):
-    if(row_is_footer(row)):
-        raise StopIteration()
-    else:
-        row_dict = {}
-        for i, field in enumerate(row):
-            row_dict[columns_header[i]] = field
-        return row_dict
-
-# read each line of the csv ignoring 2 headers and last line and write to the db
-with open(filename) as f:
-    reader = csv.reader(f, delimiter='\t')
-    header_1 = next(reader) # row 0
-    header_2 = next(reader) # row 1
-
-    # read all lines after lines one and two
-    try:
-        while True:
-            row_dict = parse_row(next(reader), header_2)
-            try:
-                # insert the row
-                record = mai50_z30(**row_dict)
-                session.add(record)
-                session.commit()
-            except:
-                # should I create a db exception here?
-                session.rollback()
-    except StopIteration:
-        pass
 
 '''
 create stg 2 tables
+
 '''
+
+pdb.set_trace()
 
 
 
@@ -172,12 +126,12 @@ print(json.dumps(table_config, indent=4))
 # with open(filename as f):
 
 
-# transform_field(df, table_config)
+# stg 2 to transform_field(df, table_config)
 
 
 
 
-# load to intermediate database
+# load to stg 3
 
 
 

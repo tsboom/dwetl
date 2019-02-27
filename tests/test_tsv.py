@@ -18,13 +18,13 @@ def test_parse_tsv_filename():
     assert tsv_name_metadata['datetime'] == '20190102034001'
     # assert tsv_name_metadata['counter'] == 1
 
-# # ensure TSV file has at least 3 rows (header, footer, content)
-# def test_tsv_file_row_count():
-#     assert dwetl.tsv_has_valid_row_count(test_dataframe) == True
-# #
-# def test_tsv_contains_valid_header():
-#     assert dwetl.tsv_has_header(test_tsv) == True
-#     assert dwetl.tsv_has_header(test_tsv_missing_header) == False
+# ensure TSV file has at least 3 rows (header, footer, content)
+def test_tsv_file_row_count():
+    assert dwetl.tsv_has_valid_row_count(test_dataframe) == True
+
+def test_tsv_contains_valid_header():
+    assert dwetl.tsv_has_header(test_tsv) == True
+    assert dwetl.tsv_has_header(test_tsv_missing_header) == False
 
 # check to see if tsv can be imported into not empty dataframe
 test_dataframe = None

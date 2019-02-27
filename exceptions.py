@@ -1,6 +1,13 @@
+
+
+
 class DWETLException(Exception):
+    pass
 
 
+class InvalidTSVException(DWETLException):
+    """ Raised when a tsv contains invalid data """
+    pass
 
 
 class FatalTransformException(DWETLException):
