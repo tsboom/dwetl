@@ -1,4 +1,7 @@
 import pdb
+import pprint
+from colorama import init, Fore, Back, Style
+init()
 import re
 import csv
 import json
@@ -19,12 +22,31 @@ from sqlalchemy import MetaData
 import database_credentials
 
 import TableTransform
-import extract
+import loadstg1
+import loadstg2
+import importlib
 
 
+# logging format
+formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
 
-logging.basicConfig(filename='dwetl.log', level=logging.DEBUG)
-logging.info('Started logging at ', datetime.datetime.now())
+def setup_logger(name, log_file, level=logging.DEBUG):
+    # set up logging file
+    handler = logging.FileHandler(log_file)
+    handler.setFormatter(formatter)
+    logger = logging.getLogger(name)
+    logger.setLevel(level)
+    logger.addHandler(handler)
+    return logger
+
+# dwetl logger
+# log file with today's date
+logfile = datetime.datetime.now().strftime('dwetl.log.%Y%m%d')
+dwetl_logger = setup_logger('dwetl_logger', logfile)
+# sqlalchemy logger
+sa_logfile = datetime.datetime.now().strftime('sqlalchemy.engine.log.%Y%m%d')
+sa_engine_logger = setup_logger('sqlalchemy.engine', sa_logfile)
+
 
 '''
 set files for processing
@@ -56,13 +78,7 @@ def create_db_engine():
 
 engine = create_db_engine()
 
-def set_up_db_logging():
-    # set up logging file
-    handler = logging.FileHandler('sqlalchemy.engine.log')
-    handler.level = logging.DEBUG
-    logging.getLogger('sqlalchemy.engine').addHandler(handler)
 
-set_up_db_logging()
 
 
 
@@ -73,9 +89,7 @@ Base.prepare(engine, reflect=True)
 # # print a list of each table object
 # print(Base.classes.keys())
 
-# # create class names for each base class that was automapped
-# mai50_z30 = Base.classes.dw_stg_1_mai50_z30
-#
+
 # # bib record dimension file-equivalent-tables
 bib_rec_stg1_tables = {
     'mai01_z00': Base.classes.dw_stg_1_mai01_z00, #has data
@@ -86,38 +100,47 @@ bib_rec_stg1_tables = {
 }
 
 
-logging.info('Successfully mapped postgres tables to Base classes.')
-# doesn't exist
-# mai39_z13u = Base.classes.dw_stg_1_mai39_z13u
-#
 # # inspect table that was created for debugging
 # insp = inspect(engine)
 # insp.get_columns('dw_stg_1_mai01_z13u')
 
 
 
-'''
-
-extract data and load file-equivalent table for all TSVs that are configured
-
-'''
-for filename in tsvs_to_process:
-    extract.load_file_equivalent_table(filename, engine, bib_rec_stg1_tables)
-
+# '''
+#
+# extract data and load file-equivalent table for all TSVs that are configured
+#
+# '''
+# for filename in tsvs_to_process:
+#     loadstg1.load_file_equivalent_table(filename, engine, bib_rec_stg1_tables)
+#
 
 '''
 create stg 2 tables
+read from stg1 tables
 
 '''
 
-pdb.set_trace()
+bib_rec_stg2_tables = {
+    'bib_rec_z00': Base.classes.dw_stg_2_bib_rec_z00,
+    'bib_rec_z13': Base.classes.dw_stg_2_bib_rec_z13,
+    'bib_rec_z13u': Base.classes.dw_stg_2_bib_rec_z13u,
+    'bib_rec_z00_field': Base.classes.dw_stg_2_bib_rec_z00_field,
+    }
 
+# rethink this reload
+importlib.reload(loadstg2)
+loadstg2.load_stg2_table(engine, bib_rec_stg1_tables, bib_rec_stg2_tables, dwetl_logger)
 
 
 
 '''
 transform
 '''
+
+print('got to transform')
+
+pdb.set_trace()
 
 table_config = TableTransform.load_table_config(tc_path)
 print(json.dumps(table_config, indent=4))
