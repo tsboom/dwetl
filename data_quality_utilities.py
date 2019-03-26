@@ -1,7 +1,9 @@
 import dwetl
 import datetime
 
-
+'''
+finish is mandatory
+'''
 # checks if mandatory
 def is_mandatory(input):
     print("temporary")
@@ -30,10 +32,11 @@ def is_valid_range(number, a, z):
         return True
 
 # checks to see if there are no nulls, all spaces, or all zeros
-def has_missing_values(input):
+def no_missing_values(input):
     # check for all zeros
     if input == None or input.isspace() or int(input) == 0:
-        return True
+        return False
+    return True
 
 
 
@@ -58,3 +61,13 @@ def is_valid_aleph_date(string_date):
             return True
     except ValueError:
         raise ValueError(string_date + ": Date is invalid")
+
+# function create a python dict from a 2 column CSV lookup table
+def create_dict_from_csv(csv_file):
+    csv_file_path = os.path.join('lookup_tables', csv_file)
+    with open(csv_file_path, mode='r') as f:
+        reader = csv.DictReader(f, fieldnames=('code', 'description'))
+        csv_dict = {}
+        for row in reader:
+            csv_dict[row['code']] = row['description']
+        return csv_dict
