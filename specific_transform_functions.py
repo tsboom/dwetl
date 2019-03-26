@@ -36,6 +36,17 @@ def is_suppressed(input):
 bibliographic record dimension transform functions
 '''
 
+# source field Z13U_USER_DEFINED_2
+def remove_ocm_ocn_on(field):
+    if field[0:2] == "ocm":
+        field = field[3:]
+    elif field[0:2] == "ocn":
+        field = field[3:]
+    elif field[0:1] == "on":
+        field = field[2:]
+
+
+
 # source field Z13U_USER_DEFINED_6 specific transform
 # target fields:
 # BIB_REC_ACQUISITION_CREATED_FLAG
