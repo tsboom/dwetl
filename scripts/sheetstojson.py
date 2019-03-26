@@ -12,7 +12,12 @@ import os
 # If modifying these scopes, delete the file token.json.
 SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
 # The ID and range of test source to target spreadsheet.
-SPREADSHEET_ID = '1RkxYf2YaxkGnpdLGV7oYUu9Rln81vwBQAGIaUBPROyw'
+# SPREADSHEET_ID = '1RkxYf2YaxkGnpdLGV7oYUu9Rln81vwBQAGIaUBPROyw'
+
+
+# the ID of the real star schema spreadsheets
+SPREADSHEET_ID = '1QyEk0qAUjplpEXPQsAHHJ4avxOWqyJWkW6LIzxQB64Y'
+
 
 def set_up_sheets_api():
     # The file token.json stores the user's access and refresh tokens, and is
@@ -37,7 +42,9 @@ SOURCE_TO_TARGET_COLUMN_RANGE = 'Source-to-Target Mapping!A6:V6'
 # library item dimension range
 LIB_ITEM_DIM_RANGE = 'Source-to-Target Mapping!A69:V113'
 # bib record dimension range
-BIB_RECORD_DIM_RANGE = 'Source-to-Target Mapping!A28:V59'
+# BIB_RECORD_DIM_RANGE = 'Source-to-Target Mapping!A28:V59'
+BIB_RECORD_DIM_RANGE = 'Source-to-Target Mapping!A33:V63'
+
 # data quality range
 DATA_QUALITY_RANGE = 'Data Quality Checks!A6:S82'
 # data quality column variable names range
