@@ -146,7 +146,7 @@ table_config = TableTransform.load_table_config(tc_path)
 print(json.dumps(table_config, indent=4))
 # Use a function which uses the table metadata config files and performs the transformations
 
-# with open(filename as f):
+
 
 
 # stg 2 to transform_field(df, table_config)
