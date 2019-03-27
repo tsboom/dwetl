@@ -39,7 +39,7 @@ def set_up_sheets_api():
 # column variable names from source to target sheets is_valid_range
 SOURCE_TO_TARGET_COLUMN_RANGE = 'Source-to-Target Mapping!A6:X6'
 # library item dimension range real Star Scheme sheet
-LIB_ITEM_DIM_RANGE = 'Source-to-Target Mapping!A70:X135'
+LIB_ITEM_DIM_RANGE = 'Source-to-Target Mapping!A79:X135'
 # bib record dimension range real Star Scheme sheet
 BIB_RECORD_DIM_RANGE = 'Source-to-Target Mapping!A33:X63'
 
@@ -84,7 +84,6 @@ def get_dq_rows_dict(dq_values, sheet):
         for idx, key in enumerate(sheet_columns):
             row_values_dict[key] = row_values[idx]
             # i got an error whenever column S was blank. need a test to make sure column S is not blank.
-
         source_column_name = row_values_dict['source_column_name']
         # append dq row to existing key (if key exists)
         if dq_rows_dict.get(source_column_name, False):
@@ -117,6 +116,7 @@ def main():
     # create a dict of dicts for every dq_check row that can be searched by key(field name)
     dq_rows_dict = get_dq_rows_dict(dq_values, sheet)
 
+    # list dimensions values to process
     dimension_values_list = [bib_rec_values, lib_item_values]
 
     for dimension_values in dimension_values_list:
@@ -124,8 +124,9 @@ def main():
             print('No data found.')
         else:
             dimension_dict = {}
-            # write dimension name to table using first row of dimension values
-            dimension_name = dimension_values[0][18]
+            # write dimension name to table using first row of dimension values. dimension name is in index 20
+            dimension_name = dimension_values[0][20]
+            pdb.set_trace()
             dimension_dict['target_dimension_name'] = dimension_name
 
             dimension_dict['fields'] = []
