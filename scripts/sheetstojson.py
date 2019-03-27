@@ -14,7 +14,6 @@ SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
 # The ID and range of test source to target spreadsheet.
 # SPREADSHEET_ID = '1RkxYf2YaxkGnpdLGV7oYUu9Rln81vwBQAGIaUBPROyw'
 
-
 # the ID of the real star schema spreadsheets
 SPREADSHEET_ID = '1QyEk0qAUjplpEXPQsAHHJ4avxOWqyJWkW6LIzxQB64Y'
 
@@ -38,17 +37,16 @@ def set_up_sheets_api():
 
 
 # column variable names from source to target sheets is_valid_range
-SOURCE_TO_TARGET_COLUMN_RANGE = 'Source-to-Target Mapping!A6:V6'
-# library item dimension range
-LIB_ITEM_DIM_RANGE = 'Source-to-Target Mapping!A69:V113'
-# bib record dimension range
-# BIB_RECORD_DIM_RANGE = 'Source-to-Target Mapping!A28:V59'
-BIB_RECORD_DIM_RANGE = 'Source-to-Target Mapping!A33:V63'
+SOURCE_TO_TARGET_COLUMN_RANGE = 'Source-to-Target Mapping!A6:X6'
+# library item dimension range real Star Scheme sheet
+LIB_ITEM_DIM_RANGE = 'Source-to-Target Mapping!A70:X135'
+# bib record dimension range real Star Scheme sheet
+BIB_RECORD_DIM_RANGE = 'Source-to-Target Mapping!A33:X63'
 
-# data quality range
-DATA_QUALITY_RANGE = 'Data Quality Checks!A6:S82'
-# data quality column variable names range
-DQ_COLUMN_RANGE = 'Data Quality Checks!A5:S5'
+# data quality range real star scheme sheet
+DATA_QUALITY_RANGE = 'Data Quality Checks!A6:T89'
+# data quality column variable names range real star scheme sheet
+DQ_COLUMN_RANGE = 'Data Quality Checks!A5:T5'
 
 def get_sheets_values_list(sheet, spreadsheet_id, range):
     # get values in a comma separated list based on range
