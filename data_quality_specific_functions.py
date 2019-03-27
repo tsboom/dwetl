@@ -8,10 +8,7 @@ import data_quality_utilities
 
 def dq_z13u_user_defined_10_valid_holding_own_code(code):
     holding_own_dict = data_quality_utilities.create_dict_from_csv('holding_own_code.csv')
-    try:
-        return holding_own_dict[code]
-    except KeyError as error:
-        print(error, ': Incorrect holding own code.')
+    return holding_own_dict[code]
 
 
 def dq_z13u_user_defined_2(input):

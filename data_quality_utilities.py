@@ -1,5 +1,7 @@
 import dwetl
 import datetime
+import os
+import csv
 
 '''
 finish is mandatory
@@ -17,7 +19,7 @@ def is_numeric(input):
 
 
 # checks if provided length is true
-def is_specified_length(input, length):
+def is_valid_length(input, length):
     if (len(input) == length):
         return True
 
@@ -26,15 +28,15 @@ def is_less_than_eq_to_length(input, length):
     if (len(input) <= length):
         return True
 
-# checks range
-def is_valid_range(number, a, z):
-    if number in range(a, z):
-        return True
+# # checks range
+# def is_valid_range(number, a, z):
+#     if number in range(a, z):
+#         return True
 
 # checks to see if there are no nulls, all spaces, or all zeros
 def no_missing_values(input):
     # check for all zeros
-    if input == None or input.isspace() or int(input) == 0:
+    if input is None or input.isspace() or int(input) == 0:
         return False
     return True
 
@@ -62,7 +64,11 @@ def is_valid_aleph_date(string_date):
     except ValueError:
         raise ValueError(string_date + ": Date is invalid")
 
-# function create a python dict from a 2 column CSV lookup table
+# # checks if hour is valid HHMM format
+# def is_valid_hour(hhmm):
+#
+
+# function create a python dict from a 2 column CSV lookup table in the lookup_tables directory
 def create_dict_from_csv(csv_file):
     csv_file_path = os.path.join('lookup_tables', csv_file)
     with open(csv_file_path, mode='r') as f:
