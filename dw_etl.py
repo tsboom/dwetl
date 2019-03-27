@@ -21,7 +21,7 @@ from sqlalchemy import MetaData
 # import database_config
 import database_credentials
 
-import TableTransform
+import table_transform
 import loadstg1
 import loadstg2
 import importlib
@@ -91,12 +91,16 @@ Base.prepare(engine, reflect=True)
 
 
 # # bib record dimension file-equivalent-tables
+'''
+is there an mai39_z13u? data is empty
+'''
 bib_rec_stg1_tables = {
     'mai01_z00': Base.classes.dw_stg_1_mai01_z00, #has data
     'mai39_z00': Base.classes.dw_stg_1_mai39_z00, #has data
     'mai01_z13': Base.classes.dw_stg_1_mai01_z13, #has data
     'mai39_z13': Base.classes.dw_stg_1_mai39_z13, # file is empty
     'mai01_z13u': Base.classes.dw_stg_1_mai01_z13u #has data
+    # 'mai39_z13u': Base.classes.dw_stg_1_mai39_z13u # file is empty
 }
 
 
@@ -106,14 +110,14 @@ bib_rec_stg1_tables = {
 
 
 
-# '''
-#
-# extract data and load file-equivalent table for all TSVs that are configured
-#
-# '''
-# for filename in tsvs_to_process:
-#     loadstg1.load_file_equivalent_table(filename, engine, bib_rec_stg1_tables)
-#
+'''
+
+extract data and load file-equivalent table for all TSVs that are configured
+
+'''
+for filename in tsvs_to_process:
+    loadstg1.load_file_equivalent_table(filename, engine, bib_rec_stg1_tables)
+
 
 '''
 create stg 2 tables
@@ -135,21 +139,25 @@ loadstg2.load_stg2_table(engine, bib_rec_stg1_tables, bib_rec_stg2_tables, dwetl
 
 
 '''
-transform
+populate stg 2 PP, DQ, and T1, T2...
 '''
 
 print('got to transform')
 
-pdb.set_trace()
+table_config_path = os.path.join('table_config','bibliographic_record_dimension.json')
 
-table_config = TableTransform.load_table_config(tc_path)
+table_config = table_transform.load_table_config(table_config_path)
 print(json.dumps(table_config, indent=4))
-# Use a function which uses the table metadata config files and performs the transformations
 
+
+# Use a function which uses the table metadata config files and performs the transformations
+# loop over items in stg 2, refer to column names in table config for instructions
 
 
 
 # stg 2 to transform_field(df, table_config)
+
+
 
 
 
