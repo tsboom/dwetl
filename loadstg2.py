@@ -40,12 +40,12 @@ def load_stg2_table(engine, bib_rec_stg1_tables, bib_rec_stg2_tables, dwetl_logg
         'em_update_tmstmp': datetime.datetime.now()
     }
 
-    def build_stg2_row(em_dict, row_dict):
+    def build_stg2_row(em_dict, row_dict, aleph_library):
         # create stg2 row
         stg2_row = {}
         for key, val in row_dict.items():
             # add metadata
-            stg2_row.update({'dw_stg_2_aleph_lbry_name': 'mai01'})
+            stg2_row.update({'dw_stg_2_aleph_lbry_name': aleph_library})
             stg2_row.update(em_dict)
             # add in val to everything but em metadata and db_operation_cd
             if key not in em_dict and key != 'db_operation_cd':
@@ -75,7 +75,7 @@ def load_stg2_table(engine, bib_rec_stg1_tables, bib_rec_stg2_tables, dwetl_logg
 
     # do mai01_z00 to stg 2 table first
     # for each row, use its row dict to take column names out, and add 'in_val_' in front
-    def process_and_write_row(Session, row, stg2_key):
+    def process_and_write_row(Session, row, stg2_key, aleph_library):
         session = Session()
         # get unwanted column names out
         row_dict = row.__dict__
@@ -85,7 +85,7 @@ def load_stg2_table(engine, bib_rec_stg1_tables, bib_rec_stg2_tables, dwetl_logg
         # with 'in_val_' in front of each column name
         invalid_keys = {'rec_type_cd', 'rec_trigger_key', '_sa_instance_state'}
         row_dict = without_keys(row_dict, invalid_keys)
-        stg2_row = build_stg2_row(em_dict, row_dict)
+        stg2_row = build_stg2_row(em_dict, row_dict, aleph_library)
         print_debug_colors(row_dict, stg2_row)
         write_row_to_table(dwetl_logger, session, stg2_row, stg2_key)
 
@@ -101,6 +101,7 @@ def load_stg2_table(engine, bib_rec_stg1_tables, bib_rec_stg2_tables, dwetl_logg
     session = Session()
 
     for key, base_class in bib_rec_stg1_tables.items():
+        aleph_library = key.split('_')[0]
         stg2_key = get_stg2_key(key)
         for row in session.query(base_class).all():
-            process_and_write_row(Session, row, stg2_key)
+            process_and_write_row(Session, row, stg2_key, aleph_library)
