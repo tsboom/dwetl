@@ -139,6 +139,7 @@ loadstg2.load_stg2_table(engine, bib_rec_stg1_tables, bib_rec_stg2_tables, dwetl
 
 
 '''
+Transform stg 2
 populate stg 2 PP, DQ, and T1, T2...
 '''
 
