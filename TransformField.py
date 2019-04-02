@@ -1,7 +1,7 @@
 '''
 Transform Field
 
-A class to represent a field to be transformed
+A class to represent a field to be transformed with optional isbn/issn code
 '''
 
 class TransformField:
