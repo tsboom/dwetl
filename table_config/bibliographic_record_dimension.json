@@ -318,7 +318,7 @@
                 "source_data_type": "VARCHAR2(100)",
                 "source_format": "",
                 "source_mandatory": "N",
-                "specific_transform_function": "",
+                "specific_transform_function": "isbn_code_020",
                 "transform_action": "Move"
             },
             "target_attribute": "- Bibliographic Record ISBN Text",
@@ -343,7 +343,7 @@
                 "source_data_type": "VARCHAR2(100)",
                 "source_format": "",
                 "source_mandatory": "N",
-                "specific_transform_function": "",
+                "specific_transform_function": "issn_code_022",
                 "transform_action": "Move"
             },
             "target_attribute": "- Bibliographic Record All Associated ISSNs Text",
