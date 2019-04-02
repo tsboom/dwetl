@@ -110,32 +110,32 @@ bib_rec_stg1_tables = {
 
 
 
-'''
-
-extract data and load file-equivalent table for all TSVs that are configured
-
-'''
-for filename in tsvs_to_process:
-    loadstg1.load_file_equivalent_table(filename, engine, bib_rec_stg1_tables)
-
-
-'''
-create stg 2 tables
-read from stg1 tables
-
-'''
-
+# '''
+#
+# extract data and load file-equivalent table for all TSVs that are configured
+#
+# '''
+# for filename in tsvs_to_process:
+#     loadstg1.load_file_equivalent_table(filename, engine, bib_rec_stg1_tables)
+#
+#
+# '''
+# create stg 2 tables
+# read from stg1 tables
+#
+# '''
+#
 bib_rec_stg2_tables = {
     'bib_rec_z00': Base.classes.dw_stg_2_bib_rec_z00,
     'bib_rec_z13': Base.classes.dw_stg_2_bib_rec_z13,
     'bib_rec_z13u': Base.classes.dw_stg_2_bib_rec_z13u,
     'bib_rec_z00_field': Base.classes.dw_stg_2_bib_rec_z00_field,
     }
-
-# rethink this reload
-importlib.reload(loadstg2)
-loadstg2.load_stg2_table(engine, bib_rec_stg1_tables, bib_rec_stg2_tables, dwetl_logger)
-
+#
+# # rethink this reload
+# importlib.reload(loadstg2)
+# loadstg2.load_stg2_table(engine, bib_rec_stg1_tables, bib_rec_stg2_tables, dwetl_logger)
+#
 
 
 '''
@@ -149,6 +149,9 @@ table_config_path = os.path.join('table_config','bibliographic_record_dimension.
 
 table_config = table_transform.load_table_config(table_config_path)
 print(json.dumps(table_config, indent=4))
+
+for table in bib_rec_stg2_tables.values():
+    table_transform.transform_stg2_table(engine, table_config, table, dwetl_logger)
 
 
 # Use a function which uses the table metadata config files and performs the transformations
