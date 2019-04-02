@@ -8,23 +8,23 @@ specific transform functions that are used in more than one dimension
 '''
 
 # substring based on start and end index
-def substring(input, start, end):
-    substring = input[start:end]
+def substring(field, start, end):
+    substring = field.value[start:end]
     return substring
 
 # return 'Standard'
 # LBRY_HOLDING_REC_TYPE_DESC
 # BIB_RECORD_REC_TYPE_DESC
 # LBRY_ITEM_LOC_REC_TYPE_DESC
-def output_standard():
+def output_standard(field):
     return 'Standard'
 
 
 # Check to see if SUPPRESSED flag is there
 # LBRY_HOLDING_DISPLAY_SUPPRESSED_FLAG
 # BIB_REC_DISPLAY_SUPPRESSED_FLAG
-def is_suppressed(input):
-    if "SUPPRESSED" in input.upper():
+def is_suppressed(field):
+    if "SUPPRESSED" in field.value.upper():
         return "Y"
     else:
         return "N"
@@ -36,14 +36,22 @@ def is_suppressed(input):
 bibliographic record dimension transform functions
 '''
 
+# source field Z13_ISBN_ISSN_CODE
+def isbn_code_020(field):
+    if 
+
+def issn_code_022(field):
+
+
 # source field Z13U_USER_DEFINED_2
 def remove_ocm_ocn_on(field):
-    if field[0:2] == "ocm":
-        field = field[3:]
-    elif field[0:2] == "ocn":
-        field = field[3:]
-    elif field[0:1] == "on":
-        field = field[2:]
+    if field.value[0:2] == "ocm":
+        result = field[3:]
+    elif field.value[0:2] == "ocn":
+        result = field[3:]
+    elif field.value[0:1] == "on":
+        result = field[2:]
+    return result
 
 
 
