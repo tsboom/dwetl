@@ -9,6 +9,7 @@ dataquality tests
 
 def test_is_numeric():
     assert data_quality_specific_functions.is_numeric(5634563) == True
+    assert data_quality_specific_functions.is_numeric("a") == False
 
 # def test_is_valid_length():
 #

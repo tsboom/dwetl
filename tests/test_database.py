@@ -24,5 +24,10 @@ def test_db_connection():
 
 
 
+# test that tables have right uniqueness constraints
+# https://stackoverflow.com/questions/33878830/sqlalchemy-determine-if-unique-constraint-exists
+
+
+
 
 # for a Move, test value in source and value in destination and make sure they are the same
