@@ -12,7 +12,7 @@ from sqlalchemy import MetaData
 
 from TransformField import TransformField
 import data_quality_utilities
-# import data_quality_specific_functions
+import data_quality_specific_functions
 # import specific_transform_functions
 
 
@@ -32,6 +32,8 @@ def get_isbn_issn_code(column, row_dict):
         isbn_issn_code = row_dict[isbn_issn_column][0:2]
     # column name contains ISBN_ISSN, optional_isbn_code = isbn_code
     if column == 'in_z13_isbn_issn':
+        # get ISBN code from first three chars, save code to var
+        isbn_issn_code = row_dict[isbn_issn_column][0:2]
         optional_isbn_code = isbn_issn_code
         return optional_isbn_code
     return optional_isbn_code
@@ -60,8 +62,42 @@ def preprocess(field, table_config):
         if in_col_name == field.name:
             if obj['Preprocessing Info']['pre_action'] == 'Trim':
                 return data_quality_utilities.trim(field.value)
-            else:
-                return field.value
+        else:
+            return field.value
+
+def execute_dq_function(function_name, arg):
+    module_name = 'data_quality_specific_functions'
+    f_string = function_name
+    function = getattr(module_name, f_string)
+    return function(arg)
+
+
+
+def check_data_quality(field, table_config):
+    '''
+    find current field.name in table_config. execute dq checks if exist.
+    '''
+    for obj in table_config['fields']:
+        in_col_name = 'in_' + obj['Transformation Info']['source_col_name'].lower()
+        #print(in_col_name, field.name)
+        if in_col_name == field.name:
+            try:
+                dq_list = obj.get('Data Quality Info', {}).get('data_quality_checks')
+                for check in dq_list:
+                    function_name = check.get('specific_dq_function')
+                    arg = check.get('specific_dq_function_param_1')
+                    pdb.set_trace()
+        #             print(function_name, arg)
+        #             is_passing = execute_dq_function(function_name, arg)
+        #             if is_passing == True:
+        #                 return field.value
+            except TypeError:
+                pass
+        # else:
+        #     print('no dq check')
+        # return field.value
+
+
 
 
 def transform_field(field, table_config):
@@ -71,17 +107,16 @@ def transform_field(field, table_config):
 
     # run pp
     result = preprocess(field, table_config)
-    field.log_pp(result)
-    pdb.set_trace()
+    field.record_pp(result)
 
+    # run dq
+    dq_result = check_data_quality(field, table_config)
+    field.record_dq(dq_result)
 
-    # # run dq
-    # field.log_dq(result)
-    #
     # # run transformation
-    #     # determine which transforms to run, call that func's tranfsorm function
+    #     # determine which transforms to run, call that func's transform function
     #
-    # field.log_transform_result(tf_name, result)...
+    # field.record_transforms(tf_name, result)...
     #
     #
     # '''
@@ -91,10 +126,11 @@ def transform_field(field, table_config):
     # write_log(field.name, field.log) # writes to stage 2 db
 
 
-'''
-main function to load stg_2 table PP, DQ, T1, T2.. etc
-'''
+
 def transform_stg2_table(engine, table_config, table, dwetl_logger):
+    '''
+    main function to load stg_2 table PP, DQ, T1, T2.. etc
+    '''
     Session = sessionmaker(bind=engine)
     session = Session()
 

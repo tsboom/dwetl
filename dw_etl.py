@@ -125,11 +125,16 @@ bib_rec_stg1_tables = {
 #
 # '''
 #
+# bib_rec_stg2_tables = {
+#     'bib_rec_z00': Base.classes.dw_stg_2_bib_rec_z00,
+#     'bib_rec_z13': Base.classes.dw_stg_2_bib_rec_z13,
+#     'bib_rec_z13u': Base.classes.dw_stg_2_bib_rec_z13u,
+#     'bib_rec_z00_field': Base.classes.dw_stg_2_bib_rec_z00_field,
+#     }
+
+'''using this for isolated testing of z13u b/c it has dq checks'''
 bib_rec_stg2_tables = {
-    'bib_rec_z00': Base.classes.dw_stg_2_bib_rec_z00,
-    'bib_rec_z13': Base.classes.dw_stg_2_bib_rec_z13,
-    'bib_rec_z13u': Base.classes.dw_stg_2_bib_rec_z13u,
-    'bib_rec_z00_field': Base.classes.dw_stg_2_bib_rec_z00_field,
+    'bib_rec_z13u': Base.classes.dw_stg_2_bib_rec_z13u
     }
 #
 # # rethink this reload
