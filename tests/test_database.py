@@ -15,9 +15,10 @@ database tests
 
 
 # test db connection
-def test_db_connection():
+def test_db_connection(self):
     engine = dwetl.connect_to_db()
     assert engine == True
+    #self.assertFalse(engine.closed)
 
 
 # test to see that target schema is the same as input schema
