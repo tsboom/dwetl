@@ -25,12 +25,3 @@ def test_tsv_file_row_count():
 def test_tsv_contains_valid_header():
     assert dwetl.tsv_has_header(test_tsv) == True
     assert dwetl.tsv_has_header(test_tsv_missing_header) == False
-
-# check to see if tsv can be imported into not empty dataframe
-test_dataframe = None
-test_dataframe_missing_header = None
-
-def test_read_dataframe():
-    test_dataframe = dwetl.read_tsv_into_dataframe(VALID_TEST_TSV_PATH)
-    test_dataframe_missing_header = dwetl.read_tsv_into_dataframe(INVALID_MISSING_HEADER_TSV_PATH)
-    assert test_dataframe.empty == False
