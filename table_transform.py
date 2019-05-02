@@ -65,13 +65,16 @@ def preprocess(field, table_config):
         else:
             return field.value
 
-def execute_dq_function(function_name, arg):
+def execute_dq_function(function_name, arg, input):
     module_name = 'data_quality_specific_functions'
+    # parse out dw prefixes from function na
     f_string = function_name
-    function = getattr(module_name, f_string)
-    return function(arg)
-
-
+    function = getattr(globals()[module_name], f_string)
+    if not arg:
+        is_passing = function(input)
+    else:
+        is_passing = function(input, arg)
+    return is_passing
 
 def check_data_quality(field, table_config):
     '''
@@ -79,24 +82,28 @@ def check_data_quality(field, table_config):
     '''
     for obj in table_config['fields']:
         in_col_name = 'in_' + obj['Transformation Info']['source_col_name'].lower()
-        #print(in_col_name, field.name)
         if in_col_name == field.name:
-            try:
-                dq_list = obj.get('Data Quality Info', {}).get('data_quality_checks')
-                for check in dq_list:
-                    function_name = check.get('specific_dq_function')
-                    arg = check.get('specific_dq_function_param_1')
-                    pdb.set_trace()
-        #             print(function_name, arg)
-        #             is_passing = execute_dq_function(function_name, arg)
-        #             if is_passing == True:
-        #                 return field.value
-            except TypeError:
-                pass
-        # else:
-        #     print('no dq check')
-        # return field.value
+            dq_list = obj.get('Data Quality Info', {}).get('data_quality_checks')
+            for check in dq_list:
+                function_name = check.get('specific_dq_function')
+                arg = check.get('specific_dq_function_param_1')
+                print(function_name, arg)
+                is_passing = execute_dq_function(function_name, arg, field.value)
+                if is_passing:
+                    field_dq_result = field.value
+                else:
+                    replacement_value = check.get('replacement_value')
+                    # need to check for dimension_link_to_record
+                    if replacement_value:
+                        field_dq_result = replacement_value
+                        print("deal with dimension_link_to_records")
+                return field_dq_result
 
+        else:
+            print('no dq check for ' + in_col_name)
+            return field.value
+
+def run_transformation()
 
 
 
@@ -112,6 +119,7 @@ def transform_field(field, table_config):
     # run dq
     dq_result = check_data_quality(field, table_config)
     field.record_dq(dq_result)
+    pdb.set_trace()
 
     # # run transformation
     #     # determine which transforms to run, call that func's transform function
