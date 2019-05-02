@@ -370,7 +370,7 @@
                         "replacement_value": "temp",
                         "source_column_name": "Z13U_USER_DEFINED_2",
                         "source_file": "Z13U",
-                        "specific_dq_function": "dq_z13_user_defined_2",
+                        "specific_dq_function": "dq_z13u_user_defined_2",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Format Check"
