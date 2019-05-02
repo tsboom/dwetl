@@ -36,11 +36,11 @@ def is_suppressed(field):
 bibliographic record dimension transform functions
 '''
 
-# source field Z13_ISBN_ISSN_CODE
-def isbn_code_020(field):
-    if 
-
-def issn_code_022(field):
+# # source field Z13_ISBN_ISSN_CODE
+# def isbn_code_020(field):
+#     if
+#
+# def issn_code_022(field):
 
 
 # source field Z13U_USER_DEFINED_2

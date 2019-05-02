@@ -2,6 +2,8 @@
 import datetime
 import os
 import csv
+import pdb
+# use pdb.set_trace() to set a breakpoint
 
 '''
 finish is mandatory
@@ -20,7 +22,7 @@ def is_numeric(input):
 
 # checks if provided length is true
 def is_valid_length(input, length):
-    if (len(input) == length):
+    if (len(str(input)) == length):
         return True
 
 # checks if less than or equal to specified length
