@@ -152,10 +152,22 @@ print('got to transform')
 table_config_path = os.path.join('table_config','bibliographic_record_dimension.json')
 
 table_config = table_transform.load_table_config(table_config_path)
-print(json.dumps(table_config, indent=4))
+# create a dict of field objects which is uses source col name as keys
+# for each source col name, there should be an object for each target column inside of it
+
+# find repeating source col names and put that obj under same source col name key in a list
+source_col_sorted_dict = {}
+for obj in table_config["fields"]:
+    source_col_name = 'in_' + obj["Transformation Info"]["source_col_name"].lower()
+    if source_col_sorted_dict.get(source_col_name):
+        # if there's multiple obj per source col, append to that source col dict list
+        source_col_sorted_dict[source_col_name].append(obj)
+    else:
+        source_col_sorted_dict[source_col_name] = [obj]
+
 
 for table in bib_rec_stg2_tables.values():
-    table_transform.transform_stg2_table(engine, table_config, table, dwetl_logger)
+    table_transform.transform_stg2_table(engine, source_col_sorted_dict, table, dwetl_logger)
 
 
 # Use a function which uses the table metadata config files and performs the transformations
