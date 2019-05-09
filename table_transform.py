@@ -11,8 +11,8 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy import MetaData
 
 from TransformField import TransformField
-import data_quality_utilities
-import data_quality_specific_functions
+import data_quality_specific_functions as dqs
+import data_quality_utilities as dqu
 # import specific_transform_functions
 
 
@@ -56,16 +56,76 @@ def transform_row(sa_row):
 def write_log(field_name, log):
     print('write log temp')
 
-def preprocess(field, table_config):
-    for obj in table_config['fields']:
-        in_col_name = 'in_' + obj['Transformation Info']['source_col_name'].lower()
-        if in_col_name == field.name:
-            if obj['Preprocessing Info']['pre_action'] == 'Trim':
-                return data_quality_utilities.trim(field.value)
-        else:
-            return field.value
+def preprocess(field, source_col_sorted_dict):
+    try:
+        objs = source_col_sorted_dict[field.name]
+        # only process the first object which is info for first transformation
+        if objs[0]['Preprocessing Info']['pre_action'] == 'Trim':
+            return dqu.trim(field.value)
+        return field.value
+    except KeyError:
+        print('No preprocessing for ' + field.name)
+        return field.value
 
-def execute_dq_function(function_name, arg, input):
+
+def dict_from_module(module):
+    context = {}
+    for setting in dir(module):
+        # you can write your filter here
+        if setting.islower() and setting.isalpha():
+            context[setting] = getattr(module, setting)
+    return context
+
+
+
+def execute_dq_function(function_name, arg, input, dq_funcs_dict):
+    try:
+        function = dq_funcs_dict[function_name]
+        if not arg:
+            is_passing = function(input)
+        else:
+            is_passing = function(input, arg)
+        return is_passing
+    except KeyError:
+        # dq func name missing from dq_funcs_dict
+        print('temp')
+
+
+
+def check_data_quality(field, dq_funcs_dict, obj):
+    '''
+    execute dq check for current object and handle replacement values
+    '''
+    # find dq checks to run
+    try:
+        pdb.set_trace()
+        dq_list = obj.get('Data Quality Info', {}).get('data_quality_checks')
+        # run dq checks
+        for check in dq_list:
+            function_name = check.get('specific_dq_function')
+            arg = check.get('specific_dq_function_param_1')
+            is_passing = execute_dq_function(function_name, arg, field.value, dq_funcs_dict)
+            if is_passing:
+                field_dq_result = field.value
+            else:
+                replacement_value = check.get('replacement_value')
+                if replacement_value:
+                    field_dq_result = replacement_value
+                    print("deal with dimension_link_to_records")
+            return field_dq_result
+
+    except KeyError:
+        # missing
+        print('No dq check for ' + field.name)
+        return field.value
+
+def run_dq_checks(field, dq_funcs_dict, source_col_sorted_dict):
+    objs = source_col_sorted_dict[field.name]
+    for obj in objs:
+        check_data_quality(field, dq_funcs_dict, obj)
+
+
+def run_transformation(function_name, arg, input):
     module_name = 'data_quality_specific_functions'
     # parse out dw prefixes from function na
     f_string = function_name
@@ -76,50 +136,24 @@ def execute_dq_function(function_name, arg, input):
         is_passing = function(input, arg)
     return is_passing
 
-def check_data_quality(field, table_config):
-    '''
-    find current field.name in table_config. execute dq checks if exist.
-    '''
-    for obj in table_config['fields']:
-        in_col_name = 'in_' + obj['Transformation Info']['source_col_name'].lower()
-        if in_col_name == field.name:
-            dq_list = obj.get('Data Quality Info', {}).get('data_quality_checks')
-            for check in dq_list:
-                function_name = check.get('specific_dq_function')
-                arg = check.get('specific_dq_function_param_1')
-                print(function_name, arg)
-                is_passing = execute_dq_function(function_name, arg, field.value)
-                if is_passing:
-                    field_dq_result = field.value
-                else:
-                    replacement_value = check.get('replacement_value')
-                    # need to check for dimension_link_to_record
-                    if replacement_value:
-                        field_dq_result = replacement_value
-                        print("deal with dimension_link_to_records")
-                return field_dq_result
-
-        else:
-            print('no dq check for ' + in_col_name)
-            return field.value
-
-def run_transformation()
 
 
-
-def transform_field(field, table_config):
+def transform_field(field, source_col_sorted_dict):
     '''
     Using the field name and value, run transformations and log to the field's log
     '''
 
     # run pp
-    result = preprocess(field, table_config)
+    result = preprocess(field, source_col_sorted_dict)
     field.record_pp(result)
 
+    # set up dq
+    dq_funcs_dict = dict_from_module(dqs).update(dict_from_module(dqu))
+
     # run dq
-    dq_result = check_data_quality(field, table_config)
+    dq_result = check_data_quality(field, dq_funcs_dict, source_col_sorted_dict)
     field.record_dq(dq_result)
-    pdb.set_trace()
+
 
     # # run transformation
     #     # determine which transforms to run, call that func's transform function
@@ -135,7 +169,7 @@ def transform_field(field, table_config):
 
 
 
-def transform_stg2_table(engine, table_config, table, dwetl_logger):
+def transform_stg2_table(engine, source_col_sorted_dict, table, dwetl_logger):
     '''
     main function to load stg_2 table PP, DQ, T1, T2.. etc
     '''
@@ -145,4 +179,4 @@ def transform_stg2_table(engine, table_config, table, dwetl_logger):
     for row in session.query(table).all():
         row_fields = transform_row(row)
         for field in row_fields:
-            transform_field(field, table_config)
+            transform_field(field, source_col_sorted_dict)
