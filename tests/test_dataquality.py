@@ -168,17 +168,28 @@ class TestDQ(unittest.TestCase):
         #self.assertTrue(dq_z13u_user_defined_2(''))
         #Should the above test pass? Unclear from reading the function.
 
+#specific_transform_functions
     def test_transform_sub(self):
         #Test field substring
         a = TransformField('245','This is an exceptionally long title but we are using it as an example')
         self.assertEqual(substring(a,0,35),'This is an exceptionally long title')
 
-    def test_output_standard(self):
-        b = TransformField('')
+#    def test_output_standard(self):
+#        b = TransformField('')
 
     def test_remove_ocm_ocn_on(self):
+        #test ocn recognition and transform
         c = TransformField('035','ocn300461916')
-        self.assertEqual()
+        self.assertEqual(remove_ocm_ocn_on(c),'300461916')
+
+        #test ocm recognition and transform
+        d = TransformField('035','ocm54523819')
+        self.assertEqual(remove_ocm_ocn_on(d),'54523819')
+
+        #test on recognition and transform
+        e = TransformField('035','on1080584686')
+        self.assertEqual(remove_ocm_ocn_on(e),'1080584686')
+
 
 if __name__ == '__main__':
     unittest.main()
