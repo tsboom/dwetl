@@ -2,10 +2,10 @@
 #dependency transformations
 #valid value lookups
 
-
 '''
 specific transform functions that are used in more than one dimension
 '''
+from TransformField import TransformField
 
 # substring based on start and end index
 def substring(field, start, end):
@@ -45,14 +45,12 @@ bibliographic record dimension transform functions
 
 # source field Z13U_USER_DEFINED_2
 def remove_ocm_ocn_on(field):
-    if field.value[0:2] == "ocm":
-        result = field[3:]
-    elif field.value[0:2] == "ocn":
-        result = field[3:]
-    elif field.value[0:1] == "on":
-        result = field[2:]
-    return result
-
+    if field.value[0:3] == "ocm":
+        return field.value[3:]
+    elif field.value[0:3] == "ocn":
+        return field.value[3:]
+    elif field.value[0:2] == "on":
+        return field.value[2:]
 
 
 # source field Z13U_USER_DEFINED_6 specific transform
@@ -62,20 +60,20 @@ def remove_ocm_ocn_on(field):
 # BIB_REC_PROVISIONAL_STATUS_FLAG
 
 def is_acq_created(field):
-    if "ACQ-CREATED" in field.upper():
+    if "ACQ-CREATED" in field.value.upper():
         return 'Y'
     else:
         return 'N'
 
 def is_circ_created(field):
-    if "CIRC-CREATED" in field.upper():
+    if "CIRC-CREATED" in field.value.upper():
         return 'Y'
     else:
         return 'N'
 
 
 def is_provisional(field):
-    if "PROVISIONAL" in field.upper():
+    if "PROVISIONAL" in field.value.upper():
         return 'Y'
     else:
         return 'N'
@@ -92,16 +90,18 @@ def subLookUp(field, ref, start=0, end=None):
     with open(ref, 'r') as f:
         lookup_table = csv.reader(f)
         for (key,value) in lookup_table:
-                if field[start:end] in key:
+                if field.value[start:end] in key:
                     return value
 
 
 def z13cond(field):
     #field input is value from record's z13_isbn_issn_code field, while field is the value of z13_isbn_issn field
-    if field[0:3] == "020" or field[0:3] == "022":
-        return field
+    if str(field.value)[0:3] == "020" or str(field.value)[0:3] == "022":
+        return field.value
     else:
         return None
+
+#^need to stringify numbers
 
 #itemProcessStatus
 #z35eventChecksReallyNotClearOnHowTheseAreSupposedToWork
