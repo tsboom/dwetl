@@ -18,5 +18,5 @@ class AbortException(DWETLException):
     """Raised when ETL must be aborted"""
     pass
 
-class MissingValueException(DWETLException, field)
-    print(field + 'is missing')
+# class MissingValueException(DWETLException, field)
+#     print(field + 'is missing')

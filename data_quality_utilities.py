@@ -72,6 +72,7 @@ def is_valid_aleph_year(year):
 # checks if valid date 1980-present
 
 
+# need to make sure null passes missing value data quality
 def is_valid_aleph_date(string_date):
     string_date_valid = datetime.datetime.strptime(
         string_date, '%Y%m%d').strftime('%Y%m%d')

@@ -149,12 +149,12 @@ populate stg 2 PP, DQ, and T1, T2...
 
 print('got to transform')
 
-table_config_path = os.path.join('table_config','bibliographic_record_dimension.json')
+table_config_path = os.path.join('table_config', 'bibliographic_record_dimension.json')
 
 table_config = table_transform.load_table_config(table_config_path)
+
 # create a dict of field objects which is uses source col name as keys
 # for each source col name, there should be an object for each target column inside of it
-
 # find repeating source col names and put that obj under same source col name key in a list
 source_col_sorted_dict = {}
 for obj in table_config["fields"]:
