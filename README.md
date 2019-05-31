@@ -39,13 +39,15 @@ These steps correlate with (Alex's high level ETL diagram)[https://drive.google.
 
   - *loadstg2.py*
 - **Step 3.** Populate Stage 2 tables with preprocessing, data quality checks, and transform results.
-
-  - *TransformField.py* - class to hold value of pp, dq, and transforms,
+- *TransformField.py* - class to hold value of pp, dq, and transforms,
   - *table_transform.py*
-
-    - Preprocess fields, write result to field object
-    - Data quality checks on fields, write results fo field object
+  
+  - Preprocess fields, write result to field object
+    - Data quality checks on fields, write results of field object.
+      - *data_quality_specific_functions.py**
+      - **data_quality_utilities.py*
     - Transform field, write result to field object
+      - *specific_transform_functions.py*
   - Write field values  to corresponding PP, DQ, and T1, T2, T3... rows and columns in the Stage 2 table.
 - **Step 4. ** intertable processing on the Library Item Event Z35 stage 2 table. Make sure that the Library Item ID is unique and if so, add Last Loan, Last Renew, and Last Return details to the Library Item Z30 stage 2 table.
 - **Step 5.** Grab final value of fields from Stage 2 tables and put into the Stg 3 Dimension tables.
