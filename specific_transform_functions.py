@@ -64,6 +64,7 @@ def is_acq_created(field):
         return 'Y'
     else:
         return 'N'
+#^^^ not sure what 'N' conditions should be, but I tested 'not-acq-created' and it passed. I imagine it is the same with the other check functions. Just a thought...        
 
 def is_circ_created(field):
     if "CIRC-CREATED" in field.value.upper():
@@ -92,11 +93,11 @@ def subLookUp(field, ref, start=0, end=None):
         for (key,value) in lookup_table:
                 if field.value[start:end] in key:
                     return value
-
+#^^^ what substring will we be checking against, I'm not clear.
 
 def z13cond(field):
     #field input is value from record's z13_isbn_issn_code field, while field is the value of z13_isbn_issn field
-    if str(field.value)[0:3] == "020" or str(field.value)[0:3] == "022":
+    if str(field.isbn_issn_code)[0:3] == "020" or str(field.isbn_issn_code)[0:3] == "022":
         return field.value
     else:
         return None

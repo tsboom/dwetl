@@ -1,25 +1,31 @@
-import dwetl
+#import dw_etl
 import os
 import pdb
+import table_transform
+import unittest
 
 
 
-VALID_TEST_TSV_PATH = os.path.join('tests','data','mai50_z305_20181115_172016_1.tsv')
 
 
 '''
 Test Table Transform
 '''
-TABLE_CONFIG = os.path.join('tests','data','test_table_config_z30.json')
-table_config = dwetl.load_table_config(TABLE_CONFIG)
+VALID_TEST_TSV_PATH = os.path.join('tests','data','mai50_z305_20181115_172016_1.tsv')
+
 
 # check to see if tsv can be imported into not empty dataframe
-def test_load_table_config():
-    assert table_config['title'] == 'z30'
+#def test_load_table_config():
+#    assert table_config['title'] == 'z30'
+class TestTableTransform(unittest.TestCase):
+    def test_load_table_config(self):
+        TABLE_PATH = os.path.join('tests','data','test_table_config_z30.json')
+        table_config = table_transform.load_table_config(TABLE_PATH)
+        self.assertEqual(table_config['title'],'z30')
 
 
-VALID_TEST_TSV_PATH = os.path.join('tests','data','test_mai50_z305_20181115_172016_1.tsv')
-df = dwetl.read_tsv_into_dataframe(VALID_TEST_TSV_PATH)
+#VALID_TEST_TSV_PATH = os.path.join('tests','data','test_mai50_z305_20181115_172016_1.tsv')
+#df = dwetl.read_tsv_into_dataframe(VALID_TEST_TSV_PATH)
 
 # def test_transform_field():
     # check to see if target row increases when a field is transformed
