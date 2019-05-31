@@ -1,40 +1,38 @@
 import dwetl
 import os
 import pdb
+import unittest
 
-
-
-VALID_TEST_TSV_PATH = os.path.join('tests','data','mai50_z305_20181115_172016_1.tsv')
+from table_transform import *
 
 
 '''
-Test Table Transform
+Unit tests for table_transform.py
 '''
-TABLE_CONFIG = os.path.join('tests','data','test_table_config_z30.json')
-table_config = dwetl.load_table_config(TABLE_CONFIG)
 
-# check to see if tsv can be imported into not empty dataframe
-def test_load_table_config():
-    assert table_config['title'] == 'z30'
+class TestTableTransform(unittest.TestCase):
 
+    def test_check_data_quality():
 
-VALID_TEST_TSV_PATH = os.path.join('tests','data','test_mai50_z305_20181115_172016_1.tsv')
-df = dwetl.read_tsv_into_dataframe(VALID_TEST_TSV_PATH)
+        # when there's no dq check, field.value is used
 
-# def test_transform_field():
-    # check to see if target row increases when a field is transformed
+        # each dq check is called with its parameters provided
 
-    # check to see if source field exists, that target field is there
+        # field.value is used whenever a dq check is passing
+        self.assertTrue(data_quality_utilities.is_valid_length(5634563, 7))
 
-    # transform_field(df[3], target_row)
-    # print(df[3])
+        # replacement_value is used whenever dq check is failing
 
-# def test_field_exceptions():
+        
 
 
 
 
 
+
+
+if __name__ == '__main__':
+    unittest.main()
 ####
 '''
 
@@ -45,7 +43,3 @@ gets put in the target dimension
 possible field-unique conversion function
 one field broken up into multiple in target
 '''
-
-# target_row
-# for field in row:
-#     transform_field(source_field, target_row)

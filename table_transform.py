@@ -1,8 +1,10 @@
 import os
 import json
 import pdb
+import pprint
+import inspect
 
-from sqlalchemy import inspect, create_engine
+from sqlalchemy import create_engine
 from sqlalchemy import exc
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import sessionmaker
@@ -68,43 +70,39 @@ def preprocess(field, source_col_sorted_dict):
         return field.value
 
 
-def dict_from_module(module):
-    context = {}
-    for setting in dir(module):
-        # you can write your filter here
-        if setting.islower() and setting.isalpha():
-            context[setting] = getattr(module, setting)
-    return context
+def functions_from_module(module):
+    functions = inspect.getmembers(module, inspect.isfunction)
+    return functions
 
 
 
-def execute_dq_function(function_name, arg, input, dq_funcs_dict):
-    try:
-        function = dq_funcs_dict[function_name]
-        if not arg:
-            is_passing = function(input)
-        else:
-            is_passing = function(input, arg)
-        return is_passing
-    except KeyError:
-        # dq func name missing from dq_funcs_dict
-        print('temp')
+def execute_dq_function(function_name, arg, input, dq_funcs_list):
+    is_passing = ''
+    # search for function in dq list, execute with params
+    for function in dq_funcs_list:
+        function_object = function[1]
+        dq_function = function[0]
+        if function_name is dq_function:
+            if not arg:
+                is_passing = function_object(input)
+            else:
+                is_passing = function_object(input, arg)
+            break
+    return is_passing
 
 
-
-def check_data_quality(field, dq_funcs_dict, obj):
+def check_data_quality(field, dq_funcs_list, obj):
     '''
     execute dq check for current object and handle replacement values
     '''
     # find dq checks to run
     try:
-        pdb.set_trace()
         dq_list = obj.get('Data Quality Info', {}).get('data_quality_checks')
         # run dq checks
         for check in dq_list:
             function_name = check.get('specific_dq_function')
             arg = check.get('specific_dq_function_param_1')
-            is_passing = execute_dq_function(function_name, arg, field.value, dq_funcs_dict)
+            is_passing = execute_dq_function(function_name, arg, field.value, dq_funcs_list)
             if is_passing:
                 field_dq_result = field.value
             else:
@@ -112,22 +110,27 @@ def check_data_quality(field, dq_funcs_dict, obj):
                 if replacement_value:
                     field_dq_result = replacement_value
                     print("deal with dimension_link_to_records")
-            return field_dq_result
+            result =  {'name': function_name, 'result': field_dq_result}
+            return result
 
-    except KeyError:
+    except TypeError:
         # missing
         print('No dq check for ' + field.name)
         return field.value
 
-def run_dq_checks(field, dq_funcs_dict, source_col_sorted_dict):
-    objs = source_col_sorted_dict[field.name]
-    for obj in objs:
-        check_data_quality(field, dq_funcs_dict, obj)
+def run_dq_checks(field, dq_funcs_list, source_col_sorted_dict):
+    try:
+        objs = source_col_sorted_dict[field.name]
+        for obj in objs:
+            result = check_data_quality(field, dq_funcs_list, obj)
+            field.record_dq(result)
+    except KeyError:
+        print('Field name ' + field.name +' is not a source column.')
 
 
 def run_transformation(function_name, arg, input):
     module_name = 'data_quality_specific_functions'
-    # parse out dw prefixes from function na
+    # parse out dw prefixes from function name
     f_string = function_name
     function = getattr(globals()[module_name], f_string)
     if not arg:
@@ -148,11 +151,11 @@ def transform_field(field, source_col_sorted_dict):
     field.record_pp(result)
 
     # set up dq
-    dq_funcs_dict = dict_from_module(dqs).update(dict_from_module(dqu))
+    dq_funcs_list = functions_from_module(dqs) + functions_from_module(dqu)
 
     # run dq
-    dq_result = check_data_quality(field, dq_funcs_dict, source_col_sorted_dict)
-    field.record_dq(dq_result)
+    run_dq_checks(field, dq_funcs_list, source_col_sorted_dict)
+
 
 
     # # run transformation
@@ -180,3 +183,5 @@ def transform_stg2_table(engine, source_col_sorted_dict, table, dwetl_logger):
         row_fields = transform_row(row)
         for field in row_fields:
             transform_field(field, source_col_sorted_dict)
+            print(field.value)
+            print(field.record)
