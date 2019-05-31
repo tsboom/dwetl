@@ -12,7 +12,7 @@ class TransformField:
         self.isbn_issn_code = isbn_issn_code
         self.record = {
             "pp": None,
-            "dq" : None,
+            "dq" : [],
             "transforms" : []
         }
 
@@ -23,4 +23,4 @@ class TransformField:
         self.record['pp'] = result
 
     def record_dq(self, result):
-        self.record['dq'] = result
+        self.record['dq'].append(result)
