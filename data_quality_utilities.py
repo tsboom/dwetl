@@ -96,6 +96,7 @@ def is_valid_aleph_date_redux(string_date):
             return False
 #    except TypeError:
 #        print(str(string_date) + " is not a string")
+# rewrite to remove year check
 
 # # checks if hour is valid HHMM format
 def is_valid_hour(hhmm):
