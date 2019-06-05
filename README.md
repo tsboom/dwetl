@@ -44,8 +44,8 @@ These steps correlate with (Alex's high level ETL diagram)[https://drive.google.
   
   - Preprocess fields, write result to field object
     - Data quality checks on fields, write results of field object.
-      - *data_quality_specific_functions.py**
-      - **data_quality_utilities.py*
+      - *data_quality_specific_functions.py*
+      - *data_quality_utilities.py*
     - Transform field, write result to field object
       - *specific_transform_functions.py*
   - Write field values  to corresponding PP, DQ, and T1, T2, T3... rows and columns in the Stage 2 table.
