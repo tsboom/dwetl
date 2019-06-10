@@ -33,18 +33,42 @@ def set_up_sheets_api():
     sheet = service.spreadsheets()
     return sheet
 
-
-
+'''
+Configure ranges for each table
+'''
 
 # column variable names from source to target sheets is_valid_range
 SOURCE_TO_TARGET_COLUMN_RANGE = 'Source-to-Target Mapping!A6:X6'
-# library item dimension range real Star Scheme sheet
-LIB_ITEM_DIM_RANGE = 'Source-to-Target Mapping!A79:X135'
-# bib record dimension range real Star Scheme sheet
-BIB_RECORD_DIM_RANGE = 'Source-to-Target Mapping!A33:X63'
 
-# data quality range real star scheme sheet
-DATA_QUALITY_RANGE = 'Data Quality Checks!A6:T89'
+
+LIBRARY_HOLDING_DIM_RANGE = 'Source-to-Target Mapping!A7:X30'
+LIBRARY_HOLDING_MARC_RECORD_FIELD_OUTRIGGER_RANGE = 'Source-to-Target Mapping!A66:X70'
+BIB_RECORD_DIM_RANGE = 'Source-to-Target Mapping!A35:X64'
+BIBLIOGRAPHIC_RECORD_MARC_RECORD_FIELD_OUTRIGGER_DIM_RANGE = 'Source-to-Target Mapping!A7:X30'
+LIB_ITEM_LOCATION_DIM_RANGE = 'Source-to-Target Mapping!A72:X79'
+LIB_ITEM_DIM_RANGE = 'Source-to-Target Mapping!A80:X138'
+LIBRARY_ITEM_MATERIAL_FORM_DIM_RANGE = 'Source-to-Target Mapping!A139:X141'
+LIBRARY_ITEM_PROCESS_STATUS_DIM_RANGE = 'Source-to-Target Mapping!A142:X146'
+LIBRARY_ITEM_STATUS_DIM_RANGE = 'Source-to-Target Mapping!A147:X149'
+# Date dimension has blanks in the spreadsheet. (will be implemented in the future)
+# DATE_DIMENSION_RANGE = 'Source-to-Target Mapping!A150:X167'
+LIBRARY_ITEM_FACT_RANGE = 'Source-to-Target Mapping!A168:X183'
+
+table_ranges = {
+    'library_holding': LIBRARY_HOLDING_DIM_RANGE,
+    'library_holding_marc_record_field_outrigger': LIBRARY_HOLDING_MARC_RECORD_FIELD_OUTRIGGER_RANGE,
+    'bib_record': BIB_RECORD_DIM_RANGE,
+    'bib_record_marc_record_field_outrigger': BIBLIOGRAPHIC_RECORD_MARC_RECORD_FIELD_OUTRIGGER_DIM_RANGE,
+    'lib_item_location': LIB_ITEM_LOCATION_DIM_RANGE,
+    'lib_item': LIB_ITEM_DIM_RANGE,
+    'lib_item_material_form': LIBRARY_ITEM_MATERIAL_FORM_DIM_RANGE,
+    'lib_item_process_status': LIBRARY_ITEM_PROCESS_STATUS_DIM_RANGE,
+    'lib_item_status': LIBRARY_ITEM_STATUS_DIM_RANGE,
+    'lib_item_fact': LIBRARY_ITEM_FACT_RANGE
+    }
+
+#_data quality range real star scheme sheet
+DATA_QUALITY_RANGE = 'Data Quality Checks!A6:T83'
 # data quality column variable names range real star scheme sheet
 DQ_COLUMN_RANGE = 'Data Quality Checks!A5:T5'
 
@@ -98,12 +122,13 @@ def main():
 
     sheet = set_up_sheets_api()
 
-
-    # # generate values lists for column names, dq checks, and the dimensions to process
-    # ranges_to_process = [SOURCE_TO_TARGET_COLUMN_RANGE, DATA_QUALITY_RANGE, LIB_ITEM_DIM_RANGE, BIB_RECORD_DIM_RANGE]
-
     #get column variable names from row 6 of spreadsheet
     sheet_columns = get_sheets_values_list(sheet, SPREADSHEET_ID, SOURCE_TO_TARGET_COLUMN_RANGE)
+
+    # get dq checks values
+    dq_values = get_sheets_values_list(sheet, SPREADSHEET_ID, DATA_QUALITY_RANGE)
+    # create a dict of dicts for every dq_check row that can be searched by key(field name)
+    dq_rows_dict = get_dq_rows_dict(dq_values, sheet)
 
     # get values by using range of all the dimensions and dq sheet
     bib_rec_values = get_sheets_values_list(sheet, SPREADSHEET_ID, BIB_RECORD_DIM_RANGE)
@@ -111,14 +136,22 @@ def main():
     # get library item values
     lib_item_values = get_sheets_values_list(sheet, SPREADSHEET_ID, LIB_ITEM_DIM_RANGE)
 
-    # get dq checks values
-    dq_values = get_sheets_values_list(sheet, SPREADSHEET_ID, DATA_QUALITY_RANGE)
-    # create a dict of dicts for every dq_check row that can be searched by key(field name)
-    dq_rows_dict = get_dq_rows_dict(dq_values, sheet)
+    # get spreadsheet values for each dimension and fact range in a list
+    dimension_values_list = []
 
-    # list dimensions values to process
-    dimension_values_list = [bib_rec_values, lib_item_values]
+    # use spreadsheet ranges to get values for each dim and fact
+    for range_name, sheet_range in table_ranges.items():
+        current_values = get_sheets_values_list(sheet, SPREADSHEET_ID, sheet_range)
+        dimension_values_list.append(current_values)
+        print(range_name + ' values were found and added to dimension_values_list')
 
+
+
+
+
+    '''
+    create JSON for each dimension and fact
+    '''
     for dimension_values in dimension_values_list:
         if not dimension_values:
             print('No data found.')
@@ -126,7 +159,6 @@ def main():
             dimension_dict = {}
             # write dimension name to table using first row of dimension values. dimension name is in index 20
             dimension_name = dimension_values[0][20]
-            pdb.set_trace()
             dimension_dict['target_dimension_name'] = dimension_name
 
             dimension_dict['fields'] = []
@@ -148,6 +180,8 @@ def main():
                         "transform_action": row_dict['transform_action'],
                         "action_specific": row_dict['action_specific'],
                         "specific_transform_function": row_dict['specific_transform_function'],
+                        "specific_transform_function_param1": row_dict['specific_transform_function_param1'],
+                        "specific_transform_function_param2": row_dict['specific_transform_function_param2'],
                         "source_col_name": row_dict['source_col_name'],
                         "source_data_type": row_dict['source_data_type'],
                         "source_format": row_dict['source_format'],
@@ -164,8 +198,8 @@ def main():
                     "Data Quality Info": {}
                 }
 
-                # check if current col name exists in dq rows dict, if so write dq info
-                # need to make sure all the fields  needing DQ are noted as Yes
+                # Add Data Quality: check if current col name exists in dq rows dict
+                # need to make sure all the fields needing DQ are noted as Yes
                 if row_dict['dq_required'] in {'Y', 'Yes'} and \
                     row_dict['source_col_name'] in dq_rows_dict.keys():
                     all_dq_check_rows = dq_rows_dict[row_dict['source_col_name']]
@@ -182,7 +216,7 @@ def main():
             filename = dimension_name.replace(' ', '_').lower() + '.json'
             full_filename = os.path.join(dirname, '../table_config/'+filename)
 
-            print('\n\n\n...Writing ' +  filename+'\n\n\n')
+            print('\n...Writing ' +  filename+'\n')
             with open(full_filename, 'w') as outfile:
                 json.dump(dimension_dict, outfile, sort_keys=True, indent=4, separators=(',', ': '))
 
