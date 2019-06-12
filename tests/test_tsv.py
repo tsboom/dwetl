@@ -15,18 +15,19 @@ INVALID_MISSING_HEADER_TSV_PATH = os.path.join('tests','data','test_mai50_z30_20
 #valideate_header2
 #validate_footer
 #
+class TestTSV(unittest.TestCase):
 
-def test_parse_tsv_filename(self):
-    tsv_name_metadata = dwetl.parse_tsv_filename(VALID_TEST_TSV_PATH)
-    self.assertEqual(tsv_name_metadata['library'],'mai50')
-    self.assertEqual(tsv_name_metadata['table'],'z30')
-    self.assertEqual(tsv_name_metadata['datetime'],'20190102034001')
+    def test_parse_tsv_filename(self):
+        tsv_name_metadata = loadstg1.parse_tsv_filename(VALID_TEST_TSV_PATH)
+        self.assertEqual(loadstg1.tsv_name_metadata['library'],'mai50')
+        self.assertEqual(loadstg1.tsv_name_metadata['table'],'z30')
+        self.assertEqual(loadstg1.tsv_name_metadata['datetime'],'20190102034001')
     # assert tsv_name_metadata['counter'] == 1
 
 # ensure TSV file has at least 3 rows (header, footer, content)
-def test_tsv_file_row_count(self):
-    self.assertTrue(dwetl.tsv_has_valid_row_count(test_dataframe))
+#    def test_tsv_file_row_count(self):
+#        self.assertTrue(dwetl.tsv_has_valid_row_count(test_dataframe))
 
-def test_tsv_contains_valid_header(self):
-    self.assertTrue(dwetl.tsv_has_header(test_tsv))
-    self.assertFalse(dwetl.tsv_has_header(test_tsv_missing_header))
+#    def test_tsv_contains_valid_header(self):
+#        self.assertTrue(dwetl.tsv_has_header(test_tsv))
+#        self.assertFalse(dwetl.tsv_has_header(test_tsv_missing_header))
