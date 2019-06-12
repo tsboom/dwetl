@@ -19,12 +19,13 @@ from sqlalchemy.engine import reflection
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy import MetaData
 # import database_config
-# import database_credentials
+import database_credentials
 import table_transform
 import loadstg1
 import loadstg2
 import importlib
 
+# pdb.set_trace() to pause script in interactive mode
 
 # logging format
 formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
@@ -98,7 +99,8 @@ bib_rec_stg1_tables = {
     'mai39_z00': Base.classes.dw_stg_1_mai39_z00, #has data
     'mai01_z13': Base.classes.dw_stg_1_mai01_z13, #has data
     'mai39_z13': Base.classes.dw_stg_1_mai39_z13, # file is empty
-    'mai01_z13u': Base.classes.dw_stg_1_mai01_z13u #has data
+    'mai01_z13u': Base.classes.dw_stg_1_mai01_z13u, #has data
+    'mai50_z30': Base.classes.dw_stg_1_mai50_z30
     # 'mai39_z13u': Base.classes.dw_stg_1_mai39_z13u # file is empty
 }
 
@@ -124,17 +126,18 @@ bib_rec_stg1_tables = {
 #
 # '''
 #
-# bib_rec_stg2_tables = {
-#     'bib_rec_z00': Base.classes.dw_stg_2_bib_rec_z00,
-#     'bib_rec_z13': Base.classes.dw_stg_2_bib_rec_z13,
-#     'bib_rec_z13u': Base.classes.dw_stg_2_bib_rec_z13u,
-#     'bib_rec_z00_field': Base.classes.dw_stg_2_bib_rec_z00_field,
-#     }
-
-'''using this for isolated testing of z13u b/c it has dq checks'''
 bib_rec_stg2_tables = {
-    'bib_rec_z13u': Base.classes.dw_stg_2_bib_rec_z13u
-    }
+#     'bib_rec_z00': Base.classes.dw_stg_2_bib_rec_z00,
+     'bib_rec_z13': Base.classes.dw_stg_2_bib_rec_z13
+     'bib_rec_z13u': Base.classes.dw_stg_2_bib_rec_z13u,
+#     'bib_rec_z30u': Base.classes.dw_stg_2_lbry_item_z30
+#     'bib_rec_z00_field': Base.classes.dw_stg_2_bib_rec_z00_field,
+     }
+
+#'''using this for isolated testing of z13u b/c it has dq checks'''
+#bib_rec_stg2_tables = {
+#    'bib_rec_z13u': Base.classes.dw_stg_2_bib_rec_z13u
+#    }
 #
 # # rethink this reload
 # importlib.reload(loadstg2)
@@ -168,7 +171,6 @@ for obj in table_config["fields"]:
 
 for table in bib_rec_stg2_tables.values():
     table_transform.transform_stg2_table(engine, source_col_sorted_dict, table, dwetl_logger)
-
 
 # Use a function which uses the table metadata config files and performs the transformations
 # loop over items in stg 2, refer to column names in table config for instructions
