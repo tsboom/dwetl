@@ -19,6 +19,8 @@
                 "source_format": "N/A",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Generate"
             },
             "target_attribute": "- Library Item Dimension Key",
@@ -27,54 +29,7 @@
         },
         {
             "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "N/A",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "= 'Standard'",
-                "action_specific": "",
-                "aleph_table": "N/A",
-                "chg_proc_type": "N/A",
-                "source_col_name": "N/A",
-                "source_data_type": "N/A",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Item Record Type Description",
-            "target_col_name": "LBRY_ITEM_REC_TYPE_DESC",
-            "target_data_type": "VarChar(50)"
-        },
-        {
-            "Data Quality Info": {
                 "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "MAI50",
-                        "always": "",
-                        "application": "",
-                        "column_data_type": "CHAR(15)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "",
-                        "exception_message": "",
-                        "format": "",
-                        "instructions": "UNIQUE WITHIN:\n  - All Member Libraries",
-                        "only_if_data_exists": "",
-                        "order": "",
-                        "replacement_value": "",
-                        "source_column_name": "Z30_REC_KEY",
-                        "source_file": "Z30",
-                        "specific_dq_function": "",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "",
-                        "type": "Uniqueness"
-                    },
                     {
                         "additional_conditions": "",
                         "aleph_library": "MAI50",
@@ -247,6 +202,8 @@
                 "source_format": "N/A",
                 "source_mandatory": null,
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Source System Identifier",
@@ -256,28 +213,6 @@
         {
             "Data Quality Info": {
                 "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "MAI50",
-                        "always": "",
-                        "application": "",
-                        "column_data_type": "CHAR(15)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "",
-                        "exception_message": "",
-                        "format": "",
-                        "instructions": "UNIQUE WITHIN:\n  - All Member Libraries",
-                        "only_if_data_exists": "",
-                        "order": "",
-                        "replacement_value": "",
-                        "source_column_name": "Z30_REC_KEY",
-                        "source_file": "Z30",
-                        "specific_dq_function": "",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "",
-                        "type": "Uniqueness"
-                    },
                     {
                         "additional_conditions": "",
                         "aleph_library": "MAI50",
@@ -450,6 +385,8 @@
                 "source_format": "N/A",
                 "source_mandatory": null,
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item ADM Number",
@@ -459,28 +396,6 @@
         {
             "Data Quality Info": {
                 "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "MAI50",
-                        "always": "",
-                        "application": "",
-                        "column_data_type": "CHAR(15)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "",
-                        "exception_message": "",
-                        "format": "",
-                        "instructions": "UNIQUE WITHIN:\n  - All Member Libraries",
-                        "only_if_data_exists": "",
-                        "order": "",
-                        "replacement_value": "",
-                        "source_column_name": "Z30_REC_KEY",
-                        "source_file": "Z30",
-                        "specific_dq_function": "",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "",
-                        "type": "Uniqueness"
-                    },
                     {
                         "additional_conditions": "",
                         "aleph_library": "MAI50",
@@ -653,6 +568,8 @@
                 "source_format": "N/A",
                 "source_mandatory": null,
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Sequence Number",
@@ -678,6 +595,8 @@
                 "source_format": "N/A",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Source Aleph Library Name",
@@ -703,6 +622,8 @@
                 "source_format": "N/A",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Update LMS Staff Account Identifier",
@@ -772,8 +693,10 @@
                 "source_col_name": "Z30_OPEN_DATE",
                 "source_data_type": "NUMBER(8)",
                 "source_format": "YYYYMMDD",
-                "source_mandatory": null,
+                "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Create Date",
@@ -790,14 +713,14 @@
                         "application": "H,I",
                         "column_data_type": "NUMBER(8)",
                         "column_sub_component": "",
-                        "dimension_link_to_record": "DIM_DATE(-2)",
+                        "dimension_link_to_record": "temp",
                         "exception_memorialization": "Create Exception Record",
                         "exception_message": "Missing Value",
                         "format": "YYYYMMDD",
                         "instructions": "1) <null>\n2) All zeros",
                         "only_if_data_exists": "X",
                         "order": "1",
-                        "replacement_value": "0001-01-02'",
+                        "replacement_value": "(null)",
                         "source_column_name": "Z30_UPDATE_DATE",
                         "source_file": "Z30",
                         "specific_dq_function": "no_missing_values",
@@ -819,7 +742,7 @@
                         "instructions": "All charcters must be [0-9]",
                         "only_if_data_exists": "X",
                         "order": "2",
-                        "replacement_value": "0001-01-03'",
+                        "replacement_value": "(null)",
                         "source_column_name": "Z30_UPDATE_DATE",
                         "source_file": "Z30",
                         "specific_dq_function": "is_valid_aleph_year",
@@ -843,8 +766,10 @@
                 "source_col_name": "Z30_UPDATE_DATE",
                 "source_data_type": "NUMBER(8)",
                 "source_format": "YYYYMMDD",
-                "source_mandatory": null,
+                "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Update Date",
@@ -856,25 +781,27 @@
                 "dq_required": false
             },
             "Preprocessing Info": {
-                "pre_action": "N/A",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "N/A"
+                "pre_action": "Conversion",
+                "pre_detailed_instructions": "To Postgres Date Datatype",
+                "pre_or_post_dq": "POST"
             },
             "Transformation Info": {
                 "action_detailed_instructions": "",
                 "action_specific": "As-Is",
                 "aleph_table": "Z30",
                 "chg_proc_type": "1",
-                "source_col_name": "Z30_NO_LOANS",
-                "source_data_type": "NUMBER(3)",
-                "source_format": "",
-                "source_mandatory": null,
+                "source_col_name": "Z30_PROCESS_STATUS_DATE",
+                "source_data_type": "NUMBER(8)",
+                "source_format": "YYYYMMDD",
+                "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
-            "target_attribute": "- Library Item Total Loan Event Count",
-            "target_col_name": "LBRY_ITEM_TOTAL_LOAN_EVENT_CNT",
-            "target_data_type": "Integer"
+            "target_attribute": "- Library Item Process Status Update Date",
+            "target_col_name": "LBRY_ITEM_PROCESS_STATUS_UPDATE_DT",
+            "target_data_type": "Date"
         },
         {
             "Data Quality Info": {
@@ -895,6 +822,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Volume-Issue Number",
@@ -966,6 +895,8 @@
                 "source_format": "YYYYMMDD",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Accession Date",
@@ -991,6 +922,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Page Range Text",
@@ -1014,8 +947,10 @@
                 "source_col_name": "Z30_COPY_ID",
                 "source_data_type": "CHAR(5)",
                 "source_format": "",
-                "source_mandatory": null,
+                "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Copy Number",
@@ -1085,8 +1020,10 @@
                 "source_col_name": "Z30_ISSUE_DATE",
                 "source_data_type": "NUMBER(8)",
                 "source_format": "YYYYMMDD",
-                "source_mandatory": null,
+                "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Publication Date",
@@ -1112,6 +1049,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Supplemental Material Title",
@@ -1181,8 +1120,10 @@
                 "source_col_name": "Z30_EXPECTED_ARRIVAL_DATE",
                 "source_data_type": "NUMBER(8)",
                 "source_format": "YYYYMMDD",
-                "source_mandatory": null,
+                "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Expected Arrival Date",
@@ -1252,8 +1193,10 @@
                 "source_col_name": "Z30_ARRIVAL_DATE",
                 "source_data_type": "NUMBER(8)",
                 "source_format": "YYYYMMDD",
-                "source_mandatory": null,
+                "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Actual Arrival Date",
@@ -1279,10 +1222,12 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
-            "target_attribute": "- Library Item Acquisition Price Amount",
-            "target_col_name": "LBRY_ITEM_ACQUISITION_PRICE_AMT",
+            "target_attribute": "- Library Item Acquisition Price Text",
+            "target_col_name": "LBRY_ITEM_ACQUISITION_PRICE_TXT",
             "target_data_type": "VarChar(10)"
         },
         {
@@ -1331,28 +1276,6 @@
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Leading Spaces"
-                    },
-                    {
-                        "additional_conditions": "No previous Z30_BARCODE exception",
-                        "aleph_library": "MAI50",
-                        "always": "X",
-                        "application": "H,I",
-                        "column_data_type": "CHAR(30)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Non-Unique Value",
-                        "format": "",
-                        "instructions": "UNIQUE WITHIN:\n  - All Member Libraries",
-                        "only_if_data_exists": "",
-                        "order": "3",
-                        "replacement_value": "\"Non-Unique Value\"",
-                        "source_column_name": "Z30_BARCODE",
-                        "source_file": "Z30",
-                        "specific_dq_function": "",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "No",
-                        "type": "Uniqueness"
                     }
                 ],
                 "dq_required": true
@@ -1370,8 +1293,10 @@
                 "source_col_name": "Z30_BARCODE",
                 "source_data_type": "CHAR(30)",
                 "source_format": "",
-                "source_mandatory": null,
+                "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Barcode Number",
@@ -1421,6 +1346,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Location Call Number Scheme Code",
@@ -1446,6 +1373,8 @@
                 "source_format": "N/A",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Lookup"
             },
             "target_attribute": "- Library Item Location Call Number Scheme Description",
@@ -1471,6 +1400,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Location Call Number",
@@ -1496,6 +1427,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Location Sort Normalized Call Number",
@@ -1522,7 +1455,7 @@
                         "replacement_value": "N/A",
                         "source_column_name": "Z30_TEMP_LOCATION",
                         "source_file": "Z30",
-                        "specific_dq_function": "",
+                        "specific_dq_function": "has_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "",
                         "type": "Missing Value"
@@ -1565,8 +1498,10 @@
                 "source_col_name": "Z30_TEMP_LOCATION",
                 "source_data_type": "CHAR(1)",
                 "source_format": "",
-                "source_mandatory": null,
+                "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Location Temporary Designation Flag",
@@ -1616,6 +1551,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Location Alternative Call Number Scheme Code",
@@ -1641,6 +1578,8 @@
                 "source_format": "N/A",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Lookup"
             },
             "target_attribute": "- Library Item Location Alternative Call Number Scheme Description",
@@ -1666,6 +1605,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Location Alternative Call Number",
@@ -1691,6 +1632,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Location Alternative Sort Normalized Call Number",
@@ -1714,8 +1657,10 @@
                 "source_col_name": "Z30_ENUMERATION_A",
                 "source_data_type": "CHAR(20)",
                 "source_format": "",
-                "source_mandatory": null,
+                "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Enumeration Level 1 Text",
@@ -1741,6 +1686,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Enumeration Level 2 Text",
@@ -1766,6 +1713,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Enumeration Level 3 Text",
@@ -1791,6 +1740,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Enumeration Level 4 Text",
@@ -1816,6 +1767,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Enumeration Level 5 Text",
@@ -1841,6 +1794,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Enumeration Level 6 Text",
@@ -1866,6 +1821,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Alternate Enumeration Level 1 Text",
@@ -1891,6 +1848,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Alternate Enumeration Level 2 Text",
@@ -1916,6 +1875,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Chronology Level 1 Text",
@@ -1941,6 +1902,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Chronology Level 2 Text",
@@ -1966,6 +1929,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Chronology Level 3 Text",
@@ -1991,6 +1956,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Chronology Level 4 Text",
@@ -2016,6 +1983,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Alternate Chronology Text",
@@ -2041,6 +2010,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Circulation Display Note",
@@ -2066,6 +2037,8 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item OPAC Display Text",
@@ -2091,11 +2064,94 @@
                 "source_format": "",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "- Library Item Staff-Only Display Note",
             "target_col_name": "LBRY_ITEM_STAFF_ONLY_DISPLAY_NOTE",
             "target_data_type": "VarChar(200)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "N/A",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-Is",
+                "aleph_table": "Z30",
+                "chg_proc_type": "2",
+                "source_col_name": "Z30_MATERIAL",
+                "source_data_type": "CHAR(5)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Library Item Actual Material Form Code",
+            "target_col_name": "lbry_item_actual_matrl_form_cd",
+            "target_data_type": "VarChar(5)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "N/A",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-Is",
+                "aleph_table": "Z30",
+                "chg_proc_type": "2",
+                "source_col_name": "Z30_ITEM_STATUS",
+                "source_data_type": "CHAR(2)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Library Item Actual Status Code",
+            "target_col_name": "lbry_item_actual_status_cd",
+            "target_data_type": "Character(2)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "N/A",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-Is",
+                "aleph_table": "Z30",
+                "chg_proc_type": "2",
+                "source_col_name": "Z30_ITEM_PROCESS_STATUS",
+                "source_data_type": "CHAR(2)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Library Item Actual Process Status Code",
+            "target_col_name": "lbry_item_actual_prcs_status_cd",
+            "target_data_type": "Character(2)"
         },
         {
             "Data Quality Info": {
@@ -2116,6 +2172,8 @@
                 "source_format": "YYYYMMDD",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "Library Item Most Recent Loan Event Date",
@@ -2141,6 +2199,8 @@
                 "source_format": "HHMM",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "Library Item Most Recent Loan Event Time",
@@ -2166,6 +2226,8 @@
                 "source_format": "N/A",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "Library Item Most Recent Loan Event Type Code",
@@ -2191,6 +2253,8 @@
                 "source_format": "N/A",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "Library Item Most Recent Loan Event IP Address",
@@ -2216,6 +2280,8 @@
                 "source_format": "YYYYMMDD",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "Library Item Most Recent Return Event Date",
@@ -2241,6 +2307,8 @@
                 "source_format": "HHMM",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "Library Item Most Recent Return Event Time",
@@ -2266,6 +2334,8 @@
                 "source_format": "N/A",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "Library Item Most Recent Return Event Type Code",
@@ -2291,6 +2361,8 @@
                 "source_format": "N/A",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "Library Item Most Recent Return Event IP Address",
@@ -2316,6 +2388,8 @@
                 "source_format": "YYYYMMDD",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "Library Item Most Recent Renew Event Date",
@@ -2341,6 +2415,8 @@
                 "source_format": "HHMM",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "Library Item Most Recent Renew Event Time",
@@ -2366,6 +2442,8 @@
                 "source_format": "N/A",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "Library Item Most Recent Renew Event Type Code",
@@ -2391,6 +2469,8 @@
                 "source_format": "N/A",
                 "source_mandatory": "N",
                 "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
                 "transform_action": "Move"
             },
             "target_attribute": "Library Item Most Recent Renew Event IP Address",
