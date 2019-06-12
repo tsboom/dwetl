@@ -47,7 +47,7 @@
                         "replacement_value": "N/A",
                         "source_column_name": "Z30_REC_KEY",
                         "source_file": "Z30",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "Yes",
                         "type": "Missing Value"
@@ -113,7 +113,7 @@
                         "replacement_value": "N/A",
                         "source_column_name": "Z30_REC_KEY",
                         "source_file": "Z30",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "Yes",
                         "type": "Missing Value"
@@ -157,7 +157,7 @@
                         "replacement_value": "N/A",
                         "source_column_name": "Z30_REC_KEY",
                         "source_file": "Z30",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "Yes",
                         "type": "Missing Value"
@@ -230,7 +230,7 @@
                         "replacement_value": "N/A",
                         "source_column_name": "Z30_REC_KEY",
                         "source_file": "Z30",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "Yes",
                         "type": "Missing Value"
@@ -296,7 +296,7 @@
                         "replacement_value": "N/A",
                         "source_column_name": "Z30_REC_KEY",
                         "source_file": "Z30",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "Yes",
                         "type": "Missing Value"
@@ -340,7 +340,7 @@
                         "replacement_value": "N/A",
                         "source_column_name": "Z30_REC_KEY",
                         "source_file": "Z30",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "Yes",
                         "type": "Missing Value"
@@ -413,7 +413,7 @@
                         "replacement_value": "N/A",
                         "source_column_name": "Z30_REC_KEY",
                         "source_file": "Z30",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "Yes",
                         "type": "Missing Value"
@@ -479,7 +479,7 @@
                         "replacement_value": "N/A",
                         "source_column_name": "Z30_REC_KEY",
                         "source_file": "Z30",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "Yes",
                         "type": "Missing Value"
@@ -523,7 +523,7 @@
                         "replacement_value": "N/A",
                         "source_column_name": "Z30_REC_KEY",
                         "source_file": "Z30",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "Yes",
                         "type": "Missing Value"
@@ -650,7 +650,7 @@
                         "replacement_value": "0001-01-02'",
                         "source_column_name": "Z30_OPEN_DATE",
                         "source_file": "Z30",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Missing Value"
@@ -723,7 +723,7 @@
                         "replacement_value": "(null)",
                         "source_column_name": "Z30_UPDATE_DATE",
                         "source_file": "Z30",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Missing Value"
@@ -850,7 +850,7 @@
                         "replacement_value": "0001-01-01'",
                         "source_column_name": "Z30_INVENTORY_NUMBER_DATE",
                         "source_file": "Z30",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Missing Value"
@@ -977,7 +977,7 @@
                         "replacement_value": "0001-01-02'",
                         "source_column_name": "Z30_ISSUE_DATE",
                         "source_file": "Z30",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Missing Value"
@@ -1150,7 +1150,7 @@
                         "replacement_value": "0001-01-02'",
                         "source_column_name": "Z30_ARRIVAL_DATE",
                         "source_file": "Z30",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Missing Value"
@@ -1250,7 +1250,7 @@
                         "replacement_value": "\"Missing Value\"",
                         "source_column_name": "Z30_BARCODE",
                         "source_file": "Z30",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Missing Value"

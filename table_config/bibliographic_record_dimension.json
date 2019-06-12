@@ -846,7 +846,7 @@
                         "replacement_value": "(null)",
                         "source_column_name": "Z13_OPEN_DATE",
                         "source_file": "Z13",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Missing Value"
@@ -919,7 +919,7 @@
                         "replacement_value": "(null)",
                         "source_column_name": "Z13_UPDATE_DATE",
                         "source_file": "Z13",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Missing Value"
