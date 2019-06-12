@@ -48,7 +48,7 @@ def is_less_than_eq_to_length(input, length):
 
 def no_missing_values(input):
     # check for all zeros
-    if input is None or input.isspace() or int(input) == 0:
+    if input is None or int(input) == 0:
         return False
     return True
 # ^^^not sure if working
