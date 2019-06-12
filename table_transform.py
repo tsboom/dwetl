@@ -100,7 +100,6 @@ def check_data_quality(field, dq_funcs_list, obj):
     '''
     # find dq checks to run
     try:
-        pdb.set_trace()
         dq_list = obj['Data Quality Info']['data_quality_checks']
         print(dq_list)
         # run dq checks
@@ -173,6 +172,7 @@ def run_transformations(field, transformations_list, source_col_sorted_dict):
     try:
         objs = source_col_sorted_dict[field.name]
         for obj in objs:
+            pdb.set_trace()
             result = check_transform(field, transformations_list, obj)
             field.record_transforms(result)
     except KeyError:
@@ -183,7 +183,6 @@ def run_transformations(field, transformations_list, source_col_sorted_dict):
 
 
 def transform_field(field, source_col_sorted_dict):
-    pdb.set_trace()
     '''
     Using the field name and value, run transformations and log to the field's log
     '''
@@ -227,7 +226,6 @@ def transform_stg2_table(engine, source_col_sorted_dict, table, dwetl_logger):
     session = Session()
 
     for row in session.query(table).all():
-        pdb.set_trace()
         row_fields = transform_row(row)
         for field in row_fields:
             transform_field(field, source_col_sorted_dict)
