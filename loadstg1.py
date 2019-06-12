@@ -11,7 +11,7 @@ from sqlalchemy.engine import reflection
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy import MetaData
 # import database_config
-import database_credentials
+# import database_credentials
 
 
 
