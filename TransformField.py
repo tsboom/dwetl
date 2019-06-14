@@ -16,8 +16,8 @@ class TransformField:
             "transforms" : []
         }
 
-    def record_transforms(self, transform_name, result):
-        self.record["transforms"].append({name: transform_name, result: result})
+    def record_transform(self, result):
+        self.record["transforms"].append(result)
 
     def record_pp(self, result):
         self.record['pp'] = result
