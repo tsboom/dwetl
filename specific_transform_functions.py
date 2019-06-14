@@ -74,7 +74,7 @@ def is_acq_created(field):
         return 'Y'
     else:
         return 'N'
-#^^^ not sure what 'N' conditions should be, but I tested 'not-acq-created' and it passed. I imagine it is the same with the other check functions. Just a thought...        
+#^^^ not sure what 'N' conditions should be, but I tested 'not-acq-created' and it passed. I imagine it is the same with the other check functions. Just a thought...
 
 def is_circ_created(field):
     if "CIRC-CREATED" in field.value.upper():

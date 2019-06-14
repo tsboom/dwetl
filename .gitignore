@@ -1,5 +1,6 @@
 *.pyc
 database_credentials.py
 data/*
+logs/*
 scripts/credentials.json
 scripts/token_dw.json

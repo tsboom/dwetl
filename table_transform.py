@@ -36,7 +36,6 @@ def load_table_config(table_config_path):
 # TO DO: probably should figure out a better way to do this check only for z13, not other tables.
 def get_isbn_issn_code(column, row_dict):
     optional_isbn_code = None
-
     # column name contains ISBN_ISSN, optional_isbn_code = isbn_code
     if column == 'in_z13_isbn_issn':
         # get ISBN code from first three chars, save code to var
@@ -44,10 +43,8 @@ def get_isbn_issn_code(column, row_dict):
         optional_isbn_code = isbn_issn_code
         return optional_isbn_code
     return optional_isbn_code
-#^^ the first if seems like it will always return NONE, correct?
-#^^ updated to return substring 0:3 because it does say you need the first three characters, yes?
-# creates array of TransformField objects which takes into account ISBN/ISSN code
 
+# creates array of TransformField objects which takes into account ISBN/ISSN code
 def transform_row(sa_row):
     # fields to transform
     fields = []
@@ -58,7 +55,7 @@ def transform_row(sa_row):
             optional_isbn_code = get_isbn_issn_code(column, row_dict)
             fields.append(TransformField(column, field_value, isbn_issn_code=optional_isbn_code))
     return fields
-    
+
 
 # Write field transform log to stage 2 db
 def write_log(field_name, log):
@@ -84,12 +81,6 @@ def functions_from_module(module):
 def execute_dq_function(current_function, arg, input, dq_funcs_list):
     is_passing = ''
     # search for function in dq list, execute with params
-    print(function_name)
-    print(arg)
-    print(str(arg))
-    print(len(arg))
-    print(input)
-    pdb.set_trace()
     for function in dq_funcs_list:
         function_object = function[1]
         dq_function = function[0]
@@ -110,14 +101,12 @@ def check_data_quality(field, dq_funcs_list, obj):
     # find dq checks to run
     try:
         dq_list = obj['Data Quality Info']['data_quality_checks']
-        print(dq_list)
         # run dq checks
         for check in dq_list:
             function_name = check.get('specific_dq_function')
             arg = check.get('specific_dq_function_param_1')
             # is_passing is an empty string if no dq check is found, otherwise is True or False.
             is_passing = execute_dq_function(function_name, arg, field.value, dq_funcs_list)
-            print("IS PASSING VARIABLE IS" + is_passing)
             if is_passing:
                 field_dq_result = field.value
             elif is_passing is False:
@@ -149,21 +138,22 @@ def run_dq_checks(field, dq_funcs_list, source_col_sorted_dict):
         print('Field name ' + field.name +' is not a source column so there are no dq checks. \n\n\n')
 
 
-def execute_transform(current_function, arg1, arg2, input, transformations_list):
+def execute_transform(current_function, arg1, arg2, field, transformations_list):
     result = ''
     for function in transformations_list:
         function_object = function[1]
         transform_function = function[0]
+        print(current_function, transform_function)
         if current_function == transform_function:
             if not arg1 and not arg2:
-                result = function_object(input)
+                result = function_object(field)
             elif arg1 and arg2:
-                result = function_object(input, arg1, arg2)
+                result = function_object(field, arg1, arg2)
             elif arg1:
-                result = function_object(input, arg1)
+                result = function_object(field, arg1)
             else:
-                continue
-        return result
+                break
+    return result
 
 def check_transform(field, transformations_list, obj):
     ''''
@@ -172,8 +162,11 @@ def check_transform(field, transformations_list, obj):
     # find the corresponding transformation in dimension json
     try:
         specific_transform_function = obj['Transformation Info']['specific_transform_function']
-        pdb.set_trace()
-        arg = 'temp'
+        arg1 = obj.get('specific_transform_function_param1')
+        arg2 = obj.get('specific_transform_function_param2')
+        t_result = execute_transform(specific_transform_function, arg1, arg2, field, transformations_list)
+        result = {'name': specific_transform_function, 'result': t_result}
+        return result
     except KeyError:
         print('This source field does not exist in the source to target json.')
 
@@ -182,9 +175,10 @@ def run_transformations(field, transformations_list, source_col_sorted_dict):
     try:
         objs = source_col_sorted_dict[field.name]
         for obj in objs:
-            pdb.set_trace()
             result = check_transform(field, transformations_list, obj)
-            field.record_transforms(result)
+            print(result)
+            pdb.set_trace()
+            field.record_transform(result)
     except KeyError:
         print('Field name ' + field.name +' is not a source column so there are no transformations. \n\n\n')
 
@@ -196,7 +190,7 @@ def transform_field(field, source_col_sorted_dict):
     '''
     Using the field name and value, run transformations and log to the field's log
     '''
-#^^do we think it is wise to have a function with the same name as a class and additional python file? Or does it not matter?
+    #^^do we think it is wise to have a function with the same name as a class and additional python file? Or does it not matter?
     # run pp
     result = preprocess(field, source_col_sorted_dict)
     field.record_pp(result)
@@ -208,23 +202,12 @@ def transform_field(field, source_col_sorted_dict):
     # run dq
     run_dq_checks(field, dq_funcs_list, source_col_sorted_dict)
 
-    # set up list of transformation functions from module
+    # set up list of specific transformation functions from module
     transformations_list = functions_from_module(stf)
     # run transformations
     run_transformations(field, transformations_list, source_col_sorted_dict)
 
 
-
-    # # run transformation
-    #     # determine which transforms to run, call that func's transform function
-    #
-    # field.record_transforms(tf_name, result)...
-    #
-    #
-    # '''
-    # After transforming and logging, write log to database
-    # '''
-    #
     # write_log(field.name, field.log) # writes to stage 2 db
 
 
