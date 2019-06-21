@@ -19,7 +19,7 @@ import database_credentials
 '''
 main function to load stg_2 table using nested functions
 '''
-def load_stg2_table(engine, bib_rec_stg1_tables, bib_rec_stg2_tables, dwetl_logger):
+def load_stg2_table(engine, stg1_tables, stg2_tables, dwetl_logger):
 
     # func to remove some keys from becoming 'in_val_' column names
     def without_keys(d, invalid_keys):
@@ -65,7 +65,7 @@ def load_stg2_table(engine, bib_rec_stg1_tables, bib_rec_stg2_tables, dwetl_logg
         # write the stage 2 table 'in_val_'s
         try:
             # insert the row into SQLAlchemy table base class
-            record = bib_rec_stg2_tables[stg2_key](**stg2_row)
+            record = stg2_tables[stg2_key](**stg2_row)
             session.add(record)
             session.commit()
         except exc.SQLAlchemyError as e:
@@ -92,7 +92,8 @@ def load_stg2_table(engine, bib_rec_stg1_tables, bib_rec_stg2_tables, dwetl_logg
     # doesn't work for z00_field
     def get_stg2_key(key):
         table = key.split('_')[1]
-        stg2_key = 'bib_rec_' + table
+        #fix this to work with any dimension
+        stg2_key = 'lib_item_' + table
         return stg2_key
 
 
@@ -100,7 +101,7 @@ def load_stg2_table(engine, bib_rec_stg1_tables, bib_rec_stg2_tables, dwetl_logg
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    for key, base_class in bib_rec_stg1_tables.items():
+    for key, base_class in stg1_tables.items():
         aleph_library = key.split('_')[0]
         stg2_key = get_stg2_key(key)
         for row in session.query(base_class).all():

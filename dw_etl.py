@@ -55,7 +55,8 @@ set files for processing
 # use filenames in a specific directory to process
 # in this case i put the bib rec files in data/bib_rec
 files = []
-for (dirpath, dirnames, filenames) in walk('data/bib_rec'):
+# for (dirpath, dirnames, filenames) in walk('data/bib_rec'):
+for (dirpath, dirnames, filenames) in walk('data/library_item'):
     for file in filenames:
         files.append(os.path.join(dirpath, file))
 
@@ -73,7 +74,6 @@ set up SQLAlchemy to map to reflect existing tables in the database
 def create_db_engine():
     # connect to database
     engine = create_engine(database_credentials.DB_CONNECTION_STRING, echo=True)
-
     return engine
 
 engine = create_db_engine()
@@ -86,31 +86,29 @@ engine = create_db_engine()
 Base = automap_base()
 # reflect the entire database
 Base.prepare(engine, reflect=True)
-# # print a list of each table object
-# print(Base.classes.keys())
 
 
-# # bib record dimension file-equivalent-tables
-'''
-is there an mai39_z13u? data is empty
-'''
-bib_rec_stg1_tables = {
-    'mai01_z00': Base.classes.dw_stg_1_mai01_z00, #has data
-    'mai39_z00': Base.classes.dw_stg_1_mai39_z00, #has data
-    'mai01_z13': Base.classes.dw_stg_1_mai01_z13, #has data
-    'mai39_z13': Base.classes.dw_stg_1_mai39_z13, # file is empty
-    'mai01_z13u': Base.classes.dw_stg_1_mai01_z13u, #has data
+# # # bib record dimension file-equivalent-tables
+# bib_rec_stg1_tables = {
+#     'mai01_z00': Base.classes.dw_stg_1_mai01_z00, #has data
+#     'mai39_z00': Base.classes.dw_stg_1_mai39_z00, #has data
+#     'mai01_z13': Base.classes.dw_stg_1_mai01_z13, #has data
+#     'mai39_z13': Base.classes.dw_stg_1_mai39_z13, # file is empty
+#     'mai01_z13u': Base.classes.dw_stg_1_mai01_z13u #has data
+#     # 'mai39_z13u': Base.classes.dw_stg_1_mai39_z13u # file is empty
+# }
+
+
+lib_item_stg1_tables = {
     'mai50_z30': Base.classes.dw_stg_1_mai50_z30
-    # 'mai39_z13u': Base.classes.dw_stg_1_mai39_z13u # file is empty
 }
-
 
 # # inspect table that was created for debugging
 # insp = inspect(engine)
 # insp.get_columns('dw_stg_1_mai01_z13u')
 
 
-
+#
 # '''
 #
 # extract data and load file-equivalent table for all TSVs that are configured
@@ -118,31 +116,42 @@ bib_rec_stg1_tables = {
 # '''
 # for filename in tsvs_to_process:
 #     loadstg1.load_file_equivalent_table(filename, engine, bib_rec_stg1_tables)
+
+# for filename in tsvs_to_process:
+#     loadstg1.load_file_equivalent_table(filename, engine, lib_item_stg1_tables)
 #
-#
-# '''
-# create stg 2 tables
-# read from stg1 tables
-#
-# '''
-#
+
+'''
+create stg 2 tables
+read from stg1 tables
+
+'''
+
 bib_rec_stg2_tables = {
-#     'bib_rec_z00': Base.classes.dw_stg_2_bib_rec_z00,
-     'bib_rec_z13': Base.classes.dw_stg_2_bib_rec_z13
+    'bib_rec_z00': Base.classes.dw_stg_2_bib_rec_z00,
+     'bib_rec_z13': Base.classes.dw_stg_2_bib_rec_z13,
      'bib_rec_z13u': Base.classes.dw_stg_2_bib_rec_z13u,
-#     'bib_rec_z30u': Base.classes.dw_stg_2_lbry_item_z30
-#     'bib_rec_z00_field': Base.classes.dw_stg_2_bib_rec_z00_field,
+    'bib_rec_z30u': Base.classes.dw_stg_2_lbry_item_z30,
+    # 'bib_rec_z00_field': Base.classes.dw_stg_2_bib_rec_z00_field,
      }
 
-#'''using this for isolated testing of z13u b/c it has dq checks'''
-#bib_rec_stg2_tables = {
+lib_item_stg2_tables = {
+    'lib_item_z30': Base.classes.dw_stg_2_lbry_item_z30
+}
+
+# '''using this for isolated testing of z13u b/c it has dq checks'''
+# bib_rec_stg2_tables = {
 #    'bib_rec_z13u': Base.classes.dw_stg_2_bib_rec_z13u
 #    }
 #
 # # rethink this reload
 # importlib.reload(loadstg2)
 # loadstg2.load_stg2_table(engine, bib_rec_stg1_tables, bib_rec_stg2_tables, dwetl_logger)
-#
+#loadstg2.load_stg2_table(engine, lib_item_stg1_tables, lib_item_stg2_tables, dwetl_logger)
+
+
+
+
 
 
 '''
@@ -152,7 +161,8 @@ populate stg 2 PP, DQ, and T1, T2...
 
 print('got to transform')
 
-table_config_path = os.path.join('table_config', 'bibliographic_record_dimension.json')
+# table_config_path = os.path.join('table_config', 'bibliographic_record_dimension.json')
+table_config_path = os.path.join('table_config', 'library_item_dimension.json')
 
 table_config = table_transform.load_table_config(table_config_path)
 
@@ -168,21 +178,16 @@ for obj in table_config["fields"]:
     else:
         source_col_sorted_dict[source_col_name] = [obj]
 
-
-for table in bib_rec_stg2_tables.values():
-    table_transform.transform_stg2_table(engine, source_col_sorted_dict, table, dwetl_logger)
-
 # Use a function which uses the table metadata config files and performs the transformations
 # loop over items in stg 2, refer to column names in table config for instructions
+#for table in bib_rec_stg2_tables.values():
+for table in lib_item_stg2_tables.values():
+    table_transform.transform_stg2_table(engine, source_col_sorted_dict, table, dwetl_logger)
 
+'''
+Stage 3
 
-
-# stg 2 to transform_field(df, table_config)
-
-
-
-
-
+'''
 
 # load to stg 3
 
