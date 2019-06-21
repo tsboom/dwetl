@@ -14,14 +14,9 @@ def is_mandatory(input):
     print("temporary")
 
 # checks if numeric only
-
-
 def is_numeric(input):
-    n = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    if (all(str(i) in input for i in n)):
+    if input.isnumeric() is True:
         return True
-# ^^^ doesn't work?
-
 
 # checks if provided length is true
 def is_valid_length(input, length):
@@ -29,28 +24,28 @@ def is_valid_length(input, length):
         return True
 
 # do these dq utilities need to return positive and negative results or does a fail return False?
+# Answer: fail should return False
 
 # checks if less than or equal to specified length
-
-
 def is_less_than_eq_to_length(input, length):
     if (len(str(input)) <= length):
         return True
 # ^^^ how to check len on ints?
+# ANSWER: i don't think we ever get ints, everything is a string from the TSV
 
-# # checks range
-# def is_valid_range(number, a, z):
-#     if number in range(a, z):
-#         return True
 
 # checks to see if there are no nulls, all spaces, or all zeros
-
-
 def no_missing_values(input):
-    # check for all zeros
-    if input is None or int(input) == 0:
-        return False
-    return True
+    output = True
+    # check for all zeros nulls, or white spaces
+    if input is None:
+        output = False
+    if input.isspace():
+        output = False
+    if input.isnumeric():
+        if int(input) != 0:
+            output = True
+    return output
 # ^^^not sure if working
 
 
@@ -68,6 +63,13 @@ def is_valid_aleph_year(year):
     else:
         return True
 # ^^^ exception doesn't seem to work, rewrote it to be a simple if/else. Can this be altered to then throw an error?
+
+def has_leading_space(input):
+    if input[0].isspace():
+        return True
+    else:
+        return False
+
 
 # checks if valid date 1980-present
 
