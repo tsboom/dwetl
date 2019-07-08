@@ -55,22 +55,22 @@ LIBRARY_ITEM_STATUS_DIM_RANGE = 'Source-to-Target Mapping!A147:X149'
 LIBRARY_ITEM_FACT_RANGE = 'Source-to-Target Mapping!A168:X183'
 
 table_ranges = {
-    'library_holding': LIBRARY_HOLDING_DIM_RANGE,
-    'library_holding_marc_record_field_outrigger': LIBRARY_HOLDING_MARC_RECORD_FIELD_OUTRIGGER_RANGE,
-    'bib_record': BIB_RECORD_DIM_RANGE,
-    'bib_record_marc_record_field_outrigger': BIBLIOGRAPHIC_RECORD_MARC_RECORD_FIELD_OUTRIGGER_DIM_RANGE,
-    'lib_item_location': LIB_ITEM_LOCATION_DIM_RANGE,
-    'lib_item': LIB_ITEM_DIM_RANGE,
-    'lib_item_material_form': LIBRARY_ITEM_MATERIAL_FORM_DIM_RANGE,
-    'lib_item_process_status': LIBRARY_ITEM_PROCESS_STATUS_DIM_RANGE,
-    'lib_item_status': LIBRARY_ITEM_STATUS_DIM_RANGE,
-    'lib_item_fact': LIBRARY_ITEM_FACT_RANGE
+    # 'library_holding': LIBRARY_HOLDING_DIM_RANGE,
+    # 'library_holding_marc_record_field_outrigger': LIBRARY_HOLDING_MARC_RECORD_FIELD_OUTRIGGER_RANGE,
+    # 'bib_record': BIB_RECORD_DIM_RANGE,
+    # 'bib_record_marc_record_field_outrigger': BIBLIOGRAPHIC_RECORD_MARC_RECORD_FIELD_OUTRIGGER_DIM_RANGE,
+    # 'lib_item_location': LIB_ITEM_LOCATION_DIM_RANGE,
+    'lib_item': LIB_ITEM_DIM_RANGE
+    # 'lib_item_material_form': LIBRARY_ITEM_MATERIAL_FORM_DIM_RANGE,
+    # 'lib_item_process_status': LIBRARY_ITEM_PROCESS_STATUS_DIM_RANGE,
+    # 'lib_item_status': LIBRARY_ITEM_STATUS_DIM_RANGE,
+    # 'lib_item_fact': LIBRARY_ITEM_FACT_RANGE
     }
 
 #_data quality range real star scheme sheet
-DATA_QUALITY_RANGE = 'Data Quality Checks!A6:T83'
+DATA_QUALITY_RANGE = 'Data Quality Checks!A6:U83'
 # data quality column variable names range real star scheme sheet
-DQ_COLUMN_RANGE = 'Data Quality Checks!A5:T5'
+DQ_COLUMN_RANGE = 'Data Quality Checks!A5:U5'
 
 def get_sheets_values_list(sheet, spreadsheet_id, range):
     # get values in a comma separated list based on range
@@ -95,6 +95,7 @@ def write_no_if_not_yes(value):
 
 # function that creates a dict of each row dict, with the field/column name as key
 # so that they can be searched
+
 def get_dq_rows_dict(dq_values, sheet):
     dq_rows_dict = {}
 
@@ -107,9 +108,10 @@ def get_dq_rows_dict(dq_values, sheet):
         # add keys (from sheet_columns)to each row's values list
         for idx, key in enumerate(sheet_columns):
             row_values_dict[key] = row_values[idx]
-            # i got an error whenever column S was blank. need a test to make sure column S is not blank.
+            # i got an error whenever column T was blank. need a test to make sure column T is not blank.
         source_column_name = row_values_dict['source_column_name']
         # append dq row to existing key (if key exists)
+
         if dq_rows_dict.get(source_column_name, False):
             dq_rows_dict[source_column_name].append(row_values_dict)
         else:
@@ -165,12 +167,16 @@ def main():
 
             for col in dimension_values:
                 row_dict = {}
+
                 # create a dict from Sheet row values using the sheet column names
                 for idx, key in enumerate(sheet_columns):
                     row_dict[key] = value_if_exists(col, idx)
+                    pdb.set_trace()
 
-                # generate a dict describing dimension column fields (use to create JSON later)
-
+                # Using the row_dict just created from the list of every column's values,
+                # We need to rearrange this data into JSON that makes sense for the ETL.
+                # Generate a dict describing dimension column fields and subset transformations and dq Checks
+                # used to create JSON. 
                 col_dict = {
                     "target_col_name": row_dict['target_col_name'],
                     "target_data_type": row_dict['target_data_type'],
@@ -198,14 +204,19 @@ def main():
                     "Data Quality Info": {}
                 }
 
+
                 # Add Data Quality: check if current col name exists in dq rows dict
                 # need to make sure all the fields needing DQ are noted as Yes
+                # TODO: Deal with discerning dq checks for source columns vs. sourcecolumns after doing a substring.
+                # modify dq part so that list of dqs only occur per target col name using target_column_name in dq spreadsheet
                 if row_dict['dq_required'] in {'Y', 'Yes'} and \
                     row_dict['source_col_name'] in dq_rows_dict.keys():
+                    # get only the dq check rows for current target column
                     all_dq_check_rows = dq_rows_dict[row_dict['source_col_name']]
+                    target_col_checks = [i for i in all_dq_check_rows if i['target_column_name'] == row_dict['target_col_name']]
                     col_dict['Data Quality Info'] = {
                         "dq_required": True,
-                        "data_quality_checks": all_dq_check_rows
+                        "data_quality_checks": target_col_checks
                         }
                 else:
                     col_dict['Data Quality Info'] = {"dq_required": False}
