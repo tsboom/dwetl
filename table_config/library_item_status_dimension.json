@@ -47,7 +47,7 @@
                         "replacement_value": "N/A",
                         "source_column_name": "Library Item Status Code",
                         "source_file": "ITEM_STATUS\n (tab15.eng)",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "Yes",
                         "type": "Missing Value"
@@ -142,7 +142,7 @@
                         "replacement_value": "\"unspecified description\"",
                         "source_column_name": "Library Item Status Description",
                         "source_file": "ITEM_STATUS\n (tab15.eng)",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Missing Value"

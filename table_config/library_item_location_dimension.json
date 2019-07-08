@@ -47,7 +47,7 @@
                         "replacement_value": "N/A",
                         "source_column_name": "Member Library Code",
                         "source_file": "MEMBER_LIBRARY\n (tab_sub_library.eng)",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "Yes",
                         "type": "Missing Value"
@@ -120,7 +120,7 @@
                         "replacement_value": "\"unspecified name\"",
                         "source_column_name": "Member Library Name",
                         "source_file": "MEMBER_LIBRARY\n (tab_sub_library.eng)",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Missing Value"
@@ -171,7 +171,7 @@
                         "replacement_value": "\"Undefined\"",
                         "source_column_name": "Member Library Membership Type Code",
                         "source_file": "MEMBER_LIBRARY",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Missing Value"
@@ -222,7 +222,7 @@
                         "replacement_value": "N/A",
                         "source_column_name": "Library Entity Code",
                         "source_file": "LIBRARY_ENTITY\n (tab_sub_library.eng)",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "Yes",
                         "type": "Missing Value"
@@ -317,7 +317,7 @@
                         "replacement_value": "\"unspecified name\"",
                         "source_column_name": "Library Entity Name",
                         "source_file": "LIBRARY_ENTITY",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Missing Value"
@@ -368,7 +368,7 @@
                         "replacement_value": "N/A",
                         "source_column_name": "Library Collection Code",
                         "source_file": "COLLECTION\n (tab40.eng)",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "Yes",
                         "type": "Missing Value"
@@ -463,7 +463,7 @@
                         "replacement_value": "\"unspecified name\"",
                         "source_column_name": "Library Collection Name",
                         "source_file": "COLLECTION\n (tab40.eng)",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Missing Value"

@@ -47,7 +47,7 @@
                         "replacement_value": "N/A",
                         "source_column_name": "Material Form Code",
                         "source_file": "MATERIAL_FORM\n (tab25.eng)",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "Yes",
                         "type": "Missing Value"
@@ -120,7 +120,7 @@
                         "replacement_value": "\"unspecified name\"",
                         "source_column_name": "Material Form Name",
                         "source_file": "MATERIAL_FORM\n (tab25.eng)",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Missing Value"

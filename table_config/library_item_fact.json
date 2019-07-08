@@ -128,7 +128,7 @@
                         "replacement_value": "\"-M\"",
                         "source_column_name": "Z30_SUB_LIBRARY",
                         "source_file": "Z30",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Missing Value"
@@ -306,7 +306,7 @@
                         "replacement_value": "\"-M\"",
                         "source_column_name": "Z30_MATERIAL",
                         "source_file": "Z30",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Missing Value"
@@ -379,7 +379,7 @@
                         "replacement_value": "\"-M\"",
                         "source_column_name": "Z30_ITEM_STATUS",
                         "source_file": "Z30",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Missing Value"
@@ -530,7 +530,7 @@
                         "replacement_value": "0001-01-02'",
                         "source_column_name": "Z30_OPEN_DATE",
                         "source_file": "Z30",
-                        "specific_dq_function": "has_missing_values",
+                        "specific_dq_function": "no_missing_values",
                         "specific_dq_function_param_1": "",
                         "suspend_record": "No",
                         "type": "Missing Value"
