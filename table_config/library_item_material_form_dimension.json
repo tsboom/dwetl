@@ -1,156 +1,97 @@
 {
-    "fields": [
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "N/A",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "Use sequential counter",
-                "action_specific": "N/A",
-                "aleph_table": "N/A",
-                "chg_proc_type": "N/A",
-                "source_col_name": "N/A",
-                "source_data_type": "N/A",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Generate"
-            },
-            "target_attribute": "- Library Item Material Form Dimension Key",
-            "target_col_name": "LBRY_ITEM_MATERIAL_FORM_DIM_KEY",
-            "target_data_type": "SmallInt"
+    "N/A": {
+        "source_col_name": "N/A",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "N/A",
+            "pre_detailed_instructions": "N/A"
         },
-        {
-            "Data Quality Info": {
-                "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "VARCHAR(5)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Material Form Code is missing",
-                        "format": "N/A",
-                        "instructions": "1) <null> 2) All spaces",
-                        "only_if_data_exists": "",
-                        "order": "1",
-                        "replacement_value": "N/A",
-                        "source_column_name": "Material Form Code",
-                        "source_file": "MATERIAL_FORM\n (tab25.eng)",
-                        "specific_dq_function": "no_missing_values",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "Yes",
-                        "type": "Missing Value"
-                    },
-                    {
-                        "additional_conditions": "No previous DQ exceptions",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "VARCHAR(5)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Material Form Code is too long",
-                        "format": "N/A",
-                        "instructions": "Must be equal to or less than 5",
-                        "only_if_data_exists": "",
-                        "order": "2",
-                        "replacement_value": "N/A",
-                        "source_column_name": "Material Form Code",
-                        "source_file": "MATERIAL_FORM\n (tab25.eng)",
-                        "specific_dq_function": "is_less_than_eq_to_length(input, 5)",
-                        "specific_dq_function_param_1": "5",
-                        "suspend_record": "Yes",
-                        "type": "Length Check"
-                    }
-                ],
-                "dq_required": true
-            },
-            "Preprocessing Info": {
-                "pre_action": "Trim",
-                "pre_detailed_instructions": "Remove leading and trailing spaces",
-                "pre_or_post_dq": "PRE"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "N/A",
-                "action_specific": "As-Is",
-                "aleph_table": "MATERIAL_FORM\n(tab25.eng)",
-                "chg_proc_type": "2",
-                "source_col_name": "Material Form Code",
-                "source_data_type": "VARCHAR(5)",
-                "source_format": "N/A",
-                "source_mandatory": null,
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Item Material Form Code",
-            "target_col_name": "LBRY_ITEM_MATERIAL_FORM_CD",
-            "target_data_type": "VarChar(5)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_ITEM_MATERIAL_FORM_DIM_KEY",
+                "target_data_type": "SmallInt",
+                "target_attribute": "- Library Item Material Form Dimension Key",
+                "transformation_info": {
+                    "chg_proc_type": "N/A",
+                    "transform_action": "Generate",
+                    "action_specific": "N/A",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "N/A",
+                    "source_data_type": "N/A",
+                    "source_format": "N/A",
+                    "source_mandatory": "N",
+                    "aleph_table": "N/A",
+                    "action_detailed_instructions": "Use sequential counter"
+                }
+            }
+        ]
+    },
+    "Material Form Code": {
+        "source_col_name": "Material Form Code",
+        "preprocessing_info": {
+            "pre_or_post_dq": "PRE",
+            "pre_action": "Trim",
+            "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
-        {
-            "Data Quality Info": {
-                "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "VARCHAR(30)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Material Form Name is blank",
-                        "format": "N/A",
-                        "instructions": "1) <null> 2) All spaces",
-                        "only_if_data_exists": "",
-                        "order": "1",
-                        "replacement_value": "\"unspecified name\"",
-                        "source_column_name": "Material Form Name",
-                        "source_file": "MATERIAL_FORM\n (tab25.eng)",
-                        "specific_dq_function": "no_missing_values",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "No",
-                        "type": "Missing Value"
-                    }
-                ],
-                "dq_required": true
-            },
-            "Preprocessing Info": {
-                "pre_action": "Trim",
-                "pre_detailed_instructions": "Remove leading and trailing spaces",
-                "pre_or_post_dq": "PRE"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "N/A",
-                "action_specific": "As-Is",
-                "aleph_table": "MATERIAL_FORM\n(tab25.eng)",
-                "chg_proc_type": "2",
-                "source_col_name": "Material Form Name",
-                "source_data_type": "VARCHAR(30)",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Item Material Form Name",
-            "target_col_name": "LBRY_ITEM_MATERIAL_FORM_NAME",
-            "target_data_type": "VarChar(30)"
-        }
-    ],
-    "target_dimension_name": "LIBRARY ITEM MATERIAL FORM DIMENSION"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_ITEM_MATERIAL_FORM_CD",
+                "target_data_type": "VarChar(5)",
+                "target_attribute": "- Library Item Material Form Code",
+                "transformation_info": {
+                    "chg_proc_type": "2",
+                    "transform_action": "Move",
+                    "action_specific": "As-Is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Material Form Code",
+                    "source_data_type": "VARCHAR(5)",
+                    "source_format": "N/A",
+                    "source_mandatory": null,
+                    "aleph_table": "MATERIAL_FORM\n(tab25.eng)",
+                    "action_detailed_instructions": "N/A"
+                },
+                "data_quality_info": {
+                    "dq_required": true,
+                    "data_quality_checks": []
+                }
+            }
+        ]
+    },
+    "Material Form Name": {
+        "source_col_name": "Material Form Name",
+        "preprocessing_info": {
+            "pre_or_post_dq": "PRE",
+            "pre_action": "Trim",
+            "pre_detailed_instructions": "Remove leading and trailing spaces"
+        },
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_ITEM_MATERIAL_FORM_NAME",
+                "target_data_type": "VarChar(30)",
+                "target_attribute": "- Library Item Material Form Name",
+                "transformation_info": {
+                    "chg_proc_type": "2",
+                    "transform_action": "Move",
+                    "action_specific": "As-Is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Material Form Name",
+                    "source_data_type": "VARCHAR(30)",
+                    "source_format": "N/A",
+                    "source_mandatory": "N",
+                    "aleph_table": "MATERIAL_FORM\n(tab25.eng)",
+                    "action_detailed_instructions": "N/A"
+                },
+                "data_quality_info": {
+                    "dq_required": true,
+                    "data_quality_checks": []
+                }
+            }
+        ]
+    }
 }

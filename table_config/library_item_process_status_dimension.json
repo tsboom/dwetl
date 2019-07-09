@@ -1,256 +1,159 @@
 {
-    "fields": [
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "N/A",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "Use sequential counter",
-                "action_specific": "N/A",
-                "aleph_table": "N/A",
-                "chg_proc_type": "N/A",
-                "source_col_name": "N/A",
-                "source_data_type": "N/A",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Generate"
-            },
-            "target_attribute": "- Library Item Process Status Dimension Key",
-            "target_col_name": "LBRY_ITEM_PROCESS_STATUS_DIM_KEY",
-            "target_data_type": "SmallInt"
+    "N/A": {
+        "source_col_name": "N/A",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "N/A",
+            "pre_detailed_instructions": "N/A"
         },
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "",
-                "pre_detailed_instructions": "",
-                "pre_or_post_dq": ""
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "",
-                "aleph_table": "",
-                "chg_proc_type": "",
-                "source_col_name": "",
-                "source_data_type": "",
-                "source_format": "",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": ""
-            },
-            "target_attribute": "",
-            "target_col_name": "lbry_item_prcs_status_mbr_lbry_cd",
-            "target_data_type": null
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_ITEM_PROCESS_STATUS_DIM_KEY",
+                "target_data_type": "SmallInt",
+                "target_attribute": "- Library Item Process Status Dimension Key",
+                "transformation_info": {
+                    "chg_proc_type": "N/A",
+                    "transform_action": "Generate",
+                    "action_specific": "N/A",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "N/A",
+                    "source_data_type": "N/A",
+                    "source_format": "N/A",
+                    "source_mandatory": "N",
+                    "aleph_table": "N/A",
+                    "action_detailed_instructions": "Use sequential counter"
+                }
+            }
+        ]
+    },
+    "": {
+        "source_col_name": "",
+        "preprocessing_info": {
+            "pre_or_post_dq": "",
+            "pre_action": "",
+            "pre_detailed_instructions": ""
         },
-        {
-            "Data Quality Info": {
-                "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "CHAR(2)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "IPS Code is missing",
-                        "format": "N/A",
-                        "instructions": "1) <null> 2) All spaces",
-                        "only_if_data_exists": "",
-                        "order": "1",
-                        "replacement_value": "N/A",
-                        "source_column_name": "Library Item Process Status Code",
-                        "source_file": "ITEM_PROCESS_STATUS\n (tab15.eng)",
-                        "specific_dq_function": "no_missing_values",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "Yes",
-                        "type": "Missing Value"
-                    },
-                    {
-                        "additional_conditions": "No previous DQ exceptions",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "CHAR(2)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "IPS Code is not two characters",
-                        "format": "N/A",
-                        "instructions": "Must equal 2",
-                        "only_if_data_exists": "",
-                        "order": "2",
-                        "replacement_value": "N/A",
-                        "source_column_name": "Library Item Process Status Code",
-                        "source_file": "ITEM_PROCESS_STATUS\n (tab15.eng)",
-                        "specific_dq_function": "is_valid_length",
-                        "specific_dq_function_param_1": "2",
-                        "suspend_record": "Yes",
-                        "type": "Length Check"
-                    },
-                    {
-                        "additional_conditions": "No previous DQ exceptions",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "CHAR(2)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "IPS Code is not associated with a valid Member Library",
-                        "format": "N/A",
-                        "instructions": "Associated Member Library Code must be a valid Member Library Code",
-                        "only_if_data_exists": "",
-                        "order": "3",
-                        "replacement_value": "N/A",
-                        "source_column_name": "Library Item Process Status Code",
-                        "source_file": "ITEM_PROCESS_STATUS\n (tab15.eng)",
-                        "specific_dq_function": "",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "Yes",
-                        "type": "Valid Values"
-                    }
-                ],
-                "dq_required": true
-            },
-            "Preprocessing Info": {
-                "pre_action": "Trim",
-                "pre_detailed_instructions": "Remove leading and trailing spaces",
-                "pre_or_post_dq": "PRE"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "N/A",
-                "action_specific": "As-Is",
-                "aleph_table": "ITEM_PROCESS_STATUS\n(tab15.eng)",
-                "chg_proc_type": "2",
-                "source_col_name": "Library Item Process Status Code",
-                "source_data_type": "CHAR(2)",
-                "source_format": "N/A",
-                "source_mandatory": null,
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Item Process Status Code",
-            "target_col_name": "LBRY_ITEM_PROCESS_STATUS_CD",
-            "target_data_type": "Character(2)"
+        "transformation_steps": [
+            {
+                "target_col_name": "lbry_item_prcs_status_mbr_lbry_cd",
+                "target_data_type": null,
+                "target_attribute": "",
+                "transformation_info": {
+                    "chg_proc_type": "",
+                    "transform_action": "",
+                    "action_specific": "",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "",
+                    "source_data_type": "",
+                    "source_format": "",
+                    "source_mandatory": "N",
+                    "aleph_table": "",
+                    "action_detailed_instructions": ""
+                }
+            }
+        ]
+    },
+    "Library Item Process Status Code": {
+        "source_col_name": "Library Item Process Status Code",
+        "preprocessing_info": {
+            "pre_or_post_dq": "PRE",
+            "pre_action": "Trim",
+            "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
-        {
-            "Data Quality Info": {
-                "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "VARCHAR(30)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "IPS Public Description is blank",
-                        "format": "N/A",
-                        "instructions": "1) <null> 2) All spaces",
-                        "only_if_data_exists": "",
-                        "order": "1",
-                        "replacement_value": "\"unspecified description\"",
-                        "source_column_name": "Library Item Process Status Public Description",
-                        "source_file": "ITEM_PROCESS_STATUS\n (tab15.eng)",
-                        "specific_dq_function": "no_missing_values",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "No",
-                        "type": "Missing Value"
-                    }
-                ],
-                "dq_required": true
-            },
-            "Preprocessing Info": {
-                "pre_action": "Trim",
-                "pre_detailed_instructions": "Remove leading and trailing spaces",
-                "pre_or_post_dq": "PRE"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "N/A",
-                "action_specific": "As-Is",
-                "aleph_table": "ITEM_PROCESS_STATUS\n(tab15.eng)",
-                "chg_proc_type": "2",
-                "source_col_name": "Library Item Process Status Public Description",
-                "source_data_type": "VARCHAR(30)",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Item Process Status Public Description",
-            "target_col_name": "LBRY_ITEM_PROCESS_STATUS_PUBLIC_CD",
-            "target_data_type": "VarChar(30)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_ITEM_PROCESS_STATUS_CD",
+                "target_data_type": "Character(2)",
+                "target_attribute": "- Library Item Process Status Code",
+                "transformation_info": {
+                    "chg_proc_type": "2",
+                    "transform_action": "Move",
+                    "action_specific": "As-Is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Library Item Process Status Code",
+                    "source_data_type": "CHAR(2)",
+                    "source_format": "N/A",
+                    "source_mandatory": null,
+                    "aleph_table": "ITEM_PROCESS_STATUS\n(tab15.eng)",
+                    "action_detailed_instructions": "N/A"
+                },
+                "data_quality_info": {
+                    "dq_required": true,
+                    "data_quality_checks": []
+                }
+            }
+        ]
+    },
+    "Library Item Process Status Public Description": {
+        "source_col_name": "Library Item Process Status Public Description",
+        "preprocessing_info": {
+            "pre_or_post_dq": "PRE",
+            "pre_action": "Trim",
+            "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
-        {
-            "Data Quality Info": {
-                "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "VARCHAR(50)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "IPS Internal Description is blank",
-                        "format": "N/A",
-                        "instructions": "1) <null> 2) All spaces",
-                        "only_if_data_exists": "",
-                        "order": "1",
-                        "replacement_value": "\"unspecified description\"",
-                        "source_column_name": "Library Item Process Status Internal Description",
-                        "source_file": "ITEM_PROCESS_STATUS\n (pc_tab_exp_field.eng)",
-                        "specific_dq_function": "no_missing_values",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "No",
-                        "type": "Missing Value"
-                    }
-                ],
-                "dq_required": true
-            },
-            "Preprocessing Info": {
-                "pre_action": "Trim",
-                "pre_detailed_instructions": "Remove leading and trailing spaces",
-                "pre_or_post_dq": "PRE"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "N/A",
-                "action_specific": "As-Is",
-                "aleph_table": "ITEM_PROCESS_STATUS\n(pc_tab_exp_field.eng)",
-                "chg_proc_type": "2",
-                "source_col_name": "Library Item Process Status Internal Description",
-                "source_data_type": "VARCHAR(50)",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Item Process Status Internal Description",
-            "target_col_name": "LBRY_ITEM_PROCESS_STATUS_INTERNAL_CD",
-            "target_data_type": "VarChar(80)"
-        }
-    ],
-    "target_dimension_name": "LIBRARY ITEM PROCESS STATUS DIMENSION"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_ITEM_PROCESS_STATUS_PUBLIC_CD",
+                "target_data_type": "VarChar(30)",
+                "target_attribute": "- Library Item Process Status Public Description",
+                "transformation_info": {
+                    "chg_proc_type": "2",
+                    "transform_action": "Move",
+                    "action_specific": "As-Is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Library Item Process Status Public Description",
+                    "source_data_type": "VARCHAR(30)",
+                    "source_format": "N/A",
+                    "source_mandatory": "N",
+                    "aleph_table": "ITEM_PROCESS_STATUS\n(tab15.eng)",
+                    "action_detailed_instructions": "N/A"
+                },
+                "data_quality_info": {
+                    "dq_required": true,
+                    "data_quality_checks": []
+                }
+            }
+        ]
+    },
+    "Library Item Process Status Internal Description": {
+        "source_col_name": "Library Item Process Status Internal Description",
+        "preprocessing_info": {
+            "pre_or_post_dq": "PRE",
+            "pre_action": "Trim",
+            "pre_detailed_instructions": "Remove leading and trailing spaces"
+        },
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_ITEM_PROCESS_STATUS_INTERNAL_CD",
+                "target_data_type": "VarChar(80)",
+                "target_attribute": "- Library Item Process Status Internal Description",
+                "transformation_info": {
+                    "chg_proc_type": "2",
+                    "transform_action": "Move",
+                    "action_specific": "As-Is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Library Item Process Status Internal Description",
+                    "source_data_type": "VARCHAR(50)",
+                    "source_format": "N/A",
+                    "source_mandatory": "N",
+                    "aleph_table": "ITEM_PROCESS_STATUS\n(pc_tab_exp_field.eng)",
+                    "action_detailed_instructions": "N/A"
+                },
+                "data_quality_info": {
+                    "dq_required": true,
+                    "data_quality_checks": []
+                }
+            }
+        ]
+    }
 }
