@@ -1,837 +1,684 @@
 {
-    "fields": [
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "N/A",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "Use sequential counter",
-                "action_specific": "N/A",
-                "aleph_table": "N/A",
-                "chg_proc_type": "N/A",
-                "source_col_name": "N/A",
-                "source_data_type": "N/A",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Generate"
-            },
-            "target_attribute": "- Library Holding Dimension Key",
-            "target_col_name": "LBRY_HOLDING_DIM_KEY",
-            "target_data_type": "Bigint"
+    "N/A": {
+        "source_col_name": "N/A",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "N/A",
+            "pre_detailed_instructions": "N/A"
         },
-        {
-            "Data Quality Info": {
-                "dq_required": false
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_HOLDING_DIM_KEY",
+                "target_data_type": "Bigint",
+                "target_attribute": "- Library Holding Dimension Key",
+                "transformation_info": {
+                    "chg_proc_type": "N/A",
+                    "transform_action": "Generate",
+                    "action_specific": "N/A",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "N/A",
+                    "source_data_type": "N/A",
+                    "source_format": "N/A",
+                    "source_mandatory": "N",
+                    "aleph_table": "N/A",
+                    "action_detailed_instructions": "Use sequential counter"
+                }
             },
-            "Preprocessing Info": {
-                "pre_action": "",
-                "pre_detailed_instructions": "",
-                "pre_or_post_dq": ""
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "",
-                "aleph_table": "Z00",
-                "chg_proc_type": "0",
-                "source_col_name": "Z00_DOC_NUMBER",
-                "source_data_type": "CHAR(9)",
-                "source_format": "",
-                "source_mandatory": null,
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": ""
-            },
-            "target_attribute": "- Library Holding Identifier",
-            "target_col_name": "LBRY_HOLDING_SOURCE_SYSTEM_ID",
-            "target_data_type": "Character(9)"
+            {
+                "target_col_name": "LBRY_HOLDING_ALEPH_LBRY_CD",
+                "target_data_type": "Character(5)",
+                "target_attribute": "- Library Holding Aleph Library Code",
+                "transformation_info": {
+                    "chg_proc_type": "N/A",
+                    "transform_action": "Move",
+                    "action_specific": "As-Is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "N/A",
+                    "source_data_type": "N/A",
+                    "source_format": "N/A",
+                    "source_mandatory": "N",
+                    "aleph_table": "N/A",
+                    "action_detailed_instructions": ""
+                }
+            }
+        ]
+    },
+    "Z00_DOC_NUMBER": {
+        "source_col_name": "Z00_DOC_NUMBER",
+        "preprocessing_info": {
+            "pre_or_post_dq": "",
+            "pre_action": "",
+            "pre_detailed_instructions": ""
         },
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "Generate",
-                "pre_detailed_instructions": "When loading the File Equivalent Tables, retrieve and parse from file name",
-                "pre_or_post_dq": "PRE"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-Is",
-                "aleph_table": "N/A",
-                "chg_proc_type": "N/A",
-                "source_col_name": "N/A",
-                "source_data_type": "N/A",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Holding Aleph Library Code",
-            "target_col_name": "LBRY_HOLDING_ALEPH_LBRY_CD",
-            "target_data_type": "Character(5)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_HOLDING_SOURCE_SYSTEM_ID",
+                "target_data_type": "Character(9)",
+                "target_attribute": "- Library Holding Identifier",
+                "transformation_info": {
+                    "chg_proc_type": "0",
+                    "transform_action": "",
+                    "action_specific": "",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Z00_DOC_NUMBER",
+                    "source_data_type": "CHAR(9)",
+                    "source_format": "",
+                    "source_mandatory": null,
+                    "aleph_table": "Z00",
+                    "action_detailed_instructions": ""
+                }
+            }
+        ]
+    },
+    "Z00_NO_LINES ": {
+        "source_col_name": "Z00_NO_LINES ",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "N/A",
+            "pre_detailed_instructions": "N/A"
         },
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "N/A",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-Is",
-                "aleph_table": "Z00",
-                "chg_proc_type": "1",
-                "source_col_name": "Z00_NO_LINES ",
-                "source_data_type": "NUMBER(4)",
-                "source_format": "",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Holding MARC Record Field Count",
-            "target_col_name": "LBRY_HOLDING_MARC_REC_FIELD_CNT",
-            "target_data_type": "SmallInt"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_HOLDING_MARC_REC_FIELD_CNT",
+                "target_data_type": "SmallInt",
+                "target_attribute": "- Library Holding MARC Record Field Count",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Move",
+                    "action_specific": "As-Is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Z00_NO_LINES ",
+                    "source_data_type": "NUMBER(4)",
+                    "source_format": "",
+                    "source_mandatory": "N",
+                    "aleph_table": "Z00",
+                    "action_detailed_instructions": ""
+                }
+            }
+        ]
+    },
+    "Z00_DATA_LEN": {
+        "source_col_name": "Z00_DATA_LEN",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "N/A",
+            "pre_detailed_instructions": "N/A"
         },
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "N/A",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-Is",
-                "aleph_table": "Z00",
-                "chg_proc_type": "1",
-                "source_col_name": "Z00_DATA_LEN",
-                "source_data_type": "NUMBER(6)",
-                "source_format": "",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Holding MARC Record Data Content Length Count",
-            "target_col_name": "LBRY_HOLDING_MARC_REC_DATA_CONTENT_LEN_CNT",
-            "target_data_type": "Integer"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_HOLDING_MARC_REC_DATA_CONTENT_LEN_CNT",
+                "target_data_type": "Integer",
+                "target_attribute": "- Library Holding MARC Record Data Content Length Count",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Move",
+                    "action_specific": "As-Is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Z00_DATA_LEN",
+                    "source_data_type": "NUMBER(6)",
+                    "source_format": "",
+                    "source_mandatory": "N",
+                    "aleph_table": "Z00",
+                    "action_detailed_instructions": ""
+                }
+            }
+        ]
+    },
+    "Z00_DATA": {
+        "source_col_name": "Z00_DATA",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "N/A",
+            "pre_detailed_instructions": "N/A"
         },
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "N/A",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-Is",
-                "aleph_table": "Z00",
-                "chg_proc_type": "1",
-                "source_col_name": "Z00_DATA",
-                "source_data_type": "LONG",
-                "source_format": "",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Holding MARC Record Data Content Text",
-            "target_col_name": "LBRY_HOLDING_MARC_REC_DATA_CONTENT_TXT",
-            "target_data_type": "VarChar(45000)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_HOLDING_MARC_REC_DATA_CONTENT_TXT",
+                "target_data_type": "VarChar(45000)",
+                "target_attribute": "- Library Holding MARC Record Data Content Text",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Move",
+                    "action_specific": "As-Is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Z00_DATA",
+                    "source_data_type": "LONG",
+                    "source_format": "",
+                    "source_mandatory": "N",
+                    "aleph_table": "Z00",
+                    "action_detailed_instructions": ""
+                }
+            }
+        ]
+    },
+    "Z13U_USER_DEFINED_6": {
+        "source_col_name": "Z13U_USER_DEFINED_6",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "Trim",
+            "pre_detailed_instructions": ""
         },
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "Trim",
-                "pre_detailed_instructions": "",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-Is",
-                "aleph_table": "Z13U",
-                "chg_proc_type": "1",
-                "source_col_name": "Z13U_USER_DEFINED_6",
-                "source_data_type": "VARCHAR2(500)",
-                "source_format": "",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Holding Action Note",
-            "target_col_name": "LBRY_HOLDING_ACTION_NOTE",
-            "target_data_type": "VarChar(500)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_HOLDING_ACTION_NOTE",
+                "target_data_type": "VarChar(500)",
+                "target_attribute": "- Library Holding Action Note",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Move",
+                    "action_specific": "As-Is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Z13U_USER_DEFINED_6",
+                    "source_data_type": "VARCHAR2(500)",
+                    "source_format": "",
+                    "source_mandatory": "N",
+                    "aleph_table": "Z13U",
+                    "action_detailed_instructions": ""
+                }
+            }
+        ]
+    },
+    "Z13U_USER_DEFINED_3": {
+        "source_col_name": "Z13U_USER_DEFINED_3",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "Trim",
+            "pre_detailed_instructions": ""
         },
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "Trim",
-                "pre_detailed_instructions": "",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "If source field contains \"SUPPRESSED\" (case-insensitive) then target field=Y. Else, target field=N.",
-                "action_specific": "",
-                "aleph_table": "Z13U",
-                "chg_proc_type": "1",
-                "source_col_name": "Z13U_USER_DEFINED_3",
-                "source_data_type": "VARCHAR2(500)",
-                "source_format": "",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Substitute"
-            },
-            "target_attribute": "- Library Holding Display Suppressed Flag",
-            "target_col_name": "LBRY_HOLDING_DISPLAY_SUPPRESSED_FLAG",
-            "target_data_type": "Character(1)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_HOLDING_DISPLAY_SUPPRESSED_FLAG",
+                "target_data_type": "Character(1)",
+                "target_attribute": "- Library Holding Display Suppressed Flag",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Substitute",
+                    "action_specific": "",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Z13U_USER_DEFINED_3",
+                    "source_data_type": "VARCHAR2(500)",
+                    "source_format": "",
+                    "source_mandatory": "N",
+                    "aleph_table": "Z13U",
+                    "action_detailed_instructions": "If source field contains \"SUPPRESSED\" (case-insensitive) then target field=Y. Else, target field=N."
+                }
+            }
+        ]
+    },
+    "Z13U_USER_DEFINED_7": {
+        "source_col_name": "Z13U_USER_DEFINED_7",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "",
+            "pre_detailed_instructions": ""
         },
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "",
-                "pre_detailed_instructions": "",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-is",
-                "aleph_table": "Z13U",
-                "chg_proc_type": "1",
-                "source_col_name": "Z13U_USER_DEFINED_7",
-                "source_data_type": "VARCHAR2(500)",
-                "source_format": "",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Holding Summary Holdings Text",
-            "target_col_name": "LBRY_HOLDING_SUMMARY_HOLDINGS_TXT",
-            "target_data_type": "VarChar(500)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_HOLDING_SUMMARY_HOLDINGS_TXT",
+                "target_data_type": "VarChar(500)",
+                "target_attribute": "- Library Holding Summary Holdings Text",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Move",
+                    "action_specific": "As-is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Z13U_USER_DEFINED_7",
+                    "source_data_type": "VARCHAR2(500)",
+                    "source_format": "",
+                    "source_mandatory": "N",
+                    "aleph_table": "Z13U",
+                    "action_detailed_instructions": ""
+                }
+            }
+        ]
+    },
+    "Z13U_USER_DEFINED_8": {
+        "source_col_name": "Z13U_USER_DEFINED_8",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "",
+            "pre_detailed_instructions": ""
         },
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "",
-                "pre_detailed_instructions": "",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-is",
-                "aleph_table": "Z13U",
-                "chg_proc_type": "1",
-                "source_col_name": "Z13U_USER_DEFINED_8",
-                "source_data_type": "VARCHAR2(500)",
-                "source_format": "",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Holding Supplement Summary Holdings Text",
-            "target_col_name": "LBRY_HOLDING_SUPP_SUMMARY_HOLDINGS_TXT",
-            "target_data_type": "VarChar(500)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_HOLDING_SUPP_SUMMARY_HOLDINGS_TXT",
+                "target_data_type": "VarChar(500)",
+                "target_attribute": "- Library Holding Supplement Summary Holdings Text",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Move",
+                    "action_specific": "As-is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Z13U_USER_DEFINED_8",
+                    "source_data_type": "VARCHAR2(500)",
+                    "source_format": "",
+                    "source_mandatory": "N",
+                    "aleph_table": "Z13U",
+                    "action_detailed_instructions": ""
+                }
+            }
+        ]
+    },
+    "Z13U_USER_DEFINED_9": {
+        "source_col_name": "Z13U_USER_DEFINED_9",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "",
+            "pre_detailed_instructions": ""
         },
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "",
-                "pre_detailed_instructions": "",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-is",
-                "aleph_table": "Z13U",
-                "chg_proc_type": "1",
-                "source_col_name": "Z13U_USER_DEFINED_9",
-                "source_data_type": "VARCHAR2(500)",
-                "source_format": "",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Holding Index Summary Holdings Text",
-            "target_col_name": "LBRY_HOLDING_INDEX_SUMMARY_HOLDINGS_TXT",
-            "target_data_type": "VarChar(500)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_HOLDING_INDEX_SUMMARY_HOLDINGS_TXT",
+                "target_data_type": "VarChar(500)",
+                "target_attribute": "- Library Holding Index Summary Holdings Text",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Move",
+                    "action_specific": "As-is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Z13U_USER_DEFINED_9",
+                    "source_data_type": "VARCHAR2(500)",
+                    "source_format": "",
+                    "source_mandatory": "N",
+                    "aleph_table": "Z13U",
+                    "action_detailed_instructions": ""
+                }
+            }
+        ]
+    },
+    "": {
+        "source_col_name": "",
+        "preprocessing_info": {
+            "pre_or_post_dq": "",
+            "pre_action": "",
+            "pre_detailed_instructions": ""
         },
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "",
-                "pre_detailed_instructions": "",
-                "pre_or_post_dq": ""
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "***??? ***",
-                "action_specific": "",
-                "aleph_table": "",
-                "chg_proc_type": "",
-                "source_col_name": "",
-                "source_data_type": "",
-                "source_format": "",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": ""
-            },
-            "target_attribute": "- Library Holding Location Call Number Scheme Code",
-            "target_col_name": "LBRY_HOLDING_LOC_CALL_NO_SCHEME_CD",
-            "target_data_type": "Character(1)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_HOLDING_LOC_CALL_NO_SCHEME_CD",
+                "target_data_type": "Character(1)",
+                "target_attribute": "- Library Holding Location Call Number Scheme Code",
+                "transformation_info": {
+                    "chg_proc_type": "",
+                    "transform_action": "",
+                    "action_specific": "",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "",
+                    "source_data_type": "",
+                    "source_format": "",
+                    "source_mandatory": "N",
+                    "aleph_table": "",
+                    "action_detailed_instructions": "***??? ***"
+                }
+            }
+        ]
+    },
+    "Z13_CALL_NO": {
+        "source_col_name": "Z13_CALL_NO",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "",
+            "pre_detailed_instructions": ""
         },
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "",
-                "pre_detailed_instructions": "",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-is",
-                "aleph_table": "Z13",
-                "chg_proc_type": "1",
-                "source_col_name": "Z13_CALL_NO",
-                "source_data_type": "VARCHAR2(100)",
-                "source_format": "",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Holding Location Call Number",
-            "target_col_name": "LBRY_HOLDING_LOC_CALL_NO",
-            "target_data_type": "VarChar(100)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_HOLDING_LOC_CALL_NO",
+                "target_data_type": "VarChar(100)",
+                "target_attribute": "- Library Holding Location Call Number",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Move",
+                    "action_specific": "As-is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Z13_CALL_NO",
+                    "source_data_type": "VARCHAR2(100)",
+                    "source_format": "",
+                    "source_mandatory": "N",
+                    "aleph_table": "Z13",
+                    "action_detailed_instructions": ""
+                }
+            }
+        ]
+    },
+    "Z13U_USER_DEFINED_5": {
+        "source_col_name": "Z13U_USER_DEFINED_5",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "",
+            "pre_detailed_instructions": ""
         },
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "",
-                "pre_detailed_instructions": "",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-is",
-                "aleph_table": "Z13U",
-                "chg_proc_type": "1",
-                "source_col_name": "Z13U_USER_DEFINED_5",
-                "source_data_type": "VARCHAR2(500)",
-                "source_format": "",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Holding Location Public Note",
-            "target_col_name": "LBRY_HOLDING_LOC_PUBLIC_NOTE",
-            "target_data_type": "VarChar(500)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_HOLDING_LOC_PUBLIC_NOTE",
+                "target_data_type": "VarChar(500)",
+                "target_attribute": "- Library Holding Location Public Note",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Move",
+                    "action_specific": "As-is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Z13U_USER_DEFINED_5",
+                    "source_data_type": "VARCHAR2(500)",
+                    "source_format": "",
+                    "source_mandatory": "N",
+                    "aleph_table": "Z13U",
+                    "action_detailed_instructions": ""
+                }
+            }
+        ]
+    },
+    "Z13U_USER_DEFINED_4": {
+        "source_col_name": "Z13U_USER_DEFINED_4",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "",
+            "pre_detailed_instructions": ""
         },
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "",
-                "pre_detailed_instructions": "",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-is",
-                "aleph_table": "Z13U",
-                "chg_proc_type": "1",
-                "source_col_name": "Z13U_USER_DEFINED_4",
-                "source_data_type": "VARCHAR2(500)",
-                "source_format": "",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Holding Location Non-Public Note",
-            "target_col_name": "LBRY_HOLDING_LOC_NON_PUBLIC_NOTE",
-            "target_data_type": "VarChar(500)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_HOLDING_LOC_NON_PUBLIC_NOTE",
+                "target_data_type": "VarChar(500)",
+                "target_attribute": "- Library Holding Location Non-Public Note",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Move",
+                    "action_specific": "As-is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Z13U_USER_DEFINED_4",
+                    "source_data_type": "VARCHAR2(500)",
+                    "source_format": "",
+                    "source_mandatory": "N",
+                    "aleph_table": "Z13U",
+                    "action_detailed_instructions": ""
+                }
+            }
+        ]
+    },
+    "Z13_OPEN_DATE": {
+        "source_col_name": "Z13_OPEN_DATE",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "",
+            "pre_detailed_instructions": ""
         },
-        {
-            "Data Quality Info": {
-                "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "MAI01, MAI39",
-                        "always": "X",
-                        "application": "H,I",
-                        "column_data_type": "NUMBER(8)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Missing Value: Z13_OPEN_DATE",
-                        "format": "YYYYMMDD",
-                        "instructions": "1) <null> 2) All zeros",
-                        "only_if_data_exists": "",
-                        "order": "1",
-                        "replacement_value": "(null)",
-                        "source_column_name": "Z13_OPEN_DATE",
-                        "source_file": "Z13",
-                        "specific_dq_function": "no_missing_values",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "No",
-                        "type": "Missing Value"
-                    },
-                    {
-                        "additional_conditions": "No previous Z13_OPEN_DATE DQ exception",
-                        "aleph_library": "MAI01, MAI39",
-                        "always": "",
-                        "application": "H,I",
-                        "column_data_type": "NUMBER(8)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Invalid Date: Z13_OPEN_DATE",
-                        "format": "YYYYMMDD",
-                        "instructions": "Must be valid aleph date.",
-                        "only_if_data_exists": "X",
-                        "order": "2",
-                        "replacement_value": "(null)",
-                        "source_column_name": "Z13_OPEN_DATE",
-                        "source_file": "Z13",
-                        "specific_dq_function": "is_valid_aleph_year",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "No",
-                        "type": "Date check"
-                    }
-                ],
-                "dq_required": true
-            },
-            "Preprocessing Info": {
-                "pre_action": "Conversion",
-                "pre_detailed_instructions": "To Postgres Date Datatype",
-                "pre_or_post_dq": "Post"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-is",
-                "aleph_table": "Z13",
-                "chg_proc_type": "1",
-                "source_col_name": "Z13_OPEN_DATE",
-                "source_data_type": "NUMBER(8)",
-                "source_format": "YYYYMMDD",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Holding Create Date",
-            "target_col_name": "LBRY_HOLDING_CREATE_DT",
-            "target_data_type": "Date"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_HOLDING_CREATE_DT",
+                "target_data_type": "Date",
+                "target_attribute": "- Library Holding Create Date",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Move",
+                    "action_specific": "As-is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Z13_OPEN_DATE",
+                    "source_data_type": "NUMBER(8)",
+                    "source_format": "YYYYMMDD",
+                    "source_mandatory": null,
+                    "aleph_table": "Z13",
+                    "action_detailed_instructions": ""
+                },
+                "data_quality_info": {
+                    "dq_required": true,
+                    "data_quality_checks": []
+                }
+            }
+        ]
+    },
+    "Z13_UPDATE_DATE": {
+        "source_col_name": "Z13_UPDATE_DATE",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "",
+            "pre_detailed_instructions": ""
         },
-        {
-            "Data Quality Info": {
-                "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "MAI01, MAI39",
-                        "always": "X",
-                        "application": "H,I",
-                        "column_data_type": "NUMBER(8)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Missing Value: Z13_UPDATE_DATE",
-                        "format": "YYYYMMDD",
-                        "instructions": "1) <null> 2) All zeros",
-                        "only_if_data_exists": "",
-                        "order": "1",
-                        "replacement_value": "(null)",
-                        "source_column_name": "Z13_UPDATE_DATE",
-                        "source_file": "Z13",
-                        "specific_dq_function": "no_missing_values",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "No",
-                        "type": "Missing Value"
-                    },
-                    {
-                        "additional_conditions": "No previous Z13_UPDATE_DATE DQ exception",
-                        "aleph_library": "MAI01, MAI39",
-                        "always": "",
-                        "application": "H,I",
-                        "column_data_type": "NUMBER(8)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Invalid Date: Z13_UPDATE_DATE",
-                        "format": "YYYYMMDD",
-                        "instructions": "Must be valid aleph date.",
-                        "only_if_data_exists": "X",
-                        "order": "2",
-                        "replacement_value": "(null)",
-                        "source_column_name": "Z13_UPDATE_DATE",
-                        "source_file": "Z13",
-                        "specific_dq_function": "is_valid_aleph_year",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "No",
-                        "type": "Date check"
-                    }
-                ],
-                "dq_required": true
-            },
-            "Preprocessing Info": {
-                "pre_action": "Conversion",
-                "pre_detailed_instructions": "To Postgres Date Datatype",
-                "pre_or_post_dq": "Post"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-is",
-                "aleph_table": "Z13",
-                "chg_proc_type": "1",
-                "source_col_name": "Z13_UPDATE_DATE",
-                "source_data_type": "CHAR(8)",
-                "source_format": "YYYYMMDD",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Holding Update Date",
-            "target_col_name": "LBRY_HOLDING_UPDATE_DT",
-            "target_data_type": "Date"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_HOLDING_UPDATE_DT",
+                "target_data_type": "Date",
+                "target_attribute": "- Library Holding Update Date",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Move",
+                    "action_specific": "As-is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Z13_UPDATE_DATE",
+                    "source_data_type": "CHAR(8)",
+                    "source_format": "YYYYMMDD",
+                    "source_mandatory": null,
+                    "aleph_table": "Z13",
+                    "action_detailed_instructions": ""
+                },
+                "data_quality_info": {
+                    "dq_required": true,
+                    "data_quality_checks": []
+                }
+            }
+        ]
+    },
+    "Z13U_USER_DEFINED_10": {
+        "source_col_name": "Z13U_USER_DEFINED_10",
+        "preprocessing_info": {
+            "pre_or_post_dq": "",
+            "pre_action": "",
+            "pre_detailed_instructions": ""
         },
-        {
-            "Data Quality Info": {
-                "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "MAI60",
-                        "always": "X",
-                        "application": "H,I",
-                        "column_data_type": "VARCHAR2(500)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Missing Value",
-                        "format": "",
-                        "instructions": "1) <null>\n2) All spaces",
-                        "only_if_data_exists": "",
-                        "order": "1",
-                        "replacement_value": "\"-M\"",
-                        "source_column_name": "Z13U_USER_DEFINED_10",
-                        "source_file": "Z13U",
-                        "specific_dq_function": "no_missing_values",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "No",
-                        "type": "Missing Value"
-                    },
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "MAI60",
-                        "always": "",
-                        "application": "H,I",
-                        "column_data_type": "VARCHAR2(500)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Invalid Value",
-                        "format": "",
-                        "instructions": "holding_own_code.csv",
-                        "only_if_data_exists": "X",
-                        "order": "2",
-                        "replacement_value": "\"-I\"",
-                        "source_column_name": "Z13U_USER_DEFINED_10",
-                        "source_file": "Z13U",
-                        "specific_dq_function": "dq_z13u_user_defined_10__valid_holding_own_code",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "No",
-                        "type": "Valid Value"
-                    }
-                ],
-                "dq_required": true
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_HOLDING_MAINT_MBR_LBRY_CD",
+                "target_data_type": "Character(2)",
+                "target_attribute": "- Library Holding Maintenance Member Library Code",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Move",
+                    "action_specific": "Sub-String",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Z13U_USER_DEFINED_10",
+                    "source_data_type": "VARCHAR2(500)",
+                    "source_format": "",
+                    "source_mandatory": "N",
+                    "aleph_table": "Z13U",
+                    "action_detailed_instructions": "If value is valid, then target field = substr(z13u_user_defined_10,1,2)."
+                },
+                "data_quality_info": {
+                    "dq_required": true,
+                    "data_quality_checks": []
+                }
             },
-            "Preprocessing Info": {
-                "pre_action": "",
-                "pre_detailed_instructions": "",
-                "pre_or_post_dq": ""
+            {
+                "target_col_name": "LBRY_HOLDING_SUPER_HOLDING_FLAG",
+                "target_data_type": "Character(1)",
+                "target_attribute": "- Library Holding Superholding Flag",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Substitute",
+                    "action_specific": "",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Z13U_USER_DEFINED_10",
+                    "source_data_type": "VARCHAR2(500)",
+                    "source_format": "",
+                    "source_mandatory": "N",
+                    "aleph_table": "Z13U",
+                    "action_detailed_instructions": "If value is valid and substr(z13u_user_defined_10,3,3) is blank/null, then target field = \"Y\". Else, target field = \"N\""
+                },
+                "data_quality_info": {
+                    "dq_required": true,
+                    "data_quality_checks": []
+                }
             },
-            "Transformation Info": {
-                "action_detailed_instructions": "If value is valid, then target field = substr(z13u_user_defined_10,1,2).",
-                "action_specific": "Sub-String",
-                "aleph_table": "Z13U",
-                "chg_proc_type": "1",
-                "source_col_name": "Z13U_USER_DEFINED_10",
-                "source_data_type": "VARCHAR2(500)",
-                "source_format": "",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Holding Maintenance Member Library Code",
-            "target_col_name": "LBRY_HOLDING_MAINT_MBR_LBRY_CD",
-            "target_data_type": "Character(2)"
+            {
+                "target_col_name": "LBRY_HOLDING_ACTUAL_OWN_CODE",
+                "target_data_type": "VarChar(500)",
+                "target_attribute": "- Library Holding Actual Own Code",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Move",
+                    "action_specific": "As-is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Z13U_USER_DEFINED_10",
+                    "source_data_type": "VARCHAR2(500)",
+                    "source_format": "N/A",
+                    "source_mandatory": "N",
+                    "aleph_table": "Z13U",
+                    "action_detailed_instructions": ""
+                }
+            }
+        ]
+    },
+    "Z13U_USER_DEFINED_1": {
+        "source_col_name": "Z13U_USER_DEFINED_1",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "N/A",
+            "pre_detailed_instructions": "N/A"
         },
-        {
-            "Data Quality Info": {
-                "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "MAI60",
-                        "always": "X",
-                        "application": "H,I",
-                        "column_data_type": "VARCHAR2(500)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Missing Value",
-                        "format": "",
-                        "instructions": "1) <null>\n2) All spaces",
-                        "only_if_data_exists": "",
-                        "order": "1",
-                        "replacement_value": "\"-M\"",
-                        "source_column_name": "Z13U_USER_DEFINED_10",
-                        "source_file": "Z13U",
-                        "specific_dq_function": "no_missing_values",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "No",
-                        "type": "Missing Value"
-                    },
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "MAI60",
-                        "always": "",
-                        "application": "H,I",
-                        "column_data_type": "VARCHAR2(500)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Invalid Value",
-                        "format": "",
-                        "instructions": "holding_own_code.csv",
-                        "only_if_data_exists": "X",
-                        "order": "2",
-                        "replacement_value": "\"-I\"",
-                        "source_column_name": "Z13U_USER_DEFINED_10",
-                        "source_file": "Z13U",
-                        "specific_dq_function": "dq_z13u_user_defined_10__valid_holding_own_code",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "No",
-                        "type": "Valid Value"
-                    }
-                ],
-                "dq_required": true
-            },
-            "Preprocessing Info": {
-                "pre_action": "",
-                "pre_detailed_instructions": "",
-                "pre_or_post_dq": ""
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "If value is valid and substr(z13u_user_defined_10,3,3) is blank/null, then target field = \"Y\". Else, target field = \"N\"",
-                "action_specific": "",
-                "aleph_table": "Z13U",
-                "chg_proc_type": "1",
-                "source_col_name": "Z13U_USER_DEFINED_10",
-                "source_data_type": "VARCHAR2(500)",
-                "source_format": "",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Substitute"
-            },
-            "target_attribute": "- Library Holding Superholding Flag",
-            "target_col_name": "LBRY_HOLDING_SUPER_HOLDING_FLAG",
-            "target_data_type": "Character(1)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_HOLDING_ACTUAL_LBRY_ENTITY_CD",
+                "target_data_type": "VarChar(500)",
+                "target_attribute": "- Library Holding Actual Library Entity Code",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Move",
+                    "action_specific": "As-is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Z13U_USER_DEFINED_1",
+                    "source_data_type": "VARCHAR2(500)",
+                    "source_format": "N/A",
+                    "source_mandatory": "N",
+                    "aleph_table": "Z13U",
+                    "action_detailed_instructions": ""
+                }
+            }
+        ]
+    },
+    "Z13U_USER_DEFINED_2": {
+        "source_col_name": "Z13U_USER_DEFINED_2",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "N/A",
+            "pre_detailed_instructions": "N/A"
         },
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "",
-                "pre_detailed_instructions": "",
-                "pre_or_post_dq": ""
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-is",
-                "aleph_table": "Z13U",
-                "chg_proc_type": "1",
-                "source_col_name": "Z13U_USER_DEFINED_10",
-                "source_data_type": "VARCHAR2(500)",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Holding Actual Own Code",
-            "target_col_name": "LBRY_HOLDING_ACTUAL_OWN_CODE",
-            "target_data_type": "VarChar(500)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_HOLDING_ACTUAL_COLLECTION_CD",
+                "target_data_type": "VarChar(500)",
+                "target_attribute": "- Library Holding Actual Collection Code",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Move",
+                    "action_specific": "As-is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Z13U_USER_DEFINED_2",
+                    "source_data_type": "VARCHAR2(500)",
+                    "source_format": "N/A",
+                    "source_mandatory": "N",
+                    "aleph_table": "Z13U",
+                    "action_detailed_instructions": ""
+                }
+            }
+        ]
+    },
+    "dest_docnum": {
+        "source_col_name": "dest_docnum",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "N/A",
+            "pre_detailed_instructions": "N/A"
         },
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "N/A",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-is",
-                "aleph_table": "Z13U",
-                "chg_proc_type": "1",
-                "source_col_name": "Z13U_USER_DEFINED_1",
-                "source_data_type": "VARCHAR2(500)",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Holding Actual Library Entity Code",
-            "target_col_name": "LBRY_HOLDING_ACTUAL_LBRY_ENTITY_CD",
-            "target_data_type": "VarChar(500)"
+        "transformation_steps": [
+            {
+                "target_col_name": "BIB_REC_SOURCE_SYSTEM_ID",
+                "target_data_type": "Character(9)",
+                "target_attribute": "- Bibliographic Record Identifier",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Move",
+                    "action_specific": "As-is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "dest_docnum",
+                    "source_data_type": "CHAR(9)",
+                    "source_format": "N/A",
+                    "source_mandatory": "N",
+                    "aleph_table": "Z103_BIB",
+                    "action_detailed_instructions": ""
+                }
+            }
+        ]
+    },
+    "dest_lib": {
+        "source_col_name": "dest_lib",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "N/A",
+            "pre_detailed_instructions": "N/A"
         },
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "N/A",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-is",
-                "aleph_table": "Z13U",
-                "chg_proc_type": "1",
-                "source_col_name": "Z13U_USER_DEFINED_2",
-                "source_data_type": "VARCHAR2(500)",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Holding Actual Collection Code",
-            "target_col_name": "LBRY_HOLDING_ACTUAL_COLLECTION_CD",
-            "target_data_type": "VarChar(500)"
-        },
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "N/A",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-is",
-                "aleph_table": "Z103_BIB",
-                "chg_proc_type": "1",
-                "source_col_name": "dest_docnum",
-                "source_data_type": "CHAR(9)",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Bibliographic Record Identifier",
-            "target_col_name": "BIB_REC_SOURCE_SYSTEM_ID",
-            "target_data_type": "Character(9)"
-        },
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "N/A",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-is",
-                "aleph_table": "Z103_BIB",
-                "chg_proc_type": "1",
-                "source_col_name": "dest_lib",
-                "source_data_type": "CHAR(5)",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Bibliographic Record Aleph Library Code",
-            "target_col_name": "BIB_REC_ALEPH_LBRY_CD",
-            "target_data_type": "Character(5)"
-        }
-    ],
-    "target_dimension_name": "LIBRARY HOLDING DIMENSION"
+        "transformation_steps": [
+            {
+                "target_col_name": "BIB_REC_ALEPH_LBRY_CD",
+                "target_data_type": "Character(5)",
+                "target_attribute": "- Bibliographic Record Aleph Library Code",
+                "transformation_info": {
+                    "chg_proc_type": "1",
+                    "transform_action": "Move",
+                    "action_specific": "As-is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "dest_lib",
+                    "source_data_type": "CHAR(5)",
+                    "source_format": "N/A",
+                    "source_mandatory": "N",
+                    "aleph_table": "Z103_BIB",
+                    "action_detailed_instructions": ""
+                }
+            }
+        ]
+    }
 }

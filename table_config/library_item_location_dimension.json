@@ -1,499 +1,262 @@
 {
-    "fields": [
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "N/A",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "Use sequential counter",
-                "action_specific": "N/A",
-                "aleph_table": "N/A",
-                "chg_proc_type": "N/A",
-                "source_col_name": "N/A",
-                "source_data_type": "N/A",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Generate"
-            },
-            "target_attribute": "- Library Item Location Dimension Key",
-            "target_col_name": "LBRY_ITEM_LOC_DIM_KEY",
-            "target_data_type": "Integer"
+    "N/A": {
+        "source_col_name": "N/A",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "N/A",
+            "pre_detailed_instructions": "N/A"
         },
-        {
-            "Data Quality Info": {
-                "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "CHAR(2)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Member Library Code is missing",
-                        "format": "N/A",
-                        "instructions": "1) <null> 2) All spaces",
-                        "only_if_data_exists": "",
-                        "order": "1",
-                        "replacement_value": "N/A",
-                        "source_column_name": "Member Library Code",
-                        "source_file": "MEMBER_LIBRARY\n (tab_sub_library.eng)",
-                        "specific_dq_function": "no_missing_values",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "Yes",
-                        "type": "Missing Value"
-                    },
-                    {
-                        "additional_conditions": "No previous DQ exceptions",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "CHAR(2)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Member Library Code is not two characters",
-                        "format": "N/A",
-                        "instructions": "Must equal 2",
-                        "only_if_data_exists": "",
-                        "order": "2",
-                        "replacement_value": "N/A",
-                        "source_column_name": "Member Library Code",
-                        "source_file": "MEMBER_LIBRARY\n (tab_sub_library.eng)",
-                        "specific_dq_function": "is_valid_length",
-                        "specific_dq_function_param_1": "2",
-                        "suspend_record": "Yes",
-                        "type": "Length Check"
-                    }
-                ],
-                "dq_required": true
-            },
-            "Preprocessing Info": {
-                "pre_action": "Trim",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "Pre"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-Is",
-                "aleph_table": "MEMBER_LIBRARY\n(tab_sub_library.eng)",
-                "chg_proc_type": "0",
-                "source_col_name": "Member Library Code",
-                "source_data_type": "CHAR(2)",
-                "source_format": "N/A",
-                "source_mandatory": null,
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Item Location Member Library Code",
-            "target_col_name": "LBRY_ITEM_LOC_MBR_LBRY_CD",
-            "target_data_type": "Character(2)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_ITEM_LOC_DIM_KEY",
+                "target_data_type": "Integer",
+                "target_attribute": "- Library Item Location Dimension Key",
+                "transformation_info": {
+                    "chg_proc_type": "N/A",
+                    "transform_action": "Generate",
+                    "action_specific": "N/A",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "N/A",
+                    "source_data_type": "N/A",
+                    "source_format": "N/A",
+                    "source_mandatory": "N",
+                    "aleph_table": "N/A",
+                    "action_detailed_instructions": "Use sequential counter"
+                }
+            }
+        ]
+    },
+    "Member Library Code": {
+        "source_col_name": "Member Library Code",
+        "preprocessing_info": {
+            "pre_or_post_dq": "Pre",
+            "pre_action": "Trim",
+            "pre_detailed_instructions": "N/A"
         },
-        {
-            "Data Quality Info": {
-                "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "VARCHAR(70)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Member Library Name is blank",
-                        "format": "N/A",
-                        "instructions": "1) <null> 2) All spaces",
-                        "only_if_data_exists": "",
-                        "order": "1",
-                        "replacement_value": "\"unspecified name\"",
-                        "source_column_name": "Member Library Name",
-                        "source_file": "MEMBER_LIBRARY\n (tab_sub_library.eng)",
-                        "specific_dq_function": "no_missing_values",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "No",
-                        "type": "Missing Value"
-                    }
-                ],
-                "dq_required": true
-            },
-            "Preprocessing Info": {
-                "pre_action": "Trim",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "Pre"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-is",
-                "aleph_table": "MEMBER_LIBRARY \n(pull names as listed here: http://usmai.org/about-us/member-libraries)\n",
-                "chg_proc_type": "2",
-                "source_col_name": "Member Library Name",
-                "source_data_type": "VARCHAR(70)",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Item Location Member Library Name",
-            "target_col_name": "LBRY_ITEM_LOC_MBR_LBRY_NAME",
-            "target_data_type": "VarChar(70)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_ITEM_LOC_MBR_LBRY_CD",
+                "target_data_type": "Character(2)",
+                "target_attribute": "- Library Item Location Member Library Code",
+                "transformation_info": {
+                    "chg_proc_type": "0",
+                    "transform_action": "Move",
+                    "action_specific": "As-Is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Member Library Code",
+                    "source_data_type": "CHAR(2)",
+                    "source_format": "N/A",
+                    "source_mandatory": null,
+                    "aleph_table": "MEMBER_LIBRARY\n(tab_sub_library.eng)",
+                    "action_detailed_instructions": ""
+                },
+                "data_quality_info": {
+                    "dq_required": true,
+                    "data_quality_checks": []
+                }
+            }
+        ]
+    },
+    "Member Library Name": {
+        "source_col_name": "Member Library Name",
+        "preprocessing_info": {
+            "pre_or_post_dq": "Pre",
+            "pre_action": "Trim",
+            "pre_detailed_instructions": "N/A"
         },
-        {
-            "Data Quality Info": {
-                "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "VARCHAR(10)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Member Library Type is undefined",
-                        "format": "N/A",
-                        "instructions": "1) <null> 2) All spaces",
-                        "only_if_data_exists": "",
-                        "order": "1",
-                        "replacement_value": "\"Undefined\"",
-                        "source_column_name": "Member Library Membership Type Code",
-                        "source_file": "MEMBER_LIBRARY",
-                        "specific_dq_function": "no_missing_values",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "No",
-                        "type": "Missing Value"
-                    }
-                ],
-                "dq_required": true
-            },
-            "Preprocessing Info": {
-                "pre_action": "Trim",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "Pre"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-is",
-                "aleph_table": "MEMBER_LIBRARY",
-                "chg_proc_type": "2",
-                "source_col_name": "Member Library Membership Type Code",
-                "source_data_type": "VARCHAR(10)",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Item Location Member Library Membership Type Code",
-            "target_col_name": "LBRY_ITEM_LOC_MBR_LBRY_MBRSHP_TYPE_CD",
-            "target_data_type": "VarChar(10)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_ITEM_LOC_MBR_LBRY_NAME",
+                "target_data_type": "VarChar(70)",
+                "target_attribute": "- Library Item Location Member Library Name",
+                "transformation_info": {
+                    "chg_proc_type": "2",
+                    "transform_action": "Move",
+                    "action_specific": "As-is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Member Library Name",
+                    "source_data_type": "VARCHAR(70)",
+                    "source_format": "N/A",
+                    "source_mandatory": "N",
+                    "aleph_table": "MEMBER_LIBRARY \n(pull names as listed here: http://usmai.org/about-us/member-libraries)\n",
+                    "action_detailed_instructions": ""
+                },
+                "data_quality_info": {
+                    "dq_required": true,
+                    "data_quality_checks": []
+                }
+            }
+        ]
+    },
+    "Member Library Membership Type Code": {
+        "source_col_name": "Member Library Membership Type Code",
+        "preprocessing_info": {
+            "pre_or_post_dq": "Pre",
+            "pre_action": "Trim",
+            "pre_detailed_instructions": "N/A"
         },
-        {
-            "Data Quality Info": {
-                "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "CHAR(5)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Library Entity Code is missing",
-                        "format": "N/A",
-                        "instructions": "1) <null> 2) All spaces",
-                        "only_if_data_exists": "",
-                        "order": "1",
-                        "replacement_value": "N/A",
-                        "source_column_name": "Library Entity Code",
-                        "source_file": "LIBRARY_ENTITY\n (tab_sub_library.eng)",
-                        "specific_dq_function": "no_missing_values",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "Yes",
-                        "type": "Missing Value"
-                    },
-                    {
-                        "additional_conditions": "No previous DQ exceptions",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "CHAR(5)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Library Entity Code is too long",
-                        "format": "N/A",
-                        "instructions": "Must be equal to or less than 5",
-                        "only_if_data_exists": "",
-                        "order": "2",
-                        "replacement_value": "N/A",
-                        "source_column_name": "Library Entity Code",
-                        "source_file": "LIBRARY_ENTITY\n (tab_sub_library.eng)",
-                        "specific_dq_function": "is_less_than_eq_to_length",
-                        "specific_dq_function_param_1": "5",
-                        "suspend_record": "Yes",
-                        "type": "Length Check"
-                    },
-                    {
-                        "additional_conditions": "No previous DQ exceptions",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "CHAR(5)",
-                        "column_sub_component": "SUBSTR(1,2)",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Library Entity Code does not begin with a valid Member Library Code",
-                        "format": "N/A",
-                        "instructions": "The first two characters must be a valid Member Library Code",
-                        "only_if_data_exists": "",
-                        "order": "3",
-                        "replacement_value": "N/A",
-                        "source_column_name": "Library Entity Code",
-                        "source_file": "LIBRARY_ENTITY\n (tab_sub_library.eng)",
-                        "specific_dq_function": "",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "Yes",
-                        "type": "Valid Values"
-                    }
-                ],
-                "dq_required": true
-            },
-            "Preprocessing Info": {
-                "pre_action": "Trim",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "Pre"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-Is",
-                "aleph_table": "LIBRARY_ENTITY\n(tab_sub_library.eng)",
-                "chg_proc_type": "0",
-                "source_col_name": "Library Entity Code",
-                "source_data_type": "CHAR(5)",
-                "source_format": "N/A",
-                "source_mandatory": null,
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Item Location Library Entity Code",
-            "target_col_name": "LBRY_ITEM_LOC_LBRY_ENTITY_CD",
-            "target_data_type": "VarChar(5)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_ITEM_LOC_MBR_LBRY_MBRSHP_TYPE_CD",
+                "target_data_type": "VarChar(10)",
+                "target_attribute": "- Library Item Location Member Library Membership Type Code",
+                "transformation_info": {
+                    "chg_proc_type": "2",
+                    "transform_action": "Move",
+                    "action_specific": "As-is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Member Library Membership Type Code",
+                    "source_data_type": "VARCHAR(10)",
+                    "source_format": "N/A",
+                    "source_mandatory": "N",
+                    "aleph_table": "MEMBER_LIBRARY",
+                    "action_detailed_instructions": ""
+                },
+                "data_quality_info": {
+                    "dq_required": true,
+                    "data_quality_checks": []
+                }
+            }
+        ]
+    },
+    "Library Entity Code": {
+        "source_col_name": "Library Entity Code",
+        "preprocessing_info": {
+            "pre_or_post_dq": "Pre",
+            "pre_action": "Trim",
+            "pre_detailed_instructions": "N/A"
         },
-        {
-            "Data Quality Info": {
-                "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "VARCHAR(30)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Library Entity Name is blank",
-                        "format": "N/A",
-                        "instructions": "1) <null> 2) All spaces",
-                        "only_if_data_exists": "",
-                        "order": "1",
-                        "replacement_value": "\"unspecified name\"",
-                        "source_column_name": "Library Entity Name",
-                        "source_file": "LIBRARY_ENTITY",
-                        "specific_dq_function": "no_missing_values",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "No",
-                        "type": "Missing Value"
-                    }
-                ],
-                "dq_required": true
-            },
-            "Preprocessing Info": {
-                "pre_action": "Trim",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "Pre"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-Is",
-                "aleph_table": "LIBRARY_ENTITY",
-                "chg_proc_type": "2",
-                "source_col_name": "Library Entity Name",
-                "source_data_type": "VARCHAR(30)",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Item Location Library Entity Name",
-            "target_col_name": "LBRY_ITEM_LOC_LBRY_ENTITY_NAME",
-            "target_data_type": "VarChar(70)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_ITEM_LOC_LBRY_ENTITY_CD",
+                "target_data_type": "VarChar(5)",
+                "target_attribute": "- Library Item Location Library Entity Code",
+                "transformation_info": {
+                    "chg_proc_type": "0",
+                    "transform_action": "Move",
+                    "action_specific": "As-Is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Library Entity Code",
+                    "source_data_type": "CHAR(5)",
+                    "source_format": "N/A",
+                    "source_mandatory": null,
+                    "aleph_table": "LIBRARY_ENTITY\n(tab_sub_library.eng)",
+                    "action_detailed_instructions": ""
+                },
+                "data_quality_info": {
+                    "dq_required": true,
+                    "data_quality_checks": []
+                }
+            }
+        ]
+    },
+    "Library Entity Name": {
+        "source_col_name": "Library Entity Name",
+        "preprocessing_info": {
+            "pre_or_post_dq": "Pre",
+            "pre_action": "Trim",
+            "pre_detailed_instructions": "N/A"
         },
-        {
-            "Data Quality Info": {
-                "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "VARCHAR(5)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Library Collection Code is missing",
-                        "format": "N/A",
-                        "instructions": "1) <null> 2) All spaces",
-                        "only_if_data_exists": "",
-                        "order": "1",
-                        "replacement_value": "N/A",
-                        "source_column_name": "Library Collection Code",
-                        "source_file": "COLLECTION\n (tab40.eng)",
-                        "specific_dq_function": "no_missing_values",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "Yes",
-                        "type": "Missing Value"
-                    },
-                    {
-                        "additional_conditions": "No previous DQ exceptions",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "VARCHAR(5)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Library Collection Code is too long",
-                        "format": "N/A",
-                        "instructions": "Must be equal to or less than 5",
-                        "only_if_data_exists": "",
-                        "order": "2",
-                        "replacement_value": "N/A",
-                        "source_column_name": "Library Collection Code",
-                        "source_file": "COLLECTION\n (tab40.eng)",
-                        "specific_dq_function": "is_less_than_eq_to_length",
-                        "specific_dq_function_param_1": "5",
-                        "suspend_record": "Yes",
-                        "type": "Length Check"
-                    },
-                    {
-                        "additional_conditions": "No previous DQ exceptions",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "VARCHAR(5)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Library Collection Code is not associated with a valid Library Entity",
-                        "format": "N/A",
-                        "instructions": "Associated Library Entity Code (as defined in Collections manual extract file) must be valid",
-                        "only_if_data_exists": "",
-                        "order": "3",
-                        "replacement_value": "N/A",
-                        "source_column_name": "Library Collection Code",
-                        "source_file": "COLLECTION\n (tab40.eng)",
-                        "specific_dq_function": "",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "Yes",
-                        "type": "Valid Values"
-                    }
-                ],
-                "dq_required": true
-            },
-            "Preprocessing Info": {
-                "pre_action": "Trim",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "Pre"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-Is",
-                "aleph_table": "COLLECTION\n(tab40.eng)",
-                "chg_proc_type": "0",
-                "source_col_name": "Library Collection Code",
-                "source_data_type": "VARCHAR(5)",
-                "source_format": "N/A",
-                "source_mandatory": null,
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Item Location Collection Code",
-            "target_col_name": "LBRY_ITEM_LOC_COLLECTION_CD",
-            "target_data_type": "VarChar(5)"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_ITEM_LOC_LBRY_ENTITY_NAME",
+                "target_data_type": "VarChar(70)",
+                "target_attribute": "- Library Item Location Library Entity Name",
+                "transformation_info": {
+                    "chg_proc_type": "2",
+                    "transform_action": "Move",
+                    "action_specific": "As-Is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Library Entity Name",
+                    "source_data_type": "VARCHAR(30)",
+                    "source_format": "N/A",
+                    "source_mandatory": "N",
+                    "aleph_table": "LIBRARY_ENTITY",
+                    "action_detailed_instructions": ""
+                },
+                "data_quality_info": {
+                    "dq_required": true,
+                    "data_quality_checks": []
+                }
+            }
+        ]
+    },
+    "Library Collection Code": {
+        "source_col_name": "Library Collection Code",
+        "preprocessing_info": {
+            "pre_or_post_dq": "Pre",
+            "pre_action": "Trim",
+            "pre_detailed_instructions": "N/A"
         },
-        {
-            "Data Quality Info": {
-                "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "VARCHAR(80)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Collection Name is blank",
-                        "format": "N/A",
-                        "instructions": "1) <null> 2) All spaces",
-                        "only_if_data_exists": "",
-                        "order": "1",
-                        "replacement_value": "\"unspecified name\"",
-                        "source_column_name": "Library Collection Name",
-                        "source_file": "COLLECTION\n (tab40.eng)",
-                        "specific_dq_function": "no_missing_values",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "No",
-                        "type": "Missing Value"
-                    }
-                ],
-                "dq_required": true
-            },
-            "Preprocessing Info": {
-                "pre_action": "Trim",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "Pre"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "",
-                "action_specific": "As-Is",
-                "aleph_table": "COLLECTION\n(tab40.eng)",
-                "chg_proc_type": "2",
-                "source_col_name": "Library Collection Name",
-                "source_data_type": "VARCHAR(80)",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Item Location Collection Name",
-            "target_col_name": "LBRY_ITEM_LOC_COLLECTION_NAME",
-            "target_data_type": "VarChar(80)"
-        }
-    ],
-    "target_dimension_name": "LIBRARY ITEM LOCATION DIMENSION"
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_ITEM_LOC_COLLECTION_CD",
+                "target_data_type": "VarChar(5)",
+                "target_attribute": "- Library Item Location Collection Code",
+                "transformation_info": {
+                    "chg_proc_type": "0",
+                    "transform_action": "Move",
+                    "action_specific": "As-Is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Library Collection Code",
+                    "source_data_type": "VARCHAR(5)",
+                    "source_format": "N/A",
+                    "source_mandatory": null,
+                    "aleph_table": "COLLECTION\n(tab40.eng)",
+                    "action_detailed_instructions": ""
+                },
+                "data_quality_info": {
+                    "dq_required": true,
+                    "data_quality_checks": []
+                }
+            }
+        ]
+    },
+    "Library Collection Name": {
+        "source_col_name": "Library Collection Name",
+        "preprocessing_info": {
+            "pre_or_post_dq": "Pre",
+            "pre_action": "Trim",
+            "pre_detailed_instructions": "N/A"
+        },
+        "transformation_steps": [
+            {
+                "target_col_name": "LBRY_ITEM_LOC_COLLECTION_NAME",
+                "target_data_type": "VarChar(80)",
+                "target_attribute": "- Library Item Location Collection Name",
+                "transformation_info": {
+                    "chg_proc_type": "2",
+                    "transform_action": "Move",
+                    "action_specific": "As-Is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "Library Collection Name",
+                    "source_data_type": "VARCHAR(80)",
+                    "source_format": "N/A",
+                    "source_mandatory": "N",
+                    "aleph_table": "COLLECTION\n(tab40.eng)",
+                    "action_detailed_instructions": ""
+                },
+                "data_quality_info": {
+                    "dq_required": true,
+                    "data_quality_checks": []
+                }
+            }
+        ]
+    }
 }
