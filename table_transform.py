@@ -96,42 +96,33 @@ def execute_dq_function(current_function, arg, input, dq_funcs_list):
     return is_passing
 
 
-def check_data_quality(field, dq_funcs_list, obj):
+def check_data_quality(check, dq_funcs_list, field):
     '''
     execute dq check for current object and handle replacement values
     '''
     # find dq checks to run
-    try:
-        dq_list = obj['Data Quality Info']['data_quality_checks']
-        # run dq checks
-        for check in dq_list:
-            print(Fore.RED + str(check))
-            function_name = check.get('specific_dq_function')
-            arg = check.get('specific_dq_function_param_1')
-            # is_passing is an empty string if no dq check is found, otherwise is True or False.
-            is_passing = execute_dq_function(function_name, arg, field.value, dq_funcs_list)
-            print(Back.CYAN + str(function_name) + ' - ' + str(is_passing))
-            print(Style.RESET_ALL)
-            pdb.set_trace()
+    function_name = check.get('specific_dq_function')
+    target_col_name = check.get('target_column_name')
+    arg = check.get('specific_dq_function_param_1')
+    # is_passing is an empty string if no dq check is found, otherwise is True or False.
+    is_passing = execute_dq_function(function_name, arg, field.value, dq_funcs_list)
+    pdb.set_trace()
+    if is_passing is True:
+        field_dq_result = field.value
+    elif is_passing is False:
+        print(Fore.RED + 'DQ '+ function_name +' FAILED for source(' + field.name + ') target('  + target_col_name + ') - ' + field.value)
+        replacement_value = check.get('replacement_value')
+        if replacement_value:
+            field_dq_result = replacement_value
+            print("deal with dimension_link_to_records. replacement_value is: " + replacement_value)
+    else:
+        print('DQ check' + function_name + ' was not found in dq functions.')
+        field_dq_result = 'ERROR no result'
+    # save name and result of dq check
+    print(Style.RESET_ALL)
+    result = {'name': function_name, 'result': field_dq_result, 'target_col_name': target_col_name}
+    return result
 
-            if is_passing is True:
-                field_dq_result = field.value
-            elif is_passing is False:
-                print('DQ '+ function_name +' FAILED')
-                replacement_value = check.get('replacement_value')
-                if replacement_value:
-                    field_dq_result = replacement_value
-                    print("deal with dimension_link_to_records")
-            else:
-                print('DQ check' + function_name + ' was not found in dq functions.')
-                continue
-            # save name and result of dq check
-            result = {'name': function_name, 'result': field_dq_result}
-            return result
-    except KeyError:
-        # missing
-        print(field.name + ' DQ checks not applicable.')
-        return field.value
 
 
 
@@ -139,8 +130,11 @@ def run_dq_checks(field, dq_funcs_list, source_col_sorted_dict):
     try:
         objs = source_col_sorted_dict[field.name]
         for obj in objs:
-            result = check_data_quality(field, dq_funcs_list, obj)
-            field.record_dq(result)
+            # find list of dq checks for that object
+            dq_list = obj['Data Quality Info']['data_quality_checks']
+            for check in dq_list:
+                result = check_data_quality(check, dq_funcs_list, field)
+                field.record_dq(result)
     except KeyError:
         print(field.name +' has no DQ checks.')
 
@@ -170,16 +164,13 @@ def check_transform(field, transformations_list, obj):
     try:
         specific_transform_function = obj['Transformation Info']['specific_transform_function']
         if specific_transform_function:
-            arg1 = obj.get('specific_transform_function_param1')
-            arg2 = obj.get('specific_transform_function_param2')
+            arg1 = obj.get('Transformation Info', {}).get('specific_transform_function_param1')
+            arg2 = obj.get('Transformation Info', {}).get('specific_transform_function_param2')
             print(field.name, arg1, arg2)
-            pdb.set_trace()
             # get the name of the target column
             target_col_name = obj['target_col_name']
             t_result = execute_transform(specific_transform_function, arg1, arg2, field, transformations_list)
             result = {'name': specific_transform_function, 'result': t_result, 'target_col_name': target_col_name}
-            print(result)
-            pdb.set_trace()
             return result
         else:
             return None
@@ -192,7 +183,7 @@ def run_transformations(field, transformations_list, source_col_sorted_dict):
         objs = source_col_sorted_dict[field.name]
         for obj in objs:
             result = check_transform(field, transformations_list, obj)
-            print(result)
+            print(pprint.pprint(result))
             field.record_transform(result)
     except KeyError:
         print(field.name + ' - Transformation: Move As-Is.\n\n\n')
@@ -205,28 +196,30 @@ def transform_field(field, source_col_sorted_dict):
     '''
     Using the field name and value, run transformations and log to the field's log
     '''
-    if source_col_sorted_dict[field.name]:
-        # run pp
-        result = preprocess(field, source_col_sorted_dict)
-        field.record_pp(result)
+    try:
+        if source_col_sorted_dict[field.name]:
+            # run pp
+            result = preprocess(field, source_col_sorted_dict)
+            field.record_pp(result)
 
 
-        # set up dq by creating list of dq function objects from utilities
-        # and data quality specific functions
-        dq_funcs_list = functions_from_module(dqs) + functions_from_module(dqu)
-        # run dq
-        run_dq_checks(field, dq_funcs_list, source_col_sorted_dict)
+            # set up dq by creating list of dq function objects from utilities
+            # and data quality specific functions
+            dq_funcs_list = functions_from_module(dqs) + functions_from_module(dqu)
+            # run dq
+            pdb.set_trace()
+            run_dq_checks(field, dq_funcs_list, source_col_sorted_dict)
 
-        # set up list of specific transformation functions from module
-        transformations_list = functions_from_module(stf)
-        # run transformations
-        run_transformations(field, transformations_list, source_col_sorted_dict)
-        print(field.name, field.value,'\n', field.record)
+            # set up list of specific transformation functions from module
+            transformations_list = functions_from_module(stf)
+            # run transformations
+            run_transformations(field, transformations_list, source_col_sorted_dict)
+            print(field.name, field.value,'\n', field.record)
 
 
-        # write_log(field.name, field.log) # writes to stage 2 db
-    else:
-        print(field.name + " is not in the Data Warehouse.")
+            # write_log(field.name, field.log) # writes to stage 2 db
+    except KeyError:
+        print("\n" + field.name + " is not in dimension being processed.\n")
 
 
 
