@@ -17,21 +17,24 @@ def is_mandatory(input):
 def is_numeric(input):
     if input.isnumeric() is True:
         return True
+    else:
+        return False
 
 # checks if provided length is true
 def is_valid_length(input, length):
-    if (len(str(input)) == length):
+    # len() outputs an integer so need to cast length to int
+    if (len(str(input)) == int(length)):
         return True
-
-# do these dq utilities need to return positive and negative results or does a fail return False?
-# Answer: fail should return False
+    else:
+        return False
 
 # checks if less than or equal to specified length
 def is_less_than_eq_to_length(input, length):
-    if (len(str(input)) <= length):
+    # len() outputs an integer so need to cast length to int
+    if (len(str(input)) <= int(length)):
         return True
-# ^^^ how to check len on ints?
-# ANSWER: i don't think we ever get ints, everything is a string from the TSV
+    else:
+        return False
 
 
 # checks to see if there are no nulls, all spaces, or all zeros
@@ -46,7 +49,6 @@ def no_missing_values(input):
         if int(input) != 0:
             output = True
     return output
-# ^^^not sure if working
 
 
 # def trim function no leading and trailing spaces
@@ -64,11 +66,11 @@ def is_valid_aleph_year(year):
         return True
 # ^^^ exception doesn't seem to work, rewrote it to be a simple if/else. Can this be altered to then throw an error?
 
-def has_leading_space(input):
+def no_leading_space(input):
     if input[0].isspace():
-        return True
-    else:
         return False
+    else:
+        return True
 
 
 # checks if valid date 1980-present
@@ -89,16 +91,16 @@ def is_valid_aleph_date(string_date):
 # TypeError for nonstrings?
 
 
-def is_valid_aleph_date_redux(string_date):
-#    try:
-        string_date_valid = datetime.datetime.strptime(string_date, '%Y%m%d').strftime('%Y%m%d')
-        if string_date == string_date_valid and is_valid_aleph_year(int(string_date[0:4])):
-            return True
-        else:
-            return False
-#    except TypeError:
-#        print(str(string_date) + " is not a string")
-# rewrite to remove year check
+# def is_valid_aleph_date_redux(string_date):
+#     try:
+#         string_date_valid = datetime.datetime.strptime(string_date, '%Y%m%d').strftime('%Y%m%d')
+#         if string_date == string_date_valid and is_valid_aleph_year(int(string_date[0:4])):
+#             return True
+#         else:
+#             return False
+# #    except TypeError:
+# #        print(str(string_date) + " is not a string")
+# # rewrite to remove year check
 
 # # checks if hour is valid HHMM format
 def is_valid_hour(hhmm):
