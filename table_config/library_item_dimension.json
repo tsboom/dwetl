@@ -42,7 +42,7 @@
                     "source_format": "N/A",
                     "source_mandatory": "N",
                     "aleph_table": "N/A",
-                    "action_detailed_instructions": ""
+                    "action_detailed_instructions": "Already exists in Stg 1 and Stg 2"
                 }
             }
         ]
