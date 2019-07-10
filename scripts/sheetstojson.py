@@ -157,9 +157,12 @@ def main():
         if not dimension_values:
             print('No data found.')
         else:
-            # create dict to hold dicts for each source column and transformations
+            # dict to hold dicts of transformation and dq info for each source column
             dimension_dict = {}
+            # save dimension to use in file name
+            dimension_name = dimension_values[0][20]
 
+            # create a dict of keys and values for each Google sheet row
             row_dict_list = []
             for col in dimension_values:
                 row_dict = {}
@@ -169,7 +172,8 @@ def main():
                 # add row_dict keys and values to a list
                 row_dict_list.append(row_dict)
 
-
+            # using the google sheets dict, create a new col_dict in a better format for JSON
+            # the new JSON uses source columns as keys, and transformations/dq checks are nested underneath
             for row_dict in row_dict_list:
 
                 # generate a dict describing dimension column fields (use to create JSON later)
