@@ -157,11 +157,7 @@ def main():
         if not dimension_values:
             print('No data found.')
         else:
-            dimension_dict = {}
-            # write dimension name to table using first row of dimension values. dimension name is in index 20
-            dimension_name = dimension_values[0][20]
-            dimension_dict['target_dimension_name'] = dimension_name
-
+            # create dict to hold dicts for each source column and transformations
             dimension_dict = {}
 
             row_dict_list = []
