@@ -55,15 +55,15 @@ LIBRARY_ITEM_STATUS_DIM_RANGE = 'Source-to-Target Mapping!A147:X149'
 LIBRARY_ITEM_FACT_RANGE = 'Source-to-Target Mapping!A168:X183'
 
 table_ranges = {
-    # 'library_holding': LIBRARY_HOLDING_DIM_RANGE,
-    # 'library_holding_marc_record_field_outrigger': LIBRARY_HOLDING_MARC_RECORD_FIELD_OUTRIGGER_RANGE,
-    # 'bib_record': BIB_RECORD_DIM_RANGE,
-    # 'bib_record_marc_record_field_outrigger': BIBLIOGRAPHIC_RECORD_MARC_RECORD_FIELD_OUTRIGGER_DIM_RANGE,
-    # 'lib_item_location': LIB_ITEM_LOCATION_DIM_RANGE,
-    'lib_item': LIB_ITEM_DIM_RANGE
-    # 'lib_item_material_form': LIBRARY_ITEM_MATERIAL_FORM_DIM_RANGE,
-    # 'lib_item_process_status': LIBRARY_ITEM_PROCESS_STATUS_DIM_RANGE,
-    # 'lib_item_status': LIBRARY_ITEM_STATUS_DIM_RANGE,
+    'library_holding': LIBRARY_HOLDING_DIM_RANGE,
+    'library_holding_marc_record_field_outrigger': LIBRARY_HOLDING_MARC_RECORD_FIELD_OUTRIGGER_RANGE,
+    'bib_record': BIB_RECORD_DIM_RANGE,
+    'bib_record_marc_record_field_outrigger': BIBLIOGRAPHIC_RECORD_MARC_RECORD_FIELD_OUTRIGGER_DIM_RANGE,
+    'lib_item_location': LIB_ITEM_LOCATION_DIM_RANGE,
+    'lib_item': LIB_ITEM_DIM_RANGE,
+    'lib_item_material_form': LIBRARY_ITEM_MATERIAL_FORM_DIM_RANGE,
+    'lib_item_process_status': LIBRARY_ITEM_PROCESS_STATUS_DIM_RANGE,
+    'lib_item_status': LIBRARY_ITEM_STATUS_DIM_RANGE
     # 'lib_item_fact': LIBRARY_ITEM_FACT_RANGE
     }
 
@@ -111,7 +111,6 @@ def get_dq_rows_dict(dq_values, sheet):
             # i got an error whenever column T was blank. need a test to make sure column T is not blank.
         source_column_name = row_values_dict['source_column_name']
         # append dq row to existing key (if key exists)
-
         if dq_rows_dict.get(source_column_name, False):
             dq_rows_dict[source_column_name].append(row_values_dict)
         else:
@@ -163,25 +162,42 @@ def main():
             dimension_name = dimension_values[0][20]
             dimension_dict['target_dimension_name'] = dimension_name
 
-            dimension_dict['fields'] = []
+            dimension_dict = {}
 
+            row_dict_list = []
             for col in dimension_values:
                 row_dict = {}
-
                 # create a dict from Sheet row values using the sheet column names
                 for idx, key in enumerate(sheet_columns):
                     row_dict[key] = value_if_exists(col, idx)
-                    pdb.set_trace()
+                # add row_dict keys and values to a list
+                row_dict_list.append(row_dict)
 
-                # Using the row_dict just created from the list of every column's values,
-                # We need to rearrange this data into JSON that makes sense for the ETL.
-                # Generate a dict describing dimension column fields and subset transformations and dq Checks
-                # used to create JSON. 
+
+            for row_dict in row_dict_list:
+
+                # generate a dict describing dimension column fields (use to create JSON later)
+                '''
+                rewrite JSON so transformation info is grouped under source column
+                '''
+                source_column_name = row_dict['source_col_name']
                 col_dict = {
+                    # source column name is key of dictionary
+                    "source_col_name": source_column_name,
+                    "preprocessing_info": {
+                        "pre_or_post_dq": row_dict['pre_or_post_dq'],
+                        "pre_action": row_dict['pre_action'],
+                        "pre_detailed_instructions": row_dict['pre_detailed_instructions']
+                    },
+                    "transformation_steps": []
+                }
+
+                # get transformation info of current row_dict. format it.
+                current_transform = {
                     "target_col_name": row_dict['target_col_name'],
                     "target_data_type": row_dict['target_data_type'],
                     "target_attribute": row_dict['target_attribute'],
-                    "Transformation Info": {
+                    "transformation_info": {
                         "chg_proc_type": row_dict['chg_proc_type'],
                         "transform_action": row_dict['transform_action'],
                         "action_specific": row_dict['action_specific'],
@@ -195,33 +211,38 @@ def main():
                         "aleph_table": row_dict['aleph_table'],
                         #remove '\n'
                         "action_detailed_instructions":row_dict['action_detailed_instructions'].rstrip()
-                    },
-                    "Preprocessing Info": {
-                        "pre_or_post_dq": row_dict['pre_or_post_dq'],
-                        "pre_action": row_dict['pre_action'],
-                        "pre_detailed_instructions": row_dict['pre_detailed_instructions']
-                    },
-                    "Data Quality Info": {}
+                    }
                 }
+
+                col_dict["transformation_steps"].append(current_transform)
+
 
 
                 # Add Data Quality: check if current col name exists in dq rows dict
-                # need to make sure all the fields needing DQ are noted as Yes
-                # TODO: Deal with discerning dq checks for source columns vs. sourcecolumns after doing a substring.
-                # modify dq part so that list of dqs only occur per target col name using target_column_name in dq spreadsheet
+                # add data quality checks to matching target column name
                 if row_dict['dq_required'] in {'Y', 'Yes'} and \
                     row_dict['source_col_name'] in dq_rows_dict.keys():
-                    # get only the dq check rows for current target column
+
+                    # get only the dq check rows for the current target column
                     all_dq_check_rows = dq_rows_dict[row_dict['source_col_name']]
                     target_col_checks = [i for i in all_dq_check_rows if i['target_column_name'] == row_dict['target_col_name']]
-                    col_dict['Data Quality Info'] = {
-                        "dq_required": True,
-                        "data_quality_checks": target_col_checks
-                        }
-                else:
-                    col_dict['Data Quality Info'] = {"dq_required": False}
 
-                dimension_dict['fields'].append(col_dict)
+                    # find matching transformation_step, write dq info to it
+                    for index, step in enumerate(col_dict['transformation_steps']):
+                        # find matching target column name to attach dq check info to the transformation_step
+                        if step['target_col_name'] == row_dict['target_col_name']:
+                            col_dict['transformation_steps'][index]['data_quality_info'] = {
+                                "dq_required": True,
+                                "data_quality_checks": target_col_checks
+                                }
+
+                # create new column dict for the current source column name if it doesn't exist
+                if source_column_name not in dimension_dict:
+                    dimension_dict[source_column_name] = col_dict
+                else:
+                    # if the key already exists, only update the transform_steps of the source_column_name
+                    dimension_dict[source_column_name]["transformation_steps"].append(current_transform)
+
 
             dirname = os.path.dirname(__file__) #current directory
             filename = dimension_name.replace(' ', '_').lower() + '.json'
@@ -229,7 +250,7 @@ def main():
 
             print('\n...Writing ' +  filename+'\n')
             with open(full_filename, 'w') as outfile:
-                json.dump(dimension_dict, outfile, sort_keys=True, indent=4, separators=(',', ': '))
+                json.dump(dimension_dict, outfile, sort_keys=False, indent=4, separators=(',', ': '))
 
 
 if __name__ == '__main__':
