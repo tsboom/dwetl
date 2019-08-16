@@ -11,7 +11,7 @@ specific transform functions that are used in more than one dimension
 
 # substring based on start and end index
 def substring(field, start, end):
-    output = field.record['dq'][int(start):int(end)]
+    output = field.value[int(start):int(end)]
     return output
 
 # return 'Standard'
