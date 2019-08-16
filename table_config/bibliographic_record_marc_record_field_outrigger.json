@@ -1,11 +1,12 @@
 {
-    "N/A": {
-        "source_col_name": "N/A",
+    "n/a": {
+        "source_col_name": "n/a",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
                 "target_col_name": "bib_rec_marc_rec_field_out_seq_no",
@@ -18,7 +19,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "N/A",
+                    "source_col_name": "n/a",
                     "source_data_type": "N/A",
                     "source_format": "N/A",
                     "source_mandatory": null,
@@ -27,7 +28,7 @@
                 }
             },
             {
-                "target_col_name": "BIB_REC_ALEPH_LBRY_CD",
+                "target_col_name": "bib_rec_aleph_lbry_cd",
                 "target_data_type": "VarChar(5)",
                 "target_attribute": "- Bibliographic Record MARC Record Field Outrigger Aleph Library Code",
                 "transformation_info": {
@@ -37,7 +38,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "N/A",
+                    "source_col_name": "n/a",
                     "source_data_type": "N/A",
                     "source_format": "N/A",
                     "source_mandatory": null,
@@ -47,13 +48,14 @@
             }
         ]
     },
-    "[Column #1]": {
-        "source_col_name": "[Column #1]",
+    "[column #1]": {
+        "source_col_name": "[column #1]",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
                 "target_col_name": "bib_rec_source_system_id",
@@ -66,7 +68,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "[Column #1]",
+                    "source_col_name": "[column #1]",
                     "source_data_type": "N/A",
                     "source_format": "N/A",
                     "source_mandatory": null,
@@ -76,13 +78,14 @@
             }
         ]
     },
-    "[Column #2]": {
-        "source_col_name": "[Column #2]",
+    "[column #2]": {
+        "source_col_name": "[column #2]",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
                 "target_col_name": "bib_rec_marc_rec_field_cd",
@@ -95,7 +98,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "[Column #2]",
+                    "source_col_name": "[column #2]",
                     "source_data_type": "N/A",
                     "source_format": "N/A",
                     "source_mandatory": null,
@@ -105,13 +108,14 @@
             }
         ]
     },
-    "[Column #4]": {
-        "source_col_name": "[Column #4]",
+    "[column #4]": {
+        "source_col_name": "[column #4]",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
                 "target_col_name": "bib_rec_marc_rec_field_txt",
@@ -124,7 +128,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "[Column #4]",
+                    "source_col_name": "[column #4]",
                     "source_data_type": "N/A",
                     "source_format": "N/A",
                     "source_mandatory": null,
