@@ -25,17 +25,3 @@ class TransformField:
 
     def record_transform(self, result):
         self.record["transforms"].append(result)
-
-    def last(self):
-        # get the value of the last not null value in a list
-        def get_last(value_list):
-            last = [i for i in value_list if i][-1]
-            return last['result']
-
-        if self.record['transforms']:
-            last_value = get_last(self.record['transforms'])
-        elif self.record['dq']:
-            last_value = get_last(self.record['dq'])
-        else:
-            last_value = self.record['pp']
-        return last_value
