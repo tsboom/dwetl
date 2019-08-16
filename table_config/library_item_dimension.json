@@ -1,14 +1,15 @@
 {
-    "N/A": {
-        "source_col_name": "N/A",
+    "n/a": {
+        "source_col_name": "n/a",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_DIM_KEY",
+                "target_col_name": "lbry_item_dim_key",
                 "target_data_type": "Bigint",
                 "target_attribute": "- Library Item Dimension Key",
                 "transformation_info": {
@@ -18,7 +19,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "N/A",
+                    "source_col_name": "n/a",
                     "source_data_type": "N/A",
                     "source_format": "N/A",
                     "source_mandatory": "N",
@@ -27,7 +28,7 @@
                 }
             },
             {
-                "target_col_name": "LBRY_ITEM_ALEPH_LBRY_NAME",
+                "target_col_name": "lbry_item_aleph_lbry_name",
                 "target_data_type": "Character(5)",
                 "target_attribute": "- Library Item Source Aleph Library Name",
                 "transformation_info": {
@@ -37,7 +38,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "N/A",
+                    "source_col_name": "n/a",
                     "source_data_type": "N/A",
                     "source_format": "N/A",
                     "source_mandatory": "N",
@@ -47,16 +48,87 @@
             }
         ]
     },
-    "Z30_REC_KEY": {
-        "source_col_name": "Z30_REC_KEY",
+    "z30_rec_key": {
+        "source_col_name": "z30_rec_key",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": [
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_REC_KEY",
+                "target_column_name": "LBRY_ITEM_SOURCE_SYSTEM_ID",
+                "column_sub_component": "",
+                "column_data_type": "CHAR(15)",
+                "format": "",
+                "type": "Missing Value",
+                "instructions": "1) <null>\n2) All spaces\n3) All zeros",
+                "specific_dq_function": "no_missing_values",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "1",
+                "always": "X",
+                "only_if_data_exists": "",
+                "additional_conditions": "",
+                "suspend_record": "Yes",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Missing Value",
+                "replacement_value": "N/A",
+                "dimension_link_to_record": "N/A"
+            },
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_REC_KEY",
+                "target_column_name": "LBRY_ITEM_SOURCE_SYSTEM_ID",
+                "column_sub_component": "",
+                "column_data_type": "CHAR(15)",
+                "format": "",
+                "type": "Length Check",
+                "instructions": "Must equal 15",
+                "specific_dq_function": "is_valid_length",
+                "specific_dq_function_param_1": "15",
+                "application": "H,I",
+                "order": "2",
+                "always": "X",
+                "only_if_data_exists": "",
+                "additional_conditions": "No previous Z30_REC_KEY DQ exception",
+                "suspend_record": "Yes",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Incorrect Length",
+                "replacement_value": "N/A",
+                "dimension_link_to_record": "N/A"
+            },
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_REC_KEY",
+                "target_column_name": "LBRY_ITEM_SOURCE_SYSTEM_ID",
+                "column_sub_component": "",
+                "column_data_type": "CHAR(15)",
+                "format": "",
+                "type": "Numeric-only check",
+                "instructions": "All charcters must be [0-9]",
+                "specific_dq_function": "is_numeric",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "3",
+                "always": "X",
+                "only_if_data_exists": "",
+                "additional_conditions": "No previous Z30_REC_KEY DQ exception",
+                "suspend_record": "Yes",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Non-numeric Value",
+                "replacement_value": "N/A",
+                "dimension_link_to_record": "N/A"
+            }
+        ],
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_SOURCE_SYSTEM_ID",
+                "target_col_name": "lbry_item_source_system_id",
                 "target_data_type": "Character(15)",
                 "target_attribute": "- Library Item Source System Identifier",
                 "transformation_info": {
@@ -66,90 +138,16 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_REC_KEY",
+                    "source_col_name": "z30_rec_key",
                     "source_data_type": "CHAR(15)",
                     "source_format": "N/A",
                     "source_mandatory": null,
                     "aleph_table": "Z30",
                     "action_detailed_instructions": ""
-                },
-                "data_quality_info": {
-                    "dq_required": true,
-                    "data_quality_checks": [
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_REC_KEY",
-                            "target_column_name": "LBRY_ITEM_SOURCE_SYSTEM_ID",
-                            "column_sub_component": "",
-                            "column_data_type": "CHAR(15)",
-                            "format": "",
-                            "type": "Missing Value",
-                            "instructions": "1) <null>\n2) All spaces\n3) All zeros",
-                            "specific_dq_function": "no_missing_values",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "1",
-                            "always": "X",
-                            "only_if_data_exists": "",
-                            "additional_conditions": "",
-                            "suspend_record": "Yes",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Missing Value",
-                            "replacement_value": "N/A",
-                            "dimension_link_to_record": "N/A"
-                        },
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_REC_KEY",
-                            "target_column_name": "LBRY_ITEM_SOURCE_SYSTEM_ID",
-                            "column_sub_component": "",
-                            "column_data_type": "CHAR(15)",
-                            "format": "",
-                            "type": "Length Check",
-                            "instructions": "Must equal 15",
-                            "specific_dq_function": "is_valid_length",
-                            "specific_dq_function_param_1": "15",
-                            "application": "H,I",
-                            "order": "2",
-                            "always": "X",
-                            "only_if_data_exists": "",
-                            "additional_conditions": "No previous Z30_REC_KEY DQ exception",
-                            "suspend_record": "Yes",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Incorrect Length",
-                            "replacement_value": "N/A",
-                            "dimension_link_to_record": "N/A"
-                        },
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_REC_KEY",
-                            "target_column_name": "LBRY_ITEM_SOURCE_SYSTEM_ID",
-                            "column_sub_component": "",
-                            "column_data_type": "CHAR(15)",
-                            "format": "",
-                            "type": "Numeric-only check",
-                            "instructions": "All charcters must be [0-9]",
-                            "specific_dq_function": "is_numeric",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "3",
-                            "always": "X",
-                            "only_if_data_exists": "",
-                            "additional_conditions": "No previous Z30_REC_KEY DQ exception",
-                            "suspend_record": "Yes",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Non-numeric Value",
-                            "replacement_value": "N/A",
-                            "dimension_link_to_record": "N/A"
-                        }
-                    ]
                 }
             },
             {
-                "target_col_name": "LBRY_ITEM_ADM_NO",
+                "target_col_name": "lbry_item_adm_no",
                 "target_data_type": "Character(9)",
                 "target_attribute": "- Library Item ADM Number",
                 "transformation_info": {
@@ -159,67 +157,16 @@
                     "specific_transform_function": "substring",
                     "specific_transform_function_param1": "0",
                     "specific_transform_function_param2": "9",
-                    "source_col_name": "Z30_REC_KEY",
+                    "source_col_name": "z30_rec_key",
                     "source_data_type": "CHAR(15)",
                     "source_format": "N/A",
                     "source_mandatory": null,
                     "aleph_table": "Z30",
                     "action_detailed_instructions": "Start: 1\nEnd: 9"
-                },
-                "data_quality_info": {
-                    "dq_required": true,
-                    "data_quality_checks": [
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_REC_KEY",
-                            "target_column_name": "LBRY_ITEM_ADM_NO",
-                            "column_sub_component": "SUBSTR(Z30_REC_KEY, 1, 9)",
-                            "column_data_type": "CHAR(9)",
-                            "format": "",
-                            "type": "Missing Value",
-                            "instructions": "1) All spaces\n2) All zeros",
-                            "specific_dq_function": "no_missing_values",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "4",
-                            "always": "X",
-                            "only_if_data_exists": "",
-                            "additional_conditions": "No previous Z30_REC_KEY DQ exception",
-                            "suspend_record": "Yes",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Missing Value",
-                            "replacement_value": "N/A",
-                            "dimension_link_to_record": "N/A"
-                        },
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_REC_KEY",
-                            "target_column_name": "LBRY_ITEM_ADM_NO",
-                            "column_sub_component": "SUBSTR(Z30_REC_KEY, 1, 9)",
-                            "column_data_type": "CHAR(9)",
-                            "format": "",
-                            "type": "Length Check",
-                            "instructions": "Must equal 9",
-                            "specific_dq_function": "is_valid_length",
-                            "specific_dq_function_param_1": "9",
-                            "application": "H,I",
-                            "order": "5",
-                            "always": "X",
-                            "only_if_data_exists": "",
-                            "additional_conditions": "No previous Z30_REC_KEY DQ exception",
-                            "suspend_record": "Yes",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Incorrect Length",
-                            "replacement_value": "N/A",
-                            "dimension_link_to_record": "N/A"
-                        }
-                    ]
                 }
             },
             {
-                "target_col_name": "LBRY_ITEM_SEQ_NO",
+                "target_col_name": "lbry_item_seq_no",
                 "target_data_type": "Character(6)",
                 "target_attribute": "- Library Item Sequence Number",
                 "transformation_info": {
@@ -229,77 +176,27 @@
                     "specific_transform_function": "substring",
                     "specific_transform_function_param1": "9",
                     "specific_transform_function_param2": "15",
-                    "source_col_name": "Z30_REC_KEY",
+                    "source_col_name": "z30_rec_key",
                     "source_data_type": "CHAR(15)",
                     "source_format": "N/A",
                     "source_mandatory": null,
                     "aleph_table": "Z30",
                     "action_detailed_instructions": "Start: 10\nEnd: 15"
-                },
-                "data_quality_info": {
-                    "dq_required": true,
-                    "data_quality_checks": [
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_REC_KEY",
-                            "target_column_name": "LBRY_ITEM_SEQ_NO",
-                            "column_sub_component": "SUBSTR(Z30_REC_KEY, 10, 15)",
-                            "column_data_type": "CHAR(6)",
-                            "format": "",
-                            "type": "Missing Value",
-                            "instructions": "1) All spaces\n2) All zeros",
-                            "specific_dq_function": "no_missing_values",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "6",
-                            "always": "X",
-                            "only_if_data_exists": "",
-                            "additional_conditions": "No previous Z30_REC_KEY DQ exception",
-                            "suspend_record": "Yes",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Missing Value",
-                            "replacement_value": "N/A",
-                            "dimension_link_to_record": "N/A"
-                        },
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_REC_KEY",
-                            "target_column_name": "LBRY_ITEM_SEQ_NO",
-                            "column_sub_component": "SUBSTR(Z30_REC_KEY, 10, 15)",
-                            "column_data_type": "CHAR(6)",
-                            "format": "",
-                            "type": "Length Check",
-                            "instructions": "Must equal 6",
-                            "specific_dq_function": "is_valid_length",
-                            "specific_dq_function_param_1": "6",
-                            "application": "H,I",
-                            "order": "7",
-                            "always": "X",
-                            "only_if_data_exists": "",
-                            "additional_conditions": "No previous Z30_REC_KEY DQ exception",
-                            "suspend_record": "Yes",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Incorrect Length",
-                            "replacement_value": "N/A",
-                            "dimension_link_to_record": "N/A"
-                        }
-                    ]
                 }
             }
         ]
     },
-    "Z30_CATALOGER": {
-        "source_col_name": "Z30_CATALOGER",
+    "z30_cataloger": {
+        "source_col_name": "z30_cataloger",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_UPDATE_LMS_STAFF_ACCT_ID",
+                "target_col_name": "lbry_item_update_lms_staff_acct_id",
                 "target_data_type": "VarChar(10)",
                 "target_attribute": "- Library Item Update LMS Staff Account Identifier",
                 "transformation_info": {
@@ -309,7 +206,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_CATALOGER",
+                    "source_col_name": "z30_cataloger",
                     "source_data_type": "CHAR(10)",
                     "source_format": "N/A",
                     "source_mandatory": "N",
@@ -319,16 +216,64 @@
             }
         ]
     },
-    "Z30_OPEN_DATE": {
-        "source_col_name": "Z30_OPEN_DATE",
+    "z30_open_date": {
+        "source_col_name": "z30_open_date",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": [
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_OPEN_DATE",
+                "target_column_name": "LBRY_ITEM_CREATE_DT",
+                "column_sub_component": "",
+                "column_data_type": "NUMBER(8)",
+                "format": "YYYYMMDD",
+                "type": "Missing Value",
+                "instructions": "1) <null>\n2) All zeros",
+                "specific_dq_function": "no_missing_values",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "1",
+                "always": "X",
+                "only_if_data_exists": "",
+                "additional_conditions": "",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Missing Value",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            },
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_OPEN_DATE",
+                "target_column_name": "LBRY_ITEM_CREATE_DT",
+                "column_sub_component": "",
+                "column_data_type": "NUMBER(8)",
+                "format": "YYYYMMDD",
+                "type": "Date check",
+                "instructions": "All charcters must be [0-9]",
+                "specific_dq_function": "is_valid_aleph_year",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "2",
+                "always": "X",
+                "only_if_data_exists": "",
+                "additional_conditions": "No previous Z30_OPEN_DATE DQ exception",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Non-numeric Value",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            }
+        ],
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_CREATE_DT",
+                "target_col_name": "lbry_item_create_dt",
                 "target_data_type": "Date",
                 "target_attribute": "- Library Item Create Date",
                 "transformation_info": {
@@ -338,77 +283,74 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_OPEN_DATE",
+                    "source_col_name": "z30_open_date",
                     "source_data_type": "NUMBER(8)",
                     "source_format": "YYYYMMDD",
                     "source_mandatory": "N",
                     "aleph_table": "Z30",
                     "action_detailed_instructions": ""
-                },
-                "data_quality_info": {
-                    "dq_required": true,
-                    "data_quality_checks": [
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_OPEN_DATE",
-                            "target_column_name": "LBRY_ITEM_CREATE_DT",
-                            "column_sub_component": "",
-                            "column_data_type": "NUMBER(8)",
-                            "format": "YYYYMMDD",
-                            "type": "Missing Value",
-                            "instructions": "1) <null>\n2) All zeros",
-                            "specific_dq_function": "no_missing_values",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "1",
-                            "always": "X",
-                            "only_if_data_exists": "",
-                            "additional_conditions": "",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Missing Value",
-                            "replacement_value": "(null)",
-                            "dimension_link_to_record": "N/A"
-                        },
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_OPEN_DATE",
-                            "target_column_name": "LBRY_ITEM_CREATE_DT",
-                            "column_sub_component": "",
-                            "column_data_type": "NUMBER(8)",
-                            "format": "YYYYMMDD",
-                            "type": "Date check",
-                            "instructions": "All charcters must be [0-9]",
-                            "specific_dq_function": "is_valid_aleph_year",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "2",
-                            "always": "X",
-                            "only_if_data_exists": "",
-                            "additional_conditions": "No previous Z30_OPEN_DATE DQ exception",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Non-numeric Value",
-                            "replacement_value": "(null)",
-                            "dimension_link_to_record": "N/A"
-                        }
-                    ]
                 }
             }
         ]
     },
-    "Z30_UPDATE_DATE": {
-        "source_col_name": "Z30_UPDATE_DATE",
+    "z30_update_date": {
+        "source_col_name": "z30_update_date",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": [
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_UPDATE_DATE",
+                "target_column_name": "LBRY_ITEM_UPDATE_DT",
+                "column_sub_component": "",
+                "column_data_type": "NUMBER(8)",
+                "format": "YYYYMMDD",
+                "type": "Missing Value",
+                "instructions": "1) <null>\n2) All zeros",
+                "specific_dq_function": "no_missing_values",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "1",
+                "always": "",
+                "only_if_data_exists": "X",
+                "additional_conditions": "",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Missing Value",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            },
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_UPDATE_DATE",
+                "target_column_name": "LBRY_ITEM_UPDATE_DT",
+                "column_sub_component": "",
+                "column_data_type": "NUMBER(8)",
+                "format": "YYYYMMDD",
+                "type": "Date check",
+                "instructions": "All charcters must be [0-9]",
+                "specific_dq_function": "is_valid_aleph_year",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "2",
+                "always": "",
+                "only_if_data_exists": "X",
+                "additional_conditions": "No previous Z30_UPDATE_DATE DQ exception",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Non-numeric Value",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            }
+        ],
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_UPDATE_DT",
+                "target_col_name": "lbry_item_update_dt",
                 "target_data_type": "Date",
                 "target_attribute": "- Library Item Update Date",
                 "transformation_info": {
@@ -418,77 +360,27 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_UPDATE_DATE",
+                    "source_col_name": "z30_update_date",
                     "source_data_type": "NUMBER(8)",
                     "source_format": "YYYYMMDD",
                     "source_mandatory": "N",
                     "aleph_table": "Z30",
                     "action_detailed_instructions": ""
-                },
-                "data_quality_info": {
-                    "dq_required": true,
-                    "data_quality_checks": [
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_UPDATE_DATE",
-                            "target_column_name": "LBRY_ITEM_UPDATE_DT",
-                            "column_sub_component": "",
-                            "column_data_type": "NUMBER(8)",
-                            "format": "YYYYMMDD",
-                            "type": "Missing Value",
-                            "instructions": "1) <null>\n2) All zeros",
-                            "specific_dq_function": "no_missing_values",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "1",
-                            "always": "",
-                            "only_if_data_exists": "X",
-                            "additional_conditions": "",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Missing Value",
-                            "replacement_value": "(null)",
-                            "dimension_link_to_record": "N/A"
-                        },
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_UPDATE_DATE",
-                            "target_column_name": "LBRY_ITEM_UPDATE_DT",
-                            "column_sub_component": "",
-                            "column_data_type": "NUMBER(8)",
-                            "format": "YYYYMMDD",
-                            "type": "Date check",
-                            "instructions": "All charcters must be [0-9]",
-                            "specific_dq_function": "is_valid_aleph_year",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "2",
-                            "always": "",
-                            "only_if_data_exists": "X",
-                            "additional_conditions": "No previous Z30_UPDATE_DATE DQ exception",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Non-numeric Value",
-                            "replacement_value": "(null)",
-                            "dimension_link_to_record": "N/A"
-                        }
-                    ]
                 }
             }
         ]
     },
-    "Z30_PROCESS_STATUS_DATE": {
-        "source_col_name": "Z30_PROCESS_STATUS_DATE",
+    "z30_process_status_date": {
+        "source_col_name": "z30_process_status_date",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_PROCESS_STATUS_UPDATE_DT",
+                "target_col_name": "lbry_item_process_status_update_dt",
                 "target_data_type": "Date",
                 "target_attribute": "- Library Item Process Status Update Date",
                 "transformation_info": {
@@ -498,7 +390,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_PROCESS_STATUS_DATE",
+                    "source_col_name": "z30_process_status_date",
                     "source_data_type": "NUMBER(8)",
                     "source_format": "YYYYMMDD",
                     "source_mandatory": "N",
@@ -508,16 +400,17 @@
             }
         ]
     },
-    "Z30_DESCRIPTION": {
-        "source_col_name": "Z30_DESCRIPTION",
+    "z30_description": {
+        "source_col_name": "z30_description",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_VOLUME_ISSUE_NO",
+                "target_col_name": "lbry_item_volume_issue_no",
                 "target_data_type": "VarChar(20)",
                 "target_attribute": "- Library Item Volume-Issue Number",
                 "transformation_info": {
@@ -527,7 +420,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_DESCRIPTION",
+                    "source_col_name": "z30_description",
                     "source_data_type": "VARCHAR2(200)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -537,16 +430,64 @@
             }
         ]
     },
-    "Z30_INVENTORY_NUMBER_DATE": {
-        "source_col_name": "Z30_INVENTORY_NUMBER_DATE",
+    "z30_inventory_number_date": {
+        "source_col_name": "z30_inventory_number_date",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": [
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_INVENTORY_NUMBER_DATE",
+                "target_column_name": "LBRY_ITEM_ACCESSION_DT",
+                "column_sub_component": "",
+                "column_data_type": "NUMBER(8)",
+                "format": "YYYYMMDD",
+                "type": "Missing Value",
+                "instructions": "1) <null>\n2) All zeros",
+                "specific_dq_function": "no_missing_values",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "1",
+                "always": "",
+                "only_if_data_exists": "X",
+                "additional_conditions": "",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Missing Value",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            },
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_INVENTORY_NUMBER_DATE",
+                "target_column_name": "LBRY_ITEM_ACCESSION_DT",
+                "column_sub_component": "",
+                "column_data_type": "NUMBER(8)",
+                "format": "YYYYMMDD",
+                "type": "Date check",
+                "instructions": "All charcters must be [0-9]",
+                "specific_dq_function": "is_valid_aleph_year",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "2",
+                "always": "",
+                "only_if_data_exists": "X",
+                "additional_conditions": "No previous Z30_INVENTORY_NUMBER_DATE DQ exceptions",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Non-numeric Value",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            }
+        ],
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_ACCESSION_DT",
+                "target_col_name": "lbry_item_accession_dt",
                 "target_data_type": "Date",
                 "target_attribute": "- Library Item Accession Date",
                 "transformation_info": {
@@ -556,77 +497,27 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_INVENTORY_NUMBER_DATE",
+                    "source_col_name": "z30_inventory_number_date",
                     "source_data_type": "NUMBER(8)",
                     "source_format": "YYYYMMDD",
                     "source_mandatory": "N",
                     "aleph_table": "Z30",
                     "action_detailed_instructions": ""
-                },
-                "data_quality_info": {
-                    "dq_required": true,
-                    "data_quality_checks": [
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_INVENTORY_NUMBER_DATE",
-                            "target_column_name": "LBRY_ITEM_ACCESSION_DT",
-                            "column_sub_component": "",
-                            "column_data_type": "NUMBER(8)",
-                            "format": "YYYYMMDD",
-                            "type": "Missing Value",
-                            "instructions": "1) <null>\n2) All zeros",
-                            "specific_dq_function": "no_missing_values",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "1",
-                            "always": "",
-                            "only_if_data_exists": "X",
-                            "additional_conditions": "",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Missing Value",
-                            "replacement_value": "(null)",
-                            "dimension_link_to_record": "N/A"
-                        },
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_INVENTORY_NUMBER_DATE",
-                            "target_column_name": "LBRY_ITEM_ACCESSION_DT",
-                            "column_sub_component": "",
-                            "column_data_type": "NUMBER(8)",
-                            "format": "YYYYMMDD",
-                            "type": "Date check",
-                            "instructions": "All charcters must be [0-9]",
-                            "specific_dq_function": "is_valid_aleph_year",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "2",
-                            "always": "",
-                            "only_if_data_exists": "X",
-                            "additional_conditions": "No previous Z30_INVENTORY_NUMBER_DATE DQ exceptions",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Non-numeric Value",
-                            "replacement_value": "(null)",
-                            "dimension_link_to_record": "N/A"
-                        }
-                    ]
                 }
             }
         ]
     },
-    "Z30_PAGES": {
-        "source_col_name": "Z30_PAGES",
+    "z30_pages": {
+        "source_col_name": "z30_pages",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_PAGE_RANGE_TXT",
+                "target_col_name": "lbry_item_page_range_txt",
                 "target_data_type": "VarChar(30)",
                 "target_attribute": "- Library Item Page Range Text",
                 "transformation_info": {
@@ -636,7 +527,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_PAGES",
+                    "source_col_name": "z30_pages",
                     "source_data_type": "VARCHAR2(30)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -646,16 +537,17 @@
             }
         ]
     },
-    "Z30_COPY_ID": {
-        "source_col_name": "Z30_COPY_ID",
+    "z30_copy_id": {
+        "source_col_name": "z30_copy_id",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_COPY_NO",
+                "target_col_name": "lbry_item_copy_no",
                 "target_data_type": "VarChar(5)",
                 "target_attribute": "- Library Item Copy Number",
                 "transformation_info": {
@@ -665,7 +557,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_COPY_ID",
+                    "source_col_name": "z30_copy_id",
                     "source_data_type": "CHAR(5)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -675,16 +567,64 @@
             }
         ]
     },
-    "Z30_ISSUE_DATE": {
-        "source_col_name": "Z30_ISSUE_DATE",
+    "z30_issue_date": {
+        "source_col_name": "z30_issue_date",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": [
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_ISSUE_DATE",
+                "target_column_name": "LBRY_ITEM_PUBLICATION_DT",
+                "column_sub_component": "",
+                "column_data_type": "NUMBER(8)",
+                "format": "YYYYMMDD",
+                "type": "Missing Value",
+                "instructions": "1) <null>\n2) All zeros",
+                "specific_dq_function": "no_missing_values",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "1",
+                "always": "",
+                "only_if_data_exists": "X",
+                "additional_conditions": "",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Missing Value",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            },
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_ISSUE_DATE",
+                "target_column_name": "LBRY_ITEM_PUBLICATION_DT",
+                "column_sub_component": "",
+                "column_data_type": "NUMBER(8)",
+                "format": "YYYYMMDD",
+                "type": "Date check",
+                "instructions": "Must be valid aleph date.",
+                "specific_dq_function": "is_valid_aleph_year",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "2",
+                "always": "",
+                "only_if_data_exists": "X",
+                "additional_conditions": "No previous Z30_ISSUE_DATE DQ exceptions",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Non-numeric Value",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            }
+        ],
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_PUBLICATION_DT",
+                "target_col_name": "lbry_item_publication_dt",
                 "target_data_type": "Date",
                 "target_attribute": "- Library Item Publication Date",
                 "transformation_info": {
@@ -694,77 +634,27 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_ISSUE_DATE",
+                    "source_col_name": "z30_issue_date",
                     "source_data_type": "NUMBER(8)",
                     "source_format": "YYYYMMDD",
                     "source_mandatory": "N",
                     "aleph_table": "Z30",
                     "action_detailed_instructions": ""
-                },
-                "data_quality_info": {
-                    "dq_required": true,
-                    "data_quality_checks": [
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_ISSUE_DATE",
-                            "target_column_name": "LBRY_ITEM_PUBLICATION_DT",
-                            "column_sub_component": "",
-                            "column_data_type": "NUMBER(8)",
-                            "format": "YYYYMMDD",
-                            "type": "Missing Value",
-                            "instructions": "1) <null>\n2) All zeros",
-                            "specific_dq_function": "no_missing_values",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "1",
-                            "always": "",
-                            "only_if_data_exists": "X",
-                            "additional_conditions": "",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Missing Value",
-                            "replacement_value": "(null)",
-                            "dimension_link_to_record": "N/A"
-                        },
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_ISSUE_DATE",
-                            "target_column_name": "LBRY_ITEM_PUBLICATION_DT",
-                            "column_sub_component": "",
-                            "column_data_type": "NUMBER(8)",
-                            "format": "YYYYMMDD",
-                            "type": "Date check",
-                            "instructions": "Must be valid aleph date.",
-                            "specific_dq_function": "is_valid_aleph_year",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "2",
-                            "always": "",
-                            "only_if_data_exists": "X",
-                            "additional_conditions": "No previous Z30_ISSUE_DATE DQ exceptions",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Non-numeric Value",
-                            "replacement_value": "(null)",
-                            "dimension_link_to_record": "N/A"
-                        }
-                    ]
                 }
             }
         ]
     },
-    "Z30_SUPP_INDEX_O": {
-        "source_col_name": "Z30_SUPP_INDEX_O",
+    "z30_supp_index_o": {
+        "source_col_name": "z30_supp_index_o",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_SUPPLEMENTAL_MATERIAL_TITLE",
+                "target_col_name": "lbry_item_supplemental_material_title",
                 "target_data_type": "VarChar(30)",
                 "target_attribute": "- Library Item Supplemental Material Title",
                 "transformation_info": {
@@ -774,7 +664,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_SUPP_INDEX_O",
+                    "source_col_name": "z30_supp_index_o",
                     "source_data_type": "VARCHAR2(30)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -784,16 +674,64 @@
             }
         ]
     },
-    "Z30_EXPECTED_ARRIVAL_DATE": {
-        "source_col_name": "Z30_EXPECTED_ARRIVAL_DATE",
+    "z30_expected_arrival_date": {
+        "source_col_name": "z30_expected_arrival_date",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": [
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_EXPECTED_ARRIVAL_DATE",
+                "target_column_name": "LBRY_ITEM_EXPECTED_ARRIVAL_DT",
+                "column_sub_component": "",
+                "column_data_type": "NUMBER(8)",
+                "format": "YYYYMMDD",
+                "type": "Missing Value",
+                "instructions": "1) <null>\n2) All zeros",
+                "specific_dq_function": "no_missing_values",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "1",
+                "always": "",
+                "only_if_data_exists": "X",
+                "additional_conditions": "",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Missing Value",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            },
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_EXPECTED_ARRIVAL_DATE",
+                "target_column_name": "LBRY_ITEM_EXPECTED_ARRIVAL_DT",
+                "column_sub_component": "",
+                "column_data_type": "NUMBER(8)",
+                "format": "YYYYMMDD",
+                "type": "Date check",
+                "instructions": "Must be valid aleph date.",
+                "specific_dq_function": "is_valid_aleph_year",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "2",
+                "always": "",
+                "only_if_data_exists": "X",
+                "additional_conditions": "No previous Z30_EXPECTED_ARRIVAL_DATE DQ exceptions",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Non-numeric Value",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            }
+        ],
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_EXPECTED_ARRIVAL_DT",
+                "target_col_name": "lbry_item_expected_arrival_dt",
                 "target_data_type": "Date",
                 "target_attribute": "- Library Item Expected Arrival Date",
                 "transformation_info": {
@@ -803,77 +741,74 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_EXPECTED_ARRIVAL_DATE",
+                    "source_col_name": "z30_expected_arrival_date",
                     "source_data_type": "NUMBER(8)",
                     "source_format": "YYYYMMDD",
                     "source_mandatory": "N",
                     "aleph_table": "Z30",
                     "action_detailed_instructions": ""
-                },
-                "data_quality_info": {
-                    "dq_required": true,
-                    "data_quality_checks": [
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_EXPECTED_ARRIVAL_DATE",
-                            "target_column_name": "LBRY_ITEM_EXPECTED_ARRIVAL_DT",
-                            "column_sub_component": "",
-                            "column_data_type": "NUMBER(8)",
-                            "format": "YYYYMMDD",
-                            "type": "Missing Value",
-                            "instructions": "1) <null>\n2) All zeros",
-                            "specific_dq_function": "no_missing_values",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "1",
-                            "always": "",
-                            "only_if_data_exists": "X",
-                            "additional_conditions": "",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Missing Value",
-                            "replacement_value": "(null)",
-                            "dimension_link_to_record": "N/A"
-                        },
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_EXPECTED_ARRIVAL_DATE",
-                            "target_column_name": "LBRY_ITEM_EXPECTED_ARRIVAL_DT",
-                            "column_sub_component": "",
-                            "column_data_type": "NUMBER(8)",
-                            "format": "YYYYMMDD",
-                            "type": "Date check",
-                            "instructions": "Must be valid aleph date.",
-                            "specific_dq_function": "is_valid_aleph_year",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "2",
-                            "always": "",
-                            "only_if_data_exists": "X",
-                            "additional_conditions": "No previous Z30_EXPECTED_ARRIVAL_DATE DQ exceptions",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Non-numeric Value",
-                            "replacement_value": "(null)",
-                            "dimension_link_to_record": "N/A"
-                        }
-                    ]
                 }
             }
         ]
     },
-    "Z30_ARRIVAL_DATE": {
-        "source_col_name": "Z30_ARRIVAL_DATE",
+    "z30_arrival_date": {
+        "source_col_name": "z30_arrival_date",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": [
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_ARRIVAL_DATE",
+                "target_column_name": "LBRY_ITEM_ACTUAL_ARRIVAL_DT",
+                "column_sub_component": "",
+                "column_data_type": "NUMBER(8)",
+                "format": "YYYYMMDD",
+                "type": "Missing Value",
+                "instructions": "1) <null>\n2) All zeros",
+                "specific_dq_function": "no_missing_values",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "1",
+                "always": "",
+                "only_if_data_exists": "X",
+                "additional_conditions": "",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Missing Value",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            },
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_ARRIVAL_DATE",
+                "target_column_name": "LBRY_ITEM_ACTUAL_ARRIVAL_DT",
+                "column_sub_component": "",
+                "column_data_type": "NUMBER(8)",
+                "format": "YYYYMMDD",
+                "type": "Date check",
+                "instructions": "Must be valid aleph date.",
+                "specific_dq_function": "is_valid_aleph_year",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "2",
+                "always": "",
+                "only_if_data_exists": "X",
+                "additional_conditions": "No previous Z30_ARRIVAL_DATE DQ exceptions",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Non-numeric Value",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            }
+        ],
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_ACTUAL_ARRIVAL_DT",
+                "target_col_name": "lbry_item_actual_arrival_dt",
                 "target_data_type": "Date",
                 "target_attribute": "- Library Item Actual Arrival Date",
                 "transformation_info": {
@@ -883,77 +818,27 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_ARRIVAL_DATE",
+                    "source_col_name": "z30_arrival_date",
                     "source_data_type": "NUMBER(8)",
                     "source_format": "YYYYMMDD",
                     "source_mandatory": "N",
                     "aleph_table": "Z30",
                     "action_detailed_instructions": ""
-                },
-                "data_quality_info": {
-                    "dq_required": true,
-                    "data_quality_checks": [
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_ARRIVAL_DATE",
-                            "target_column_name": "LBRY_ITEM_ACTUAL_ARRIVAL_DT",
-                            "column_sub_component": "",
-                            "column_data_type": "NUMBER(8)",
-                            "format": "YYYYMMDD",
-                            "type": "Missing Value",
-                            "instructions": "1) <null>\n2) All zeros",
-                            "specific_dq_function": "no_missing_values",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "1",
-                            "always": "",
-                            "only_if_data_exists": "X",
-                            "additional_conditions": "",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Missing Value",
-                            "replacement_value": "(null)",
-                            "dimension_link_to_record": "N/A"
-                        },
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_ARRIVAL_DATE",
-                            "target_column_name": "LBRY_ITEM_ACTUAL_ARRIVAL_DT",
-                            "column_sub_component": "",
-                            "column_data_type": "NUMBER(8)",
-                            "format": "YYYYMMDD",
-                            "type": "Date check",
-                            "instructions": "Must be valid aleph date.",
-                            "specific_dq_function": "is_valid_aleph_year",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "2",
-                            "always": "",
-                            "only_if_data_exists": "X",
-                            "additional_conditions": "No previous Z30_ARRIVAL_DATE DQ exceptions",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Non-numeric Value",
-                            "replacement_value": "(null)",
-                            "dimension_link_to_record": "N/A"
-                        }
-                    ]
                 }
             }
         ]
     },
-    "Z30_PRICE": {
-        "source_col_name": "Z30_PRICE",
+    "z30_price": {
+        "source_col_name": "z30_price",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_ACQUISITION_PRICE_TXT",
+                "target_col_name": "lbry_item_acquisition_price_txt",
                 "target_data_type": "VarChar(10)",
                 "target_attribute": "- Library Item Acquisition Price Text",
                 "transformation_info": {
@@ -963,7 +848,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_PRICE",
+                    "source_col_name": "z30_price",
                     "source_data_type": "CHAR(10)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -973,16 +858,64 @@
             }
         ]
     },
-    "Z30_BARCODE": {
-        "source_col_name": "Z30_BARCODE",
+    "z30_barcode": {
+        "source_col_name": "z30_barcode",
         "preprocessing_info": {
             "pre_or_post_dq": "PRE",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove trailing spaces"
         },
+        "dataquality_info": [
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_BARCODE",
+                "target_column_name": "LBRY_ITEM_BARCODE_NO",
+                "column_sub_component": "",
+                "column_data_type": "CHAR(30)",
+                "format": "",
+                "type": "Missing Value",
+                "instructions": "1) <null>\n2) All spaces\n3) All zeros",
+                "specific_dq_function": "no_missing_values",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "1",
+                "always": "X",
+                "only_if_data_exists": "",
+                "additional_conditions": "",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Missing Value",
+                "replacement_value": "\"Missing Value\"",
+                "dimension_link_to_record": "N/A"
+            },
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_BARCODE",
+                "target_column_name": "LBRY_ITEM_BARCODE_NO",
+                "column_sub_component": "",
+                "column_data_type": "CHAR(30)",
+                "format": "",
+                "type": "Leading Spaces",
+                "instructions": "First charcter must not contain a space",
+                "specific_dq_function": "no_leading_space",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "2",
+                "always": "X",
+                "only_if_data_exists": "",
+                "additional_conditions": "No previous Z30_BARCODE exception",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Leading Spaces",
+                "replacement_value": "\"Leading Spaces in Value\"",
+                "dimension_link_to_record": "N/A"
+            }
+        ],
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_BARCODE_NO",
+                "target_col_name": "lbry_item_barcode_no",
                 "target_data_type": "VarChar(30)",
                 "target_attribute": "- Library Item Barcode Number",
                 "transformation_info": {
@@ -992,77 +925,74 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_BARCODE",
+                    "source_col_name": "z30_barcode",
                     "source_data_type": "CHAR(30)",
                     "source_format": "",
                     "source_mandatory": "N",
                     "aleph_table": "Z30",
                     "action_detailed_instructions": ""
-                },
-                "data_quality_info": {
-                    "dq_required": true,
-                    "data_quality_checks": [
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_BARCODE",
-                            "target_column_name": "LBRY_ITEM_BARCODE_NO",
-                            "column_sub_component": "",
-                            "column_data_type": "CHAR(30)",
-                            "format": "",
-                            "type": "Missing Value",
-                            "instructions": "1) <null>\n2) All spaces\n3) All zeros",
-                            "specific_dq_function": "no_missing_values",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "1",
-                            "always": "X",
-                            "only_if_data_exists": "",
-                            "additional_conditions": "",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Missing Value",
-                            "replacement_value": "\"Missing Value\"",
-                            "dimension_link_to_record": "N/A"
-                        },
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_BARCODE",
-                            "target_column_name": "LBRY_ITEM_BARCODE_NO",
-                            "column_sub_component": "",
-                            "column_data_type": "CHAR(30)",
-                            "format": "",
-                            "type": "Leading Spaces",
-                            "instructions": "First charcter must not contain a space",
-                            "specific_dq_function": "no_leading_space",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "2",
-                            "always": "X",
-                            "only_if_data_exists": "",
-                            "additional_conditions": "No previous Z30_BARCODE exception",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Leading Spaces",
-                            "replacement_value": "\"Leading Spaces in Value\"",
-                            "dimension_link_to_record": "N/A"
-                        }
-                    ]
                 }
             }
         ]
     },
-    "Z30_CALL_NO_TYPE": {
-        "source_col_name": "Z30_CALL_NO_TYPE",
+    "z30_call_no_type": {
+        "source_col_name": "z30_call_no_type",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": [
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_CALL_NO_TYPE",
+                "target_column_name": "LBRY_ITEM_LOC_CALL_NO_SCHEME_CD",
+                "column_sub_component": "",
+                "column_data_type": "CHAR(1)",
+                "format": "",
+                "type": "Missing Value",
+                "instructions": "<null>",
+                "specific_dq_function": "",
+                "specific_dq_function_param_1": "",
+                "application": "",
+                "order": "1",
+                "always": "X",
+                "only_if_data_exists": "",
+                "additional_conditions": "",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Missing value",
+                "replacement_value": "-M",
+                "dimension_link_to_record": "N/A"
+            },
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_CALL_NO_TYPE",
+                "target_column_name": "LBRY_ITEM_LOC_CALL_NO_SCHEME_CD",
+                "column_sub_component": "",
+                "column_data_type": "CHAR(1)",
+                "format": "#",
+                "type": "Valid Value",
+                "instructions": "VALID VALUES LIST:\nCALL-NO-TYPE LOOKUP",
+                "specific_dq_function": "dq_z30_call_no_type__valid_cal_no_type",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "2",
+                "always": "",
+                "only_if_data_exists": "X",
+                "additional_conditions": "No previous Z30_CALL_NO_TYPE DQ exceptions",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Invalid value",
+                "replacement_value": "-I",
+                "dimension_link_to_record": "N/A"
+            }
+        ],
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_LOC_CALL_NO_SCHEME_CD",
+                "target_col_name": "lbry_item_loc_call_no_scheme_cd",
                 "target_data_type": "VarChar(2)",
                 "target_attribute": "- Library Item Location Call Number Scheme Code",
                 "transformation_info": {
@@ -1072,67 +1002,16 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_CALL_NO_TYPE",
+                    "source_col_name": "z30_call_no_type",
                     "source_data_type": "CHAR(1)",
                     "source_format": "",
                     "source_mandatory": "N",
                     "aleph_table": "Z30",
                     "action_detailed_instructions": ""
-                },
-                "data_quality_info": {
-                    "dq_required": true,
-                    "data_quality_checks": [
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_CALL_NO_TYPE",
-                            "target_column_name": "LBRY_ITEM_LOC_CALL_NO_SCHEME_CD",
-                            "column_sub_component": "",
-                            "column_data_type": "CHAR(1)",
-                            "format": "",
-                            "type": "Missing Value",
-                            "instructions": "<null>",
-                            "specific_dq_function": "",
-                            "specific_dq_function_param_1": "",
-                            "application": "",
-                            "order": "1",
-                            "always": "X",
-                            "only_if_data_exists": "",
-                            "additional_conditions": "",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Missing value",
-                            "replacement_value": "-M",
-                            "dimension_link_to_record": "N/A"
-                        },
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_CALL_NO_TYPE",
-                            "target_column_name": "LBRY_ITEM_LOC_CALL_NO_SCHEME_CD",
-                            "column_sub_component": "",
-                            "column_data_type": "CHAR(1)",
-                            "format": "#",
-                            "type": "Valid Value",
-                            "instructions": "VALID VALUES LIST:\nCALL-NO-TYPE LOOKUP",
-                            "specific_dq_function": "dq_z30_call_no_type__valid_cal_no_type",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "2",
-                            "always": "",
-                            "only_if_data_exists": "X",
-                            "additional_conditions": "No previous Z30_CALL_NO_TYPE DQ exceptions",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Invalid value",
-                            "replacement_value": "-I",
-                            "dimension_link_to_record": "N/A"
-                        }
-                    ]
                 }
             },
             {
-                "target_col_name": "LBRY_ITEM_LOC_CALL_NO_SCHEME_DESC",
+                "target_col_name": "lbry_item_loc_call_no_scheme_desc",
                 "target_data_type": "VarChar(50)",
                 "target_attribute": "- Library Item Location Call Number Scheme Description",
                 "transformation_info": {
@@ -1142,7 +1021,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_CALL_NO_TYPE",
+                    "source_col_name": "z30_call_no_type",
                     "source_data_type": "N/A",
                     "source_format": "N/A",
                     "source_mandatory": "N",
@@ -1152,16 +1031,17 @@
             }
         ]
     },
-    "Z30_CALL_NO": {
-        "source_col_name": "Z30_CALL_NO",
+    "z30_call_no": {
+        "source_col_name": "z30_call_no",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_LOC_CALL_NO",
+                "target_col_name": "lbry_item_loc_call_no",
                 "target_data_type": "VarChar(80)",
                 "target_attribute": "- Library Item Location Call Number",
                 "transformation_info": {
@@ -1171,7 +1051,7 @@
                     "specific_transform_function": "call_no",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_CALL_NO",
+                    "source_col_name": "z30_call_no",
                     "source_data_type": "VARCHAR2(80)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1181,16 +1061,17 @@
             }
         ]
     },
-    "Z30_CALL_NO_KEY": {
-        "source_col_name": "Z30_CALL_NO_KEY",
+    "z30_call_no_key": {
+        "source_col_name": "z30_call_no_key",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_LOC_SORT_NRMLZD_CALL_NO",
+                "target_col_name": "lbry_item_loc_sort_nrmlzd_call_no",
                 "target_data_type": "VarChar(80)",
                 "target_attribute": "- Library Item Location Sort Normalized Call Number",
                 "transformation_info": {
@@ -1200,7 +1081,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_CALL_NO_KEY",
+                    "source_col_name": "z30_call_no_key",
                     "source_data_type": "CHAR(80)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1210,16 +1091,64 @@
             }
         ]
     },
-    "Z30_TEMP_LOCATION": {
-        "source_col_name": "Z30_TEMP_LOCATION",
+    "z30_temp_location": {
+        "source_col_name": "z30_temp_location",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": [
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_TEMP_LOCATION",
+                "target_column_name": "LBRY_ITEM_LOC_TEMP_DESIGNATION_FLAG",
+                "column_sub_component": "",
+                "column_data_type": "CHAR(1)",
+                "format": "Y/N",
+                "type": "Missing Value",
+                "instructions": "<null>",
+                "specific_dq_function": "no_missing_values",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "1",
+                "always": "X",
+                "only_if_data_exists": "",
+                "additional_conditions": "",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Missing value",
+                "replacement_value": "-M",
+                "dimension_link_to_record": "N/A"
+            },
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_TEMP_LOCATION",
+                "target_column_name": "LBRY_ITEM_LOC_TEMP_DESIGNATION_FLAG",
+                "column_sub_component": "",
+                "column_data_type": "CHAR(1)",
+                "format": "Y/N",
+                "type": "Valid Value",
+                "instructions": "z30_temp_location in ('Y','N'), change other values to '-I'\n",
+                "specific_dq_function": "dq_z30_temp_location",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "2",
+                "always": "",
+                "only_if_data_exists": "X",
+                "additional_conditions": "No previous Z30_TEMP_LOCATION DQ exceptions",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Invalid value",
+                "replacement_value": "-I",
+                "dimension_link_to_record": "N/A"
+            }
+        ],
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_LOC_TEMP_DESIGNATION_FLAG",
+                "target_col_name": "lbry_item_loc_temp_designation_flag",
                 "target_data_type": "VarChar(2)",
                 "target_attribute": "- Library Item Location Temporary Designation Flag",
                 "transformation_info": {
@@ -1229,77 +1158,74 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_TEMP_LOCATION",
+                    "source_col_name": "z30_temp_location",
                     "source_data_type": "CHAR(1)",
                     "source_format": "",
                     "source_mandatory": "N",
                     "aleph_table": "Z30",
                     "action_detailed_instructions": ""
-                },
-                "data_quality_info": {
-                    "dq_required": true,
-                    "data_quality_checks": [
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_TEMP_LOCATION",
-                            "target_column_name": "LBRY_ITEM_LOC_TEMP_DESIGNATION_FLAG",
-                            "column_sub_component": "",
-                            "column_data_type": "CHAR(1)",
-                            "format": "Y/N",
-                            "type": "Missing Value",
-                            "instructions": "<null>",
-                            "specific_dq_function": "no_missing_values",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "1",
-                            "always": "X",
-                            "only_if_data_exists": "",
-                            "additional_conditions": "",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Missing value",
-                            "replacement_value": "-M",
-                            "dimension_link_to_record": "N/A"
-                        },
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_TEMP_LOCATION",
-                            "target_column_name": "LBRY_ITEM_LOC_TEMP_DESIGNATION_FLAG",
-                            "column_sub_component": "",
-                            "column_data_type": "CHAR(1)",
-                            "format": "Y/N",
-                            "type": "Valid Value",
-                            "instructions": "z30_temp_location in ('Y','N'), change other values to '-I'\n",
-                            "specific_dq_function": "dq_z30_temp_location",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "2",
-                            "always": "",
-                            "only_if_data_exists": "X",
-                            "additional_conditions": "No previous Z30_TEMP_LOCATION DQ exceptions",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Invalid value",
-                            "replacement_value": "-I",
-                            "dimension_link_to_record": "N/A"
-                        }
-                    ]
                 }
             }
         ]
     },
-    "Z30_CALL_NO_2_TYPE": {
-        "source_col_name": "Z30_CALL_NO_2_TYPE",
+    "z30_call_no_2_type": {
+        "source_col_name": "z30_call_no_2_type",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": [
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_CALL_NO_2_TYPE",
+                "target_column_name": "LBRY_ITEM_LOC_ALT_CALL_NO_SCHEME_CD",
+                "column_sub_component": "",
+                "column_data_type": "CHAR(1)",
+                "format": "",
+                "type": "Missing Value",
+                "instructions": "<null>",
+                "specific_dq_function": "",
+                "specific_dq_function_param_1": "",
+                "application": "",
+                "order": "1",
+                "always": "X",
+                "only_if_data_exists": "",
+                "additional_conditions": "",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Missing value",
+                "replacement_value": "-M",
+                "dimension_link_to_record": "N/A"
+            },
+            {
+                "aleph_library": "MAI50",
+                "source_file": "Z30",
+                "source_column_name": "Z30_CALL_NO_2_TYPE",
+                "target_column_name": "LBRY_ITEM_LOC_ALT_CALL_NO_SCHEME_CD",
+                "column_sub_component": "",
+                "column_data_type": "CHAR(1)",
+                "format": "",
+                "type": "Valid value",
+                "instructions": "VALID VALUES LIST:\nCALL-NO-TYPE LOOKUP",
+                "specific_dq_function": "dq_z30_call_no_type__valid_cal_no_type",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "2",
+                "always": "",
+                "only_if_data_exists": "X",
+                "additional_conditions": "No previous DQ exceptions",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Invalid value",
+                "replacement_value": "-I",
+                "dimension_link_to_record": "N/A"
+            }
+        ],
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_LOC_ALT_CALL_NO_SCHEME_CD",
+                "target_col_name": "lbry_item_loc_alt_call_no_scheme_cd",
                 "target_data_type": "VarChar(2)",
                 "target_attribute": "- Library Item Location Alternative Call Number Scheme Code",
                 "transformation_info": {
@@ -1309,67 +1235,16 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_CALL_NO_2_TYPE",
+                    "source_col_name": "z30_call_no_2_type",
                     "source_data_type": "CHAR(1)",
                     "source_format": "",
                     "source_mandatory": "N",
                     "aleph_table": "Z30",
                     "action_detailed_instructions": ""
-                },
-                "data_quality_info": {
-                    "dq_required": true,
-                    "data_quality_checks": [
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_CALL_NO_2_TYPE",
-                            "target_column_name": "LBRY_ITEM_LOC_ALT_CALL_NO_SCHEME_CD",
-                            "column_sub_component": "",
-                            "column_data_type": "CHAR(1)",
-                            "format": "",
-                            "type": "Missing Value",
-                            "instructions": "<null>",
-                            "specific_dq_function": "",
-                            "specific_dq_function_param_1": "",
-                            "application": "",
-                            "order": "1",
-                            "always": "X",
-                            "only_if_data_exists": "",
-                            "additional_conditions": "",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Missing value",
-                            "replacement_value": "-M",
-                            "dimension_link_to_record": "N/A"
-                        },
-                        {
-                            "aleph_library": "MAI50",
-                            "source_file": "Z30",
-                            "source_column_name": "Z30_CALL_NO_2_TYPE",
-                            "target_column_name": "LBRY_ITEM_LOC_ALT_CALL_NO_SCHEME_CD",
-                            "column_sub_component": "",
-                            "column_data_type": "CHAR(1)",
-                            "format": "",
-                            "type": "Valid value",
-                            "instructions": "VALID VALUES LIST:\nCALL-NO-TYPE LOOKUP",
-                            "specific_dq_function": "dq_z30_call_no_type__valid_cal_no_type",
-                            "specific_dq_function_param_1": "",
-                            "application": "H,I",
-                            "order": "2",
-                            "always": "",
-                            "only_if_data_exists": "X",
-                            "additional_conditions": "No previous DQ exceptions",
-                            "suspend_record": "No",
-                            "exception_memorialization": "Create Exception Record",
-                            "exception_message": "Invalid value",
-                            "replacement_value": "-I",
-                            "dimension_link_to_record": "N/A"
-                        }
-                    ]
                 }
             },
             {
-                "target_col_name": "LBRY_ITEM_LOC_ALT_CALL_NO_SCHEME_DESC",
+                "target_col_name": "lbry_item_loc_alt_call_no_scheme_desc",
                 "target_data_type": "VarChar(50)",
                 "target_attribute": "- Library Item Location Alternative Call Number Scheme Description",
                 "transformation_info": {
@@ -1379,7 +1254,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_CALL_NO_2_TYPE",
+                    "source_col_name": "z30_call_no_2_type",
                     "source_data_type": "N/A",
                     "source_format": "N/A",
                     "source_mandatory": "N",
@@ -1389,16 +1264,17 @@
             }
         ]
     },
-    "Z30_CALL_NO_2": {
-        "source_col_name": "Z30_CALL_NO_2",
+    "z30_call_no_2": {
+        "source_col_name": "z30_call_no_2",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_LOC_ALT_CALL_NO",
+                "target_col_name": "lbry_item_loc_alt_call_no",
                 "target_data_type": "VarChar(80)",
                 "target_attribute": "- Library Item Location Alternative Call Number",
                 "transformation_info": {
@@ -1408,7 +1284,7 @@
                     "specific_transform_function": "call_no",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_CALL_NO_2",
+                    "source_col_name": "z30_call_no_2",
                     "source_data_type": "VARCHAR2(80)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1418,16 +1294,17 @@
             }
         ]
     },
-    "Z30_CALL_NO_2_KEY": {
-        "source_col_name": "Z30_CALL_NO_2_KEY",
+    "z30_call_no_2_key": {
+        "source_col_name": "z30_call_no_2_key",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_LOC_ALT_SORT_NRMLZD_CALL_NO",
+                "target_col_name": "lbry_item_loc_alt_sort_nrmlzd_call_no",
                 "target_data_type": "VarChar(80)",
                 "target_attribute": "- Library Item Location Alternative Sort Normalized Call Number",
                 "transformation_info": {
@@ -1437,7 +1314,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_CALL_NO_2_KEY",
+                    "source_col_name": "z30_call_no_2_key",
                     "source_data_type": "CHAR(80)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1447,16 +1324,17 @@
             }
         ]
     },
-    "Z30_ENUMERATION_A": {
-        "source_col_name": "Z30_ENUMERATION_A",
+    "z30_enumeration_a": {
+        "source_col_name": "z30_enumeration_a",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_ENUMERATION_LVL_1_TXT",
+                "target_col_name": "lbry_item_enumeration_lvl_1_txt",
                 "target_data_type": "VarChar(20)",
                 "target_attribute": "- Library Item Enumeration Level 1 Text",
                 "transformation_info": {
@@ -1466,7 +1344,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_ENUMERATION_A",
+                    "source_col_name": "z30_enumeration_a",
                     "source_data_type": "CHAR(20)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1476,16 +1354,17 @@
             }
         ]
     },
-    "Z30_ENUMERATION_B": {
-        "source_col_name": "Z30_ENUMERATION_B",
+    "z30_enumeration_b": {
+        "source_col_name": "z30_enumeration_b",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_ENUMERATION_LVL_2_TXT",
+                "target_col_name": "lbry_item_enumeration_lvl_2_txt",
                 "target_data_type": "VarChar(20)",
                 "target_attribute": "- Library Item Enumeration Level 2 Text",
                 "transformation_info": {
@@ -1495,7 +1374,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_ENUMERATION_B",
+                    "source_col_name": "z30_enumeration_b",
                     "source_data_type": "CHAR(20)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1505,16 +1384,17 @@
             }
         ]
     },
-    "Z30_ENUMERATION_C": {
-        "source_col_name": "Z30_ENUMERATION_C",
+    "z30_enumeration_c": {
+        "source_col_name": "z30_enumeration_c",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_ENUMERATION_LVL_3_TXT",
+                "target_col_name": "lbry_item_enumeration_lvl_3_txt",
                 "target_data_type": "VarChar(20)",
                 "target_attribute": "- Library Item Enumeration Level 3 Text",
                 "transformation_info": {
@@ -1524,7 +1404,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_ENUMERATION_C",
+                    "source_col_name": "z30_enumeration_c",
                     "source_data_type": "CHAR(20)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1534,16 +1414,17 @@
             }
         ]
     },
-    "Z30_ENUMERATION_D": {
-        "source_col_name": "Z30_ENUMERATION_D",
+    "z30_enumeration_d": {
+        "source_col_name": "z30_enumeration_d",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_ENUMERATION_LVL_4_TXT",
+                "target_col_name": "lbry_item_enumeration_lvl_4_txt",
                 "target_data_type": "VarChar(20)",
                 "target_attribute": "- Library Item Enumeration Level 4 Text",
                 "transformation_info": {
@@ -1553,7 +1434,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_ENUMERATION_D",
+                    "source_col_name": "z30_enumeration_d",
                     "source_data_type": "CHAR(20)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1563,16 +1444,17 @@
             }
         ]
     },
-    "Z30_ENUMERATION_E": {
-        "source_col_name": "Z30_ENUMERATION_E",
+    "z30_enumeration_e": {
+        "source_col_name": "z30_enumeration_e",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_ENUMERATION_LVL_5_TXT",
+                "target_col_name": "lbry_item_enumeration_lvl_5_txt",
                 "target_data_type": "VarChar(20)",
                 "target_attribute": "- Library Item Enumeration Level 5 Text",
                 "transformation_info": {
@@ -1582,7 +1464,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_ENUMERATION_E",
+                    "source_col_name": "z30_enumeration_e",
                     "source_data_type": "CHAR(20)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1592,16 +1474,17 @@
             }
         ]
     },
-    "Z30_ENUMERATION_F": {
-        "source_col_name": "Z30_ENUMERATION_F",
+    "z30_enumeration_f": {
+        "source_col_name": "z30_enumeration_f",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_ENUMERATION_LVL_6_TXT",
+                "target_col_name": "lbry_item_enumeration_lvl_6_txt",
                 "target_data_type": "VarChar(20)",
                 "target_attribute": "- Library Item Enumeration Level 6 Text",
                 "transformation_info": {
@@ -1611,7 +1494,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_ENUMERATION_F",
+                    "source_col_name": "z30_enumeration_f",
                     "source_data_type": "CHAR(20)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1621,16 +1504,17 @@
             }
         ]
     },
-    "Z30_ENUMERATION_G": {
-        "source_col_name": "Z30_ENUMERATION_G",
+    "z30_enumeration_g": {
+        "source_col_name": "z30_enumeration_g",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_ALT_ENUMERATION_LVL_1_TXT",
+                "target_col_name": "lbry_item_alt_enumeration_lvl_1_txt",
                 "target_data_type": "VarChar(20)",
                 "target_attribute": "- Library Item Alternate Enumeration Level 1 Text",
                 "transformation_info": {
@@ -1640,7 +1524,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_ENUMERATION_G",
+                    "source_col_name": "z30_enumeration_g",
                     "source_data_type": "CHAR(20)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1650,16 +1534,17 @@
             }
         ]
     },
-    "Z30_ENUMERATION_H": {
-        "source_col_name": "Z30_ENUMERATION_H",
+    "z30_enumeration_h": {
+        "source_col_name": "z30_enumeration_h",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_ALT_ENUMERATION_LVL_2_TXT",
+                "target_col_name": "lbry_item_alt_enumeration_lvl_2_txt",
                 "target_data_type": "VarChar(20)",
                 "target_attribute": "- Library Item Alternate Enumeration Level 2 Text",
                 "transformation_info": {
@@ -1669,7 +1554,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_ENUMERATION_H",
+                    "source_col_name": "z30_enumeration_h",
                     "source_data_type": "CHAR(20)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1679,16 +1564,17 @@
             }
         ]
     },
-    "Z30_CHRONOLOGICAL_I": {
-        "source_col_name": "Z30_CHRONOLOGICAL_I",
+    "z30_chronological_i": {
+        "source_col_name": "z30_chronological_i",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_CHRONOLOGY_LVL_1_TXT",
+                "target_col_name": "lbry_item_chronology_lvl_1_txt",
                 "target_data_type": "VarChar(20)",
                 "target_attribute": "- Library Item Chronology Level 1 Text",
                 "transformation_info": {
@@ -1698,7 +1584,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_CHRONOLOGICAL_I",
+                    "source_col_name": "z30_chronological_i",
                     "source_data_type": "CHAR(20)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1708,16 +1594,17 @@
             }
         ]
     },
-    "Z30_CHRONOLOGICAL_J": {
-        "source_col_name": "Z30_CHRONOLOGICAL_J",
+    "z30_chronological_j": {
+        "source_col_name": "z30_chronological_j",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_CHRONOLOGY_LVL_2_TXT",
+                "target_col_name": "lbry_item_chronology_lvl_2_txt",
                 "target_data_type": "VarChar(20)",
                 "target_attribute": "- Library Item Chronology Level 2 Text",
                 "transformation_info": {
@@ -1727,7 +1614,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_CHRONOLOGICAL_J",
+                    "source_col_name": "z30_chronological_j",
                     "source_data_type": "CHAR(20)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1737,16 +1624,17 @@
             }
         ]
     },
-    "Z30_CHRONOLOGICAL_K": {
-        "source_col_name": "Z30_CHRONOLOGICAL_K",
+    "z30_chronological_k": {
+        "source_col_name": "z30_chronological_k",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_CHRONOLOGY_LVL_3_TXT",
+                "target_col_name": "lbry_item_chronology_lvl_3_txt",
                 "target_data_type": "VarChar(20)",
                 "target_attribute": "- Library Item Chronology Level 3 Text",
                 "transformation_info": {
@@ -1756,7 +1644,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_CHRONOLOGICAL_K",
+                    "source_col_name": "z30_chronological_k",
                     "source_data_type": "CHAR(20)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1766,16 +1654,17 @@
             }
         ]
     },
-    "Z30_CHRONOLOGICAL_L": {
-        "source_col_name": "Z30_CHRONOLOGICAL_L",
+    "z30_chronological_l": {
+        "source_col_name": "z30_chronological_l",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_CHRONOLOGY_LVL_4_TXT",
+                "target_col_name": "lbry_item_chronology_lvl_4_txt",
                 "target_data_type": "VarChar(20)",
                 "target_attribute": "- Library Item Chronology Level 4 Text",
                 "transformation_info": {
@@ -1785,7 +1674,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_CHRONOLOGICAL_L",
+                    "source_col_name": "z30_chronological_l",
                     "source_data_type": "CHAR(20)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1795,16 +1684,17 @@
             }
         ]
     },
-    "Z30_CHRONOLOGICAL_M": {
-        "source_col_name": "Z30_CHRONOLOGICAL_M",
+    "z30_chronological_m": {
+        "source_col_name": "z30_chronological_m",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_ALT_CHRONOLOGY_TXT",
+                "target_col_name": "lbry_item_alt_chronology_txt",
                 "target_data_type": "VarChar(20)",
                 "target_attribute": "- Library Item Alternate Chronology Text",
                 "transformation_info": {
@@ -1814,7 +1704,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_CHRONOLOGICAL_M",
+                    "source_col_name": "z30_chronological_m",
                     "source_data_type": "CHAR(20)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1824,16 +1714,17 @@
             }
         ]
     },
-    "Z30_NOTE_CIRCULATION": {
-        "source_col_name": "Z30_NOTE_CIRCULATION",
+    "z30_note_circulation": {
+        "source_col_name": "z30_note_circulation",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_CRCLTN_DISPLAY_NOTE",
+                "target_col_name": "lbry_item_crcltn_display_note",
                 "target_data_type": "VarChar(200)",
                 "target_attribute": "- Library Item Circulation Display Note",
                 "transformation_info": {
@@ -1843,7 +1734,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_NOTE_CIRCULATION",
+                    "source_col_name": "z30_note_circulation",
                     "source_data_type": "VARCHAR2(200)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1853,16 +1744,17 @@
             }
         ]
     },
-    "Z30_NOTE_OPAC": {
-        "source_col_name": "Z30_NOTE_OPAC",
+    "z30_note_opac": {
+        "source_col_name": "z30_note_opac",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_OPAC_DISPLAY_TXT",
+                "target_col_name": "lbry_item_opac_display_txt",
                 "target_data_type": "VarChar(200)",
                 "target_attribute": "- Library Item OPAC Display Text",
                 "transformation_info": {
@@ -1872,7 +1764,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_NOTE_OPAC",
+                    "source_col_name": "z30_note_opac",
                     "source_data_type": "VARCHAR2(200)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1882,16 +1774,17 @@
             }
         ]
     },
-    "Z30_NOTE_INTERNAL": {
-        "source_col_name": "Z30_NOTE_INTERNAL",
+    "z30_note_internal": {
+        "source_col_name": "z30_note_internal",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "LBRY_ITEM_STAFF_ONLY_DISPLAY_NOTE",
+                "target_col_name": "lbry_item_staff_only_display_note",
                 "target_data_type": "VarChar(200)",
                 "target_attribute": "- Library Item Staff-Only Display Note",
                 "transformation_info": {
@@ -1901,7 +1794,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_NOTE_INTERNAL",
+                    "source_col_name": "z30_note_internal",
                     "source_data_type": "VARCHAR2(200)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1911,13 +1804,14 @@
             }
         ]
     },
-    "Z30_MATERIAL": {
-        "source_col_name": "Z30_MATERIAL",
+    "z30_material": {
+        "source_col_name": "z30_material",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
                 "target_col_name": "lbry_item_actual_matrl_form_cd",
@@ -1930,7 +1824,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_MATERIAL",
+                    "source_col_name": "z30_material",
                     "source_data_type": "CHAR(5)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1940,13 +1834,14 @@
             }
         ]
     },
-    "Z30_ITEM_STATUS": {
-        "source_col_name": "Z30_ITEM_STATUS",
+    "z30_item_status": {
+        "source_col_name": "z30_item_status",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
                 "target_col_name": "lbry_item_actual_status_cd",
@@ -1959,7 +1854,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_ITEM_STATUS",
+                    "source_col_name": "z30_item_status",
                     "source_data_type": "CHAR(2)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -1969,13 +1864,14 @@
             }
         ]
     },
-    "Z30_ITEM_PROCESS_STATUS": {
-        "source_col_name": "Z30_ITEM_PROCESS_STATUS",
+    "z30_item_process_status": {
+        "source_col_name": "z30_item_process_status",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
                 "target_col_name": "lbry_item_actual_prcs_status_cd",
@@ -1988,280 +1884,12 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z30_ITEM_PROCESS_STATUS",
+                    "source_col_name": "z30_item_process_status",
                     "source_data_type": "CHAR(2)",
                     "source_format": "",
                     "source_mandatory": "N",
                     "aleph_table": "Z30",
                     "action_detailed_instructions": ""
-                }
-            }
-        ]
-    },
-    "Z35-EVENT-DAY": {
-        "source_col_name": "Z35-EVENT-DAY",
-        "preprocessing_info": {
-            "pre_or_post_dq": "N/A",
-            "pre_action": "N/A",
-            "pre_detailed_instructions": "N/A"
-        },
-        "transformation_steps": [
-            {
-                "target_col_name": null,
-                "target_data_type": null,
-                "target_attribute": "Library Item Most Recent Loan Event Date",
-                "transformation_info": {
-                    "chg_proc_type": "1",
-                    "transform_action": "Move",
-                    "action_specific": "Conditional",
-                    "specific_transform_function": "",
-                    "specific_transform_function_param1": "",
-                    "specific_transform_function_param2": "",
-                    "source_col_name": "Z35-EVENT-DAY",
-                    "source_data_type": "NUMBER(8,0)",
-                    "source_format": "YYYYMMDD",
-                    "source_mandatory": "N",
-                    "aleph_table": "Z35",
-                    "action_detailed_instructions": "FOR Insert trigger in Z35:\nIF Z35-EVENT-TYPE = 50|52|54|56|91\n     identify relevant item {\n       JOIN \n         Z35_REC_KEY = SUBSTR(Z30_REC_KEY,1,9) AND\n         Z35_ITEM_SEQUENCE = SUBSTR(Z30_REC_KEY,10,15)\n         }\n     update value\nELSE \n     do nothing"
-                }
-            },
-            {
-                "target_col_name": null,
-                "target_data_type": null,
-                "target_attribute": "Library Item Most Recent Return Event Date",
-                "transformation_info": {
-                    "chg_proc_type": "1",
-                    "transform_action": "Move",
-                    "action_specific": "Conditional",
-                    "specific_transform_function": "",
-                    "specific_transform_function_param1": "",
-                    "specific_transform_function_param2": "",
-                    "source_col_name": "Z35-EVENT-DAY",
-                    "source_data_type": "NUMBER(8,0)",
-                    "source_format": "YYYYMMDD",
-                    "source_mandatory": "N",
-                    "aleph_table": "Z35",
-                    "action_detailed_instructions": "FOR Insert trigger in Z35:\nIF Z35-EVENT-TYPE = 58|61|82\n     identify relevant item {\n       JOIN \n         Z35_REC_KEY = SUBSTR(Z30_REC_KEY,1,9) AND\n         Z35_ITEM_SEQUENCE = SUBSTR(Z30_REC_KEY,10,15)\n         }\n     update value\nELSE \n     do nothing"
-                }
-            },
-            {
-                "target_col_name": null,
-                "target_data_type": null,
-                "target_attribute": "Library Item Most Recent Renew Event Date",
-                "transformation_info": {
-                    "chg_proc_type": "1",
-                    "transform_action": "Move",
-                    "action_specific": "Conditional",
-                    "specific_transform_function": "",
-                    "specific_transform_function_param1": "",
-                    "specific_transform_function_param2": "",
-                    "source_col_name": "Z35-EVENT-DAY",
-                    "source_data_type": "NUMBER(8,0)",
-                    "source_format": "YYYYMMDD",
-                    "source_mandatory": "N",
-                    "aleph_table": "Z35",
-                    "action_detailed_instructions": "FOR Insert trigger in Z35:\nIF Z35-EVENT-TYPE = 62|63|64\n     identify relevant item {\n       JOIN \n         Z35_REC_KEY = SUBSTR(Z30_REC_KEY,1,9) AND\n         Z35_ITEM_SEQUENCE = SUBSTR(Z30_REC_KEY,10,15)\n         }\n     update value\nELSE \n     do nothing"
-                }
-            }
-        ]
-    },
-    "Z35-EVENT-HOUR": {
-        "source_col_name": "Z35-EVENT-HOUR",
-        "preprocessing_info": {
-            "pre_or_post_dq": "POST",
-            "pre_action": "Conversion",
-            "pre_detailed_instructions": "To Postgres Time Datatype"
-        },
-        "transformation_steps": [
-            {
-                "target_col_name": null,
-                "target_data_type": null,
-                "target_attribute": "Library Item Most Recent Loan Event Time",
-                "transformation_info": {
-                    "chg_proc_type": "1",
-                    "transform_action": "Move",
-                    "action_specific": "Conditional",
-                    "specific_transform_function": "",
-                    "specific_transform_function_param1": "",
-                    "specific_transform_function_param2": "",
-                    "source_col_name": "Z35-EVENT-HOUR",
-                    "source_data_type": "NUMBER(4,0)",
-                    "source_format": "HHMM",
-                    "source_mandatory": "N",
-                    "aleph_table": "Z35",
-                    "action_detailed_instructions": "FOR Insert trigger in Z35:\nIF Z35-EVENT-TYPE = 50|52|54|56|91\n     identify relevant item {\n       JOIN \n         Z35_REC_KEY = SUBSTR(Z30_REC_KEY,1,9) AND\n         Z35_ITEM_SEQUENCE = SUBSTR(Z30_REC_KEY,10,15)\n         }\n     update value\nELSE \n     do nothing"
-                }
-            },
-            {
-                "target_col_name": null,
-                "target_data_type": null,
-                "target_attribute": "Library Item Most Recent Return Event Time",
-                "transformation_info": {
-                    "chg_proc_type": "1",
-                    "transform_action": "Move",
-                    "action_specific": "Conditional",
-                    "specific_transform_function": "",
-                    "specific_transform_function_param1": "",
-                    "specific_transform_function_param2": "",
-                    "source_col_name": "Z35-EVENT-HOUR",
-                    "source_data_type": "NUMBER(4,0)",
-                    "source_format": "HHMM",
-                    "source_mandatory": "N",
-                    "aleph_table": "Z35",
-                    "action_detailed_instructions": "FOR Insert trigger in Z35:\nIF Z35-EVENT-TYPE = 58|61|82\n     identify relevant item {\n       JOIN \n         Z35_REC_KEY = SUBSTR(Z30_REC_KEY,1,9) AND\n         Z35_ITEM_SEQUENCE = SUBSTR(Z30_REC_KEY,10,15)\n         }\n     update value\nELSE \n     do nothing"
-                }
-            },
-            {
-                "target_col_name": null,
-                "target_data_type": null,
-                "target_attribute": "Library Item Most Recent Renew Event Time",
-                "transformation_info": {
-                    "chg_proc_type": "1",
-                    "transform_action": "Move",
-                    "action_specific": "Conditional",
-                    "specific_transform_function": "",
-                    "specific_transform_function_param1": "",
-                    "specific_transform_function_param2": "",
-                    "source_col_name": "Z35-EVENT-HOUR",
-                    "source_data_type": "NUMBER(4,0)",
-                    "source_format": "HHMM",
-                    "source_mandatory": "N",
-                    "aleph_table": "Z35",
-                    "action_detailed_instructions": "FOR Insert trigger in Z35:\nIF Z35-EVENT-TYPE = 62|63|64\n     identify relevant item {\n       JOIN \n         Z35_REC_KEY = SUBSTR(Z30_REC_KEY,1,9) AND\n         Z35_ITEM_SEQUENCE = SUBSTR(Z30_REC_KEY,10,15)\n         }\n     update value\nELSE \n     do nothing"
-                }
-            }
-        ]
-    },
-    "Z35-EVENT-TYPE": {
-        "source_col_name": "Z35-EVENT-TYPE",
-        "preprocessing_info": {
-            "pre_or_post_dq": "N/A",
-            "pre_action": "N/A",
-            "pre_detailed_instructions": "N/A"
-        },
-        "transformation_steps": [
-            {
-                "target_col_name": null,
-                "target_data_type": null,
-                "target_attribute": "Library Item Most Recent Loan Event Type Code",
-                "transformation_info": {
-                    "chg_proc_type": "1",
-                    "transform_action": "Move",
-                    "action_specific": "Conditional",
-                    "specific_transform_function": "",
-                    "specific_transform_function_param1": "",
-                    "specific_transform_function_param2": "",
-                    "source_col_name": "Z35-EVENT-TYPE",
-                    "source_data_type": "CHAR(2 BYTE)",
-                    "source_format": "N/A",
-                    "source_mandatory": "N",
-                    "aleph_table": "Z35",
-                    "action_detailed_instructions": "FOR Insert trigger in Z35:\nIF Z35-EVENT-TYPE = 50|52|54|56|91\n     identify relevant item {\n       JOIN \n         Z35_REC_KEY = SUBSTR(Z30_REC_KEY,1,9) AND\n         Z35_ITEM_SEQUENCE = SUBSTR(Z30_REC_KEY,10,15)\n         }\n     update value\nELSE \n     do nothing"
-                }
-            },
-            {
-                "target_col_name": null,
-                "target_data_type": null,
-                "target_attribute": "Library Item Most Recent Return Event Type Code",
-                "transformation_info": {
-                    "chg_proc_type": "1",
-                    "transform_action": "Move",
-                    "action_specific": "Conditional",
-                    "specific_transform_function": "",
-                    "specific_transform_function_param1": "",
-                    "specific_transform_function_param2": "",
-                    "source_col_name": "Z35-EVENT-TYPE",
-                    "source_data_type": "CHAR(2 BYTE)",
-                    "source_format": "N/A",
-                    "source_mandatory": "N",
-                    "aleph_table": "Z35",
-                    "action_detailed_instructions": "FOR Insert trigger in Z35:\nIF Z35-EVENT-TYPE = 58|61|82\n     identify relevant item {\n       JOIN \n         Z35_REC_KEY = SUBSTR(Z30_REC_KEY,1,9) AND\n         Z35_ITEM_SEQUENCE = SUBSTR(Z30_REC_KEY,10,15)\n         }\n     update value\nELSE \n     do nothing"
-                }
-            },
-            {
-                "target_col_name": null,
-                "target_data_type": null,
-                "target_attribute": "Library Item Most Recent Renew Event Type Code",
-                "transformation_info": {
-                    "chg_proc_type": "1",
-                    "transform_action": "Move",
-                    "action_specific": "Conditional",
-                    "specific_transform_function": "",
-                    "specific_transform_function_param1": "",
-                    "specific_transform_function_param2": "",
-                    "source_col_name": "Z35-EVENT-TYPE",
-                    "source_data_type": "CHAR(2 BYTE)",
-                    "source_format": "N/A",
-                    "source_mandatory": "N",
-                    "aleph_table": "Z35",
-                    "action_detailed_instructions": "FOR Insert trigger in Z35:\nIF Z35-EVENT-TYPE = 62|63|64\n     identify relevant item {\n       JOIN \n         Z35_REC_KEY = SUBSTR(Z30_REC_KEY,1,9) AND\n         Z35_ITEM_SEQUENCE = SUBSTR(Z30_REC_KEY,10,15)\n         }\n     update value\nELSE \n     do nothing"
-                }
-            }
-        ]
-    },
-    "Z35-IP-ADDRESS": {
-        "source_col_name": "Z35-IP-ADDRESS",
-        "preprocessing_info": {
-            "pre_or_post_dq": "N/A",
-            "pre_action": "Trim",
-            "pre_detailed_instructions": ""
-        },
-        "transformation_steps": [
-            {
-                "target_col_name": null,
-                "target_data_type": null,
-                "target_attribute": "Library Item Most Recent Loan Event IP Address",
-                "transformation_info": {
-                    "chg_proc_type": "1",
-                    "transform_action": "Move",
-                    "action_specific": "Conditional",
-                    "specific_transform_function": "",
-                    "specific_transform_function_param1": "",
-                    "specific_transform_function_param2": "",
-                    "source_col_name": "Z35-IP-ADDRESS",
-                    "source_data_type": "VARCHAR2(20 BYTE)",
-                    "source_format": "N/A",
-                    "source_mandatory": "N",
-                    "aleph_table": "Z35",
-                    "action_detailed_instructions": "FOR Insert trigger in Z35:\nIF Z35-EVENT-TYPE = 50|52|54|56|91\n     identify relevant item {\n       JOIN \n         Z35_REC_KEY = SUBSTR(Z30_REC_KEY,1,9) AND\n         Z35_ITEM_SEQUENCE = SUBSTR(Z30_REC_KEY,10,15)\n         }\n     update value\nELSE \n     do nothing"
-                }
-            },
-            {
-                "target_col_name": null,
-                "target_data_type": null,
-                "target_attribute": "Library Item Most Recent Return Event IP Address",
-                "transformation_info": {
-                    "chg_proc_type": "1",
-                    "transform_action": "Move",
-                    "action_specific": "Conditional",
-                    "specific_transform_function": "",
-                    "specific_transform_function_param1": "",
-                    "specific_transform_function_param2": "",
-                    "source_col_name": "Z35-IP-ADDRESS",
-                    "source_data_type": "VARCHAR2(20 BYTE)",
-                    "source_format": "N/A",
-                    "source_mandatory": "N",
-                    "aleph_table": "Z35",
-                    "action_detailed_instructions": "FOR Insert trigger in Z35:\nIF Z35-EVENT-TYPE = 58|61|82\n     identify relevant item {\n       JOIN \n         Z35_REC_KEY = SUBSTR(Z30_REC_KEY,1,9) AND\n         Z35_ITEM_SEQUENCE = SUBSTR(Z30_REC_KEY,10,15)\n         }\n     update value\nELSE \n     do nothing"
-                }
-            },
-            {
-                "target_col_name": null,
-                "target_data_type": null,
-                "target_attribute": "Library Item Most Recent Renew Event IP Address",
-                "transformation_info": {
-                    "chg_proc_type": "1",
-                    "transform_action": "Move",
-                    "action_specific": "Conditional",
-                    "specific_transform_function": "",
-                    "specific_transform_function_param1": "",
-                    "specific_transform_function_param2": "",
-                    "source_col_name": "Z35-IP-ADDRESS",
-                    "source_data_type": "VARCHAR2(20 BYTE)",
-                    "source_format": "N/A",
-                    "source_mandatory": "N",
-                    "aleph_table": "Z35",
-                    "action_detailed_instructions": "FOR Insert trigger in Z35:\nIF Z35-EVENT-TYPE = 62|63|64\n     identify relevant item {\n       JOIN \n         Z35_REC_KEY = SUBSTR(Z30_REC_KEY,1,9) AND\n         Z35_ITEM_SEQUENCE = SUBSTR(Z30_REC_KEY,10,15)\n         }\n     update value\nELSE \n     do nothing"
                 }
             }
         ]

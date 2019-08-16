@@ -1,14 +1,15 @@
 {
-    "N/A": {
-        "source_col_name": "N/A",
+    "n/a": {
+        "source_col_name": "n/a",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "BIB_REC_DIM_KEY",
+                "target_col_name": "bib_rec_dim_key",
                 "target_data_type": "Bigint",
                 "target_attribute": "- Bibliographic Record Dimension Key",
                 "transformation_info": {
@@ -18,7 +19,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "N/A",
+                    "source_col_name": "n/a",
                     "source_data_type": "N/A",
                     "source_format": "N/A",
                     "source_mandatory": "N",
@@ -27,7 +28,7 @@
                 }
             },
             {
-                "target_col_name": "BIB_REC_ALEPH_LBRY_CD",
+                "target_col_name": "bib_rec_aleph_lbry_cd",
                 "target_data_type": "VarChar(5)",
                 "target_attribute": "- Bibliographic Record Aleph Library Code",
                 "transformation_info": {
@@ -37,7 +38,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "N/A",
+                    "source_col_name": "n/a",
                     "source_data_type": "N/A",
                     "source_format": "N/A",
                     "source_mandatory": "N",
@@ -47,16 +48,64 @@
             }
         ]
     },
-    "Z00_DOC_NUMBER": {
-        "source_col_name": "Z00_DOC_NUMBER",
+    "z00_doc_number": {
+        "source_col_name": "z00_doc_number",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": [
+            {
+                "aleph_library": "MAI01,MAI39",
+                "source_file": "Z00",
+                "source_column_name": "Z00_DOC_NUMBER",
+                "target_column_name": "",
+                "column_sub_component": "",
+                "column_data_type": "CHAR(9)",
+                "format": "",
+                "type": "Missing Value",
+                "instructions": "1) <null> 2) All spaces",
+                "specific_dq_function": "no_missing_values",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "1",
+                "always": "x",
+                "only_if_data_exists": "",
+                "additional_conditions": "",
+                "suspend_record": "Yes",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Missing Value: Z00_DOC_NUMBER",
+                "replacement_value": "N/A",
+                "dimension_link_to_record": "N/A"
+            },
+            {
+                "aleph_library": "MAI01,MAI39",
+                "source_file": "Z00",
+                "source_column_name": "Z00_DOC_NUMBER",
+                "target_column_name": "",
+                "column_sub_component": "",
+                "column_data_type": "CHAR(9)",
+                "format": "",
+                "type": "Length Check",
+                "instructions": "Must equal 9",
+                "specific_dq_function": "is_valid_length",
+                "specific_dq_function_param_1": "9",
+                "application": "H,I",
+                "order": "2",
+                "always": "",
+                "only_if_data_exists": "x",
+                "additional_conditions": "",
+                "suspend_record": "Yes",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Invalid Value: Z00_DOC_NUMBER",
+                "replacement_value": "N/A",
+                "dimension_link_to_record": "N/A"
+            }
+        ],
         "transformation_steps": [
             {
-                "target_col_name": "BIB_REC_SOURCE_SYSTEM_ID",
+                "target_col_name": "bib_rec_source_system_id",
                 "target_data_type": "Character(9)",
                 "target_attribute": "- Bibliographic Record Identifier",
                 "transformation_info": {
@@ -66,30 +115,27 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z00_DOC_NUMBER",
+                    "source_col_name": "z00_doc_number",
                     "source_data_type": "CHAR(9)",
                     "source_format": "",
                     "source_mandatory": null,
                     "aleph_table": "Z00",
                     "action_detailed_instructions": ""
-                },
-                "data_quality_info": {
-                    "dq_required": true,
-                    "data_quality_checks": []
                 }
             }
         ]
     },
-    "Z00_NO_LINES ": {
-        "source_col_name": "Z00_NO_LINES ",
+    "z00_no_lines ": {
+        "source_col_name": "z00_no_lines ",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "BIB_REC_MARC_REC_FIELD_CNT",
+                "target_col_name": "bib_rec_marc_rec_field_cnt",
                 "target_data_type": "SmallInt",
                 "target_attribute": "- Bibliographic Record MARC Record Field Count",
                 "transformation_info": {
@@ -99,7 +145,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z00_NO_LINES ",
+                    "source_col_name": "z00_no_lines ",
                     "source_data_type": "NUMBER(4)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -109,16 +155,17 @@
             }
         ]
     },
-    "Z00_DATA_LEN": {
-        "source_col_name": "Z00_DATA_LEN",
+    "z00_data_len": {
+        "source_col_name": "z00_data_len",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "BIB_REC_MARC_REC_DATA_CNTNT_LEN_CNT",
+                "target_col_name": "bib_rec_marc_rec_data_cntnt_len_cnt",
                 "target_data_type": "SmallInt",
                 "target_attribute": "- Bibliographic Record MARC Record Data Content Length Count",
                 "transformation_info": {
@@ -128,7 +175,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z00_DATA_LEN",
+                    "source_col_name": "z00_data_len",
                     "source_data_type": "NUMBER(6)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -138,16 +185,17 @@
             }
         ]
     },
-    "Z00_DATA": {
-        "source_col_name": "Z00_DATA",
+    "z00_data": {
+        "source_col_name": "z00_data",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "BIB_REC_MARC_REC_DATA_CNTNT_TXT",
+                "target_col_name": "bib_rec_marc_rec_data_cntnt_txt",
                 "target_data_type": "VarChar(45000)",
                 "target_attribute": "- Bibliographic Record MARC Record Data Content Text",
                 "transformation_info": {
@@ -157,7 +205,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z00_DATA",
+                    "source_col_name": "z00_data",
                     "source_data_type": "LONG",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -167,16 +215,17 @@
             }
         ]
     },
-    "Z13_YEAR": {
-        "source_col_name": "Z13_YEAR",
+    "z13_year": {
+        "source_col_name": "z13_year",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "BIB_REC_PUBLICATION_YR_NO",
+                "target_col_name": "bib_rec_publication_yr_no",
                 "target_data_type": "SmallInt",
                 "target_attribute": "- Bibliographic Record Publication Year Number",
                 "transformation_info": {
@@ -186,7 +235,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13_YEAR",
+                    "source_col_name": "z13_year",
                     "source_data_type": "NUMBER(4)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -196,16 +245,17 @@
             }
         ]
     },
-    "Z13_TITLE": {
-        "source_col_name": "Z13_TITLE",
+    "z13_title": {
+        "source_col_name": "z13_title",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "BIB_REC_TITLE",
+                "target_col_name": "bib_rec_title",
                 "target_data_type": "VarChar(100)",
                 "target_attribute": "- Bibliographic Record Title",
                 "transformation_info": {
@@ -215,7 +265,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13_TITLE",
+                    "source_col_name": "z13_title",
                     "source_data_type": "VARCHAR2(100)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -225,16 +275,17 @@
             }
         ]
     },
-    "Z13_AUTHOR": {
-        "source_col_name": "Z13_AUTHOR",
+    "z13_author": {
+        "source_col_name": "z13_author",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "BIB_REC_AUTHOR_NAME",
+                "target_col_name": "bib_rec_author_name",
                 "target_data_type": "VarChar(100)",
                 "target_attribute": "- Bibliographic Record Author Name",
                 "transformation_info": {
@@ -244,7 +295,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13_AUTHOR",
+                    "source_col_name": "z13_author",
                     "source_data_type": "VARCHAR2(100)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -254,16 +305,17 @@
             }
         ]
     },
-    "Z13_IMPRINT": {
-        "source_col_name": "Z13_IMPRINT",
+    "z13_imprint": {
+        "source_col_name": "z13_imprint",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "BIB_REC_IMPRINT_TXT",
+                "target_col_name": "bib_rec_imprint_txt",
                 "target_data_type": "VarChar(100)",
                 "target_attribute": "- Bibliographic Record Imprint Text",
                 "transformation_info": {
@@ -273,7 +325,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13_IMPRINT",
+                    "source_col_name": "z13_imprint",
                     "source_data_type": "VARCHAR2(100)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -283,16 +335,17 @@
             }
         ]
     },
-    "Z13_ISBN_ISSN_CODE": {
-        "source_col_name": "Z13_ISBN_ISSN_CODE",
+    "z13_isbn_issn_code": {
+        "source_col_name": "z13_isbn_issn_code",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "BIB_REC_ISBN_ISSN_SOURCE_CD",
+                "target_col_name": "bib_rec_isbn_issn_source_cd",
                 "target_data_type": "VarChar(5)",
                 "target_attribute": "- Bibliographic Record ISBN ISSN Source Code",
                 "transformation_info": {
@@ -302,7 +355,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13_ISBN_ISSN_CODE",
+                    "source_col_name": "z13_isbn_issn_code",
                     "source_data_type": "CHAR(5)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -312,16 +365,17 @@
             }
         ]
     },
-    "Z13_ISBN_ISSN": {
-        "source_col_name": "Z13_ISBN_ISSN",
+    "z13_isbn_issn": {
+        "source_col_name": "z13_isbn_issn",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "BIB_REC_ISBN_TXT",
+                "target_col_name": "bib_rec_isbn_txt",
                 "target_data_type": "VarChar(100)",
                 "target_attribute": "- Bibliographic Record ISBN Text",
                 "transformation_info": {
@@ -331,7 +385,7 @@
                     "specific_transform_function": "isbn_code_020",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13_ISBN_ISSN",
+                    "source_col_name": "z13_isbn_issn",
                     "source_data_type": "VARCHAR2(100)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -340,7 +394,7 @@
                 }
             },
             {
-                "target_col_name": "BIB_REC_ALL_ASSOCIATED_ISSNs_TXT",
+                "target_col_name": "bib_rec_all_associated_issns_txt",
                 "target_data_type": "VarChar(100)",
                 "target_attribute": "- Bibliographic Record All Associated ISSNs Text",
                 "transformation_info": {
@@ -350,7 +404,7 @@
                     "specific_transform_function": "issn_code_022",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13_ISBN_ISSN",
+                    "source_col_name": "z13_isbn_issn",
                     "source_data_type": "VARCHAR2(100)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -360,16 +414,41 @@
             }
         ]
     },
-    "Z13U_USER_DEFINED_2": {
-        "source_col_name": "Z13U_USER_DEFINED_2",
+    "z13u_user_defined_2": {
+        "source_col_name": "z13u_user_defined_2",
         "preprocessing_info": {
             "pre_or_post_dq": "Pre",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": [
+            {
+                "aleph_library": "MAI01, MAI39",
+                "source_file": "Z13U",
+                "source_column_name": "Z13U_USER_DEFINED_2",
+                "target_column_name": "",
+                "column_sub_component": "",
+                "column_data_type": "VARCHAR2(500)",
+                "format": "",
+                "type": "Format Check",
+                "instructions": "\"ocm\" followed by 8 digits or\n\"ocn\" followed by 9 digits or \n\"on\" followed by 10 digits or\nempty field",
+                "specific_dq_function": "dq_z13u_user_defined_2",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "1",
+                "always": "x",
+                "only_if_data_exists": "",
+                "additional_conditions": "",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Invalid value: Z13_USER_DEFINED_2",
+                "replacement_value": "\"-I\"",
+                "dimension_link_to_record": "N/A"
+            }
+        ],
         "transformation_steps": [
             {
-                "target_col_name": "BIB_REC_OCLC_NO",
+                "target_col_name": "bib_rec_oclc_no",
                 "target_data_type": "VarChar(50)",
                 "target_attribute": "- Bibliographic Record OCLC Number",
                 "transformation_info": {
@@ -379,30 +458,27 @@
                     "specific_transform_function": "remove_ocm_ocn_on",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13U_USER_DEFINED_2",
+                    "source_col_name": "z13u_user_defined_2",
                     "source_data_type": "VARCHAR2(500)",
                     "source_format": "",
                     "source_mandatory": "N",
                     "aleph_table": "Z13U",
                     "action_detailed_instructions": "Remove \"ocm\", \"ocn\", or \"on\" from beginning of string"
-                },
-                "data_quality_info": {
-                    "dq_required": true,
-                    "data_quality_checks": []
                 }
             }
         ]
     },
-    "Z13U_USER_DEFINED_3": {
-        "source_col_name": "Z13U_USER_DEFINED_3",
+    "z13u_user_defined_3": {
+        "source_col_name": "z13u_user_defined_3",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "",
             "pre_detailed_instructions": ""
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "BIB_REC_MARC_REC_LEADER_FIELD_TXT",
+                "target_col_name": "bib_rec_marc_rec_leader_field_txt",
                 "target_data_type": "VarChar(50)",
                 "target_attribute": "- Bibliographic Record MARC Record Leader Field Text",
                 "transformation_info": {
@@ -412,7 +488,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13U_USER_DEFINED_3",
+                    "source_col_name": "z13u_user_defined_3",
                     "source_data_type": "VARCHAR2(500)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -421,7 +497,7 @@
                 }
             },
             {
-                "target_col_name": "BIB_REC_TYPE_CD",
+                "target_col_name": "bib_rec_type_cd",
                 "target_data_type": "Character(1)",
                 "target_attribute": "- Bibliographic Record Type Code",
                 "transformation_info": {
@@ -431,7 +507,7 @@
                     "specific_transform_function": "substring",
                     "specific_transform_function_param1": "6",
                     "specific_transform_function_param2": "7",
-                    "source_col_name": "Z13U_USER_DEFINED_3",
+                    "source_col_name": "z13u_user_defined_3",
                     "source_data_type": "VARCHAR2(500)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -440,7 +516,7 @@
                 }
             },
             {
-                "target_col_name": "BIB_REC_TYPE_DESC",
+                "target_col_name": "bib_rec_type_desc",
                 "target_data_type": "VarChar(100)",
                 "target_attribute": "- Bibliographic Record Type Description",
                 "transformation_info": {
@@ -450,7 +526,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13U_USER_DEFINED_3",
+                    "source_col_name": "z13u_user_defined_3",
                     "source_data_type": "N/A",
                     "source_format": "N/A",
                     "source_mandatory": "N",
@@ -459,7 +535,7 @@
                 }
             },
             {
-                "target_col_name": "BIB_REC_BIB_LVL_CD",
+                "target_col_name": "bib_rec_bib_lvl_cd",
                 "target_data_type": "Character(1)",
                 "target_attribute": "- Bibliographic Record Bibliographic Level Code",
                 "transformation_info": {
@@ -469,7 +545,7 @@
                     "specific_transform_function": "substring",
                     "specific_transform_function_param1": "6",
                     "specific_transform_function_param2": "7",
-                    "source_col_name": "Z13U_USER_DEFINED_3",
+                    "source_col_name": "z13u_user_defined_3",
                     "source_data_type": "VARCHAR2(500)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -478,7 +554,7 @@
                 }
             },
             {
-                "target_col_name": "BIB_REC_BIB_LVL_DESC",
+                "target_col_name": "bib_rec_bib_lvl_desc",
                 "target_data_type": "VarChar(100)",
                 "target_attribute": "- Bibliographic Record Bibliographic Level Description",
                 "transformation_info": {
@@ -488,7 +564,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13U_USER_DEFINED_3",
+                    "source_col_name": "z13u_user_defined_3",
                     "source_data_type": "N/A",
                     "source_format": "N/A",
                     "source_mandatory": "N",
@@ -497,7 +573,7 @@
                 }
             },
             {
-                "target_col_name": "BIB_REC_ENCODING_LVL_CD",
+                "target_col_name": "bib_rec_encoding_lvl_cd",
                 "target_data_type": "Character(1)",
                 "target_attribute": "- Bibliographic Record Encoding Level Code",
                 "transformation_info": {
@@ -507,7 +583,7 @@
                     "specific_transform_function": "substring",
                     "specific_transform_function_param1": "17",
                     "specific_transform_function_param2": "18",
-                    "source_col_name": "Z13U_USER_DEFINED_3",
+                    "source_col_name": "z13u_user_defined_3",
                     "source_data_type": "VARCHAR2(500)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -516,7 +592,7 @@
                 }
             },
             {
-                "target_col_name": "BIB_REC_ENCODING_LVL_DESC",
+                "target_col_name": "bib_rec_encoding_lvl_desc",
                 "target_data_type": "VarChar(150)",
                 "target_attribute": "- Bibliographic Record Encoding Level Description",
                 "transformation_info": {
@@ -526,7 +602,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13U_USER_DEFINED_3",
+                    "source_col_name": "z13u_user_defined_3",
                     "source_data_type": "N/A",
                     "source_format": "N/A",
                     "source_mandatory": "N",
@@ -536,16 +612,17 @@
             }
         ]
     },
-    "Z13U_USER_DEFINED_4": {
-        "source_col_name": "Z13U_USER_DEFINED_4",
+    "z13u_user_defined_4": {
+        "source_col_name": "z13u_user_defined_4",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "BIB_REC_MARC_REC_008_FIELD_TXT",
+                "target_col_name": "bib_rec_marc_rec_008_field_txt",
                 "target_data_type": "VarChar(100)",
                 "target_attribute": "- Bibliographic Record MARC Record 008 Field Text",
                 "transformation_info": {
@@ -555,7 +632,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13U_USER_DEFINED_4",
+                    "source_col_name": "z13u_user_defined_4",
                     "source_data_type": "VARCHAR2(500)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -564,7 +641,7 @@
                 }
             },
             {
-                "target_col_name": "BIB_REC_LANGUAGE_CD",
+                "target_col_name": "bib_rec_language_cd",
                 "target_data_type": "Character(3)",
                 "target_attribute": "- Bibliographic Record Language Code",
                 "transformation_info": {
@@ -574,7 +651,7 @@
                     "specific_transform_function": "substring",
                     "specific_transform_function_param1": "35",
                     "specific_transform_function_param2": "38",
-                    "source_col_name": "Z13U_USER_DEFINED_4",
+                    "source_col_name": "z13u_user_defined_4",
                     "source_data_type": "VARCHAR2(500)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -584,16 +661,17 @@
             }
         ]
     },
-    "Z13U_USER_DEFINED_5": {
-        "source_col_name": "Z13U_USER_DEFINED_5",
+    "z13u_user_defined_5": {
+        "source_col_name": "z13u_user_defined_5",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "BIB_REC_ISSN",
+                "target_col_name": "bib_rec_issn",
                 "target_data_type": "VarChar(50)",
                 "target_attribute": "- Bibliographic Record ISSN",
                 "transformation_info": {
@@ -603,7 +681,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13U_USER_DEFINED_5",
+                    "source_col_name": "z13u_user_defined_5",
                     "source_data_type": "VARCHAR2(500)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -613,16 +691,17 @@
             }
         ]
     },
-    "Z13U_USER_DEFINED_6": {
-        "source_col_name": "Z13U_USER_DEFINED_6",
+    "z13u_user_defined_6": {
+        "source_col_name": "z13u_user_defined_6",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "Trim",
             "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
+        "dataquality_info": {},
         "transformation_steps": [
             {
-                "target_col_name": "BIB_REC_DISPLAY_SUPPRESSED_FLAG",
+                "target_col_name": "bib_rec_display_suppressed_flag",
                 "target_data_type": "Character(1)",
                 "target_attribute": "- Bibliographic Record Display Suppressed Flag",
                 "transformation_info": {
@@ -632,7 +711,7 @@
                     "specific_transform_function": "is_suppressed",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13U_USER_DEFINED_6",
+                    "source_col_name": "z13u_user_defined_6",
                     "source_data_type": "VARCHAR2(500)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -641,7 +720,7 @@
                 }
             },
             {
-                "target_col_name": "BIB_REC_ACQUISITION_CREATED_FLAG",
+                "target_col_name": "bib_rec_acquisition_created_flag",
                 "target_data_type": "Character(1)",
                 "target_attribute": "- Bibliographic Record Acquisition-Created Flag",
                 "transformation_info": {
@@ -651,7 +730,7 @@
                     "specific_transform_function": "is_acq_created",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13U_USER_DEFINED_6",
+                    "source_col_name": "z13u_user_defined_6",
                     "source_data_type": "VARCHAR2(500)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -660,7 +739,7 @@
                 }
             },
             {
-                "target_col_name": "BIB_REC_CIRCULATION_CREATED_FLAG",
+                "target_col_name": "bib_rec_circulation_created_flag",
                 "target_data_type": "Character(1)",
                 "target_attribute": "- Bibliographic Record Circulation-Created Flag",
                 "transformation_info": {
@@ -670,7 +749,7 @@
                     "specific_transform_function": "is_circ_created",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13U_USER_DEFINED_6",
+                    "source_col_name": "z13u_user_defined_6",
                     "source_data_type": "VARCHAR2(500)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -679,7 +758,7 @@
                 }
             },
             {
-                "target_col_name": "BIB_REC_PROVISIONAL_STATUS_FLAG",
+                "target_col_name": "bib_rec_provisional_status_flag",
                 "target_data_type": "Character(1)",
                 "target_attribute": "- Bibliographic Record Provisional Status Flag",
                 "transformation_info": {
@@ -689,7 +768,7 @@
                     "specific_transform_function": "is_provisional",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13U_USER_DEFINED_6",
+                    "source_col_name": "z13u_user_defined_6",
                     "source_data_type": "VARCHAR2(500)",
                     "source_format": "",
                     "source_mandatory": "N",
@@ -699,16 +778,110 @@
             }
         ]
     },
-    "Z13_OPEN_DATE": {
-        "source_col_name": "Z13_OPEN_DATE",
+    "z13_open_date": {
+        "source_col_name": "z13_open_date",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": [
+            {
+                "aleph_library": "MAI01, MAI39",
+                "source_file": "Z13",
+                "source_column_name": "Z13_OPEN_DATE",
+                "target_column_name": "",
+                "column_sub_component": "",
+                "column_data_type": "NUMBER(8)",
+                "format": "YYYYMMDD",
+                "type": "Missing Value",
+                "instructions": "1) <null> 2) All zeros",
+                "specific_dq_function": "no_missing_values",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "1",
+                "always": "X",
+                "only_if_data_exists": "",
+                "additional_conditions": "",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Missing Value: Z13_OPEN_DATE",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            },
+            {
+                "aleph_library": "MAI01, MAI39",
+                "source_file": "Z13",
+                "source_column_name": "Z13_OPEN_DATE",
+                "target_column_name": "",
+                "column_sub_component": "",
+                "column_data_type": "NUMBER(8)",
+                "format": "YYYYMMDD",
+                "type": "Date check",
+                "instructions": "Must be valid aleph date.",
+                "specific_dq_function": "is_valid_aleph_year",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "2",
+                "always": "",
+                "only_if_data_exists": "X",
+                "additional_conditions": "No previous Z13_OPEN_DATE DQ exception",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Invalid Date: Z13_OPEN_DATE",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            },
+            {
+                "aleph_library": "MAI60",
+                "source_file": "Z13",
+                "source_column_name": "Z13_OPEN_DATE",
+                "target_column_name": "",
+                "column_sub_component": "",
+                "column_data_type": "NUMBER(8)",
+                "format": "YYYYMMDD",
+                "type": "Missing Value",
+                "instructions": "1) <null> 2) All zeros",
+                "specific_dq_function": "no_missing_values",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "1",
+                "always": "X",
+                "only_if_data_exists": "",
+                "additional_conditions": "",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Missing Value: Z13_OPEN_DATE",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            },
+            {
+                "aleph_library": "MAI60",
+                "source_file": "Z13",
+                "source_column_name": "Z13_OPEN_DATE",
+                "target_column_name": "",
+                "column_sub_component": "",
+                "column_data_type": "NUMBER(8)",
+                "format": "YYYYMMDD",
+                "type": "Date check",
+                "instructions": "Must be valid aleph date.",
+                "specific_dq_function": "is_valid_aleph_year",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "2",
+                "always": "",
+                "only_if_data_exists": "X",
+                "additional_conditions": "No previous Z13_OPEN_DATE DQ exception",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Invalid Date: Z13_OPEN_DATE",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            }
+        ],
         "transformation_steps": [
             {
-                "target_col_name": "BIB_REC_CREATE_DT",
+                "target_col_name": "bib_rec_create_dt",
                 "target_data_type": "Date",
                 "target_attribute": "- Bibliographic Record Create Date",
                 "transformation_info": {
@@ -718,30 +891,120 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13_OPEN_DATE",
+                    "source_col_name": "z13_open_date",
                     "source_data_type": "NUMBER(8)",
                     "source_format": "YYMMDD",
                     "source_mandatory": "N",
                     "aleph_table": "Z13",
                     "action_detailed_instructions": ""
-                },
-                "data_quality_info": {
-                    "dq_required": true,
-                    "data_quality_checks": []
                 }
             }
         ]
     },
-    "Z13_UPDATE_DATE": {
-        "source_col_name": "Z13_UPDATE_DATE",
+    "z13_update_date": {
+        "source_col_name": "z13_update_date",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
             "pre_detailed_instructions": "N/A"
         },
+        "dataquality_info": [
+            {
+                "aleph_library": "MAI01, MAI39",
+                "source_file": "Z13",
+                "source_column_name": "Z13_UPDATE_DATE",
+                "target_column_name": "",
+                "column_sub_component": "",
+                "column_data_type": "NUMBER(8)",
+                "format": "YYYYMMDD",
+                "type": "Missing Value",
+                "instructions": "1) <null> 2) All zeros",
+                "specific_dq_function": "no_missing_values",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "1",
+                "always": "X",
+                "only_if_data_exists": "",
+                "additional_conditions": "",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Missing Value: Z13_UPDATE_DATE",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            },
+            {
+                "aleph_library": "MAI01, MAI39",
+                "source_file": "Z13",
+                "source_column_name": "Z13_UPDATE_DATE",
+                "target_column_name": "",
+                "column_sub_component": "",
+                "column_data_type": "NUMBER(8)",
+                "format": "YYYYMMDD",
+                "type": "Date check",
+                "instructions": "Must be valid aleph date.",
+                "specific_dq_function": "is_valid_aleph_year",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "2",
+                "always": "",
+                "only_if_data_exists": "X",
+                "additional_conditions": "No previous Z13_UPDATE_DATE DQ exception",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Invalid Date: Z13_UPDATE_DATE",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            },
+            {
+                "aleph_library": "MAI60",
+                "source_file": "Z13",
+                "source_column_name": "Z13_UPDATE_DATE",
+                "target_column_name": "",
+                "column_sub_component": "",
+                "column_data_type": "CHAR(8)",
+                "format": "YYYYMMDD",
+                "type": "Missing Value",
+                "instructions": "1) <null> 2) All zeros",
+                "specific_dq_function": "no_missing_values",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "1",
+                "always": "X",
+                "only_if_data_exists": "",
+                "additional_conditions": "",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Missing Value: Z13_UPDATE_DATE",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            },
+            {
+                "aleph_library": "MAI60",
+                "source_file": "Z13",
+                "source_column_name": "Z13_UPDATE_DATE",
+                "target_column_name": "",
+                "column_sub_component": "",
+                "column_data_type": "CHAR(8)",
+                "format": "YYYYMMDD",
+                "type": "Date check",
+                "instructions": "Must be valid aleph date.",
+                "specific_dq_function": "is_valid_aleph_year",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "2",
+                "always": "",
+                "only_if_data_exists": "X",
+                "additional_conditions": "No previous Z13_UPDATE_DATE DQ exception",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Invalid Date: Z13_UPDATE_DATE",
+                "replacement_value": "(null)",
+                "dimension_link_to_record": "N/A"
+            }
+        ],
         "transformation_steps": [
             {
-                "target_col_name": "BIB_REC_UPDATE_DT",
+                "target_col_name": "bib_rec_update_dt",
                 "target_data_type": "Date",
                 "target_attribute": "- Bibliographic Record Update Date",
                 "transformation_info": {
@@ -751,16 +1014,12 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "Z13_UPDATE_DATE",
+                    "source_col_name": "z13_update_date",
                     "source_data_type": "CHAR(8)",
                     "source_format": "YYMMDD",
                     "source_mandatory": "N",
                     "aleph_table": "Z13",
                     "action_detailed_instructions": ""
-                },
-                "data_quality_info": {
-                    "dq_required": true,
-                    "data_quality_checks": []
                 }
             }
         ]
