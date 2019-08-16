@@ -27,10 +27,13 @@ import importlib
 
 # pdb.set_trace() to pause script in interactive mode
 
-# logging format
-formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+
+
+
 
 def setup_logger(name, log_file, level=logging.DEBUG):
+    # logging format
+    formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
     # set up logging file
     handler = logging.FileHandler(log_file)
     handler.setFormatter(formatter)
@@ -77,10 +80,6 @@ def create_db_engine():
     return engine
 
 engine = create_db_engine()
-
-
-
-
 
 # Reflecting database with Automap (see chapter 10 of Essential SQLAlchemy 2nd edition)
 Base = automap_base()
@@ -164,25 +163,15 @@ print('got to transform')
 # table_config_path = os.path.join('table_config', 'bibliographic_record_dimension.json')
 table_config_path = os.path.join('table_config', 'library_item_dimension.json')
 
+# load table config JSON
 table_config = table_transform.load_table_config(table_config_path)
 
-# create a dict of field objects which is uses source col name as keys
-# for each source col name, there should be an object for each target column inside of it
-# find repeating source col names and put that obj under same source col name key in a list
-source_col_sorted_dict = {}
-for obj in table_config["fields"]:
-    source_col_name = 'in_' + obj["Transformation Info"]["source_col_name"].lower()
-    if source_col_sorted_dict.get(source_col_name):
-        # if there's multiple obj per source col, append to that source col dict list
-        source_col_sorted_dict[source_col_name].append(obj)
-    else:
-        source_col_sorted_dict[source_col_name] = [obj]
 
 # Use a function which uses the table metadata config files and performs the transformations
 # loop over items in stg 2, refer to column names in table config for instructions
 #for table in bib_rec_stg2_tables.values():
 for table in lib_item_stg2_tables.values():
-    table_transform.transform_stg2_table(engine, source_col_sorted_dict, table, dwetl_logger)
+    table_transform.transform_stg2_table(engine, table_config, table, dwetl_logger)
 
 '''
 Stage 3
