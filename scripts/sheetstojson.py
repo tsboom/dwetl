@@ -46,7 +46,9 @@ LIBRARY_HOLDING_MARC_RECORD_FIELD_OUTRIGGER_RANGE = 'Source-to-Target Mapping!A6
 BIB_RECORD_DIM_RANGE = 'Source-to-Target Mapping!A35:X64'
 BIBLIOGRAPHIC_RECORD_MARC_RECORD_FIELD_OUTRIGGER_DIM_RANGE = 'Source-to-Target Mapping!A7:X30'
 LIB_ITEM_LOCATION_DIM_RANGE = 'Source-to-Target Mapping!A72:X79'
-LIB_ITEM_DIM_RANGE = 'Source-to-Target Mapping!A80:X138'
+# LIB_ITEM_DIM_RANGE = 'Source-to-Target Mapping!A80:X138'
+# this library item below is without z35 stuff (those are missing a target column)
+LIB_ITEM_DIM_RANGE = 'Source-to-Target Mapping!A80:X126'
 LIBRARY_ITEM_MATERIAL_FORM_DIM_RANGE = 'Source-to-Target Mapping!A139:X141'
 LIBRARY_ITEM_PROCESS_STATUS_DIM_RANGE = 'Source-to-Target Mapping!A142:X146'
 LIBRARY_ITEM_STATUS_DIM_RANGE = 'Source-to-Target Mapping!A147:X149'
@@ -180,7 +182,7 @@ def main():
                 '''
                 rewrite JSON so transformation info is grouped under source column
                 '''
-                source_column_name = row_dict['source_col_name']
+                source_column_name = row_dict['source_col_name'].lower()
                 col_dict = {
                     # source column name is key of dictionary
                     "source_col_name": source_column_name,
@@ -189,12 +191,13 @@ def main():
                         "pre_action": row_dict['pre_action'],
                         "pre_detailed_instructions": row_dict['pre_detailed_instructions']
                     },
+                    "dataquality_info": {},
                     "transformation_steps": []
                 }
 
                 # get transformation info of current row_dict. format it.
                 current_transform = {
-                    "target_col_name": row_dict['target_col_name'],
+                    "target_col_name": row_dict['target_col_name'].lower(),
                     "target_data_type": row_dict['target_data_type'],
                     "target_attribute": row_dict['target_attribute'],
                     "transformation_info": {
@@ -204,7 +207,7 @@ def main():
                         "specific_transform_function": row_dict['specific_transform_function'],
                         "specific_transform_function_param1": row_dict['specific_transform_function_param1'],
                         "specific_transform_function_param2": row_dict['specific_transform_function_param2'],
-                        "source_col_name": row_dict['source_col_name'],
+                        "source_col_name": source_column_name,
                         "source_data_type": row_dict['source_data_type'],
                         "source_format": row_dict['source_format'],
                         "source_mandatory": write_no_if_not_yes(row_dict['source_mandatory']),
@@ -225,16 +228,17 @@ def main():
 
                     # get only the dq check rows for the current target column
                     all_dq_check_rows = dq_rows_dict[row_dict['source_col_name']]
-                    target_col_checks = [i for i in all_dq_check_rows if i['target_column_name'] == row_dict['target_col_name']]
-
-                    # find matching transformation_step, write dq info to it
-                    for index, step in enumerate(col_dict['transformation_steps']):
-                        # find matching target column name to attach dq check info to the transformation_step
-                        if step['target_col_name'] == row_dict['target_col_name']:
-                            col_dict['transformation_steps'][index]['data_quality_info'] = {
-                                "dq_required": True,
-                                "data_quality_checks": target_col_checks
-                                }
+                    col_dict['dataquality_info'] = all_dq_check_rows
+                    # target_col_checks = [i for i in all_dq_check_rows if i['target_column_name'] == row_dict['target_col_name']]
+                    #
+                    # # find matching transformation_step, write dq info to it
+                    # for index, step in enumerate(col_dict['transformation_steps']):
+                    #     # find matching target column name to attach dq check info to the transformation_step
+                    #     if step['target_col_name'] == row_dict['target_col_name']:
+                    #         col_dict['transformation_steps'][index]['data_quality_info'] = {
+                    #             "dq_required": True,
+                    #             "data_quality_checks": target_col_checks
+                    #             }
 
                 # create new column dict for the current source column name if it doesn't exist
                 if source_column_name not in dimension_dict:
