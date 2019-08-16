@@ -63,15 +63,15 @@ def transform_row(sa_row):
 def write_log(field_name, log):
     print('write log temp')
 
-def preprocess(field, source_col_sorted_dict):
+def preprocess(field, table_config):
     try:
-        objs = source_col_sorted_dict[field.name]
+        obj = table_config[field.name[3:]]
         # only process the first object which is info for first transformation
-        if objs[0]['Preprocessing Info']['pre_action'] == 'Trim':
+        if obj['preprocessing_info']['pre_action'] == 'Trim':
             return dqu.trim(field.value)
         return field.value
     except KeyError:
-        # print(field.name + " does not exist in source_col_sorted_dict")
+        # print(field.name + " does not exist in table_config")
         print('No preprocessing for ' + field.name)
         return field.value
 
@@ -106,7 +106,6 @@ def check_data_quality(check, dq_funcs_list, field):
     arg = check.get('specific_dq_function_param_1')
     # is_passing is an empty string if no dq check is found, otherwise is True or False.
     is_passing = execute_dq_function(function_name, arg, field.value, dq_funcs_list)
-    pdb.set_trace()
     if is_passing is True:
         field_dq_result = field.value
     elif is_passing is False:
@@ -126,96 +125,100 @@ def check_data_quality(check, dq_funcs_list, field):
 
 
 
-def run_dq_checks(field, dq_funcs_list, source_col_sorted_dict):
+def run_dq_checks(field, dq_funcs_list, table_config):
     try:
-        objs = source_col_sorted_dict[field.name]
-        for obj in objs:
-            # find list of dq checks for that object
-            dq_list = obj['Data Quality Info']['data_quality_checks']
-            for check in dq_list:
-                result = check_data_quality(check, dq_funcs_list, field)
-                field.record_dq(result)
+        # find matching transform information from table_config for current field
+        transform_info = table_config[field.name[3:]]
+        # find list of dq checks for that object
+        dq_list = transform_info['dataquality_info']
+        for check in dq_list:
+            result = check_data_quality(check, dq_funcs_list, field)
+            field.record_dq(result)
     except KeyError:
         print(field.name +' has no DQ checks.')
 
 
-def execute_transform(current_function, arg1, arg2, field, transformations_list):
-    result = ''
+
+def execute_transform(specific_transform_function, arg1, arg2, field, transformations_list):
+    '''
+    find current function in list of function object tuples, and execute it
+    '''
+    t_result = ''
     for function in transformations_list:
         function_object = function[1]
         transform_function = function[0]
-        print(current_function, transform_function)
-        if current_function == transform_function:
+        if specific_transform_function == transform_function:
             if not arg1 and not arg2:
-                result = function_object(field)
+                t_result = function_object(field)
             elif arg1 and arg2:
-                result = function_object(field, arg1, arg2)
+                t_result = function_object(field, arg1, arg2)
             elif arg1:
-                result = function_object(field, arg1)
+                t_result = function_object(field, arg1)
             else:
+                print('Inconsistent number of arguments to transform_function')
                 break
-    return result
+        else:
+            continue
+    return t_result
 
-def check_transform(field, transformations_list, obj):
+def check_transform(field, transformations_list, transform_obj):
     ''''
     execute the transforms per source column name, updating the TransformField object
     '''
     # find the corresponding transformation in dimension json
     try:
-        specific_transform_function = obj['Transformation Info']['specific_transform_function']
+        specific_transform_function = transform_obj['transformation_info']['specific_transform_function']
         if specific_transform_function:
-            arg1 = obj.get('Transformation Info', {}).get('specific_transform_function_param1')
-            arg2 = obj.get('Transformation Info', {}).get('specific_transform_function_param2')
+            arg1 = transform_obj.get('transformation_info', {}).get('specific_transform_function_param1')
+            arg2 = transform_obj.get('transformation_info', {}).get('specific_transform_function_param2')
             print(field.name, arg1, arg2)
             # get the name of the target column
-            target_col_name = obj['target_col_name']
+            target_col_name = transform_obj['target_col_name']
             t_result = execute_transform(specific_transform_function, arg1, arg2, field, transformations_list)
             result = {'name': specific_transform_function, 'result': t_result, 'target_col_name': target_col_name}
             return result
-        else:
-            return None
     except KeyError:
         print(field.name + ' - Transformation: Move As-Is.')
 
 
-def run_transformations(field, transformations_list, source_col_sorted_dict):
+def run_transformations(field, transformations_list, table_config):
     try:
-        objs = source_col_sorted_dict[field.name]
-        for obj in objs:
-            result = check_transform(field, transformations_list, obj)
-            print(pprint.pprint(result))
-            field.record_transform(result)
+        obj = table_config[field.name[3:]]
+        transform_list = obj['transformation_steps']
+        for transform_obj in transform_list:
+            t_result = check_transform(field, transformations_list, transform_obj)
+            print(pprint.pprint(t_result))
+            field.record_transform(t_result)
     except KeyError:
         print(field.name + ' - Transformation: Move As-Is.\n\n\n')
 
 
-
-
-
-def transform_field(field, source_col_sorted_dict):
+def transform_field(field, table_config):
     '''
     Using the field name and value, run transformations and log to the field's log
     '''
     try:
-        if source_col_sorted_dict[field.name]:
-            # run pp
-            result = preprocess(field, source_col_sorted_dict)
-            field.record_pp(result)
+        # remove "in_" from field name
+        field_name = field.name[3:]
+        if table_config[field_name]:
 
+            # run pp
+            result = preprocess(field, table_config)
+            field.record_pp(result)
 
             # set up dq by creating list of dq function objects from utilities
             # and data quality specific functions
-            dq_funcs_list = functions_from_module(dqs) + functions_from_module(dqu)
+            dq_funcs_list = functions_from_module(dqs) + functions_from_module(dqu)  # TODO, do this only once outside this func
+
             # run dq
-            pdb.set_trace()
-            run_dq_checks(field, dq_funcs_list, source_col_sorted_dict)
+            run_dq_checks(field, dq_funcs_list, table_config)
 
             # set up list of specific transformation functions from module
-            transformations_list = functions_from_module(stf)
-            # run transformations
-            run_transformations(field, transformations_list, source_col_sorted_dict)
-            print(field.name, field.value,'\n', field.record)
+            transformations_list = functions_from_module(stf)  # TODO  same ^
 
+            # run transformations
+            run_transformations(field, transformations_list, table_config)
+            pprint.pprint(field.record)
 
             # write_log(field.name, field.log) # writes to stage 2 db
     except KeyError:
@@ -223,7 +226,7 @@ def transform_field(field, source_col_sorted_dict):
 
 
 
-def transform_stg2_table(engine, source_col_sorted_dict, table, dwetl_logger):
+def transform_stg2_table(engine, table_config, table, dwetl_logger):
     '''
     main function to load stg_2 table PP, DQ, T1, T2.. etc
     '''
@@ -233,4 +236,4 @@ def transform_stg2_table(engine, source_col_sorted_dict, table, dwetl_logger):
     for row in session.query(table).all():
         row_fields = transform_row(row)
         for field in row_fields:
-            transform_field(field, source_col_sorted_dict)
+            transform_field(field, table_config)
