@@ -45,10 +45,10 @@ def setup_logger(name, log_file, level=logging.DEBUG):
 # dwetl logger
 # log file with today's date
 logfile = datetime.datetime.now().strftime('dwetl.log.%Y%m%d')
-dwetl_logger = setup_logger('logs/dwetl_logger', logfile)
+dwetl_logger = setup_logger('dwetl_logger', 'logs/'+ logfile)
 # sqlalchemy logger
 sa_logfile = datetime.datetime.now().strftime('sqlalchemy.engine.log.%Y%m%d')
-sa_engine_logger = setup_logger('logs/sqlalchemy.engine', sa_logfile)
+sa_engine_logger = setup_logger('sqlalchemy.engine', 'logs/'+ sa_logfile)
 
 
 '''
