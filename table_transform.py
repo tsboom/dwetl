@@ -219,7 +219,7 @@ def transform_field(field, table_config):
             # run transformations
             run_transformations(field, transformations_list, table_config)
             pprint.pprint(field.record)
-
+            pdb.set_trace()
             # write_log(field.name, field.log) # writes to stage 2 db
     except KeyError:
         print("\n" + field.name + " is not in dimension being processed.\n")
