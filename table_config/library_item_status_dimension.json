@@ -1,178 +1,186 @@
 {
-    "fields": [
-        {
-            "Data Quality Info": {
-                "dq_required": false
-            },
-            "Preprocessing Info": {
-                "pre_action": "N/A",
-                "pre_detailed_instructions": "N/A",
-                "pre_or_post_dq": "N/A"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "Use sequential counter",
-                "action_specific": "N/A",
-                "aleph_table": "N/A",
-                "chg_proc_type": "N/A",
-                "source_col_name": "N/A",
-                "source_data_type": "N/A",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Generate"
-            },
-            "target_attribute": "- Library Item Status Dimension Key",
-            "target_col_name": "LBRY_ITEM_STATUS_DIM_KEY",
-            "target_data_type": "SmallInt"
+    "n/a": {
+        "source_col_name": "n/a",
+        "preprocessing_info": {
+            "pre_or_post_dq": "N/A",
+            "pre_action": "N/A",
+            "pre_detailed_instructions": "N/A"
         },
-        {
-            "Data Quality Info": {
-                "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "CHAR(2)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Item Status Code is missing",
-                        "format": "N/A",
-                        "instructions": "1) <null> 2) All spaces",
-                        "only_if_data_exists": "",
-                        "order": "1",
-                        "replacement_value": "N/A",
-                        "source_column_name": "Library Item Status Code",
-                        "source_file": "ITEM_STATUS\n (tab15.eng)",
-                        "specific_dq_function": "has_missing_values",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "Yes",
-                        "type": "Missing Value"
-                    },
-                    {
-                        "additional_conditions": "No previous DQ exceptions",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "CHAR(2)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Item Status Code is not two characters",
-                        "format": "N/A",
-                        "instructions": "Must equal 2",
-                        "only_if_data_exists": "",
-                        "order": "2",
-                        "replacement_value": "N/A",
-                        "source_column_name": "Library Item Status Code",
-                        "source_file": "ITEM_STATUS\n (tab15.eng)",
-                        "specific_dq_function": "is_valid_length",
-                        "specific_dq_function_param_1": "2",
-                        "suspend_record": "Yes",
-                        "type": "Length Check"
-                    },
-                    {
-                        "additional_conditions": "No previous DQ exceptions",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "CHAR(2)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Item Status Code is not associated with a valid Member Library",
-                        "format": "N/A",
-                        "instructions": "Associated Member Library Code must be a valid Member Library Code",
-                        "only_if_data_exists": "",
-                        "order": "3",
-                        "replacement_value": "N/A",
-                        "source_column_name": "Library Item Status Code",
-                        "source_file": "ITEM_STATUS\n (tab15.eng)",
-                        "specific_dq_function": "",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "Yes",
-                        "type": "Valid Values"
-                    }
-                ],
-                "dq_required": true
-            },
-            "Preprocessing Info": {
-                "pre_action": "Trim",
-                "pre_detailed_instructions": "Remove leading and trailing spaces",
-                "pre_or_post_dq": "PRE"
-            },
-            "Transformation Info": {
-                "action_detailed_instructions": "N/A",
-                "action_specific": "As-Is",
-                "aleph_table": "ITEM_STATUS\n(tab15.eng)",
-                "chg_proc_type": "2",
-                "source_col_name": "Library Item Status Code",
-                "source_data_type": "CHAR(2)",
-                "source_format": "N/A",
-                "source_mandatory": null,
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Item Status Code",
-            "target_col_name": "LBRY_ITEM_STATUS_CD",
-            "target_data_type": "Character(2)"
+        "dataquality_info": {},
+        "transformation_steps": [
+            {
+                "target_col_name": "lbry_item_status_dim_key",
+                "target_data_type": "SmallInt",
+                "target_attribute": "- Library Item Status Dimension Key",
+                "transformation_info": {
+                    "chg_proc_type": "N/A",
+                    "transform_action": "Generate",
+                    "action_specific": "N/A",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "n/a",
+                    "source_data_type": "N/A",
+                    "source_format": "N/A",
+                    "source_mandatory": "N",
+                    "aleph_table": "N/A",
+                    "action_detailed_instructions": "Use sequential counter"
+                }
+            }
+        ]
+    },
+    "library item status code": {
+        "source_col_name": "library item status code",
+        "preprocessing_info": {
+            "pre_or_post_dq": "PRE",
+            "pre_action": "Trim",
+            "pre_detailed_instructions": "Remove leading and trailing spaces"
         },
-        {
-            "Data Quality Info": {
-                "data_quality_checks": [
-                    {
-                        "additional_conditions": "",
-                        "aleph_library": "N/A",
-                        "always": "x",
-                        "application": "H,I",
-                        "column_data_type": "VARCHAR(30)",
-                        "column_sub_component": "",
-                        "dimension_link_to_record": "N/A",
-                        "exception_memorialization": "Create Exception Record",
-                        "exception_message": "Item Status Description is blank",
-                        "format": "N/A",
-                        "instructions": "1) <null> 2) All spaces",
-                        "only_if_data_exists": "",
-                        "order": "1",
-                        "replacement_value": "\"unspecified description\"",
-                        "source_column_name": "Library Item Status Description",
-                        "source_file": "ITEM_STATUS\n (tab15.eng)",
-                        "specific_dq_function": "has_missing_values",
-                        "specific_dq_function_param_1": "",
-                        "suspend_record": "No",
-                        "type": "Missing Value"
-                    }
-                ],
-                "dq_required": true
+        "dataquality_info": [
+            {
+                "aleph_library": "N/A",
+                "source_file": "ITEM_STATUS\n (tab15.eng)",
+                "source_column_name": "Library Item Status Code",
+                "target_column_name": "",
+                "column_sub_component": "",
+                "column_data_type": "CHAR(2)",
+                "format": "N/A",
+                "type": "Missing Value",
+                "instructions": "1) <null> 2) All spaces",
+                "specific_dq_function": "no_missing_values",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "1",
+                "always": "x",
+                "only_if_data_exists": "",
+                "additional_conditions": "",
+                "suspend_record": "Yes",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Item Status Code is missing",
+                "replacement_value": "N/A",
+                "dimension_link_to_record": "N/A"
             },
-            "Preprocessing Info": {
-                "pre_action": "Trim",
-                "pre_detailed_instructions": "Remove leading and trailing spaces",
-                "pre_or_post_dq": "PRE"
+            {
+                "aleph_library": "N/A",
+                "source_file": "ITEM_STATUS\n (tab15.eng)",
+                "source_column_name": "Library Item Status Code",
+                "target_column_name": "",
+                "column_sub_component": "",
+                "column_data_type": "CHAR(2)",
+                "format": "N/A",
+                "type": "Length Check",
+                "instructions": "Must equal 2",
+                "specific_dq_function": "is_valid_length",
+                "specific_dq_function_param_1": "2",
+                "application": "H,I",
+                "order": "2",
+                "always": "x",
+                "only_if_data_exists": "",
+                "additional_conditions": "No previous DQ exceptions",
+                "suspend_record": "Yes",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Item Status Code is not two characters",
+                "replacement_value": "N/A",
+                "dimension_link_to_record": "N/A"
             },
-            "Transformation Info": {
-                "action_detailed_instructions": "N/A",
-                "action_specific": "As-Is",
-                "aleph_table": "ITEM_STATUS\n(tab15.eng)",
-                "chg_proc_type": "2",
-                "source_col_name": "Library Item Status Description",
-                "source_data_type": "VARCHAR(30)",
-                "source_format": "N/A",
-                "source_mandatory": "N",
-                "specific_transform_function": "",
-                "specific_transform_function_param1": "",
-                "specific_transform_function_param2": "",
-                "transform_action": "Move"
-            },
-            "target_attribute": "- Library Item Status Description",
-            "target_col_name": "LBRY_ITEM_STATUS_DESC",
-            "target_data_type": "VarChar(30)"
-        }
-    ],
-    "target_dimension_name": "LIBRARY ITEM STATUS DIMENSION"
+            {
+                "aleph_library": "N/A",
+                "source_file": "ITEM_STATUS\n (tab15.eng)",
+                "source_column_name": "Library Item Status Code",
+                "target_column_name": "",
+                "column_sub_component": "",
+                "column_data_type": "CHAR(2)",
+                "format": "N/A",
+                "type": "Valid Values",
+                "instructions": "Associated Member Library Code must be a valid Member Library Code",
+                "specific_dq_function": "",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "3",
+                "always": "x",
+                "only_if_data_exists": "",
+                "additional_conditions": "No previous DQ exceptions",
+                "suspend_record": "Yes",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Item Status Code is not associated with a valid Member Library",
+                "replacement_value": "N/A",
+                "dimension_link_to_record": "N/A"
+            }
+        ],
+        "transformation_steps": [
+            {
+                "target_col_name": "lbry_item_status_cd",
+                "target_data_type": "Character(2)",
+                "target_attribute": "- Library Item Status Code",
+                "transformation_info": {
+                    "chg_proc_type": "2",
+                    "transform_action": "Move",
+                    "action_specific": "As-Is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "library item status code",
+                    "source_data_type": "CHAR(2)",
+                    "source_format": "N/A",
+                    "source_mandatory": null,
+                    "aleph_table": "ITEM_STATUS\n(tab15.eng)",
+                    "action_detailed_instructions": "N/A"
+                }
+            }
+        ]
+    },
+    "library item status description": {
+        "source_col_name": "library item status description",
+        "preprocessing_info": {
+            "pre_or_post_dq": "PRE",
+            "pre_action": "Trim",
+            "pre_detailed_instructions": "Remove leading and trailing spaces"
+        },
+        "dataquality_info": [
+            {
+                "aleph_library": "N/A",
+                "source_file": "ITEM_STATUS\n (tab15.eng)",
+                "source_column_name": "Library Item Status Description",
+                "target_column_name": "",
+                "column_sub_component": "",
+                "column_data_type": "VARCHAR(30)",
+                "format": "N/A",
+                "type": "Missing Value",
+                "instructions": "1) <null> 2) All spaces",
+                "specific_dq_function": "no_missing_values",
+                "specific_dq_function_param_1": "",
+                "application": "H,I",
+                "order": "1",
+                "always": "x",
+                "only_if_data_exists": "",
+                "additional_conditions": "",
+                "suspend_record": "No",
+                "exception_memorialization": "Create Exception Record",
+                "exception_message": "Item Status Description is blank",
+                "replacement_value": "\"unspecified description\"",
+                "dimension_link_to_record": "N/A"
+            }
+        ],
+        "transformation_steps": [
+            {
+                "target_col_name": "lbry_item_status_desc",
+                "target_data_type": "VarChar(30)",
+                "target_attribute": "- Library Item Status Description",
+                "transformation_info": {
+                    "chg_proc_type": "2",
+                    "transform_action": "Move",
+                    "action_specific": "As-Is",
+                    "specific_transform_function": "",
+                    "specific_transform_function_param1": "",
+                    "specific_transform_function_param2": "",
+                    "source_col_name": "library item status description",
+                    "source_data_type": "VARCHAR(30)",
+                    "source_format": "N/A",
+                    "source_mandatory": "N",
+                    "aleph_table": "ITEM_STATUS\n(tab15.eng)",
+                    "action_detailed_instructions": "N/A"
+                }
+            }
+        ]
+    }
 }

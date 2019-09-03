@@ -1,3 +1,4 @@
+import pdb
 '''
 Transform Field
 
@@ -16,11 +17,11 @@ class TransformField:
             "transforms" : []
         }
 
-    def record_transform(self, result):
-        self.record["transforms"].append(result)
-
     def record_pp(self, result):
         self.record['pp'] = result
 
     def record_dq(self, result):
         self.record['dq'].append(result)
+
+    def record_transform(self, result):
+        self.record["transforms"].append(result)
