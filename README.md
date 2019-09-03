@@ -14,9 +14,12 @@ Start by cloning the repo and unzipping it into your /apps/git folder. `cd dwetl
 
 Create a virtualenv called venv. `virtualenv venv`
 
-Enter your virtual environmentDownload the requirements
+Enter your virtual environment
+`source venv/bin/activate`
 
-`pip install requirements.txt`
+Download the requirements
+
+`pip install -r requirements.txt`
 
 To connect to the pgcommondev, it is recommended that an SSH tunnel is used so that you can work on this project from any IP address.
 
@@ -41,7 +44,7 @@ These steps correlate with (Alex's high level ETL diagram)[https://drive.google.
 - **Step 3.** Populate Stage 2 tables with preprocessing, data quality checks, and transform results.
 - *TransformField.py* - class to hold value of pp, dq, and transforms,
   - *table_transform.py*
-  
+
   - Preprocess fields, write result to field object
     - Data quality checks on fields, write results of field object.
       - *data_quality_specific_functions.py*
