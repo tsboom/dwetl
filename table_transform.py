@@ -242,18 +242,6 @@ def transform_field(field, table_config):
     except KeyError:
         print("\n" + field.name + " is not in dimension being processed.\n")
 
-
-def is_field_valid(field):
-    # if all dq checks are good, continue
-    result = True
-    for check in field.record['dq']:
-        if check['check_passed'] == False:
-            result = False
-            break
-    return result
-
-    # find which checks failed, and whether to suspend record
-
 def convert_suspend_record_bool(suspend_record):
     if suspend_record == 'Yes':
         return True
@@ -268,16 +256,13 @@ def is_suspend_record(field, table_config):
     # find current fields dq checks
     field_config = table_config[field.name[3:]]
 
-    for dq in field_config['dataquality_info']:
-        suspend_on_fail = convert_suspend_record_bool(dq['suspend_record'])
-        if not suspend_on_fail:
-            continue
-        else:
-            # get name of the function that failed
-            for check in field.record['dq']:
-                if check['check_passed'] == False:
+    for check in field.record['dq']:
+        if check['check_passed'] == False:
+            for dq in field_config['dataquality_info']:
+                is_suspend = convert_suspend_record_bool(dq['suspend_record'])
+                if check['name'] == dq['specific_dq_function'] and is_suspend:
                     result = True
-                    break
+                    print(f"SUSPENDED {field.name}  Failed DQ Check: {dq['type']}")
     return result
 
 
@@ -295,7 +280,7 @@ def transform_stg2_table(engine, table_config, table, dwetl_logger):
         row_fields = transform_row(row)
         for field in row_fields:
             transform_field(field, table_config)
-            if not is_field_valid(field):
+            if not field.is_valid():
                 # find out if record needs to be suspended
                 # suspend it
                 print('temp')

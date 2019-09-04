@@ -109,22 +109,6 @@ class TestTableTransform(unittest.TestCase):
         self.assertEqual(get_replacement_value({'replacement_value':'N/A'}), '')
         self.assertEqual(get_replacement_value({'replacement_value':'-M'}), '-M')
 
-    def test_is_field_valid(self):
-        field = TransformField('in_z30_rec_key', '000001200000020', 'dw_stg_2_lbry_item_z30')
-        field.record_dq({'check_passed': True})
-        field.record_dq({'check_passed': True})
-        field.record_dq({'check_passed': True})
-        self.assertTrue(is_field_valid(field))
-
-        field = TransformField('in_z30_rec_key', '000001200000020', 'dw_stg_2_lbry_item_z30')
-        field.record_dq({'check_passed': True})
-        field.record_dq({'check_passed': False})
-        field.record_dq({'check_passed': True})
-        self.assertFalse(is_field_valid(field))
-
-        field = TransformField('in_z30_rec_key', '000001200000020', 'dw_stg_2_lbry_item_z30')
-        self.assertTrue(is_field_valid(field))
-
     def test_is_suspend_record(self):
         # get table_config
         TABLE_PATH = os.path.join('table_config', 'library_item_dimension.json')
@@ -138,6 +122,13 @@ class TestTableTransform(unittest.TestCase):
         field = TransformField('in_z30_rec_key', ' ', 'dw_stg_2_lbry_item_z30')
         transform_field(field, table_config)
         self.assertTrue(is_suspend_record(field, table_config))
+
+        # check record that fails dq, but isn't suspended
+        field = TransformField('in_z30_barcode', '    31430058801988       ', 'dw_stg_2_lbry_item_z30')
+        transform_field(field, table_config)
+        self.assertFalse(field.is_valid())
+        self.assertFalse(is_suspend_record(field, table_config))
+
 
     def test_convert_suspend_record_bool(self):
         self.assertTrue(convert_suspend_record_bool('Yes'))
