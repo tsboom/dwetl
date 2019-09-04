@@ -134,7 +134,7 @@
                 "suspend_record": "No",
                 "exception_memorialization": "Create Exception Record",
                 "exception_message": "Material Form Name is blank",
-                "replacement_value": "\"unspecified name\"",
+                "replacement_value": "unspecified name",
                 "dimension_link_to_record": "N/A"
             }
         ],
