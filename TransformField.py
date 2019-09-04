@@ -26,4 +26,12 @@ class TransformField:
 
     def record_transform(self, result):
         self.record["transforms"].append(result)
-        
+
+    def is_valid(self):
+        # if all dq checks are good, continue
+        result = True
+        for check in self.record['dq']:
+            if check['check_passed'] == False:
+                result = False
+                break
+        return result
