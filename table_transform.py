@@ -51,11 +51,12 @@ def transform_row(sa_row):
     # fields to transform
     fields = []
     row_dict = sa_row.__dict__
+    table_name = sa_row.__table__.name
     for column in sa_row.__table__.columns.keys():
         if column.startswith('in_'):
             field_value = row_dict[column]
             optional_isbn_code = get_isbn_issn_code(column, row_dict)
-            fields.append(TransformField(column, field_value, isbn_issn_code=optional_isbn_code))
+            fields.append(TransformField(column, field_value, table_name, isbn_issn_code=optional_isbn_code))
     return fields
 
 
@@ -66,6 +67,7 @@ def write_log(field_name, log):
 def preprocess(field, table_config):
     try:
         obj = table_config[field.name[3:]]
+
         # only process the first object which is info for first transformation
         if obj['preprocessing_info']['pre_action'] == 'Trim':
             return dqu.trim(field.value)
@@ -95,6 +97,19 @@ def execute_dq_function(current_function, arg, input, dq_funcs_list):
             break
     return is_passing
 
+def get_replacement_value(check):
+    result = ''
+    replacement_value = check.get('replacement_value')
+    if replacement_value:
+        if replacement_value == "(null)":
+            result = None
+        elif replacement_value == 'N/A':
+            result = ''
+        else:
+            result =  replacement_value
+    return result
+
+
 
 def check_data_quality(check, dq_funcs_list, field):
     '''
@@ -104,24 +119,28 @@ def check_data_quality(check, dq_funcs_list, field):
     function_name = check.get('specific_dq_function')
     target_col_name = check.get('target_column_name')
     arg = check.get('specific_dq_function_param_1')
+    # suspend_record = convert_suspend_record_bool(check.get('suspend_record'))
+
+
     # is_passing is an empty string if no dq check is found, otherwise is True or False.
     is_passing = execute_dq_function(function_name, arg, field.value, dq_funcs_list)
     if is_passing is True:
         field_dq_result = field.value
     elif is_passing is False:
-        print(Fore.RED + 'DQ '+ function_name +' FAILED for source(' + field.name + ') target('  + target_col_name + ') - ' + field.value)
-        replacement_value = check.get('replacement_value')
-        if replacement_value:
-            field_dq_result = replacement_value
-            print("deal with dimension_link_to_records. replacement_value is: " + replacement_value)
+        # print(Fore.RED + 'DQ '+ function_name +' FAILED for source(' + field.name + ') target('  + target_col_name + ') - ' + field.value)
+
+        field_dq_result = get_replacement_value(check)
+
+        # print("deal with dimension_link_to_records. replacement_value is: " + field_dq_result)
     else:
-        print('DQ check' + function_name + ' was not found in dq functions.')
+        # print('DQ check' + function_name + ' was not found in dq functions.')
+
         field_dq_result = 'ERROR no result'
+
     # save name and result of dq check
     print(Style.RESET_ALL)
-    result = {'name': function_name, 'result': field_dq_result, 'target_col_name': target_col_name}
+    result = {'name': function_name, 'result': field_dq_result, 'target_col_name': target_col_name, 'check_passed': is_passing}
     return result
-
 
 
 
@@ -224,6 +243,45 @@ def transform_field(field, table_config):
         print("\n" + field.name + " is not in dimension being processed.\n")
 
 
+def is_field_valid(field):
+    # if all dq checks are good, continue
+    result = True
+    for check in field.record['dq']:
+        if check['check_passed'] == False:
+            result = False
+            break
+    return result
+
+    # find which checks failed, and whether to suspend record
+
+def convert_suspend_record_bool(suspend_record):
+    if suspend_record == 'Yes':
+        return True
+    elif suspend_record == 'No':
+        return False
+    else:
+        return False
+
+def is_suspend_record(field, table_config):
+    result = False
+
+    # find current fields dq checks
+    field_config = table_config[field.name[3:]]
+
+    for dq in field_config['dataquality_info']:
+        suspend_on_fail = convert_suspend_record_bool(dq['suspend_record'])
+        if not suspend_on_fail:
+            continue
+        else:
+            # get name of the function that failed
+            for check in field.record['dq']:
+                if check['check_passed'] == False:
+                    result = True
+                    break
+    return result
+
+
+
 
 def transform_stg2_table(engine, table_config, table, dwetl_logger):
     '''
@@ -232,7 +290,13 @@ def transform_stg2_table(engine, table_config, table, dwetl_logger):
     Session = sessionmaker(bind=engine)
     session = Session()
 
+    # process the row, iterate over each field in the row and transform
     for row in session.query(table).all():
         row_fields = transform_row(row)
         for field in row_fields:
             transform_field(field, table_config)
+            if not is_field_valid(field):
+                # find out if record needs to be suspended
+                # suspend it
+                print('temp')
+                # set exceptions count

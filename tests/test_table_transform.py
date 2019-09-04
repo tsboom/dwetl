@@ -12,10 +12,10 @@ Unit tests for table_transform.py
 
 class TestTableTransform(unittest.TestCase):
 
-    def test_load_table_config(self):
-        TABLE_PATH = os.path.join('tests','data','test_table_config_z30.json')
-        table_config = load_table_config(TABLE_PATH)
-        self.assertEqual(table_config['title'],'z30')
+    # def test_load_table_config(self):
+    #     TABLE_PATH = os.path.join('tests','data','test_table_config_z30.json')
+    #     table_config = load_table_config(TABLE_PATH)
+    #     self.assertEqual(table_config['title'],'z30')
 
     def test_get_isbn_issn_code(self):
         self.assertEqual(get_isbn_issn_code('in_z13_isbn_issn',data_get_isbn_issn_none),'   ')
@@ -27,13 +27,17 @@ class TestTableTransform(unittest.TestCase):
         self.assertEqual(get_isbn_issn_code('in_z13_isbn_issn',data_get_isbn_issn_0220),'022')
 
     def test_preprocess(self):
+        # get table_config
+        TABLE_PATH = os.path.join('table_config', 'bibliographic_record_dimension.json')
+        table_config = load_table_config(TABLE_PATH)
         #testing trim preprocessing function
-        a = TransformField('in_z13_title','   A title with some extraneous spaces     ')
-        self.assertEqual(preprocess(a,data_source_col_sorted),'A title with some extraneous spaces')
+        a = TransformField('in_z13_title','   A title with some extraneous spaces     ' , 'dw_stg_2_bib_rec_z13')
+        # pdb.set_trace()
+        self.assertEqual(preprocess(a, table_config), 'A title with some extraneous spaces')
 
         #testing date no preprocessing no output $$$this is a bad test as processing occurs after dq whoops
-        b = TransformField('in_z13_open_date',20021124)
-        self.assertEqual(preprocess(b,data_source_col_sorted),20021124)
+        b = TransformField('in_z13_open_date',20021124, 'dw_stg_2_bib_rec_z13')
+        self.assertEqual(preprocess(b, table_config), 20021124)
 
         #testing terminal output of no preprocessing
         #c = TransformField('in_z13_upd_time_stamp',201708251637466)
@@ -44,7 +48,7 @@ class TestTableTransform(unittest.TestCase):
         #z13u preprocess test
 
 #    def test_dq_func_list(self):
-
+    @unittest.skip('rewrite this test or delete as unnecessary')
     def test_func_from_mod(self):
         dqu_check = functions_from_module(dqu)
         dqs_check = functions_from_module(dqs)
@@ -76,14 +80,16 @@ class TestTableTransform(unittest.TestCase):
         dq_funcs_list = functions_from_module(dqs) + functions_from_module(dqu)
 
         #test no_missing_values
-        self.assertTrue(execute_dq_function('no_missing_values','',20021124,dq_funcs_list))
-        self.assertFalse(execute_dq_function('no_missing_values','',0,dq_funcs_list))
+        self.assertTrue(execute_dq_function('no_missing_values', '', '20021124', dq_funcs_list))
+        self.assertFalse(execute_dq_function('no_missing_values', '', '0', dq_funcs_list))
 
         #test dq_z13_user_defined_2
         self.assertTrue(execute_dq_function('dq_z13u_user_defined_2','','ocm00024372',dq_funcs_list))
         self.assertFalse(execute_dq_function('dq_z13u_user_defined_2','','ocm333',dq_funcs_list))
         self.assertTrue(execute_dq_function('dq_z13u_user_defined_2','','ocn464584694',dq_funcs_list))
         self.assertTrue(execute_dq_function('dq_z13u_user_defined_2','','on1245789453',dq_funcs_list))
+
+
 
 #    def test_check_data_quality():
 
@@ -96,9 +102,47 @@ class TestTableTransform(unittest.TestCase):
 
         # replacement_value is used whenever dq check is failing
 
-#
+    def test_get_replacement_value(self):
+        self.assertEqual(get_replacement_value({}), '')
+        self.assertEqual(get_replacement_value({'replacement_value': ''}), '')
+        self.assertEqual(get_replacement_value({'replacement_value':'(null)'}), None)
+        self.assertEqual(get_replacement_value({'replacement_value':'N/A'}), '')
+        self.assertEqual(get_replacement_value({'replacement_value':'-M'}), '-M')
 
+    def test_is_field_valid(self):
+        field = TransformField('in_z30_rec_key', '000001200000020', 'dw_stg_2_lbry_item_z30')
+        field.record_dq({'check_passed': True})
+        field.record_dq({'check_passed': True})
+        field.record_dq({'check_passed': True})
+        self.assertTrue(is_field_valid(field))
 
+        field = TransformField('in_z30_rec_key', '000001200000020', 'dw_stg_2_lbry_item_z30')
+        field.record_dq({'check_passed': True})
+        field.record_dq({'check_passed': False})
+        field.record_dq({'check_passed': True})
+        self.assertFalse(is_field_valid(field))
+
+        field = TransformField('in_z30_rec_key', '000001200000020', 'dw_stg_2_lbry_item_z30')
+        self.assertTrue(is_field_valid(field))
+
+    def test_is_suspend_record(self):
+        # get table_config
+        TABLE_PATH = os.path.join('table_config', 'library_item_dimension.json')
+        table_config = load_table_config(TABLE_PATH)
+        # normal value
+        field = TransformField('in_z30_rec_key', '000001200000020', 'dw_stg_2_lbry_item_z30')
+        transform_field(field, table_config)
+        self.assertFalse(is_suspend_record(field, table_config))
+
+        # testing field.value is empty
+        field = TransformField('in_z30_rec_key', ' ', 'dw_stg_2_lbry_item_z30')
+        transform_field(field, table_config)
+        self.assertTrue(is_suspend_record(field, table_config))
+
+    def test_convert_suspend_record_bool(self):
+        self.assertTrue(convert_suspend_record_bool('Yes'))
+        self.assertFalse(convert_suspend_record_bool('No'))
+        self.assertFalse(convert_suspend_record_bool(''))
 
 
 

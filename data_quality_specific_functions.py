@@ -22,7 +22,7 @@ def dq_z30_call_no_type__valid_cal_no_type(code):
 def dq_z13u_user_defined_10__valid_holding_own_code(code):
     holding_own_dict = data_quality_utilities.create_dict_from_csv('holding_own_code.csv')
     try:
-        result = holdin_own_dict[code]
+        result = holding_own_dict[code]
         return True
     except KeyError:
         print('\tHolding own code ' + code + 'is invalid.')

@@ -37,17 +37,19 @@ def is_less_than_eq_to_length(input, length):
         return False
 
 
-# checks to see if there are no nulls, all spaces, or all zeros
+# checks to see if there are no nulls, empty string, all spaces, or all zeros
 def no_missing_values(input):
     output = True
     # check for all zeros nulls, or white spaces
     if input is None:
         output = False
-    if input.isspace():
+    elif input is '':
         output = False
-    if input.isnumeric():
-        if int(input) != 0:
-            output = True
+    elif input.isspace():
+        output = False
+    elif input.isnumeric():
+        if int(input) == 0:
+            output = False
     return output
 
 

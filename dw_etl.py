@@ -165,6 +165,7 @@ table_config_path = os.path.join('table_config', 'library_item_dimension.json')
 
 # load table config JSON
 table_config = table_transform.load_table_config(table_config_path)
+pdb.set_trace()
 
 
 # Use a function which uses the table metadata config files and performs the transformations
