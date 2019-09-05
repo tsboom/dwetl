@@ -13,7 +13,6 @@ class Test_z30_rec_key(unittest.TestCase):
         self.table_config = load_table_config(table_config_path)
 
 
-
     def test_valid_z30_rec_key(self):
         # create field object
         z30_rec_key = TransformField('in_z30_rec_key', '000001200000020', 'dw_stg_2_lbry_item_z30')
@@ -49,6 +48,11 @@ class Test_z30_rec_key(unittest.TestCase):
         # Decide what DQ failed result should be
         expected_dqs = [
             {'name': 'no_missing_values', 'result': '', 'target_col_name': 'LBRY_ITEM_SOURCE_SYSTEM_ID', 'check_passed': False},
+            {'name': 'is_valid_length', 'result': '', 'target_col_name': 'LBRY_ITEM_SOURCE_SYSTEM_ID',
+             'check_passed': False},
+            {'name': 'is_numeric', 'result': '', 'target_col_name': 'LBRY_ITEM_SOURCE_SYSTEM_ID',
+             'check_passed': False}
+
         ]
         self.assertEqual(expected_dqs, z30_rec_key.record['dq'])
 
