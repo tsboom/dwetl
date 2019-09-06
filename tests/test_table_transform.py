@@ -12,11 +12,6 @@ Unit tests for table_transform.py
 
 class TestTableTransform(unittest.TestCase):
 
-    # def test_load_table_config(self):
-    #     TABLE_PATH = os.path.join('tests','data','test_table_config_z30.json')
-    #     table_config = load_table_config(TABLE_PATH)
-    #     self.assertEqual(table_config['title'],'z30')
-
     def test_get_isbn_issn_code(self):
         self.assertEqual(get_isbn_issn_code('in_z13_isbn_issn',data_get_isbn_issn_none),'   ')
         self.assertEqual(get_isbn_issn_code('in_z13_isbn_issn',data_get_isbn_issn_020),'020')
