@@ -73,7 +73,6 @@ def preprocess(field, table_config):
         return field.value
     except KeyError:
         # print(field.name + " does not exist in table_config")
-        print('No preprocessing for ' + field.name)
         return field.value
 
 def functions_from_module(module):
@@ -164,7 +163,6 @@ def execute_transform(specific_transform_function, arg1, arg2, field, transforma
             elif arg1:
                 t_result = function_object(field, arg1)
             else:
-                print('Inconsistent number of arguments to transform_function')
                 break
         else:
             continue
@@ -180,14 +178,13 @@ def check_transform(field, transformations_list, transform_obj):
         if specific_transform_function:
             arg1 = transform_obj.get('transformation_info', {}).get('specific_transform_function_param1')
             arg2 = transform_obj.get('transformation_info', {}).get('specific_transform_function_param2')
-            print(field.name, arg1, arg2)
             # get the name of the target column
             target_col_name = transform_obj['target_col_name']
             t_result = execute_transform(specific_transform_function, arg1, arg2, field, transformations_list)
             result = {'name': specific_transform_function, 'result': t_result, 'target_col_name': target_col_name}
             return result
-    except KeyError:
-        print(field.name + ' - Transformation: Move As-Is.')
+    except:
+        pass
 
 
 def run_transformations(field, transformations_list, table_config):
@@ -195,7 +192,6 @@ def run_transformations(field, transformations_list, table_config):
     transform_list = obj['transformation_steps']
     for transform_obj in transform_list:
         t_result = check_transform(field, transformations_list, transform_obj)
-        print(pprint.pprint(t_result))
         field.record_transform(t_result)
 
 
@@ -248,7 +244,6 @@ def is_suspend_record(field, table_config):
                 is_suspend = convert_suspend_record_bool(dq['suspend_record'])
                 if check['name'] == dq['specific_dq_function'] and is_suspend:
                     result = True
-                    print(f"SUSPENDED {field.name}  Failed DQ Check: {dq['type']}")
     return result
 
 def suspend_record(field):
