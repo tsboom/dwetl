@@ -51,12 +51,11 @@ def transform_row(sa_row):
     # fields to transform
     fields = []
     row_dict = sa_row.__dict__
-    table_name = sa_row.__table__.name
     for column in sa_row.__table__.columns.keys():
         if column.startswith('in_'):
             field_value = row_dict[column]
             optional_isbn_code = get_isbn_issn_code(column, row_dict)
-            fields.append(TransformField(column, field_value, table_name, isbn_issn_code=optional_isbn_code))
+            fields.append(TransformField(column, field_value, isbn_issn_code=optional_isbn_code))
     return fields
 
 
@@ -214,7 +213,7 @@ def run_transformations(field, transformations_list, table_config):
 
 def transform_field(field, table_config):
     '''
-    Using the field name and value, run transformations and log to the field's log
+    Using the field name and value, run transformations and log to the field's record
     '''
     try:
         # remove "in_" from field name
@@ -265,23 +264,39 @@ def is_suspend_record(field, table_config):
                     print(f"SUSPENDED {field.name}  Failed DQ Check: {dq['type']}")
     return result
 
+def suspend_record(field):
+    # write suspend metadata to the record
+    print('temp')
 
 
 
+
+'''
+
+main function to load stg_2 table PP, DQ, T1, T2.. etc
+
+'''
 def transform_stg2_table(engine, table_config, table, dwetl_logger):
-    '''
-    main function to load stg_2 table PP, DQ, T1, T2.. etc
-    '''
+
     Session = sessionmaker(bind=engine)
     session = Session()
 
     # process the row, iterate over each field in the row and transform
     for row in session.query(table).all():
         row_fields = transform_row(row)
+        suspend_exists = False
+        check_exception_count = 0
+
         for field in row_fields:
             transform_field(field, table_config)
             if not field.is_valid():
-                # find out if record needs to be suspended
-                # suspend it
+                # find out if record needs to be suspended, suspend it
+                # create dict of properties that neec to be written to the record
+                if is_suspend_record(field, table_config):
+                    rm_props = { 'rm_suspend_rec_flag': 'Y', 'rm_suspend_rec_reason_cd': '', 'rm_dq_check_exception_cnt': 0}
+                # testing sa
+
+
+
                 print('temp')
                 # set exceptions count

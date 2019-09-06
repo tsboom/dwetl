@@ -10,19 +10,19 @@ class TestTransformField(unittest.TestCase):
     #     self.assertEqual(table_config['title'],'z30')
 
     def test_is_valid(self):
-        field = TransformField('in_z30_rec_key', '000001200000020', 'dw_stg_2_lbry_item_z30')
+        field = TransformField('in_z30_rec_key', '000001200000020')
         field.record_dq({'check_passed': True})
         field.record_dq({'check_passed': True})
         field.record_dq({'check_passed': True})
         self.assertTrue(field.is_valid())
 
-        field = TransformField('in_z30_rec_key', '000001200000020', 'dw_stg_2_lbry_item_z30')
+        field = TransformField('in_z30_rec_key', '000001200000020')
         field.record_dq({'check_passed': True})
         field.record_dq({'check_passed': False})
         field.record_dq({'check_passed': True})
         self.assertFalse(field.is_valid())
 
-        field = TransformField('in_z30_rec_key', '000001200000020', 'dw_stg_2_lbry_item_z30')
+        field = TransformField('in_z30_rec_key', '000001200000020')
         self.assertTrue(field.is_valid())
 
 

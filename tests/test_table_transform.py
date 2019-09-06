@@ -28,12 +28,12 @@ class TestTableTransform(unittest.TestCase):
         TABLE_PATH = os.path.join('table_config', 'bibliographic_record_dimension.json')
         table_config = load_table_config(TABLE_PATH)
         #testing trim preprocessing function
-        a = TransformField('in_z13_title','   A title with some extraneous spaces     ' , 'dw_stg_2_bib_rec_z13')
+        a = TransformField('in_z13_title','   A title with some extraneous spaces     ')
         # pdb.set_trace()
         self.assertEqual(preprocess(a, table_config), 'A title with some extraneous spaces')
 
         #testing date no preprocessing no output $$$this is a bad test as processing occurs after dq whoops
-        b = TransformField('in_z13_open_date',20021124, 'dw_stg_2_bib_rec_z13')
+        b = TransformField('in_z13_open_date',20021124)
         self.assertEqual(preprocess(b, table_config), 20021124)
 
         #testing terminal output of no preprocessing
@@ -111,17 +111,17 @@ class TestTableTransform(unittest.TestCase):
         TABLE_PATH = os.path.join('table_config', 'library_item_dimension.json')
         table_config = load_table_config(TABLE_PATH)
         # normal value
-        field = TransformField('in_z30_rec_key', '000001200000020', 'dw_stg_2_lbry_item_z30')
+        field = TransformField('in_z30_rec_key', '000001200000020')
         transform_field(field, table_config)
         self.assertFalse(is_suspend_record(field, table_config))
 
         # testing field.value is empty
-        field = TransformField('in_z30_rec_key', ' ', 'dw_stg_2_lbry_item_z30')
+        field = TransformField('in_z30_rec_key', ' ')
         transform_field(field, table_config)
         self.assertTrue(is_suspend_record(field, table_config))
 
         # check record that fails dq, but isn't suspended
-        field = TransformField('in_z30_barcode', '    31430058801988       ', 'dw_stg_2_lbry_item_z30')
+        field = TransformField('in_z30_barcode', '    31430058801988       ')
         transform_field(field, table_config)
         self.assertFalse(field.is_valid())
         self.assertFalse(is_suspend_record(field, table_config))

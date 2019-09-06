@@ -15,7 +15,7 @@ class Test_z30_rec_key(unittest.TestCase):
 
     def test_valid_z30_rec_key(self):
         # create field object
-        z30_rec_key = TransformField('in_z30_rec_key', '000001200000020', 'dw_stg_2_lbry_item_z30')
+        z30_rec_key = TransformField('in_z30_rec_key', '000001200000020')
 
         # feed into something
         transform_field(z30_rec_key, self.table_config)
@@ -41,7 +41,7 @@ class Test_z30_rec_key(unittest.TestCase):
 
 
     def test_missing_z30_rec_key(self):
-        z30_rec_key = TransformField('in_z30_rec_key', '', 'dw_stg_2_lbry_item_z30')
+        z30_rec_key = TransformField('in_z30_rec_key', '')
         transform_field(z30_rec_key, self.table_config)
 
         # test expected dqs
