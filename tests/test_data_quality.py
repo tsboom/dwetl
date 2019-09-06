@@ -1,20 +1,19 @@
 # from dwetl import dw_etl
-
-import sys
-from data_quality_utilities import *
-from data_quality_specific_functions import *
-from specific_transform_functions import *
-from TransformField import TransformField
-import unittest
-#from unittest import mock
 import datetime
 import csv
+import data_quality_utilities
+# from data_quality_utilities import *
+import unittest
+from TransformField import TransformField
+
+
+
 
 '''
-dataquality tests
+data_quality_utilities.py tests
 '''
 
-class TestDQ(unittest.TestCase):
+class TestDataQualityUtilities(unittest.TestCase):
     #test if right exceptions are thrown when given bad data
 
     #def test_is_numeric(self):
@@ -146,114 +145,10 @@ class TestDQ(unittest.TestCase):
         #Test that out-of-range time stamp fails
         self.assertFalse(data_quality_utilities.is_valid_hour(2515))
 
-# #spcific_transform_function tests
-#     def test_substring(self):
-#         self.assertEqual(specific_transform_functions())
-
-#data_quality_specific_functions
-    def test_dq_z13u_holding_code(self):
-
-        #Test known value
-        self.assertEqual(dq_z13u_user_defined_10__valid_holding_own_code("CP"), True)
-
-        #Is it sufficient to run a test on a hard-coded value or is it better to dynamically pull data from source?
-    def test_dq_z13u_user_defined_2(self):
-
-        #test ocm number
-        self.assertTrue(dq_z13u_user_defined_2("ocm00265003"))
-
-        #test fail ocm len
-        self.assertFalse(dq_z13u_user_defined_2("ocm0026500"))
-
-        #test ocn number
-        self.assertTrue(dq_z13u_user_defined_2("ocn464584694"))
-
-        #test fail ocn len
-        self.assertFalse(dq_z13u_user_defined_2("ocn46458469"))
-
-        #test on number
-        self.assertTrue(dq_z13u_user_defined_2("on1245789453"))
-
-        #test None
-        #self.assertTrue(dq_z13u_user_defined_2(''))
-        #Should the above test pass? Unclear from reading the function.
-
-#specific_transform_functions
-    def test_transform_sub(self):
-        #Test field substring
-        a = TransformField('245','This is an exceptionally long title but we are using it as an example')
-        self.assertEqual(substring(a,0,35),'This is an exceptionally long title')
 
 #    def test_output_standard(self):
 #        b = TransformField('')
 
-    def test_remove_ocm_ocn_on(self):
-        #test ocn recognition and transform
-        c = TransformField('z13u_user_defined_2','ocn748578120')
-        self.assertEqual(remove_ocm_ocn_on(c),'748578120')
-
-        #test ocm recognition and transform
-        d = TransformField('z13u_user_defined_2','ocm00003739')
-        self.assertEqual(remove_ocm_ocn_on(d),'00003739')
-
-        #test on recognition and transform
-        e = TransformField('z13u_user_defined_2','on1038022607')
-        self.assertEqual(remove_ocm_ocn_on(e),'1038022607')
-
-    def test_isAcqCreated(self):
-        #test to confirm is_acq_created works with upper, lower, mixed, and fail
-        i = TransformField('z13u_user_defined_6','acq-created ||')
-        j = TransformField('z13u_user_defined_6','ACQ-CREATED ||')
-        k = TransformField('z13u_user_defined_6','NOT-acq-created')
-        l = TransformField('z13u_user_defined_6','Shpoomples')
-        self.assertEqual(is_acq_created(i),'Y')
-        self.assertEqual(is_acq_created(j),'Y')
-        self.assertEqual(is_acq_created(k),'Y')
-        self.assertEqual(is_acq_created(l),'N')
-
-    def test_isCircCreated(self):
-        #test to confirm is_circ_created works with upper, lower, mixed, and fail
-        m = TransformField('z13u_user_defined_6','circ-created suppressed ||')
-        n = TransformField('z13u_user_defined_6','CIRC-CREATED SUPPRESSED || ')
-        o = TransformField('z13u_user_defined_6','Shpoomples')
-        self.assertEqual(is_circ_created(m),'Y')
-        self.assertEqual(is_circ_created(n),'Y')
-        self.assertEqual(is_circ_created(o),'N')
-
-    def test_isProvisional(self):
-        #test to confirm is_provisional works with upper, lower, mixed, and fail
-        p = TransformField('z13u_user_defined_6','provisional')
-        q = TransformField('z13u_user_defined_6','pRoViSiOnAl')
-        r = TransformField('z13u_user_defined_6','Shpoomples')
-        self.assertEqual(is_provisional(p),'Y')
-        self.assertEqual(is_provisional(q),'Y')
-        self.assertEqual(is_provisional(r),'N')
-
-    def test_isSuppressed(self):
-        #test to confirm is_suppressed works with upper, lower, mixed, and fail
-        s = TransformField('LBRY_HOLDING_DISPLAY_SUPPRESSED_FLAG','suppressed')
-        t = TransformField('LBRY_HOLDING_DISPLAY_SUPPRESSED_FLAG','SuPpReSsEd')
-        u = TransformField('LBRY_HOLDING_DISPLAY_SUPPRESSED_FLAG','Shpoomples')
-        self.assertEqual(is_suppressed(s),'Y')
-        self.assertEqual(is_suppressed(t),'Y')
-        self.assertEqual(is_suppressed(u),'N')
-#^^should test value be LBRY_HOLDING_DISPLAY_SUPPRESSED_FLAG or z13u_user_defined_6?
-
-    # def test_subLookUp(self):
-    #     #test code lookup from CSV table
-    #     f = TransformField('z13u_user_defined_3','750424m19769999wiub^^^^^b^^^^001^0^eng^^')
-    #     self.assertEqual(subLookUp(f,'lookup_tables/encoding_level.csv',17,18),'Unknown')
-    #     self.assertEqual(subLookUp(f,'lookup_tables/bibliographic_level.csv',6,7),'Monograph/Item')
-    #     #blank vs ^? is there an established protocol for our data b/c there's a disagreement between data & lookups
-
-    # TODO: Write z13 condition
-    def test_isbn_code_020(self):
-        #test isbn_issn check function
-        g = TransformField('z13_isbn_issn','177091921X','020')
-        self.assertEqual(isbn_code_020(g),'177091921X')
-
-        h = TransformField('z13_isbn_issn','177091921X','022')
-        self.assertEqual(issn_code_022(h),'177091921X')
 
 if __name__ == '__main__':
     unittest.main()
