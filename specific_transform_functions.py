@@ -29,7 +29,7 @@ bibliographic record dimension transform functions
 # # source field Z13_ISBN_ISSN using optional_isbn_code
 def isbn_code_020(field):
     if field.isbn_issn_code == '020':
-        isbn_issn = field.record['dq']
+        isbn_issn = field.value
     else:
         # Alex says "treat as empty field" not sure if this is empty string or None
         isbn_issn = ''
@@ -37,7 +37,7 @@ def isbn_code_020(field):
 
 def issn_code_022(field):
     if field.isbn_issn_code == '022':
-        isbn_issn = field.record['dq']
+        isbn_issn = field.value
     else:
         isbn_issn = ''
     return isbn_issn
