@@ -70,9 +70,9 @@ class Test_z30_rec_key(unittest.TestCase):
         # test expected dqs
         # Decide what DQ failed result should be
         expected_dqs = [
-            {'name': 'no_missing_values', 'result': '', 'target_col_name': 'LBRY_ITEM_SOURCE_SYSTEM_ID', 'check_passed': True},
-            {'name': 'is_valid_length', 'result': 'thisisawronglengthstring', 'target_col_name': 'LBRY_ITEM_SOURCE_SYSTEM_ID', 'check_passed': True},
-            {'name': 'is_numeric', 'result': 'thisisnotnumeric', 'target_col_name': 'LBRY_ITEM_SOURCE_SYSTEM_ID', 'check_passed': False}
+            {'name': 'no_missing_values', 'result': 'thisisnotnumeri', 'target_col_name': 'LBRY_ITEM_SOURCE_SYSTEM_ID', 'check_passed': True},
+            {'name': 'is_valid_length', 'result': 'thisisnotnumeri', 'target_col_name': 'LBRY_ITEM_SOURCE_SYSTEM_ID', 'check_passed': True},
+            {'name': 'is_numeric', 'result': '', 'target_col_name': 'LBRY_ITEM_SOURCE_SYSTEM_ID', 'check_passed': False}
         ]
 
 

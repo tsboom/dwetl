@@ -90,20 +90,15 @@ def is_provisional(field):
     else:
         return 'N'
 
-
-#ref should be path to csv lookup table
-#works for z30_call_no_type and z30_call_no_2_type
-
-
 #z13u_user_defined_3 value parsing (can this be combined with the command above? requires substring handling based on check)
 """ with the optional start and stop arguments, this should work for full strings or substrings (I think) """
 import csv
-def sub_look_Up(field, ref, start=0, end=None):
+def sub_look_up(field, ref, start=0, end=None):
     with open(ref, 'r') as f:
         lookup_table = csv.reader(f)
         for (key,value) in lookup_table:
-                if field.value[start:end] in key:
-                    return value
+            if field.value[start:end] in key:
+                return value
 #^^^ what substring will we be checking against, I'm not clear.
 
 
