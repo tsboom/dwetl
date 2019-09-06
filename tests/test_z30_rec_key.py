@@ -47,14 +47,33 @@ class Test_z30_rec_key(unittest.TestCase):
         # test expected dqs
         # Decide what DQ failed result should be
         expected_dqs = [
-            {'name': 'no_missing_values', 'result': '', 'target_col_name': 'LBRY_ITEM_SOURCE_SYSTEM_ID', 'check_passed': False},
-            {'name': 'is_valid_length', 'result': '', 'target_col_name': 'LBRY_ITEM_SOURCE_SYSTEM_ID',
-             'check_passed': False},
-            {'name': 'is_numeric', 'result': '', 'target_col_name': 'LBRY_ITEM_SOURCE_SYSTEM_ID',
-             'check_passed': False}
-
+            {'name': 'no_missing_values', 'result': '', 'target_col_name': 'LBRY_ITEM_SOURCE_SYSTEM_ID', 'check_passed': False}
         ]
         self.assertEqual(expected_dqs, z30_rec_key.record['dq'])
+
+    def test_bad_length_z30_rec_key(self):
+        z30_rec_key = TransformField('in_z30_rec_key', 'thisisawronglengthstring')
+        transform_field(z30_rec_key, self.table_config)
+
+        # test expected dqs
+        # Decide what DQ failed result should be
+        expected_dqs = [
+            {'name': 'no_missing_values', 'result': 'thisisawronglengthstring', 'target_col_name': 'LBRY_ITEM_SOURCE_SYSTEM_ID', 'check_passed': True},
+            {'name': 'is_valid_length', 'result': '', 'target_col_name': 'LBRY_ITEM_SOURCE_SYSTEM_ID', 'check_passed': False}
+        ]
+        self.assertEqual(expected_dqs, z30_rec_key.record['dq'])
+
+    def test_not_numeric_z30_rec_key(self):
+        z30_rec_key = TransformField('in_z30_rec_key', 'thisisnotnumeric')
+        transform_field(z30_rec_key, self.table_config)
+
+        # test expected dqs
+        # Decide what DQ failed result should be
+        expected_dqs = [
+            {'name': 'no_missing_values', 'result': '', 'target_col_name': 'LBRY_ITEM_SOURCE_SYSTEM_ID', 'check_passed': True},
+            {'name': 'is_valid_length', 'result': 'thisisawronglengthstring', 'target_col_name': 'LBRY_ITEM_SOURCE_SYSTEM_ID', 'check_passed': True},
+            {'name': 'is_numeric', 'result': 'thisisnotnumeric', 'target_col_name': 'LBRY_ITEM_SOURCE_SYSTEM_ID', 'check_passed': False}
+        ]
 
 
 

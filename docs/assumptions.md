@@ -48,3 +48,7 @@ Questions:
   - em_update_tmstmp
 
 -  Do not do PP, DQ for Deletes
+- Data quality checking: 
+  - When a DQ check fails, no other DQ checks are run
+  - We aren't looking at the Order in the Sheet
+  - 
