@@ -44,29 +44,7 @@ class TestTableTransform(unittest.TestCase):
 
         #z13u preprocess test
 
-#    def test_dq_func_list(self):
-    @unittest.skip('rewrite this test or delete as unnecessary')
-    def test_func_from_mod(self):
-        dqu_check = functions_from_module(dqu)
-        dqs_check = functions_from_module(dqs)
 
-        #test output is list
-        self.assertIsInstance(dqu_check, list)
-        self.assertIsInstance(dqs_check, list)
-
-        '''test sys generated list of function name matches established test variable, if new checks are added, this test will fail, so a nice check on future wor;
-        I'm honestly not sure how to work with the regularly returned output of functions_from_module '''
-        func_names = []
-        for i in dqu_check:
-            func_names.append(i[0])
-        for i in func_names:
-            self.assertTrue(i in dqu_func_names_list)
-
-        spec_func_names = []
-        for i in dqs_check:
-            spec_func_names.append(i[0])
-        for i in spec_func_names:
-            self.assertTrue(i in dqs_func_names_list)
 
 #    def test_run_dq_checks(self):
 

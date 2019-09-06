@@ -247,14 +247,13 @@ class TestDQ(unittest.TestCase):
     #     #blank vs ^? is there an established protocol for our data b/c there's a disagreement between data & lookups
 
     # TODO: Write z13 condition
-    @unittest.skip("need to check z13 condition")
-    def test_z13cond(self):
+    def test_isbn_code_020(self):
         #test isbn_issn check function
         g = TransformField('z13_isbn_issn','177091921X','020')
-        self.assertEqual(z13cond(g),'177091921X')
+        self.assertEqual(isbn_code_020(g),'177091921X')
 
         h = TransformField('z13_isbn_issn','177091921X','022')
-        self.assertEqual(z13cond(h),'177091921X')
+        self.assertEqual(issn_code_022(h),'177091921X')
 
 if __name__ == '__main__':
     unittest.main()
