@@ -126,35 +126,26 @@ def check_data_quality(check, dq_funcs_list, field):
     if is_passing is True:
         field_dq_result = field.value
     elif is_passing is False:
-        # print(Fore.RED + 'DQ '+ function_name +' FAILED for source(' + field.name + ') target('  + target_col_name + ') - ' + field.value)
-
         field_dq_result = get_replacement_value(check)
-
-        # print("deal with dimension_link_to_records. replacement_value is: " + field_dq_result)
     else:
-        # print('DQ check' + function_name + ' was not found in dq functions.')
-
         field_dq_result = 'ERROR no result'
 
     # save name and result of dq check
-    print(Style.RESET_ALL)
     result = {'name': function_name, 'result': field_dq_result, 'target_col_name': target_col_name, 'check_passed': is_passing}
     return result
 
 
 
 def run_dq_checks(field, dq_funcs_list, table_config):
-    try:
-        # find matching transform information from table_config for current field
-        transform_info = table_config[field.name[3:]]
-        # find list of dq checks for that object
-        dq_list = transform_info['dataquality_info']
-        for check in dq_list:
-            result = check_data_quality(check, dq_funcs_list, field)
-            field.record_dq(result)
-    except KeyError:
-        print(field.name +' has no DQ checks.')
-
+    # find matching transform information from table_config for current field
+    transform_info = table_config[field.name[3:]]
+    # find list of dq checks for that object
+    dq_list = transform_info['dataquality_info']
+    for check in dq_list:
+        result = check_data_quality(check, dq_funcs_list, field)
+        field.record_dq(result)
+        if result['check_passed'] == False:
+            break
 
 
 def execute_transform(specific_transform_function, arg1, arg2, field, transformations_list):
@@ -200,46 +191,42 @@ def check_transform(field, transformations_list, transform_obj):
 
 
 def run_transformations(field, transformations_list, table_config):
-    try:
-        obj = table_config[field.name[3:]]
-        transform_list = obj['transformation_steps']
-        for transform_obj in transform_list:
-            t_result = check_transform(field, transformations_list, transform_obj)
-            print(pprint.pprint(t_result))
-            field.record_transform(t_result)
-    except KeyError:
-        print(field.name + ' - Transformation: Move As-Is.\n\n\n')
+    obj = table_config[field.name[3:]]
+    transform_list = obj['transformation_steps']
+    for transform_obj in transform_list:
+        t_result = check_transform(field, transformations_list, transform_obj)
+        print(pprint.pprint(t_result))
+        field.record_transform(t_result)
+
 
 
 def transform_field(field, table_config):
     '''
     Using the field name and value, run transformations and log to the field's record
     '''
-    try:
-        # remove "in_" from field name
-        field_name = field.name[3:]
-        if table_config[field_name]:
+    # remove "in_" from field name
+    field_name = field.name[3:]
+    if table_config[field_name]:
 
-            # run pp
-            result = preprocess(field, table_config)
-            field.record_pp(result)
+        # run pp
+        result = preprocess(field, table_config)
+        field.record_pp(result)
 
-            # set up dq by creating list of dq function objects from utilities
-            # and data quality specific functions
-            dq_funcs_list = functions_from_module(dqs) + functions_from_module(dqu)  # TODO, do this only once outside this func
+        # set up dq by creating list of dq function objects from utilities
+        # and data quality specific functions
+        dq_funcs_list = functions_from_module(dqs) + functions_from_module(dqu)  # TODO, do this only once outside this func
 
-            # run dq
-            run_dq_checks(field, dq_funcs_list, table_config)
+        # run dq
+        run_dq_checks(field, dq_funcs_list, table_config)
 
-            # set up list of specific transformation functions from module
-            transformations_list = functions_from_module(stf)  # TODO  same ^
+        # set up list of specific transformation functions from module
+        transformations_list = functions_from_module(stf)  # TODO  same ^
 
-            # run transformations
-            run_transformations(field, transformations_list, table_config)
-            pprint.pprint(field.record)
-            # write_log(field.name, field.log) # writes to stage 2 db
-    except KeyError:
-        print("\n" + field.name + " is not in dimension being processed.\n")
+        # run transformations
+        run_transformations(field, transformations_list, table_config)
+        # pprint.pprint(field.record)
+        # write_log(field.name, field.log) # writes to stage 2 db
+
 
 def convert_suspend_record_bool(suspend_record):
     if suspend_record == 'Yes':
