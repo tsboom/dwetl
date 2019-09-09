@@ -1,6 +1,6 @@
 import unittest
-import specific_transform_functions
-from TransformField import TransformField
+from dwetl import specific_transform_functions
+from dwetl.transform_field import TransformField
 
 
 '''
@@ -68,11 +68,6 @@ class TestSpecificTransformFunctions(unittest.TestCase):
 
         field = TransformField('z13u_user_defined_6', 'Shpoomples')
         self.assertEqual(specific_transform_functions.is_provisional(field), 'N')
-
-
-
-
-
 
     def test_sub_look_up(self):
         #test code lookup from CSV table
