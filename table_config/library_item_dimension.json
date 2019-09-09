@@ -886,7 +886,7 @@
                 "suspend_record": "No",
                 "exception_memorialization": "Create Exception Record",
                 "exception_message": "Missing Value",
-                "replacement_value": "\"Missing Value\"",
+                "replacement_value": "Missing Value",
                 "dimension_link_to_record": "N/A"
             },
             {
@@ -909,7 +909,7 @@
                 "suspend_record": "No",
                 "exception_memorialization": "Create Exception Record",
                 "exception_message": "Leading Spaces",
-                "replacement_value": "\"Leading Spaces in Value\"",
+                "replacement_value": "Leading Spaces in Value",
                 "dimension_link_to_record": "N/A"
             }
         ],

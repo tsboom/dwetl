@@ -2,6 +2,7 @@ import datetime
 import os
 import csv
 import pdb
+
 # use pdb.set_trace() to set a breakpoint
 
 '''
@@ -37,17 +38,19 @@ def is_less_than_eq_to_length(input, length):
         return False
 
 
-# checks to see if there are no nulls, all spaces, or all zeros
+# checks to see if there are no nulls, empty string, all spaces, or all zeros
 def no_missing_values(input):
     output = True
     # check for all zeros nulls, or white spaces
     if input is None:
         output = False
-    if input.isspace():
+    elif input is '':
         output = False
-    if input.isnumeric():
-        if int(input) != 0:
-            output = True
+    elif input.isspace():
+        output = False
+    elif input.isnumeric():
+        if int(input) == 0:
+            output = False
     return output
 
 
@@ -64,16 +67,12 @@ def is_valid_aleph_year(year):
         return False
     else:
         return True
-# ^^^ exception doesn't seem to work, rewrote it to be a simple if/else. Can this be altered to then throw an error?
 
 def no_leading_space(input):
     if input[0].isspace():
         return False
     else:
         return True
-
-
-# checks if valid date 1980-present
 
 
 # need to make sure null passes missing value data quality
@@ -84,23 +83,7 @@ def is_valid_aleph_date(string_date):
         return True
     else:
         return False
-# ^^^ same issue as above I'd imagine. Also is_valid_aleph_year doesn't strip out just the year from the incoming date.
-# Do we need to ensure that the incoming information is stringified?
-# We then need to int the string to work with is_valid_aleph_year because it is expecting an int
-# is valid aleph date gonna check if the date has occured yet? Should we have it do so?
-# TypeError for nonstrings?
 
-
-# def is_valid_aleph_date_redux(string_date):
-#     try:
-#         string_date_valid = datetime.datetime.strptime(string_date, '%Y%m%d').strftime('%Y%m%d')
-#         if string_date == string_date_valid and is_valid_aleph_year(int(string_date[0:4])):
-#             return True
-#         else:
-#             return False
-# #    except TypeError:
-# #        print(str(string_date) + " is not a string")
-# # rewrite to remove year check
 
 # # checks if hour is valid HHMM format
 def is_valid_hour(hhmm):

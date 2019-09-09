@@ -1,3 +1,11 @@
+from sqlalchemy import inspect, create_engine
+from sqlalchemy import exc
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.engine import reflection
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy import MetaData
+
 import pdb
 import pprint
 from colorama import init, Fore, Back, Style
@@ -11,13 +19,7 @@ from os import walk
 import logging
 import datetime
 import sqlalchemy
-from sqlalchemy import inspect, create_engine
-from sqlalchemy import exc
-from sqlalchemy.ext.automap import automap_base
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.engine import reflection
-from sqlalchemy.ext.automap import automap_base
-from sqlalchemy import MetaData
+
 # import database_config
 import database_credentials
 import table_transform
@@ -26,7 +28,6 @@ import loadstg2
 import importlib
 
 # pdb.set_trace() to pause script in interactive mode
-
 
 
 
@@ -165,6 +166,7 @@ table_config_path = os.path.join('table_config', 'library_item_dimension.json')
 
 # load table config JSON
 table_config = table_transform.load_table_config(table_config_path)
+
 
 
 # Use a function which uses the table metadata config files and performs the transformations
