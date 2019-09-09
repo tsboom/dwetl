@@ -1,5 +1,5 @@
 import csv
-import data_quality_utilities
+from dwetl import data_quality_utilities
 
 def dq_z30_temp_location(in_value):
     return in_value in ('Y', 'N')

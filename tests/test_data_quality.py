@@ -1,10 +1,8 @@
 # from dwetl import dw_etl
 import datetime
 import csv
-import data_quality_utilities
-# from data_quality_utilities import *
 import unittest
-from TransformField import TransformField
+from dwetl import data_quality_utilities
 
 
 

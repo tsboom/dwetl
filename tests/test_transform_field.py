@@ -1,6 +1,6 @@
 import pdb
 import unittest
-from TransformField import *
+from dwetl.transform_field import TransformField
 
 class TestTransformField(unittest.TestCase):
 

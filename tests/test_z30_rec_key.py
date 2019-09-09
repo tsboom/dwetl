@@ -1,16 +1,15 @@
 import unittest
-from table_transform import *
 import os
-from .data.test_variables import *
-from TransformField import *
+from dwetl import table_transform
+from dwetl.transform_field import TransformField
 
 
-class Test_z30_rec_key(unittest.TestCase):
+class TestZ30RecKey(unittest.TestCase):
 
     def setUp(self):
         # load table config JSON
         table_config_path = os.path.join('table_config', 'library_item_dimension.json')
-        self.table_config = load_table_config(table_config_path)
+        self.table_config = table_transform.load_table_config(table_config_path)
 
 
     def test_valid_z30_rec_key(self):
@@ -18,7 +17,7 @@ class Test_z30_rec_key(unittest.TestCase):
         z30_rec_key = TransformField('in_z30_rec_key', '000001200000020')
 
         # feed into something
-        transform_field(z30_rec_key, self.table_config)
+        table_transform.transform_field(z30_rec_key, self.table_config)
 
         # test pp
         self.assertEqual('000001200000020', z30_rec_key.record['pp'])
@@ -42,7 +41,7 @@ class Test_z30_rec_key(unittest.TestCase):
 
     def test_missing_z30_rec_key(self):
         z30_rec_key = TransformField('in_z30_rec_key', '')
-        transform_field(z30_rec_key, self.table_config)
+        table_transform.transform_field(z30_rec_key, self.table_config)
 
         # test expected dqs
         # Decide what DQ failed result should be
@@ -53,7 +52,7 @@ class Test_z30_rec_key(unittest.TestCase):
 
     def test_bad_length_z30_rec_key(self):
         z30_rec_key = TransformField('in_z30_rec_key', 'thisisawronglengthstring')
-        transform_field(z30_rec_key, self.table_config)
+        table_transform.transform_field(z30_rec_key, self.table_config)
 
         # test expected dqs
         # Decide what DQ failed result should be
@@ -65,7 +64,7 @@ class Test_z30_rec_key(unittest.TestCase):
 
     def test_not_numeric_z30_rec_key(self):
         z30_rec_key = TransformField('in_z30_rec_key', 'thisisnotnumeric')
-        transform_field(z30_rec_key, self.table_config)
+        table_transform.transform_field(z30_rec_key, self.table_config)
 
         # test expected dqs
         # Decide what DQ failed result should be

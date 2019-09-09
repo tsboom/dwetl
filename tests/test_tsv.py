@@ -1,4 +1,4 @@
-import loadstg1
+from dwetl import loadstg1
 import os
 import pdb
 import unittest

@@ -1,7 +1,3 @@
-#date check
-#dependency transformations
-#valid value lookups
-from TransformField import TransformField
 import pdb
 
 '''
