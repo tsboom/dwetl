@@ -1,7 +1,3 @@
-#date check
-#dependency transformations
-#valid value lookups
-from TransformField import TransformField
 import pdb
 
 '''
@@ -29,7 +25,7 @@ bibliographic record dimension transform functions
 # # source field Z13_ISBN_ISSN using optional_isbn_code
 def isbn_code_020(field):
     if field.isbn_issn_code == '020':
-        isbn_issn = field.record['dq']
+        isbn_issn = field.value
     else:
         # Alex says "treat as empty field" not sure if this is empty string or None
         isbn_issn = ''
@@ -37,7 +33,7 @@ def isbn_code_020(field):
 
 def issn_code_022(field):
     if field.isbn_issn_code == '022':
-        isbn_issn = field.record['dq']
+        isbn_issn = field.value
     else:
         isbn_issn = ''
     return isbn_issn
@@ -90,20 +86,15 @@ def is_provisional(field):
     else:
         return 'N'
 
-
-#ref should be path to csv lookup table
-#works for z30_call_no_type and z30_call_no_2_type
-
-
 #z13u_user_defined_3 value parsing (can this be combined with the command above? requires substring handling based on check)
 """ with the optional start and stop arguments, this should work for full strings or substrings (I think) """
 import csv
-def sub_look_Up(field, ref, start=0, end=None):
+def sub_look_up(field, ref, start=0, end=None):
     with open(ref, 'r') as f:
         lookup_table = csv.reader(f)
         for (key,value) in lookup_table:
-                if field.value[start:end] in key:
-                    return value
+            if field.value[start:end] in key:
+                return value
 #^^^ what substring will we be checking against, I'm not clear.
 
 

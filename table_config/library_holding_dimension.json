@@ -712,7 +712,7 @@
                 "suspend_record": "No",
                 "exception_memorialization": "Create Exception Record",
                 "exception_message": "Missing Value",
-                "replacement_value": "\"-M\"",
+                "replacement_value": "-M",
                 "dimension_link_to_record": "N/A"
             },
             {
@@ -731,7 +731,7 @@
                 "order": "2",
                 "always": "",
                 "only_if_data_exists": "X",
-                "additional_conditions": "",
+                "additional_conditions": "No previous DQ exceptions",
                 "suspend_record": "No",
                 "exception_memorialization": "Create Exception Record",
                 "exception_message": "Invalid Value",

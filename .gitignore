@@ -7,3 +7,4 @@ scripts/credentials.json
 scripts/token_dw.json
 tests/data/reference/
 **/.DS_Store
+.idea

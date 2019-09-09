@@ -1,4 +1,4 @@
-import loadstg1
+from dwetl import loadstg1
 import os
 import pdb
 import unittest
@@ -18,10 +18,11 @@ INVALID_MISSING_HEADER_TSV_PATH = os.path.join('tests','data','test_mai50_z30_20
 class TestTSV(unittest.TestCase):
 
     def test_parse_tsv_filename(self):
-        tsv_name_metadata = loadstg1.parse_tsv_filename(VALID_TEST_TSV_PATH)
-        self.assertEqual(loadstg1.tsv_name_metadata['library'],'mai50')
-        self.assertEqual(loadstg1.tsv_name_metadata['table'],'z30')
-        self.assertEqual(loadstg1.tsv_name_metadata['datetime'],'20190102034001')
+        hhf_dict = loadstg1.get_headers_footer(VALID_TEST_TSV_PATH)
+        tsv_name_metadata = loadstg1.parse_tsv_filename(VALID_TEST_TSV_PATH, hhf_dict)
+        self.assertEqual(tsv_name_metadata['library'],'mai50')
+        self.assertEqual(tsv_name_metadata['table'],'z30')
+        self.assertEqual(tsv_name_metadata['datetime'],'20190102034001')
     # assert tsv_name_metadata['counter'] == 1
 
 # ensure TSV file has at least 3 rows (header, footer, content)

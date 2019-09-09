@@ -187,7 +187,7 @@
                 "suspend_record": "No",
                 "exception_memorialization": "Create Exception Record",
                 "exception_message": "IPS Public Description is blank",
-                "replacement_value": "\"unspecified description\"",
+                "replacement_value": "unspecified description",
                 "dimension_link_to_record": "N/A"
             }
         ],
@@ -241,7 +241,7 @@
                 "suspend_record": "No",
                 "exception_memorialization": "Create Exception Record",
                 "exception_message": "IPS Internal Description is blank",
-                "replacement_value": "\"unspecified description\"",
+                "replacement_value": "unspecified description",
                 "dimension_link_to_record": "N/A"
             }
         ],
