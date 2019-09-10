@@ -26,13 +26,13 @@ Download the requirements
 
 `pip install -r requirements.txt`
 
-Setup the database. See "Database Setup".
+Setup the database. See "Database Setup" in docs.
 
 
 ## Database Setup
 
 There are three ways to setup the database for use in development:
- 
+
 * Use the pgcommondev server
 * Local Postgres installation
 * Docker Postgres container
@@ -247,49 +247,6 @@ These steps correlate with (Alex's high level ETL diagram)[https://drive.google.
 - **Step 10.** Create fact table using surrogate key from each dimension. The fact table links all dimensions together. Using natural keys, populate the fact table with surrogate keys.
 
 
-### Project structure
-```
-dwetl/
-
-├── logs
-│   ├── dwetl.log
-│   ├── sqlalchemy.engine.log
-├── lookup_tables
-│   ├── bibliographic_level.csv
-│   ├── call_no_type.csv
-│   ├── encoding_level.csv
-│   ├── holding_own_code.csv
-│   └── record_type_code.csv
-├── scripts
-│   ├── credentials.json
-│   ├── sheetstojson.py
-│   └── token_dw.json
-├── table_config
-│   ├── bibliographic_record_dimension.json
-│   └── library_item_dimension.json
-├── tests
-│   ├── data
-│   ├── test_database.py
-│   ├── test_dataquality.py
-│   ├── test_table_transform.py
-│   └── test_tsv.py
-└── __init__.py
-├── LICENSE.md
-├── README.md
-├── requirements.txt
-├── TransformField.py
-├── table_transform.py
-├── data_quality_specific_functions.py
-├── data_quality_utilities.py
-├── database_credentials.py
-├── database_tables.py
-├── dwetl.log
-├── exceptions.py
-├── loadstg1.py
-├── loadstg2.py
-├── specific_transform_functions.py
-└── dw_etl.py
-```
 
 
 ## Running the tests
