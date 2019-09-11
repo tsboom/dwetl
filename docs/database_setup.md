@@ -3,8 +3,8 @@
 There are three ways to setup the database for use in development:
 
 * Use the pgcommondev server
-* Docker Postgres container
-* Local Postgres installation
+* [Docker Postgres container](database_setup_docker_postgres.md)
+* [Local Postgres installation](database_setup_local_postgres.md)
 
 
 Each method uses the `config/database_credentials.py` file for configuration. Copy the "config/database_credentials_TEMPLATE.py" file to "config/database_credentials.py", and then edit the file as appropriate for the method you are using.
