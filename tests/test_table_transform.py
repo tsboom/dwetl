@@ -15,9 +15,9 @@ class TestTableTransform(unittest.TestCase):
     @unittest.skip
     def test_get_isbn_issn_code(self):
         self.assertEqual(table_transform.get_isbn_issn_code('in_z13_isbn_issn', table_transform.data_get_isbn_issn_none),'   ')
-        self.assertEqual(get_isbn_issn_code('in_z13_isbn_issn',data_get_isbn_issn_020),'020')
-        self.assertEqual(get_isbn_issn_code('in_z13_isbn_issn',data_get_isbn_issn_022),'022')
-        self.assertEqual(get_isbn_issn_code('in_z13_isbn_issn',data_get_isbn_issn_0220),'022')
+        self.assertEqual(table_transform.get_isbn_issn_code('in_z13_isbn_issn', table_transform.data_get_isbn_issn_020),'020')
+        self.assertEqual(table_transform.get_isbn_issn_code('in_z13_isbn_issn', table_transform.data_get_isbn_issn_022),'022')
+        self.assertEqual(table_transform.get_isbn_issn_code('in_z13_isbn_issn', table_transform.data_get_isbn_issn_0220),'022')
 
     def test_preprocess(self):
         # get table_config

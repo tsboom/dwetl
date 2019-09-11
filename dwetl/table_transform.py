@@ -12,12 +12,11 @@ from sqlalchemy.engine import reflection
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy import MetaData
 
-from dwetl.transform_field import TransformField
-import dwetl.data_quality_specific_functions as dqs
-import dwetl.data_quality_utilities as dqu
-
-import dwetl.specific_transform_functions as stf
-from colorama import init, Fore, Back, Style
+# from dwetl.transform_field import TransformField
+# import dwetl.data_quality_specific_functions as dqs
+# import dwetl.data_quality_utilities as dqu
+# 
+# import dwetl.specific_transform_functions as stf
 
 
 

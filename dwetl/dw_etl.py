@@ -7,9 +7,7 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy import MetaData
 
 import pdb
-import pprint
-from colorama import init, Fore, Back, Style
-init()
+
 import re
 import csv
 import json
@@ -18,7 +16,7 @@ import os
 from os import walk
 import logging
 import datetime
-import sqlalchemy
+
 
 # import database_config
 import database_credentials
@@ -26,6 +24,7 @@ import table_transform
 import loadstg1
 import loadstg2
 import importlib
+import file_equivalent_table_mapping
 
 # pdb.set_trace() to pause script in interactive mode
 
@@ -88,9 +87,12 @@ Base = automap_base()
 Base.prepare(engine, reflect=True)
 
 
+table_map = file_equivalent_table_mapping.get_table_class(filename, Base)
+
+pdb.set_trace()
 # # # bib record dimension file-equivalent-tables
 # bib_rec_stg1_tables = {
-#     'mai01_z00': Base.classes.dw_stg_1_mai01_z00, #has data
+#     'mai01_z00': Base.classes['dw_stg_1_mai01_z00'], #has data
 #     'mai39_z00': Base.classes.dw_stg_1_mai39_z00, #has data
 #     'mai01_z13': Base.classes.dw_stg_1_mai01_z13, #has data
 #     'mai39_z13': Base.classes.dw_stg_1_mai39_z13, # file is empty
