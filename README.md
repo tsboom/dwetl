@@ -26,7 +26,7 @@ Download the requirements
 
 `pip install -r requirements.txt`
 
-Setup the database. See (Database Setup)[docs/database_setup.md] in docs.
+Setup the database. See [Database Setup](docs/database_setup.md) in docs.
 
 
 
@@ -36,7 +36,7 @@ To run the entire ETL process, use  `python dw_etl.py` from inside of your dwetl
 
 ### Project overview
 
-These steps correlate with (Alex's high level ETL diagram)[https://drive.google.com/drive/folders/1z2UkgnvhqQJioESxjUPkUpInaKnBoo3t], and also with the dwetl program. They will need to be refined some more, as Tiffany typed these up from some old notes, but they might be missing details.
+These steps correlate with [Alex's high level ETL diagram](https://drive.google.com/drive/folders/1z2UkgnvhqQJioESxjUPkUpInaKnBoo3t), and also with the dwetl program. They will need to be refined some more, as Tiffany typed these up from some old notes, but they might be missing details.
 
 
 - **Step 1**. Read tab-separated files into a file-equivalent (Stage 1) table in pgcommon dev.
@@ -56,7 +56,7 @@ These steps correlate with (Alex's high level ETL diagram)[https://drive.google.
     - Transform field, write result to field object
       - *specific_transform_functions.py*
   - Write field values  to corresponding PP, DQ, and T1, T2, T3... rows and columns in the Stage 2 table.
-- **Step 4. ** intertable processing on the Library Item Event Z35 stage 2 table. Make sure that the Library Item ID is unique and if so, add Last Loan, Last Renew, and Last Return details to the Library Item Z30 stage 2 table.
+- **Step 4.** intertable processing on the Library Item Event Z35 stage 2 table. Make sure that the Library Item ID is unique and if so, add Last Loan, Last Renew, and Last Return details to the Library Item Z30 stage 2 table.
 - **Step 5.** Grab final value of fields from Stage 2 tables and put into the Stg 3 Dimension tables.
 
   - Pay special attention to z13, z00, z13u because we might get an updated record for z00 but not z13 or z13u. Even though z13 and z13u are blank, they should not override the reporting databases's values with blank information.
