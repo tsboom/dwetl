@@ -2,7 +2,15 @@ from sqlalchemy import exc
 
 
 class SqlAlchemyWriter:
+    """
+    Updates a database table using the given row dictionary.
+    """
     def __init__(self, session, table_base_class):
+        """
+        Constructs the writer
+        :param session: the SqlAlchemy session object to use
+        :param table_base_class: the SqlAlchemy table base class to write to
+        """
         self.session = session
         self.table_base_class = table_base_class
 
