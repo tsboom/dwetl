@@ -27,7 +27,7 @@ pg_restore -d usmai_dw_etl -U postgres <DATABASE_DUMP_FILENAME>
 ```
 Note: You can also create an empty database  (see Database setup)[database_setup.md]
 
-4) In the "config/database_credentials.py" file the following properties can be used:
+4) In the ".env" file the following properties can be used:
 
 ```
 DB_USER = 'postgres'
