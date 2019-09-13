@@ -1,4 +1,5 @@
 import os
+import sys
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -18,7 +19,13 @@ DB_HOST_NAME = os.getenv("DB_HOST_NAME")
 # The port to use to connect to the Postgres server
 DB_PORT = os.getenv("DB_PORT")
 
-DB_CONNECTION_STRING = f'postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST_NAME}:{DB_PORT}/{DB_NAME}'
+DB_CONNECTION_STRING = None
+if DB_USER and DB_PASSWORD and DB_HOST_NAME and DB_PORT and DB_NAME:
+    DB_CONNECTION_STRING = f'postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST_NAME}:{DB_PORT}/{DB_NAME}'
+
+if not DB_CONNECTION_STRING:
+    print("ERROR. Application database has not been configured. Exiting.")
+    sys.exit(1)
 
 '''
 Test Database Settings
@@ -33,7 +40,12 @@ TEST_DB_NAME = os.getenv("TEST_DB_NAME")
 TEST_DB_HOST_NAME = os.getenv("TEST_DB_HOST_NAME")
 TEST_DB_PORT = os.getenv("TEST_DB_PORT")
 
-TEST_DB_CONNECTION_STRING = f'postgresql+psycopg2://{TEST_DB_USER}:{TEST_DB_PASSWORD}@{TEST_DB_NAME}:{TEST_DB_HOST_NAME}/{TEST_DB_PORT}'
+TEST_DB_CONNECTION_STRING = None
+if TEST_DB_USER and TEST_DB_PASSWORD and TEST_DB_NAME and TEST_DB_HOST_NAME and TEST_DB_PORT:
+    TEST_DB_CONNECTION_STRING = f'postgresql+psycopg2://{TEST_DB_USER}:{TEST_DB_PASSWORD}@{TEST_DB_NAME}:{TEST_DB_HOST_NAME}/{TEST_DB_PORT}'
 
 # Boolean used by tests requiring an actual database to determine whether the test database has been configured
-TEST_DB_CONFIGURED = TEST_DB_USER and TEST_DB_PASSWORD and TEST_DB_NAME and TEST_DB_HOST_NAME and TEST_DB_PORT
+if TEST_DB_CONNECTION_STRING:
+    TEST_DB_CONFIGURED = True
+else:
+    TEST_DB_CONFIGURED = False
