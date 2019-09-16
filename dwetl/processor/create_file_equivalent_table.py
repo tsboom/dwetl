@@ -1,9 +1,9 @@
-from dwetl.processing_step import ProcessingStep
+from dwetl.processor.processor import Processor
 
 
-class CreateFileEquivalentTable(ProcessingStep):
+class CreateFileEquivalentTable(Processor):
     """
-    Processing step for creating the file equivalent tables from
+    Processor for creating the file equivalent tables from
     TSV files.
 
     This processing step simply appends the job_info to the given

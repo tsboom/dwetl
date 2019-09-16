@@ -2,7 +2,7 @@ import unittest
 import datetime
 from dwetl.reader.list_reader import ListReader
 from dwetl.writer.list_writer import ListWriter
-from dwetl.create_file_equivalent_table import CreateFileEquivalentTable
+from dwetl.processor.create_file_equivalent_table import CreateFileEquivalentTable
 
 
 class TestCreateFileEquivalentTable(unittest.TestCase):

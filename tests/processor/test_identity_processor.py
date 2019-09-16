@@ -2,11 +2,11 @@ import unittest
 import datetime
 from dwetl.reader.list_reader import ListReader
 from dwetl.writer.list_writer import ListWriter
-from dwetl.identity_processing import IdentityProcessing
+from dwetl.processor.identity_processor import IdentityProcessor
 
 
-class TestIdentityProcessing(unittest.TestCase):
-    def test_identity_processing(self):
+class TestIdentityProcessor(unittest.TestCase):
+    def test_identity_processor(self):
         sample_data = [
             {'rec_type_cd': 'D', 'db_operation_cd': 'U', 'rec_trigger_key': '000007520' },
             {'rec_type_cd': 'D', 'db_operation_cd': 'U', 'rec_trigger_key': '000147967'}
@@ -26,7 +26,7 @@ class TestIdentityProcessing(unittest.TestCase):
 
         logger = None
 
-        step = IdentityProcessing(reader, writer, job_info, logger)
+        step = IdentityProcessor(reader, writer, job_info, logger)
 
         step.execute()
 

@@ -1,7 +1,7 @@
-from dwetl.processing_step import ProcessingStep
+from dwetl.processor.processor import Processor
 
 
-class IdentityProcessing(ProcessingStep):
+class IdentityProcessor(Processor):
     """
     Processing step for that simply passes the data, unchanged, from the
     reader to the writer.
@@ -13,10 +13,10 @@ class IdentityProcessing(ProcessingStep):
 
     @classmethod
     def create(cls, reader, writer, job_info, logger):
-        return IdentityProcessing(reader, writer, job_info, logger)
+        return IdentityProcessor(reader, writer, job_info, logger)
 
     def job_name(self):
-        return 'IdentityProcessing'
+        return 'IdentityProcessor'
 
     def process_item(self, item):
         return item
