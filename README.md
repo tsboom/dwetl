@@ -76,8 +76,52 @@ These steps correlate with [Alex's high level ETL diagram](https://drive.google.
 - **Step 9**. Intertable Fact Processing. Dw_stg_2_lbry_item_z30_full gets holding collection id, bib rec id. source lbry_item_holding_loc_collection_cd.
 - **Step 10.** Create fact table using surrogate key from each dimension. The fact table links all dimensions together. Using natural keys, populate the fact table with surrogate keys.
 
+## Readers, Processors, and Writers
 
+A majority of the application is build around the idea of "readers",
+"processors", and "writers".
 
+### Readers
+
+A reader provides data from some data source. It is expected to operate as
+a Python "generator" so that it can be used in a "for" loop.
+
+In this application, a reader will typically provide a single Dictionary
+object for each line/row in the data source.
+
+Commonly used readers are:
+
+* TsvFileReader - reads tab-separated data line-by-line from a file
+* SqlAlchemyReader - reads a database table row-by-row.
+
+The "ListReader" is commonly used for unit testing, in place of the
+"TsvFileReader" or "SqlAlchemyReader".
+
+### Processors
+
+A processor converts data from the reader into data appropriate for the writer.
+
+In this application, a processor will typically get a single Dictionary object
+from the reader for each line/row, and then modify that Dictionary object, and
+passing it to the writer.
+
+A processor will typically operate on one row/line at a time, and iterate
+through all the rows/lines using a "for" loop.
+
+### Writers
+
+A writer sends data to some output.
+
+In this application, a writer will typically receive a single Dictionary
+object for each line/row in the data source. When used with SQLAlchemy, the
+Dictionary object is equivalent to the row in the database table being
+written to.
+
+A commonly used writer is "SqlAlchemyWriter", which writes the data to a
+particular database table.
+
+The "ListWriter" is commonly used for unit testing, in place of the
+"SqlAlchemyWriter", to verify the output of a processor.
 
 ## Running the tests
 

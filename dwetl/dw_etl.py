@@ -21,7 +21,7 @@ import datetime
 import sqlalchemy
 
 # import database_config
-import database_credentials
+import dwetl.database_credentials as database_credentials
 import table_transform
 import loadstg1
 import loadstg2
@@ -77,7 +77,8 @@ set up SQLAlchemy to map to reflect existing tables in the database
 '''
 def create_db_engine():
     # connect to database
-    engine = create_engine(database_credentials.DB_CONNECTION_STRING, echo=True)
+    db_settings = database_credentials.db_settings()
+    engine = create_engine(db_settings['DB_CONNECTION_STRING'], echo=True)
     return engine
 
 engine = create_db_engine()
