@@ -1,4 +1,7 @@
-class PrintWriter:
+from dwetl.writer.writer import Writer
+
+
+class PrintWriter(Writer):
     """
     Writer that sends each row to standard out.
 

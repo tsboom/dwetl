@@ -1,7 +1,8 @@
 from sqlalchemy import exc
+from dwetl.writer.writer import Writer
 
 
-class SqlAlchemyWriter:
+class SqlAlchemyWriter(Writer):
     """
     Updates a database table using the given row dictionary.
     """

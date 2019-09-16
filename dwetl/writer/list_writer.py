@@ -1,4 +1,7 @@
-class ListWriter:
+from dwetl.writer.writer import Writer
+
+
+class ListWriter(Writer):
     """
     Simple Writer that stores all the rows in a list.
 
