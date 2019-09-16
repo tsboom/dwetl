@@ -21,7 +21,23 @@ In production, only the "application" database settings should be configured.
 
 ## Setting up a clean database
 
- Set up the etl database with all tables and fields, but no data. In the dwetl/ddl directory there are postgres dump files for generating the clean database. The first file was generated from pgcommondev using the following command:
+The DDL for the entire database is located in the ddl directory and named usmai_dw_etl.sql.
+
+This command generated the DDL for usma_dw_etl.sql. This file should be updated if there is a change to the database schema.
+```
+> pg_dump -U postgres -h localhost -p 5432 usmai_dw_etl -Fp --create --clean --schema-only -f Development/usmai_dw_etl.sql
+```
+
+To recreate the database from usmai_dw_etl.sql run the following command from the ddl directory:
+NOTE: This will destroy existing db and create a new empty usmai_dw_etl database.
+
+```
+psql -d postgres  -f usmai_dw_etl.sql
+```
+
+### Database Migrations
+
+To set up the etl database with all tables and fields from pgcommondev, but no data. In the dwetl/ddl directory there are postgres dump files for generating the clean database. The first file was generated from pgcommondev using the following command:
 
 ```
 > pg_dump -U usmai_dw -h pgcommondev.lib.umd.edu -p 5439 usmai_dw_etl -Fp --schema-only -f /tmp/00001_usmai_dw_etl.sql
@@ -96,6 +112,3 @@ DB_PORT= '3333'
 ```
 
 where \<USMAI_DW_USER_PASSWORD> is the password for the "usmai_dw" Postgres user.
-
-
-

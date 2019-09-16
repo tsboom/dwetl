@@ -21,6 +21,8 @@ WITH (
 ALTER TABLE "dw_prcsng_cycle_job" ADD CONSTRAINT "dw_prcsng_cycle_job_key" PRIMARY KEY ("dw_prcsng_cycle_job_name","dw_prcsng_cycle_job_version_no")
 ;
 
+ALTER TABLE public.dw_prcsng_cycle_job OWNER TO usmai_dw;
+
 -- Table DW_PRCSNG_CYCLE_JOB_EXECTN
 
 CREATE TABLE "dw_prcsng_cycle_job_exectn"(
@@ -54,6 +56,8 @@ CREATE INDEX "IX_Relationship2" ON "dw_prcsng_cycle_job_exectn" ("dw_prcsng_cycl
 ALTER TABLE "dw_prcsng_cycle_job_exectn" ADD CONSTRAINT "dw_prcsng_cycle_episode_job_exectn_key" PRIMARY KEY ("dw_prcsng_cycle_job_exectn_id")
 ;
 
+ALTER TABLE public.dw_prcsng_cycle_job_exectn OWNER TO usmai_dw;
+
 -- Table DW_PRCSNG_CYCLE
 
 CREATE TABLE "dw_prcsng_cycle"(
@@ -77,3 +81,5 @@ WITH (
 
 ALTER TABLE "dw_prcsng_cycle" ADD CONSTRAINT "dw_prcsng_cycle_episode_key" PRIMARY KEY ("dw_prcsng_cycle_id")
 ;
+
+ALTER TABLE public.dw_prcsng_cycle OWNER TO usmai_dw;
