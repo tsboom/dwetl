@@ -1,5 +1,4 @@
 *.pyc
-database_credentials.py
 data/*
 logs/*
 venv
@@ -8,3 +7,4 @@ scripts/token_dw.json
 tests/data/reference/
 **/.DS_Store
 .idea
+.env

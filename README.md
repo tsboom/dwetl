@@ -26,6 +26,10 @@ Download the requirements
 
 `pip install -r requirements.txt`
 
+Copy the "env_example" file to ".env" and configure:
+
+`cp env_example .env`
+
 Setup the database. See [Database Setup](docs/database_setup.md) in docs.
 
 

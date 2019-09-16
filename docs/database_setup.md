@@ -6,9 +6,18 @@ There are three ways to setup the database for use in development:
 * [Docker Postgres container](database_setup_docker_postgres.md)
 * [Local Postgres installation](database_setup_local_postgres.md)
 
+The `.env` file, in conjunction with the `config/database_credentials.py` file,
+provides the database connection information.
 
-Each method uses the `config/database_credentials.py` file for configuration. Copy the "config/database_credentials_TEMPLATE.py" file to "config/database_credentials.py", and then edit the file as appropriate for the method you are using.
+The configuration provides for an "application" database and a "test" database.
+The "application" database is used when actually running the application. The
+"test" database is used by unit/integration tests that require a database
+connection.
 
+In development, the same database can be used for both "application" and "test"
+as the tests are designed to rollback any changes on completion.
+
+In production, only the "application" database settings should be configured.
 
 ## Setting up a clean database
 

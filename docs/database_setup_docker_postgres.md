@@ -65,7 +65,7 @@ where \<DATABASE_DUMP_FILENAME> is the name of the database dump. For example, i
 docker> pg_restore -d usmai_dw_etl -U postgres dump-usmai_dw_etl9.custom.Tuesday-pm
 ```
 
-8) In the "config/database_credentials.py" file the following properties can be used:
+8) In the ".env" file the following properties can be used:
 
 ```
 DB_USER = 'postgres'
