@@ -25,7 +25,7 @@ def db_settings():
             'DB_NAME': db_name,
             'DB_HOST_NAME': db_host_name,
             'DB_PORT': db_port,
-            'db_connection_string': f'postgresql+psycopg2://{db_user}:{db_password}@{db_host_name}:{db_port}/{db_name}'
+            'DB_CONNECTION_STRING': f'postgresql+psycopg2://{db_user}:{db_password}@{db_host_name}:{db_port}/{db_name}'
         }
     else:
         print("ERROR. Application database has not been configured. Exiting.")
