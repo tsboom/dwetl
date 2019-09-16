@@ -32,8 +32,9 @@ To recreate the database from usmai_dw_etl.sql run the following command from th
 NOTE: This will destroy existing db and create a new empty usmai_dw_etl database.
 
 ```
-psql -d postgres  -f usmai_dw_etl.sql
+psql -U <DB_USERNAME> -d postgres -f usmai_dw_etl.sql --host=127.0.0.1
 ```
+Where `<DB_USERNAME>` is the username for your database. 
 
 ### Database Migrations
 
