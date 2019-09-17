@@ -32,7 +32,7 @@ docker> psql -U postgres
 
 ```
 postgres=# CREATE DATABASE usmai_dw_etl;
-postgres=# CREATE ROLE usami_dw;
+postgres=# CREATE ROLE usmai_dw;
 postgres=# <Ctrl-D>
 ```
 
