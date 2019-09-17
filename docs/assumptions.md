@@ -8,7 +8,16 @@ This document keeps track of things we are assuming while developing the ETL. Th
 
 Questions: 
 
-- Do we have DDLs for every table in the DW? We could use them to generate a clean postgres db to test with. 
+- Is it okay to only use the DW_PRCSNG_CYCLE table?
+- 
+
+
+
+## Execution metadata
+
+-  We are only using the DW_PRCSNG_CYCLE table
+- Not populating dw_processing_cycle_job, or dw_prcsng_cycle_job_exectn tables because it is too complicated for the moment. Need to focus on getting ETL working first. 
+- 
 
 
 
@@ -26,7 +35,7 @@ Questions:
 - RM metadata:
 
   - rm_suspend_rec_flag
-    - Y and N
+    - Y and N 
   - rm_suspend_rec_reason_cd
     - TBD what these codes are
   - rm_dq_check_exception_cnt
