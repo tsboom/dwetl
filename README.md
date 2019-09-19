@@ -35,7 +35,17 @@ Setup the database. See [Database Setup](docs/database_setup.md) in docs.
 See [Database Usage](docs/database_usage.md) for information about
 programmatically accessing to the database.
 
+## "invoke" Task Runner
 
+A number of administrative tasks are available using the "invoke" task runner.
+
+To see the list of available tasks, run:
+
+```
+> invoke --list
+```
+
+See [Tasks](docs/tasks.md) for more information about the available tasks.
 
 ## Running the application
 
@@ -136,7 +146,7 @@ Explain how to run the automated tests for this system
 
 ```
 Give an example
-​```
+```
 ```
 
 
