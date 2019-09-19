@@ -1,5 +1,11 @@
 # Database Setup
 
+## Introduction
+
+This document describes how to setup and configure the a database for
+use by the application. For information about programmatically accessing
+the database, see [Database Usage](database_usage.md).
+ 
 There are three ways to setup the database for use in development:
 
 * Use the pgcommondev server

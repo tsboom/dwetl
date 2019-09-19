@@ -20,6 +20,5 @@ class SqlAlchemyWriter(Writer):
             # insert the row into SQLAlchemy table base class
             record = self.table_base_class(**row_dict)
             self.session.add(record)
-            self.session.commit()
         except exc.SQLAlchemyError as e:
             self.session.rollback()
