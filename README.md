@@ -32,7 +32,17 @@ Copy the "env_example" file to ".env" and configure:
 
 Setup the database. See [Database Setup](docs/database_setup.md) in docs.
 
+## "invoke" Task Runner
 
+A number of administrative tasks are available using the "invoke" task runner.
+
+To see the list of available tasks, run:
+
+```
+> invoke --list
+```
+
+See [Tasks](docs/tasks.md) for more information about the available tasks.
 
 ## Running the application
 
