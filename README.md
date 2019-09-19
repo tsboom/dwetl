@@ -32,6 +32,9 @@ Copy the "env_example" file to ".env" and configure:
 
 Setup the database. See [Database Setup](docs/database_setup.md) in docs.
 
+See [Database Usage](docs/database_usage.md) for information about
+programmatically accessing to the database.
+
 
 
 ## Running the application
