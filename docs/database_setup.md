@@ -21,20 +21,28 @@ In production, only the "application" database settings should be configured.
 
 ## Setting up a clean database
 
-The DDL for the entire database is located in the ddl directory and named usmai_dw_etl.sql.
+The DDL for the entire database is located in the "ddl" directory and named
+"usmai_dw_etl.sql".
 
-This command generated the DDL for usma_dw_etl.sql. This file should be updated if there is a change to the database schema.
+The DDL in the "usmai_dw_etl.sql" file was generated using the following
+command:
+
 ```
 > pg_dump -U postgres -h localhost -p 5432 usmai_dw_etl -Fp --create --clean --schema-only -f Development/usmai_dw_etl.sql
 ```
 
-To recreate the database from usmai_dw_etl.sql run the following command from the ddl directory:
-NOTE: This will destroy existing db and create a new empty usmai_dw_etl database.
+The "usmai_dw_etl.sql" file should be updated whenever there is a change to the
+database schema.
+
+To recreate the database from the "usmai_dw_etl.sql",  run the following
+command:
+
+**Note:** This command will DESTROY the existing db and create a new empty
+"usmai_dw_etl" database.
 
 ```
-psql -U <DB_USERNAME> -d postgres -f usmai_dw_etl.sql --host=127.0.0.1
+> invoke database-reset
 ```
-Where `<DB_USERNAME>` is the username for your database. 
 
 ### Database Migrations
 
