@@ -48,5 +48,4 @@ class JobInfoFactory():
 
         record = cls.table_base_class(**row)
         cls.session.add(record)
-        cls.session.commit()
         return JobInfo(cls.prcsng_cycle_id, cls.user_id, cls.job_version_no, cls.job_exectn_id)
