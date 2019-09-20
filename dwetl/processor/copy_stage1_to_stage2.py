@@ -1,0 +1,50 @@
+from dwetl.processor.processor import Processor
+import pdb
+
+class CopyStage1ToStage2(Processor):
+    """
+    Processor for creating the file equivalent tables from
+    TSV files.
+
+    This processing step simply appends the job_info to the given
+    item, and returns the resulting dictionary.
+    """
+    def __init__(self, reader, writer, job_info, logger, aleph_library):
+        super().__init__(reader, writer, job_info, logger)
+        self.aleph_library = aleph_library
+
+    @classmethod
+    def create(cls, reader, writer, job_info, logger, aleph_library):
+        return CopyStage1ToStage2(reader, writer, job_info, logger, aleph_library)
+
+    def job_name(self):
+        return 'CopyStage1ToStage2'
+
+    def process_item(self, item):
+        processed_item = {}
+        invalid_keys = ['rec_type_cd', 'rec_trigger_key', '_sa_instance_state']
+
+        for key, value in item.items():
+            if key in invalid_keys:
+                continue
+
+            new_key = key
+            if not (key.startswith('em') or key == 'db_operation_cd'):
+                new_key = 'in_' + key
+
+            processed_item[new_key] = value
+
+        # HACK for in_z30_rec_key
+        if self.aleph_library == 'mai50':
+            processed_item['in_z30_rec_key'] = item['rec_trigger_key']
+
+        # Update metadata
+        if self.aleph_library:
+            processed_item['dw_stg_2_aleph_lbry_name'] = self.aleph_library
+
+        processed_item['em_create_dw_job_name'] = self.job_name()
+
+        processed_item.update(self.job_info)
+        return processed_item
+
+
