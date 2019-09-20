@@ -1,0 +1,2 @@
+ALTER TABLE dw_stg_1_mai60_z13
+RENAME COLUMN dw_create_prcsng_cycle_id TO em_create_dw_prcsng_cycle_id;

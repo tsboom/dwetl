@@ -1063,7 +1063,7 @@ CREATE TABLE public.dw_stg_1_mai60_z13 (
     z13_isbn_issn_code character(5),
     z13_isbn_issn character varying(100),
     z13_upd_time_stamp character(15),
-    dw_create_prcsng_cycle_id integer NOT NULL,
+    em_create_dw_prcsng_cycle_id integer NOT NULL,
     em_create_dw_job_exectn_id integer NOT NULL,
     em_create_dw_job_name character varying(100) NOT NULL,
     em_create_dw_job_version_no character varying(20) NOT NULL,
@@ -3426,7 +3426,7 @@ ALTER TABLE ONLY public.dw_stg_1_mai60_z00_field
 --
 
 ALTER TABLE ONLY public.dw_stg_1_mai60_z13
-    ADD CONSTRAINT pk_dw_stg_1_mai60_z13 PRIMARY KEY (db_operation_cd, rec_trigger_key, dw_create_prcsng_cycle_id);
+    ADD CONSTRAINT pk_dw_stg_1_mai60_z13 PRIMARY KEY (db_operation_cd, rec_trigger_key, em_create_dw_prcsng_cycle_id);
 
 
 --
