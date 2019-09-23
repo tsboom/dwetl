@@ -1133,7 +1133,7 @@ ALTER TABLE public.dw_stg_1_mai60_z13u OWNER TO usmai_dw;
 CREATE TABLE public.dw_stg_1_mpf_collection (
     db_operation_cd character varying(1) NOT NULL,
     collection_cd character varying(5) NOT NULL,
-    colletion_name character varying(80),
+    collection_name character varying(80),
     usmai_mbr_lbry_cd character varying(2) NOT NULL,
     lbry_entity_cd character varying(5) NOT NULL,
     db_operation_effective_date character(10),
