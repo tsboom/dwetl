@@ -16,6 +16,15 @@ class JobInfo():
         self.job_exectn_id = job_exectn_id
         self.job_version_no = job_version_no
 
+    def as_dict(self, type):
+        result = {}
+        for key, val in self.__dict__.items():
+            prefix = f'em_{type}_dw_'
+            if key == 'user_id':
+                prefix = f'em_{type}_'
+            result[prefix + key] = val
+        return result
+
 
 class JobInfoFactory():
     '''
