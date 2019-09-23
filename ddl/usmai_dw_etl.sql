@@ -1257,8 +1257,8 @@ CREATE TABLE public.dw_stg_1_mpf_mbr_lbry (
     em_create_dw_job_name character varying(100) NOT NULL,
     em_create_dw_job_version_no character varying(20) NOT NULL,
     em_create_user_id character varying(20) NOT NULL,
-    em_create_tmstmp bigint NOT NULL,
-    usmai_mbr_lbry_mbrshp_type_cd character varying(10)
+    usmai_mbr_lbry_mbrshp_type_cd character varying(10),
+    em_create_tmstmp timestamp without time zone NOT NULL
 )
 WITH (autovacuum_enabled='true');
 
