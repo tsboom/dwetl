@@ -1,4 +1,5 @@
 import csv
+import os
 
 
 class TsvFileReader:
@@ -20,9 +21,11 @@ class TsvFileReader:
         self.file_path = file_path
         self.fd = open(self.file_path)
         self.reader = csv.reader(self.fd, delimiter='\t')
-        # Skip first two header lines
-        _header1 = next(self.reader)
-        self.headers = next(self.reader)
+        # check if file is empty
+        if os.stat(self.file_path).st_size is not 0:
+            # Skip first two header lines
+            _header1 = next(self.reader)
+            self.headers = next(self.reader)
 
     def __iter__(self):
         for line in self.reader:
