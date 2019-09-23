@@ -958,7 +958,7 @@ ALTER TABLE public.dw_stg_1_mai50_z30_full OWNER TO usmai_dw;
 CREATE TABLE public.dw_stg_1_mai50_z35 (
     rec_type_cd character(1) NOT NULL,
     db_operation_cd character(1) NOT NULL,
-    rec_trigger_key character(9) NOT NULL,
+    rec_trigger_key character(22) NOT NULL,
     z35_rec_key character(9),
     z35_item_sequence character varying(6),
     z35_event_type character(2),
