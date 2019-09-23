@@ -1226,7 +1226,7 @@ ALTER TABLE public.dw_stg_1_mpf_lbry_entity OWNER TO usmai_dw;
 
 CREATE TABLE public.dw_stg_1_mpf_matrl_form (
     db_operation_cd character varying(1) NOT NULL,
-    matrl_form_cd character varying(2) NOT NULL,
+    matrl_form_cd character varying(5) NOT NULL,
     matrl_form_name character varying(30),
     db_operation_effective_date character(10),
     lbry_staff_lms_user_id character varying(10),
