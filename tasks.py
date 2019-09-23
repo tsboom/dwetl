@@ -56,6 +56,26 @@ def run_migration(c, sql_file):
         raise Exception()
         print('An error has occurred')
 
+@task
+def update_db_ddl(c):
+    """
+    Creates a ddl from the entire db in usmai_dw_etl.sql
+    """
+    db_settings = dwetl.database_credentials.db_settings()
+    db_user = db_settings['DB_USER']
+    db_host = db_settings['DB_HOST_NAME']
+    db_port = db_settings['DB_PORT']
+    db_password = db_settings['DB_PASSWORD']
+    db_name = db_settings['DB_NAME']
+    pg_password=f'PGPASSWORD={db_password} '
+
+    psql_cmd = f'pg_dump -U {db_user} -h {db_host} -p {db_port} -d {db_name} -Fp --create --clean --schema-only -f ddl/usmai_dw_etl.sql'
+    if c.run(pg_password + psql_cmd):
+        print('-----------')
+        print('Updated usmai_dw_etl.sql')
+    else:
+        raise Exception()
+        print('An error has occurred')
 
 # Task helper function
 def reset_database(context, db_host, db_port, db_user, db_password):
