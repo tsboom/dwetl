@@ -34,13 +34,13 @@ class TsvFileReader:
                 continue
 
             # Create a dictionary from headers and line values
-            result = {}
+            row_dict = {}
             for i, header in enumerate(self.headers):
                 # Skip rest of headers if we run out of values
                 if i < len(line):
-                    result[self.headers[i]] = line[i]
+                    row_dict[self.headers[i]] = line[i]
 
-            yield result
+            yield row_dict
 
     def __del__(self):
         if hasattr(self, 'fd') and self.fd:
