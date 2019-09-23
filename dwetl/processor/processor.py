@@ -11,9 +11,9 @@ class Processor:
         self.logger = logger
 
     def execute(self):
-        for item in self.reader:
-            result = self.process_item(item)
-            self.writer.write_row(result)
+        for row_dict in self.reader:
+            processed_row_dict = self.process_item(row_dict)
+            self.writer.write_row(processed_row_dict)
 
     def job_name(self):
         raise NotImplementedError
