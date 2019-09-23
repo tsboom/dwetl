@@ -9,7 +9,7 @@ This document keeps track of things we are assuming while developing the ETL. Th
 Questions: 
 
 - Is it okay to only use the DW_PRCSNG_CYCLE table?
-- 
+- mai50_z35_data has rec_trigger_key which is set to be 9 characters (like the rec_key), but the data files include rec_trigger_keys that are long numbers that look like timestamps. `2019091903453899997233`. For now we changed the character count to 22. 
 
 
 
