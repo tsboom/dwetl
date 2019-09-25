@@ -35,6 +35,9 @@ ALEPH_TSV_TABLE_MAPPING = {
 
 }
 
+with dwetl.database_session() as session:
+    job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
+    job_info = JobInfoFactory.create_job_info_from_db(session, job_info_table_class)
 
 
 
@@ -59,6 +62,10 @@ for file, table in ALEPH_TSV_TABLE_MAPPING.items():
         print(endtime - time_started)
 
 
+'''
+load mpf tsv files
+'''
+
 MPF_TABLE_MAPPING = {
     "mpf_member-library-dimension.txt": "dw_stg_1_mpf_mbr_lbry",
     "mpf_library-entity-dimension.txt": "dw_stg_1_mpf_lbry_entity",
@@ -68,9 +75,7 @@ MPF_TABLE_MAPPING = {
     "mpf_material-form-dimension.txt": "dw_stg_1_mpf_matrl_form"
 }
 
-'''
-load mpf tsv files
-'''
+
 for file, table in MPF_TABLE_MAPPING.items():
     file_path = directory + file
     print(file_path)
