@@ -32,15 +32,15 @@ FILE_TO_TABLE_MAPPING = {
     "mpf_material-form-dimension.txt": "dw_stg_1_mpf_matrl_form"
 }
 
+with dwetl.database_session() as session:
+    job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
+    job_info = JobInfoFactory.create_job_info_from_db(session, job_info_table_class)
 
 directory = 'data/20190920/'
 for file, table in FILE_TO_TABLE_MAPPING.items():
     file_path = directory + file
     print(file_path)
     with dwetl.database_session() as session:
-        job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
-        job_info = JobInfoFactory.create_job_info_from_db(session, job_info_table_class)
-
         # reader = TsvFileReader('data/20190920/mai50_z30_full_data')
         reader = TsvFileReader(file_path)
         #writer = PrintWriter()
