@@ -1,6 +1,7 @@
 import datetime
 from dwetl.job_info import JobInfoFactory, JobInfo
 from dwetl.reader.tsv_file_reader import TsvFileReader
+from dwetl.reader.z00_field_reader import Z00FieldReader
 from dwetl.writer.print_writer import PrintWriter
 from dwetl.processor.load_aleph_tsv import LoadAlephTsv
 from dwetl.processor.load_z00_field_tsv import LoadZ00FieldTsv
@@ -75,7 +76,7 @@ def load_stage_1(job_info, input_directory):
         file_path = input_directory + file
         print(file_path)
         with dwetl.database_session() as session:
-            reader = TsvFileReader(file_path)
+            reader = Z00FieldReader(file_path)
             # writer = PrintWriter()
             writer = SqlAlchemyWriter(session, dwetl.Base.classes[table])
             logger = None
