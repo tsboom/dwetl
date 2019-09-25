@@ -24,6 +24,10 @@ Questions:
 
 - mai01/39/60_z00_field_data files don't have headers or DB operation codes in them. We could manually add headers, but are not sure how to get the db operation codes. 
 
+  - first column is rec_trigger_key and z00_doc_number
+  - last column is field_txt
+  - Ignore the L
+
   
 
 
