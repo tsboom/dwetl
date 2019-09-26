@@ -80,3 +80,7 @@ class TestJobInfo(unittest.TestCase):
 
             expected_version = dwetl.version
             self.assertEqual(expected_version, job_info.job_version_no)
+
+    def test_job_info_factory_create_from_prcsng_cycle_id(self):
+        job_info = JobInfoFactory.create_from_prcsng_cycle_id(1)
+        self.assertEqual(1, job_info.prcsng_cycle_id)
