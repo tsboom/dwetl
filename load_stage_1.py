@@ -1,4 +1,5 @@
 import datetime
+import os.path
 from dwetl.job_info import JobInfoFactory, JobInfo
 from dwetl.reader.tsv_file_reader import TsvFileReader
 from dwetl.reader.z00_field_reader import Z00FieldReader
@@ -74,14 +75,17 @@ def load_stage_1(job_info, input_directory):
     '''
     for file, table in Z00_FIELD_TABLE_MAPPING.items():
         file_path = input_directory + file
-        print(file_path)
-        with dwetl.database_session() as session:
-            reader = Z00FieldReader(file_path)
-            # writer = PrintWriter()
-            writer = SqlAlchemyWriter(session, dwetl.Base.classes[table])
-            logger = None
-            processor = LoadZ00FieldTsv(reader, writer, job_info, logger)
-            processor.execute()
+        if os.path.exists(file_path):
+            print(file_path)
+            with dwetl.database_session() as session:
+                reader = Z00FieldReader(file_path)
+                # writer = PrintWriter()
+                writer = SqlAlchemyWriter(session, dwetl.Base.classes[table])
+                logger = None
+                processor = LoadZ00FieldTsv(reader, writer, job_info, logger)
+                processor.execute()
+        else:
+            print(file_path + ' does not exist.')
 
 
 
