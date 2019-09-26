@@ -3143,6 +3143,22 @@ ALTER TABLE ONLY public.dw_prcsng_cycle_job
 
 
 --
+-- Name: dw_stg_1_mai39_z00_field dw_stg_1_mai39_z00_field_pkey; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
+--
+
+ALTER TABLE ONLY public.dw_stg_1_mai39_z00_field
+    ADD CONSTRAINT dw_stg_1_mai39_z00_field_pkey PRIMARY KEY (db_operation_cd, rec_trigger_key, dw_stg_1_marc_rec_field_seq_no, em_create_dw_prcsng_cycle_id);
+
+
+--
+-- Name: dw_stg_1_mai60_z00_field dw_stg_1_mai60_z00_field_pkey; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
+--
+
+ALTER TABLE ONLY public.dw_stg_1_mai60_z00_field
+    ADD CONSTRAINT dw_stg_1_mai60_z00_field_pkey PRIMARY KEY (db_operation_cd, rec_trigger_key, dw_stg_1_marc_rec_field_seq_no, em_create_dw_prcsng_cycle_id);
+
+
+--
 -- Name: dim_bib_rec indx_dim_bib_rec_pk; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
 --
 
@@ -3343,14 +3359,6 @@ ALTER TABLE ONLY public.dw_stg_1_mai39_z00
 
 
 --
--- Name: dw_stg_1_mai39_z00_field pk_dw_stg_1_mai39_z00_field; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
---
-
-ALTER TABLE ONLY public.dw_stg_1_mai39_z00_field
-    ADD CONSTRAINT pk_dw_stg_1_mai39_z00_field PRIMARY KEY (db_operation_cd, rec_trigger_key, em_create_dw_prcsng_cycle_id);
-
-
---
 -- Name: dw_stg_1_mai39_z13 pk_dw_stg_1_mai39_z13; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
 --
 
@@ -3412,14 +3420,6 @@ ALTER TABLE ONLY public.dw_stg_1_mai50_z35
 
 ALTER TABLE ONLY public.dw_stg_1_mai60_z00
     ADD CONSTRAINT pk_dw_stg_1_mai60_z00 PRIMARY KEY (rec_trigger_key, db_operation_cd, em_create_dw_prcsng_cycle_id);
-
-
---
--- Name: dw_stg_1_mai60_z00_field pk_dw_stg_1_mai60_z00_field; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
---
-
-ALTER TABLE ONLY public.dw_stg_1_mai60_z00_field
-    ADD CONSTRAINT pk_dw_stg_1_mai60_z00_field PRIMARY KEY (db_operation_cd, rec_trigger_key, em_create_dw_prcsng_cycle_id);
 
 
 --
