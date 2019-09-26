@@ -37,7 +37,7 @@ class Z00FieldReader:
             result[self.headers[1]] = match.group(2)
             result[self.headers[2]] = match.group(3)
             result[self.headers[3]] = match.group(4)
-            pdb.set_trace()
+
             yield result
 
     def __del__(self):
