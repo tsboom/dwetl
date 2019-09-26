@@ -39,9 +39,21 @@ def run(input_directory):
     '''
     load 'in_' values from stg1 to stg 2 tables
     '''
+
+
     endtime = datetime.datetime.now()
+    # write end time to processing cycle table
+    with dwetl.database_session() as session:
+        job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
+        # get row for current id and write end time to it
+        max_prcsng_id = session.query(job_info_table_class).\
+            filter(job_info_table_class.dw_prcsng_cycle_id == job_info.prcsng_cycle_id).\
+            update({'dw_prcsng_cycle_exectn_end_tmstmp': endtime})
+
     elapsed_time = endtime - time_started
     print("elapsed time: ", str(elapsed_time))
+
+
 
 
 '''
