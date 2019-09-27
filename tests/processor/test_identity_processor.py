@@ -15,9 +15,13 @@ class TestIdentityProcessor(unittest.TestCase):
         reader = ListReader(sample_data)
         writer = ListWriter()
 
+        # Using negative processing_cycle_id so having real data in the
+        # tables won't interfere with the tests.
+        processing_cycle_id = -1
+
         job_info = {
-                'em_create_dw_prcsng_cycle_id': 9999,
-                'em_create_dw_job_exectn_id': 9999,
+                'em_create_dw_prcsng_cycle_id': processing_cycle_id,
+                'em_create_dw_job_exectn_id': 1,
                 'em_create_dw_job_name': 'TEST',
                 'em_create_dw_job_version_no': '0.0',
                 'em_create_user_id': 'test_user',

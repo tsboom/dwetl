@@ -8,8 +8,27 @@ This document keeps track of things we are assuming while developing the ETL. Th
 
 Questions: 
 
-- Is it okay to only use the DW_PRCSNG_CYCLE table?
-- 
+- mai50_z35_data has rec_trigger_key which is set to be 9 characters (like the rec_key), but the data files include rec_trigger_keys that are long numbers that look like timestamps. `2019091903453899997233`. For now we changed the character count to 22. 
+
+- library-entity-dimension.txt, mpf_library-collection-dimension.txt are missing `usmai_mbr_lbry_cd` (2 characters)
+
+- mpf_item-status-dimension.txt has an Integrity error.
+  - ```DETAIL:  Key (db_operation_cd, usmai_mbr_lbry_cd, item_status_cd, em_create_dw_prcsng_cycle_id)=(I, BC, 38, 40) already exists.```
+  - Seems like we can't use that combination of columns as the PK. Should we add effective_date into the key?
+  
+- item-process-status-dimension.txt has same kind of integrity error
+  
+  - ```DETAIL:  Key (db_operation_cd, usmai_mbr_lbry_cd, item_prcs_status_cd, em_create_dw_prcsng_cycle_id)=(U, CP, HT, 40) already exists.```
+  
+- material-form-dimension.txt `matrl_form_code` is 5 characters, not 2. We changed it in stage 1 but still need to make these changes across the rest of the tables. 
+
+- mai01/39/60_z00_field_data files don't have headers or DB operation codes in them. We could manually add headers, but are not sure how to get the db operation codes. 
+
+  - first column is rec_trigger_key and z00_doc_number
+  - last column is field_txt
+  - Ignore the L
+
+  
 
 
 
@@ -24,6 +43,9 @@ Questions:
 ##Step1 - File Equivalent Table Load
 
 - The ETL only keeps last night's TSV data in the Stage 1 tables
+- MPF files with no usmai_mbr_lbry_cd need 2 characters taken out of lbry_entity_cd
+  - library_collection
+  - library-entity-dimension.txt
 
 ## Step 2 - Copy File Stage 1 tables to DW Stage 2 Tables
 

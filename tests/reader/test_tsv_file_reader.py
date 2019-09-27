@@ -45,6 +45,14 @@ class TestTsvFileReader(unittest.TestCase):
             self.assertEqual(expected_line1, results[0])
             self.assertEqual(expected_line2, results[1])
 
+    def test_empty_file(self):
+        with TemporaryTestFile([]) as tempFilePath:
+            tsv_file_reader = TsvFileReader(tempFilePath)
+            results = []
+            for row in tsv_file_reader:
+                results.append(row)
+            self.assertEqual(0, len(results))
+
     def test_mai50_z30_data_file(self):
         expected_line = {
             'rec_type_cd': 'D',
