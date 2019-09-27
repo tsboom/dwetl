@@ -139,15 +139,12 @@ The "ListWriter" is commonly used for unit testing, in place of the
 ## Running the tests
 
 Explain how to run the automated tests for this system
+ 
+Tests are located in the `dwetl/tests` directory. They are written in Unittest but Pytest will run them with better color output. 
 
-### Break down into end to end tests
+`pytest` from the root directory to run all tests.
+`pytest tests/{FILE_NAME}` to run tests from one file. 
 
-** Future ** Explain what these tests test and why
-
-```
-Give an example
-```
-```
 
 
 ## Built With
@@ -160,3 +157,5 @@ Give an example
 
 
 See the [LICENSE](LICENSE.md) file for license rights and limitations (Apache 2.0).
+
+```

@@ -1,7 +1,8 @@
 from dwetl.processor.processor import Processor
+import datetime
 
 
-class CreateFileEquivalentTable(Processor):
+class LoadAlephTsv(Processor):
     """
     Processor for creating the file equivalent tables from
     TSV files.
@@ -14,14 +15,13 @@ class CreateFileEquivalentTable(Processor):
 
     @classmethod
     def create(cls, reader, writer, job_info, logger):
-        return CreateFileEquivalentTable(reader, writer, job_info, logger)
+        return LoadAlephTsv(reader, writer, job_info, logger)
 
     def job_name(self):
-        return 'CreateFileEquivalentTable'
+        return 'LoadAlephTsv'
 
     def process_item(self, item):
-        item.update(self.job_info)
+        item.update(self.job_info.as_dict('create'))
         item['em_create_dw_job_name'] = self.job_name()
+        item['em_create_tmstmp'] = datetime.datetime.now()
         return item
-
-

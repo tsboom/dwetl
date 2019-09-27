@@ -16,6 +16,15 @@ class JobInfo():
         self.job_exectn_id = job_exectn_id
         self.job_version_no = job_version_no
 
+    def as_dict(self, type):
+        result = {}
+        for key, val in self.__dict__.items():
+            prefix = f'em_{type}_dw_'
+            if key == 'user_id':
+                prefix = f'em_{type}_'
+            result[prefix + key] = val
+        return result
+
 
 class JobInfoFactory():
     '''
@@ -49,3 +58,11 @@ class JobInfoFactory():
         record = cls.table_base_class(**row)
         cls.session.add(record)
         return JobInfo(cls.prcsng_cycle_id, cls.user_id, cls.job_version_no, cls.job_exectn_id)
+
+    @classmethod
+    def create_from_prcsng_cycle_id(cls, prcsng_cycle_id):
+        user_id =  getpass.getuser()
+        job_exectn_id = 1
+        job_version_no = dwetl.version
+        job_info = JobInfo(prcsng_cycle_id, user_id, job_version_no, job_exectn_id)
+        return job_info

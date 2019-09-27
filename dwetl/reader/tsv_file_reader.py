@@ -1,4 +1,5 @@
 import csv
+import os
 
 
 class TsvFileReader:
@@ -20,9 +21,11 @@ class TsvFileReader:
         self.file_path = file_path
         self.fd = open(self.file_path)
         self.reader = csv.reader(self.fd, delimiter='\t')
-        # Skip first two header lines
-        _header1 = next(self.reader)
-        self.headers = next(self.reader)
+        # check if file is empty
+        if os.stat(self.file_path).st_size is not 0:
+            # Skip first two header lines
+            _header1 = next(self.reader)
+            self.headers = next(self.reader)
 
     def __iter__(self):
         for line in self.reader:
@@ -31,13 +34,13 @@ class TsvFileReader:
                 continue
 
             # Create a dictionary from headers and line values
-            result = {}
+            row_dict = {}
             for i, header in enumerate(self.headers):
                 # Skip rest of headers if we run out of values
                 if i < len(line):
-                    result[self.headers[i]] = line[i]
+                    row_dict[self.headers[i]] = line[i]
 
-            yield result
+            yield row_dict
 
     def __del__(self):
         if hasattr(self, 'fd') and self.fd:

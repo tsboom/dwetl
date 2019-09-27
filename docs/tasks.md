@@ -54,3 +54,18 @@ restore the application database.
 
 This task also terminates all active sessions to the database (this is
 needed to actually drop the database).
+
+### run-migration
+
+Runs a database migration from an sql file. 
+
+Run the script using an argument which is the path to the sql file migration.
+
+`invoke run-migration ddl/migration/{file_name}`
+
+### update-db-ddl
+
+Generates a new "ddl/usmai_dw_etl.sql" file from what is inside of usmai_dw_etl.sql. This task is done after database migrations are executed. 
+
+
+

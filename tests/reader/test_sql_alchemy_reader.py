@@ -17,12 +17,12 @@ class TestSqlAlchemyReader(unittest.TestCase):
 
     def append_job_info(self, row_dict, processing_cycle_field_name, processing_cycle_id):
         job_info = {
-            'em_create_dw_job_exectn_id': 9999,
+            processing_cycle_field_name: processing_cycle_id,
+            'em_create_dw_job_exectn_id': 1,
             'em_create_dw_job_name': 'TEST',
             'em_create_dw_job_version_no': '0.0',
             'em_create_user_id': 'test_user',
-            'em_create_tmstmp': datetime.datetime.now(),
-            processing_cycle_field_name: processing_cycle_id
+            'em_create_tmstmp': datetime.datetime.now()
         }
 
         row_dict.update(job_info)
@@ -30,7 +30,11 @@ class TestSqlAlchemyReader(unittest.TestCase):
     def test_read_empty_table(self):
         with dwetl.test_database_session() as session:
             table_base_class = dwetl.Base.classes.dw_stg_1_mai01_z00
-            reader = SqlAlchemyReader(session, table_base_class, 'em_create_dw_prcsng_cycle_id', 9999)
+
+            # Use negative processing cycle id, so any actual data in the tables
+            # won't interfere with the tests.
+            processing_cycle_id = -1
+            reader = SqlAlchemyReader(session, table_base_class, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
 
             results = []
             for row in reader:
@@ -49,12 +53,16 @@ class TestSqlAlchemyReader(unittest.TestCase):
                 {'rec_type_cd': 'D', 'db_operation_cd': 'U', 'rec_trigger_key': '000245526'}
             ]
 
+            # Use negative processing cycle id, so any actual data in the tables
+            # won't interfere with the tests.
+            processing_cycle_id = -1
+
             for row in rows:
-                self.append_job_info(row, 'em_create_dw_prcsng_cycle_id', 9999)
+                self.append_job_info(row, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
 
             self.setup_rows(session, table_base_class, rows)
 
-            reader = SqlAlchemyReader(session, table_base_class, 'em_create_dw_prcsng_cycle_id', 9999)
+            reader = SqlAlchemyReader(session, table_base_class, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
             results = []
             for row in reader:
                 results.append(row)
@@ -75,12 +83,15 @@ class TestSqlAlchemyReader(unittest.TestCase):
             ]
 
             # Use different em_create_dw_prcsng_cycle_ids for each row
-            self.append_job_info(rows[0], 'em_create_dw_prcsng_cycle_id', 1234)
-            self.append_job_info(rows[1], 'em_create_dw_prcsng_cycle_id', 9876)
+            #
+            # Using negative processing_cycle_ids so having real data in the
+            # tables won't interfere with the tests.
+            self.append_job_info(rows[0], 'em_create_dw_prcsng_cycle_id', -1)
+            self.append_job_info(rows[1], 'em_create_dw_prcsng_cycle_id', -2)
 
             self.setup_rows(session, table_base_class, rows)
 
-            reader = SqlAlchemyReader(session, table_base_class, 'em_create_dw_prcsng_cycle_id', 9876)
+            reader = SqlAlchemyReader(session, table_base_class, 'em_create_dw_prcsng_cycle_id', -2)
             results = []
             for row in reader:
                 results.append(row)

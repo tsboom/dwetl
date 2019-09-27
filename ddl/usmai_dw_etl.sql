@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.10
--- Dumped by pg_dump version 10.10
+-- Dumped from database version 9.6.15
+-- Dumped by pg_dump version 11.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -12,7 +12,6 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
-SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
@@ -35,23 +34,8 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
-SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
 
 SET default_tablespace = '';
 
@@ -570,7 +554,7 @@ CREATE TABLE public.dw_stg_1_mai01_z00_field (
     rec_trigger_key character(9) NOT NULL,
     z00_doc_number character(9),
     dw_stg_1_marc_rec_field_seq_no smallint NOT NULL,
-    z00_marc_rec_field_cd character varying(3),
+    z00_marc_rec_field_cd character varying(5),
     z00_marc_rec_field_txt character varying(2000),
     em_create_dw_prcsng_cycle_id integer NOT NULL,
     em_create_dw_job_exectn_id integer NOT NULL,
@@ -705,7 +689,7 @@ CREATE TABLE public.dw_stg_1_mai39_z00_field (
     rec_trigger_key character(9) NOT NULL,
     z00_doc_number character(9),
     dw_stg_1_marc_rec_field_seq_no smallint NOT NULL,
-    z00_marc_rec_field_cd character varying(3),
+    z00_marc_rec_field_cd character varying(5),
     z00_marc_rec_field_txt character varying(2000),
     em_create_dw_prcsng_cycle_id integer NOT NULL,
     em_create_dw_job_exectn_id integer NOT NULL,
@@ -756,6 +740,57 @@ WITH (autovacuum_enabled='true');
 ALTER TABLE public.dw_stg_1_mai39_z13 OWNER TO usmai_dw;
 
 --
+-- Name: dw_stg_1_mai39_z13u; Type: TABLE; Schema: public; Owner: usmai_dw
+--
+
+CREATE TABLE public.dw_stg_1_mai39_z13u (
+    rec_type_cd character(1) NOT NULL,
+    db_operation_cd character(1) NOT NULL,
+    rec_trigger_key character(9) NOT NULL,
+    z13u_rec_key character(9),
+    z13u_user_defined_1_code character(5),
+    z13u_user_defined_1 character varying(500),
+    z13u_user_defined_2_code character(5),
+    z13u_user_defined_2 character varying(500),
+    z13u_user_defined_3_code character(5),
+    z13u_user_defined_3 character varying(500),
+    z13u_user_defined_4_code character(5),
+    z13u_user_defined_4 character varying(500),
+    z13u_user_defined_5_code character(5),
+    z13u_user_defined_5 character varying(500),
+    z13u_user_defined_6_code character(5),
+    z13u_user_defined_6 character varying(500),
+    z13u_user_defined_7_code character(5),
+    z13u_user_defined_7 character varying(500),
+    z13u_user_defined_8_code character(5),
+    z13u_user_defined_8 character varying(500),
+    z13u_user_defined_9_code character(5),
+    z13u_user_defined_9 character varying(500),
+    z13u_user_defined_10_code character(5),
+    z13u_user_defined_10 character varying(500),
+    z13u_user_defined_11_code character(5),
+    z13u_user_defined_11 character varying(500),
+    z13u_user_defined_12_code character(5),
+    z13u_user_defined_12 character varying(500),
+    z13u_user_defined_13_code character(5),
+    z13u_user_defined_13 character varying(500),
+    z13u_user_defined_14_code character(5),
+    z13u_user_defined_14 character varying(500),
+    z13u_user_defined_15_code character(5),
+    z13u_user_defined_15 character varying(500),
+    em_create_dw_prcsng_cycle_id integer NOT NULL,
+    em_create_dw_job_exectn_id integer NOT NULL,
+    em_create_dw_job_name character varying(100) NOT NULL,
+    em_create_dw_job_version_no character varying(20) NOT NULL,
+    em_create_user_id character varying(20) NOT NULL,
+    em_create_tmstmp timestamp without time zone NOT NULL
+)
+WITH (autovacuum_enabled='true');
+
+
+ALTER TABLE public.dw_stg_1_mai39_z13u OWNER TO usmai_dw;
+
+--
 -- Name: dw_stg_1_mai50_z103_bib; Type: TABLE; Schema: public; Owner: usmai_dw
 --
 
@@ -778,6 +813,30 @@ WITH (autovacuum_enabled='true');
 
 
 ALTER TABLE public.dw_stg_1_mai50_z103_bib OWNER TO usmai_dw;
+
+--
+-- Name: dw_stg_1_mai50_z103_bib_full; Type: TABLE; Schema: public; Owner: usmai_dw
+--
+
+CREATE TABLE public.dw_stg_1_mai50_z103_bib_full (
+    rec_type_cd character(1) NOT NULL,
+    db_operation_cd character(1) NOT NULL,
+    rec_trigger_key character(9) NOT NULL,
+    source character(9),
+    dest character(9),
+    dest_lib character(5),
+    dest_docnum character(9),
+    em_create_dw_prcsng_cycle_id integer NOT NULL,
+    em_create_dw_job_exectn_id integer NOT NULL,
+    em_create_dw_job_name character varying(100) NOT NULL,
+    em_create_dw_job_version_no character varying(20) NOT NULL,
+    em_create_user_id character varying(20) NOT NULL,
+    em_create_tmstmp timestamp without time zone NOT NULL
+)
+WITH (autovacuum_enabled='true');
+
+
+ALTER TABLE public.dw_stg_1_mai50_z103_bib_full OWNER TO usmai_dw;
 
 --
 -- Name: dw_stg_1_mai50_z30; Type: TABLE; Schema: public; Owner: usmai_dw
@@ -865,13 +924,41 @@ WITH (autovacuum_enabled='true');
 ALTER TABLE public.dw_stg_1_mai50_z30 OWNER TO usmai_dw;
 
 --
+-- Name: dw_stg_1_mai50_z30_full; Type: TABLE; Schema: public; Owner: usmai_dw
+--
+
+CREATE TABLE public.dw_stg_1_mai50_z30_full (
+    rec_type_cd character(1) NOT NULL,
+    db_operation_cd character(1) NOT NULL,
+    rec_trigger_key character(15) NOT NULL,
+    z30_rec_key character(15),
+    z30_barcode character(30),
+    z30_sub_library character(5),
+    z30_material character(5),
+    z30_item_status character(2),
+    z30_open_date character varying(8),
+    z30_hol_doc_number_x character(9),
+    z30_order_number character varying(30),
+    em_create_dw_prcsng_cycle_id integer NOT NULL,
+    em_create_dw_job_exectn_id integer NOT NULL,
+    em_create_dw_job_name character varying(100) NOT NULL,
+    em_create_dw_job_version_no character varying(20) NOT NULL,
+    em_create_user_id character varying(20) NOT NULL,
+    em_create_tmstmp timestamp without time zone NOT NULL
+)
+WITH (autovacuum_enabled='true');
+
+
+ALTER TABLE public.dw_stg_1_mai50_z30_full OWNER TO usmai_dw;
+
+--
 -- Name: dw_stg_1_mai50_z35; Type: TABLE; Schema: public; Owner: usmai_dw
 --
 
 CREATE TABLE public.dw_stg_1_mai50_z35 (
     rec_type_cd character(1) NOT NULL,
     db_operation_cd character(1) NOT NULL,
-    rec_trigger_key character(9) NOT NULL,
+    rec_trigger_key character(22) NOT NULL,
     z35_rec_key character(9),
     z35_item_sequence character varying(6),
     z35_event_type character(2),
@@ -938,7 +1025,7 @@ CREATE TABLE public.dw_stg_1_mai60_z00_field (
     rec_trigger_key character(9) NOT NULL,
     z00_doc_number character(9),
     dw_stg_1_marc_rec_field_seq_no smallint NOT NULL,
-    z00_marc_rec_field_cd character varying(3),
+    z00_marc_rec_field_cd character varying(5),
     z00_marc_rec_field_txt character varying(2000),
     em_create_dw_prcsng_cycle_id integer NOT NULL,
     em_create_dw_job_exectn_id integer NOT NULL,
@@ -976,7 +1063,7 @@ CREATE TABLE public.dw_stg_1_mai60_z13 (
     z13_isbn_issn_code character(5),
     z13_isbn_issn character varying(100),
     z13_upd_time_stamp character(15),
-    dw_create_prcsng_cycle_id integer NOT NULL,
+    em_create_dw_prcsng_cycle_id integer NOT NULL,
     em_create_dw_job_exectn_id integer NOT NULL,
     em_create_dw_job_name character varying(100) NOT NULL,
     em_create_dw_job_version_no character varying(20) NOT NULL,
@@ -1046,10 +1133,10 @@ ALTER TABLE public.dw_stg_1_mai60_z13u OWNER TO usmai_dw;
 CREATE TABLE public.dw_stg_1_mpf_collection (
     db_operation_cd character varying(1) NOT NULL,
     collection_cd character varying(5) NOT NULL,
-    colletion_name character varying(80),
+    collection_name character varying(80),
     usmai_mbr_lbry_cd character varying(2) NOT NULL,
     lbry_entity_cd character varying(5) NOT NULL,
-    db_operation_effective_date character varying(8),
+    db_operation_effective_date character(10),
     lbry_staff_lms_user_id character varying(10),
     em_create_dw_prcsng_cycle_id integer NOT NULL,
     em_create_dw_job_exectn_id integer NOT NULL,
@@ -1073,7 +1160,7 @@ CREATE TABLE public.dw_stg_1_mpf_item_prcs_status (
     item_prcs_status_cd character varying(2) NOT NULL,
     item_prcs_status_public_desc character varying(30),
     item_prcs_status_internal_desc character varying(50),
-    db_operation_effective_date character varying(8),
+    db_operation_effective_date character(10),
     lbry_staff_lms_user_id character varying(10),
     em_create_dw_prcsng_cycle_id integer NOT NULL,
     em_create_dw_job_exectn_id integer NOT NULL,
@@ -1096,7 +1183,7 @@ CREATE TABLE public.dw_stg_1_mpf_item_status (
     usmai_mbr_lbry_cd character(2) NOT NULL,
     item_status_cd character varying(2) NOT NULL,
     item_status_desc character varying(30),
-    db_operation_effective_date character varying(8),
+    db_operation_effective_date character(10),
     lbry_staff_lms_user_id character varying(10),
     em_create_dw_prcsng_cycle_id integer NOT NULL,
     em_create_dw_job_exectn_id integer NOT NULL,
@@ -1119,7 +1206,7 @@ CREATE TABLE public.dw_stg_1_mpf_lbry_entity (
     usmai_mbr_lbry_cd character varying(2) NOT NULL,
     lbry_entity_cd character varying(5) NOT NULL,
     lbry_entity_name character varying(30),
-    db_operation_effective_date character varying(8),
+    db_operation_effective_date character(10),
     lbry_staff_lms_user_id character varying(10),
     em_create_dw_prcsng_cycle_id integer NOT NULL,
     em_create_dw_job_exectn_id integer NOT NULL,
@@ -1139,9 +1226,9 @@ ALTER TABLE public.dw_stg_1_mpf_lbry_entity OWNER TO usmai_dw;
 
 CREATE TABLE public.dw_stg_1_mpf_matrl_form (
     db_operation_cd character varying(1) NOT NULL,
-    matrl_form_cd character varying(2) NOT NULL,
+    matrl_form_cd character varying(5) NOT NULL,
     matrl_form_name character varying(30),
-    db_operation_effective_date character varying(8),
+    db_operation_effective_date character(10),
     lbry_staff_lms_user_id character varying(10),
     em_create_dw_prcsng_cycle_id integer NOT NULL,
     em_create_dw_job_exectn_id integer NOT NULL,
@@ -1163,14 +1250,15 @@ CREATE TABLE public.dw_stg_1_mpf_mbr_lbry (
     db_operation_cd character varying(1) NOT NULL,
     usmai_mbr_lbry_cd character varying(2) NOT NULL,
     usmai_mbr_lbry_name character varying(70),
-    db_operation_effective_date character varying(8),
+    db_operation_effective_date character(10),
     lbry_staff_lms_user_id character varying(10),
     em_create_dw_prcsng_cycle_id integer NOT NULL,
     em_create_dw_job_exectn_id integer NOT NULL,
     em_create_dw_job_name character varying(100) NOT NULL,
     em_create_dw_job_version_no character varying(20) NOT NULL,
     em_create_user_id character varying(20) NOT NULL,
-    em_create_tmstmp bigint NOT NULL
+    usmai_mbr_lbry_mbrshp_type_cd character varying(10),
+    em_create_tmstmp timestamp without time zone NOT NULL
 )
 WITH (autovacuum_enabled='true');
 
@@ -1682,6 +1770,58 @@ WITH (autovacuum_enabled='true');
 
 
 ALTER TABLE public.dw_stg_2_lbry_item_event_z35 OWNER TO usmai_dw;
+
+--
+-- Name: dw_stg_2_lbry_item_fact_z103_bib_full; Type: TABLE; Schema: public; Owner: usmai_dw
+--
+
+CREATE TABLE public.dw_stg_2_lbry_item_fact_z103_bib_full (
+    rec_type_cd character(1) NOT NULL,
+    db_operation_cd character(1) NOT NULL,
+    rec_trigger_key character(9) NOT NULL,
+    source character(9),
+    dest character(9),
+    dest_lib character(5),
+    dest_docnum character(9),
+    em_create_dw_prcsng_cycle_id integer NOT NULL,
+    em_create_dw_job_exectn_id integer NOT NULL,
+    em_create_dw_job_name character varying(100) NOT NULL,
+    em_create_dw_job_version_no character varying(20) NOT NULL,
+    em_create_user_id character varying(20) NOT NULL,
+    em_create_tmstmp timestamp without time zone NOT NULL
+)
+WITH (autovacuum_enabled='true');
+
+
+ALTER TABLE public.dw_stg_2_lbry_item_fact_z103_bib_full OWNER TO usmai_dw;
+
+--
+-- Name: dw_stg_2_lbry_item_fact_z30_full; Type: TABLE; Schema: public; Owner: usmai_dw
+--
+
+CREATE TABLE public.dw_stg_2_lbry_item_fact_z30_full (
+    rec_type_cd character(1) NOT NULL,
+    db_operation_cd character(1) NOT NULL,
+    rec_trigger_key character(15) NOT NULL,
+    z30_sub_library character(5),
+    z30_collection character(5),
+    z30_material character(5),
+    z30_item_status character(2),
+    z30_item_process_status character(2),
+    z30_open_date character varying(8),
+    z30_order_number character varying(30),
+    z30_no_loans character varying(3),
+    em_create_dw_prcsng_cycle_id integer NOT NULL,
+    em_create_dw_job_exectn_id integer NOT NULL,
+    em_create_dw_job_name character varying(100) NOT NULL,
+    em_create_dw_job_version_no character varying(20) NOT NULL,
+    em_create_user_id character varying(20) NOT NULL,
+    em_create_tmstmp timestamp without time zone NOT NULL
+)
+WITH (autovacuum_enabled='true');
+
+
+ALTER TABLE public.dw_stg_2_lbry_item_fact_z30_full OWNER TO usmai_dw;
 
 --
 -- Name: dw_stg_2_lbry_item_z103_bib; Type: TABLE; Schema: public; Owner: usmai_dw
@@ -3003,6 +3143,22 @@ ALTER TABLE ONLY public.dw_prcsng_cycle_job
 
 
 --
+-- Name: dw_stg_1_mai39_z00_field dw_stg_1_mai39_z00_field_pkey; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
+--
+
+ALTER TABLE ONLY public.dw_stg_1_mai39_z00_field
+    ADD CONSTRAINT dw_stg_1_mai39_z00_field_pkey PRIMARY KEY (db_operation_cd, rec_trigger_key, dw_stg_1_marc_rec_field_seq_no, em_create_dw_prcsng_cycle_id);
+
+
+--
+-- Name: dw_stg_1_mai60_z00_field dw_stg_1_mai60_z00_field_pkey; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
+--
+
+ALTER TABLE ONLY public.dw_stg_1_mai60_z00_field
+    ADD CONSTRAINT dw_stg_1_mai60_z00_field_pkey PRIMARY KEY (db_operation_cd, rec_trigger_key, dw_stg_1_marc_rec_field_seq_no, em_create_dw_prcsng_cycle_id);
+
+
+--
 -- Name: dim_bib_rec indx_dim_bib_rec_pk; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
 --
 
@@ -3203,19 +3359,19 @@ ALTER TABLE ONLY public.dw_stg_1_mai39_z00
 
 
 --
--- Name: dw_stg_1_mai39_z00_field pk_dw_stg_1_mai39_z00_field; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
---
-
-ALTER TABLE ONLY public.dw_stg_1_mai39_z00_field
-    ADD CONSTRAINT pk_dw_stg_1_mai39_z00_field PRIMARY KEY (db_operation_cd, rec_trigger_key, em_create_dw_prcsng_cycle_id);
-
-
---
 -- Name: dw_stg_1_mai39_z13 pk_dw_stg_1_mai39_z13; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
 --
 
 ALTER TABLE ONLY public.dw_stg_1_mai39_z13
     ADD CONSTRAINT pk_dw_stg_1_mai39_z13 PRIMARY KEY (db_operation_cd, rec_trigger_key, em_create_dw_prcsng_cycle_id);
+
+
+--
+-- Name: dw_stg_1_mai39_z13u pk_dw_stg_1_mai39_z13u; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
+--
+
+ALTER TABLE ONLY public.dw_stg_1_mai39_z13u
+    ADD CONSTRAINT pk_dw_stg_1_mai39_z13u PRIMARY KEY (db_operation_cd, rec_trigger_key, em_create_dw_prcsng_cycle_id);
 
 
 --
@@ -3227,11 +3383,27 @@ ALTER TABLE ONLY public.dw_stg_1_mai50_z103_bib
 
 
 --
+-- Name: dw_stg_1_mai50_z103_bib_full pk_dw_stg_1_mai50_z103_bib_full; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
+--
+
+ALTER TABLE ONLY public.dw_stg_1_mai50_z103_bib_full
+    ADD CONSTRAINT pk_dw_stg_1_mai50_z103_bib_full PRIMARY KEY (db_operation_cd, rec_trigger_key, em_create_dw_prcsng_cycle_id);
+
+
+--
 -- Name: dw_stg_1_mai50_z30 pk_dw_stg_1_mai50_z30; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
 --
 
 ALTER TABLE ONLY public.dw_stg_1_mai50_z30
     ADD CONSTRAINT pk_dw_stg_1_mai50_z30 PRIMARY KEY (db_operation_cd, rec_trigger_key, em_create_dw_prcsng_cycle_id);
+
+
+--
+-- Name: dw_stg_1_mai50_z30_full pk_dw_stg_1_mai50_z30_full; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
+--
+
+ALTER TABLE ONLY public.dw_stg_1_mai50_z30_full
+    ADD CONSTRAINT pk_dw_stg_1_mai50_z30_full PRIMARY KEY (db_operation_cd, rec_trigger_key, em_create_dw_prcsng_cycle_id);
 
 
 --
@@ -3251,19 +3423,11 @@ ALTER TABLE ONLY public.dw_stg_1_mai60_z00
 
 
 --
--- Name: dw_stg_1_mai60_z00_field pk_dw_stg_1_mai60_z00_field; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
---
-
-ALTER TABLE ONLY public.dw_stg_1_mai60_z00_field
-    ADD CONSTRAINT pk_dw_stg_1_mai60_z00_field PRIMARY KEY (db_operation_cd, rec_trigger_key, em_create_dw_prcsng_cycle_id);
-
-
---
 -- Name: dw_stg_1_mai60_z13 pk_dw_stg_1_mai60_z13; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
 --
 
 ALTER TABLE ONLY public.dw_stg_1_mai60_z13
-    ADD CONSTRAINT pk_dw_stg_1_mai60_z13 PRIMARY KEY (db_operation_cd, rec_trigger_key, dw_create_prcsng_cycle_id);
+    ADD CONSTRAINT pk_dw_stg_1_mai60_z13 PRIMARY KEY (db_operation_cd, rec_trigger_key, em_create_dw_prcsng_cycle_id);
 
 
 --
@@ -3392,6 +3556,14 @@ ALTER TABLE ONLY public.dw_stg_2_lbry_holding_z13u
 
 ALTER TABLE ONLY public.dw_stg_2_lbry_item_event_z35
     ADD CONSTRAINT pk_dw_stg_2_lbry_item_event_z35 PRIMARY KEY (db_operation_cd, dw_stg_2_aleph_lbry_name, in_z35_rec_key, em_create_dw_prcsng_cycle_id);
+
+
+--
+-- Name: dw_stg_2_lbry_item_fact_z103_bib_full pk_dw_stg_2_lbry_item_fact_z103_bib_full; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
+--
+
+ALTER TABLE ONLY public.dw_stg_2_lbry_item_fact_z103_bib_full
+    ADD CONSTRAINT pk_dw_stg_2_lbry_item_fact_z103_bib_full PRIMARY KEY (db_operation_cd, rec_trigger_key, em_create_dw_prcsng_cycle_id);
 
 
 --
@@ -3590,13 +3762,6 @@ CREATE INDEX indx_fact_lbry_item_prcs_status ON public.fact_lbry_item USING btre
 --
 
 CREATE INDEX indx_fact_lbry_item_status ON public.fact_lbry_item USING btree (lbry_item_status_dim_key);
-
-
---
--- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
---
-
-GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
