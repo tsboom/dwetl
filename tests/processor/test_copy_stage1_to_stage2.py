@@ -1,22 +1,14 @@
 import unittest
-import datetime
 from dwetl.reader.list_reader import ListReader
 from dwetl.writer.list_writer import ListWriter
 from dwetl.processor.copy_stage1_to_stage2 import CopyStage1ToStage2
+from dwetl.job_info import JobInfoFactory
 
 
 class TestCopyStage1ToStage2(unittest.TestCase):
     def setUp(self):
         self.writer = ListWriter()
-        self.job_info = {
-                'em_create_dw_prcsng_cycle_id': 9999,
-                'em_create_dw_job_exectn_id': 9999,
-                'em_create_dw_job_name': 'CopyStage1ToStage2',
-                'em_create_dw_job_version_no': '0.0',
-                'em_create_user_id': 'test_user',
-                'em_create_tmstmp': datetime.datetime.now()
-        }
-
+        self.job_info = JobInfoFactory.create_from_prcsng_cycle_id(-1)
         self.logger = None
 
     def test_copy_mai01_z00_stage1_to_stage2(self):
@@ -26,10 +18,10 @@ class TestCopyStage1ToStage2(unittest.TestCase):
                 '_sa_instance_state': '',
                 'db_operation_cd': 'I',
                 'em_create_dw_job_name': 'CreateFileEquivalentTable',
-                'em_create_dw_prcsng_cycle_id': 9999,
+                'em_create_dw_prcsng_cycle_id': self.job_info.prcsng_cycle_id,
                 'em_create_tmstmp': 'datetime.datetime(2019, 9, 17, 8, 53, 56, 619908)',
                 'em_create_user_id': 'test_user',
-                'em_create_dw_job_exectn_id': 9999,
+                'em_create_dw_job_exectn_id': 1,
                 'em_create_dw_job_version_no': '0.0',
                 'rec_trigger_key': '006137019',
                 'rec_type_cd': 'D',
@@ -78,10 +70,10 @@ class TestCopyStage1ToStage2(unittest.TestCase):
                 # Sample from dw_stg_1_mai50_z30
                 '_sa_instance_state': '',
                 'db_operation_cd': 'U',
-                'em_create_dw_job_exectn_id': 9999,
+                'em_create_dw_job_exectn_id': 1,
                 'em_create_dw_job_name': 'CreateFileEquivalentTable',
                 'em_create_dw_job_version_no': '0.0',
-                'em_create_dw_prcsng_cycle_id': 9999,
+                'em_create_dw_prcsng_cycle_id': self.job_info.prcsng_cycle_id,
                 'em_create_tmstmp': 'datetime.datetime(2019, 9, 17, 8, 53, 56, 619908)',
                 'em_create_user_id': 'test_user',
                 'rec_trigger_key': '000000084000120',

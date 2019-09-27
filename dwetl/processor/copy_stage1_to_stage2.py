@@ -1,5 +1,6 @@
 from dwetl.processor.processor import Processor
-import pdb
+import datetime
+
 
 class CopyStage1ToStage2(Processor):
     """
@@ -34,17 +35,14 @@ class CopyStage1ToStage2(Processor):
 
             processed_item[new_key] = value
 
-        # HACK for in_z30_rec_key
-        if self.aleph_library == 'mai50':
-            processed_item['in_z30_rec_key'] = item['rec_trigger_key']
-
         # Update metadata
         if self.aleph_library:
             processed_item['dw_stg_2_aleph_lbry_name'] = self.aleph_library
 
         processed_item['em_create_dw_job_name'] = self.job_name()
 
-        processed_item.update(self.job_info)
+        processed_item.update(self.job_info.as_dict('create'))
+        processed_item['em_create_tmstmp'] = datetime.datetime.now()
         return processed_item
 
 
