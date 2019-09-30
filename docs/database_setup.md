@@ -30,7 +30,7 @@ In production, only the "application" database settings should be configured.
 The DDL for the entire database is located in the "ddl" directory and named
 "usmai_dw_etl.sql".
 
-The DDL in the "usmai_dw_etl.sql" file was generated using the following
+The ddl has already been created, but for reference, the DDL in the "usmai_dw_etl.sql" file was generated using the following
 command:
 
 ```
@@ -40,7 +40,7 @@ command:
 The "usmai_dw_etl.sql" file should be updated whenever there is a change to the
 database schema.
 
-To recreate the database from the "usmai_dw_etl.sql",  run the following
+To create the db from scratch from the ddl, or to recreate the database from the "usmai_dw_etl.sql",  run the following
 command:
 
 **Note:** This command will DESTROY the existing db and create a new empty
