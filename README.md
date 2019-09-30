@@ -10,7 +10,9 @@ This application reads several TSV files representing different tables in Aleph,
 
 Prerequisites: Python 3, pip, virtualenv
 
-Start by cloning the repo and unzipping it into your /apps/git folder.
+Start by cloning the repo and unzipping it into your /apps/git directory, or wherever your UMD Libraries repos are stored on your local machine.
+
+Go into the repo's root directory.
 
 `cd dwetl`
 
@@ -49,7 +51,7 @@ See [Tasks](docs/tasks.md) for more information about the available tasks.
 
 ## Running the application
 
-To run the entire ETL process, use  `python dw_etl.py` from inside of your dwetl directory.
+To run the entire ETL process, use  `python run.py` from inside of your dwetl directory.
 
 ### Project overview
 
