@@ -8,7 +8,7 @@ This application reads several TSV files representing different tables in Aleph,
 
 ## Getting Started
 
-Prerequisites: Python 3, pip, virtualenv
+Prerequisites: Python 3.7, pip, virtualenv
 
 Start by cloning the repo and unzipping it into your /apps/git directory, or wherever your UMD Libraries repos are stored on your local machine.
 
@@ -16,13 +16,17 @@ Go into the repo's root directory.
 
 `cd dwetl`
 
-Create a virtualenv called venv.
+Create a virtualenv called venv using Python 3. 
 
 `virtualenv venv`
 
-Enter your virtual environment
+Enter your virtual environment and check to see if `python --version` shows python 3.7. 
 
 `source venv/bin/activate`
+
+Make sure your python version is Python 3.7. If it isn't, delete that venv directory and create a new one. 
+
+`python3 -m venv venv`
 
 Make sure when you are inside your virtual environment `(venv)` should show up in your terminal on the left-hand side, and your python --version should be Python 3. 
 
