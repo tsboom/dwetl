@@ -24,9 +24,12 @@ Enter your virtual environment
 
 `source venv/bin/activate`
 
-Download the requirements
+Download the requirements using python3. You may need to use `pip3` depending on how your path is configured. 
 
 `pip install -r requirements.txt`
+
+If you get an error about psycopg2, you will need to make sure you have postgresql installed. 
+You can do it with homebrew `brew install postgresql` and try installing the requirements again. 
 
 Copy the "env_example" file to ".env" and configure:
 
