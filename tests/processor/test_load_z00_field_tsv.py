@@ -49,19 +49,19 @@ class TestLoadZ00FieldTsv(unittest.TestCase):
         """
         sample_data = [
             {'z00_doc_number': '000025252',
-            'z00_marc_rec_field_cd': 'FMT',
-            'UNUSED': 'L',
-            'z00_marc_rec_field_txt': 'BK',
+             'z00_marc_rec_field_cd': 'FMT',
+             'UNUSED': 'L',
+             'z00_marc_rec_field_txt': 'BK',
             },
             {'z00_doc_number': '000025252',
-            'z00_marc_rec_field_cd': 'LDR',
-            'UNUSED': 'L',
-            'z00_marc_rec_field_txt': '^^^^^cam^^2200493^^^4500',
+             'z00_marc_rec_field_cd': 'LDR',
+             'UNUSED': 'L',
+             'z00_marc_rec_field_txt': '^^^^^cam^^2200493^^^4500',
             },
             {'z00_doc_number': '000090849',
-            'z00_marc_rec_field_cd': 'FMT',
-            'UNUSED': 'L',
-            'z00_marc_rec_field_txt': 'BK',
+             'z00_marc_rec_field_cd': 'FMT',
+             'UNUSED': 'L',
+             'z00_marc_rec_field_txt': 'BK',
             },
         ]
         reader = ListReader(sample_data)
