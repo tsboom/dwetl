@@ -1321,9 +1321,9 @@ CREATE TABLE public.dw_stg_2_bib_rec_z00_field (
     dq_z00_doc_number character(9),
     t1_z00_doc_number__bib_rec_source_system_id character(9),
     in_dw_stg_1_marc_rec_field_seq_no smallint NOT NULL,
-    in_z00_marc_rec_field_cd character(3),
-    pp_z00_marc_rec_field_cd character(3),
-    dq_z00_marc_rec_field_cd character(3),
+    in_z00_marc_rec_field_cd character(5),
+    pp_z00_marc_rec_field_cd character(5),
+    dq_z00_marc_rec_field_cd character(5),
     t1_z00_marc_rec_field_cd__bib_rec_marc_rec_field_cd character(3),
     in_z00_marc_rec_field_txt character varying(2000),
     pp_z00_marc_rec_field_txt character varying(2000),
@@ -1556,10 +1556,10 @@ CREATE TABLE public.dw_stg_2_lbry_holding_z00_field (
     dq_z00_doc_number character(9),
     t1_z00_doc_number__lbry_holding_source_system_id character(9),
     dw_stg_1_marc_rec_field_seq_no smallint NOT NULL,
-    in_z00_marc_rec_field_cd character(3),
-    pp_z00_marc_rec_field_cd character(3),
-    dq_z00_marc_rec_field_cd character(3),
-    t1_z00_marc_rec_field_cd__lbry_holding_marc_rec_field_cd character(3),
+    in_z00_marc_rec_field_cd character(5),
+    pp_z00_marc_rec_field_cd character(5),
+    dq_z00_marc_rec_field_cd character(5),
+    t1_z00_marc_rec_field_cd__lbry_holding_marc_rec_field_cd character(5),
     in_z00_marc_rec_field_txt character varying(2000),
     pp_z00_marc_rec_field_txt character varying(2000),
     dq_z00_marc_rec_field_txt character varying(2000),
@@ -3555,7 +3555,7 @@ ALTER TABLE ONLY public.dw_stg_2_lbry_holding_z13u
 --
 
 ALTER TABLE ONLY public.dw_stg_2_lbry_item_event_z35
-    ADD CONSTRAINT pk_dw_stg_2_lbry_item_event_z35 PRIMARY KEY (db_operation_cd, dw_stg_2_aleph_lbry_name, in_z35_rec_key, em_create_dw_prcsng_cycle_id);
+    ADD CONSTRAINT pk_dw_stg_2_lbry_item_event_z35 PRIMARY KEY (db_operation_cd, dw_stg_2_aleph_lbry_name, in_z35_rec_key, em_create_dw_prcsng_cycle_id, in_z35_time_stamp);
 
 
 --
@@ -3767,4 +3767,3 @@ CREATE INDEX indx_fact_lbry_item_status ON public.fact_lbry_item USING btree (lb
 --
 -- PostgreSQL database dump complete
 --
-
