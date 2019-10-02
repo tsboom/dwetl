@@ -17,8 +17,11 @@ class SqlAlchemyWriter(Writer):
 
     def write_row(self, row_dict):
         try:
+            # TODO: check if row_dict keys are in the db, only put matching keys and
+            # values into the record
+            matching_row_dict = {}
             # insert the row into SQLAlchemy table base class
-            record = self.table_base_class(**row_dict)
+            record = self.table_base_class(**matching_row_dict)
             self.session.add(record)
         except exc.SQLAlchemyError as e:
             self.session.rollback()
