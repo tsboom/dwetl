@@ -154,6 +154,7 @@ Tests are located in the `dwetl/tests` directory. They are written in Unittest b
 
 `pytest` from the root directory to run all tests.
 `pytest tests/{FILE_NAME}` to run tests from one file.
+`pytest tests/{reader, writer, processor}/{FILE_NAME}` runs the tests for a Reader, Writer, or Processor. 
 
 
 
