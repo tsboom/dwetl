@@ -8,25 +8,35 @@ This application reads several TSV files representing different tables in Aleph,
 
 ## Getting Started
 
-Prerequisites: Python 3, pip, virtualenv
+Prerequisites: Python 3.7, pip, virtualenv
 
-Start by cloning the repo and unzipping it into your /apps/git folder.
+Start by cloning the repo and unzipping it into your /apps/git directory, or wherever your UMD Libraries repos are stored on your local machine.
+
+Go into the repo's root directory.
 
 `cd dwetl`
 
-Create a virtualenv called venv.
+Create a virtualenv called venv using Python 3.
 
 `virtualenv venv`
 
-Enter your virtual environment
+Enter your virtual environment and check to see if `python --version` shows python 3.7.
 
 `source venv/bin/activate`
 
-Download the requirements
+Make sure your python version is Python 3.7. If it isn't, delete that venv directory and create a new one.
+
+`python3 -m venv venv`
+
+
+Make sure when you are inside your virtual environment `(venv)` should show up in your terminal on the left-hand side, and your python --version should be Python 3.
 
 `pip install -r requirements.txt`
 
-Copy the "env_example" file to ".env" and configure:
+If you get an error about psycopg2, you will need to make sure you have postgresql installed.
+You can do it with homebrew `brew install postgresql` and try installing the requirements again.
+
+Copy the "env_example" file to ".env" and edit the .env file with your environment information:
 
 `cp env_example .env`
 
@@ -49,7 +59,7 @@ See [Tasks](docs/tasks.md) for more information about the available tasks.
 
 ## Running the application
 
-To run the entire ETL process, use  `python dw_etl.py` from inside of your dwetl directory.
+To run the entire ETL process, use  `python run.py` from inside of your dwetl directory.
 
 ### Project overview
 
@@ -139,11 +149,11 @@ The "ListWriter" is commonly used for unit testing, in place of the
 ## Running the tests
 
 Explain how to run the automated tests for this system
- 
-Tests are located in the `dwetl/tests` directory. They are written in Unittest but Pytest will run them with better color output. 
+
+Tests are located in the `dwetl/tests` directory. They are written in Unittest but Pytest will run them with better color output.
 
 `pytest` from the root directory to run all tests.
-`pytest tests/{FILE_NAME}` to run tests from one file. 
+`pytest tests/{FILE_NAME}` to run tests from one file.
 
 
 
