@@ -39,6 +39,7 @@ def run(input_directory):
     '''
     load_stage_2
     load 'in_' values from stg1 to stg 2 tables
+    load 'in_' values
     '''
     load_stage_2.load_stage_2(job_info)
 
