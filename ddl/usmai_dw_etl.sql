@@ -1555,7 +1555,7 @@ CREATE TABLE public.dw_stg_2_lbry_holding_z00_field (
     pp_z00_doc_number character(9),
     dq_z00_doc_number character(9),
     t1_z00_doc_number__lbry_holding_source_system_id character(9),
-    dw_stg_1_marc_rec_field_seq_no smallint NOT NULL,
+    in_dw_stg_1_marc_rec_field_seq_no smallint NOT NULL,
     in_z00_marc_rec_field_cd character(5),
     pp_z00_marc_rec_field_cd character(5),
     dq_z00_marc_rec_field_cd character(5),
@@ -3531,7 +3531,7 @@ ALTER TABLE ONLY public.dw_stg_2_lbry_holding_z00
 --
 
 ALTER TABLE ONLY public.dw_stg_2_lbry_holding_z00_field
-    ADD CONSTRAINT pk_dw_stg_2_lbry_holding_z00_field PRIMARY KEY (db_operation_cd, dw_stg_2_aleph_lbry_name, in_z00_doc_number, dw_stg_1_marc_rec_field_seq_no, em_create_dw_prcsng_cycle_id);
+    ADD CONSTRAINT pk_dw_stg_2_lbry_holding_z00_field PRIMARY KEY (db_operation_cd, dw_stg_2_aleph_lbry_name, in_z00_doc_number, in_dw_stg_1_marc_rec_field_seq_no, em_create_dw_prcsng_cycle_id);
 
 
 --
