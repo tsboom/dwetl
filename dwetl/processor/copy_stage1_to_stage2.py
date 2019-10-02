@@ -30,7 +30,7 @@ class CopyStage1ToStage2(Processor):
                 continue
 
             new_key = key
-            if not (key.startswith('em') or key == 'db_operation_cd'  or key =='dw_stg_1_marc_rec_field_seq_no'):
+            if not (key.startswith('em') or key == 'db_operation_cd'):
                 new_key = 'in_' + key
 
             processed_item[new_key] = value
