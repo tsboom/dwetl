@@ -25,8 +25,10 @@ class TestCopyStage1ToStage2(unittest.TestCase):
                 'em_create_dw_job_version_no': '0.0',
                 'rec_trigger_key': '006137019',
                 'rec_type_cd': 'D',
+                'z00_doc_number': '006137019',
                 'z00_data': '',
                 'z00_data_len': '005425',
+                'z00_no_lines': '0047'
             }
         ]
 
@@ -257,7 +259,7 @@ class TestCopyStage1ToStage2(unittest.TestCase):
             }
         ]
 
-        aleph_library = 'mai50'
+        aleph_library = 'mai60'
         reader = ListReader(sample_data)
         processor = CopyStage1ToStage2.create(reader, self.writer, self.job_info, self.logger, aleph_library)
         processor.execute()
@@ -268,7 +270,7 @@ class TestCopyStage1ToStage2(unittest.TestCase):
             'db_operation_cd',
             'dw_stg_2_aleph_lbry_name',
             'in_z00_doc_number',
-            'dw_stg_1_marc_rec_field_seq_no',
+            'in_dw_stg_1_marc_rec_field_seq_no',
             'in_z00_marc_rec_field_cd',
             'in_z00_marc_rec_field_txt',
             'em_create_dw_prcsng_cycle_id',
@@ -283,7 +285,24 @@ class TestCopyStage1ToStage2(unittest.TestCase):
         self.assertEqual('I', results[0]['db_operation_cd'])
         self.assertEqual('mai60', results[0]['dw_stg_2_aleph_lbry_name'])
         self.assertEqual('000153121', results[0]['in_z00_doc_number'])
-        self.assertEqual('1', results[0]['dw_stg_1_marc_rec_field_seq_no'])
+        self.assertEqual('1', results[0]['in_dw_stg_1_marc_rec_field_seq_no'])
         self.assertEqual('FMT', results[0]['in_z00_marc_rec_field_cd'])
         self.assertEqual('HO', results[0]['in_z00_marc_rec_field_txt'])
         self.assertEqual(processor.job_name(), results[0]['em_create_dw_job_name'])
+
+    def test_mai50_z35_event_type_not_in_list(self):
+        sample_data = [
+                { 'z35_event_type': '01',
+                'z35_rec_key': '003891145'},
+                { 'z35_event_type': '82',
+                'z35_rec_key': '004893642'},
+            ]
+        aleph_library= 'mai50'
+
+        reader = ListReader(sample_data)
+        processor = CopyStage1ToStage2.create(reader, self.writer, self.job_info, self.logger, aleph_library)
+        processor.execute()
+        results = self.writer.list
+
+        self.assertEqual(1, len(results))
+        self.assertEqual('004893642', results[0]['in_z35_rec_key'])
