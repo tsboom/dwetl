@@ -24,26 +24,26 @@ def load_stage_2(job_info):
     print('Loading stage 2...')
 
     stage1_to_stage2_table_mappings = {
-        "dw_stg_1_mai39_z13": "dw_stg_2_bib_rec_z13",
-        'dw_stg_1_mai01_z13': "dw_stg_2_bib_rec_z13",
-        "dw_stg_1_mai01_z13u": "dw_stg_2_bib_rec_z13u",
-        "dw_stg_1_mai39_z00": "dw_stg_2_bib_rec_z00",
-        "dw_stg_1_mai39_z13": "dw_stg_2_bib_rec_z13",
-        "dw_stg_1_mai39_z13u": "dw_stg_2_bib_rec_z13u",
-        "dw_stg_1_mai60_z00": "dw_stg_2_lbry_holding_z00",
-        "dw_stg_1_mai60_z13": "dw_stg_2_lbry_holding_z13",
-        "dw_stg_1_mai60_z13u": "dw_stg_2_lbry_holding_z13u",
-        "dw_stg_1_mai50_z30": "dw_stg_2_lbry_item_z30",
+        # "dw_stg_1_mai39_z13": "dw_stg_2_bib_rec_z13",
+        # 'dw_stg_1_mai01_z13': "dw_stg_2_bib_rec_z13",
+        # "dw_stg_1_mai01_z13u": "dw_stg_2_bib_rec_z13u",
+        # "dw_stg_1_mai39_z00": "dw_stg_2_bib_rec_z00",
+        # "dw_stg_1_mai39_z13": "dw_stg_2_bib_rec_z13",
+        # "dw_stg_1_mai39_z13u": "dw_stg_2_bib_rec_z13u",
+        # "dw_stg_1_mai60_z00": "dw_stg_2_lbry_holding_z00",
+        # "dw_stg_1_mai60_z13": "dw_stg_2_lbry_holding_z13",
+        # "dw_stg_1_mai60_z13u": "dw_stg_2_lbry_holding_z13u",
+        # "dw_stg_1_mai50_z30": "dw_stg_2_lbry_item_z30",
         # "dw_stg_1_mai50_z35": "dw_stg_2_lbry_item_event_z35",
         "dw_stg_1_mai01_z00_field": "dw_stg_2_bib_rec_z00_field",
         "dw_stg_1_mai39_z00_field": "dw_stg_2_bib_rec_z00_field",
         "dw_stg_1_mai60_z00_field": "dw_stg_2_lbry_holding_z00_field",
-        "dw_stg_1_mpf_mbr_lbry": "dw_stg2_mbr_lbry",
-        "dw_stg_1_mpf_lbry_entity": "dw_stg2_lbry_entity",
-        "dw_stg_1_mpf_collection": "dw_stg_2_collection",
-        "dw_stg_1_mpf_item_status": "dw_stg_2_item_status",
-        "dw_stg_1_mpf_item_prcs_status": "dw_stg_2_item_prcs_status",
-        "dw_stg_1_mpf_matrl_form": "dw_stg_2_matrl_form"
+        "dw_stg_1_mpf_mbr_lbry": "dw_stg2_mpf_mbr_lbry",
+        "dw_stg_1_mpf_lbry_entity": "dw_stg2_mpf_lbry_entity",
+        "dw_stg_1_mpf_collection": "dw_stg_2_mpf_collection",
+        "dw_stg_1_mpf_item_status": "dw_stg_2_mpf_item_status",
+        "dw_stg_1_mpf_item_prcs_status": "dw_stg_2_mpf_item_prcs_status",
+        "dw_stg_1_mpf_matrl_form": "dw_stg_2_mpf_matrl_form"
     }
 
     logger = None
