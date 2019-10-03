@@ -28,13 +28,13 @@ class TestTableTransform(unittest.TestCase):
         # pdb.set_trace()
         self.assertEqual(table_transform.preprocess(a, table_config), 'A title with some extraneous spaces')
 
-        #testing date no preprocessing no output $$$this is a bad test as processing occurs after dq whoops
+        # testing date no preprocessing no output $$$this is a bad test as processing occurs after dq whoops
         b = TransformField('in_z13_open_date',20021124)
         self.assertEqual(table_transform.preprocess(b, table_config), 20021124)
 
-        #testing terminal output of no preprocessing
-        #c = TransformField('in_z13_upd_time_stamp',201708251637466)
-        #with self.assertRaises(KeyError):
+        # testing terminal output of no preprocessing
+        # c = TransformField('in_z13_upd_time_stamp',201708251637466)
+        # with self.assertRaises(KeyError):
         #    preprocess(c,data_source_col_sorted)
             #doesn't seem to be working with the KeyError?
 

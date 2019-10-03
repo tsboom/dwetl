@@ -19,7 +19,7 @@ import datetime
 import sqlalchemy
 import dwetl.database_credentials as database_credentials
 from dwetl.job_info import JobInfoFactory, JobInfo
-import load_stage_1
+import load_stage_1, load_stage_2
 
 def run(input_directory):
     time_started = datetime.datetime.now()
@@ -37,8 +37,12 @@ def run(input_directory):
     load_stage_1.load_stage_1(job_info, input_directory)
 
     '''
+    load_stage_2
     load 'in_' values from stg1 to stg 2 tables
+    load 'in_' values
     '''
+    load_stage_2.load_stage_2(job_info)
+
 
 
     endtime = datetime.datetime.now()

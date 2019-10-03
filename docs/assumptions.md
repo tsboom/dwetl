@@ -12,6 +12,8 @@ Questions:
 
 - library-entity-dimension.txt, mpf_library-collection-dimension.txt are missing `usmai_mbr_lbry_cd` (2 characters)
 
+  - TODO: still need to fix library-entity-dimension-txt column headers in the extract
+
 - mpf_item-status-dimension.txt has an Integrity error.
   - ```DETAIL:  Key (db_operation_cd, usmai_mbr_lbry_cd, item_status_cd, em_create_dw_prcsng_cycle_id)=(I, BC, 38, 40) already exists.```
   - Seems like we can't use that combination of columns as the PK. Should we add effective_date into the key?
@@ -20,9 +22,9 @@ Questions:
   
   - ```DETAIL:  Key (db_operation_cd, usmai_mbr_lbry_cd, item_prcs_status_cd, em_create_dw_prcsng_cycle_id)=(U, CP, HT, 40) already exists.```
   
-- material-form-dimension.txt `matrl_form_code` is 5 characters, not 2. We changed it in stage 1 but still need to make these changes across the rest of the tables. 
+- TODO: material-form-dimension.txt `matrl_form_code` is 5 characters, not 2. We changed it in stage 1 but still need to make these changes across the rest of the tables. 
 
-- mai01/39/60_z00_field_data files don't have headers or DB operation codes in them. We could manually add headers, but are not sure how to get the db operation codes. 
+- DONE: mai01/39/60_z00_field_data files don't have headers or DB operation codes in them. We could manually add headers, but are not sure how to get the db operation codes. 
 
   - first column is rec_trigger_key and z00_doc_number
   - last column is field_txt
