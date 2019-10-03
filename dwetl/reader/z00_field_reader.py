@@ -10,6 +10,7 @@ class Z00FieldReader:
     This implementation assumes that the second in the file
     is a tab-separated list of the keys to use.
 
+    TODO
     This class is temporary until the extract files are tab separated.
     """
     def __init__(self, file_path):

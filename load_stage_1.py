@@ -10,11 +10,12 @@ from dwetl.processor.load_z00_field_tsv import LoadZ00FieldTsv
 from dwetl.processor.load_mpf_tsv import LoadMpfTsv
 from dwetl.writer.sql_alchemy_writer import SqlAlchemyWriter
 import dwetl
+import pdb
 
 
 def load_stage_1(job_info, input_directory):
 
-
+    print('Loading stage 1...')
     '''
     file to table mapping
     '''
