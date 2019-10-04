@@ -1,5 +1,6 @@
 from dwetl.processor.processor import Processor
 from dwetl.data_quality_utilities import trim
+import datetime
 
 class Preprocess(Processor):
     """
@@ -9,7 +10,7 @@ class Preprocess(Processor):
     """
 
     def __init__(self, reader, writer, job_info, logger, json_config):
-        super().__init__(reader, writer, job_info, logger, json_config)
+        super().__init__(reader, writer, job_info, logger)
         self.json_config = json_config
 
     # @classmethod
