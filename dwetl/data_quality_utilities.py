@@ -8,9 +8,7 @@ import pdb
 '''
 finish is mandatory
 '''
-# checks if mandatory
-
-
+# TODO: checks if mandatory
 def is_mandatory(input):
     print("temporary")
 
