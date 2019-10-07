@@ -28,6 +28,8 @@ class SqlAlchemyWriter(Writer):
             #         matching_row_dict[key] = val
             # insert the matching keys row into SQLAlchemy table base class
             record = self.table_base_class(**row_dict)
-            self.session.add(record)
+
+            # self.session.add(record)
+            self.session.merge(record)
         except exc.SQLAlchemyError as e:
             self.session.rollback()
