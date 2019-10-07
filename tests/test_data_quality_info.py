@@ -75,6 +75,28 @@ class TestDataQualityInfo(unittest.TestCase):
         self.assertFalse(dq.validate('1234567890123456'))
         self.assertFalse(dq.validate('ABCDEFGHIJKLMNOPQRSTUVWXYZ'))
 
+    def test_data_quality_info_is_numeric(self):
+        json_config = {
+            'specific_dq_function': 'is_numeric',
+            'specific_dq_function_param_1': '',
+            'suspend_record': 'Yes',
+            'exception_message': 'Non-numeric Value',
+            'replacement_value': 'N/A'
+        }
+
+        dq = DataQualityInfo(json_config)
+
+        self.assertTrue(dq.suspend_record)
+        self.assertEqual('Non-numeric Value', dq.exception_message)
+        self.assertEqual(None, dq.replacement_value)
+
+        self.assertFalse(dq.validate('ABCD'))
+        self.assertTrue(dq.validate('1236717823681'))
+        self.assertTrue(dq.validate('0000'))
+        self.assertFalse(dq.validate(''))
+        self.assertTrue(dq.validate('0'))
+        self.assertFalse(dq.validate('a1d3'))
+
     def test_data_quality_info_suspect_flag(self):
         json_config = {
             'specific_dq_function': 'is_valid_length',
