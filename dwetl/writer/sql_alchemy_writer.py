@@ -19,6 +19,8 @@ class SqlAlchemyWriter(Writer):
         try:
             # insert the row into SQLAlchemy table base class
             record = self.table_base_class(**row_dict)
-            self.session.add(record)
+
+            # self.session.add(record)
+            self.session.merge(record)
         except exc.SQLAlchemyError as e:
             self.session.rollback()
