@@ -11,10 +11,14 @@ class TestPreprocess(unittest.TestCase):
         tests the case where there's no whitespace
         """
         sample_data = [
-            {   # z00 don't have trims
+            {   # pk data
+                'db_operation_cd': 'U',
+                'dw_stg_2_aleph_lbry_name': 'mai60',
+                'em_create_dw_prcsng_cycle_id': '-1',
+                # z00 don't have trims
                 'in_z00_doc_number': '000019087',
-                'in_z00_no_lines': None,
-                'in_z00_data_len': None,
+                'in_z00_no_lines': '0011',
+                'in_z00_data_len': '000400',
                 # z13 has trims
                 'in_z13_title': 'A literary history of America',
                 'in_z13_author': 'Wendell, Barrett, 1855-1921',
@@ -75,30 +79,39 @@ class TestPreprocess(unittest.TestCase):
         }
 
 
+        pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
 
-
-        step = Preprocess(reader, writer, job_info, logger, sample_json_config)
+        step = Preprocess(reader, writer, job_info, logger, sample_json_config, pk_list)
         step.execute()
         results = step.writer.list
 
         expected_keys = sorted([
-            'in_z00_doc_number', 'in_z00_no_lines', 'in_z13_title', 'in_z13_author',
-            'in_z00_data_len', 'in_z13_imprint',
-            'em_update_dw_prcsng_cycle_id', 'em_update_dw_job_exectn_id',
-            'em_update_dw_job_name', 'em_update_dw_job_version_no',
-            'em_update_user_id', 'em_update_tmstmp'
-        ])
+                'in_z00_doc_number', 'pp_z00_doc_number', 'dw_stg_2_aleph_lbry_name', 'db_operation_cd',
+                'pp_z00_no_lines', 'pp_z13_title', 'pp_z13_author',
+                'pp_z00_data_len', 'pp_z13_imprint',
+                'em_update_dw_prcsng_cycle_id', 'em_update_dw_job_exectn_id',
+                'em_update_dw_job_name', 'em_update_dw_job_version_no',
+                'em_update_user_id', 'em_update_tmstmp', 'em_create_dw_prcsng_cycle_id'
+                ])
+
         self.assertEqual(expected_keys, sorted(list(results[0].keys())))
-        self.assertEqual("000019087", results[0]['in_z00_doc_number'])
+        self.assertEqual("000019087", results[0]['pp_z00_doc_number'])
+        self.assertEqual('0011', results[0]['pp_z00_no_lines'])
+        self.assertEqual('000400', results[0]['pp_z00_data_len'])
 
 
 
-    def test_preprocess_lots_of_whitespace(self):
+    def test_preprocess_lots_of_whitespace_and_none(self):
         """
         tests the case where whitespace exists
         """
         sample_data = [
-            {   # z00 don't have trims
+            {
+                # pk data
+                'db_operation_cd': 'U',
+                'dw_stg_2_aleph_lbry_name': 'mai60',
+                'em_create_dw_prcsng_cycle_id': '-1',
+                # z00 don't have trims
                 'in_z00_doc_number': '  000019087 ',
                 'in_z00_no_lines': None,
                 'in_z00_data_len': None,
@@ -162,20 +175,23 @@ class TestPreprocess(unittest.TestCase):
         }
 
 
+        pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
 
-
-        step = Preprocess(reader, writer, job_info, logger, sample_json_config)
+        step = Preprocess(reader, writer, job_info, logger, sample_json_config, pk_list)
         step.execute()
         results = step.writer.list
 
         expected_keys = sorted([
-            'in_z00_doc_number', 'in_z00_no_lines', 'in_z13_title', 'in_z13_author',
-            'in_z00_data_len', 'in_z13_imprint',
+            'in_z00_doc_number', 'pp_z00_doc_number', 'dw_stg_2_aleph_lbry_name', 'db_operation_cd',
+            'pp_z00_no_lines', 'pp_z13_title', 'pp_z13_author',
+            'pp_z00_data_len', 'pp_z13_imprint',
             'em_update_dw_prcsng_cycle_id', 'em_update_dw_job_exectn_id',
             'em_update_dw_job_name', 'em_update_dw_job_version_no',
-            'em_update_user_id', 'em_update_tmstmp'
+            'em_update_user_id', 'em_update_tmstmp', 'em_create_dw_prcsng_cycle_id'
         ])
         self.assertEqual(expected_keys, sorted(list(results[0].keys())))
-        self.assertEqual("  000019087 ", results[0]['in_z00_doc_number'])
-        self.assertEqual("A literary history of America", results[0]['in_z13_title'])
-        self.assertEqual("Wendell, Barrett, 1855-1921", results[0]['in_z13_author'])
+        self.assertEqual("  000019087 ", results[0]['pp_z00_doc_number'])
+        self.assertEqual("A literary history of America", results[0]['pp_z13_title'])
+        self.assertEqual("Wendell, Barrett, 1855-1921", results[0]['pp_z13_author'])
+        self.assertEqual(None, results[0]['pp_z00_no_lines'])
+        self.assertEqual(None, results[0]['pp_z00_data_len'])
