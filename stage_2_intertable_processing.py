@@ -9,6 +9,7 @@ import os
 import sys
 from dwetl.job_info import JobInfoFactory, JobInfo
 from dwetl.processor.preprocess import Preprocess
+from dwetl.processor.data_quality_processor import DataQualityProcessor
 from dwetl.writer.print_writer import PrintWriter
 import dwetl
 
@@ -45,10 +46,22 @@ def stage_2_intertable_processing(job_info):
 
             reader = SqlAlchemyReader(session, stage2_table_class, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
             writer = SqlAlchemyWriter(session, stage2_table_class)
-            # writer = PrintWriter()
-            preprocessor = Preprocess(reader, writer, job_info, logger, json_config, pk_list)
 
+            '''
+            Preprocessing
+            '''
+            preprocessor = Preprocess(reader, writer, job_info, logger, json_config, pk_list)
             preprocessor.execute()
+
+            '''
+            Data Quality Checks
+            '''
+            data_quality_checker = DataQualityProcessor(reader, writer, job_info, logger, json_config, pk_list)
+            data_quality_checker.execute()
+
+
+
+
 
 
 
