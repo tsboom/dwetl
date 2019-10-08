@@ -1,5 +1,5 @@
 import unittest
-from data_quality_info import DataQualityInfo
+from dwetl.data_quality_info import DataQualityInfo
 
 class TestDataQualityInfo(unittest.TestCase):
     def setUp(self):
