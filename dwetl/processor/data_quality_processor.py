@@ -33,11 +33,15 @@ class DataQualityProcessor(Processor):
             if key in invalid_keys:
                 continue
             pdb.set_trace()
+
             # get list of DQ objects from json_config
+            if key.startswith('in_'):
+                orig_key = key[3:]
             try:
-                key_json = json_config[key[3:]]
+                key_json = json_config[orig_key]
             except:
-                print(key, 'not found')
+                print(orig_key, 'not found')
+                pass
 
             # get DQ checks for current key
 
@@ -49,17 +53,17 @@ class DataQualityProcessor(Processor):
 
 
 
-
-            # convert key name to pp_keyname
-            dq_key = key.replace('pp_', 'dq_')
-
-
-            if need_preprocess:
-                result = trim(val)
-                preprocessed_item[pp_key] = result
-            else:
-                preprocessed_item[pp_key] = val
-        return preprocessed_item
+            #
+            # # convert key name to pp_keyname
+            # dq_key = key.replace('pp_', 'dq_')
+        #
+        #
+        #     if need_preprocess:
+        #         result = trim(val)
+        #         preprocessed_item[pp_key] = result
+        #     else:
+        #         preprocessed_item[pp_key] = val
+        # return preprocessed_item
 
     def process_item(self, item):
         processed_item = DataQualityProcessor.check_data_quality(item, self.json_config, self.stg2_pk_list)

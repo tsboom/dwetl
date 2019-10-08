@@ -18,18 +18,31 @@ class SqlAlchemyWriter(Writer):
 
     def write_row(self, row_dict):
         try:
-            # TODO: check if row_dict keys are in the db, only put matching keys and
-            # values into the record
-            # matching_row_dict = {}
-            # # find a list of keys from the table.
-            # table_keys = self.table_base_class.__table__.columns.keys()
-            # for key, val in row_dict.items():
-            #     if key in table_keys:
-            #         matching_row_dict[key] = val
             # insert the matching keys row into SQLAlchemy table base class
             record = self.table_base_class(**row_dict)
 
-            # self.session.add(record)
-            self.session.merge(record)
+            # get list of primary keys from table_base_class
+            pk_list = []
+            pk_values = self.table_base_class.__table__.primary_key.columns.values()
+            for i, key in enumerate(pk_values):
+                # index = pk_values.index(key)
+                pk_list.append(pk_values[i].name)
+
+            # Update the row if PK list is found in row
+
+            for pk in pk_values:
+                in_dict = False
+                if pk in row_dict.keys():
+                    in_dict == True
+                else:
+                    in_dict == False
+            pdb.set_trace()
+            if in_dict == True:
+                pdb.set_trace()
+                self.session.merge(record)
+            else:
+                # Add new row if PK list is not found in row
+                self.session.add(record)
+
         except exc.SQLAlchemyError as e:
             self.session.rollback()
