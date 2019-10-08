@@ -29,7 +29,28 @@ class SqlAlchemyWriter(Writer):
             # insert the matching keys row into SQLAlchemy table base class
             record = self.table_base_class(**row_dict)
 
-            # self.session.add(record)
-            self.session.merge(record)
+            # get list of primary keys from table_base_class
+            pk_list = []
+            pk_values = self.table_base_class.__table__.primary_key.columns.values()
+            for i, key in enumerate(pk_values):
+                # index = pk_values.index(key)
+                pk_list.append(pk_values[i].name)
+
+            # Update the row if PK list is found in row
+
+            for pk in pk_list:
+                in_dict = False
+                if pk in list(row_dict.keys()):
+                    in_dict == True
+                else:
+                    in_dict == False
+
+            if in_dict == True:
+                pdb.set_trace()
+                self.session.merge(record)
+            else:
+                # Add new row if PK list is not found in row
+                self.session.add(record)
+
         except exc.SQLAlchemyError as e:
             self.session.rollback()
