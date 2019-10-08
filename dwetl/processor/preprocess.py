@@ -5,9 +5,7 @@ import pdb
 
 class Preprocess(Processor):
     """
-    Processor for Preprocessing, Dataquality checks, and Transforms
-    of "in_values" in stage 2 tables.
-    Inter-table Processing
+    Processor for Preprocessing
     """
 
     def __init__(self, reader, writer, job_info, logger, json_config, pk_list):

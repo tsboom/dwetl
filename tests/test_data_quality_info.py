@@ -75,7 +75,6 @@ class TestDataQualityInfo(unittest.TestCase):
         self.assertFalse(dq.validate('1234567890123456'))
         self.assertFalse(dq.validate('ABCDEFGHIJKLMNOPQRSTUVWXYZ'))
 
-<<<<<<< HEAD
     def test_data_quality_info_is_numeric(self):
         json_config = {
             'specific_dq_function': 'is_numeric',
@@ -98,8 +97,6 @@ class TestDataQualityInfo(unittest.TestCase):
         self.assertTrue(dq.validate('0'))
         self.assertFalse(dq.validate('a1d3'))
 
-=======
->>>>>>> fde9e01... WIP. Initial DataQualityInfo implementation.
     def test_data_quality_info_suspect_flag(self):
         json_config = {
             'specific_dq_function': 'is_valid_length',
