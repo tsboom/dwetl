@@ -34,12 +34,20 @@ class DataQualityProcessor(Processor):
                 continue
             pdb.set_trace()
             # get list of DQ objects from json_config
-            key_json = json_config[key[3:]]
+            try:
+                key_json = json_config[key[3:]]
+            except:
+                print(key, 'not found')
 
-            # get preprocess stanza out
+            # get DQ checks for current key
 
-            # create DataQualityInfo for current key
+            # create DataQualityInfo for each DQ check
             data_quality_info = DataQualityInfo(json_config)
+
+            #data quality check is applid only on keys with 'pp_' prefix
+
+
+
 
 
             # convert key name to pp_keyname
