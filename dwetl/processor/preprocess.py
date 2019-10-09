@@ -1,7 +1,7 @@
 from dwetl.processor.processor import Processor
-from dwetl.data_quality_utilities import trim
 import datetime
 import pdb
+import pprint
 
 class Preprocess(Processor):
     """
@@ -14,7 +14,7 @@ class Preprocess(Processor):
         self.stg2_pk_list = pk_list
 
     def job_name(self):
-        return 'PreprocessProcessor'
+        return 'Preprocessing'
 
     @classmethod
     def need_preprocess(cls, json_config, key):
@@ -39,26 +39,38 @@ class Preprocess(Processor):
         """
         if need_preprocess is true, trim the item
         """
-        preprocessed_item = {}
+
+        out_dict = {}
         invalid_keys = ['rec_type_cd', 'rec_trigger_key', '_sa_instance_state']
 
         for key, val in item.items():
-            if key in invalid_keys:
+
+            # skip invalid keys and dq and t and pp keys
+            if key in invalid_keys or key.startswith('dq_') or key.startswith('t') or key.startswith('rm_') or key.startswith('pp_'):
                 continue
+
+            # add primary keys and values to result
+            if key in pk_list:
+                out_dict[key] = val
+
+            # find out if the in_ key needs preprocessing
             need_preprocess = Preprocess.need_preprocess(json_config, key)
 
             # convert key name to pp_keyname
             pp_key = key.replace('in_', 'pp_')
 
-            # for every pk column, write the key and value to the preprocessed_item dict
-            if key in pk_list:
-                preprocessed_item[key] = val
             if need_preprocess:
-                result = trim(val)
-                preprocessed_item[pp_key] = result
+                # strip if None,
+                if val == '':
+                    result = val
+                elif val:
+                    result = val.strip()
+                else:
+                    result = val
+                out_dict[pp_key] = result
             else:
-                preprocessed_item[pp_key] = val
-        return preprocessed_item
+                out_dict[pp_key] = val
+        return out_dict
 
     def process_item(self, item):
         processed_item = Preprocess.preprocess(item, self.json_config, self.stg2_pk_list)
