@@ -54,7 +54,9 @@ def no_missing_values(input):
 
 # def trim function no leading and trailing spaces
 def trim(input):
-    return input.strip()
+    if input:
+        return input.strip()
+    return None
 
 # check if valid aleph year (1980 - Present)
 

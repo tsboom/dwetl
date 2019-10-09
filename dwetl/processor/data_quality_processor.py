@@ -1,6 +1,5 @@
 from dwetl.processor.processor import Processor
 from dwetl.data_quality_info import DataQualityInfo
-from dwetl.data_quality_utilities import trim
 import datetime
 import pdb
 
