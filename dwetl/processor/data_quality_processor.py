@@ -25,23 +25,31 @@ class DataQualityProcessor(Processor):
         """
         if need_preprocess is true, trim the item
         """
-        data_quality_checked_item = {}
+        out_dict = {}
         invalid_keys = ['rec_type_cd', 'rec_trigger_key', '_sa_instance_state']
 
         for key, val in item.items():
-            if key in invalid_keys:
+            # skip all keys that aren't pp_ because pp_ values need to be used
+            if key in invalid_keys or key.startswith('dq_') or key.startswith('t') or key.startswith('rm_') or key.startswith('in_'):
                 continue
-            pdb.set_trace()
+            #pdb.set_trace()
             # get list of DQ objects from json_config
             try:
                 key_json = json_config[key[3:]]
             except:
                 print(key, 'not found')
 
-            # get DQ checks for current key
+            if key in pk_list:
+                out_dict[key] = val
 
-            # create DataQualityInfo for each DQ check
-            data_quality_info = DataQualityInfo(json_config)
+
+            # get DQ checks for current key
+            dq_checks= json_config[key]['dataquality_info']
+
+            for check_json in dq_checks:
+                # create DataQualityInfo for each DQ check
+                data_quality_info = DataQualityInfo(check_json)
+                pdb.set_trace()
 
             #data quality check is applid only on keys with 'pp_' prefix
 
