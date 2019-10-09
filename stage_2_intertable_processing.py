@@ -20,6 +20,7 @@ def load_table_config(table_config_path):
 
 
 def stage_2_intertable_processing(job_info):
+    print("Stage 2 Intertable Processing...")
 
     STG_2_TABLE_CONFIG_MAPPING = {
         'dw_stg_2_bib_rec_z00': 'bibliographic_record_dimension',
@@ -34,6 +35,7 @@ def stage_2_intertable_processing(job_info):
     processing_cycle_id = job_info.prcsng_cycle_id
 
     for table, dimension in STG_2_TABLE_CONFIG_MAPPING.items():
+        print(table)
         # get json_config for current dimension
         table_config_path = os.path.join('table_config', dimension + '.json')
         json_config = load_table_config(table_config_path)
@@ -53,11 +55,11 @@ def stage_2_intertable_processing(job_info):
             preprocessor = Preprocess(reader, writer, job_info, logger, json_config, pk_list)
             preprocessor.execute()
 
-            '''
-            Data Quality Checks
-            '''
-            data_quality_checker = DataQualityProcessor(reader, writer, job_info, logger, json_config, pk_list)
-            data_quality_checker.execute()
+            # '''
+            # Data Quality Checks
+            # '''
+            # data_quality_checker = DataQualityProcessor(reader, writer, job_info, logger, json_config, pk_list)
+            # data_quality_checker.execute()
 
 
 
