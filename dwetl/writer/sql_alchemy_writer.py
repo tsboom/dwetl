@@ -18,16 +18,17 @@ class SqlAlchemyWriter(Writer):
 
     def write_row(self, row_dict):
         try:
-            # TODO: check if row_dict keys are in the db, only put matching keys and
-            # values into the record
-            # matching_row_dict = {}
-            # # find a list of keys from the table.
-            # table_keys = self.table_base_class.__table__.columns.keys()
-            # for key, val in row_dict.items():
-            #     if key in table_keys:
-            #         matching_row_dict[key] = val
-            # insert the matching keys row into SQLAlchemy table base class
-            record = self.table_base_class(**row_dict)
+            # check to see if row_dict contains uneeded columns
+            # some values are in stage 2, but do not move forward in ETL
+            # ex: in_z13_call_no in dw_stg_2_bib_rec_z13
+            relevant_row_dict = {}
+            for key, val in row_dict.items():
+                columns = self.table_base_class.__table__.columns.values()
+                if key in columns:
+                    relevant_row_dict[key] = val
+
+            record = self.table_base_class(**relevant_row_dict)
+            
 
             # get list of primary keys from table_base_class
             pk_list = []
@@ -36,20 +37,19 @@ class SqlAlchemyWriter(Writer):
                 # index = pk_values.index(key)
                 pk_list.append(pk_values[i].name)
 
-            # Update the row if PK list is found in row
-
+            # check to see if list of pks are in the row_dict
             for pk in pk_list:
                 in_dict = False
-                if pk in list(row_dict.keys()):
-                    in_dict == True
+                if pk in row_dict:
+                    in_dict = True
                 else:
-                    in_dict == False
+                    in_dict = False
 
+            # Update the row if PK list is found in row
             if in_dict == True:
-                pdb.set_trace()
                 self.session.merge(record)
             else:
-                # Add new row if PK list is not found in row
+            # Add new row if PK list is not found in row
                 self.session.add(record)
 
         except exc.SQLAlchemyError as e:
