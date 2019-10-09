@@ -23,12 +23,13 @@ class SqlAlchemyWriter(Writer):
             # ex: in_z13_call_no in dw_stg_2_bib_rec_z13
             relevant_row_dict = {}
             for key, val in row_dict.items():
-                columns = self.table_base_class.__table__.columns.values()
+                columns = self.table_base_class.__table__.columns.keys()
                 if key in columns:
+                    #pdb.set_trace()
                     relevant_row_dict[key] = val
 
             record = self.table_base_class(**relevant_row_dict)
-            
+
 
             # get list of primary keys from table_base_class
             pk_list = []
