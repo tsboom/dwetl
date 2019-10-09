@@ -35,7 +35,6 @@ def load_stage_1(job_info, input_directory):
         "mai50_z35_data": "dw_stg_1_mai50_z35",
         # "mai50_z30_full_data": "dw_stg_1_mai50_z30_full",
         # "mai50_z103_bib_full_data": "dw_stg_2_lbry_item_z103_bib_full",
-
     }
 
     Z00_FIELD_TABLE_MAPPING = {
