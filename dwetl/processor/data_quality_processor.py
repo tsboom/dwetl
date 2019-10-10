@@ -36,7 +36,7 @@ class DataQualityProcessor(Processor):
         """
         if need_preprocess is true, trim the item
         """
-        data_quality_checked_item = {}
+        out_dict = {}
         invalid_keys = ['rec_type_cd', 'rec_trigger_key', '_sa_instance_state']
 
         for key, val in item.items():
@@ -45,6 +45,10 @@ class DataQualityProcessor(Processor):
                 continue
             if not key.startswith('pp_'):
                 continue
+
+            if key in pk_list:
+                out_dict[key] = val
+
 
             # get DQ checks for current key
             dq_list = DataQualityProcessor.get_dq_checks_for_key(key, json_config)
