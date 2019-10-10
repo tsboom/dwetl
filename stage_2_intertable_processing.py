@@ -55,11 +55,11 @@ def stage_2_intertable_processing(job_info):
             preprocessor = Preprocess(reader, writer, job_info, logger, json_config, pk_list)
             preprocessor.execute()
 
-            # '''
+            '''
             # Data Quality Checks
             # '''
-            # data_quality_checker = DataQualityProcessor(reader, writer, job_info, logger, json_config, pk_list)
-            # data_quality_checker.execute()
+            data_quality_checker = DataQualityProcessor(reader, writer, job_info, logger, json_config, pk_list)
+            data_quality_checker.execute()
 
 
 
