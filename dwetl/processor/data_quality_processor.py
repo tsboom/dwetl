@@ -30,11 +30,13 @@ class DataQualityProcessor(Processor):
         except:
             return None
 
-
     @classmethod
     def check_data_quality(cls, item, json_config, pk_list):
         """
-        if need_preprocess is true, trim the item
+        Takes values from 'pp_' fields and runs DQ checks, adding replacement
+        values if needed.
+
+        Suspends record if needed.
         """
         out_dict = {}
         invalid_keys = ['rec_type_cd', 'rec_trigger_key', '_sa_instance_state']
@@ -46,6 +48,7 @@ class DataQualityProcessor(Processor):
             if not key.startswith('pp_'):
                 continue
 
+            # add the pks to the out_dict so the row can be inserted later
             if key in pk_list:
                 out_dict[key] = val
 
@@ -57,9 +60,23 @@ class DataQualityProcessor(Processor):
                 for dq_check in dq_list:
                     # create DataQualityInfo for each DQ check
                     data_quality_info = DataQualityInfo(dq_check)
+                    # determine if value passes check
+                    is_passing = data_quality_info.validate(val)
 
-                # # convert key name to pp_keyname
-                # dq_key = key.replace('pp_', 'dq_')
+                    if is_passing:
+                        dq_key = key.replace('pp_', 'dq_')
+                        # write value to out_dict because it passes
+                        out_dict[dq_key] = val
+                    else:
+                        # check for suspend record
+                        if data_quality_info.suspend_record:
+                            print('SUSPEND ', key, val)
+
+                            #TODO: how exactly to suspend a record again?
+                        else:
+                            # find replacement and use it if needed
+                            out_dict[dq_key] = data_quality_info.replacement_value
+        return out_dict
 
 
     def process_item(self, item):

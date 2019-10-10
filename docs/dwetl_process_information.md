@@ -8,7 +8,7 @@ We can also find the data quality checks for the columns in the library_item_dim
 
 
 
-**data quality story:**
+**Data Quality story:**
 
 z00_doc_number
 
@@ -20,11 +20,21 @@ z00_doc_number
 
 4) First DQ check happens, (no_missing), returns True
 
-​	- DQ_ value is the pp_value
+- DQ_ value is the pp_value
+- if False, 
+   	- Check to see if suspend record is Yes:
+   	     	  - Suspend the record, and don't continue to the next check
+   	   - If suspend record is NO:
+   	        - replace failing value with a replacement value
 
 5) Second DQ check happens (), returns True
 
 - DQ_value is last DQ value
+- if False,
+  - Check to see if suspend record is Yes:
+    - Suspend the record, and don't continue to the next check
+  - If suspend record is NO:
+    - replace failing value with a replacement value
 
-6) 
+
 
