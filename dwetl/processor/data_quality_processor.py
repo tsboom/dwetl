@@ -2,6 +2,7 @@ from dwetl.processor.processor import Processor
 from dwetl.data_quality_info import DataQualityInfo
 import datetime
 import pdb
+import pprint
 
 class DataQualityProcessor(Processor):
 
@@ -19,6 +20,16 @@ class DataQualityProcessor(Processor):
     def job_name(self):
         return 'DataQualityProcessor'
 
+    @classmethod
+    def get_dq_checks_for_key(cls, key, json_config):
+        # get list of DQ check objects from json_config
+        try:
+            key_json = json_config[key[3:]]
+            dq_list = key_json['dataquality_info']
+            return dq_list
+        except:
+            return None
+
 
     @classmethod
     def check_data_quality(cls, item, json_config, pk_list):
@@ -29,36 +40,23 @@ class DataQualityProcessor(Processor):
         invalid_keys = ['rec_type_cd', 'rec_trigger_key', '_sa_instance_state']
 
         for key, val in item.items():
+            # skip keys from invalid_keys and keys that aren't 'pp_'
             if key in invalid_keys:
                 continue
-            pdb.set_trace()
-            # get list of DQ objects from json_config
-            try:
-                key_json = json_config[key[3:]]
-            except:
-                print(key, 'not found')
+            if not key.startswith('pp_'):
+                continue
 
             # get DQ checks for current key
+            dq_list = DataQualityProcessor.get_dq_checks_for_key(key, json_config)
 
-            # create DataQualityInfo for each DQ check
-            data_quality_info = DataQualityInfo(json_config)
+            if dq_list:
+                for dq_check in dq_list:
+                    # create DataQualityInfo for each DQ check
+                    data_quality_info = DataQualityInfo(dq_check)
 
-            #data quality check is applid only on keys with 'pp_' prefix
+                # # convert key name to pp_keyname
+                # dq_key = key.replace('pp_', 'dq_')
 
-
-
-
-
-            # convert key name to pp_keyname
-            dq_key = key.replace('pp_', 'dq_')
-
-
-            if need_preprocess:
-                result = trim(val)
-                preprocessed_item[pp_key] = result
-            else:
-                preprocessed_item[pp_key] = val
-        return preprocessed_item
 
     def process_item(self, item):
         processed_item = DataQualityProcessor.check_data_quality(item, self.json_config, self.stg2_pk_list)
