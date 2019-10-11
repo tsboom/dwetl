@@ -253,7 +253,7 @@ class TestPreprocess(unittest.TestCase):
             'em_update_dw_job_name', 'em_update_dw_job_version_no',
             'em_update_user_id', 'em_update_tmstmp', 'em_create_dw_prcsng_cycle_id'
         ])
-        self.assertEqual(False, Preprocess.need_preprocess(sample_json_config, '')
+        self.assertEqual(False, Preprocess.need_preprocess(sample_json_config, ''))
         self.assertEqual(expected_keys, sorted(list(results[0].keys())))
         self.assertEqual("000181506", results[0]['pp_z00_doc_number'])
         self.assertEqual("0038", results[0]['pp_z00_no_lines'])
