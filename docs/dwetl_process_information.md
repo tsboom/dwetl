@@ -22,10 +22,12 @@ z00_doc_number
 
 - DQ_ value is the pp_value
 - if False, 
-   	- Check to see if suspend record is Yes:
-   	     	  - Suspend the record, and don't continue to the next check
-   	   - If suspend record is NO:
-   	        - replace failing value with a replacement value
+    - Check to see if suspend record is Yes:
+         - Suspend the record, and don't continue to the next check
+              - rm_suspend_rec_flag = Y
+              - rm_suspend_rec_reason_cd = 
+     - If suspend record is NO:
+          - replace failing value with a replacement value
 
 5) Second DQ check happens (), returns True
 
