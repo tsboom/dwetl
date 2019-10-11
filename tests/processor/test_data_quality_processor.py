@@ -182,9 +182,10 @@ class TestDataQualityProcessor(unittest.TestCase):
             'dq_z00_data_len', 'dq_z00_doc_number',
             'em_update_dw_prcsng_cycle_id', 'em_update_dw_job_exectn_id',
             'em_update_dw_job_name', 'em_update_dw_job_version_no',
-            'em_update_user_id', 'em_update_tmstmp', 'em_create_dw_prcsng_cycle_id'
+            'em_update_user_id', 'em_update_tmstmp', 'em_update_dw_prcsng_cycle_id'
             ])
 
+        pdb.set_trace()
         self.assertEqual(expected_keys, sorted(list(results[0].keys())))
         self.assertEqual("000053939", results[0]['dq_z00_doc_number'])
         self.assertEqual('0049', results[0]['dq_z00_no_lines'])

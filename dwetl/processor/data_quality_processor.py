@@ -42,19 +42,20 @@ class DataQualityProcessor(Processor):
         invalid_keys = ['rec_type_cd', 'rec_trigger_key', '_sa_instance_state']
 
         for key, val in item.items():
-            # skip keys from invalid_keys and keys that aren't 'pp_'
             if key in invalid_keys:
-                continue
-            if not key.startswith('pp_'):
                 continue
 
             # add the pks to the out_dict so the row can be inserted later
             if key in pk_list:
                 out_dict[key] = val
 
+            # skip keys from invalid_keys and keys that aren't 'pp_'
+            if not key.startswith('pp_'):
+                continue
 
             # get DQ checks for current key
             dq_list = DataQualityProcessor.get_dq_checks_for_key(key, json_config)
+            dq_key = key.replace('pp_', 'dq_')
 
             if dq_list:
                 for dq_check in dq_list:
@@ -64,7 +65,6 @@ class DataQualityProcessor(Processor):
                     is_passing = data_quality_info.validate(val)
 
                     if is_passing:
-                        dq_key = key.replace('pp_', 'dq_')
                         # write value to out_dict because it passes
                         out_dict[dq_key] = val
                     else:
@@ -76,6 +76,10 @@ class DataQualityProcessor(Processor):
                         else:
                             # find replacement and use it if needed
                             out_dict[dq_key] = data_quality_info.replacement_value
+            else:
+                # if there are no dq checks, output the pp value to dq
+                out_dict[dq_key] = val
+
         return out_dict
 
 
