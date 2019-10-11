@@ -13,7 +13,6 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy import MetaData
 
 from dwetl.transform_field import TransformField
-import dwetl.data_quality_specific_functions as dqs
 import dwetl.data_quality_utilities as dqu
 
 import dwetl.specific_transform_functions as stf
@@ -210,7 +209,7 @@ def transform_field(field, table_config):
 
         # set up dq by creating list of dq function objects from utilities
         # and data quality specific functions
-        dq_funcs_list = functions_from_module(dqs) + functions_from_module(dqu)  # TODO, do this only once outside this func
+        dq_funcs_list = functions_from_module(dqu)  # TODO, do this only once outside this func
 
         # run dq
         run_dq_checks(field, dq_funcs_list, table_config)

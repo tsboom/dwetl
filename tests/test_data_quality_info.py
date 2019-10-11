@@ -1,5 +1,6 @@
 import unittest
 from dwetl.data_quality_info import DataQualityInfo
+import dwetl.data_quality_utilities as dqu
 
 class TestDataQualityInfo(unittest.TestCase):
     def setUp(self):
@@ -154,3 +155,28 @@ class TestDataQualityInfo(unittest.TestCase):
 
         dq = DataQualityInfo(json_config)
         self.assertFalse(dq.suspend_record)
+
+    def test_dq_z30_temp_location(self):
+        self.assertTrue(dqu.dq_z30_temp_location('Y'))
+        self.assertTrue(dqu.dq_z30_temp_location('N'))
+        self.assertFalse(dqu.dq_z30_temp_location('NotYesOrNo'))
+
+    def test_dq_z30_call_no_type__valid_cal_no_type(self):
+        self.assertTrue(dqu.dq_z30_call_no_type__valid_cal_no_type('1'))
+        self.assertTrue(dqu.dq_z30_call_no_type__valid_cal_no_type('-M'))
+        self.assertFalse(dqu.dq_z30_call_no_type__valid_cal_no_type('9'))
+        self.assertFalse(dqu.dq_z30_call_no_type__valid_cal_no_type(''))
+        self.assertFalse(dqu.dq_z30_call_no_type__valid_cal_no_type(None))
+
+    def test_dq_z13u_user_defined_10__valid_holding_own_code(self):
+        self.assertTrue(dqu.dq_z13u_user_defined_10__valid_holding_own_code('SMHOL'))
+        self.assertFalse(dqu.dq_z13u_user_defined_10__valid_holding_own_code(''))
+        self.assertFalse(dqu.dq_z13u_user_defined_10__valid_holding_own_code(None))
+
+    def test_dq_z13u_user_defined_2(self):
+        self.assertTrue(dqu.dq_z13u_user_defined_2('ocm00003739'))
+        self.assertTrue(dqu.dq_z13u_user_defined_2('ocn000037390'))
+        self.assertTrue(dqu.dq_z13u_user_defined_2('on0000037390'))
+        self.assertTrue(dqu.dq_z13u_user_defined_2(''))
+        self.assertFalse(dqu.dq_z13u_user_defined_2('doesntstartwithocstuff'))
+        self.assertFalse(dqu.dq_z13u_user_defined_2('lengthistoolong123940124814'))
