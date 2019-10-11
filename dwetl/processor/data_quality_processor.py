@@ -28,7 +28,7 @@ class DataQualityProcessor(Processor):
             dq_list = key_json['dataquality_info']
             return dq_list
         except:
-            return None
+            return None        
 
     @classmethod
     def check_data_quality(cls, item, json_config, pk_list):
