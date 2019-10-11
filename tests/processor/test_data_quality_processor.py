@@ -172,15 +172,14 @@ class TestDataQualityProcessor(unittest.TestCase):
 
         pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
 
-        step = DataQualityProcessor(reader, writer, job_info, logger, json_config, pk_list)(reader, writer, job_info, logger, self.bib_rec_sample_json_config, pk_list)
+        step = DataQualityProcessor(reader, writer, job_info, logger, self.bib_rec_sample_json_config, pk_list)
         step.execute()
         results = step.writer.list
 
         expected_keys = sorted([
             'in_z00_doc_number', 'dw_stg_2_aleph_lbry_name', 'db_operation_cd',
-            # 'pp_z00_no_lines', 'pp_z00_data_len', 'pp_z00_data'
             'dq_z00_no_lines',
-            'dq_z00_data_len', 'dq_z00_doc_number'
+            'dq_z00_data_len', 'dq_z00_doc_number',
             'em_update_dw_prcsng_cycle_id', 'em_update_dw_job_exectn_id',
             'em_update_dw_job_name', 'em_update_dw_job_version_no',
             'em_update_user_id', 'em_update_tmstmp', 'em_create_dw_prcsng_cycle_id'
