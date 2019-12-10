@@ -28,7 +28,17 @@ class DataQualityProcessor(Processor):
             dq_list = key_json['dataquality_info']
             return dq_list
         except:
-            return None        
+            return None
+
+    @classmethod
+    def suspend_record(cls, key, data_quality_info):
+        # get list of DQ check objects from json_config
+        try:
+            key_json = json_config[key[3:]]
+            dq_list = key_json['dataquality_info']
+            return dq_list
+        except:
+            return None
 
     @classmethod
     def check_data_quality(cls, item, json_config, pk_list):

@@ -87,4 +87,11 @@ Questions:
   
 ### Suspend Records after failed DQ checks
 - When a record fails a DQ check, and needs to be suspended. There are no replacement values. 
-	- 
+- report record that suspended in the log and write an email
+- write execution metadata with suspend rec flag and reason code
+
+
+
+Sunsetting a record
+
+- change current record flag from Y to N, change effetive to date
