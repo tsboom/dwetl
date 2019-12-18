@@ -5,6 +5,7 @@ from dwetl.job_info import JobInfoFactory
 import dwetl
 import sys
 import re
+import pdb
 
 
 def aleph_library(table_name):
@@ -16,6 +17,9 @@ def aleph_library(table_name):
     """
     m = re.search('dw_stg_1_(.*?)_.*', table_name)
     library = m.group(1)
+
+    if library == 'mpf':
+        return None
     return library
 
 
@@ -27,23 +31,23 @@ def load_stage_2(job_info):
         "dw_stg_1_mai39_z13": "dw_stg_2_bib_rec_z13",
         'dw_stg_1_mai01_z13': "dw_stg_2_bib_rec_z13",
         "dw_stg_1_mai01_z13u": "dw_stg_2_bib_rec_z13u",
+        "dw_stg_1_mai01_z00": "dw_stg_2_bib_rec_z00",
         "dw_stg_1_mai39_z00": "dw_stg_2_bib_rec_z00",
-        "dw_stg_1_mai39_z13": "dw_stg_2_bib_rec_z13",
         "dw_stg_1_mai39_z13u": "dw_stg_2_bib_rec_z13u",
-        "dw_stg_1_mai60_z00": "dw_stg_2_lbry_holding_z00",
-        "dw_stg_1_mai60_z13": "dw_stg_2_lbry_holding_z13",
-        "dw_stg_1_mai60_z13u": "dw_stg_2_lbry_holding_z13u",
-        "dw_stg_1_mai50_z30": "dw_stg_2_lbry_item_z30",
-        "dw_stg_1_mai50_z35": "dw_stg_2_lbry_item_event_z35",
-        "dw_stg_1_mai01_z00_field": "dw_stg_2_bib_rec_z00_field",
-        "dw_stg_1_mai39_z00_field": "dw_stg_2_bib_rec_z00_field",
-        "dw_stg_1_mai60_z00_field": "dw_stg_2_lbry_holding_z00_field",
-        "dw_stg_1_mpf_mbr_lbry": "dw_stg_2_mpf_mbr_lbry",
-        "dw_stg_1_mpf_lbry_entity": "dw_stg_2_mpf_lbry_entity",
-        "dw_stg_1_mpf_collection": "dw_stg_2_mpf_collection",
-        "dw_stg_1_mpf_item_status": "dw_stg_2_mpf_item_status",
-        "dw_stg_1_mpf_item_prcs_status": "dw_stg_2_mpf_item_prcs_status",
-        "dw_stg_1_mpf_matrl_form": "dw_stg_2_mpf_matrl_form"
+        # "dw_stg_1_mai60_z00": "dw_stg_2_lbry_holding_z00",
+        # "dw_stg_1_mai60_z13": "dw_stg_2_lbry_holding_z13",
+        # "dw_stg_1_mai60_z13u": "dw_stg_2_lbry_holding_z13u",
+        # "dw_stg_1_mai50_z30": "dw_stg_2_lbry_item_z30",
+        # "dw_stg_1_mai50_z35": "dw_stg_2_lbry_item_event_z35",
+        # "dw_stg_1_mai01_z00_field": "dw_stg_2_bib_rec_z00_field",
+        # "dw_stg_1_mai39_z00_field": "dw_stg_2_bib_rec_z00_field",
+        # "dw_stg_1_mai60_z00_field": "dw_stg_2_lbry_holding_z00_field",
+        # "dw_stg_1_mpf_mbr_lbry": "dw_stg_2_mpf_mbr_lbry",
+        # "dw_stg_1_mpf_lbry_entity": "dw_stg_2_mpf_lbry_entity",
+        # "dw_stg_1_mpf_collection": "dw_stg_2_mpf_collection",
+        # "dw_stg_1_mpf_item_status": "dw_stg_2_mpf_item_status",
+        # "dw_stg_1_mpf_item_prcs_status": "dw_stg_2_mpf_item_prcs_status",
+        # "dw_stg_1_mpf_matrl_form": "dw_stg_2_mpf_matrl_form"
     }
 
     logger = None

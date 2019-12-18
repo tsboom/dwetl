@@ -61,7 +61,6 @@ class TestDataQualityUtilities(unittest.TestCase):
         self.assertTrue(data_quality_utilities.no_missing_values('123'))
         self.assertFalse(data_quality_utilities.no_missing_values('0'))
 
-
     def test_trim(self):
         #Test leading and trailing space trimmed
         self.assertEqual(data_quality_utilities.trim("   mustard is cool   "), "mustard is cool")
