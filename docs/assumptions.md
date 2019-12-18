@@ -84,4 +84,7 @@ Questions:
 - Data quality checking: 
   - When a DQ check fails, no other DQ checks are run
   - We aren't looking at the Order in the Sheet
-  - 
+  
+### Suspend Records after failed DQ checks
+- When a record fails a DQ check, and needs to be suspended. There are no replacement values. 
+	- 

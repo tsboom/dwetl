@@ -19,7 +19,9 @@ import datetime
 import sqlalchemy
 import dwetl.database_credentials as database_credentials
 from dwetl.job_info import JobInfoFactory, JobInfo
-import load_stage_1, load_stage_2
+import load_stage_1
+import load_stage_2
+import stage_2_intertable_processing
 
 def run(input_directory):
     time_started = datetime.datetime.now()
@@ -43,7 +45,16 @@ def run(input_directory):
     '''
     load_stage_2.load_stage_2(job_info)
 
+    '''
+    stg 2 intertable processing
+    '''
+    stage_2_intertable_processing.stage_2_intertable_processing(job_info)
 
+
+
+    '''
+    end of job metadata writing
+    '''
 
     endtime = datetime.datetime.now()
     # write end time to processing cycle table
@@ -56,6 +67,9 @@ def run(input_directory):
 
     elapsed_time = endtime - time_started
     print("elapsed time: ", str(elapsed_time))
+
+
+
 
 
 
