@@ -114,52 +114,60 @@ class TestDataQualityProcessor(unittest.TestCase):
         result = DataQualityProcessor.get_dq_checks_for_key(key, json_config)
 
         expected_result = [
-        {'additional_conditions': '',
-          'aleph_library': 'MAI01,MAI39',
-          'always': 'x',
-          'application': 'H,I',
-          'column_data_type': 'CHAR(9)',
-          'column_sub_component': '',
-          'dimension_link_to_record': 'N/A',
-          'exception_memorialization': 'Create Exception Record',
-          'exception_message': 'Missing Value: Z00_DOC_NUMBER',
-          'format': '',
-          'instructions': '1) <null> 2) All spaces',
-          'only_if_data_exists': '',
-          'order': '1',
-          'replacement_value': 'N/A',
-          'source_column_name': 'Z00_DOC_NUMBER',
-          'source_file': 'Z00',
-          'specific_dq_function': 'no_missing_values',
-          'specific_dq_function_param_1': '',
-          'suspend_record': 'Yes',
-          'target_column_name': '',
-          'type': 'Missing Value'},
-         {'additional_conditions': 'No previous DQ exceptions',
-          'aleph_library': 'MAI01,MAI39',
-          'always': '',
-          'application': 'H,I',
-          'column_data_type': 'CHAR(9)',
-          'column_sub_component': '',
-          'dimension_link_to_record': 'N/A',
-          'exception_memorialization': 'Create Exception Record',
-          'exception_message': 'Invalid Value: Z00_DOC_NUMBER',
-          'format': '',
-          'instructions': 'Must equal 9',
-          'only_if_data_exists': 'x',
-          'order': '2',
-          'replacement_value': 'N/A',
-          'source_column_name': 'Z00_DOC_NUMBER',
-          'source_file': 'Z00',
-          'specific_dq_function': 'is_valid_length',
-          'specific_dq_function_param_1': '9',
-          'suspend_record': 'Yes',
-          'target_column_name': '',
-          'type': 'Length Check'}
+            {'additional_conditions': '',
+              'aleph_library': 'MAI01,MAI39',
+              'always': 'x',
+              'application': 'H,I',
+              'column_data_type': 'CHAR(9)',
+              'column_sub_component': '',
+              'dimension_link_to_record': 'N/A',
+              'exception_memorialization': 'Create Exception Record',
+              'exception_message': 'Missing Value: Z00_DOC_NUMBER',
+              'format': '',
+              'instructions': '1) <null> 2) All spaces',
+              'only_if_data_exists': '',
+              'order': '1',
+              'replacement_value': 'N/A',
+              'source_column_name': 'Z00_DOC_NUMBER',
+              'source_file': 'Z00',
+              'specific_dq_function': 'no_missing_values',
+              'specific_dq_function_param_1': '',
+              'suspend_record': 'Yes',
+              'target_column_name': '',
+              'type': 'Missing Value'},
+             {'additional_conditions': 'No previous DQ exceptions',
+              'aleph_library': 'MAI01,MAI39',
+              'always': '',
+              'application': 'H,I',
+              'column_data_type': 'CHAR(9)',
+              'column_sub_component': '',
+              'dimension_link_to_record': 'N/A',
+              'exception_memorialization': 'Create Exception Record',
+              'exception_message': 'Invalid Value: Z00_DOC_NUMBER',
+              'format': '',
+              'instructions': 'Must equal 9',
+              'only_if_data_exists': 'x',
+              'order': '2',
+              'replacement_value': 'N/A',
+              'source_column_name': 'Z00_DOC_NUMBER',
+              'source_file': 'Z00',
+              'specific_dq_function': 'is_valid_length',
+              'specific_dq_function_param_1': '9',
+              'suspend_record': 'Yes',
+              'target_column_name': '',
+              'type': 'Length Check'}
           ]
 
         self.assertEqual(expected_result, result)
 
+    def test_suspend_record(self):
+        key = "pp_z00_doc_number"
+        json_config = self.bib_rec_sample_json_config
+        
+        result = DataQualityProcessor.suspend_record(key, data_quality_info)
+
+        
+        
 
     def test_dataquality_bib_rec(self):
 
