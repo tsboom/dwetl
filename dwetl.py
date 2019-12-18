@@ -81,7 +81,8 @@ if __name__=='__main__':
     arguments = sys.argv
 
     today = datetime.datetime.now().strftime('%Y%m%d')
-    input_directory = f'data/{today}/'
+    # input_directory = f'data/{today}/'
+    input_directory = f'data/20191211/'
 
     # give hint if --help
     if '--help' in arguments:

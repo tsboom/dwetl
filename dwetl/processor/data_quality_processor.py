@@ -81,7 +81,7 @@ class DataQualityProcessor(Processor):
                         # check for suspend record
                         if data_quality_info.suspend_record:
                             print('SUSPEND ', key, val)
-
+                            
                             #TODO: how exactly to suspend a record again?
                         else:
                             # find replacement and use it if needed
