@@ -2,6 +2,7 @@ import unittest
 from dwetl.reader.list_reader import ListReader
 from dwetl.writer.list_writer import ListWriter
 from dwetl.job_info import JobInfo
+from dwetl.data_quality_info import DataQualityInfo
 from dwetl.processor.data_quality_processor import DataQualityProcessor
 import pdb
 import pprint
@@ -160,11 +161,23 @@ class TestDataQualityProcessor(unittest.TestCase):
 
         self.assertEqual(expected_result, result)
 
-    def test_suspend_record(self):
+    def test_get_suspend_record_code(self):
         key = "pp_z00_doc_number"
-        json_config = self.bib_rec_sample_json_config
         
-        result = DataQualityProcessor.suspend_record(key, data_quality_info)
+        json_config = {
+            'specific_dq_function': 'no_missing_values',
+            'specific_dq_function_param_1': '',
+            'suspend_record': 'Yes',
+            'type': 'Missing Value',
+            'exception_message': 'Missing Value',
+            'replacement_value': 'N/A'
+        }
+
+        dq = DataQualityInfo(json_config)
+
+        expected_result = "MIS"
+        result = DataQualityProcessor.get_suspend_record_code(key, dq)
+        self.assertEqual(expected_result, result)
 
         
         

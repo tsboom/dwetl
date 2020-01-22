@@ -1,5 +1,6 @@
 from dwetl.processor.processor import Processor
 from dwetl.data_quality_info import DataQualityInfo
+import dwetl.data_quality_utilities as dqu
 import datetime
 import pdb
 import pprint
@@ -31,14 +32,19 @@ class DataQualityProcessor(Processor):
             return None
 
     @classmethod
-    def suspend_record(cls, key, data_quality_info):
-        # get list of DQ check objects from json_config
-        try:
-            key_json = json_config[key[3:]]
-            dq_list = key_json['dataquality_info']
-            return dq_list
-        except:
-            return None
+    def get_suspend_record_code(cls, key, data_quality_info):
+        # write suspend record reason code (use lookup table)
+        suspend_record_dict = dqu.create_dict_from_csv('suspend_record_reason_code.csv')
+        suspend_record_type = data_quality_info.type
+        for k, v in suspend_record_dict.items():
+            if v == data_quality_info.type:
+                suspend_record_code = k
+        return suspend_record_code
+
+        
+    # @classmethod
+    # def write_to_log(cls, )
+        
 
     @classmethod
     def check_data_quality(cls, item, json_config, pk_list):
@@ -66,6 +72,8 @@ class DataQualityProcessor(Processor):
             # get DQ checks for current key
             dq_list = DataQualityProcessor.get_dq_checks_for_key(key, json_config)
             dq_key = key.replace('pp_', 'dq_')
+            
+            dq_exception_count = 0 
 
             if dq_list:
                 for dq_check in dq_list:
@@ -80,6 +88,10 @@ class DataQualityProcessor(Processor):
                     else:
                         # check for suspend record
                         if data_quality_info.suspend_record:
+                            # change suspend record flag 
+                            suspend_record_flag = "Y"
+                            # increment exception count
+                            dq_exception_count = dq_exception_count + 1
                             print('SUSPEND ', key, val)
                             
                             #TODO: how exactly to suspend a record again?
