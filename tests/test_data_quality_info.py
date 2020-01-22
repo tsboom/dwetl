@@ -11,6 +11,7 @@ class TestDataQualityInfo(unittest.TestCase):
             'specific_dq_function': 'no_missing_values',
             'specific_dq_function_param_1': '',
             'suspend_record': 'No',
+            'type': 'Missing Value',
             'exception_message': 'Missing Value',
             'replacement_value': 'Missing Value'
         }
@@ -32,6 +33,7 @@ class TestDataQualityInfo(unittest.TestCase):
             'specific_dq_function': 'no_leading_space',
             'specific_dq_function_param_1': '',
             'suspend_record': 'No',
+            'type': 'Leading Spaces',
             'exception_message': 'Leading Spaces',
             'replacement_value': 'Leading Spaces in Value'
         }
@@ -52,6 +54,7 @@ class TestDataQualityInfo(unittest.TestCase):
             'specific_dq_function': 'is_valid_length',
             'specific_dq_function_param_1': '15',
             'suspend_record': 'Yes',
+            'type': 'Length Check',
             'exception_message': 'Incorrect Length',
             'replacement_value': 'N/A'
         }
@@ -81,6 +84,7 @@ class TestDataQualityInfo(unittest.TestCase):
             'specific_dq_function': 'is_numeric',
             'specific_dq_function_param_1': '',
             'suspend_record': 'Yes',
+            'type':'Numeric-only check',
             'exception_message': 'Non-numeric Value',
             'replacement_value': 'N/A'
         }
@@ -103,6 +107,7 @@ class TestDataQualityInfo(unittest.TestCase):
             'specific_dq_function': 'is_valid_length',
             'specific_dq_function_param_1': '15',
             'suspend_record': 'Yes',
+            'type':'Length Check',
             'exception_message': 'Incorrect Length',
             'replacement_value': 'N/A'
         }
@@ -114,6 +119,7 @@ class TestDataQualityInfo(unittest.TestCase):
             'specific_dq_function': 'is_valid_length',
             'specific_dq_function_param_1': '15',
             'suspend_record': 'No',
+            'type':'Length Check',
             'exception_message': 'Incorrect Length',
             'replacement_value': 'N/A'
         }
@@ -126,6 +132,7 @@ class TestDataQualityInfo(unittest.TestCase):
             'specific_dq_function': 'is_valid_length',
             'specific_dq_function_param_1': '15',
             'suspend_record': 'Yes',
+            'type':'Length Check',
             'exception_message': 'Incorrect Length',
             'replacement_value': 'N/A'
         }
@@ -138,6 +145,7 @@ class TestDataQualityInfo(unittest.TestCase):
             'specific_dq_function': 'is_valid_length',
             'specific_dq_function_param_1': '15',
             'suspend_record': 'Yes',
+            'type':'Length Check',
             'exception_message': 'Incorrect Length',
             'replacement_value': '(null)'
         }
@@ -149,6 +157,7 @@ class TestDataQualityInfo(unittest.TestCase):
             'specific_dq_function': 'is_valid_length',
             'specific_dq_function_param_1': '15',
             'suspend_record': 'No',
+            'type':'Length Check',
             'exception_message': 'Incorrect Length',
             'replacement_value': 'N/A'
         }

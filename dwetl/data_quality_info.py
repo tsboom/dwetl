@@ -1,6 +1,7 @@
 
 import dwetl.data_quality_utilities as dqu
 from functools import partial
+import pdb
 
 class DataQualityInfo:
     """
@@ -10,6 +11,7 @@ class DataQualityInfo:
         self.exception_message = json_config['exception_message']
         self.replacement_value = json_config['replacement_value']
         self.suspend_record = DataQualityInfo.text_to_bool(json_config['suspend_record'])
+        self.type = json_config['type']
         self.specific_dq_function = json_config['specific_dq_function']
         self.specific_dq_function_param_1 = json_config['specific_dq_function_param_1']
 
