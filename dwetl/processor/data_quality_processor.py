@@ -40,6 +40,8 @@ class DataQualityProcessor(Processor):
             if v == data_quality_info.type:
                 suspend_record_code = k
         return suspend_record_code
+        
+        
 
         
     # @classmethod
@@ -81,20 +83,28 @@ class DataQualityProcessor(Processor):
                     data_quality_info = DataQualityInfo(dq_check)
                     # determine if value passes check
                     is_passing = data_quality_info.validate(val)
+                    pdb.set_trace() 
 
                     if is_passing:
                         # write value to out_dict because it passes
                         out_dict[dq_key] = val
+                        
                     else:
                         # check for suspend record
+                        pdb.set_trace() 
                         if data_quality_info.suspend_record:
+                            pdb.set_trace() 
                             # change suspend record flag 
                             suspend_record_flag = "Y"
+                            out_dict['rm_suspend_rec_flag'] = suspend_record_flag
                             # increment exception count
                             dq_exception_count = dq_exception_count + 1
-                            print('SUSPEND ', key, val)
+                            out_dict['rm_dq_check_exception_cnt'] = dq_exception_count
                             
-                            #TODO: how exactly to suspend a record again?
+                            # get suspend record code
+                            suspend_record_code = DataQualityProcessor.get_suspend_record_code(dq_key, data_quality_info)
+                            out_dict['rm_suspend_rec_reason_cd'] = suspend_record_code
+                            pdb.set_trace()
                         else:
                             # find replacement and use it if needed
                             out_dict[dq_key] = data_quality_info.replacement_value

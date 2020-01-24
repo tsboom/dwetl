@@ -92,6 +92,14 @@ Questions:
 
 
 
+rm_suspend_rec_flag
+
+rm_suspend_rec_reason_cd
+
+rm_dq_check_exception_cnt
+
+
+
 Sunsetting a record
 
 - change current record flag from Y to N, change effetive to date
