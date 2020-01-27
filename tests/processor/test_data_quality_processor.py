@@ -12,7 +12,33 @@ class TestDataQualityProcessor(unittest.TestCase):
     def setUpClass(cls):
 
         cls.bib_rec_sample_data = [
-            # good data
+            # # good data
+            # {
+            #     'db_operation_cd': 'U',
+            #     'dq_z00_data': None,
+            #     'dq_z00_data_len': None,
+            #     'dq_z00_doc_number': None,
+            #     'dq_z00_no_lines': None,
+            #     'dw_stg_2_aleph_lbry_name': 'mai01',
+            #     'em_update_dw_job_name': 'Preprocessing',
+            #     'in_z00_data': '',
+            #     'in_z00_data_len': '001970',
+            #     'in_z00_doc_number': '000053939',
+            #     'in_z00_no_lines': '0049',
+            #     'pp_z00_data': '',
+            #     'pp_z00_data_len': '001970',
+            #     'pp_z00_doc_number': '000053939',
+            #     'pp_z00_no_lines': '0049',
+            #     'rm_dq_check_excptn_cnt': 0,
+            #     'rm_suspend_rec_flag': 'N',
+            #     'rm_suspend_rec_reason_cd': None,
+            #     't1_z00_data__bib_rec_marc_rec_data_cntnt_txt': None,
+            #     't1_z00_data_len__bib_rec_marc_rec_data_cntnt_len_cnt': None,
+            #     't1_z00_doc_number__bib_rec_source_system_id': None,
+            #     't1_z00_no_lines__bib_rec_marc_rec_field_cnt': None
+            # },
+            # bad data
+            # bad data missing value
             {
                 'db_operation_cd': 'U',
                 'dq_z00_data': None,
@@ -23,11 +49,11 @@ class TestDataQualityProcessor(unittest.TestCase):
                 'em_update_dw_job_name': 'Preprocessing',
                 'in_z00_data': '',
                 'in_z00_data_len': '001970',
-                'in_z00_doc_number': '000053939',
+                'in_z00_doc_number': '', # empty doc number
                 'in_z00_no_lines': '0049',
                 'pp_z00_data': '',
                 'pp_z00_data_len': '001970',
-                'pp_z00_doc_number': '000053939',
+                'pp_z00_doc_number': '', # empty doc number
                 'pp_z00_no_lines': '0049',
                 'rm_dq_check_excptn_cnt': 0,
                 'rm_suspend_rec_flag': 'N',
@@ -37,7 +63,6 @@ class TestDataQualityProcessor(unittest.TestCase):
                 't1_z00_doc_number__bib_rec_source_system_id': None,
                 't1_z00_no_lines__bib_rec_marc_rec_field_cnt': None
             },
-            # bad data
             {
                 'db_operation_cd': 'U',
                 'dq_z00_data': None,
@@ -48,36 +73,11 @@ class TestDataQualityProcessor(unittest.TestCase):
                 'em_update_dw_job_name': 'Preprocessing',
                 'in_z00_data': '',
                 'in_z00_data_len': '001970',
-                'in_z00_doc_number': '00005393900', # too long
+                'in_z00_doc_number': '00005393900', # too long fails length check
                 'in_z00_no_lines': '0049',
                 'pp_z00_data': '',
                 'pp_z00_data_len': '001970',
-                'pp_z00_doc_number': '000053939',
-                'pp_z00_no_lines': '0049',
-                'rm_dq_check_excptn_cnt': 0,
-                'rm_suspend_rec_flag': 'N',
-                'rm_suspend_rec_reason_cd': None,
-                't1_z00_data__bib_rec_marc_rec_data_cntnt_txt': None,
-                't1_z00_data_len__bib_rec_marc_rec_data_cntnt_len_cnt': None,
-                't1_z00_doc_number__bib_rec_source_system_id': None,
-                't1_z00_no_lines__bib_rec_marc_rec_field_cnt': None
-            },
-            # bad data
-            {
-                'db_operation_cd': 'U',
-                'dq_z00_data': None,
-                'dq_z00_data_len': None,
-                'dq_z00_doc_number': None,
-                'dq_z00_no_lines': None,
-                'dw_stg_2_aleph_lbry_name': 'mai01',
-                'em_update_dw_job_name': 'Preprocessing',
-                'in_z00_data': '',
-                'in_z00_data_len': '001970',
-                'in_z00_doc_number': '', # empty
-                'in_z00_no_lines': '0049',
-                'pp_z00_data': '',
-                'pp_z00_data_len': '001970',
-                'pp_z00_doc_number': '000053939',
+                'pp_z00_doc_number': '00005393900', # too long fails length check
                 'pp_z00_no_lines': '0049',
                 'rm_dq_check_excptn_cnt': 0,
                 'rm_suspend_rec_flag': 'N',
@@ -87,6 +87,7 @@ class TestDataQualityProcessor(unittest.TestCase):
                 't1_z00_doc_number__bib_rec_source_system_id': None,
                 't1_z00_no_lines__bib_rec_marc_rec_field_cnt': None
             }
+
         ]
 
         cls.bib_rec_sample_json_config = {
@@ -242,22 +243,28 @@ class TestDataQualityProcessor(unittest.TestCase):
         logger = None
 
         pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
-        pdb.set_trace()
+        
         step = DataQualityProcessor(reader, writer, job_info, logger, self.bib_rec_sample_json_config, pk_list)
         step.execute()
         results = step.writer.list
 
         expected_keys = sorted([
-            'in_z00_doc_number', 'dw_stg_2_aleph_lbry_name', 'db_operation_cd',
-            'dq_z00_no_lines', 'dq_z00_data_len', 'dq_z00_doc_number', 'dq_z00_data',
-            'em_update_dw_prcsng_cycle_id', 'em_update_dw_job_exectn_id',
-            'em_update_dw_job_name', 'em_update_dw_job_version_no',
-            'em_update_user_id', 'em_update_tmstmp'
+            'db_operation_cd', 'dq_z00_data', 'dq_z00_data_len', 'dq_z00_no_lines', 'dw_stg_2_aleph_lbry_name', 
+            'em_update_dw_job_exectn_id', 'em_update_dw_job_name', 'em_update_dw_job_version_no', 
+            'em_update_dw_prcsng_cycle_id', 'em_update_tmstmp', 'em_update_user_id', 
+            'in_z00_doc_number', 'rm_dq_check_exception_cnt', 'rm_suspend_rec_flag', 'rm_suspend_rec_reason_cd'
             ])
-
-
+            
+        pdb.set_trace()
+    
         self.assertEqual(expected_keys, sorted(list(results[0].keys())))
-        self.assertEqual("000053939", results[0]['dq_z00_doc_number'])
+        self.assertEqual(expected_keys, sorted(list(results[1].keys())))
+        self.assertEqual("SUSPENDED", results[0]['dq_z00_doc_number'])
+        self.assertEqual("1", results[0]['rm_dq_check_exception_cnt'])
+        self.assertEqual("MIS", results[0]['rm_suspend_rec_reason_cd'])
+        self.assertEqual("SUSPENDED", results[1]['dq_z00_doc_number'])
+        self.assertEqual("2", results[1]['rm_dq_check_exception_cnt'])
+        self.assertEqual("LEN", results[1]['rm_suspend_rec_reason_cd'])
         self.assertEqual('0049', results[0]['dq_z00_no_lines'])
         self.assertEqual('001970', results[0]['dq_z00_data_len'])
         

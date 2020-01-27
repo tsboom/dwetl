@@ -75,6 +75,7 @@ class DataQualityProcessor(Processor):
             dq_list = DataQualityProcessor.get_dq_checks_for_key(key, json_config)
             dq_key = key.replace('pp_', 'dq_')
             
+            # keep track of dq exception number
             dq_exception_count = 0 
 
             if dq_list:
@@ -83,7 +84,6 @@ class DataQualityProcessor(Processor):
                     data_quality_info = DataQualityInfo(dq_check)
                     # determine if value passes check
                     is_passing = data_quality_info.validate(val)
-                    pdb.set_trace() 
 
                     if is_passing:
                         # write value to out_dict because it passes
@@ -91,9 +91,10 @@ class DataQualityProcessor(Processor):
                         
                     else:
                         # check for suspend record
-                        pdb.set_trace() 
                         if data_quality_info.suspend_record:
-                            pdb.set_trace() 
+                            # out_dict for the current dq_ key contains same value. 
+                            out_dict[dq_key] = 'SUSPENDED'
+                            
                             # change suspend record flag 
                             suspend_record_flag = "Y"
                             out_dict['rm_suspend_rec_flag'] = suspend_record_flag
@@ -104,7 +105,6 @@ class DataQualityProcessor(Processor):
                             # get suspend record code
                             suspend_record_code = DataQualityProcessor.get_suspend_record_code(dq_key, data_quality_info)
                             out_dict['rm_suspend_rec_reason_cd'] = suspend_record_code
-                            pdb.set_trace()
                         else:
                             # find replacement and use it if needed
                             out_dict[dq_key] = data_quality_info.replacement_value
