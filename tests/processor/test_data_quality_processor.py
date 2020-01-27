@@ -234,7 +234,7 @@ class TestDataQualityProcessor(unittest.TestCase):
     def test_dataquality_bib_rec(self):
 
         reader = ListReader(self.bib_rec_sample_data)
-        pdb.set_trace()
+        
         writer = ListWriter()
 
         job_info = JobInfo(-1, 'test_user', '1', '1')
@@ -242,7 +242,7 @@ class TestDataQualityProcessor(unittest.TestCase):
         logger = None
 
         pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
-
+        pdb.set_trace()
         step = DataQualityProcessor(reader, writer, job_info, logger, self.bib_rec_sample_json_config, pk_list)
         step.execute()
         results = step.writer.list
