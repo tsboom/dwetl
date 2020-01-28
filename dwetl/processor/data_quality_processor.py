@@ -56,10 +56,13 @@ class DataQualityProcessor(Processor):
 
         Suspends record if needed.
         """
+        # out dict to hold the processed item
         out_dict = {}
         invalid_keys = ['rec_type_cd', 'rec_trigger_key', '_sa_instance_state']
 
         for key, val in item.items():
+            
+            
             if key in invalid_keys:
                 continue
 
@@ -75,22 +78,30 @@ class DataQualityProcessor(Processor):
             dq_list = DataQualityProcessor.get_dq_checks_for_key(key, json_config)
             dq_key = key.replace('pp_', 'dq_')
             
+            
+
             # keep track of dq exception number
             dq_exception_count = 0 
-
+            
+            # do DQ checks if exist
             if dq_list:
                 for dq_check in dq_list:
                     # create DataQualityInfo for each DQ check
                     data_quality_info = DataQualityInfo(dq_check)
                     # determine if value passes check
                     is_passing = data_quality_info.validate(val)
+                    
+                    # if the value has an exception count of 1, it likely has a missing value 
+                    # skip the check if it has "only if data exists" flag
+                    if dq_exception_count == 1 and data_quality_info.only_if_data_exists: 
+                        continue 
 
                     if is_passing:
                         # write value to out_dict because it passes
                         out_dict[dq_key] = val
-                        
+            
                     else:
-                        # check for suspend record
+                        # check for suspend record is True
                         if data_quality_info.suspend_record:
                             # out_dict for the current dq_ key contains same value. 
                             out_dict[dq_key] = 'SUSPENDED'
@@ -100,11 +111,13 @@ class DataQualityProcessor(Processor):
                             out_dict['rm_suspend_rec_flag'] = suspend_record_flag
                             # increment exception count
                             dq_exception_count = dq_exception_count + 1
+                            
                             out_dict['rm_dq_check_exception_cnt'] = dq_exception_count
                             
                             # get suspend record code
                             suspend_record_code = DataQualityProcessor.get_suspend_record_code(dq_key, data_quality_info)
                             out_dict['rm_suspend_rec_reason_cd'] = suspend_record_code
+                            
                         else:
                             # find replacement and use it if needed
                             out_dict[dq_key] = data_quality_info.replacement_value
