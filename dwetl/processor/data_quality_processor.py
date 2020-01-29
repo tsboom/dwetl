@@ -104,7 +104,7 @@ class DataQualityProcessor(Processor):
                         # check for suspend record is True
                         if data_quality_info.suspend_record:
                             # out_dict for the current dq_ key contains same value. 
-                            out_dict[dq_key] = 'SUSPENDED'
+                            out_dict[dq_key] = 'SUS'
                             
                             # change suspend record flag 
                             suspend_record_flag = "Y"
@@ -117,6 +117,7 @@ class DataQualityProcessor(Processor):
                             # get suspend record code
                             suspend_record_code = DataQualityProcessor.get_suspend_record_code(dq_key, data_quality_info)
                             out_dict['rm_suspend_rec_reason_cd'] = suspend_record_code
+                            pdb.set_trace()
                             
                         else:
                             # find replacement and use it if needed
