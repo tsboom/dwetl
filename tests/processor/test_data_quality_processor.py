@@ -73,11 +73,11 @@ class TestDataQualityProcessor(unittest.TestCase):
                 'em_update_dw_job_name': 'Preprocessing',
                 'in_z00_data': '',
                 'in_z00_data_len': '001970',
-                'in_z00_doc_number': '00005393900', # too long fails length check
+                'in_z00_doc_number': '000053', # too short fails length check
                 'in_z00_no_lines': '0049',
                 'pp_z00_data': '',
                 'pp_z00_data_len': '001970',
-                'pp_z00_doc_number': '00005393900', # too long fails length check
+                'pp_z00_doc_number': '000053', # too short fails length check
                 'pp_z00_no_lines': '0049',
                 'rm_dq_check_excptn_cnt': 0,
                 'rm_suspend_rec_flag': 'N',
