@@ -88,6 +88,11 @@ class DataQualityProcessor(Processor):
                 for dq_check in dq_list:
                     # create DataQualityInfo for each DQ check
                     data_quality_info = DataQualityInfo(dq_check)
+                    
+                    # trim trailing spaces of the value 
+                    # might cause problems for sublibrary code and collection code
+                    val = val.rstrip()
+                    
                     # determine if value passes check
                     is_passing = data_quality_info.validate(val)
                     
@@ -112,12 +117,11 @@ class DataQualityProcessor(Processor):
                             # increment exception count
                             dq_exception_count = dq_exception_count + 1
                             
-                            out_dict['rm_dq_check_exception_cnt'] = dq_exception_count
+                            out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
                             
                             # get suspend record code
                             suspend_record_code = DataQualityProcessor.get_suspend_record_code(dq_key, data_quality_info)
                             out_dict['rm_suspend_rec_reason_cd'] = suspend_record_code
-                            pdb.set_trace()
                             
                         else:
                             # find replacement and use it if needed
