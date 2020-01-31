@@ -49,7 +49,7 @@ class DataQualityProcessor(Processor):
         
 
     @classmethod
-    def check_data_quality(cls, item, json_config, pk_list):
+    def check_data_quality(cls, item, json_config, pk_list, logger):
         """
         Takes values from 'pp_' fields and runs DQ checks, adding replacement
         values if needed.
@@ -108,6 +108,7 @@ class DataQualityProcessor(Processor):
                     else:
                         # check for suspend record is True
                         if data_quality_info.suspend_record:
+                            logger.error(f'\t{dq_key} with value of {val} failed {data_quality_info.type}. SUSPENDED')
                             # out_dict for the current dq_ key contains same value. 
                             out_dict[dq_key] = 'SUS'
                             
@@ -124,6 +125,7 @@ class DataQualityProcessor(Processor):
                             out_dict['rm_suspend_rec_reason_cd'] = suspend_record_code
                             
                         else:
+                            logger.error(f'\t{dq_key} failed {data_quality_info.type}. Replacement value is {data_quality_info.replacement_value}.')
                             # find replacement and use it if needed
                             out_dict[dq_key] = data_quality_info.replacement_value
             else:
@@ -134,7 +136,7 @@ class DataQualityProcessor(Processor):
 
 
     def process_item(self, item):
-        processed_item = DataQualityProcessor.check_data_quality(item, self.json_config, self.stg2_pk_list)
+        processed_item = DataQualityProcessor.check_data_quality(item, self.json_config, self.stg2_pk_list, self.logger)
         processed_item.update(self.job_info.as_dict('update'))
         processed_item['em_update_dw_job_name'] = self.job_name()
         processed_item['em_update_tmstmp'] = datetime.datetime.now()
