@@ -23,9 +23,10 @@ def aleph_library(table_name):
     return library
 
 
-def load_stage_2(job_info):
+def load_stage_2(job_info, logger):
 
     print('Loading stage 2...')
+    logger.info('Loading stage 2...')
 
     stage1_to_stage2_table_mappings = {
         "dw_stg_1_mai39_z13": "dw_stg_2_bib_rec_z13",
@@ -50,11 +51,11 @@ def load_stage_2(job_info):
         # "dw_stg_1_mpf_matrl_form": "dw_stg_2_mpf_matrl_form"
     }
 
-    logger = None
-
     processing_cycle_id = job_info.prcsng_cycle_id
     for stage1_table, stage2_table in stage1_to_stage2_table_mappings.items():
         print(stage1_table)
+        logger.info(stage1_table)
+        
         library = aleph_library(stage1_table)
 
         with dwetl.database_session() as session:
