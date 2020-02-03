@@ -4,6 +4,8 @@ from dwetl.writer.list_writer import ListWriter
 from dwetl.job_info import JobInfo
 from dwetl.data_quality_info import DataQualityInfo
 from dwetl.processor.data_quality_processor import DataQualityProcessor
+import datetime
+import logging
 import pdb
 import pprint
 
@@ -239,8 +241,15 @@ class TestDataQualityProcessor(unittest.TestCase):
         writer = ListWriter()
 
         job_info = JobInfo(-1, 'test_user', '1', '1')
-
-        logger = None
+        
+        #create test logger
+        today = datetime.datetime.now().strftime('%Y%m%d')
+        logger = logging.getLogger('dwetl')
+        file_handler = logging.FileHandler(f'logs/test.dwetl.log.{today}')
+        formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
+        logger.setLevel(logging.INFO)
 
         pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
         
