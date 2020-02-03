@@ -111,19 +111,19 @@ class TestDataQualityUtilities(unittest.TestCase):
 
     def test_csv_to_dict(self):
         #Test that output is dict
-        self.assertIsInstance(data_quality_utilities.create_dict_from_csv_redux("lookup_tables/call_no_type.csv"), dict)
+        self.assertIsInstance(data_quality_utilities.create_dict_from_csv("call_no_type.csv"), dict)
 
         #Test that output is not int
-        self.assertNotIsInstance(data_quality_utilities.create_dict_from_csv_redux("lookup_tables/call_no_type.csv"), int)
+        self.assertNotIsInstance(data_quality_utilities.create_dict_from_csv("call_no_type.csv"), int)
 
         #Test that output is not list
-        self.assertNotIsInstance(data_quality_utilities.create_dict_from_csv_redux("lookup_tables/call_no_type.csv"), list)
+        self.assertNotIsInstance(data_quality_utilities.create_dict_from_csv("call_no_type.csv"), list)
 
         #Test that data count in dict matches data count in csv
         with open("lookup_tables/call_no_type.csv", "r") as file:
             csv_reader_object = csv.reader(file)
             row_count = sum(1 for row in csv_reader_object)
-            self.assertEqual(len(data_quality_utilities.create_dict_from_csv_redux("lookup_tables/call_no_type.csv")), row_count)
+            self.assertEqual(len(data_quality_utilities.create_dict_from_csv("call_no_type.csv")), row_count)
 
     def test_is_valid_hour(self):
         #Tests based on sample data from Z35_EVENT_HOUR

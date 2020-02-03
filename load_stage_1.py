@@ -13,9 +13,10 @@ import dwetl
 import pdb
 
 
-def load_stage_1(job_info, input_directory):
+def load_stage_1(job_info, input_directory, logger):
 
     print('Loading stage 1...')
+    logger.info('Loading stage 1...')
     '''
     file to table mapping
     '''
@@ -59,11 +60,11 @@ def load_stage_1(job_info, input_directory):
     for file, table in ALEPH_TSV_TABLE_MAPPING.items():
         file_path = os.path.join(input_directory, file)
         print(file_path)
+        logger.info(file_path)
         with dwetl.database_session() as session:
             reader = TsvFileReader(file_path)
             # writer = PrintWriter()
             writer = SqlAlchemyWriter(session, dwetl.Base.classes[table])
-            logger = None
             processor = LoadAlephTsv(reader, writer, job_info, logger)
             processor.execute()
 

@@ -99,24 +99,13 @@ def is_valid_hour(hhmm):
 
 def create_dict_from_csv(csv_file):
     csv_file_path = os.path.join('lookup_tables', csv_file)
-    with open(csv_file_path, mode='r') as f:
+    with open(csv_file_path, mode='r', encoding='utf-8-sig') as f:
         reader = csv.DictReader(f, fieldnames=('code', 'description'))
         csv_dict = {}
         for row in reader:
             csv_dict[row['code']] = row['description']
         return csv_dict
 
-#^^^^ will we make this an absolute path to lookup_tables?
-#^^^^ will this only work on 2 column CSVs? Any situation where this would need to be extensible?
-
-def create_dict_from_csv_redux(csv_file):
-#    csv_file_path = os.path.join('lookup_tables', csv_file)
-    with open(csv_file, mode='r') as f:
-        reader = csv.DictReader(f, fieldnames=('code', 'description'))
-        csv_dict = {}
-        for row in reader:
-            csv_dict[row['code']] = row['description']
-        return csv_dict
 
 """
 data quality specific functions
