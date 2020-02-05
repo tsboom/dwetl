@@ -1,6 +1,8 @@
 from dwetl.processor.processor import Processor
 from dwetl.transformation_info import TransformationInfo
 import dwetl.specific_transform_functions as specific_transform_functions
+import datetime
+import pdb
 
 class TransformationProcessor(Processor):
     '''
@@ -18,6 +20,7 @@ class TransformationProcessor(Processor):
     @classmethod
     def get_transformations_for_key(cls, key, json_config):
         try:
+            
             key_json = json_config[key[3:]]
             transform_steps = key_json['transformation_steps']
             return transform_steps
@@ -49,9 +52,13 @@ class TransformationProcessor(Processor):
             # only process dq values. skip keys from invalid_keys and keys that aren't 'dq_'
             if not key.startswith('dq_'):
                 continue
+                
+            # skip suspended records 
+            if item['rm_suspend_rec_flag'] == 'Y':
+                out_dict
 
             # get transformations for current key
-            transform_steps = DataQualityProcessor.get_transformations_for_key(key, json_config)
+            transform_steps = TransformationProcessor.get_transformations_for_key(key, json_config)
             
             # transform 
             if transform_steps:
@@ -60,7 +67,7 @@ class TransformationProcessor(Processor):
                     transformation_info = TransformationInfo(transformation)
                     
                     # get index of current transformation (for t1, t2, etc)
-                    index = tranform_steps.index(transformation)
+                    index = transform_steps.index(transformation)
                     transform_number = index + 1
                     
                     # run transformation 
@@ -70,7 +77,7 @@ class TransformationProcessor(Processor):
                     target_column = transformation_info.target_col_name
                     source_column = transformation_info.source_col_name
                     
-                    transform_column_name = f"t{transform_number}_{source_column}_{target_column}"
+                    transform_column_name = f"t{transform_number}_{source_column}__{target_column}"
                     
                     # write to outdict 
                     out_dict[transform_column_name] = transform_result
