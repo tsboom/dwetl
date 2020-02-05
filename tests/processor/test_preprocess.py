@@ -5,11 +5,13 @@ from dwetl.job_info import JobInfo
 from dwetl.processor.preprocess import Preprocess
 import pdb
 
+
 class TestPreprocess(unittest.TestCase):
-    def test_preprocess(self):
+    def test_bib_rec_preprocess(self):
         """
         tests the case where there's no whitespace
         """
+
         sample_data = [
             {   # pk data
                 'db_operation_cd': 'U',
@@ -78,28 +80,27 @@ class TestPreprocess(unittest.TestCase):
             }
         }
 
+        pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name',
+                   'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
 
-        pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
-
-        step = Preprocess(reader, writer, job_info, logger, sample_json_config, pk_list)
+        step = Preprocess(reader, writer, job_info, logger,
+                          sample_json_config, pk_list)
         step.execute()
         results = step.writer.list
 
         expected_keys = sorted([
-                'in_z00_doc_number', 'pp_z00_doc_number', 'dw_stg_2_aleph_lbry_name', 'db_operation_cd',
-                'pp_z00_no_lines', 'pp_z13_title', 'pp_z13_author',
-                'pp_z00_data_len', 'pp_z13_imprint',
-                'em_update_dw_prcsng_cycle_id', 'em_update_dw_job_exectn_id',
-                'em_update_dw_job_name', 'em_update_dw_job_version_no',
-                'em_update_user_id', 'em_update_tmstmp', 'em_create_dw_prcsng_cycle_id'
-                ])
+            'in_z00_doc_number', 'pp_z00_doc_number', 'dw_stg_2_aleph_lbry_name', 'db_operation_cd',
+            'pp_z00_no_lines', 'pp_z13_title', 'pp_z13_author',
+            'pp_z00_data_len', 'pp_z13_imprint',
+            'em_update_dw_prcsng_cycle_id', 'em_update_dw_job_exectn_id',
+            'em_update_dw_job_name', 'em_update_dw_job_version_no',
+            'em_update_user_id', 'em_update_tmstmp', 'em_create_dw_prcsng_cycle_id'
+        ])
 
         self.assertEqual(expected_keys, sorted(list(results[0].keys())))
         self.assertEqual("000019087", results[0]['pp_z00_doc_number'])
         self.assertEqual('0011', results[0]['pp_z00_no_lines'])
         self.assertEqual('000400', results[0]['pp_z00_data_len'])
-
-
 
     def test_preprocess_lots_of_whitespace_and_none(self):
         """
@@ -174,10 +175,11 @@ class TestPreprocess(unittest.TestCase):
             }
         }
 
+        pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name',
+                   'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
 
-        pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
-
-        step = Preprocess(reader, writer, job_info, logger, sample_json_config, pk_list)
+        step = Preprocess(reader, writer, job_info, logger,
+                          sample_json_config, pk_list)
         step.execute()
         results = step.writer.list
 
@@ -191,8 +193,10 @@ class TestPreprocess(unittest.TestCase):
         ])
         self.assertEqual(expected_keys, sorted(list(results[0].keys())))
         self.assertEqual("  000019087 ", results[0]['pp_z00_doc_number'])
-        self.assertEqual("A literary history of America", results[0]['pp_z13_title'])
-        self.assertEqual("Wendell, Barrett, 1855-1921", results[0]['pp_z13_author'])
+        self.assertEqual("A literary history of America",
+                         results[0]['pp_z13_title'])
+        self.assertEqual("Wendell, Barrett, 1855-1921",
+                         results[0]['pp_z13_author'])
         self.assertEqual(None, results[0]['pp_z00_no_lines'])
         self.assertEqual(None, results[0]['pp_z00_data_len'])
 
@@ -200,14 +204,14 @@ class TestPreprocess(unittest.TestCase):
 
         sample_data = [
             {
-             'db_operation_cd': 'U',
-             'in_z00_data': '',
-             'in_z00_data_len': '001726',
-             'in_z00_doc_number': '000181506',
-             'in_z00_no_lines': '0038',
-             'dw_stg_2_aleph_lbry_name': 'mai01',
-             'em_create_dw_prcsng_cycle_id': '-1',
-             }
+                'db_operation_cd': 'U',
+                'in_z00_data': '',
+                'in_z00_data_len': '001726',
+                'in_z00_doc_number': '000181506',
+                'in_z00_no_lines': '0038',
+                'dw_stg_2_aleph_lbry_name': 'mai01',
+                'em_create_dw_prcsng_cycle_id': '-1',
+            }
         ]
 
         reader = ListReader(sample_data)
@@ -217,31 +221,33 @@ class TestPreprocess(unittest.TestCase):
 
         logger = None
 
-        sample_json_config =    {'z00_doc_number': {
-                "preprocessing_info": {
-                    "pre_or_post_dq": "N/A",
-                    "pre_action": "N/A",
-                    "pre_detailed_instructions": "N/A"
-                }
-            },
+        sample_json_config = {'z00_doc_number': {
+            "preprocessing_info": {
+                "pre_or_post_dq": "N/A",
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "N/A"
+            }
+        },
             'z00_no_lines': {
                 "preprocessing_info": {
                     "pre_or_post_dq": "N/A",
                     "pre_action": "N/A",
                     "pre_detailed_instructions": "N/A"
                 }
-            },
+        },
             'z00_data_len': {
                 "preprocessing_info": {
                     "pre_or_post_dq": "N/A",
                     "pre_action": "N/A",
                     "pre_detailed_instructions": "N/A"
                 }
-            }}
+        }}
 
-        pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
+        pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name',
+                   'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
 
-        step = Preprocess(reader, writer, job_info, logger, sample_json_config, pk_list)
+        step = Preprocess(reader, writer, job_info, logger,
+                          sample_json_config, pk_list)
         step.execute()
         results = step.writer.list
 
@@ -253,7 +259,8 @@ class TestPreprocess(unittest.TestCase):
             'em_update_dw_job_name', 'em_update_dw_job_version_no',
             'em_update_user_id', 'em_update_tmstmp', 'em_create_dw_prcsng_cycle_id'
         ])
-        self.assertEqual(False, Preprocess.need_preprocess(sample_json_config, ''))
+        self.assertEqual(False, Preprocess.need_preprocess(
+            sample_json_config, ''))
         self.assertEqual(expected_keys, sorted(list(results[0].keys())))
         self.assertEqual("000181506", results[0]['pp_z00_doc_number'])
         self.assertEqual("0038", results[0]['pp_z00_no_lines'])
