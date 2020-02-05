@@ -5,6 +5,7 @@ from dwetl.job_info import JobInfo
 from dwetl.data_quality_info import DataQualityInfo
 from dwetl.processor.data_quality_processor import DataQualityProcessor
 from tests.data.dimension_sample_data import bib_record_dimension_sample_data
+from tests import test_logger
 import datetime
 import logging
 import pdb
@@ -15,6 +16,8 @@ class TestDataQualityProcessor(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.bib_record_dimension_sample_data = bib_record_dimension_sample_data.bib_rec_sample_data
+        
+        cls.logger = test_logger.logger
         
         with open('table_config/bibliographic_record_dimension.json') as json_file:
             cls.bib_rec_json_config = json.load(json_file)
@@ -109,18 +112,9 @@ class TestDataQualityProcessor(unittest.TestCase):
 
         job_info = JobInfo(-1, 'test_user', '1', '1')
 
-        #create test logger
-        today = datetime.datetime.now().strftime('%Y%m%d')
-        logger = logging.getLogger('dwetl')
-        file_handler = logging.FileHandler(f'logs/test.dwetl.log.{today}')
-        formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
-        file_handler.setFormatter(formatter)
-        logger.addHandler(file_handler)
-        logger.setLevel(logging.INFO)
-
         pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
 
-        data_quality_processor = DataQualityProcessor(reader, writer, job_info, logger, json_config, pk_list)
+        data_quality_processor = DataQualityProcessor(reader, writer, job_info, self.logger, json_config, pk_list)
         data_quality_processor.execute()
         results = data_quality_processor.writer.list
         
