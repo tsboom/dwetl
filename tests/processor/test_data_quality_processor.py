@@ -81,19 +81,10 @@ class TestDataQualityProcessor(unittest.TestCase):
 
     def test_get_suspend_record_code(self):
         key = "pp_z00_doc_number"
-        with open('table_config/bibliographic_record_dimension.json') as json_file:
-            json_config = json.load(json_file)
-
-        json_config = {
-            'specific_dq_function': 'no_missing_values',
-            'specific_dq_function_param_1': '',
-            'suspend_record': 'Yes',
-            'type': 'Missing Value',
-            'always':'x',
-            'only_if_data_exists': '',
-            'exception_message': 'Missing Value',
-            'replacement_value': 'N/A'
-        }
+        
+        whole_json_config = self.bib_rec_json_config
+        
+        json_config = whole_json_config['z00_doc_number']['dataquality_info'][0]
 
         dq = DataQualityInfo(json_config)
 
@@ -117,8 +108,6 @@ class TestDataQualityProcessor(unittest.TestCase):
         data_quality_processor = DataQualityProcessor(reader, writer, job_info, self.logger, json_config, pk_list)
         data_quality_processor.execute()
         results = data_quality_processor.writer.list
-        
-        pdb.set_trace()
 
         expected_keys = sorted([
             'db_operation_cd', 'dq_z00_data', 'dq_z00_data_len', 'dq_z00_doc_number', 'dq_z00_no_lines', 'dw_stg_2_aleph_lbry_name',
