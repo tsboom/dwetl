@@ -3,7 +3,7 @@ This sample data is for DataQualityProcessor and TransformationProcessor
 """
 
 bib_rec_sample_data = [
-
+    # bib rec only has one DQ checked field: z00_doc_number
     # z00_doc_number missing value
     {
         "db_operation_cd": "U",

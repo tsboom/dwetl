@@ -3,6 +3,7 @@ from dwetl.transformation_info import TransformationInfo
 import dwetl.specific_transform_functions as specific_transform_functions
 import datetime
 import pdb
+import pprint
 
 class TransformationProcessor(Processor):
     '''
@@ -20,9 +21,9 @@ class TransformationProcessor(Processor):
     @classmethod
     def get_transformations_for_key(cls, key, json_config):
         try:
-            
             key_json = json_config[key[3:]]
             transform_steps = key_json['transformation_steps']
+            
             return transform_steps
         except:
             return None 
@@ -45,17 +46,17 @@ class TransformationProcessor(Processor):
             if key in invalid_keys:
                 continue
 
-            # add the pks to the out_dict so the row can be inserted later
+            # add the pks to the out_dict so the row can be inserted later 
             if key in pk_list:
                 out_dict[key] = val
 
             # only process dq values. skip keys from invalid_keys and keys that aren't 'dq_'
             if not key.startswith('dq_'):
                 continue
-                
+            
             # skip suspended records 
-            if item['rm_suspend_rec_flag'] == 'Y':
-                out_dict
+            if item.get('rm_suspend_rec_flag') == 'Y':
+                continue
 
             # get transformations for current key
             transform_steps = TransformationProcessor.get_transformations_for_key(key, json_config)
