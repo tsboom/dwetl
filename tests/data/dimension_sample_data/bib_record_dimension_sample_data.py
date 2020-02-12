@@ -94,7 +94,7 @@ bib_rec_sample_data = [
         "pp_z13_year": "1969",
         "rm_dq_check_excptn_cnt": 0,
         "rm_suspend_rec_flag": "N",
-        "rm_suspend_rec_reason_cd": None,
+        "rm_suspend_rec_reason_cd": None ,
 
     }
 
