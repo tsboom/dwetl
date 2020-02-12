@@ -83,7 +83,7 @@ bib_rec_sample_data = [
     # z13_doc_number good record
     {
 
-        "db_operation_cd": "U",
+        "db_operation_cd":  " U",
         "dw_stg_2_aleph_lbry_name": "mai01",
         "em_update_dw_job_name": "Preprocessing",
         "in_z13_rec_key": "000000897",
