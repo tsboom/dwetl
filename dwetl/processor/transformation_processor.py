@@ -56,6 +56,7 @@ class TransformationProcessor(Processor):
             
             # skip suspended records 
             if item.get('rm_suspend_rec_flag') == 'Y':
+                # dont' do anything for suspended records
                 continue
 
             # get transformations for current key

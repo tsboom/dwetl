@@ -68,6 +68,11 @@ class TestTransformationProcessor(unittest.TestCase):
             reader, writer, job_info, self.logger, self.bib_rec_sample_json_config, pk_list)
         data_quality_processor.execute()
         bib_rec_dq_results = data_quality_processor.writer.list
+        
+        # quick check that dq results are workign as expected for 'SUS'
+        self.assertEqual('SUS', bib_rec_dq_results[0]['dq_z00_doc_number'])
+        # self.assertEqual('SUS', bib_rec_dq_results[3]['dq_z13_open_date'])
+        # self.assertEqual('SUS', bib_rec_dq_results[4]['dq_z13_open_date'])
 
         # item
         reader = ListReader(bib_rec_dq_results)
@@ -100,5 +105,9 @@ class TestTransformationProcessor(unittest.TestCase):
         self.assertEqual('', results[2]['t1_z00_data__bib_rec_marc_rec_data_cntnt_txt'])
         self.assertEqual('001970',results[2]['t1_z00_data_len__bib_rec_marc_rec_data_cntnt_len_cnt'] )
         self.assertEqual('000053939', results[2]['t1_z00_doc_number__bib_rec_source_system_id'])
+        
+        # # fourth index sample data item tests z13_open_date date format 
+        # self.assertEqual(None, results[3]['t1_z13_open_date__bib_rec_create_dt'])
+        # self.assertEqual(None, results[4]['t1_z13_open_date__bib_rec_create_dt'])
         
 
