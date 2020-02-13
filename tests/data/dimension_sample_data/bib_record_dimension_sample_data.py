@@ -4,7 +4,7 @@ This sample data is for DataQualityProcessor and TransformationProcessor
 
 bib_rec_sample_data = [
 
-    # # z00_doc_number missing value
+    # # z00_doc_number missing values
     # {
     #     "db_operation_cd": "U",
     #     "dw_stg_2_aleph_lbry_name": "mai01",

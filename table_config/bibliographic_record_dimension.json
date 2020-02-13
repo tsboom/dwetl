@@ -48,6 +48,8 @@
             }
         ]
     },
+
+
     "z00_doc_number": {
         "source_col_name": "z00_doc_number",
         "preprocessing_info": {
@@ -831,53 +833,8 @@
                 "exception_message": "Invalid Date: Z13_OPEN_DATE",
                 "replacement_value": "(null)",
                 "dimension_link_to_record": "N/A"
-            },
-            {
-                "aleph_library": "MAI60",
-                "source_file": "Z13",
-                "source_column_name": "Z13_OPEN_DATE",
-                "target_column_name": "",
-                "column_sub_component": "",
-                "column_data_type": "NUMBER(8)",
-                "format": "YYYYMMDD",
-                "type": "Missing Value",
-                "instructions": "1) <null> 2) All zeros",
-                "specific_dq_function": "no_missing_values",
-                "specific_dq_function_param_1": "",
-                "application": "H,I",
-                "order": "1",
-                "always": "X",
-                "only_if_data_exists": "",
-                "additional_conditions": "",
-                "suspend_record": "No",
-                "exception_memorialization": "Create Exception Record",
-                "exception_message": "Missing Value: Z13_OPEN_DATE",
-                "replacement_value": "(null)",
-                "dimension_link_to_record": "N/A"
-            },
-            {
-                "aleph_library": "MAI60",
-                "source_file": "Z13",
-                "source_column_name": "Z13_OPEN_DATE",
-                "target_column_name": "",
-                "column_sub_component": "",
-                "column_data_type": "NUMBER(8)",
-                "format": "YYYYMMDD",
-                "type": "Date check",
-                "instructions": "Must be valid aleph date.",
-                "specific_dq_function": "is_valid_aleph_year",
-                "specific_dq_function_param_1": "",
-                "application": "H,I",
-                "order": "2",
-                "always": "",
-                "only_if_data_exists": "X",
-                "additional_conditions": "No previous Z13_OPEN_DATE DQ exception",
-                "suspend_record": "No",
-                "exception_memorialization": "Create Exception Record",
-                "exception_message": "Invalid Date: Z13_OPEN_DATE",
-                "replacement_value": "(null)",
-                "dimension_link_to_record": "N/A"
             }
+
         ],
         "transformation_steps": [
             {
