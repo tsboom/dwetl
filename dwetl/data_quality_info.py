@@ -1,6 +1,7 @@
 import dwetl.data_quality_utilities as dqu
 from functools import partial
 import pdb
+import pprint
 
 class DataQualityInfo:
     """
@@ -20,6 +21,7 @@ class DataQualityInfo:
 
     def validate(self, data_value):
         if self.function:
+            #pdb.set_trace()
             return self.function(data_value)
         else:
             # Data quality function is None, so just return True
