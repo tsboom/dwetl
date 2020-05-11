@@ -2,6 +2,7 @@ import datetime
 import os
 import sys
 import pdb
+import dwetl
 from dwetl.job_info import JobInfoFactory, JobInfo
 from dwetl.reader.ezproxy_reader import EzproxyReader
 from dwetl.writer.sql_alchemy_writer import SqlAlchemyWriter
@@ -11,17 +12,18 @@ load EZ Proxy file equivalent table (Stage 1)
 '''
 
 
-def load_stage_1(job_info, input_file, logger):
+def load_stage_1(job_info, input_file):
     print('EZProxy Loading stage 1...')
-    logger.info('EZ Proxy Loading stage 1...')
+    # logger.info('EZ Proxy Loading stage 1...')
+    
+    table = 'dw_stg_1_ezp_sessns_snap'
 
-
-with dwetl.database_session() as session:
-    reader = EzproxyReader(input_file)
-    # writer = PrintWriter()
-    writer = SqlAlchemyWriter(session, dwetl.Base.classes[table])
-    processor = LoadAlephTsv(reader, writer, job_info, logger)
-    processor.execute()
+    with dwetl.database_session() as session:
+        reader = EzproxyReader(input_file)
+        # writer = PrintWriter()
+        writer = SqlAlchemyWriter(session, dwetl.Base.classes[table])
+        processor = LoadAlephTsv(reader, writer, job_info, logger)
+        processor.execute()
 
 
 '''
