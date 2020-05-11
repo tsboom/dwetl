@@ -71,7 +71,6 @@ def is_valid_aleph_year(year):
     current_year = datetime.datetime.now().year
     if int(year)<1980 or int(year)>current_year:
     #if year not in range(1980, current_year+1):
-        pdb.set_trace()
         return False
     else:
         return True
