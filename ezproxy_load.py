@@ -22,7 +22,7 @@ def load_stage_1(job_info, input_file, logger):
     with dwetl.database_session() as session:
         reader = EzproxyReader(input_file)
         # writer = PrintWriter()
-        writer = SqlAlchemyWriter(session, dwetl.Base.classes[table], logger)
+        writer = SqlAlchemyWriter(session, dwetl.Base.classes[table])
         processor = LoadAlephTsv(reader, writer, job_info, logger)
         processor.execute()
 

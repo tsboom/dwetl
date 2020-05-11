@@ -2,6 +2,8 @@ import dwetl
 import datetime
 import os
 import sys
+import logging
+import sqlalchemy
 from dwetl.job_info import JobInfoFactory, JobInfo
 from dwetl.writer.print_writer import PrintWriter
 from dwetl.writer.sql_alchemy_writer import SqlAlchemyWriter
@@ -10,19 +12,19 @@ import pdb
 
 
 
-def run(input_directory):
+def run(input_file):
     
     #create logger
     today = datetime.datetime.now().strftime('%Y%m%d')
     logger = logging.getLogger('dwetl')
-    file_handler = logging.FileHandler(f'logs/dwetl.log.{today}')
+    file_handler = logging.FileHandler(f'logs/ezproxy.log.{today}')
     formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
     logger.setLevel(logging.INFO)
 
     time_started = datetime.datetime.now()
-    logger.info(f'EzProxy etl started')
+    logger.info(f'EzProxy ETL started')
 
     '''
     create job_info for current process
@@ -37,7 +39,7 @@ def run(input_directory):
     '''
     load ezproxy stage 1 
     '''
-    ezproxy_load.load_stage_1(job_info, input_directory, logger)
+    ezproxy_load.load_stage_1(job_info, input_file, logger)
     
     
     '''
