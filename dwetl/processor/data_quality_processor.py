@@ -81,7 +81,7 @@ class DataQualityProcessor(Processor):
             dq_key = key.replace('pp_', 'dq_')
 
 
-
+            
             # keep track of dq exception number
             dq_exception_count = 0
             #pdb.set_trace()
@@ -91,6 +91,7 @@ class DataQualityProcessor(Processor):
                     # create DataQualityInfo for each DQ check
 
                     data_quality_info = DataQualityInfo(dq_check)
+                    
                     if dq_check['type'] == 'Date check' and key != 'pp_z13_open_date':
                         continue
                     elif dq_check['type'] == 'Date check' and key == 'pp_z13_open_date':
@@ -138,8 +139,9 @@ class DataQualityProcessor(Processor):
 
                             dq_exception_count = dq_exception_count + 1
                             out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
-
+                            pdb.set_trace()
                             if data_quality_info.suspend_record:
+                                
                                 logger.error(f'\t{dq_key} with value of {val} failed {data_quality_info.type}. SUSPENDED')
                                 # out_dict for the current dq_ key contains same value.
                                 out_dict[dq_key] = 'SUS'
@@ -164,7 +166,6 @@ class DataQualityProcessor(Processor):
             else:
                 # if there are no dq checks, output the pp value to dq
                 out_dict[dq_key] = val
-
         return out_dict
 
 

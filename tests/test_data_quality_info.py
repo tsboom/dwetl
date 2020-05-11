@@ -1,10 +1,13 @@
 import unittest
 from dwetl.data_quality_info import DataQualityInfo
+from tests.data.dimension_sample_data import bib_record_dimension_sample_data
+from tests import test_logger
 import dwetl.data_quality_utilities as dqu
 
 class TestDataQualityInfo(unittest.TestCase):
     def setUp(self):
         pass
+
 
     def test_data_quality_info_no_missing_values(self):
         json_config = {
@@ -166,8 +169,8 @@ class TestDataQualityInfo(unittest.TestCase):
             'replacement_value': '(null)'
         }
         dq = DataQualityInfo(json_config)
-        self.assertTrue(dq.has_replacement_value())
-        self.assertEqual('(null)', dq.replacement_value)
+        self.assertFalse(dq.has_replacement_value())
+        self.assertEqual(None, dq.replacement_value)
 
         json_config = {
             'specific_dq_function': 'is_valid_length',

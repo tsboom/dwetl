@@ -9,14 +9,13 @@ class DataQualityInfo:
     """
     def __init__(self, json_config):
         self.exception_message = json_config['exception_message']
-        self.replacement_value = json_config['replacement_value']
+        self.replacement_value = DataQualityInfo.replacement_value(json_config['replacement_value'])
         self.suspend_record = DataQualityInfo.text_to_bool(json_config['suspend_record'])
         self.always = DataQualityInfo.text_to_bool(json_config['always'])
         self.only_if_data_exists = DataQualityInfo.text_to_bool(json_config['only_if_data_exists'])
         self.type = json_config['type']
         self.specific_dq_function = json_config['specific_dq_function']
         self.specific_dq_function_param_1 = json_config['specific_dq_function_param_1']
-
         self.function = DataQualityInfo.create_function(self.specific_dq_function, self.specific_dq_function_param_1)
 
     def validate(self, data_value):
@@ -26,30 +25,36 @@ class DataQualityInfo:
         else:
             # Data quality function is None, so just return True
             return True
-
+            
     def has_replacement_value(self):
         """
         Return True if this DataQualityInfo has a replacement value, False otherwise
         :return: True if this DataQualityInfo has a replacement value, False otherwise
         """
-        if self._replacement_value is None:
+        if self.replacement_value is None:
             return False
 
-        value = self._replacement_value.lower()
+        value = self.replacement_value.lower()
         if value and value == 'n/a':
             return False
+        if value and value == 'None':
+            return False
+        if value == '(null)':
+            return None
+        return True    
+        
+    @classmethod
+    def replacement_value(self, replacement_value):
 
-        return True
+        if replacement_value is None:
+            return None
 
-    @property
-    def replacement_value(self):
-        if self.has_replacement_value():
-            return self._replacement_value
-        return None
-
-    @replacement_value.setter
-    def replacement_value(self, val):
-        self._replacement_value = val
+        value = replacement_value.lower()
+        if value and value == 'n/a':
+            return None
+        if value == '(null)':
+            return None
+        return replacement_value
 
     @classmethod
     def create_function(cls, function_name, *param_values):
