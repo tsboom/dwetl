@@ -8,6 +8,7 @@ class EzproxyReader:
     This implementation assumes that the first line in the file
     is a tab-separated list of the keys to use.
     """
+
     def __init__(self, file_path):
         """
         Constructs a new EzproxyReader.
@@ -18,15 +19,15 @@ class EzproxyReader:
         self.fd = open(self.file_path)
         self.reader = csv.reader(self.fd, delimiter='\t')
         # Assume first line is the header line
-        self.headers = ['mbr_lbry_cd', 'ezp_sessns_snap_tmstmp', 'ezp_sessns_snap_actv_sessns_cnt', 'ezp_sessns_virtual_hosts_cnt']
+        self.headers = ['mbr_lbry_cd', 'ezp_sessns_snap_tmstmp',
+                        'ezp_sessns_snap_actv_sessns_cnt', 'ezp_sessns_virtual_hosts_cnt']
 
     def __iter__(self):
         for line in self.reader:
             # Create a dictionary from headers and line values
             result = {}
-            
-            # set the headers 
-            headers = 
+
+            # set the headers
             for i, header in enumerate(self.headers):
                 # Skip rest of headers if we run out of values
                 if i < len(line):
