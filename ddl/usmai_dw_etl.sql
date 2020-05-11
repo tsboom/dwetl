@@ -3543,6 +3543,12 @@ ALTER TABLE ONLY public.dw_stg_1_mpf_matrl_form
 ALTER TABLE ONLY public.dw_stg_1_mpf_mbr_lbry
     ADD CONSTRAINT pk_dw_stg_1_mpf_mbr_lbry PRIMARY KEY (db_operation_cd, usmai_mbr_lbry_cd, em_create_dw_prcsng_cycle_id);
 
+--
+-- Name: dw_stg_1_ezp_sessns_snap pk_dw_stg_1_ezp_sessns_snap; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
+--
+
+ALTER TABLE ONLY public.dw_stg_1_ezp_sessns_snap
+    ADD CONSTRAINT pk_stg_1_ezp_sessns_snap PRIMARY KEY (mbr_lbry_cd, ezp_sessns_snap_tmstmp, em_create_dw_prcsng_cycle_id);
 
 --
 -- Name: dw_stg_2_bib_rec_z00 pk_dw_stg_2_bib_rec_z00; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
