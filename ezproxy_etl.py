@@ -43,6 +43,12 @@ def run(input_file):
     
     
     '''
+    load ezproxy stage 2 
+    '''
+    ezproxy_load.load_stage_2(job_info, logger)
+    
+    
+    '''
     end of job metadata writing
     '''
 
