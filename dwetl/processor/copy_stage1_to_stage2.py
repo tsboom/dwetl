@@ -51,6 +51,4 @@ class CopyStage1ToStage2(Processor):
         processed_item.update(self.job_info.as_dict('create'))
         processed_item['em_create_tmstmp'] = datetime.datetime.now()
         
-        print('\n\ncopy stage 1 stage 2')
-        pprint.pprint(processed_item)
         return processed_item

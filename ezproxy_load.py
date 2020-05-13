@@ -9,6 +9,7 @@ from dwetl.processor.load_aleph_tsv import LoadAlephTsv
 from dwetl.writer.sql_alchemy_writer import SqlAlchemyWriter
 from dwetl.reader.sql_alchemy_reader import SqlAlchemyReader
 from dwetl.processor.copy_stage1_to_stage2 import CopyStage1ToStage2
+from dwetl.processor.ezproxy_processor import EzproxyProcessor
 
 '''
 load EZ Proxy file equivalent table (Stage 1)
@@ -46,8 +47,8 @@ def load_stage_2(job_info, logger):
         processor = CopyStage1ToStage2.create(reader, writer, job_info, logger, library)
         processor.execute()
     
-# def intertable_processing(job_info, logger):
-    # stuff
+def intertable_processing(job_info, logger):
+    stuff
     
 # '''
 # TODO: be able to load stage 1 from the command line using this one script

@@ -64,7 +64,7 @@ def test_database_session():
     Sample Usage:
 
       with dwetl.test_database_session() as session:
-         <Access datatabase>
+         <Access database>
 
     :return: a database session for use with testing that always rolls back,
              removing the changes made in the session.
@@ -102,3 +102,49 @@ def test_database_session():
         # Always rollback
         session.rollback()
         trans.rollback()
+        
+        
+@contextmanager
+def reporting_database_session():
+    """
+    Returns a reporting database session for application use.
+
+    All changes made in the session will be committed, unless an exception is
+    raised. If an exception is raised, all uncommitted changes will be rolled
+    back.
+
+    The database session will automatically commit the changes when the
+    session exits, so no explicit commit is needed by the code.
+
+    Sample Usage:
+
+      with dwetl.reporting_database_session() as session:
+         <Access datatabase>
+
+    :return: a database session for application use.
+    """
+    global Base
+    # See https://docs.sqlalchemy.org/en/13/orm/session_transaction.html
+    db_settings = database_credentials.reporting_db_settings()
+    engine = create_engine(db_settings['REPORTING_DB_CONNECTION_STRING'])
+
+    # Populate Base class, if needed.
+    if Base is None:
+        Base = automap_base()
+        Base.prepare(engine, reflect=True)
+
+    # connect to the database
+    connection = engine.connect()
+
+    # bind an individual Session to the connection
+    s = sessionmaker()
+    session = s(bind=connection)
+
+    try:
+        yield session
+        session.commit()
+    except:
+        session.rollback()
+        raise
+    finally:
+        session.close()
