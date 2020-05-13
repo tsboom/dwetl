@@ -1293,7 +1293,7 @@ ALTER TABLE public.dw_stg_1_ezp_sessns_snap OWNER TO usmai_dw;
 
 CREATE TABLE public.dw_stg_2_ezp_sessns_snap (
     in_mbr_lbry_cd character varying(2) NOT NULL,
-    t1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key character varying(2)
+    t1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key character varying(2),
     in_ezp_sessns_snap_tmstmp character varying(13) NOT NULL,
     t1_ezp_sessns_snap_tmstmp__ezp_sessns_snap_clndr_dt_dim_key bigint,
     t2_ezp_sessns_snap_tmstmp__ezp_sessns_snap_tmstmp timestamp without time zone,
