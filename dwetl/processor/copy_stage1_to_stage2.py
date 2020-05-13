@@ -1,6 +1,7 @@
 from dwetl.processor.processor import Processor
 import datetime
 import pdb
+import pprint
 
 
 class CopyStage1ToStage2(Processor):
@@ -39,7 +40,8 @@ class CopyStage1ToStage2(Processor):
                 new_key = 'in_' + key
 
             processed_item[new_key] = value
-
+            
+        pprint.pprint(processed_item)
         # Update metadata
         if self.aleph_library:
             processed_item['dw_stg_2_aleph_lbry_name'] = self.aleph_library
@@ -48,4 +50,7 @@ class CopyStage1ToStage2(Processor):
 
         processed_item.update(self.job_info.as_dict('create'))
         processed_item['em_create_tmstmp'] = datetime.datetime.now()
+        
+        print('\n\ncopy stage 1 stage 2')
+        pprint.pprint(processed_item)
         return processed_item
