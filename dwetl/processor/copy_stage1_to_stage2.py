@@ -5,8 +5,7 @@ import pdb
 
 class CopyStage1ToStage2(Processor):
     """
-    Processor for creating the file equivalent tables from
-    TSV files.
+    Processor for moving over FET values to in_ values in stage 2. 
 
     This processing step simply appends the job_info to the given
     item, and returns the resulting dictionary.
