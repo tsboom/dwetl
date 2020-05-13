@@ -1272,7 +1272,7 @@ ALTER TABLE public.dw_stg_1_mpf_mbr_lbry OWNER TO usmai_dw;
 
 CREATE TABLE public.dw_stg_1_ezp_sessns_snap (
     mbr_lbry_cd character varying(2) NOT NULL,
-    ezp_sessns_snap_tmstmp timestamp without time zone NOT NULL,
+    ezp_sessns_snap_tmstmp character varying(13) NOT NULL,
     ezp_sessns_snap_actv_sessns_cnt integer NOT NULL,
     ezp_sessns_virtual_hosts_cnt integer NOT NULL,
     em_create_dw_prcsng_cycle_id integer NOT NULL,
