@@ -48,13 +48,13 @@ class TestEzproxyProcessor(unittest.TestCase):
     
     def test_transform(self):
         result = EzproxyProcessor.transform(self.sample_data[0], self.logger)
-        expected_keys = sorted['em_create_dw_job_exectn_id', 'em_create_dw_job_name',
+        expected_keys = sorted(['em_create_dw_job_exectn_id', 'em_create_dw_job_name',
             'em_create_dw_job_version_no', 'em_create_dw_job_version_no', 'em_create_dw_prcsng_cycle_id', 
             'em_create_tmstmp','em_create_user_id', 't1_ezp_sessns_snap_actv_sessns_cnt', 
             't1_ezp_sessns_snap_clndr_dt_dim_key', 't1_ezp_sessns_virtual_hosts_cnt',
-            't1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key', 't2_ezp_sessns_snap_tmstmp__ezp_sessns_snap_tmstmp']
+            't1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key', 't2_ezp_sessns_snap_tmstmp__ezp_sessns_snap_tmstmp'])
         
-        self.assertEqual(expected_result, sorted[list(result.keys())])
+        self.assertEqual(expected_keys, sorted(list(result.keys())))
         self.assertEqual('CopyStage1ToStage2', results['em_create_dw_job_name'])
         self.assertEqual(20, results['t1_ezp_sessns_snap_actv_sessns_cnt'])
         self.assertEqual(14740, results['t1_ezp_sessns_snap_clndr_dt_dim_key'])

@@ -69,7 +69,7 @@ class EzproxyProcessor(Processor):
         return datetime_object
 
     @classmethod
-    def transform(cls, item):
+    def transform(cls, item, logger):
         """
         do the transformations for ez proxy data 
         """
@@ -97,8 +97,9 @@ class EzproxyProcessor(Processor):
                 
                     
     def process_item(self, item):
-        processed_item = EzproxyProcessor.transform(item, self.logger)
-        processed_item.update(self.job_info.as_dict('update'))
-        processed_item['em_update_dw_job_name'] = self.job_name()
-        processed_item['em_update_tmstmp'] = datetime.now()
+        processed_item = {}
+        # processed_item = EzproxyProcessor.transform(item, self.logger)
+        # processed_item.update(self.job_info.as_dict('update'))
+        # processed_item['em_update_dw_job_name'] = self.job_name()
+        # processed_item['em_update_tmstmp'] = datetime.now()
         return processed_item
