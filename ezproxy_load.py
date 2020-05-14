@@ -53,7 +53,7 @@ def intertable_processing(job_info, logger):
     
     with dwetl.database_session() as session:
         reader = SqlAlchemyReader(session, stage2_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
-        # writer = PrintWriter()
+        pdb.set_trace()
         writer = SqlAlchemyWriter(session, stage2_table)
         processor = EzproxyProcessor(reader, writer, job_info, logger)
         processor.execute()
