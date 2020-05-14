@@ -69,14 +69,13 @@ class EzproxyProcessor(Processor):
         return datetime_object
 
     @classmethod
-    def transform(cls, item, logger):
+    def transform(cls, item):
         """
         do the transformations for ez proxy data 
         """
         # dictionary to hold processed item
         out_dict = {}
-        
-        pdb.set_trace()
+    
         # process item
         for key, value in item.items():
             if key == "in_ezp_sessns_snap_tmstmp":
@@ -91,7 +90,7 @@ class EzproxyProcessor(Processor):
                 out_dict['t1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key'] = library_dim_key
             
             else:
-                target_col_name = column_name_parts('in_', 't1_')
+                target_col_name = key.replace('in_', 't1_')
                 out_dict[target_col_name] = value
                 
         return out_dict
@@ -102,5 +101,4 @@ class EzproxyProcessor(Processor):
         processed_item.update(self.job_info.as_dict('update'))
         processed_item['em_update_dw_job_name'] = self.job_name()
         processed_item['em_update_tmstmp'] = datetime.now()
-        pdb.set_trace()
         return processed_item
