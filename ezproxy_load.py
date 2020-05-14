@@ -48,7 +48,17 @@ def load_stage_2(job_info, logger):
         processor.execute()
     
 def intertable_processing(job_info, logger):
-    stuff
+    stage2_table = dwetl.Base.classes['dw_stg_2_ezp_sessns_snap']
+    processing_cycle_id = job_info.prcsng_cycle_id
+    
+    with dwetl.database_session() as session:
+        reader = SqlAlchemyReader(session, stage2_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
+        # writer = PrintWriter()
+        writer = SqlAlchemyWriter(session, stage2_table)
+        processor = EzproxyProcessor(reader, writer, job_info, logger)
+        processor.execute()
+    
+    
     
 # '''
 # TODO: be able to load stage 1 from the command line using this one script

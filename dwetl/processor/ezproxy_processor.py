@@ -25,11 +25,10 @@ class EzproxyProcessor(Processor):
         library_code = item['in_mbr_lbry_cd'].upper()
         
         
-        with dwetl.reporting_database_session() as session:
-            
-            MemberLibrary = dwetl.Base.classes.dim_mbr_lbry
+        with dwetl.reporting_database_session() as session2:
+            MemberLibrary = dwetl.ReportingBase.classes.dim_mbr_lbry
             # look up the mbr_lbry_dim_key 
-            matching_row = session.query(MemberLibrary).filter_by(mbr_lbry_cd=library_code).first()
+            matching_row = session2.query(MemberLibrary).filter_by(mbr_lbry_cd=library_code).first()
             mbr_lbry_dim_key = matching_row.mbr_lbry_dim_key
 
         return mbr_lbry_dim_key
@@ -46,11 +45,11 @@ class EzproxyProcessor(Processor):
         # need a string YYYY-MM-DD
         datestring = date.strftime('%Y-%m-%d')
         
-        with dwetl.reporting_database_session() as session:
+        with dwetl.reporting_database_session() as session2:
             
-            dim_date = dwetl.Base.classes.dim_date
+            dim_date = dwetl.ReportingBase.classes.dim_date
             # look up the mbr_lbry_dim_key 
-            matching_row = session.query(dim_date).filter_by(clndr_dt=datestring).first()
+            matching_row = session2.query(dim_date).filter_by(clndr_dt=datestring).first()
             
             clndr_dt_dim_key = matching_row.clndr_dt_dim_key
             

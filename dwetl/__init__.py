@@ -8,6 +8,9 @@ version = "1.0.0"
 
 Base = None
 
+# base 2 for reporting db lookups. also created session2
+ReportingBase = None
+
 @contextmanager
 def database_session():
     """
@@ -123,28 +126,28 @@ def reporting_database_session():
 
     :return: a database session for application use.
     """
-    global Base
+    global ReportingBase
     # See https://docs.sqlalchemy.org/en/13/orm/session_transaction.html
     db_settings = database_credentials.reporting_db_settings()
     engine = create_engine(db_settings['REPORTING_DB_CONNECTION_STRING'])
 
     # Populate Base class, if needed.
-    if Base is None:
-        Base = automap_base()
-        Base.prepare(engine, reflect=True)
+    if ReportingBase is None:
+        ReportingBase = automap_base()
+        ReportingBase.prepare(engine, reflect=True)
 
     # connect to the database
     connection = engine.connect()
 
     # bind an individual Session to the connection
     s = sessionmaker()
-    session = s(bind=connection)
+    session2 = s(bind=connection)
 
     try:
-        yield session
-        session.commit()
+        yield session2
+        session2.commit()
     except:
-        session.rollback()
+        session2.rollback()
         raise
     finally:
-        session.close()
+        session2.close()

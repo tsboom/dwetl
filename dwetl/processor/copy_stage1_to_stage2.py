@@ -41,7 +41,6 @@ class CopyStage1ToStage2(Processor):
 
             processed_item[new_key] = value
             
-        pprint.pprint(processed_item)
         # Update metadata
         if self.aleph_library:
             processed_item['dw_stg_2_aleph_lbry_name'] = self.aleph_library
