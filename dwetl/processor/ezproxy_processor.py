@@ -1,3 +1,4 @@
+import dwetl
 from dwetl.processor.processor import Processor
 from dwetl.reader.sql_alchemy_reader import SqlAlchemyReader
 from datetime import datetime
@@ -21,12 +22,14 @@ class EzproxyProcessor(Processor):
         using the mbr_lbry_cd, find the mbr_lbry_dim_key and put into 
         t1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key
         """
-        library_code = item['mbr_lbry_cd']
+        library_code = item['in_mbr_lbry_cd']
+        
         
         with dwetl.reporting_database_session() as session:
-            member_library_table = dwetl.Base.classes['dim_mbr_lbry']
+            pdb.set_trace()
+            MemberLibrary = dwetl.Base.classes.dim_mbr_lbry
             # look up the mbr_lbry_dim_key 
-            matching_row = session.query(member_library_table).filter_by(name=library_code).first()
+            matching_row = session.query(MemberLibrary).filter_by(name=library_code).first()
            
             mbr_lbry_dim_key = matching_row.mbr_lbry_dim_key
 
@@ -41,12 +44,12 @@ class EzproxyProcessor(Processor):
         
         
     @classmethod
-    def convert_tmstmp(cls, item):
+    def convert_timestamp(cls, item):
         """
         convert 20200509-0000 into a timestamp readable by SqlAlchemy (datetime)
         """
         timestamp = item['in_ezp_sessns_snap_tmstmp']
-        datetime_object = datetime.strptime(timestamp, '%Y%m%d-%H%M')
+        datetime_object = datetime.datetime.strptime(timestamp, '%Y%m%d-%H%M')
         
         return datetime_object
 
