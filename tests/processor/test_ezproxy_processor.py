@@ -56,7 +56,6 @@ class TestEzproxyProcessor(unittest.TestCase):
         ezproxy_processor.execute()
         
         results = ezproxy_processor.writer.list
-        pdb.set_trace()
 
         expected_result = []
         
