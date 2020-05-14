@@ -49,6 +49,11 @@ def run(input_file):
     
     
     '''
+    stg 2 intertable processing
+    '''
+    ezproxy_load.intertable_processing(job_info, logger)
+    
+    '''
     end of job metadata writing
     '''
 

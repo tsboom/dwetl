@@ -75,7 +75,9 @@ class TestEzproxyProcessor(unittest.TestCase):
             'em_create_dw_job_version_no', 'em_create_dw_prcsng_cycle_id', 
             'em_create_tmstmp','em_create_user_id', 't1_ezp_sessns_snap_actv_sessns_cnt', 
             't1_ezp_sessns_snap_clndr_dt_dim_key', 't1_ezp_sessns_virtual_hosts_cnt',
-            't1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key', 't2_ezp_sessns_snap_tmstmp__ezp_sessns_snap_tmstmp'])
+            't1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key', 't2_ezp_sessns_snap_tmstmp__ezp_sessns_snap_tmstmp',
+            'em_update_user_id', 'em_update_dw_prcsng_cycle_id', 'em_update_dw_job_exectn_id', 'em_update_dw_job_version_no', 
+            'em_update_dw_job_name', 'em_update_tmstmp'])
         
         self.assertEqual(expected_keys, sorted(list(results[0].keys())))
 
