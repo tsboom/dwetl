@@ -75,7 +75,7 @@ class EzproxyProcessor(Processor):
         """
         # dictionary to hold processed item
         out_dict = {}
-    
+        
         # process item
         for key, value in item.items():
             if key == "in_ezp_sessns_snap_tmstmp":
