@@ -59,6 +59,7 @@ class EzproxyProcessor(Processor):
         
     @classmethod
     def convert_timestamp(cls, item):
+
         """
         convert 20200509-0000 into a timestamp readable by SqlAlchemy (datetime)
         """
@@ -67,11 +68,39 @@ class EzproxyProcessor(Processor):
         
         return datetime_object
 
+    @classmethod
+    def transform(cls, item, logger):
+        """
+        do the transformations for ez proxy data 
+        """
+        # dictionary to hold processed item
+        out_dict = {}
         
-    def process_item(self, item):
         pdb.set_trace()
-        processed_item = {}
+        # process item
+        for key, value in item.items():
+            if key == "in_ezp_sessns_snap_tmstmp":
+                timestamp = EzproxyProcessor.convert_timestamp(item)
+                out_dict['t2_ezp_sessns_snap_tmstmp__ezp_sessns_snap_tmstmp'] = timestamp
+                
+                calendar_date_dim_key = EzproxyProcessor.clndr_dt_dim_lookup(item)
+                out_dict['t1_ezp_sessns_snap_clndr_dt_dim_key'] = calendar_date_dim_key
+                
+            elif key == "in_mbr_lbry_cd":
+                library_dim_key = EzproxyProcessor.library_dim_lookup(item)
+                out_dict['t1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key'] = library_dim_key
+            
+            else:
+                target_col_name = column_name_parts('in_', 't1_')
+                out_dict[target_col_name] = value
+                
+        return out_dict
+                
+                    
+    def process_item(self, item):
+        processed_item = EzproxyProcessor.transform(item, self.logger)
         processed_item.update(self.job_info.as_dict('update'))
         processed_item['em_update_dw_job_name'] = self.job_name()
         processed_item['em_update_tmstmp'] = datetime.now()
+        pdb.set_trace()
         return processed_item
