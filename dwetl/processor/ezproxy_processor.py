@@ -39,7 +39,22 @@ class EzproxyProcessor(Processor):
         """
         using the ezp_sessns_snap_tmstmp, get the calendar date, and look up clndr_dt_dim_key in dim_date
         """
+        timestamp = item['in_ezp_sessns_snap_tmstmp']
         
+        date = datetime.strptime(timestamp, '%Y%m%d-%H%M')
+        
+        # need a string YYYY-MM-DD
+        datestring = date.strftime('%Y-%m-%d')
+        
+        with dwetl.reporting_database_session() as session:
+            
+            dim_date = dwetl.Base.classes.dim_date
+            # look up the mbr_lbry_dim_key 
+            matching_row = session.query(dim_date).filter_by(clndr_dt=datestring).first()
+            
+            clndr_dt_dim_key = matching_row.clndr_dt_dim_key
+            
+        return clndr_dt_dim_key
         
         
     @classmethod
@@ -54,8 +69,9 @@ class EzproxyProcessor(Processor):
 
         
     def process_item(self, item):
-        processed_item = Preprocess.preprocess(item, self.json_config, self.stg2_pk_list)
+        pdb.set_trace()
+        processed_item = {}
         processed_item.update(self.job_info.as_dict('update'))
         processed_item['em_update_dw_job_name'] = self.job_name()
-        processed_item['em_update_tmstmp'] = datetime.datetime.now()
+        processed_item['em_update_tmstmp'] = datetime.now()
         return processed_item
