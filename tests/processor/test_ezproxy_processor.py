@@ -30,7 +30,7 @@ class TestEzproxyProcessor(unittest.TestCase):
         
         result = EzproxyProcessor.convert_timestamp(self.sample_data[0])
         
-        expected_result =  datetime.strptime('20200509-0000', '%Y%m%d-%H%M')
+        expected_result =  datetime.datetime.strptime('20200509-0000', '%Y%m%d-%H%M')
         
         self.assertEqual(expected_result, result)
         
@@ -39,4 +39,24 @@ class TestEzproxyProcessor(unittest.TestCase):
         expected_result = 10
         
         self.assertEqual(expected_result, result)
+        
+    def test_clndr_dt_dim_lookup(self):
+        result = EzproxyProcessor.clndr_dt_dim_lookup(self.sample_data[0])
+        expected_result = 14740
+        
+        self.assertEqual(expected_result, result)
+        
+    def test_end_to_end(self):
+        writer = ListWriter()
+        job_info = JobInfo(-1, 'test_user', '1', '1')
+        
+        reader = ListReader(self.sample_data[0])
+        
+        ezproxy_processor = EzproxyProcessor(reader, writer, job_info, self.logger)
+        ezproxy_processor.execute()
+        
+        results = ezproxy_processor.writer.list
+        pdb.set_trace()
+
+        expected_result = []
         
