@@ -1305,7 +1305,13 @@ CREATE TABLE public.dw_stg_2_ezp_sessns_snap (
     em_create_dw_job_name character varying(100) NOT NULL,
     em_create_dw_job_version_no character varying(20) NOT NULL,
     em_create_user_id character varying(20) NOT NULL,
-    em_create_tmstmp timestamp without time zone NOT NULL
+    em_create_tmstmp timestamp without time zone NOT NULL,
+    em_update_dw_prcsng_cycle_id integer,
+    em_update_dw_job_exectn_id integer,
+    em_update_dw_job_name character varying(100),
+    em_update_dw_job_version_no character varying(20),
+    em_update_user_id character varying(20),
+    em_update_tmstmp timestamp without time zone
 )
 WITH (autovacuum_enabled='true');
 
