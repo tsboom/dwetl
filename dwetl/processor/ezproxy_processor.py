@@ -77,26 +77,24 @@ class EzproxyProcessor(Processor):
         
         # process item
         for key, value in item.items():
-            
-            if key == '_sa_instance_state':
-                continue
-            if key == "in_ezp_sessns_snap_tmstmp":
-                timestamp = EzproxyProcessor.convert_timestamp(item)
-                out_dict['t2_ezp_sessns_snap_tmstmp__ezp_sessns_snap_tmstmp'] = timestamp
-
-                calendar_date_dim_key = EzproxyProcessor.clndr_dt_dim_lookup(item)
-                out_dict['t1_ezp_sessns_snap_clndr_dt_dim_key'] = calendar_date_dim_key
+            if key.startswith('in_'):
+                if key == '_sa_instance_state':
+                    continue
+                elif key == "in_ezp_sessns_snap_tmstmp":
+                    timestamp = EzproxyProcessor.convert_timestamp(item)
                 
-                pdb.set_trace()
+                    out_dict['t2_ezp_sessns_snap_tmstmp__ezp_sessns_snap_tmstmp'] = timestamp
 
-            elif key == "in_mbr_lbry_cd":
-                library_dim_key = EzproxyProcessor.library_dim_lookup(item)
-                out_dict['t1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key'] = library_dim_key
+                    calendar_date_dim_key = EzproxyProcessor.clndr_dt_dim_lookup(item)
+                    out_dict['t1_ezp_sessns_snap_tmstmp__ezp_sessns_snap_clndr_dt_dim_key'] = calendar_date_dim_key
 
-            else:
-                target_col_name = key.replace('in_', 't1_')
-                out_dict[target_col_name] = value
-                
+                elif key == "in_mbr_lbry_cd":
+                    library_dim_key = EzproxyProcessor.library_dim_lookup(item)
+                    out_dict['t1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key'] = library_dim_key
+
+                else:
+                    target_col_name = key.replace('in_', 't1_')
+                    out_dict[target_col_name] = value
         return out_dict
                 
                     
