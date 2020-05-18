@@ -77,10 +77,15 @@ class EzproxyProcessor(Processor):
         
         # process item
         for key, value in item.items():
+            if key == 'em_create_dw_prcsng_cycle_id':
+                out_dict[key] = value
             if key.startswith('in_'):
                 if key == '_sa_instance_state':
                     continue
                 elif key == "in_ezp_sessns_snap_tmstmp":
+                    # save value in pk
+                    out_dict[key] = value
+                
                     timestamp = EzproxyProcessor.convert_timestamp(item)
                 
                     out_dict['t2_ezp_sessns_snap_tmstmp__ezp_sessns_snap_tmstmp'] = timestamp
@@ -89,9 +94,9 @@ class EzproxyProcessor(Processor):
                     out_dict['t1_ezp_sessns_snap_tmstmp__ezp_sessns_snap_clndr_dt_dim_key'] = calendar_date_dim_key
 
                 elif key == "in_mbr_lbry_cd":
+                    out_dict[key] = value
                     library_dim_key = EzproxyProcessor.library_dim_lookup(item)
                     out_dict['t1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key'] = library_dim_key
-
                 else:
                     target_col_name = key.replace('in_', 't1_')
                     out_dict[target_col_name] = value
