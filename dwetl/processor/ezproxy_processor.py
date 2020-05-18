@@ -1,6 +1,7 @@
 import dwetl
 from dwetl.processor.processor import Processor
 from dwetl.reader.sql_alchemy_reader import SqlAlchemyReader
+from sqlalchemy import and_, func
 from datetime import datetime
 import pdb
 import pprint
@@ -17,7 +18,7 @@ class EzproxyProcessor(Processor):
         return 'EzproxyProcessor'
 
     @classmethod
-    def library_dim_lookup(cls, item):
+    def library_dim_lookup(cls, item, timestamp):
         """
         using the mbr_lbry_cd, find the mbr_lbry_dim_key and put into 
         t1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key
@@ -27,8 +28,13 @@ class EzproxyProcessor(Processor):
         
         with dwetl.reporting_database_session() as session2:
             MemberLibrary = dwetl.ReportingBase.classes.dim_mbr_lbry
+            
             # look up the mbr_lbry_dim_key 
-            matching_row = session2.query(MemberLibrary).filter_by(mbr_lbry_cd=library_code).first()
+            matching_row = session2.query(MemberLibrary).\
+                filter(MemberLibrary.mbr_lbry_cd==library_code).\
+                filter(func.date(MemberLibrary.rm_rec_effective_from_dt)<timestamp).\
+                filter(func.date(MemberLibrary.rm_rec_effective_to_dt)>timestamp).first()
+
             mbr_lbry_dim_key = matching_row.mbr_lbry_dim_key
 
         return mbr_lbry_dim_key
@@ -95,7 +101,7 @@ class EzproxyProcessor(Processor):
 
                 elif key == "in_mbr_lbry_cd":
                     out_dict[key] = value
-                    library_dim_key = EzproxyProcessor.library_dim_lookup(item)
+                    library_dim_key = EzproxyProcessor.library_dim_lookup(item, timestamp)
                     out_dict['t1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key'] = library_dim_key
                 else:
                     target_col_name = key.replace('in_', 't1_')
