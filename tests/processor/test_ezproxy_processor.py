@@ -70,6 +70,7 @@ class TestEzproxyProcessor(unittest.TestCase):
         ezproxy_processor.execute()
         
         results = ezproxy_processor.writer.list
+        pdb.set_trace()
         
         expected_keys = sorted(['em_create_dw_job_exectn_id', 'em_create_dw_job_name',
             'em_create_dw_job_version_no', 'em_create_dw_prcsng_cycle_id', 
