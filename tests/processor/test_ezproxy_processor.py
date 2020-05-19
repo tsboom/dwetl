@@ -1,5 +1,6 @@
 import unittest
 import datetime
+import dwetl
 from dwetl.reader.list_reader import ListReader
 from dwetl.writer.list_writer import ListWriter
 from dwetl.job_info import JobInfo
@@ -25,6 +26,8 @@ class TestEzproxyProcessor(unittest.TestCase):
                         'in_ezp_sessns_snap_tmstmp': '20200509-0000',
                         'in_ezp_sessns_virtual_hosts_cnt': 2718,
                         'in_mbr_lbry_cd': 'ub'}]
+                        
+        cls.session2 = dwetl.reporting_database_session()
         
     def test_convert_timestemp(self):
         
@@ -35,19 +38,22 @@ class TestEzproxyProcessor(unittest.TestCase):
         self.assertEqual(expected_result, result)
         
     def test_library_dim_lookup(self):
-        result = EzproxyProcessor.library_dim_lookup(self.sample_data[0])
+        result = EzproxyProcessor.library_dim_lookup(self.sample_data[0], self.session2)
         expected_result = 10
         
         self.assertEqual(expected_result, result)
         
+    # def test_library_dim_lookup_testdb(self):
+            
+        
     def test_clndr_dt_dim_lookup(self):
-        result = EzproxyProcessor.clndr_dt_dim_lookup(self.sample_data[0])
+        result = EzproxyProcessor.clndr_dt_dim_lookup(self.sample_data[0], self.session2)
         expected_result = 14740
         
         self.assertEqual(expected_result, result)
     
     def test_transform(self):
-        result = EzproxyProcessor.transform(self.sample_data[0], self.logger)
+        result = EzproxyProcessor.transform(self.sample_data[0], self.logger, self.session2)
         
         expected_keys = sorted([
             'em_create_dw_prcsng_cycle_id', 'in_ezp_sessns_snap_tmstmp',
