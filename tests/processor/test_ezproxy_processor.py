@@ -48,16 +48,19 @@ class TestEzproxyProcessor(unittest.TestCase):
     
     def test_transform(self):
         result = EzproxyProcessor.transform(self.sample_data[0], self.logger)
-        expected_keys = sorted(['em_create_dw_job_exectn_id', 'em_create_dw_job_name',
-            'em_create_dw_job_version_no', 'em_create_dw_prcsng_cycle_id', 
-            'em_create_tmstmp','em_create_user_id', 't1_ezp_sessns_snap_actv_sessns_cnt', 
-            't1_ezp_sessns_snap_clndr_dt_dim_key', 't1_ezp_sessns_virtual_hosts_cnt',
-            't1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key', 't2_ezp_sessns_snap_tmstmp__ezp_sessns_snap_tmstmp'])
+        
+        expected_keys = sorted([
+            'em_create_dw_prcsng_cycle_id', 'in_ezp_sessns_snap_tmstmp',
+            'in_mbr_lbry_cd',
+            't1_ezp_sessns_snap_actv_sessns_cnt', 
+            't1_ezp_sessns_snap_tmstmp__ezp_sessns_snap_clndr_dt_dim_key', 't1_ezp_sessns_virtual_hosts_cnt',
+            't1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key', 't2_ezp_sessns_snap_tmstmp__ezp_sessns_snap_tmstmp',
+            't3_ezp_sessns_snap_tmstmp__ezp_sessns_snap_time_of_day_dim_key'
+            ])
         
         self.assertEqual(expected_keys, sorted(list(result.keys())))
-        self.assertEqual('CopyStage1ToStage2', result['em_create_dw_job_name'])
         self.assertEqual(20, result['t1_ezp_sessns_snap_actv_sessns_cnt'])
-        self.assertEqual(14740, result['t1_ezp_sessns_snap_clndr_dt_dim_key'])
+        self.assertEqual(14740, result['t1_ezp_sessns_snap_tmstmp__ezp_sessns_snap_clndr_dt_dim_key'])
         self.assertEqual(2718, result['t1_ezp_sessns_virtual_hosts_cnt'])    
         self.assertEqual(10, result['t1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key'])
         self.assertEqual(datetime.datetime(2020, 5, 9, 0, 0), result['t2_ezp_sessns_snap_tmstmp__ezp_sessns_snap_tmstmp'])
@@ -70,14 +73,13 @@ class TestEzproxyProcessor(unittest.TestCase):
         ezproxy_processor.execute()
         
         results = ezproxy_processor.writer.list
-        pdb.set_trace()
         
-        expected_keys = sorted(['em_create_dw_job_exectn_id', 'em_create_dw_job_name',
-            'em_create_dw_job_version_no', 'em_create_dw_prcsng_cycle_id', 
-            'em_create_tmstmp','em_create_user_id', 't1_ezp_sessns_snap_actv_sessns_cnt', 
+        expected_keys = sorted([
+            't1_ezp_sessns_snap_actv_sessns_cnt', 
             't1_ezp_sessns_snap_clndr_dt_dim_key', 't1_ezp_sessns_virtual_hosts_cnt',
             't1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key', 't2_ezp_sessns_snap_tmstmp__ezp_sessns_snap_tmstmp',
-            'em_update_user_id', 'em_update_dw_prcsng_cycle_id', 'em_update_dw_job_exectn_id', 'em_update_dw_job_version_no', 
+            't3_ezp_sessns_snap_tmstmp__ezp_sessns_snap_time_of_day_dim_key','em_update_user_id', 'em_update_dw_prcsng_cycle_id', 
+            'em_update_dw_job_exectn_id', 'em_update_dw_job_version_no', 
             'em_update_dw_job_name', 'em_update_tmstmp'])
         
         self.assertEqual(expected_keys, sorted(list(results[0].keys())))
