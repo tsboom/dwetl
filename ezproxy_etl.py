@@ -54,8 +54,15 @@ def run(input_file):
     ezproxy_load.intertable_processing(job_info, logger)
     
     '''
+    fact table load
+    '''
+    ezproxy_load.load_fact_table(job_info, logger)
+    
+    
+    '''
     end of job metadata writing
     '''
+    
 
     endtime = datetime.datetime.now()
     # write end time to processing cycle table

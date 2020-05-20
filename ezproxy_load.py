@@ -10,6 +10,11 @@ from dwetl.writer.sql_alchemy_writer import SqlAlchemyWriter
 from dwetl.reader.sql_alchemy_reader import SqlAlchemyReader
 from dwetl.processor.copy_stage1_to_stage2 import CopyStage1ToStage2
 from dwetl.processor.ezproxy_processor import EzproxyProcessor
+from dwetl.processor.ezproxy_fact_processor import EzproxyFactProcessor
+import dwetl.database_credentials as database_credentials
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy import create_engine
 
 '''
 load EZ Proxy file equivalent table (Stage 1)
@@ -54,11 +59,25 @@ def intertable_processing(job_info, logger):
     with dwetl.database_session() as session:
         reader = SqlAlchemyReader(session, stage2_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
         writer = SqlAlchemyWriter(session, stage2_table)
-        with dwetl.reporting_database_session as session2:
-            processor = EzproxyProcessor(reader, writer, job_info, logger, session2)
+
+
+        processor = EzproxyProcessor(reader, writer, job_info, logger)
         processor.execute()
         
-
+def load_fact_table(job_info, logger):
+    stage2_table = dwetl.Base.classes['dw_stg_2_ezp_sessns_snap']
+    fact_table = dwetl.Base.classes['fact_ezp_sessns_snap']
+    processing_cycle_id = job_info.prcsng_cycle_id
+    
+    
+    
+    with dwetl.database_session() as session:
+        reader = SqlAlchemyReader(session, stage2_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
+        writer = SqlAlchemyWriter(session, fact_table)
+        processor = EzproxyFactProcessor(reader, writer, job_info, logger)
+        processor.execute()
+        
+    
     
     
     
