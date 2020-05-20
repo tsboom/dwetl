@@ -3109,7 +3109,7 @@ ALTER TABLE public.fact_lbry_item OWNER TO usmai_dw;
 --
 
 CREATE TABLE public.fact_ezp_sessns_snap (
-    ezp_sessns_snap_clndr_dst_dim_key bigint NOT NULL,
+    ezp_sessns_snap_clndr_dt_dim_key bigint NOT NULL,
     ezp_sessns_snap_mbr_lbry_dim_key bigint NOT NULL,
     ezp_sessns_snap_tmstmp timestamp without time zone NOT NULL,
     ezp_sessns_snap_actv_sessns_cnt int NOT NULL,
@@ -3132,6 +3132,7 @@ WITH (autovacuum_enabled='true');
 
 
 ALTER TABLE public.fact_ezp_sessns_snap OWNER TO usmai_dw;
+
 
 --
 -- Name: out_bib_rec_marc_rec_field; Type: TABLE; Schema: public; Owner: usmai_dw
@@ -3392,6 +3393,8 @@ ALTER TABLE ONLY public.fact_lbry_item
 
 ALTER TABLE ONLY public.fact_ezp_sessns_snap
     ADD CONSTRAINT indx_fact_ezp_sessns_snap_pk PRIMARY KEY (ezp_sessns_snap_fact_key);
+    
+
 
 --
 -- Name: out_bib_rec_marc_rec_field out_bib_rec_marc_rec_field_pk; Type: CONSTRAINT; Schema: public; Owner: usmai_dw

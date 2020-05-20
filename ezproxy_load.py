@@ -59,8 +59,6 @@ def intertable_processing(job_info, logger):
     with dwetl.database_session() as session:
         reader = SqlAlchemyReader(session, stage2_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
         writer = SqlAlchemyWriter(session, stage2_table)
-
-
         processor = EzproxyProcessor(reader, writer, job_info, logger)
         processor.execute()
         
@@ -68,9 +66,7 @@ def load_fact_table(job_info, logger):
     stage2_table = dwetl.Base.classes['dw_stg_2_ezp_sessns_snap']
     fact_table = dwetl.Base.classes['fact_ezp_sessns_snap']
     processing_cycle_id = job_info.prcsng_cycle_id
-    
-    
-    
+
     with dwetl.database_session() as session:
         reader = SqlAlchemyReader(session, stage2_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
         writer = SqlAlchemyWriter(session, fact_table)
