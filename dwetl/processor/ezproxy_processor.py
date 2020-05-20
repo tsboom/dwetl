@@ -17,8 +17,8 @@ class EzproxyProcessor(Processor):
     def job_name(self):
         return 'EzproxyProcessor'
         
-    @classmethod
-    def clndr_dt_dim_lookup(cls, item):
+    @staticmethod
+    def clndr_dt_dim_lookup(item):
         """
         using the ezp_sessns_snap_tmstmp, get the calendar date, and look up clndr_dt_dim_key in dim_date
         """
@@ -42,8 +42,8 @@ class EzproxyProcessor(Processor):
         return clndr_dt_dim_key
 
         
-    @classmethod
-    def time_of_day_dim_key_lookup(cls, item):
+    @staticmethod
+    def time_of_day_dim_key_lookup(item):
         """
         using ezp_sessns_snap_tmstmp
         get ezp_sessns_snap_time_of_day_dim_key
@@ -68,8 +68,8 @@ class EzproxyProcessor(Processor):
             time_dim_key = matching_row.time_of_day_dim_key  
         return time_dim_key
             
-    @classmethod
-    def library_dim_lookup(cls, item):
+    @staticmethod
+    def library_dim_lookup(item):
         """
         using the mbr_lbry_cd, find the mbr_lbry_dim_key and put into 
         t1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key
@@ -94,8 +94,8 @@ class EzproxyProcessor(Processor):
 
         return mbr_lbry_dim_key
         
-    @classmethod
-    def convert_timestamp(cls, item):
+    @staticmethod
+    def convert_timestamp(item):
 
         """
         convert 20200509-0000 into a timestamp readable by SqlAlchemy (datetime)
@@ -104,6 +104,7 @@ class EzproxyProcessor(Processor):
         datetime_object = datetime.strptime(timestamp, '%Y%m%d-%H%M')
         
         return datetime_object
+        
 
     @classmethod
     def transform(cls, item, logger):
