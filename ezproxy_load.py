@@ -15,6 +15,7 @@ import dwetl.database_credentials as database_credentials
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy import create_engine
+from sqlalchemy import func
 
 '''
 load EZ Proxy file equivalent table (Stage 1)
@@ -66,11 +67,20 @@ def load_fact_table(job_info, logger):
     stage2_table = dwetl.Base.classes['dw_stg_2_ezp_sessns_snap']
     fact_table = dwetl.Base.classes['fact_ezp_sessns_snap']
     processing_cycle_id = job_info.prcsng_cycle_id
+    
+    # get max value for fact key from the reporting db 
+    with dwetl.reporting_database_session() as session2:
+        fact_table = dwetl.ReportingBase.classes['fact_ezp_sessns_snap']
+        max_ezp_sessns_snap_fact_key = session2.query(func.max(fact_table.ezp_sessns_snap_fact_key)).scalar()
+        
+    if max_ezp_sessns_snap_fact_key is None:
+        max_ezp_sessns_snap_fact_key = 1    
 
+    # load etl ezp fact table
     with dwetl.database_session() as session:
         reader = SqlAlchemyReader(session, stage2_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
         writer = SqlAlchemyWriter(session, fact_table)
-        processor = EzproxyFactProcessor(reader, writer, job_info, logger)
+        processor = EzproxyFactProcessor(reader, writer, job_info, logger, max_ezp_sessns_snap_fact_key)
         processor.execute()
         
     
