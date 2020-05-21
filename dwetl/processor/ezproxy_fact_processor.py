@@ -19,20 +19,22 @@ class EzproxyFactProcessor(Processor):
         self.primary_keys = ['em_create_dw_prcsng_cycle_id', 'in_ezp_sessns_snap_tmstmp', 'in_mbr_lbry_cd']
         self.em_create_keys = ['em_create_dw_job_exectn_id', 'em_create_dw_job_name', 'em_create_dw_job_version_no', 'em_create_user_id', 'em_create_tmstmp']
         self.max_ezp_sessns_snap_fact_key = max_ezp_sessns_snap_fact_key
+        self.em_metadata_keys = ['em_update_dw_job_exectn_id', 'em_create_dw_job_version_no', 'em_update_user_id' ]
         
     def job_name(self):
         return 'EzproxyFactProcessor'
-        
+
+
     @classmethod
-    def create(cls, reader, writer, job_info, logger):
-        return EzproxyFactProcessor(reader, writer, job_info, logger)
+    def create(cls, reader, writer, job_info, logger, max_ezp_sessns_snap_fact_key):
+        return EzproxyFactProcessor(reader, writer, job_info, logger, max_ezp_sessns_snap_fact_key)
 
     def job_name(self):
         return 'EzproxyFactProcessor'
 
     def process_item(self, item):
         processed_item = {}
-        
+
         new_key = ''
         for key, value in item.items():
             if key in self.invalid_keys:
@@ -40,6 +42,8 @@ class EzproxyFactProcessor(Processor):
             if key in self.primary_keys:
                 processed_item[key] = value
             if key in self.em_create_keys:
+                processed_item[key] = value
+            if key in self.em_metadata_keys:
                 processed_item[key] = value
             if key.startswith('t'):
                 key_split =key.split('__')
@@ -51,7 +55,7 @@ class EzproxyFactProcessor(Processor):
                     new_key = '_'.join(target_col_name_list)
 
                 processed_item[new_key] = value
-        
+
         processed_item['em_update_dw_job_name'] = self.job_name()
 
         processed_item.update(self.job_info.as_dict('create'))
