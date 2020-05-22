@@ -8,7 +8,6 @@ from dwetl.reader.ezproxy_reader import EzproxyReader
 from dwetl.processor.load_aleph_tsv import LoadAlephTsv
 from dwetl.writer.sql_alchemy_writer import SqlAlchemyWriter
 from dwetl.reader.sql_alchemy_reader import SqlAlchemyReader
-from dwetl.reader.sql_alchemy_reader_debug import SqlAlchemyReaderDebug
 from dwetl.processor.ezproxy_processor import EzproxyProcessor
 from dwetl.processor.ezproxy_fact_processor import EzproxyFactProcessor
 from dwetl.processor.copy_stage1_to_stage2 import CopyStage1ToStage2
@@ -79,7 +78,7 @@ def load_fact_table(job_info, logger):
 
     # load etl ezp fact table
     with dwetl.database_session() as session:
-        reader = SqlAlchemyReaderDebug(session, stage2_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
+        reader = SqlAlchemyReader(session, stage2_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
         writer = SqlAlchemyWriter(session, fact_table)
         processor = EzproxyFactProcessor(reader, writer, job_info, logger, max_ezp_sessns_snap_fact_key)
         processor.execute()
@@ -88,35 +87,4 @@ def load_fact_table(job_info, logger):
     
     
     
-# '''
-# TODO: be able to load stage 1 from the command line using this one script
-# main function for running script from the command line
-# '''
-# if __name__ == '__main__':
-#     arguments = sys.argv
-# 
-#     if len(arguments) < 2 or len(arguments) > 3:
-#         print('Usage: ')
-#         print('\tezproxy_load.py [prcsng_cycle_id] [YYYYMMDD] ')
-#         sys.exit(1)
-# 
-#     today = datetime.datetime.now().strftime('%Y%m%d')
-#     prcsng_cycle_id = arguments[1]
-# 
-#     # give hint if --help
-#     if '--help' in arguments:
-#         print('Usage: ')
-#         print('\tezproxy_load.py [YYYYMMDD]')
-#         sys.exit(1)
-#     # if a date string is provided, load that date's ezproxy data
-#     if len(arguments) == 3:
-#         today = arguments[2]
-# 
-#     # put together filename from date
-#     filename = f"sessions.log.{today}"
-# 
-#     input_file = f'data/ezproxy/{filename}'
-# 
-#     job_info = JobInfoFactory.create_from_prcsng_cycle_id(prcsng_cycle_id)
-# 
-#     load_stage_1(job_info, input_file, logger)
+
