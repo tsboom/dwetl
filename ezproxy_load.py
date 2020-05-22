@@ -8,9 +8,10 @@ from dwetl.reader.ezproxy_reader import EzproxyReader
 from dwetl.processor.load_aleph_tsv import LoadAlephTsv
 from dwetl.writer.sql_alchemy_writer import SqlAlchemyWriter
 from dwetl.reader.sql_alchemy_reader import SqlAlchemyReader
-from dwetl.processor.copy_stage1_to_stage2 import CopyStage1ToStage2
+from dwetl.reader.sql_alchemy_reader_debug import SqlAlchemyReaderDebug
 from dwetl.processor.ezproxy_processor import EzproxyProcessor
 from dwetl.processor.ezproxy_fact_processor import EzproxyFactProcessor
+from dwetl.processor.copy_stage1_to_stage2 import CopyStage1ToStage2
 import dwetl.database_credentials as database_credentials
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.automap import automap_base
@@ -70,15 +71,15 @@ def load_fact_table(job_info, logger):
     
     # get max value for fact key from the reporting db 
     with dwetl.reporting_database_session() as session2:
-        fact_table = dwetl.ReportingBase.classes['fact_ezp_sessns_snap']
-        max_ezp_sessns_snap_fact_key = session2.query(func.max(fact_table.ezp_sessns_snap_fact_key)).scalar()
-        
+        reporting_fact_table = dwetl.ReportingBase.classes['fact_ezp_sessns_snap']
+        max_ezp_sessns_snap_fact_key = session2.query(func.max(reporting_fact_table.ezp_sessns_snap_fact_key)).scalar()
+    
     if max_ezp_sessns_snap_fact_key is None:
         max_ezp_sessns_snap_fact_key = 1    
 
     # load etl ezp fact table
     with dwetl.database_session() as session:
-        reader = SqlAlchemyReader(session, stage2_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
+        reader = SqlAlchemyReaderDebug(session, stage2_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
         writer = SqlAlchemyWriter(session, fact_table)
         processor = EzproxyFactProcessor(reader, writer, job_info, logger, max_ezp_sessns_snap_fact_key)
         processor.execute()
