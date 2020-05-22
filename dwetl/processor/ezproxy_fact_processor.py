@@ -34,7 +34,6 @@ class EzproxyFactProcessor(Processor):
 
     def process_item(self, item):
         processed_item = {}
-
         new_key = ''
         for key, value in item.items():
             if key in self.invalid_keys:
@@ -61,10 +60,18 @@ class EzproxyFactProcessor(Processor):
         processed_item.update(self.job_info.as_dict('create'))
         processed_item['em_update_tmstmp'] = datetime.datetime.now()
 
+
         #self.max_ezp_sessns_snap_fact_key = self.max_ezp_sessns_snap_fact_key + 1
         #ezp_essns_snap_fact_key = self.max_ezp_sessns_snap_fact_key
 
         #processed_item['ezp_sessns_snap_fact_key'] = ezp_essns_snap_fact_key
+
+        self.max_ezp_sessns_snap_fact_key = self.max_ezp_sessns_snap_fact_key + 1
+        ezp_essns_snap_fact_key = self.max_ezp_sessns_snap_fact_key   
+        
+        processed_item['ezp_sessns_snap_fact_key'] = ezp_essns_snap_fact_key
+
         pprint.pprint(item)
         pprint.pprint(processed_item)
         return processed_item
+
