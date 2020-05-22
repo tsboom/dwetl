@@ -20,7 +20,7 @@ class EzproxyFactProcessor(Processor):
         self.em_create_keys = ['em_create_dw_job_exectn_id', 'em_create_dw_job_name', 'em_create_dw_job_version_no', 'em_create_user_id', 'em_create_tmstmp']
         self.max_ezp_sessns_snap_fact_key = max_ezp_sessns_snap_fact_key
         self.em_metadata_keys = ['em_update_dw_job_exectn_id', 'em_create_dw_job_version_no', 'em_update_user_id' ]
-        
+
     def job_name(self):
         return 'EzproxyFactProcessor'
 
@@ -61,10 +61,10 @@ class EzproxyFactProcessor(Processor):
         processed_item.update(self.job_info.as_dict('create'))
         processed_item['em_update_tmstmp'] = datetime.datetime.now()
 
-        self.max_ezp_sessns_snap_fact_key = self.max_ezp_sessns_snap_fact_key + 1
-        ezp_essns_snap_fact_key = self.max_ezp_sessns_snap_fact_key   
-        
-        processed_item['ezp_sessns_snap_fact_key'] = ezp_essns_snap_fact_key
+        #self.max_ezp_sessns_snap_fact_key = self.max_ezp_sessns_snap_fact_key + 1
+        #ezp_essns_snap_fact_key = self.max_ezp_sessns_snap_fact_key
+
+        #processed_item['ezp_sessns_snap_fact_key'] = ezp_essns_snap_fact_key
         pprint.pprint(item)
         pprint.pprint(processed_item)
         return processed_item
