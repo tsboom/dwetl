@@ -102,6 +102,7 @@ def copy_new_facts_to_reporting_db(job_info, logger):
         for record in new_fact_records:
             try:
                 session2.add(record)
+                session2.commit()
             except exc.SQLAlchemyError as e:
                 print(e)
                 session2.rollback()
