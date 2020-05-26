@@ -25,7 +25,7 @@ load EZ Proxy file equivalent table (Stage 1)
 def load_stage_1(job_info, input_file, logger):
     print('EZProxy Loading stage 1...')
     logger.info('EZ Proxy Loading stage 1...')
-    
+
     table = 'dw_stg_1_ezp_sessns_snap'
 
     with dwetl.database_session() as session:
@@ -40,9 +40,9 @@ def load_stage_1(job_info, input_file, logger):
 def load_stage_2(job_info, logger):
     print('EZProxy Loading stage 2...')
     logger.info('EZProxy Loading stage 2...')
-    
+
     processing_cycle_id = job_info.prcsng_cycle_id
-    
+
     with dwetl.database_session() as session:
         stage1_table_class = dwetl.Base.classes["dw_stg_1_ezp_sessns_snap"]
         stage2_table_class = dwetl.Base.classes["dw_stg_2_ezp_sessns_snap"]
@@ -52,29 +52,33 @@ def load_stage_2(job_info, logger):
         library = ''
         processor = CopyStage1ToStage2.create(reader, writer, job_info, logger, library)
         processor.execute()
-    
+    logger.info('Finished EZProxy loading stage 2 .... ')
+
 def intertable_processing(job_info, logger):
+    logger.info('EZProxy intertable processing starts...')
     stage2_table = dwetl.Base.classes['dw_stg_2_ezp_sessns_snap']
     processing_cycle_id = job_info.prcsng_cycle_id
-    
+
     with dwetl.database_session() as session:
         reader = SqlAlchemyReader(session, stage2_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
         writer = SqlAlchemyWriter(session, stage2_table)
         processor = EzproxyProcessor(reader, writer, job_info, logger)
         processor.execute()
-        
+    logger.info('Finished EZProxy intertable processing .... ')
+
 def load_fact_table(job_info, logger):
+    logger.info('Loading to the fact table.... ')
     stage2_table = dwetl.Base.classes['dw_stg_2_ezp_sessns_snap']
     fact_table = dwetl.Base.classes['fact_ezp_sessns_snap']
     processing_cycle_id = job_info.prcsng_cycle_id
-    
-    # get max value for fact key from the reporting db 
+
+    # get max value for fact key from the reporting db
     with dwetl.reporting_database_session() as session2:
         reporting_fact_table = dwetl.ReportingBase.classes['fact_ezp_sessns_snap']
         max_ezp_sessns_snap_fact_key = session2.query(func.max(reporting_fact_table.ezp_sessns_snap_fact_key)).scalar()
-    
+
     if max_ezp_sessns_snap_fact_key is None:
-        max_ezp_sessns_snap_fact_key = 1    
+        max_ezp_sessns_snap_fact_key = 1
 
     # load etl ezp fact table
     with dwetl.database_session() as session:
@@ -82,9 +86,4 @@ def load_fact_table(job_info, logger):
         writer = SqlAlchemyWriter(session, fact_table)
         processor = EzproxyFactProcessor(reader, writer, job_info, logger, max_ezp_sessns_snap_fact_key)
         processor.execute()
-        
-    
-    
-    
-    
-
+    logger.info('Finished loading to the fact table.... ')
