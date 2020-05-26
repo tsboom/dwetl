@@ -60,6 +60,11 @@ def run(input_file):
     
     
     '''
+    copy new ezproxy data to reporting database 
+    '''
+    ezproxy_load.copy_new_facts_to_reporting_db(job_info, logger)
+    
+    '''
     end of job metadata writing
     '''
     
@@ -74,7 +79,7 @@ def run(input_file):
             update({'dw_prcsng_cycle_exectn_end_tmstmp': endtime})
 
     elapsed_time = endtime - time_started
-    print("elapsed time: ", str(elapsed_time))
+    print("Ezproxy ETL elapsed time: ", str(elapsed_time))
 
 
 

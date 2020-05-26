@@ -16,6 +16,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy import create_engine
 from sqlalchemy import func
+import pprint
 
 '''
 load EZ Proxy file equivalent table (Stage 1)
@@ -83,6 +84,32 @@ def load_fact_table(job_info, logger):
         processor = EzproxyFactProcessor(reader, writer, job_info, logger, max_ezp_sessns_snap_fact_key)
         processor.execute()
         
+    
+def copy_new_facts_to_reporting_db(job_info, logger):
+    etl_fact_table = dwetl.Base.classes['fact_ezp_sessns_snap']
+    processing_cycle_id = job_info.prcsng_cycle_id
+    
+    # query and select records from etl fact table 
+    # should we use the create update processing cycle ID? or the Update processing cycle id?
+    with dwetl.database_session() as session:
+        new_fact_records = session.query(etl_fact_table).filter(etl_fact_table.em_update_dw_prcsng_cycle_id==processing_cycle_id).all()
+        session.expunge_all()
+        
+    # insert records into reporting db ezp fact table
+    with dwetl.reporting_database_session() as session2:
+        reporting_fact_table = dwetl.ReportingBase.classes['fact_ezp_sessns_snap']
+        
+        for record in new_fact_records:
+            try:
+                session2.add(record)
+            except exc.SQLAlchemyError as e:
+                print(e)
+                session2.rollback()
+
+
+        
+
+    
     
     
     
