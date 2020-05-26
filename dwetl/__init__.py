@@ -124,7 +124,7 @@ def reporting_database_session():
     Sample Usage:
 
       with dwetl.reporting_database_session() as session:
-         <Access datatabase>
+         <Access database>
 
     :return: a database session for application use.
     """
