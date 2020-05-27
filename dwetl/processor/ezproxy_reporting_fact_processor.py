@@ -42,10 +42,10 @@ class EzproxyReportingFactProcessor(Processor):
         processed_item['rm_rec_effective_to_dt'] = "9999-12-31"
         processed_item['rm_rec_effective_from_dt'] = item['ezp_sessns_snap_tmstmp']
         
-        processed_item['em_update_dw_job_name'] = self.job_name()
+        processed_item['em_create_dw_job_name'] = self.job_name()
 
-        processed_item.update(self.job_info.as_dict('update'))
-        processed_item['em_update_tmstmp'] = datetime.datetime.now()
+        processed_item.update(self.job_info.as_dict('create'))
+        processed_item['em_create_tmstmp'] = datetime.datetime.now()
         
         return processed_item
 

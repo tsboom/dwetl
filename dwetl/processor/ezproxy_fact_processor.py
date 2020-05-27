@@ -35,8 +35,7 @@ class EzproxyFactProcessor(Processor):
                 continue
             if key in self.primary_keys:
                 processed_item[key] = value
-            if key in self.em_create_keys:
-                processed_item[key] = value
+            # only process t_ columns
             if key.startswith('t'):
                 key_split =key.split('__')
                 # get target col name from transform
@@ -48,10 +47,10 @@ class EzproxyFactProcessor(Processor):
 
                 processed_item[new_key] = value
 
-        processed_item['em_update_dw_job_name'] = self.job_name()
+        processed_item['em_create_dw_job_name'] = self.job_name()
 
-        processed_item.update(self.job_info.as_dict('update'))
-        processed_item['em_update_tmstmp'] = datetime.datetime.now()
+        processed_item.update(self.job_info.as_dict('create'))
+        processed_item['em_create_tmstmp'] = datetime.datetime.now()
 
         self.max_ezp_sessns_snap_fact_key = self.max_ezp_sessns_snap_fact_key + 1
         ezp_essns_snap_fact_key = self.max_ezp_sessns_snap_fact_key   
