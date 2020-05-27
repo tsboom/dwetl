@@ -151,6 +151,7 @@ def reporting_database_session():
         yield session2
         session2.commit()
     except:
+        # log sqlalchemy error
         session2.rollback()
         raise
     finally:
