@@ -99,46 +99,23 @@ def copy_new_facts_to_reporting_db(job_info, logger):
     # should we use the create update processing cycle ID? or the Update processing cycle id?
     with dwetl.database_session() as session:
         reader = SqlAlchemyReader(session, etl_fact_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
-        # new_fact_records = session.query(etl_fact_table).filter(etl_fact_table.em_update_dw_prcsng_cycle_id==processing_cycle_id).all()
         session.expunge_all()
 
     # insert records into reporting db ezp fact table
     with dwetl.reporting_database_session() as session2:
         reporting_fact_table = dwetl.ReportingBase.classes['fact_ezp_sessns_snap']
-        columns = reporting_fact_table.__table__.columns.keys()
-
-        # iterate over query results from dw fact table
-        for record in new_fact_records:
-            record_dict = record.__dict__
-
-            relevant_row_dict = {}
-
-            #add record metadata
-            relevant_row_dict['rm_rec_type_cd'] = "R"
-            relevant_row_dict['rm_current_rec_flag'] = "Y"
-            relevant_row_dict['rm_rec_version_no'] = "1"
-            relevant_row_dict['rm_rec_type_desc'] = "Regular Fact Record"
-            relevant_row_dict['rm_rec_effective_to_dt'] = "9999-12-31"
-            relevant_row_dict['rm_rec_effective_from_dt'] = record_dict['ezp_sessns_snap_tmstmp']
-
-            # only add the keys and values relevant to the table
-            for key, val in record_dict.items():
-                if key in reporting_fact_table.__table__.columns.keys():
-                    relevant_row_dict[key] = val
-            sa_record = reporting_fact_table(**relevant_row_dict)
-            session2.add(sa_record)
         writer = SqlAlchemyWriter(session2, reporting_fact_table)
         processor = EzproxyReportingFactProcessor(reader, writer, job_info, logger)
         processor.execute()
         
         # columns = reporting_fact_table.__table__.columns.keys()
-        # 
-        # 
+        #
+        #
         # for record in new_fact_records:
         #     record_dict = record.__dict__
-        # 
+        #
         #     relevant_row_dict = {}
-        # 
+        #
         #     #add record metadata
         #     relevant_row_dict['rm_rec_type_cd'] = "R"
         #     relevant_row_dict['rm_current_rec_flag'] = "Y"
@@ -146,18 +123,10 @@ def copy_new_facts_to_reporting_db(job_info, logger):
         #     relevant_row_dict['rm_rec_type_desc'] = "Regular Fact Record"
         #     relevant_row_dict['rm_rec_effective_to_dt'] = "9999-12-31"
         #     relevant_row_dict['rm_rec_effective_from_dt'] = record_dict['ezp_sessns_snap_tmstmp']
-        # 
+        #
         #     # only add the keys and values relevant to the table
         #     for key, val in record_dict.items():
         #         if key in reporting_fact_table.__table__.columns.keys():
         #             relevant_row_dict[key] = val
         #     sa_record = reporting_fact_table(**relevant_row_dict)
         #     session2.add(sa_record)
-    
-
-        
-
-    
-    
-    
-  

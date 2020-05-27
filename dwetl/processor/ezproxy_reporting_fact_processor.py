@@ -33,19 +33,16 @@ class EzproxyReportingFactProcessor(Processor):
                 continue
             else:
                 processed_item[key] = value
-        
-        # add rm metadata 
+        # add rm metadata
         processed_item['rm_rec_type_cd'] = "R"
         processed_item['rm_current_rec_flag'] = "Y"
         processed_item['rm_rec_version_no'] = "1"
         processed_item['rm_rec_type_desc'] = "Regular Fact Record"
         processed_item['rm_rec_effective_to_dt'] = "9999-12-31"
         processed_item['rm_rec_effective_from_dt'] = item['ezp_sessns_snap_tmstmp']
-        
+
         processed_item['em_create_dw_job_name'] = self.job_name()
 
         processed_item.update(self.job_info.as_dict('create'))
         processed_item['em_create_tmstmp'] = datetime.datetime.now()
-        
         return processed_item
-
