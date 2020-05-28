@@ -36,8 +36,6 @@ class TestEzproxyFactProcessor(unittest.TestCase):
                         'in_mbr_lbry_cd': 'ub'}]
 
     def test_process_item(self):
-        #result = EzproxyFactProcessor.process_item(self, self.sample_data[0])
-        #max_ezp_sessns_snap_fact_key = 1
         writer = ListWriter()
         job_info = JobInfo(-1, 'test_user', '1', '1')
         reader = ListReader(self.sample_data)
@@ -49,13 +47,7 @@ class TestEzproxyFactProcessor(unittest.TestCase):
             'em_create_dw_job_exectn_id', 'em_create_dw_job_name', 'em_create_dw_job_version_no','em_update_tmstmp',
             'em_create_user_id', 'em_create_tmstmp', 'em_update_dw_job_name', 'ezp_sessns_snap_fact_key'
             ])
-        #em_update_tmstmp, em_update_user_id, em_update_dw_job_exectn_id
-        import pdb; pdb.set_trace()
-        #self.assertEqual(expected_keys, result)
+
         self.assertEqual(expected_keys, sorted(list(results[0].keys())))
 
 
-    def job_name(self):
-        return 'EzproxyFactProcessor'
-
-#E       AssertionError: ['em_create_dw_job_exectn_id', 'em_create[244 chars]_cd'] != dict_keys(['em_create_dw_job_exectn_id', [244 chars]ey'])

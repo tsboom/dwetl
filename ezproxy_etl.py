@@ -80,6 +80,7 @@ def run(input_file):
 
     elapsed_time = endtime - time_started
     print("Ezproxy ETL elapsed time: ", str(elapsed_time))
+    logger.info(f'EzProxy ETL elapsed time: {str(elapsed_time)}')
 
 
 
@@ -104,7 +105,7 @@ if __name__=='__main__':
     if len(arguments) == 2:
         today = arguments[1]
         
-    # put together filename from date 
+    # otherwise process today's date, put together filename from date 
     filename = f"sessions.log.{today}"
     # input_directory = f'data/{today}/'
     input_directory = f'data/ezproxy/'

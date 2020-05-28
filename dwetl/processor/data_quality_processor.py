@@ -139,7 +139,7 @@ class DataQualityProcessor(Processor):
 
                             dq_exception_count = dq_exception_count + 1
                             out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
-                            pdb.set_trace()
+
                             if data_quality_info.suspend_record:
                                 
                                 logger.error(f'\t{dq_key} with value of {val} failed {data_quality_info.type}. SUSPENDED')
