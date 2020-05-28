@@ -86,6 +86,14 @@ class TestEzproxyReportingFactProcessor(unittest.TestCase):
          'rm_rec_type_desc',
          'rm_rec_version_no'
         ])
-        #self.assertEqual(20, result['t1_ezp_sessns_snap_actv_sessns_cnt'])
+
+        self.assertEqual(None, results[0]['em_update_dw_job_exectn_id'])
+        self.assertEqual(None, results[0]['em_update_dw_job_name'])
+        self.assertEqual(None, results[0]['em_update_dw_job_version_no'])
+        self.assertEqual(None, results[0]['em_update_dw_prcsng_cycle_id'])
+        self.assertEqual(None, results[0]['em_update_reason_txt'])
+        self.assertEqual(None, results[0]['em_update_tmstmp'])
+        self.assertEqual(None, results[0]['em_update_user_id'])
+        self.assertEqual('EzproxyReportingFactProcessor', results[0]['em_create_dw_job_name'])
 
         self.assertEqual(expected_keys, sorted(list(results[0].keys())))
