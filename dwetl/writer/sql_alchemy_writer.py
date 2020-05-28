@@ -54,4 +54,5 @@ class SqlAlchemyWriter(Writer):
                 self.session.add(record)
 
         except exc.SQLAlchemyError as e:
+            print(e)
             self.session.rollback()

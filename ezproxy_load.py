@@ -108,25 +108,3 @@ def copy_new_facts_to_reporting_db(job_info, logger):
         processor = EzproxyReportingFactProcessor(reader, writer, job_info, logger)
         processor.execute()
         
-        # columns = reporting_fact_table.__table__.columns.keys()
-        #
-        #
-        # for record in new_fact_records:
-        #     record_dict = record.__dict__
-        #
-        #     relevant_row_dict = {}
-        #
-        #     #add record metadata
-        #     relevant_row_dict['rm_rec_type_cd'] = "R"
-        #     relevant_row_dict['rm_current_rec_flag'] = "Y"
-        #     relevant_row_dict['rm_rec_version_no'] = "1"
-        #     relevant_row_dict['rm_rec_type_desc'] = "Regular Fact Record"
-        #     relevant_row_dict['rm_rec_effective_to_dt'] = "9999-12-31"
-        #     relevant_row_dict['rm_rec_effective_from_dt'] = record_dict['ezp_sessns_snap_tmstmp']
-        #
-        #     # only add the keys and values relevant to the table
-        #     for key, val in record_dict.items():
-        #         if key in reporting_fact_table.__table__.columns.keys():
-        #             relevant_row_dict[key] = val
-        #     sa_record = reporting_fact_table(**relevant_row_dict)
-        #     session2.add(sa_record)

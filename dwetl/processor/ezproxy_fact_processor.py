@@ -51,11 +51,10 @@ class EzproxyFactProcessor(Processor):
 
         processed_item.update(self.job_info.as_dict('create'))
         processed_item['em_create_tmstmp'] = datetime.datetime.now()
-
-        self.max_ezp_sessns_snap_fact_key = self.max_ezp_sessns_snap_fact_key + 1
+        
         ezp_essns_snap_fact_key = self.max_ezp_sessns_snap_fact_key   
         
         processed_item['ezp_sessns_snap_fact_key'] = ezp_essns_snap_fact_key
-        
+        self.max_ezp_sessns_snap_fact_key = self.max_ezp_sessns_snap_fact_key + 1
         return processed_item
 
