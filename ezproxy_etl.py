@@ -2,6 +2,8 @@ import dwetl
 import datetime
 import os
 import sys
+from dotenv import load_dotenv
+load_dotenv()
 import logging
 import sqlalchemy
 from dwetl.job_info import JobInfoFactory, JobInfo
@@ -108,9 +110,10 @@ if __name__=='__main__':
     # otherwise process today's date, put together filename from date 
     filename = f"sessions.log.{today}"
     # input_directory = f'data/{today}/'
-    input_directory = f'data/ezproxy/'
     
-    input_file = f'data/ezproxy/{filename}'
+    input_directory = os.getenv("EZPROXY_INPUT_DIRECTORY")
+    
+    input_file = input_directory + filename
 
     run(input_file)
 
