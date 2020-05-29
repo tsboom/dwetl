@@ -44,8 +44,8 @@ class TestEzproxyFactProcessor(unittest.TestCase):
         results = ezproxy_fact_processor.writer.list
         expected_keys = sorted([
             'em_create_dw_prcsng_cycle_id', 'in_ezp_sessns_snap_tmstmp', 'in_mbr_lbry_cd',
-            'em_create_dw_job_exectn_id', 'em_create_dw_job_name', 'em_create_dw_job_version_no','em_update_tmstmp',
-            'em_create_user_id', 'em_create_tmstmp', 'em_update_dw_job_name', 'ezp_sessns_snap_fact_key'
+            'em_create_dw_job_exectn_id', 'em_create_dw_job_name', 'em_create_dw_job_version_no',
+            'em_create_user_id', 'em_create_tmstmp',  'ezp_sessns_snap_fact_key'
             ])
 
         self.assertEqual(expected_keys, sorted(list(results[0].keys())))
