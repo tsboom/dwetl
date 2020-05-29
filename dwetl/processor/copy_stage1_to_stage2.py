@@ -1,12 +1,12 @@
 from dwetl.processor.processor import Processor
 import datetime
 import pdb
+import pprint
 
 
 class CopyStage1ToStage2(Processor):
     """
-    Processor for creating the file equivalent tables from
-    TSV files.
+    Processor for moving over FET values to in_ values in stage 2. 
 
     This processing step simply appends the job_info to the given
     item, and returns the resulting dictionary.
@@ -40,7 +40,7 @@ class CopyStage1ToStage2(Processor):
                 new_key = 'in_' + key
 
             processed_item[new_key] = value
-
+            
         # Update metadata
         if self.aleph_library:
             processed_item['dw_stg_2_aleph_lbry_name'] = self.aleph_library
@@ -49,4 +49,5 @@ class CopyStage1ToStage2(Processor):
 
         processed_item.update(self.job_info.as_dict('create'))
         processed_item['em_create_tmstmp'] = datetime.datetime.now()
+        
         return processed_item

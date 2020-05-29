@@ -16,6 +16,7 @@ class Processor:
     def execute(self):
         for row_dict in self.reader:
             processed_row_dict = self.process_item(row_dict)
+            
             if processed_row_dict:
                 self.writer.write_row(processed_row_dict)
 

@@ -88,7 +88,7 @@ def reset_database(context, db_host, db_port, db_user, db_password):
         ask_for_confirmation = False
 
     if ask_for_confirmation:
-        confirm = input(f"Are you sure you want to reset {db_host}:{db_port}? ")
+        confirm = input(f"Are you sure you want to reset {db_host}:{db_port}? (y/n) ")
         confirm = confirm.lower()
         if not((confirm == 'y') or (confirm == 'yes')):
             print("Database has not been reset.")

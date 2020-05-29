@@ -15,6 +15,7 @@ class SqlAlchemyWriter(Writer):
         """
         self.session = session
         self.table_base_class = table_base_class
+        
 
     def write_row(self, row_dict):
         try:
@@ -25,7 +26,6 @@ class SqlAlchemyWriter(Writer):
             for key, val in row_dict.items():
                 columns = self.table_base_class.__table__.columns.keys()
                 if key in columns:
-                    #pdb.set_trace()
                     relevant_row_dict[key] = val
 
             record = self.table_base_class(**relevant_row_dict)
