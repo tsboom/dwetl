@@ -96,7 +96,9 @@ main function for running script from the command line
 if __name__=='__main__':
     arguments = sys.argv
 
-    today = datetime.datetime.now().strftime('%Y%m%d')
+    today = datetime.datetime.now()
+    yesterday = today - datetime.timedelta(days=1)
+    day_to_process = yesterday.strftime('%Y%m%d')
     
     # give hint if --help
     if '--help' in arguments:
@@ -108,8 +110,7 @@ if __name__=='__main__':
         today = arguments[1]
         
     # otherwise process today's date, put together filename from date 
-    filename = f"sessions.log.{today}"
-    # input_directory = f'data/{today}/'
+    filename = f"sessions.log.{day_to_process}"
     
     input_directory = os.getenv("EZPROXY_INPUT_DIRECTORY")
     

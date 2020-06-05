@@ -1,6 +1,7 @@
 #! /bin/bash
 
 # enter python virtual environment
+cd /apps/dwetl
 source venv/bin/activate; 
 
 # run ezproxy_etl for the current day
