@@ -107,7 +107,7 @@ if __name__=='__main__':
         sys.exit(1)
     # if a date string is provided, load that date's ezproxy data
     if len(arguments) == 2:
-        today = arguments[1]
+        day_to_process = arguments[1]
         
     # otherwise process today's date, put together filename from date 
     filename = f"sessions.log.{day_to_process}"
