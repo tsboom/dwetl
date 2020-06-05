@@ -46,7 +46,7 @@ def database_session():
     # bind an individual Session to the connection
     s = sessionmaker()
     session = s(bind=connection)
-    print('db connection opened')
+    # print('db connection opened')
 
     try:
         yield session
@@ -56,7 +56,7 @@ def database_session():
         raise
     finally:
         session.close()
-        print('\n\ndb session closed\n\n')
+        # print('\n\ndb session closed\n\n')
 
 @contextmanager
 def test_database_session():
@@ -145,7 +145,7 @@ def reporting_database_session():
     # bind an individual Session to the connection
     s = sessionmaker()
     session2 = s(bind=connection)
-    print('reporting db connection opened')
+    # print('reporting db connection opened')
 
     try:
         yield session2
@@ -156,7 +156,7 @@ def reporting_database_session():
         raise
     finally:
         session2.close()
-        print('\n\nreporting db session closed\n\n')
+        # print('\n\nreporting db session closed\n\n')
         connection.close()
-        print('\n\nconnection closed\n\n')
+        # print('\n\nconnection closed\n\n')
     
