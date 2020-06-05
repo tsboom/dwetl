@@ -139,7 +139,7 @@ def reporting_database_session():
         ReportingBase.prepare(engine, reflect=True)
 
     # connect to the database
-    print('connection started')
+    # print('connection started')
     connection = engine.connect()
 
     # bind an individual Session to the connection
