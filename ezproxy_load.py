@@ -57,6 +57,7 @@ def load_stage_2(job_info, logger):
     logger.info('Finished EZProxy loading stage 2 .... ')
 
 def intertable_processing(job_info, logger):
+    print('EZProxy transformations started...')
     logger.info('EZProxy intertable processing starts...')
     stage2_table = dwetl.Base.classes['dw_stg_2_ezp_sessns_snap']
     processing_cycle_id = job_info.prcsng_cycle_id
@@ -69,6 +70,7 @@ def intertable_processing(job_info, logger):
     logger.info('Finished EZProxy intertable processing .... ')
 
 def load_fact_table(job_info, logger):
+    print('EZProxy loading fact table...')
     logger.info('Loading to the fact table.... ')
     stage2_table = dwetl.Base.classes['dw_stg_2_ezp_sessns_snap']
     fact_table = dwetl.Base.classes['fact_ezp_sessns_snap']
