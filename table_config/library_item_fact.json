@@ -1,0 +1,669 @@
+{
+    "fields": [
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "N/A",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "Use sequential counter",
+                "action_specific": "N/A",
+                "aleph_table": "N/A",
+                "chg_proc_type": "N/A",
+                "source_col_name": "N/A",
+                "source_data_type": "N/A",
+                "source_format": "N/A",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
+                "transform_action": "Generate"
+            },
+            "target_attribute": "- Library Item Fact Key",
+            "target_col_name": "LBRY_ITEM_FACT_KEY",
+            "target_data_type": "BigInt"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "",
+                "pre_detailed_instructions": "",
+                "pre_or_post_dq": ""
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "Dimension Key",
+                "aleph_table": "",
+                "chg_proc_type": "N/A",
+                "source_col_name": "",
+                "source_data_type": "",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
+                "transform_action": "Lookup"
+            },
+            "target_attribute": "- Bibliographic Record Dimension Key",
+            "target_col_name": "BIB_REC_LOC_DIM_KEY",
+            "target_data_type": "BigInt"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "",
+                "pre_detailed_instructions": "",
+                "pre_or_post_dq": ""
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "Dimension Key",
+                "aleph_table": "",
+                "chg_proc_type": "N/A",
+                "source_col_name": "",
+                "source_data_type": "",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
+                "transform_action": "Lookup"
+            },
+            "target_attribute": "- Library Holding Dimension Key",
+            "target_col_name": "LBRY_HOLDING_DIM_KEY",
+            "target_data_type": "BigInt"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "",
+                "pre_detailed_instructions": "",
+                "pre_or_post_dq": ""
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "Dimension Key",
+                "aleph_table": "",
+                "chg_proc_type": "N/A",
+                "source_col_name": "",
+                "source_data_type": "",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
+                "transform_action": "Lookup"
+            },
+            "target_attribute": "- Library Item Dimension Key",
+            "target_col_name": "LBRY_ITEM_DIM_KEY",
+            "target_data_type": "BigInt"
+        },
+        {
+            "Data Quality Info": {
+                "data_quality_checks": [
+                    {
+                        "additional_conditions": "",
+                        "aleph_library": "MAI50",
+                        "always": "X",
+                        "application": "H,I",
+                        "column_data_type": "CHAR(5)",
+                        "column_sub_component": "",
+                        "dimension_link_to_record": "LIBRARY ITEM COLLECTION DIMENSION:\n   SR - 1",
+                        "exception_memorialization": "Create Exception Record",
+                        "exception_message": "Missing Value",
+                        "format": "",
+                        "instructions": "1) <null>\n2) All spaces",
+                        "only_if_data_exists": "",
+                        "order": "1",
+                        "replacement_value": "\"-M\"",
+                        "source_column_name": "Z30_SUB_LIBRARY",
+                        "source_file": "Z30",
+                        "specific_dq_function": "no_missing_values",
+                        "specific_dq_function_param_1": "",
+                        "suspend_record": "No",
+                        "type": "Missing Value"
+                    },
+                    {
+                        "additional_conditions": "No previous Z30_SUB_LIBRARY DQ exception",
+                        "aleph_library": "MAI50",
+                        "always": "X",
+                        "application": "H,I",
+                        "column_data_type": "CHAR(5)",
+                        "column_sub_component": "",
+                        "dimension_link_to_record": "LIBRARY ITEM COLLECTION DIMENSION:\n   SR - 2",
+                        "exception_memorialization": "Create Exception Record",
+                        "exception_message": "Invalid Value",
+                        "format": "",
+                        "instructions": "VALID VALUES LIST:\nLIBRARY ITEM LOCATION DIMENSION: \n   Library Item Location Library Entiy Five Character Code",
+                        "only_if_data_exists": "",
+                        "order": "2",
+                        "replacement_value": "\"-I\"",
+                        "source_column_name": "Z30_SUB_LIBRARY",
+                        "source_file": "Z30",
+                        "specific_dq_function": "",
+                        "specific_dq_function_param_1": "",
+                        "suspend_record": "No",
+                        "type": "Valid Value"
+                    }
+                ],
+                "dq_required": true
+            },
+            "Preprocessing Info": {
+                "pre_action": "Trim",
+                "pre_detailed_instructions": "Remove leading and trailing spaces",
+                "pre_or_post_dq": "PRE"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "Use post pre-processing / post DQ value for lookup",
+                "action_specific": "Dimension Key",
+                "aleph_table": "Z30",
+                "chg_proc_type": "N/A",
+                "source_col_name": "Z30_SUB_LIBRARY",
+                "source_data_type": "CHAR(5)",
+                "source_format": "",
+                "source_mandatory": null,
+                "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
+                "transform_action": "Lookup"
+            },
+            "target_attribute": "- Library Item Location Dimension Key",
+            "target_col_name": "LBRY_ITEM_LOC_DIM_KEY",
+            "target_data_type": "Integer"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "Trim",
+                "pre_detailed_instructions": "Remove leading and trailing spaces",
+                "pre_or_post_dq": "PRE"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "Use post pre-processing / post DQ value for lookup",
+                "action_specific": "Dimension Key",
+                "aleph_table": "Z30",
+                "chg_proc_type": "N/A",
+                "source_col_name": "Z30_COLLECTION",
+                "source_data_type": "CHAR(5)",
+                "source_format": "",
+                "source_mandatory": null,
+                "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
+                "transform_action": "Lookup"
+            },
+            "target_attribute": "- Library Item Location Dimension Key",
+            "target_col_name": "LBRY_ITEM_LOC_DIM_KEY",
+            "target_data_type": "Integer"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "Trim",
+                "pre_detailed_instructions": "Remove leading and trailing spaces",
+                "pre_or_post_dq": "PRE"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "Use post pre-processing / post DQ value for lookup",
+                "action_specific": "Dimension Key",
+                "aleph_table": "Z13U",
+                "chg_proc_type": "N/A",
+                "source_col_name": "Z13U_USER_DEFINED_1",
+                "source_data_type": "VARCHAR2(500)",
+                "source_format": "",
+                "source_mandatory": null,
+                "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
+                "transform_action": "Lookup"
+            },
+            "target_attribute": "- Library Item Holding Location Dimension Key",
+            "target_col_name": "LBRY_ITEM_HOLDING_LOC_DIM_KEY",
+            "target_data_type": "Integer"
+        },
+        {
+            "Data Quality Info": {
+                "data_quality_checks": [
+                    {
+                        "additional_conditions": "",
+                        "aleph_library": "MAI01, MAI39",
+                        "always": "x",
+                        "application": "H,I",
+                        "column_data_type": "VARCHAR2(500)",
+                        "column_sub_component": "",
+                        "dimension_link_to_record": "N/A",
+                        "exception_memorialization": "Create Exception Record",
+                        "exception_message": "Invalid value: Z13_USER_DEFINED_2",
+                        "format": "",
+                        "instructions": "\"ocm\" followed by 8 digits or\n\"ocn\" followed by 9 digits or \n\"on\" followed by 10 digits or\nempty field",
+                        "only_if_data_exists": "",
+                        "order": "1",
+                        "replacement_value": "\"-I\"",
+                        "source_column_name": "Z13U_USER_DEFINED_2",
+                        "source_file": "Z13U",
+                        "specific_dq_function": "dq_z13u_user_defined_2",
+                        "specific_dq_function_param_1": "",
+                        "suspend_record": "No",
+                        "type": "Format Check"
+                    }
+                ],
+                "dq_required": true
+            },
+            "Preprocessing Info": {
+                "pre_action": "Trim",
+                "pre_detailed_instructions": "Remove leading and trailing spaces",
+                "pre_or_post_dq": "PRE"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "Use post pre-processing / post DQ value for lookup",
+                "action_specific": "Dimension Key",
+                "aleph_table": "Z13U",
+                "chg_proc_type": "N/A",
+                "source_col_name": "Z13U_USER_DEFINED_2",
+                "source_data_type": "VARCHAR2(500)",
+                "source_format": "",
+                "source_mandatory": null,
+                "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
+                "transform_action": "Lookup"
+            },
+            "target_attribute": "- Library Item Holding Location Dimension Key",
+            "target_col_name": "LBRY_ITEM_HOLDING_LOC_DIM_KEY",
+            "target_data_type": "Integer"
+        },
+        {
+            "Data Quality Info": {
+                "data_quality_checks": [
+                    {
+                        "additional_conditions": "",
+                        "aleph_library": "MAI50",
+                        "always": "X",
+                        "application": "H,I",
+                        "column_data_type": "CHAR(5)",
+                        "column_sub_component": "",
+                        "dimension_link_to_record": "LIBRARY ITEM MATERIAL FORM DIMENSION:\n   SR - 1",
+                        "exception_memorialization": "Create Exception Record",
+                        "exception_message": "Missing Value",
+                        "format": "",
+                        "instructions": "1) <null>\n2) All spaces",
+                        "only_if_data_exists": "",
+                        "order": "1",
+                        "replacement_value": "\"-M\"",
+                        "source_column_name": "Z30_MATERIAL",
+                        "source_file": "Z30",
+                        "specific_dq_function": "no_missing_values",
+                        "specific_dq_function_param_1": "",
+                        "suspend_record": "No",
+                        "type": "Missing Value"
+                    },
+                    {
+                        "additional_conditions": "No previous Z30_MATERIAL DQ exception",
+                        "aleph_library": "MAI50",
+                        "always": "X",
+                        "application": "H,I",
+                        "column_data_type": "CHAR(5)",
+                        "column_sub_component": "",
+                        "dimension_link_to_record": "LIBRARY ITEM MATERIAL FORM DIMENSION:\n   SR - 2",
+                        "exception_memorialization": "Create Exception Record",
+                        "exception_message": "Invalid Value",
+                        "format": "",
+                        "instructions": "VALID VALUES LIST:\nLIBRARY ITEM MATERIAL FORM DIMENSION: \n   Library Item Material Form Code",
+                        "only_if_data_exists": "",
+                        "order": "2",
+                        "replacement_value": "\"-I\"",
+                        "source_column_name": "Z30_MATERIAL",
+                        "source_file": "Z30",
+                        "specific_dq_function": "",
+                        "specific_dq_function_param_1": "",
+                        "suspend_record": "No",
+                        "type": "Valid Value"
+                    }
+                ],
+                "dq_required": true
+            },
+            "Preprocessing Info": {
+                "pre_action": "Trim",
+                "pre_detailed_instructions": "Remove leading and trailing spaces",
+                "pre_or_post_dq": "PRE"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "Use post pre-processing / post DQ value for lookup",
+                "action_specific": "Dimension Key",
+                "aleph_table": "Z30",
+                "chg_proc_type": "N/A",
+                "source_col_name": "Z30_MATERIAL",
+                "source_data_type": "CHAR(5)",
+                "source_format": "",
+                "source_mandatory": null,
+                "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
+                "transform_action": "Lookup"
+            },
+            "target_attribute": "- Library Item Material Form Dimension Key",
+            "target_col_name": "LBRY_ITEM_MATERIAL_FORM_DIM_KEY",
+            "target_data_type": "SmallInt"
+        },
+        {
+            "Data Quality Info": {
+                "data_quality_checks": [
+                    {
+                        "additional_conditions": "",
+                        "aleph_library": "MAI50",
+                        "always": "X",
+                        "application": "H,I",
+                        "column_data_type": "CHAR(2)",
+                        "column_sub_component": "",
+                        "dimension_link_to_record": "LIBRARY ITEM STATUS DIMENSION:\n   SR - 1",
+                        "exception_memorialization": "Create Exception Record",
+                        "exception_message": "Missing Value",
+                        "format": "",
+                        "instructions": "1) <null>\n2) All spaces",
+                        "only_if_data_exists": "",
+                        "order": "1",
+                        "replacement_value": "\"-M\"",
+                        "source_column_name": "Z30_ITEM_STATUS",
+                        "source_file": "Z30",
+                        "specific_dq_function": "no_missing_values",
+                        "specific_dq_function_param_1": "",
+                        "suspend_record": "No",
+                        "type": "Missing Value"
+                    },
+                    {
+                        "additional_conditions": "No previous Z30_ITEM_STATUS DQ exception",
+                        "aleph_library": "MAI50",
+                        "always": "X",
+                        "application": "H,I",
+                        "column_data_type": "CHAR(2)",
+                        "column_sub_component": "",
+                        "dimension_link_to_record": "LIBRARY ITEM STATUS DIMENSION:\n   SR - 2",
+                        "exception_memorialization": "Create Exception Record",
+                        "exception_message": "Invalid Value",
+                        "format": "",
+                        "instructions": "VALID VALUES LIST:\nLIBRARY ITEM STATUS DIMENSION: \n   Library Item Status Code",
+                        "only_if_data_exists": "",
+                        "order": "2",
+                        "replacement_value": "\"-I\"",
+                        "source_column_name": "Z30_ITEM_STATUS",
+                        "source_file": "Z30",
+                        "specific_dq_function": "",
+                        "specific_dq_function_param_1": "",
+                        "suspend_record": "No",
+                        "type": "Valid Value"
+                    }
+                ],
+                "dq_required": true
+            },
+            "Preprocessing Info": {
+                "pre_action": "Trim",
+                "pre_detailed_instructions": "Remove leading and trailing spaces",
+                "pre_or_post_dq": "PRE"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "Use post pre-processing / post DQ value for lookup",
+                "action_specific": "Dimension Key",
+                "aleph_table": "Z30",
+                "chg_proc_type": "N/A",
+                "source_col_name": "Z30_ITEM_STATUS",
+                "source_data_type": "CHAR(2)",
+                "source_format": "",
+                "source_mandatory": null,
+                "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
+                "transform_action": "Lookup"
+            },
+            "target_attribute": "- Library Item Status Dimension Key",
+            "target_col_name": "LBRY_ITEM_STATUS_DIM_KEY",
+            "target_data_type": "SmallInt"
+        },
+        {
+            "Data Quality Info": {
+                "data_quality_checks": [
+                    {
+                        "additional_conditions": "",
+                        "aleph_library": "MAI50",
+                        "always": "",
+                        "application": "H,I",
+                        "column_data_type": "CHAR(2)",
+                        "column_sub_component": "",
+                        "dimension_link_to_record": "LIBRARY ITEM PROCESS STATUS DIMENSION:\n   SR - 1",
+                        "exception_memorialization": "Create Exception Record",
+                        "exception_message": "Invalid Value",
+                        "format": "",
+                        "instructions": "VALID VALUES LIST:\nLIBRARY ITEM PROCESS STATUS DIMENSION: \n   Library Item Process Status Code",
+                        "only_if_data_exists": "X",
+                        "order": "1",
+                        "replacement_value": "\"-I\"",
+                        "source_column_name": "Z30_ITEM_PROCESS_STATUS",
+                        "source_file": "Z30",
+                        "specific_dq_function": "",
+                        "specific_dq_function_param_1": "",
+                        "suspend_record": "No",
+                        "type": "Valid Value"
+                    }
+                ],
+                "dq_required": true
+            },
+            "Preprocessing Info": {
+                "pre_action": "",
+                "pre_detailed_instructions": "",
+                "pre_or_post_dq": ""
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "IF input value doesn't exist \nTHEN\n    Use \"-N\" value for lookup\nELSE\n    USE AS-IS value for lookup\nENDIF",
+                "action_specific": "Dimension Key",
+                "aleph_table": "Z30",
+                "chg_proc_type": "N/A",
+                "source_col_name": "Z30_ITEM_PROCESS_STATUS",
+                "source_data_type": "CHAR(2)",
+                "source_format": "",
+                "source_mandatory": null,
+                "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
+                "transform_action": "Lookup"
+            },
+            "target_attribute": "- Library Item Process Status Dimension Key",
+            "target_col_name": "LBRY_ITEM_PROCESS_STATUS_DIM_KEY",
+            "target_data_type": "SmallInt"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "N/A",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "*** define within ETL process ***",
+                "action_specific": "N/A",
+                "aleph_table": "N/A",
+                "chg_proc_type": "N/A",
+                "source_col_name": "N/A",
+                "source_data_type": "N/A",
+                "source_format": "N/A",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
+                "transform_action": "Generate"
+            },
+            "target_attribute": "- Library Item As-Of Date Dimension Key",
+            "target_col_name": "LBRY_ITEM_AS_OF_CLNDR_DT_DIM_KEY",
+            "target_data_type": "Integer"
+        },
+        {
+            "Data Quality Info": {
+                "data_quality_checks": [
+                    {
+                        "additional_conditions": "",
+                        "aleph_library": "MAI50",
+                        "always": "X",
+                        "application": "H,I",
+                        "column_data_type": "NUMBER(8)",
+                        "column_sub_component": "",
+                        "dimension_link_to_record": "DIM_DATE(-2)",
+                        "exception_memorialization": "Create Exception Record",
+                        "exception_message": "Missing Value",
+                        "format": "YYYYMMDD",
+                        "instructions": "1) <null>\n2) All zeros",
+                        "only_if_data_exists": "",
+                        "order": "1",
+                        "replacement_value": "0001-01-02'",
+                        "source_column_name": "Z30_OPEN_DATE",
+                        "source_file": "Z30",
+                        "specific_dq_function": "no_missing_values",
+                        "specific_dq_function_param_1": "",
+                        "suspend_record": "No",
+                        "type": "Missing Value"
+                    },
+                    {
+                        "additional_conditions": "No previous Z30_OPEN_DATE DQ exception",
+                        "aleph_library": "MAI50",
+                        "always": "X",
+                        "application": "H,I",
+                        "column_data_type": "NUMBER(8)",
+                        "column_sub_component": "",
+                        "dimension_link_to_record": "DIM_DATE(-3)",
+                        "exception_memorialization": "Create Exception Record",
+                        "exception_message": "Non-numeric Value",
+                        "format": "YYYYMMDD",
+                        "instructions": "All charcters must be [0-9]",
+                        "only_if_data_exists": "",
+                        "order": "2",
+                        "replacement_value": "0001-01-03'",
+                        "source_column_name": "Z30_OPEN_DATE",
+                        "source_file": "Z30",
+                        "specific_dq_function": "is_valid_aleph_year",
+                        "specific_dq_function_param_1": "",
+                        "suspend_record": "No",
+                        "type": "Numeric-only check"
+                    }
+                ],
+                "dq_required": true
+            },
+            "Preprocessing Info": {
+                "pre_action": "Conversion",
+                "pre_detailed_instructions": "To Postgres Date Datatype",
+                "pre_or_post_dq": "POST"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "Use post pre-processing / post DQ value (in Date Dimension) for lookup",
+                "action_specific": "Dimension Key",
+                "aleph_table": "Z30",
+                "chg_proc_type": "N/A",
+                "source_col_name": "Z30_OPEN_DATE",
+                "source_data_type": "NUMBER(8)",
+                "source_format": "YYYYMMDD",
+                "source_mandatory": null,
+                "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
+                "transform_action": "Lookup"
+            },
+            "target_attribute": "- Library Item Create Date Dimension Key",
+            "target_col_name": "LBRY_ITEM_CREATE_CLNDR_DT_DIM_KEY",
+            "target_data_type": "Integer"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "",
+                "pre_detailed_instructions": "",
+                "pre_or_post_dq": ""
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-Is",
+                "aleph_table": "Z30",
+                "chg_proc_type": "N/A",
+                "source_col_name": "Z30_ORDER_NUMBER",
+                "source_data_type": "VARCHAR2(30)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Library Item Purchase Order Number",
+            "target_col_name": "LBRY_ITEM_PO_NO",
+            "target_data_type": "VarChar(30)"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "N/A",
+                "pre_detailed_instructions": "N/A",
+                "pre_or_post_dq": "N/A"
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "",
+                "action_specific": "As-Is",
+                "aleph_table": "Z30",
+                "chg_proc_type": "N/A",
+                "source_col_name": "Z30-NO-LOANS",
+                "source_data_type": "NUMBER(3)",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
+                "transform_action": "Move"
+            },
+            "target_attribute": "- Library Item Total To-Date Loan Count",
+            "target_col_name": "LBRY_ITEM_TOTAL_TO_DATE_LOAN_CNT",
+            "target_data_type": "SmallInt"
+        },
+        {
+            "Data Quality Info": {
+                "dq_required": false
+            },
+            "Preprocessing Info": {
+                "pre_action": "",
+                "pre_detailed_instructions": "",
+                "pre_or_post_dq": ""
+            },
+            "Transformation Info": {
+                "action_detailed_instructions": "Value is always '1'",
+                "action_specific": "N/A",
+                "aleph_table": "",
+                "chg_proc_type": "N/A",
+                "source_col_name": "",
+                "source_data_type": "",
+                "source_format": "",
+                "source_mandatory": "N",
+                "specific_transform_function": "",
+                "specific_transform_function_param1": "",
+                "specific_transform_function_param2": "",
+                "transform_action": "Generate"
+            },
+            "target_attribute": "- Library Item Exists Flag",
+            "target_col_name": "LBRY_ITEM_EXISTS_FLAG",
+            "target_data_type": "SmallInt"
+        }
+    ],
+    "target_dimension_name": "LIBRARY ITEM FACT"
+}

@@ -1,5 +1,11 @@
 *.pyc
-database_credentials.py
+*.swp
 data/*
+logs/*
+venv
 scripts/credentials.json
 scripts/token_dw.json
+tests/data/reference/
+**/.DS_Store
+.idea
+.env
