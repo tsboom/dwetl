@@ -2,6 +2,7 @@ import dwetl
 import datetime
 import os
 import sys
+import socket
 from dotenv import load_dotenv
 load_dotenv()
 import logging
@@ -12,9 +13,12 @@ from dwetl.writer.sql_alchemy_writer import SqlAlchemyWriter
 import ezproxy_load
 import pdb
 
-
+def check_hostname_env(hostname):
+    print('')
+    
 
 def run(input_file):
+
     
     #create logger
     today = datetime.datetime.now().strftime('%Y%m%d')
@@ -27,6 +31,36 @@ def run(input_file):
 
     time_started = datetime.datetime.now()
     logger.info(f'EzProxy ETL started')
+    
+    
+    '''
+    check db configuration to prevent errors
+    '''
+        
+    # make sure hostname matches up with the databases used (Dev or prod)
+    hostname = socket.gethostname()
+    
+    # make sure prod connects to prod db
+    config_error = False
+    if hostname == 'dw-etl.lib.umd.edu':
+        if DB_HOST_NAME != 'pgcommon.lib.umd.edu':
+            logger.error(f'Database name is not configured correctly for dw-etl.lib.umd.edu. Please fix the .env file. ')
+            config_error = True
+        if REPORTING_DB_HOST_NAME != 'pgcommon.lib.umd.edu':
+            logger.error(f'Reporting database is not configured correctly for dw-etl.lib.umd.edu. Please fix the .env file. ')
+            config_error = True
+    elif hostname == 'dw-etl-test.lib.umd.edu':
+        if DB_HOST_NAME != 'pgcommondev.lib.umd.edu':
+            logger.error(f'Database is not configured correctly for dw-etldev.lib.umd.edu. Please fix the .env file. ')
+            config_error = True
+        if REPORTING_DB_HOST_NAME != 'pgcommondev.lib.umd.edu':
+            logger.error(f'Reporting database is not configured correctly for dw-etldev.lib.umd.edu. Please fix the .env file. ')
+            config_error = True
+    
+    # quit program if there is an error with the db configuration
+    if config_error == True:
+        logger.error(f'EzProxy ETL ended because database was not configured correctly for this environment.')
+        sys.exit()
 
     '''
     create job_info for current process
