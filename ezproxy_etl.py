@@ -40,7 +40,7 @@ def run(input_file):
     # make sure hostname matches up with the databases used (Dev or prod)
     hostname = socket.gethostname()
     
-    # make sure prod connects to prod db
+    # make sure prod connects to pgcommon, and dev to pgcommondev
     config_error = False
     if hostname == 'dw-etl.lib.umd.edu':
         if DB_HOST_NAME != 'pgcommon.lib.umd.edu':
@@ -61,6 +61,7 @@ def run(input_file):
     if config_error == True:
         logger.error(f'EzProxy ETL ended because database was not configured correctly for this environment.')
         sys.exit()
+    
 
     '''
     create job_info for current process
