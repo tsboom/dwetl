@@ -5,6 +5,7 @@ import sys
 import socket
 from dotenv import load_dotenv
 load_dotenv()
+import dwetl.database_credentials as database_credentials
 import logging
 import sqlalchemy
 from dwetl.job_info import JobInfoFactory, JobInfo
@@ -13,10 +14,39 @@ from dwetl.writer.sql_alchemy_writer import SqlAlchemyWriter
 import ezproxy_load
 import pdb
 
-
-def run(input_file):
-
+def check_config_error(logger):
+    # make sure hostname matches up with the databases used (Dev or prod)
+    hostname = socket.gethostname()
+    ip_address = socket.gethostbyname(hostname)
     
+    db_settings = database_credentials.db_settings()
+    reporting_db_settings = database_credentials.reporting_db_settings()
+    
+    # make sure prod connects to pgcommon, and dev to pgcommondev
+    config_error = False
+    if hostname == 'dw-etl.lib.umd.edu':
+        if db_settings['DB_HOST_NAME'] != 'pgcommon.lib.umd.edu':
+            logger.error(f'Database name is not configured correctly for dw-etl.lib.umd.edu. Please fix the .env file. ')
+            config_error = True
+        if reporting_db_settings['REPORTING_DB_HOST_NAME'] != 'pgcommon.lib.umd.edu':
+            logger.error(f'Reporting database is not configured correctly for dw-etl.lib.umd.edu. Please fix the .env file. ')
+            config_error = True
+    elif hostname == 'dw-etl-test.lib.umd.edu':
+        if db_settings['DB_HOST_NAME'] != 'pgcommondev.lib.umd.edu':
+            logger.error(f'Database is not configured correctly for dw-etldev.lib.umd.edu. Please fix the .env file. ')
+            config_error = True
+        if reporting_db_settings['REPORTING_DB_HOST_NAME'] != 'pgcommondev.lib.umd.edu':
+            logger.error(f'Reporting database is not configured correctly for dw-etldev.lib.umd.edu. Please fix the .env file. ')
+            config_error = True    
+    else:
+        # localhost
+        if db_settings['DB_HOST_NAME'] != '127.0.0.1':
+            config_error = True
+        if reporting_db_settings['REPORTING_DB_HOST_NAME'] != 'pgcommondev.lib.umd.edu':
+            config_error = True
+    return config_error
+
+def run(input_file):    
     #create logger
     today = datetime.datetime.now().strftime('%Y%m%d')
     logger = logging.getLogger('dwetl')
@@ -34,33 +64,14 @@ def run(input_file):
     check db configuration to prevent errors
     '''
         
-    # make sure hostname matches up with the databases used (Dev or prod)
-    hostname = socket.gethostname()
-    
-    # make sure prod connects to pgcommon, and dev to pgcommondev
-    config_error = False
-    if hostname == 'dw-etl.lib.umd.edu':
-        if DB_HOST_NAME != 'pgcommon.lib.umd.edu':
-            logger.error(f'Database name is not configured correctly for dw-etl.lib.umd.edu. Please fix the .env file. ')
-            config_error = True
-        if REPORTING_DB_HOST_NAME != 'pgcommon.lib.umd.edu':
-            logger.error(f'Reporting database is not configured correctly for dw-etl.lib.umd.edu. Please fix the .env file. ')
-            config_error = True
-    elif hostname == 'dw-etl-test.lib.umd.edu':
-        if DB_HOST_NAME != 'pgcommondev.lib.umd.edu':
-            logger.error(f'Database is not configured correctly for dw-etldev.lib.umd.edu. Please fix the .env file. ')
-            config_error = True
-        if REPORTING_DB_HOST_NAME != 'pgcommondev.lib.umd.edu':
-            logger.error(f'Reporting database is not configured correctly for dw-etldev.lib.umd.edu. Please fix the .env file. ')
-            config_error = True
+    config_error = check_config_error(logger)
     
     # quit program if there is an error with the db configuration
     if config_error == True:
+        print('ERROR: EzProxy ETL ended because database was not configured correctly for this environment.')
         logger.error(f'EzProxy ETL ended because database was not configured correctly for this environment.')
         sys.exit()
-    pdb.set_trace() 
     
-
     '''
     create job_info for current process
     '''
