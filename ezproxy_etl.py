@@ -13,9 +13,6 @@ from dwetl.writer.sql_alchemy_writer import SqlAlchemyWriter
 import ezproxy_load
 import pdb
 
-def check_hostname_env(hostname):
-    print('')
-    
 
 def run(input_file):
 
@@ -61,6 +58,7 @@ def run(input_file):
     if config_error == True:
         logger.error(f'EzProxy ETL ended because database was not configured correctly for this environment.')
         sys.exit()
+    pdb.set_trace() 
     
 
     '''
