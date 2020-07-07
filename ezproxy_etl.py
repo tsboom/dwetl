@@ -14,38 +14,6 @@ from dwetl.writer.sql_alchemy_writer import SqlAlchemyWriter
 import ezproxy_load
 import pdb
 
-def check_config_error(logger):
-    # make sure hostname matches up with the databases used (Dev or prod)
-    hostname = socket.gethostname()
-    ip_address = socket.gethostbyname(hostname)
-    
-    db_settings = database_credentials.db_settings()
-    reporting_db_settings = database_credentials.reporting_db_settings()
-    
-    # make sure prod connects to pgcommon, and dev to pgcommondev
-    config_error = False
-    if hostname == 'dw-etl.lib.umd.edu':
-        if db_settings['DB_HOST_NAME'] != 'pgcommon.lib.umd.edu':
-            logger.error(f'Database name is not configured correctly for dw-etl.lib.umd.edu. Please fix the .env file. ')
-            config_error = True
-        if reporting_db_settings['REPORTING_DB_HOST_NAME'] != 'pgcommon.lib.umd.edu':
-            logger.error(f'Reporting database is not configured correctly for dw-etl.lib.umd.edu. Please fix the .env file. ')
-            config_error = True
-    elif hostname == 'dw-etl-test.lib.umd.edu':
-        if db_settings['DB_HOST_NAME'] != 'pgcommondev.lib.umd.edu':
-            logger.error(f'Database is not configured correctly for dw-etldev.lib.umd.edu. Please fix the .env file. ')
-            config_error = True
-        if reporting_db_settings['REPORTING_DB_HOST_NAME'] != 'pgcommondev.lib.umd.edu':
-            logger.error(f'Reporting database is not configured correctly for dw-etldev.lib.umd.edu. Please fix the .env file. ')
-            config_error = True    
-    else:
-        # localhost
-        if db_settings['DB_HOST_NAME'] != '127.0.0.1':
-            config_error = True
-        if reporting_db_settings['REPORTING_DB_HOST_NAME'] != 'pgcommondev.lib.umd.edu':
-            config_error = True
-    return config_error
-
 def run(input_file):    
     #create logger
     today = datetime.datetime.now().strftime('%Y%m%d')
@@ -61,15 +29,15 @@ def run(input_file):
     
     
     '''
-    check db configuration to prevent errors
+    check current hostname environment configuration to prevent errors
     '''
-        
-    config_error = check_config_error(logger)
+    hostname= socket.gethostname()
+    configured_host = database_credentials.configured_host()
     
-    # quit program if there is an error with the db configuration
-    if config_error == True:
-        print('ERROR: EzProxy ETL ended because database was not configured correctly for this environment.')
-        logger.error(f'EzProxy ETL ended because database was not configured correctly for this environment.')
+    if hostname != configured_host:
+        # quit program if env file hostname doesn't match with the current hostname
+        print('ERROR: EzProxy ETL ended because .env contained an error. Please double check the configured host and db configuration.')
+        logger.error(f'EzProxy ETL ended because .env contained an error. please double check the configured host and db configuration.')
         sys.exit()
     
     '''

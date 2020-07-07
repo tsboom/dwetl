@@ -3,6 +3,9 @@ import sys
 from dotenv import load_dotenv
 load_dotenv()
 
+def configured_host():
+    # the current host name configured in .env
+    return os.getenv("CONFIGURED_HOST")
 
 def db_settings():
     # The username to use in connecting to the database
