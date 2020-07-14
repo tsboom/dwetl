@@ -2,6 +2,7 @@ import dwetl
 import datetime
 import os
 import sys
+import shutil
 import socket
 from dotenv import load_dotenv
 load_dotenv()
@@ -35,10 +36,10 @@ def run(input_file):
     configured_host = database_credentials.configured_host()
     
     if hostname != configured_host:
-        # quit program if env file hostname doesn't match with the current hostname
-        print('ERROR: EzProxy ETL ended because .env contained an error. Please double check the configured host and db configuration.')
-        logger.error(f'EzProxy ETL ended because .env contained an error. please double check the configured host and db configuration.')
-        sys.exit()
+       #quit program if env file hostname doesn't match with the current hostname
+       print('ERROR: EzProxy ETL ended because .env contained an error. Please double check the configured host and db configuration.')
+       logger.error(f'EzProxy ETL ended because .env contained an error. please double check the configured host and db configuration.')
+       sys.exit()
     
     '''
     create job_info for current process
@@ -82,7 +83,7 @@ def run(input_file):
     end of job metadata writing
     '''
     
-
+    
     endtime = datetime.datetime.now()
     # write end time to processing cycle table
     with dwetl.database_session() as session:
@@ -91,15 +92,17 @@ def run(input_file):
         max_prcsng_id = session.query(job_info_table_class).\
             filter(job_info_table_class.dw_prcsng_cycle_id == job_info.prcsng_cycle_id).\
             update({'dw_prcsng_cycle_exectn_end_tmstmp': endtime})
-
+    
     elapsed_time = endtime - time_started
     print("Ezproxy ETL elapsed time: ", str(elapsed_time))
     logger.info(f'EzProxy ETL elapsed time: {str(elapsed_time)}')
-
-
-
-
-
+    
+    '''
+    move data file to "processed" directory
+    '''
+    processed_dir = os.getenv("EZPROXY_INPUT_DIRECTORY") + "processed/"
+    just_filename = input_file.split('/')[-1]
+    shutil.move(input_file, processed_dir + just_filename)
 
 
 '''
