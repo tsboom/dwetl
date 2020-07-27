@@ -83,8 +83,9 @@ def run(input_file):
     elapsed_time = endtime - time_started
     print("Ezproxy ETL elapsed time: ", str(elapsed_time))
     logger.info(f'EzProxy ETL elapsed time: {str(elapsed_time)}')
-
-
+    filehandle = open('ezproxy_etl_out.txt', 'w')
+    filehandle.write('Successful. \n')
+    filehandle.close()
 
 
 
