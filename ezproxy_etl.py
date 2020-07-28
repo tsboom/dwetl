@@ -79,6 +79,16 @@ def run(input_file):
     '''
     ezproxy_load.copy_new_facts_to_reporting_db(job_info, logger)
     
+    
+    '''
+    move data file to "processed" directory
+    '''
+    processed_dir = "/apps/dw/processed/ezproxy/"
+    just_filename = input_file.split('/')[-1]
+    shutil.move(input_file, processed_dir + just_filename)
+    logger.info('Moved file to processed directory.')
+    
+    
     '''
     end of job metadata writing
     '''
@@ -97,13 +107,7 @@ def run(input_file):
     print("Ezproxy ETL elapsed time: ", str(elapsed_time))
     logger.info(f'EzProxy ETL elapsed time: {str(elapsed_time)}')
     
-    '''
-    move data file to "processed" directory
-    '''
-    processed_dir = "/apps/dw/processed/ezproxy/"
-    just_filename = input_file.split('/')[-1]
-    shutil.move(input_file, processed_dir + just_filename)
-    logger.info('Moved file to processed directory.')
+
 
 '''
 main function for running script from the command line
