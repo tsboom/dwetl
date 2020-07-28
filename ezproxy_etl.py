@@ -27,7 +27,7 @@ def run(input_file):
 
     time_started = datetime.datetime.now()
     logger.info(f'EzProxy ETL started')
-    
+    logger.info(f'input file path {input_file}')    
     
     '''
     check current hostname environment configuration to prevent errors
@@ -100,10 +100,10 @@ def run(input_file):
     '''
     move data file to "processed" directory
     '''
-    processed_dir = os.getenv("EZPROXY_INPUT_DIRECTORY") + "processed/"
+    processed_dir = "/apps/dw/processed/ezproxy/"
     just_filename = input_file.split('/')[-1]
     shutil.move(input_file, processed_dir + just_filename)
-
+    logger.info('Moved file to processed directory.')
 
 '''
 main function for running script from the command line
@@ -126,12 +126,17 @@ if __name__=='__main__':
         
     # otherwise process today's date, put together filename from date 
     filename = f"sessions.log.{day_to_process}"
-    
-    input_directory = os.getenv("EZPROXY_INPUT_DIRECTORY")
-    
-    input_file = input_directory + filename
+    input_directory = os.getenv("EZPROXY_INPUT_DIRECTORY")  
+    incoming_input_file = input_directory + filename
+    processed_dir = "/apps/dw/processed/ezproxy/"
+    processed_input_file = processed_dir + filename
+    if os.path.exists(incoming_input_file):
+        print(f'input file: {incoming_input_file}')
+        run(incoming_input_file)
+    elif os.path.exists(processed_input_file):
+        print(f'input file: {processed_input_file}')
+        run(processed_input_file)   
+        # Print the message if the file path does not exist
+    else:
+        print (f'no data file found for {day_to_process}')
 
-    run(input_file)
-
-
-    
