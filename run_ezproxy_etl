@@ -1,8 +1,13 @@
 #! /bin/bash
-
 # enter python virtual environment
 cd /apps/dwetl
 source venv/bin/activate; 
-
-# run ezproxy_etl for the current day
-python ezproxy_etl.py
+OUTFILE=/apps/dwetl/tmp/ezproxy_etl_out
+python ezproxy_etl.py > $OUTFILE 2>&1
+SUCCESS=$(grep Success $OUTFILE)
+if [[ "$SUCCESS" != "" ]]; then
+SUBJECT="ezproxy_etl Completed"
+else
+SUBJECT="exproxy_etl Failed"
+fi
+mail -s "$SUBJECT" libclas@umd.edu < $OUTFILE
