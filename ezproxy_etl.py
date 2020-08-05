@@ -44,6 +44,10 @@ def run(input_file):
     '''
     create job_info for current process
     '''
+    #file='/apps/dwetl/tmp/ezproxy_etl_out'
+    #with open(file, 'w') as filetowrite:
+        #filetowrite.write('Failed')
+
     with dwetl.database_session() as session:
         job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
         job_info = JobInfoFactory.create_job_info_from_db(session, job_info_table_class)
@@ -106,9 +110,7 @@ def run(input_file):
     elapsed_time = endtime - time_started
     print("Ezproxy ETL elapsed time: ", str(elapsed_time))
     logger.info(f'EzProxy ETL elapsed time: {str(elapsed_time)}')
-    
-
-
+    print("Success")
 '''
 main function for running script from the command line
 '''
