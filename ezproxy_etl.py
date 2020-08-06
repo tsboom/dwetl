@@ -44,15 +44,10 @@ def run(input_file):
     '''
     create job_info for current process
     '''
-    #file='/apps/dwetl/tmp/ezproxy_etl_out'
-    #with open(file, 'w') as filetowrite:
-        #filetowrite.write('Failed')
 
     with dwetl.database_session() as session:
         job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
         job_info = JobInfoFactory.create_job_info_from_db(session, job_info_table_class)
-
-
 
 
     '''
@@ -96,8 +91,7 @@ def run(input_file):
     '''
     end of job metadata writing
     '''
-    
-    
+
     endtime = datetime.datetime.now()
     # write end time to processing cycle table
     with dwetl.database_session() as session:
