@@ -31,13 +31,16 @@ def main():
 		# iterating over each and every folder and file in the path
 			for root_folder, folders, files in os.walk(path):
 				# removing the folders within the directory
-				for folder in folders:
+				if folders:
+					for folder in folders:
 					# folder path
-					folder_path = os.path.join(root_folder, folder)
-					if seconds >= get_file_or_folder_age(folder_path):
-						remove_folder(folder_path)
-					else:
-						print("no processed aleph files older than the assigned retention policy")
+						folder_path = os.path.join(root_folder, folder)
+						if seconds >= get_file_or_folder_age(folder_path):
+							remove_folder(folder_path)
+						else:
+							print("no processed aleph files older than the assigned retention policy of %s days" % days)
+				else:
+					print("no processed aleph files older than the assigned retention policy of %s days" % days)
 		else:
 			for root_folder, folders, files in os.walk(path):
 				for file in files:
@@ -47,7 +50,7 @@ def main():
 						# removing the files within the directory
 						remove_file(file_path)
 					else:
-						 print("no processed  ezproxy files older than the assigned retention policy")
+						 print("no processed ezproxy files older than the assigned retention policy of %s days" % days )
 
 	else:
 
