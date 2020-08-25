@@ -1,0 +1,4 @@
+#! /bin/bash
+cd /apps/dwetl
+# enter the directorycd /apps/dwetl
+python delete_processed_files.py /apps/dw/processed/ezproxy/ ezproxy 90

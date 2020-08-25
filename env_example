@@ -4,6 +4,13 @@
 
 
 '''
+Configured host
+'''
+CONFIGURED_HOST='samplehostname'
+
+DATA_DIRECTORY = '/path/to/datafiles'
+
+'''
 Database settings
 '''
 # The username to use in connecting to the database
@@ -35,3 +42,19 @@ TEST_DB_HOST_NAME=
 # The port to use to connect to the Postgres server
 TEST_DB_PORT=
 
+
+'''
+Reporting database settings
+
+These settings are used for configuring the reporting database
+'''
+# The username to use in connecting to the database
+REPORTING_DB_USER=username
+# The password to use in connecting to the database
+REPORTING_DB_PASSWORD=password
+# The name of the database
+REPORTING_DB_NAME=usmai_dw_reporting
+# The hostname/IP address of the Postgres server
+REPORTING_DB_HOST_NAME=pgcommondev.lib.umd.edu
+# The port to use to connect to the Postgres server
+REPORTING_DB_PORT=5439
