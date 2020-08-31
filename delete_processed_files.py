@@ -59,11 +59,10 @@ def remove_folder(path):
 	# removing the folder
 	if not shutil.rmtree(path):
 		# success message
-		print("%s was removed successfully.", path)
-		#print(f"{path} is removed successfully")
+		print("%s was removed successfully." % path)
 	else:
 		# failure message
-		print("Unable to delete the %s", path)
+		print("Unable to delete %s" % path)
 
 
 
@@ -71,12 +70,10 @@ def remove_file(path):
 	# removing the file
 	if not os.remove(path):
 		# success message
-		#print(f"{path} is removed successfully")
-		print("%s was removed successfully.", path)
+		print("%s was removed successfully." % path)
 	else:
 		# failure message
-		#print(f"Unable to delete the {path}")
-		print("Unable to delete the %s", path)
+		print("Unable to delete %s" % path)
 
 def get_file_or_folder_age(path):
 	# getting ctime of the file/folder in seconds
