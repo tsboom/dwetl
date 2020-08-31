@@ -1,0 +1,6 @@
+#! /bin/bash
+
+# enter the directory
+cd /apps/dwetl
+# run delete processed files with  arguments: path deletion_type retention_days
+python delete_processed_files.py /apps/dw/processed/aleph/ aleph 30

@@ -44,15 +44,10 @@ def run(input_file):
     '''
     create job_info for current process
     '''
-    #file='/apps/dwetl/tmp/ezproxy_etl_out'
-    #with open(file, 'w') as filetowrite:
-        #filetowrite.write('Failed')
 
     with dwetl.database_session() as session:
         job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
         job_info = JobInfoFactory.create_job_info_from_db(session, job_info_table_class)
-
-
 
 
     '''
@@ -87,17 +82,20 @@ def run(input_file):
     '''
     move data file to "processed" directory
     '''
-    processed_dir = "/apps/dw/processed/ezproxy/"
+    processed_dir = os.getenv("DATA_DIRECTORY") + "processed/ezproxy/"
     just_filename = input_file.split('/')[-1]
-    shutil.move(input_file, processed_dir + just_filename)
-    logger.info('Moved file to processed directory.')
-    
+    try:
+        shutil.move(input_file, processed_dir + just_filename)
+        logger.info('Moved file to processed directory.')
+    except Exception as e:
+        print(e)
+        logger.error('Failed to move file to processed directory: '  + str(e))
+        
     
     '''
     end of job metadata writing
     '''
-    
-    
+
     endtime = datetime.datetime.now()
     # write end time to processing cycle table
     with dwetl.database_session() as session:
@@ -132,9 +130,10 @@ if __name__=='__main__':
         
     # otherwise process today's date, put together filename from date 
     filename = f"sessions.log.{day_to_process}"
-    input_directory = os.getenv("EZPROXY_INPUT_DIRECTORY")  
+    data_directory = os.getenv("DATA_DIRECTORY")
+    input_directory = data_directory + 'incoming/ezproxy/'
     incoming_input_file = input_directory + filename
-    processed_dir = "/apps/dw/processed/ezproxy/"
+    processed_dir = data_directory + "processed/ezproxy/"
     processed_input_file = processed_dir + filename
     if os.path.exists(incoming_input_file):
         print(f'input file: {incoming_input_file}')
@@ -144,5 +143,5 @@ if __name__=='__main__':
         run(processed_input_file)   
         # Print the message if the file path does not exist
     else:
-        print (f'no data file found for {day_to_process}')
+        print (f'no data file found for {day_to_process}. Are you sure you provided the date like so? python ezproxy_etl.py YYYYMMDD')
 
