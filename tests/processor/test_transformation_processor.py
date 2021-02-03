@@ -55,6 +55,7 @@ class TestTransformationProcessor(unittest.TestCase):
             }
         ]
         self.assertEqual(expected_result, result)
+        
 
     def test_transform_bib_rec_z00(self):
 
@@ -71,8 +72,6 @@ class TestTransformationProcessor(unittest.TestCase):
         
         # quick check that dq results are workign as expected for 'SUS'
         self.assertEqual('SUS', bib_rec_dq_results[0]['dq_z00_doc_number'])
-        # self.assertEqual('SUS', bib_rec_dq_results[3]['dq_z13_open_date'])
-        # self.assertEqual('SUS', bib_rec_dq_results[4]['dq_z13_open_date'])
 
         # item
         reader = ListReader(bib_rec_dq_results)
@@ -110,4 +109,57 @@ class TestTransformationProcessor(unittest.TestCase):
         # self.assertEqual(None, results[3]['t1_z13_open_date__bib_rec_create_dt'])
         # self.assertEqual(None, results[4]['t1_z13_open_date__bib_rec_create_dt'])
         
+        
+    def test_transform_bib_rec_z13u(self):
+        
+        # dq check the sample data first before transforming
+        reader = ListReader(self.bib_record_dimension_sample_data)
+        writer = ListWriter()
+        job_info = JobInfo(-1, 'test_user', '1', '1')
+        pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name',
+                   'in_z13u_rec_key', 'em_create_dw_prcsng_cycle_id']
+        data_quality_processor = DataQualityProcessor(
+            reader, writer, job_info, self.logger, self.bib_rec_sample_json_config, pk_list)
+        data_quality_processor.execute()
+        bib_rec_dq_results = data_quality_processor.writer.list
+        
+        
+        # do the transformation process using the bib_rec_dq_results
+        reader = ListReader(bib_rec_dq_results)
+        writer = ListWriter()
 
+        job_info = job_info = JobInfo(-1, 'test_user', '1', '1')
+
+        pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name',
+                   'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
+
+        transformation_processor = TransformationProcessor(
+            reader, writer, job_info, self.logger, self.bib_rec_sample_json_config, pk_list)
+
+
+        transformation_processor.execute()
+        results = transformation_processor.writer.list
+        
+        pdb.set_trace()
+
+        expected_keys = sorted([
+            'db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'em_update_dw_job_exectn_id', 'em_update_dw_job_name',
+            'em_update_dw_job_version_no', 'em_update_dw_prcsng_cycle_id', 'em_update_tmstmp', 'em_update_user_id',
+            'in_z00_doc_number'
+        ])
+        # 
+        # self.assertEqual(expected_keys, sorted(list(results[0].keys())))
+        # self.assertEqual(expected_keys, sorted(list(results[1].keys())))
+        # 
+        # self.assertEqual('TransformationProcessor', results[0]['em_update_dw_job_name'])
+        # 
+        # # the third item in results has successful transforms 
+        # self.assertEqual('', results[2]['t1_z00_data__bib_rec_marc_rec_data_cntnt_txt'])
+        # self.assertEqual('001970',results[2]['t1_z00_data_len__bib_rec_marc_rec_data_cntnt_len_cnt'] )
+        # self.assertEqual('000053939', results[2]['t1_z00_doc_number__bib_rec_source_system_id'])
+        
+        # # fourth index sample data item tests z13_open_date date format 
+        # self.assertEqual(None, results[3]['t1_z13_open_date__bib_rec_create_dt'])
+        # self.assertEqual(None, results[4]['t1_z13_open_date__bib_rec_create_dt'])
+        
+    

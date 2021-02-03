@@ -10,6 +10,7 @@ import sys
 from dwetl.job_info import JobInfoFactory, JobInfo
 from dwetl.processor.preprocess import Preprocess
 from dwetl.processor.data_quality_processor import DataQualityProcessor
+from dwetl.processor.transformation_processor import TransformationProcessor
 from dwetl.writer.print_writer import PrintWriter
 import dwetl
 
@@ -51,16 +52,27 @@ def stage_2_intertable_processing(job_info, logger):
             '''
             Preprocessing
             '''
+            print("... preprocessing")
+            logger.info("Stage 2 Intertable Processing...")
             preprocessor = Preprocess(reader, writer, job_info, logger, json_config, pk_list)
             preprocessor.execute()
 
             '''
-            # Data Quality Checks
-            # '''
-            data_quality_checker = DataQualityProcessor(reader, writer, job_info, logger, json_config, pk_list)
-            data_quality_checker.execute()
-
-
+            Data Quality Checks
+            '''
+            print("... checking data quality")
+            logger.info("... checking data quality")
+            data_quality_processor = DataQualityProcessor(reader, writer, job_info, logger, json_config, pk_list)
+            data_quality_processor.execute()
+            
+            '''
+            Transformations
+            '''
+            print("... transformations")
+            logger.info("... transformations")
+            transformation_processor = TransformationProcessor(reader, writer, job_info, logger, json_config, pk_list)
+            transformation_processor.execute()
+    
 
 
 
