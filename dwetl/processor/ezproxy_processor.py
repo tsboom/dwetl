@@ -10,6 +10,7 @@ class EzproxyProcessor(Processor):
     """
     Processor for processing ez proxy data
     """
+    skipped_errors = []
 
     def __init__(self, reader, writer, job_info, logger):
         super().__init__(reader, writer, job_info, logger)
@@ -113,16 +114,23 @@ class EzproxyProcessor(Processor):
         # dictionary to hold processed item
         out_dict = {}
 
+        # dictionary to hold info about skipped records
+        skipped_errors = {}
+
         # process item
         for key, value in item.items():
+            # dictionary to hold pk info during the item loop to use just in case of skipped errors
+            pk_dict = {}
             if key == 'em_create_dw_prcsng_cycle_id':
                 out_dict[key] = value
             if key.startswith('in_'):
                 if key == '_sa_instance_state':
                     continue
                 elif key == "in_ezp_sessns_snap_tmstmp":
+                    print(value)
                     # save value in pk
                     out_dict[key] = value
+                    pk_dict[key] = value
 
                     timestamp = EzproxyProcessor.convert_timestamp(item)
 
@@ -137,9 +145,23 @@ class EzproxyProcessor(Processor):
                     out_dict['t3_ezp_sessns_snap_tmstmp__ezp_sessns_snap_time_of_day_dim_key'] = time_of_day_dim_key
 
                 elif key == "in_mbr_lbry_cd":
+                    print(value)
                     out_dict[key] = value
+                    pk_dict[key] = value
                     library_dim_key = EzproxyProcessor.library_dim_lookup(item)
                     out_dict['t1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key'] = library_dim_key
+                
+                # skip active sessions count row if it is empty or null
+                # keep track of error rows and data in skipped_errors list
+                if value == '':
+                    pdb.set_trace()
+                    EzproxyProcessor.skipped_errors['in_mbr_lbry_cd'] = pk_dict['in_mbr_lbry_cd']
+                    EzproxyProcessor.skipped_errors['in_ezp_sessns_snap_tmstmp'] = pk_dict['in_ezp_sessns_snap_tmstmp']
+                    EzproxyProcessor.skipped_errors['problem key'] = key
+                    EzproxyProcessor.skipped_errors['problem value'] = value
+                    print(EzproxyProcessor.skipped_errors)
+                    break
+
                 else:
                     target_col_name = key.replace('in_', 't1_')
                     out_dict[target_col_name] = value
