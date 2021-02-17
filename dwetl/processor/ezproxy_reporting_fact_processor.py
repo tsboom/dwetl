@@ -8,7 +8,7 @@ import pprint
 
 class EzproxyReportingFactProcessor(Processor):
     """
-    Processor for moving final values from intertable processing into fact table
+    Processor for moving final values from fact table to the reporting db
 
     This processing step simply appends the job_info to the given
     item, and returns the resulting dictionary.
