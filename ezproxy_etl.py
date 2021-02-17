@@ -37,7 +37,7 @@ def run(input_file):
     
     if hostname != configured_host:
        #quit program if env file hostname doesn't match with the current hostname
-       print('ERROR: EzProxy ETL ended because .env contained an error. Please double check the configured host and db configuration.')
+       print(f'ERROR: EzProxy ETL ended because .env contained an error with the hostname {hostname}. Please double check the configured host and db configuration.')
        logger.error(f'EzProxy ETL ended because .env contained an error. please double check the configured host and db configuration.')
        sys.exit()
     
@@ -73,10 +73,10 @@ def run(input_file):
     ezproxy_load.load_fact_table(job_info, logger)
     
     
-    '''
-    copy new ezproxy data to reporting database 
-    '''
-    ezproxy_load.copy_new_facts_to_reporting_db(job_info, logger)
+    # '''
+    # copy new ezproxy data to reporting database 
+    # '''
+    # ezproxy_load.copy_new_facts_to_reporting_db(job_info, logger)
     
     
     '''
@@ -104,6 +104,7 @@ def run(input_file):
         max_prcsng_id = session.query(job_info_table_class).\
             filter(job_info_table_class.dw_prcsng_cycle_id == job_info.prcsng_cycle_id).\
             update({'dw_prcsng_cycle_exectn_end_tmstmp': endtime})
+        
     
     elapsed_time = endtime - time_started
     print("Ezproxy ETL elapsed time: ", str(elapsed_time))
@@ -122,7 +123,7 @@ if __name__=='__main__':
     # give hint if --help
     if '--help' in arguments:
         print('Usage: ')
-        print('\tezproxy_etl.py datestring')
+        print('\tezproxy_etl.py YYYYMMDD')
         sys.exit(1)
     # if a date string is provided, load that date's ezproxy data
     if len(arguments) == 2:
