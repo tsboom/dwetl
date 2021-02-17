@@ -15,6 +15,7 @@ class SqlAlchemyWriter(Writer):
         """
         self.session = session
         self.table_base_class = table_base_class
+        self.error_table_base_class = error_table_base_class
         
 
     def write_row(self, row_dict):

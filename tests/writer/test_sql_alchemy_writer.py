@@ -69,7 +69,7 @@ class TestSqlAlchemyWriter(unittest.TestCase):
 
             row_dict.update(job_info)
 
-            writer = SqlAlchemyWriter(session, error_table)
+            writer = SqlAlchemyWriter(session, table_base_class, error_table)
             pdb.set_trace()
             writer.write_row(row_dict)
 
