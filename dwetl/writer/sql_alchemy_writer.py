@@ -7,7 +7,7 @@ class SqlAlchemyWriter(Writer):
     """
     Updates a database table using the given row dictionary.
     """
-    def __init__(self, session, table_base_class):
+    def __init__(self, session, table_base_class, error_table_base_class):
         """
         Constructs the writer
         :param session: the SqlAlchemy session object to use
@@ -27,7 +27,7 @@ class SqlAlchemyWriter(Writer):
                 columns = self.table_base_class.__table__.columns.keys()
                 if key in columns:
                     relevant_row_dict[key] = val
-
+            print(relevant_row_dict)
             record = self.table_base_class(**relevant_row_dict)
 
 
@@ -35,7 +35,6 @@ class SqlAlchemyWriter(Writer):
             pk_list = []
             pk_values = self.table_base_class.__table__.primary_key.columns.values()
             for i, key in enumerate(pk_values):
-                # index = pk_values.index(key)
                 pk_list.append(pk_values[i].name)
 
             # check to see if list of pks are in the row_dict
@@ -54,4 +53,8 @@ class SqlAlchemyWriter(Writer):
                 self.session.add(record)
 
         except exc.SQLAlchemyError as e:
+            pdb.set_trace() 
+            print(f"Error: {e}")
             self.session.rollback()
+        else: 
+            self.session.commit()
