@@ -13,6 +13,7 @@ class TestSqlAlchemyWriter(unittest.TestCase):
     def test_add_row_to_table(self):
         with dwetl.test_database_session() as session:
             table_base_class = dwetl.Base.classes.dw_stg_1_mai01_z00
+            error_table = dwetl.Base.classes.dw_db_errors
 
             row_dict = {'rec_type_cd': 'D', 'db_operation_cd': 'U', 'rec_trigger_key': '000007520',
                         'z00_doc_number': '000007520', 'z00_no_lines': '0041', 'z00_data_len': '001504'}
@@ -32,7 +33,7 @@ class TestSqlAlchemyWriter(unittest.TestCase):
 
             row_dict.update(job_info)
 
-            writer = SqlAlchemyWriter(session, table_base_class)
+            writer = SqlAlchemyWriter(session, table_base_class, error_table)
             writer.write_row(row_dict)
 
             # Verify that the row was added
@@ -46,6 +47,7 @@ class TestSqlAlchemyWriter(unittest.TestCase):
 
     def test_add_row_w_null_to_error_table(self):
          with dwetl.test_database_session() as session:
+            table_base_class = dwetl.Base.classes.dw_stg_2_ezp_sessns_snap
             error_table = dwetl.Base.classes.dw_db_errors
             row_dict = {
                 'in_mbr_lbry_cd': 'cp',
@@ -70,8 +72,8 @@ class TestSqlAlchemyWriter(unittest.TestCase):
             row_dict.update(job_info)
 
             writer = SqlAlchemyWriter(session, table_base_class, error_table)
-            pdb.set_trace()
             writer.write_row(row_dict)
+            pdb.set_trace()
 
             # Verify that if the row produced an error, that the error is caught and written to the error table
             error_string = "IntegrityError(\'(psycopg2.errors.NotNullViolation) null value in column \"ezp_sessns_snap_actv_sessns_cnt\" violates not-null constraint\\nDETAIL: Failing row contains (cp, 20201205-1600, null, 2384, 1, 1, LoadAlephTsv, 1.0.0, thschone, 2021-02-09 19:33:58.4565).\\n\')"

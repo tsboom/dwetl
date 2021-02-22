@@ -1300,7 +1300,7 @@ CREATE TABLE public.dw_stg_2_ezp_sessns_snap (
     t3_ezp_sessns_snap_tmstmp__ezp_sessns_snap_time_of_day_dim_key integer,
     in_ezp_sessns_snap_actv_sessns_cnt integer,
     t1_ezp_sessns_snap_actv_sessns_cnt integer,
-    in_ezp_sessns_virtual_hosts_cnt integer,
+    in_ezp_sessns_virtual_hosts_cnt integer NOT NULL,
     em_create_dw_prcsng_cycle_id integer NOT NULL,
     em_create_dw_job_exectn_id integer NOT NULL,
     em_create_dw_job_name character varying(100) NOT NULL,
