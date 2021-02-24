@@ -73,7 +73,7 @@ class TestSqlAlchemyWriter(unittest.TestCase):
 
             writer = SqlAlchemyWriter(session, table_base_class, error_table)
             writer.write_row(row_dict)
-            pdb.set_trace()
+            #pdb.set_trace()
 
             # Verify that if the row produced an error, that the error is caught and written to the error table
             error_string = "IntegrityError(\'(psycopg2.errors.NotNullViolation) null value in column \"ezp_sessns_snap_actv_sessns_cnt\" violates not-null constraint\\nDETAIL: Failing row contains (cp, 20201205-1600, null, 2384, 1, 1, LoadAlephTsv, 1.0.0, thschone, 2021-02-09 19:33:58.4565).\\n\')"
