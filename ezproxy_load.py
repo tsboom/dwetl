@@ -28,12 +28,12 @@ def load_stage_1(job_info, input_file, logger):
     print('EZProxy Loading stage 1...')
     logger.info('EZ Proxy Loading stage 1...')
 
-    table = 'dw_stg_1_ezp_sessns_snap'
+    table = dwetl.Base.classes['dw_stg_1_ezp_sessns_snap']
+    error_table = dwetl.Base.classes['dw_db_errors']
 
     with dwetl.database_session() as session:
         reader = EzproxyReader(input_file)
-        # writer = PrintWriter()
-        writer = SqlAlchemyWriter(session, dwetl.Base.classes[table])
+        writer = SqlAlchemyWriter(session, table, error_table)
         processor = LoadAlephTsv(reader, writer, job_info, logger)
         processor.execute()
 

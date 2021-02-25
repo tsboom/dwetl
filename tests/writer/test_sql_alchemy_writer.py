@@ -47,13 +47,15 @@ class TestSqlAlchemyWriter(unittest.TestCase):
 
     def test_add_row_w_null_to_error_table(self):
          with dwetl.test_database_session() as session:
-            table_base_class = dwetl.Base.classes.dw_stg_2_ezp_sessns_snap
+            table_base_class = dwetl.Base.classes.dw_stg_1_ezp_sessns_snap
             error_table = dwetl.Base.classes.dw_db_errors
+
+            # testing the row as it comes in from the TSV (during the ezproxy_load.load_stage_1)
             row_dict = {
-                'in_mbr_lbry_cd': 'cp',
-                'in_ezp_sessns_snap_tmstmp': '20201205-1600',
-                'in_ezp_sessns_snap_actv_sessns_cnt': None,
-                'in_ezp_sessns_virtual_hosts_cnt': '2384'
+                'mbr_lbry_cd': 'cp',
+                'ezp_sessns_snap_tmstmp': '20201205-1600',
+                'ezp_sessns_snap_actv_sessns_cnt': '', # data comes in as an empty string 
+                'ezp_sessns_virtual_hosts_cnt': '2384',
             }
 
             # Using negative processing_cycle_id so having real data in the

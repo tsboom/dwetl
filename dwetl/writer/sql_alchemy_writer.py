@@ -31,7 +31,6 @@ class SqlAlchemyWriter(Writer):
             print(relevant_row_dict)
             record = self.table_base_class(**relevant_row_dict)
 
-
             # get list of primary keys from table_base_class
             pk_list = []
             pk_values = self.table_base_class.__table__.primary_key.columns.values()
@@ -53,9 +52,39 @@ class SqlAlchemyWriter(Writer):
             # Add new row if PK list is not found in row
                 self.session.add(record)
 
-        except exc.SQLAlchemyError as e:
-            pdb.set_trace() 
-            print(f"Error: {e}")
+
+        except exc.SQLALchemyError as e:
+            # undo the adding of the relevant record
             self.session.rollback()
+            print('here')
+            pdb.set_trace() 
+            error = str(e.__dict__['orig'])
+
+            '''
+            temporarily put error table columns here for reference
+            error_id
+            dw_error_col_name
+            dw_error_text
+            em_create_dw_prcsng_cycle_id
+            em_create_dw_job_name
+            em_create_dw_job_version_no
+            em_create_user_id
+            em_create_tmstmp
+           '''
+            # need to parse out the column name and error text from error
+            '''
+            # create error row dictionary that will be added to the error table
+            error_row_dict = {
+                'dw_error_col_name': '',
+                'dw_error_text': error,
+                ''
+
+            }
+            '''
+            # write error to the error table
+            error_record = self.error_table_base_class(**error_row_dict)
+            self.session.add(error_record)
+
+            
         else: 
             self.session.commit()

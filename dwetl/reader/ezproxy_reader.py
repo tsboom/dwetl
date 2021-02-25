@@ -33,11 +33,6 @@ class EzproxyReader:
                 # Skip rest of headers if we run out of values
                 if i < len(line):
                     result[self.headers[i]] = line[i]
-                    # # make sure that if the line is '', it is still added as None
-                    # if not line[i]:
-                    #     result[self.headers[i]] = None
-                    # else:
-                    #     result[self.headers[i]] = line[i]
             yield result
 
     def __del__(self):
