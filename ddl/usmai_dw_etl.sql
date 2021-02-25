@@ -1273,8 +1273,8 @@ ALTER TABLE public.dw_stg_1_mpf_mbr_lbry OWNER TO usmai_dw;
 CREATE TABLE public.dw_stg_1_ezp_sessns_snap (
     mbr_lbry_cd character varying(2) NOT NULL,
     ezp_sessns_snap_tmstmp character varying(13) NOT NULL,
-    ezp_sessns_snap_actv_sessns_cnt integer,
-    ezp_sessns_virtual_hosts_cnt integer,
+    ezp_sessns_snap_actv_sessns_cnt integer NOT NULL,
+    ezp_sessns_virtual_hosts_cnt integer NOT NULL,
     em_create_dw_prcsng_cycle_id integer NOT NULL,
     em_create_dw_job_exectn_id integer NOT NULL,
     em_create_dw_job_name character varying(100) NOT NULL,
@@ -3881,7 +3881,7 @@ CREATE INDEX indx_fact_lbry_item_status ON public.fact_lbry_item USING btree (lb
 --
 
 CREATE TABLE public.dw_db_errors (
-    dw_error_id serial NOT NULL,
+    dw_error_id integer NOT NULL,
     dw_error_col_name character varying(100) NOT NULL,
     dw_error_text character varying(1000) NOT NULL,
     em_create_dw_prcsng_cycle_id integer NOT NULL,
@@ -3914,7 +3914,7 @@ CREATE SEQUENCE public.dw_error_id
 --
 
 ALTER TABLE ONLY public.dw_db_errors
-    ADD CONSTRAINT pk_dw_db_errors PRIMARY KEY (em_create_dw_prcsng_cycle_id, dw_error_text);
+    ADD CONSTRAINT pk_dw_db_errors PRIMARY KEY (dw_error_id, em_create_dw_prcsng_cycle_id);
 
 
 
