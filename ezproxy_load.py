@@ -29,12 +29,12 @@ def load_stage_1(job_info, input_file, logger):
     logger.info('EZ Proxy Loading stage 1...')
 
     table = dwetl.Base.classes['dw_stg_1_ezp_sessns_snap']
-    error_table = dwetl.Base.classes['dw_db_errors']
 
     with dwetl.database_session() as session:
         reader = EzproxyReader(input_file)
-        writer = SqlAlchemyWriter(session, table, error_table)
-        processor = LoadAlephTsv(reader, writer, job_info, logger)
+        writer = SqlAlchemyWriter(session, table)
+        error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
+        processor = LoadAlephTsv(reader, writer, job_info, logger, error_writer)
         processor.execute()
 
 
@@ -50,9 +50,10 @@ def load_stage_2(job_info, logger):
         stage2_table_class = dwetl.Base.classes["dw_stg_2_ezp_sessns_snap"]
         reader = SqlAlchemyReader(session, stage1_table_class, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
         writer = SqlAlchemyWriter(session, stage2_table_class)
+        error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
         # there is no aleph library for ez proxy data, but CopyStage1ToStage2 still will work
         library = ''
-        processor = CopyStage1ToStage2.create(reader, writer, job_info, logger, library)
+        processor = CopyStage1ToStage2.create(reader, writer, job_info, logger, library, error_writer)
         processor.execute()
     logger.info('Finished EZProxy loading stage 2 .... ')
 
@@ -65,7 +66,8 @@ def intertable_processing(job_info, logger):
     with dwetl.database_session() as session:
         reader = SqlAlchemyReader(session, stage2_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
         writer = SqlAlchemyWriter(session, stage2_table)
-        processor = EzproxyProcessor(reader, writer, job_info, logger)
+        error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
+        processor = EzproxyProcessor(reader, writer, job_info, logger, error_writer)
         processor.execute()
     logger.info('Finished EZProxy intertable processing .... ')
 
@@ -75,6 +77,7 @@ def load_fact_table(job_info, logger):
     stage2_table = dwetl.Base.classes['dw_stg_2_ezp_sessns_snap']
     fact_table = dwetl.Base.classes['fact_ezp_sessns_snap']
     processing_cycle_id = job_info.prcsng_cycle_id
+    error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
 
     # get max value for fact key from the reporting db
     with dwetl.reporting_database_session() as session2:
