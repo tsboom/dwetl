@@ -3882,8 +3882,9 @@ CREATE INDEX indx_fact_lbry_item_status ON public.fact_lbry_item USING btree (lb
 
 CREATE TABLE public.dw_db_errors (
     dw_error_id integer NOT NULL,
-    dw_error_col_name character varying(100) NOT NULL,
-    dw_error_text character varying(1000) NOT NULL,
+    dw_error_type character varying(150) NOT NULL,
+    dw_error_text character varying(2000) NOT NULL,
+    dw_error_row character varying(1000) NOT NULL,
     em_create_dw_prcsng_cycle_id integer NOT NULL,
     em_create_dw_job_exectn_id integer NOT NULL,
     em_create_dw_job_name character varying(100) NOT NULL,
@@ -3895,18 +3896,6 @@ WITH (autovacuum_enabled='true');
 
 
 ALTER TABLE public.dw_db_errors OWNER TO usmai_dw;
-
---
--- Name: dw_db_error; Type: SEQUENCE; Schema: public; Owner: usmai_dw
---
-
-CREATE SEQUENCE public.dw_error_id 
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
 
 
 --
