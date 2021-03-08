@@ -77,20 +77,33 @@ def run(input_file):
     # copy new ezproxy data to reporting database 
     # '''
     # ezproxy_load.copy_new_facts_to_reporting_db(job_info, logger)
+
     
+    # '''
+    # move data file to "processed" directory
+    # '''
+    # processed_dir = os.getenv("DATA_DIRECTORY") + "processed/ezproxy/"
+    # just_filename = input_file.split('/')[-1]
+    # try:
+    #     shutil.move(input_file, processed_dir + just_filename)
+    #     logger.info('Moved file to processed directory.')
+    # except Exception as e:
+    #     print(e)
+    #     logger.error('Failed to move file to processed directory: '  + str(e))
+
     
     '''
-    move data file to "processed" directory
+    report status and errors
     '''
-    processed_dir = os.getenv("DATA_DIRECTORY") + "processed/ezproxy/"
-    just_filename = input_file.split('/')[-1]
-    try:
-        shutil.move(input_file, processed_dir + just_filename)
-        logger.info('Moved file to processed directory.')
-    except Exception as e:
-        print(e)
-        logger.error('Failed to move file to processed directory: '  + str(e))
-        
+
+    # query to find # of rows written to the reporting db during the current process
+    with dwetl.database_session() as session:
+        error_table_class = dwetl.Base.classes['dw_db_errors']
+        # count number of records with the current process id
+        errors = session.query(error_table_class).\
+            filter(error_table_class.dw_prcsng_cycle_id == job_info.prcsng_cycle_id)
+
+    pdb.set_trace()
     
     '''
     end of job metadata writing
@@ -104,12 +117,15 @@ def run(input_file):
         max_prcsng_id = session.query(job_info_table_class).\
             filter(job_info_table_class.dw_prcsng_cycle_id == job_info.prcsng_cycle_id).\
             update({'dw_prcsng_cycle_exectn_end_tmstmp': endtime})
+
         
     
     elapsed_time = endtime - time_started
     print("Ezproxy ETL elapsed time: ", str(elapsed_time))
     logger.info(f'EzProxy ETL elapsed time: {str(elapsed_time)}')
     print("Success")
+
+
 '''
 main function for running script from the command line
 '''

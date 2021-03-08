@@ -53,7 +53,7 @@ def load_stage_2(job_info, logger):
         error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
         # there is no aleph library for ez proxy data, but CopyStage1ToStage2 still will work
         library = ''
-        processor = CopyStage1ToStage2.create(reader, writer, job_info, logger, library, error_writer)
+        processor = CopyStage1ToStage2(reader, writer, job_info, logger, library, error_writer)
         processor.execute()
     logger.info('Finished EZProxy loading stage 2 .... ')
 
@@ -77,7 +77,6 @@ def load_fact_table(job_info, logger):
     stage2_table = dwetl.Base.classes['dw_stg_2_ezp_sessns_snap']
     fact_table = dwetl.Base.classes['fact_ezp_sessns_snap']
     processing_cycle_id = job_info.prcsng_cycle_id
-    error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
 
     # get max value for fact key from the reporting db
     with dwetl.reporting_database_session() as session2:
@@ -91,6 +90,7 @@ def load_fact_table(job_info, logger):
     with dwetl.database_session() as session:
         reader = SqlAlchemyReader(session, stage2_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
         writer = SqlAlchemyWriter(session, fact_table)
+        error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
         processor = EzproxyFactProcessor(reader, writer, job_info, logger, max_ezp_sessns_snap_fact_key)
         processor.execute()
     logger.info('Finished loading to the fact table.... ')

@@ -11,8 +11,8 @@ class EzproxyProcessor(Processor):
     Processor for processing ez proxy data
     """
 
-    def __init__(self, reader, writer, job_info, logger):
-        super().__init__(reader, writer, job_info, logger)
+    def __init__(self, reader, writer, job_info, logger, error_writer):
+        super().__init__(reader, writer, job_info, logger, error_writer)
 
     def job_name(self):
         return 'EzproxyProcessor'
