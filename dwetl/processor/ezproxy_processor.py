@@ -126,7 +126,6 @@ class EzproxyProcessor(Processor):
                 if key == '_sa_instance_state':
                     continue
                 elif key == "in_ezp_sessns_snap_tmstmp":
-                    print(value)
                     # save value in pk
                     out_dict[key] = value
                     pk_dict[key] = value
@@ -144,7 +143,6 @@ class EzproxyProcessor(Processor):
                     out_dict['t3_ezp_sessns_snap_tmstmp__ezp_sessns_snap_time_of_day_dim_key'] = time_of_day_dim_key
 
                 elif key == "in_mbr_lbry_cd":
-                    print(value)
                     out_dict[key] = value
                     pk_dict[key] = value
                     library_dim_key = EzproxyProcessor.library_dim_lookup(item)

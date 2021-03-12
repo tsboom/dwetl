@@ -47,7 +47,7 @@ class TestSqlAlchemyWriter(unittest.TestCase):
             self.assertEqual('000007520', result_dict['rec_trigger_key'])
             self.assertEqual('001504', result_dict['z00_data_len'])
 
-    def test_add_row_w_null_to_error_table(self):
+    def test_add_row_w_null_to_error_table_exception(self):
         with pytest.raises(DWETLException):
             with dwetl.test_database_session() as session:
                 table_base_class = dwetl.Base.classes.dw_stg_1_ezp_sessns_snap

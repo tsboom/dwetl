@@ -45,5 +45,5 @@ class CopyStage1ToStage2(Processor):
 
         processed_item.update(self.job_info.as_dict('create'))
         processed_item['em_create_tmstmp'] = datetime.datetime.now()
-        pdb.set_trace()
+        #pdb.set_trace()
         return processed_item

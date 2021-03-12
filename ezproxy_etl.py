@@ -62,15 +62,15 @@ def run(input_file):
     ezproxy_load.load_stage_2(job_info, logger)
     
     
-    '''
-    stg 2 intertable processing
-    '''
-    ezproxy_load.intertable_processing(job_info, logger)
+    # '''
+    # stg 2 intertable processing
+    # '''
+    # ezproxy_load.intertable_processing(job_info, logger)
     
-    '''
-    fact table load
-    '''
-    ezproxy_load.load_fact_table(job_info, logger)
+    # '''
+    # fact table load
+    # '''
+    # ezproxy_load.load_fact_table(job_info, logger)
     
     
     # '''
@@ -96,14 +96,25 @@ def run(input_file):
     report status and errors
     '''
 
-    # query to find # of rows written to the reporting db during the current process
+    # query to find # of rows written to the error table during the current process
     with dwetl.database_session() as session:
         error_table_class = dwetl.Base.classes['dw_db_errors']
         # count number of records with the current process id
-        errors = session.query(error_table_class).\
-            filter(error_table_class.dw_prcsng_cycle_id == job_info.prcsng_cycle_id)
-
+        error_count = session.query(error_table_class).\
+            filter(error_table_class.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
+        
     pdb.set_trace()
+
+    # query to find # of rows written to the reporting db during the current process
+    # TODO change this to reporting_database_session when that works
+    with dwetl.database_session() as session:
+        error_table_class = dwetl.Base.classes['dw_db_errors']
+        # count number of records with the current process id
+        error_count = session.query(error_table_class).\
+            filter(error_table_class.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
+        
+    pdb.set_trace()
+
     
     '''
     end of job metadata writing

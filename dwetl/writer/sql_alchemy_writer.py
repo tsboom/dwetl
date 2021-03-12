@@ -2,6 +2,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from dwetl.writer.writer import Writer
 from dwetl.exceptions import DWETLException
 import pdb
+import dwetl
 
 
 class SqlAlchemyWriter(Writer):
@@ -27,7 +28,6 @@ class SqlAlchemyWriter(Writer):
             columns = self.table_base_class.__table__.columns.keys()
             if key in columns:
                 relevant_row_dict[key] = val
-        print(relevant_row_dict)
         record = self.table_base_class(**relevant_row_dict)
 
         # get list of primary keys from table_base_class
@@ -44,6 +44,7 @@ class SqlAlchemyWriter(Writer):
             else:
                 in_dict = False
 
+
         # Update the row if PK list is found in row
         if in_dict == True:
             self.session.merge(record)
@@ -51,12 +52,13 @@ class SqlAlchemyWriter(Writer):
         # Add new row if PK list is not found in row
             self.session.add(record)
 
-        # commit the record and catch exceptions
+        # flush record and catch exceptions. the commit happens later in __init__.py of dwetl
         try:
-            self.session.commit()
+            self.session.flush()
 
         except SQLAlchemyError as e:
             # undo the adding of the relevant record
             self.session.rollback()
             raise DWETLException(e)
+        
             

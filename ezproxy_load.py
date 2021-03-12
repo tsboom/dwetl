@@ -7,6 +7,7 @@ from dwetl.job_info import JobInfoFactory, JobInfo
 from dwetl.reader.ezproxy_reader import EzproxyReader
 from dwetl.processor.load_aleph_tsv import LoadAlephTsv
 from dwetl.writer.sql_alchemy_writer import SqlAlchemyWriter
+from dwetl.writer.print_writer import PrintWriter
 from dwetl.reader.sql_alchemy_reader import SqlAlchemyReader
 from dwetl.processor.ezproxy_processor import EzproxyProcessor
 from dwetl.processor.ezproxy_fact_processor import EzproxyFactProcessor
@@ -50,7 +51,9 @@ def load_stage_2(job_info, logger):
         stage2_table_class = dwetl.Base.classes["dw_stg_2_ezp_sessns_snap"]
         reader = SqlAlchemyReader(session, stage1_table_class, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
         writer = SqlAlchemyWriter(session, stage2_table_class)
+        #writer = PrintWriter()
         error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
+        # error_writer = PrintWriter()
         # there is no aleph library for ez proxy data, but CopyStage1ToStage2 still will work
         library = ''
         processor = CopyStage1ToStage2(reader, writer, job_info, logger, library, error_writer)

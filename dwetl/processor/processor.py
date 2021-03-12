@@ -21,7 +21,7 @@ class Processor:
     def execute(self):
         for row_dict in self.reader:
             processed_row_dict = self.process_item(row_dict)
-            
+        
             if processed_row_dict:
                 try:
                     self.writer.write_row(processed_row_dict)
@@ -54,8 +54,13 @@ class Processor:
                         'em_create_dw_job_exectn_id': processed_row_dict['em_create_dw_job_exectn_id']
                     }
 
+                    print(e.error_type, error, error_row)
+
                     # write error to the error table
                     error_record = self.error_writer.write_row(error_row_dict)
+
+                    # # log error
+                    # self.logger.info(e.error_type, error, error_row)
 
 
     def job_name(self):
