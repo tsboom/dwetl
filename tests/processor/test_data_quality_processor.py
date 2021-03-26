@@ -20,6 +20,7 @@ class TestDataQualityProcessor(unittest.TestCase):
         cls.bib_record_dimension_sample_data_z13 = bib_record_dimension_sample_data.bib_rec_sample_data_z13
 
         cls.logger = test_logger.logger
+        cls.error_writer = ListWriter()
 
         with open('table_config/bibliographic_record_dimension.json') as json_file:
             cls.bib_rec_json_config = json.load(json_file)
@@ -171,15 +172,16 @@ class TestDataQualityProcessor(unittest.TestCase):
         z13_pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'in_z13_rec_key', 'em_create_dw_prcsng_cycle_id']
 
 
-        data_quality_processor = DataQualityProcessor(reader, writer, job_info, self.logger, json_config, z00_pk_list)
+        data_quality_processor = DataQualityProcessor(reader, writer, job_info, self.logger, json_config, z00_pk_list, self.error_writer)
         data_quality_processor.execute()
         z00_results = data_quality_processor.writer.list
 
         # z13
         reader = ListReader(self.bib_record_dimension_sample_data_z00)
-        data_quality_processor = DataQualityProcessor(reader, writer, job_info, self.logger, json_config, z13_pk_list)
+        data_quality_processor = DataQualityProcessor(reader, writer, job_info, self.logger, json_config, z13_pk_list, self.error_writer)
         data_quality_processor.execute()
         z13_results = data_quality_processor.writer.list
+
 
         z00_expected_keys = sorted([
             'db_operation_cd', 'dq_z00_data', 'dq_z00_data_len', 'dq_z00_doc_number', 'dq_z00_no_lines', 'dw_stg_2_aleph_lbry_name',
@@ -195,12 +197,12 @@ class TestDataQualityProcessor(unittest.TestCase):
         self.assertEqual(z00_expected_keys, sorted(list(z00_results[0].keys())))
         self.assertEqual(z00_expected_keys, sorted(list(z00_results[1].keys())))
         self.assertEqual(z13_expected_keys, sorted(list(z13_results[3].keys())))
-        elf.assertEqual(z13_expected_keys, sorted(list(z13_results[5].keys())))
+        self.assertEqual(z13_expected_keys, sorted(list(z13_results[5].keys())))
 
         self.assertEqual("SUS", results[0]['dq_z00_doc_number'])
         self.assertEqual(1, results[0]['rm_dq_check_excptn_cnt'])
         self.assertEqual("MIS", results[0]['rm_suspend_rec_reason_cd'])
-        pdb.set_trace()
+
         self.assertEqual(None, results[3]['dq_z13_open_date'])
         self.assertEqual(1, results[3]['rm_dq_check_excptn_cnt'])
         self.assertEqual("MIS", results[0]['rm_suspend_rec_reason_cd'])

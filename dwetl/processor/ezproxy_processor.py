@@ -113,9 +113,6 @@ class EzproxyProcessor(Processor):
         # dictionary to hold processed item
         out_dict = {}
 
-        # dictionary to hold info about skipped records
-        skipped_errors = {}
-
         # process item
         for key, value in item.items():
             # dictionary to hold pk info during the item loop to use just in case of skipped errors

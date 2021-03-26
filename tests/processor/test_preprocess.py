@@ -7,6 +7,11 @@ import pdb
 
 
 class TestPreprocess(unittest.TestCase):
+    def setUp(self):
+        self.writer = ListWriter()
+        self.logger = None
+        self.error_writer = ListWriter()
+
     def test_bib_rec_preprocess(self):
         """
         tests the case where there's no whitespace
@@ -29,11 +34,8 @@ class TestPreprocess(unittest.TestCase):
         ]
 
         reader = ListReader(sample_data)
-        writer = ListWriter()
 
         job_info = JobInfo(-1, 'test_user', '1', '1')
-
-        logger = None
 
         sample_json_config = {
             'z00_doc_number': {
@@ -83,8 +85,8 @@ class TestPreprocess(unittest.TestCase):
         pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name',
                    'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
 
-        step = Preprocess(reader, writer, job_info, logger,
-                          sample_json_config, pk_list)
+        step = Preprocess(reader, self.writer, job_info, self.logger,
+                          sample_json_config, pk_list, self.error_writer)
         step.execute()
         results = step.writer.list
 
@@ -124,11 +126,8 @@ class TestPreprocess(unittest.TestCase):
         ]
 
         reader = ListReader(sample_data)
-        writer = ListWriter()
 
         job_info = JobInfo(-1, 'test_user', '1', '1')
-
-        logger = None
 
         sample_json_config = {
             'z00_doc_number': {
@@ -178,8 +177,8 @@ class TestPreprocess(unittest.TestCase):
         pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name',
                    'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
 
-        step = Preprocess(reader, writer, job_info, logger,
-                          sample_json_config, pk_list)
+        step = Preprocess(reader, self.writer, job_info, self.logger,
+                          sample_json_config, pk_list, self.error_writer)
         step.execute()
         results = step.writer.list
 
@@ -215,11 +214,8 @@ class TestPreprocess(unittest.TestCase):
         ]
 
         reader = ListReader(sample_data)
-        writer = ListWriter()
 
         job_info = JobInfo(-1, 'test_user', '1', '1')
-
-        logger = None
 
         sample_json_config = {'z00_doc_number': {
             "preprocessing_info": {
@@ -246,8 +242,8 @@ class TestPreprocess(unittest.TestCase):
         pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name',
                    'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
 
-        step = Preprocess(reader, writer, job_info, logger,
-                          sample_json_config, pk_list)
+        step = Preprocess(reader, self.writer, job_info, self.logger,
+                          sample_json_config, pk_list, self.error_writer)
         step.execute()
         results = step.writer.list
 

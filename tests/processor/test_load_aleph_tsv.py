@@ -19,8 +19,9 @@ class TestLoadAlephTsv(unittest.TestCase):
         job_info = JobInfo(-1, 'test_user' , '1', '1')
 
         logger = None
+        error_writer = ListWriter()
 
-        step = LoadAlephTsv(reader, writer, job_info, logger)
+        step = LoadAlephTsv(reader, writer, job_info, logger, error_writer)
 
         step.execute()
 

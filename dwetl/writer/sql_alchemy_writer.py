@@ -52,7 +52,8 @@ class SqlAlchemyWriter(Writer):
         # Add new row if PK list is not found in row
             self.session.add(record)
 
-        # flush record and catch exceptions. the commit happens later in __init__.py of dwetl
+        # flush record and catch exceptions. 
+        # the commit happens later in __init__.py of dwetl
         try:
             self.session.flush()
 

@@ -73,9 +73,10 @@ class TestEzproxyProcessor(unittest.TestCase):
 
     def test_end_to_end(self):
         writer = ListWriter()
+        error_writer = ListWriter()
         job_info = JobInfo(-1, 'test_user', '1', '1')
         reader = ListReader(self.sample_data)
-        ezproxy_processor = EzproxyProcessor(reader, writer, job_info, self.logger)
+        ezproxy_processor = EzproxyProcessor(reader, writer, job_info, self.logger, error_writer)
         ezproxy_processor.execute()
 
         results = ezproxy_processor.writer.list

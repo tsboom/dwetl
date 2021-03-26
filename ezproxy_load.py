@@ -26,7 +26,7 @@ load EZ Proxy file equivalent table (Stage 1)
 
 
 def load_stage_1(job_info, input_file, logger):
-    print('EZProxy Loading stage 1...')
+    print('\n\nEZProxy Loading stage 1...')
     logger.info('EZ Proxy Loading stage 1...')
 
     table = dwetl.Base.classes['dw_stg_1_ezp_sessns_snap']
@@ -38,10 +38,17 @@ def load_stage_1(job_info, input_file, logger):
         processor = LoadAlephTsv(reader, writer, job_info, logger, error_writer)
         processor.execute()
 
+        # count number of rows written to stage one
+        ezproxy_stg1_table = dwetl.Base.classes['dw_stg_1_ezp_sessns_snap']
+        # count number of records with the current process id
+        input_record_count = session.query(ezproxy_stg1_table).\
+            filter(ezproxy_stg1_table.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
+        print(f'{input_record_count} records loaded from the TSV to stage 1.')
+        logger.info(f'\n{input_record_count} records loaded from the TSV to stage 1.')
 
 
 def load_stage_2(job_info, logger):
-    print('EZProxy Loading stage 2...')
+    print('\n\nEZProxy Loading stage 2...')
     logger.info('EZProxy Loading stage 2...')
 
     processing_cycle_id = job_info.prcsng_cycle_id
@@ -61,7 +68,7 @@ def load_stage_2(job_info, logger):
     logger.info('Finished EZProxy loading stage 2 .... ')
 
 def intertable_processing(job_info, logger):
-    print('EZProxy transformations started...')
+    print('\n\nEZProxy transformations started...')
     logger.info('EZProxy intertable processing starts...')
     stage2_table = dwetl.Base.classes['dw_stg_2_ezp_sessns_snap']
     processing_cycle_id = job_info.prcsng_cycle_id
@@ -75,7 +82,7 @@ def intertable_processing(job_info, logger):
     logger.info('Finished EZProxy intertable processing .... ')
 
 def load_fact_table(job_info, logger):
-    print('EZProxy loading fact table...')
+    print('\n\nEZProxy loading fact table...')
     logger.info('Loading to the fact table.... ')
     stage2_table = dwetl.Base.classes['dw_stg_2_ezp_sessns_snap']
     fact_table = dwetl.Base.classes['fact_ezp_sessns_snap']
@@ -94,25 +101,19 @@ def load_fact_table(job_info, logger):
         reader = SqlAlchemyReader(session, stage2_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
         writer = SqlAlchemyWriter(session, fact_table)
         error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
-        processor = EzproxyFactProcessor(reader, writer, job_info, logger, max_ezp_sessns_snap_fact_key)
+        processor = EzproxyFactProcessor(reader, writer, job_info, logger, max_ezp_sessns_snap_fact_key, error_writer)
         processor.execute()
-    logger.info('Finished loading to the fact table.... ')
-
 
 def copy_new_facts_to_reporting_db(job_info, logger):
     etl_fact_table = dwetl.Base.classes['fact_ezp_sessns_snap']
     processing_cycle_id = job_info.prcsng_cycle_id
 
-    # query and select records from etl fact table
-    # should we use the create update processing cycle ID? or the Update processing cycle id?
-    with dwetl.database_session() as session:
-        reader = SqlAlchemyReader(session, etl_fact_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
-        session.expunge_all()
-
     # insert records into reporting db ezp fact table
     with dwetl.reporting_database_session() as session2:
         reporting_fact_table = dwetl.ReportingBase.classes['fact_ezp_sessns_snap']
+        reader = SqlAlchemyReader(session2, reporting_fact_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
         writer = SqlAlchemyWriter(session2, reporting_fact_table)
-        processor = EzproxyReportingFactProcessor(reader, writer, job_info, logger)
+        error_writer = SqlAlchemyWriter(session2, dwetl.Base.classes['dw_db_errors'])
+        processor = EzproxyReportingFactProcessor(reader, writer, job_info, logger, error_writer)
         processor.execute()
         

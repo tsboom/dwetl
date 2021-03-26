@@ -54,13 +54,14 @@ class Processor:
                         'em_create_dw_job_exectn_id': processed_row_dict['em_create_dw_job_exectn_id']
                     }
 
-                    print(e.error_type, error, error_row)
-
                     # write error to the error table
                     error_record = self.error_writer.write_row(error_row_dict)
 
-                    # # log error
-                    # self.logger.info(e.error_type, error, error_row)
+                    # log error
+                    self.logger.info(f'{e.error_type} found')
+                    print(f'\n{e.error_type} found: {error}')
+                    print(f'Problem row:\n{error_row}')
+
 
 
     def job_name(self):

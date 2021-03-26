@@ -13,14 +13,9 @@ class EzproxyReportingFactProcessor(Processor):
     This processing step simply appends the job_info to the given
     item, and returns the resulting dictionary.
     """
-    def __init__(self, reader, writer, job_info, logger):
-        super().__init__(reader, writer, job_info, logger)
+    def __init__(self, reader, writer, job_info, logger, error_writer):
+        super().__init__(reader, writer, job_info, logger, error_writer)
         self.invalid_keys = ['_sa_instance_state']
-
-
-    @classmethod
-    def create(cls, reader, writer, job_info, logger):
-        return EzproxyReportingFactProcessor(reader, writer, job_info, logger)
 
     def job_name(self):
         return 'EzproxyReportingFactProcessor'

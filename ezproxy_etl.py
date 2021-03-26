@@ -62,21 +62,21 @@ def run(input_file):
     ezproxy_load.load_stage_2(job_info, logger)
     
     
-    # '''
-    # stg 2 intertable processing
-    # '''
-    # ezproxy_load.intertable_processing(job_info, logger)
+    '''
+    stg 2 intertable processing
+    '''
+    ezproxy_load.intertable_processing(job_info, logger)
     
-    # '''
-    # fact table load
-    # '''
-    # ezproxy_load.load_fact_table(job_info, logger)
+    '''
+    fact table load
+    '''
+    ezproxy_load.load_fact_table(job_info, logger)
     
     
-    # '''
-    # copy new ezproxy data to reporting database 
-    # '''
-    # ezproxy_load.copy_new_facts_to_reporting_db(job_info, logger)
+    '''
+    copy new ezproxy data to reporting database 
+    '''
+    ezproxy_load.copy_new_facts_to_reporting_db(job_info, logger)
 
     
     # '''
@@ -102,24 +102,27 @@ def run(input_file):
         # count number of records with the current process id
         error_count = session.query(error_table_class).\
             filter(error_table_class.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
-        
-    pdb.set_trace()
 
     # query to find # of rows written to the reporting db during the current process
-    # TODO change this to reporting_database_session when that works
-    with dwetl.database_session() as session:
-        error_table_class = dwetl.Base.classes['dw_db_errors']
+    with dwetl.reporting_database_session() as session2:
+        ezproxy_fact_table = dwetl.ReportingBase.classes['fact_ezp_sessns_snap']
         # count number of records with the current process id
-        error_count = session.query(error_table_class).\
-            filter(error_table_class.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
+        records_count = session2.query(ezproxy_fact_table).\
+            filter(ezproxy_fact_table.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
         
-    pdb.set_trace()
 
-    
     '''
     end of job metadata writing
     '''
+    # write number of errors and number of records
+    print(f'Number of errors: \n{error_count}')
+    print(f'Number of records in fact table:\n{records_count}')
+    logger.info(f'Number of errors:\n{error_count}')
+    logger.info(f'Number of records in fact table:\n{records_count}')
 
+    print('\n\nEZProxy ETL completed.')
+    logger.info('EZProxy ETL completed.')
+    
     endtime = datetime.datetime.now()
     # write end time to processing cycle table
     with dwetl.database_session() as session:
@@ -134,7 +137,8 @@ def run(input_file):
     elapsed_time = endtime - time_started
     print("Ezproxy ETL elapsed time: ", str(elapsed_time))
     logger.info(f'EzProxy ETL elapsed time: {str(elapsed_time)}')
-    print("Success")
+
+ 
 
 
 '''
@@ -163,13 +167,15 @@ if __name__=='__main__':
     incoming_input_file = input_directory + filename
     processed_dir = data_directory + "processed/ezproxy/"
     processed_input_file = processed_dir + filename
-    if os.path.exists(incoming_input_file):
-        print(f'input file: {incoming_input_file}')
-        run(incoming_input_file)
-    elif os.path.exists(processed_input_file):
-        print(f'input file: {processed_input_file}')
-        run(processed_input_file)   
-        # Print the message if the file path does not exist
-    else:
-        print (f'no data file found for {day_to_process}. Are you sure you provided the date like so? python ezproxy_etl.py YYYYMMDD')
-
+    try:
+        if os.path.exists(incoming_input_file):
+            print(f'input file: {incoming_input_file}')
+            run(incoming_input_file)
+        elif os.path.exists(processed_input_file):
+            print(f'input file: {processed_input_file}')
+            run(processed_input_file)   
+            # Print the message if the file path does not exist
+        else:
+            print (f'no data file found for {day_to_process}. Are you sure you provided the date like so? python ezproxy_etl.py YYYYMMDD')
+    except:
+        print('FAILED')

@@ -19,12 +19,13 @@ class TestLoadZ00FieldTsv(unittest.TestCase):
 
         reader = ListReader(sample_data)
         writer = ListWriter()
+        error_writer = ListWriter()
 
         job_info = JobInfo(-1, 'test_user' , '1', '1')
 
         logger = None
 
-        step = LoadZ00FieldTsv(reader, writer, job_info, logger)
+        step = LoadZ00FieldTsv(reader, writer, job_info, logger, error_writer)
 
         step.execute()
 
@@ -66,12 +67,13 @@ class TestLoadZ00FieldTsv(unittest.TestCase):
         ]
         reader = ListReader(sample_data)
         writer = ListWriter()
+        error_writer = ListWriter()
 
         job_info = JobInfo(-1, 'test_user' , '1', '1')
 
         logger = None
 
-        step = LoadZ00FieldTsv(reader, writer, job_info, logger)
+        step = LoadZ00FieldTsv(reader, writer, job_info, logger, error_writer)
 
         step.execute()
 
