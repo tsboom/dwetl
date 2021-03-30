@@ -132,9 +132,13 @@ def run(input_file):
         
     
     elapsed_time = endtime - time_started
-    print("\nEzproxy ETL elapsed time: ", str(elapsed_time))
+    print("Ezproxy ETL elapsed time: ", str(elapsed_time))
     logger.info(f'EzProxy ETL elapsed time: {str(elapsed_time)}')
-    print("\nSuccess")
+    
+    if error_count > 0:
+        print("Completed with errors.")
+    else: 
+        print("\nCompleted!")
 
 
 '''
