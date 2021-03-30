@@ -58,7 +58,6 @@ class SqlAlchemyWriter(Writer):
             try:
                 with self.session.begin_nested():
                     self.session.add(record)
-
             except SQLAlchemyError as e:
                 raise DWETLException(e)
             
