@@ -43,7 +43,7 @@ def load_stage_1(job_info, input_file, logger):
         # count number of records with the current process id
         input_record_count = session.query(ezproxy_stg1_table).\
             filter(ezproxy_stg1_table.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
-        print(f'{input_record_count} records loaded from the TSV to stage 1.')
+        print(f'\n{input_record_count} records loaded from the TSV to stage 1.')
         logger.info(f'\n{input_record_count} records loaded from the TSV to stage 1.')
 
 
@@ -58,9 +58,7 @@ def load_stage_2(job_info, logger):
         stage2_table_class = dwetl.Base.classes["dw_stg_2_ezp_sessns_snap"]
         reader = SqlAlchemyReader(session, stage1_table_class, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
         writer = SqlAlchemyWriter(session, stage2_table_class)
-        #writer = PrintWriter()
         error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
-        # error_writer = PrintWriter()
         # there is no aleph library for ez proxy data, but CopyStage1ToStage2 still will work
         library = ''
         processor = CopyStage1ToStage2(reader, writer, job_info, logger, library, error_writer)

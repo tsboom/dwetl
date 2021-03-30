@@ -47,19 +47,19 @@ class SqlAlchemyWriter(Writer):
 
         # Update the row if PK list is found in row
         if in_dict == True:
-            self.session.merge(record)
-        else:
-        # Add new row if PK list is not found in row
-            self.session.add(record)
-
-        # flush record and catch exceptions. 
-        # the commit happens later in __init__.py of dwetl
-        try:
-            self.session.flush()
-
-        except SQLAlchemyError as e:
-            # undo the adding of the relevant record
-            self.session.rollback()
-            raise DWETLException(e)
+            try:
+                with self.session.begin_nested():
+                    self.session.merge(record)
+            except SQLAlchemyError as e: 
+                raise DWETLException(e)
         
+        # New record: Add new row if pk list is not found in row
+        else: 
+            try:
+                with self.session.begin_nested():
+                    self.session.add(record)
+
+            except SQLAlchemyError as e:
+                raise DWETLException(e)
+            
             
