@@ -111,7 +111,7 @@ def run(input_file):
         # count number of records with the current process id
         fact_count = session.query(reporting_fact_table).\
             filter(reporting_fact_table.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
-        print(f'\n\nNumber of fact records in the reporting db: {fact_count}')
+        print(f'\n\nNumber of facts written to the reporting db: \n{fact_count}')
         
 
 
@@ -138,7 +138,7 @@ def run(input_file):
     if error_count > 0:
         print("Completed with errors.")
     else: 
-        print("\nCompleted!")
+        print("Completed!")
 
 
 '''
