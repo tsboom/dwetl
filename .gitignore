@@ -10,3 +10,4 @@ tests/data/reference/
 .idea
 .env
 /tmp/ezproxy_etl_out
+run_ezproxy_etl
