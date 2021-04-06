@@ -6,7 +6,7 @@
 1) Use Docker to run a Postgres container:
 
 ```
-docker run --rm --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgres:9.6
+docker run --rm --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgres:11
 ```
 
 2) Connect to the Docker container using a bash shell:

@@ -10,6 +10,7 @@ class TestCopyStage1ToStage2(unittest.TestCase):
         self.writer = ListWriter()
         self.job_info = JobInfoFactory.create_from_prcsng_cycle_id(-1)
         self.logger = None
+        self.error_writer = ListWriter()
 
     def test_copy_mai01_z00_stage1_to_stage2(self):
         sample_data = [
@@ -34,7 +35,7 @@ class TestCopyStage1ToStage2(unittest.TestCase):
 
         aleph_library = 'mai01'
         reader = ListReader(sample_data)
-        processor = CopyStage1ToStage2.create(reader, self.writer, self.job_info, self.logger, aleph_library)
+        processor = CopyStage1ToStage2(reader, self.writer, self.job_info, self.logger, aleph_library, self.error_writer)
         processor.execute()
         results = self.writer.list
 
@@ -147,7 +148,7 @@ class TestCopyStage1ToStage2(unittest.TestCase):
 
         aleph_library = 'mai50'
         reader = ListReader(sample_data)
-        processor = CopyStage1ToStage2.create(reader, self.writer, self.job_info, self.logger, aleph_library)
+        processor = CopyStage1ToStage2(reader, self.writer, self.job_info, self.logger, aleph_library, self.error_writer)
         processor.execute()
         results = self.writer.list
 
@@ -261,7 +262,7 @@ class TestCopyStage1ToStage2(unittest.TestCase):
 
         aleph_library = 'mai60'
         reader = ListReader(sample_data)
-        processor = CopyStage1ToStage2.create(reader, self.writer, self.job_info, self.logger, aleph_library)
+        processor = CopyStage1ToStage2(reader, self.writer, self.job_info, self.logger, aleph_library, self.error_writer)
         processor.execute()
         results = self.writer.list
 
@@ -300,7 +301,7 @@ class TestCopyStage1ToStage2(unittest.TestCase):
         aleph_library= 'mai50'
 
         reader = ListReader(sample_data)
-        processor = CopyStage1ToStage2.create(reader, self.writer, self.job_info, self.logger, aleph_library)
+        processor = CopyStage1ToStage2(reader, self.writer, self.job_info, self.logger, aleph_library, self.error_writer)
         processor.execute()
         results = self.writer.list
 

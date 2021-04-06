@@ -11,8 +11,8 @@ class EzproxyProcessor(Processor):
     Processor for processing ez proxy data
     """
 
-    def __init__(self, reader, writer, job_info, logger):
-        super().__init__(reader, writer, job_info, logger)
+    def __init__(self, reader, writer, job_info, logger, error_writer):
+        super().__init__(reader, writer, job_info, logger, error_writer)
 
     def job_name(self):
         return 'EzproxyProcessor'
@@ -115,6 +115,8 @@ class EzproxyProcessor(Processor):
 
         # process item
         for key, value in item.items():
+            # dictionary to hold pk info during the item loop to use just in case of skipped errors
+            pk_dict = {}
             if key == 'em_create_dw_prcsng_cycle_id':
                 out_dict[key] = value
             if key.startswith('in_'):
@@ -123,6 +125,7 @@ class EzproxyProcessor(Processor):
                 elif key == "in_ezp_sessns_snap_tmstmp":
                     # save value in pk
                     out_dict[key] = value
+                    pk_dict[key] = value
 
                     timestamp = EzproxyProcessor.convert_timestamp(item)
 
@@ -138,8 +141,10 @@ class EzproxyProcessor(Processor):
 
                 elif key == "in_mbr_lbry_cd":
                     out_dict[key] = value
+                    pk_dict[key] = value
                     library_dim_key = EzproxyProcessor.library_dim_lookup(item)
                     out_dict['t1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key'] = library_dim_key
+                
                 else:
                     target_col_name = key.replace('in_', 't1_')
                     out_dict[target_col_name] = value

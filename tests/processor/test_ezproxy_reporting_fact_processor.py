@@ -52,9 +52,10 @@ class TestEzproxyReportingFactProcessor(unittest.TestCase):
 
     def test_end_to_end(self):
         writer = ListWriter()
+        error_writer = ListWriter()
         job_info = JobInfo(-1, 'test_user', '1', '1')
         reader = ListReader(self.sample_data)
-        ezproxy_reporting_processor = EzproxyReportingFactProcessor(reader, writer, job_info, self.logger)
+        ezproxy_reporting_processor = EzproxyReportingFactProcessor(reader, writer, job_info, self.logger, error_writer)
         ezproxy_reporting_processor.execute()
 
         results = ezproxy_reporting_processor.writer.list

@@ -39,7 +39,8 @@ class TestEzproxyFactProcessor(unittest.TestCase):
         writer = ListWriter()
         job_info = JobInfo(-1, 'test_user', '1', '1')
         reader = ListReader(self.sample_data)
-        ezproxy_fact_processor = EzproxyFactProcessor(reader, writer, job_info, self.logger, self.max_ezp_sessns_snap_fact_key )
+        error_writer = ListWriter()
+        ezproxy_fact_processor = EzproxyFactProcessor(reader, writer, job_info, self.logger, self.max_ezp_sessns_snap_fact_key, error_writer)
         ezproxy_fact_processor.execute()
         results = ezproxy_fact_processor.writer.list
         expected_keys = sorted([

@@ -11,15 +11,11 @@ class CopyStage1ToStage2(Processor):
     This processing step simply appends the job_info to the given
     item, and returns the resulting dictionary.
     """
-    def __init__(self, reader, writer, job_info, logger, aleph_library):
-        super().__init__(reader, writer, job_info, logger)
+    def __init__(self, reader, writer, job_info, logger, aleph_library, error_writer):
+        super().__init__(reader, writer, job_info, logger, error_writer)
         self.aleph_library = aleph_library
         self.invalid_keys = ['rec_type_cd', 'rec_trigger_key', '_sa_instance_state', 'usmai_mbr_lbry_mbrshp_type_cd']
         self.valid_mai50_z35_event_type =['50', '52', '54', '56', '91', '58', '61', '82', '62', '63', '64']
-
-    @classmethod
-    def create(cls, reader, writer, job_info, logger, aleph_library):
-        return CopyStage1ToStage2(reader, writer, job_info, logger, aleph_library)
 
     def job_name(self):
         return 'CopyStage1ToStage2'
@@ -49,5 +45,5 @@ class CopyStage1ToStage2(Processor):
 
         processed_item.update(self.job_info.as_dict('create'))
         processed_item['em_create_tmstmp'] = datetime.datetime.now()
-        
+        #pdb.set_trace()
         return processed_item

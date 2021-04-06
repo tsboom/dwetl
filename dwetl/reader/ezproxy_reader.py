@@ -27,7 +27,7 @@ class EzproxyReader:
         for line in self.reader:
             # Create a dictionary from headers and line values
             result = {}
-            
+
             # set the headers
             for i, header in enumerate(self.headers):
                 # Skip rest of headers if we run out of values

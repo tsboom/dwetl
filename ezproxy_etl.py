@@ -37,7 +37,7 @@ def run(input_file):
     
     if hostname != configured_host:
        #quit program if env file hostname doesn't match with the current hostname
-       print('ERROR: EzProxy ETL ended because .env contained an error. Please double check the configured host and db configuration.')
+       print(f'ERROR: EzProxy ETL ended because .env contained an error with the hostname {hostname}. Please double check the configured host and db configuration.')
        logger.error(f'EzProxy ETL ended because .env contained an error. please double check the configured host and db configuration.')
        sys.exit()
     
@@ -77,7 +77,7 @@ def run(input_file):
     copy new ezproxy data to reporting database 
     '''
     ezproxy_load.copy_new_facts_to_reporting_db(job_info, logger)
-    
+
     
     '''
     move data file to "processed" directory
@@ -90,7 +90,31 @@ def run(input_file):
     except Exception as e:
         print(e)
         logger.error('Failed to move file to processed directory: '  + str(e))
+
+    
+    '''
+    report status and errors
+    '''
+
+    # query to find # of rows written to the error table during the current process
+    with dwetl.database_session() as session:
+        error_table_class = dwetl.Base.classes['dw_db_errors']
+        # count number of records with the current process id
+        error_count = session.query(error_table_class).\
+            filter(error_table_class.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
+        print(f"\n\nNumber of errors: {error_count}")
+
+
+    # query to find # of rows written to the reporting db during the current process
+    with dwetl.reporting_database_session() as session:
+        reporting_fact_table = dwetl.Base.classes['fact_ezp_sessns_snap']
+        # count number of records with the current process id
+        fact_count = session.query(reporting_fact_table).\
+            filter(reporting_fact_table.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
+        print(f'\n\nNumber of facts written to the reporting db: \n{fact_count}')
         
+
+
     
     '''
     end of job metadata writing
@@ -104,11 +128,19 @@ def run(input_file):
         max_prcsng_id = session.query(job_info_table_class).\
             filter(job_info_table_class.dw_prcsng_cycle_id == job_info.prcsng_cycle_id).\
             update({'dw_prcsng_cycle_exectn_end_tmstmp': endtime})
+
+        
     
     elapsed_time = endtime - time_started
     print("Ezproxy ETL elapsed time: ", str(elapsed_time))
     logger.info(f'EzProxy ETL elapsed time: {str(elapsed_time)}')
-    print("Success")
+    
+    if error_count > 0:
+        print("Completed with errors.")
+    else: 
+        print("Completed!")
+
+
 '''
 main function for running script from the command line
 '''
@@ -122,7 +154,7 @@ if __name__=='__main__':
     # give hint if --help
     if '--help' in arguments:
         print('Usage: ')
-        print('\tezproxy_etl.py datestring')
+        print('\tezproxy_etl.py YYYYMMDD')
         sys.exit(1)
     # if a date string is provided, load that date's ezproxy data
     if len(arguments) == 2:

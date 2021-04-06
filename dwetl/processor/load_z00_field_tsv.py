@@ -9,15 +9,11 @@ class LoadZ00FieldTsv(Processor):
     Z00 Field TSV files.
 
     """
-    def __init__(self, reader, writer, job_info, logger):
-        super().__init__(reader, writer, job_info, logger)
+    def __init__(self, reader, writer, job_info, logger, error_writer):
+        super().__init__(reader, writer, job_info, logger, error_writer)
         # keep track of doc_number to generate sequence number when it is new
         self.last_z00_doc_number = ''
         self.last_sequence_number = 0
-
-    @classmethod
-    def create(cls, reader, writer, job_info, logger):
-        return LoadZ00FieldTsv(reader, writer, job_info, logger)
 
     def job_name(self):
         return 'LoadZ00FieldTsv'

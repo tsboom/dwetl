@@ -1298,9 +1298,9 @@ CREATE TABLE public.dw_stg_2_ezp_sessns_snap (
     t1_ezp_sessns_snap_tmstmp__ezp_sessns_snap_clndr_dt_dim_key bigint,
     t2_ezp_sessns_snap_tmstmp__ezp_sessns_snap_tmstmp timestamp without time zone,
     t3_ezp_sessns_snap_tmstmp__ezp_sessns_snap_time_of_day_dim_key integer,
-    in_ezp_sessns_snap_actv_sessns_cnt integer,
+    in_ezp_sessns_snap_actv_sessns_cnt integer NOT NULL,
     t1_ezp_sessns_snap_actv_sessns_cnt integer,
-    in_ezp_sessns_virtual_hosts_cnt integer,
+    in_ezp_sessns_virtual_hosts_cnt integer NOT NULL,
     em_create_dw_prcsng_cycle_id integer NOT NULL,
     em_create_dw_job_exectn_id integer NOT NULL,
     em_create_dw_job_name character varying(100) NOT NULL,
@@ -3871,6 +3871,40 @@ CREATE INDEX indx_fact_lbry_item_prcs_status ON public.fact_lbry_item USING btre
 --
 
 CREATE INDEX indx_fact_lbry_item_status ON public.fact_lbry_item USING btree (lbry_item_status_dim_key);
+
+
+
+
+
+--
+-- Name: dw_db_errors; Type: TABLE; Schema: public; Owner: usmai_dw
+--
+
+CREATE TABLE public.dw_db_errors (
+    dw_error_id integer NOT NULL,
+    dw_error_type character varying(150) NOT NULL,
+    dw_error_text character varying(2000) NOT NULL,
+    dw_error_row character varying(1000) NOT NULL,
+    em_create_dw_prcsng_cycle_id integer NOT NULL,
+    em_create_dw_job_exectn_id integer NOT NULL,
+    em_create_dw_job_name character varying(100) NOT NULL,
+    em_create_dw_job_version_no character varying(20) NOT NULL,
+    em_create_user_id character varying(20) NOT NULL,
+    em_create_tmstmp timestamp without time zone NOT NULL
+)
+WITH (autovacuum_enabled='true');
+
+
+ALTER TABLE public.dw_db_errors OWNER TO usmai_dw;
+
+
+--
+-- Name: dw_dw_db_errors error_id; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
+--
+
+ALTER TABLE ONLY public.dw_db_errors
+    ADD CONSTRAINT pk_dw_db_errors PRIMARY KEY (dw_error_id, em_create_dw_prcsng_cycle_id);
+
 
 
 --

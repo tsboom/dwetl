@@ -8,8 +8,8 @@ class Preprocess(Processor):
     Processor for Preprocessing
     """
 
-    def __init__(self, reader, writer, job_info, logger, json_config, pk_list):
-        super().__init__(reader, writer, job_info, logger)
+    def __init__(self, reader, writer, job_info, logger, json_config, pk_list, error_writer):
+        super().__init__(reader, writer, job_info, logger, error_writer)
         self.json_config = json_config
         self.stg2_pk_list = pk_list
 
