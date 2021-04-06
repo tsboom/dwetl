@@ -1,0 +1,15 @@
+#! /bin/bash
+# this is an example file of run_ezproxy_etl that is currently in prod on 4-6-21
+# enter python virtual environment
+cd /apps/dwetl
+source venv/bin/activate; 
+OUTFILE=/apps/dwetl/tmp/ezproxy_etl_out
+python ezproxy_etl.py > $OUTFILE 2>&1
+RECORDS_COUNT=$(tail -3 $OUTFILE | head -1)
+SUCCESS=$(grep Completed $OUTFILE)
+if [[ "$SUCCESS" != "" ]]; then
+SUBJECT="ezproxy_etl Completed $RECORDS_COUNT records"
+else
+SUBJECT="exproxy_etl FAILED"
+fi
+mail -s "$SUBJECT" libclas@umd.edu < $OUTFILE

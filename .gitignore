@@ -9,3 +9,4 @@ tests/data/reference/
 **/.DS_Store
 .idea
 .env
+/tmp/ezproxy_etl_out
