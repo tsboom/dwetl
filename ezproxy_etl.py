@@ -23,7 +23,7 @@ def run(input_file):
     formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)
 
     time_started = datetime.datetime.now()
     logger.info(f'EzProxy ETL started')
