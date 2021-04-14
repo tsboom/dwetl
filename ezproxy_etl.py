@@ -52,11 +52,13 @@ def run(input_file):
     with dwetl.database_session() as session:
         job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
         job_info = JobInfoFactory.create_job_info_from_db(session, job_info_table_class)
+        print(job_info['dw_prcsng_cycle'])
 
     # # compare max processing cycle IDs and pick the largest
     # real_max = job_info['dw_prcsng_cycle']
     # if job_info['dw_prcsng_cycle'] < reporting_max_prcsng_id:
     #     real_max = reporting_max_prcsng_id
+    # job_info['dw_prcsng_cycle'] == real_max
 
     '''
     load ezproxy stage 1 
