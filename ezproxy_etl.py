@@ -54,11 +54,11 @@ def run(input_file):
     with dwetl.reporting_database_session() as session2:
         reporting_prcsng_cycle_id_table = dwetl.ReportingBase.classes['fact_ezp_sessns_snap']
         # query max processing id in ezproxy fact table
-        reporting_max_prcsng_id = cls.session2.query(func.max(reporting_prcsng_cycle_id_table.dw_prcsng_cycle_id)).scalar()
+        reporting_max_prcsng_id = session2.query(func.max(reporting_prcsng_cycle_id_table.dw_prcsng_cycle_id)).scalar()
 
     prcsng_cycle_id = job_info['dw_prcsng_cycle']
     print(f'processing cycle id = {prcsng_cycle_id}')
-    print(f'reporting processing cycle id = {eporting_max_prcsng_id}')
+    print(f'reporting processing cycle id = {reporting_max_prcsng_id}')
 
     if prcsng_cycle_id < reporting_max_prcsng_id:
         job_info['dw_prcsng_cycle'] == reporting_max_prcsng_id
