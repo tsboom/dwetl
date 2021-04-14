@@ -45,7 +45,7 @@ class JobInfoFactory():
    
         # determine the processing cycle id by checking if reporting db processing cycle id already exists
         processing_cycle_query = cls.session.query(table_base_class.dw_prcsng_cycle_id==reporting_max_prcsng_id)
-        does_exist = clas.session.query(processing_cycle_query.exists()).scalar()
+        does_exist = cls.session.query(processing_cycle_query.exists()).scalar()
         logger.info(f'Checking the reporting max processing ID of {reporting_max_prcsng_id}...')
         if does_exist:
             logger.warning(f"Processing cycle ID was not unique due to a failed run in the ETL db. Incremented the processing cycle ID by 1.")
