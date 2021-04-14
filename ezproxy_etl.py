@@ -62,10 +62,10 @@ def run(input_file):
             reporting_max_prcsng_id = reporting_prcsng_id + 1
 
     prcsng_cycle_id = job_info.prcsng_cycle_id
-    print(f'etl db processing cycle id = {prcsng_cycle_id}')
-    print(f'reporting db processing cycle id = {reporting_max_prcsng_id}')
+    print(f'ETL db processing cycle id = {prcsng_cycle_id}')
+    print(f'Reporting db processing cycle id = {reporting_max_prcsng_id}')
 
-    # set the processing cycle to the maximum processing cycle id
+    # set the processing cycle to the maximum processing cycle id of the reporting db
     if prcsng_cycle_id < reporting_max_prcsng_id:
         job_info.prcsng_cycle_id = reporting_max_prcsng_id
         print(f'Using the reporting db processing cycle id of {job_info.prcsng_cycle_id}')
