@@ -61,7 +61,6 @@ class JobInfoFactory():
             cls.prcsng_cycle_id = reporting_max_prcsng_id
             logger.info(f'Processing cycle ID used for this job: {cls.prcsng_cycle_id}')
         print(f'Processing cycle id used for this job: {cls.prcsng_cycle_id}')
-        pdb.set_trace()
 
         row = {
             'dw_prcsng_cycle_id': cls.prcsng_cycle_id,
