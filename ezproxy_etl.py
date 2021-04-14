@@ -45,30 +45,23 @@ def run(input_file):
     '''
     create job_info for current process
     '''
-
-    with dwetl.database_session() as session:
-        job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
-        job_info = JobInfoFactory.create_job_info_from_db(session, job_info_table_class)
-
-    # compare max processing cycle IDs and pick the largest
+    # Determine processing cycle ID by using the reporting db as the authority
     with dwetl.reporting_database_session() as session2:
         reporting_fact_table = dwetl.ReportingBase.classes['fact_ezp_sessns_snap']
-        # query max processing id in ezproxy fact table
+        # query max processing id in ezproxy fact table in the reporting db
         reporting_prcsng_id = session2.query(func.max(reporting_fact_table.em_create_dw_prcsng_cycle_id)).scalar()
-        # increment the processing cycle id by 1 
+        # increment the processing cycle id by 1 if it starts as None
         if reporting_prcsng_id == None: 
             reporting_max_prcsng_id = 1
         else: 
             reporting_max_prcsng_id = reporting_prcsng_id + 1
 
-    prcsng_cycle_id = job_info.prcsng_cycle_id
-    print(f'ETL db processing cycle id = {prcsng_cycle_id}')
-    print(f'Reporting db processing cycle id = {reporting_max_prcsng_id}')
+    with dwetl.database_session() as session:
+        job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
+        # check to see if the processing cycle id from the reporting db (reporting_max_processing_id)
+        # is already in the etl db, if it is, increment it by 1 to make it unique
+        job_info = JobInfoFactory.create_job_info_from_reporting_db(session, job_info_table_class, reporting_max_prcsng_id, logger)
 
-    # set the processing cycle to the maximum processing cycle id of the reporting db
-    if prcsng_cycle_id < reporting_max_prcsng_id:
-        job_info.prcsng_cycle_id = reporting_max_prcsng_id
-        print(f'Using the reporting db processing cycle id of {job_info.prcsng_cycle_id}')
 
     '''
     load ezproxy stage 1 

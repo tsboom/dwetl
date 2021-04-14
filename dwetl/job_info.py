@@ -31,19 +31,29 @@ class JobInfoFactory():
     builds job info objects
     '''
 
+    # TODO: Need to look closer at where this method is being used. Now that the processing cycle ID
+    # is based off of the reporting db instead of the ETL db, we are not calculating the max here, but
+    # we pass in the reporting processing cycle id from ezproxy_etl.py, and make sure its unique in the
+    # etl db. If it isn't increment the processing cycle id by 1. 
     @classmethod
-    def create_job_info_from_db(cls, session, table_base_class):
+    def create_job_info_from_reporting_db(cls, session, session2, table_base_class, reporting_max_prcsng_id, logger):
         cls.session = session
         cls.table_base_class = table_base_class
-        max_prcsng_id = cls.session.query(func.max(table_base_class.dw_prcsng_cycle_id)).scalar()
-        if max_prcsng_id == None:
-            cls.prcsng_cycle_id = 1
-        else:
-            cls.prcsng_cycle_id = max_prcsng_id + 1
         cls.user_id = getpass.getuser()
         cls.job_exectn_id = 1
         cls.job_version_no = dwetl.version
-
+   
+        # determine the processing cycle id by checking if reporting db processing cycle id already exists
+        processing_cycle_query = cls.session.query(table_base_class.dw_prcsng_cycle==reporting_max_prcsng_id)
+        does_exist = clas.session.query(processing_cycle_query.exists()).scalar()
+        logger.info(f'Checking the reporting max processing ID of {reporting_max_prcsng_id}...')
+        if does_exist:
+            logger.warning(f"Processing cycle ID was not unique due to a failed run in the ETL db. Incremented the processing cycle ID by 1.")
+            cls.prcsng_cycle_id = reporting_max_prcsng_id + 1
+        else:
+            cls.prcsng_cycle_id = reporting_max_prcsng_id
+            logger.info(f'Processing cycle ID for this job: {cls.prcsng_cycle_id}')
+            print(f'Processing cycle id: {cls.prcsng_cycle_id}')
 
         row = {
             'dw_prcsng_cycle_id': cls.prcsng_cycle_id,
@@ -60,7 +70,7 @@ class JobInfoFactory():
         return JobInfo(cls.prcsng_cycle_id, cls.user_id, cls.job_version_no, cls.job_exectn_id)
 
     @classmethod
-    def create_from_prcsng_cycle_id(cls, prcsng_cycle_id):
+    def create_from_prcsng_cycle_id(cls, prcsng_cycle_id, session, processing_cycle_table):
         user_id =  getpass.getuser()
         job_exectn_id = 1
         job_version_no = dwetl.version
