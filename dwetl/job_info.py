@@ -54,14 +54,13 @@ class JobInfoFactory():
             if max_prcsng_id >= reporting_max_prcsng_id:
                 cls.prcsng_cycle_id = max_prcsng_id + 1
             else:
-                logger.warning(f"Processing cycle ID was not unique due to a failed run in the ETL db.")
-                print(f"Processing cycle ID was not unique due to a failed run in the ETL db.")
+                logger.warning(f"Processing cycle ID was not unique due to a previous failed run in the ETL db.")
+                print(f"Processing cycle ID was not unique due to a previous failed run in the ETL db.")
                 cls.prcsng_cycle_id = reporting_max_prcsng_id + 1
         else:
             cls.prcsng_cycle_id = reporting_max_prcsng_id
-            logger.info(f'Processing cycle ID used for this job: {cls.prcsng_cycle_id}')
-        print(f'Processing cycle id used for this job: {cls.prcsng_cycle_id}')
-        pdb.set_trace()
+        logger.info(f'Unique processing cycle ID used for this job: {cls.prcsng_cycle_id}')    
+        print(f'Unique processing cycle ID used for this job: {cls.prcsng_cycle_id}')
 
         row = {
             'dw_prcsng_cycle_id': cls.prcsng_cycle_id,
