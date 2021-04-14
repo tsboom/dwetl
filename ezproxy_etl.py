@@ -46,16 +46,15 @@ def run(input_file):
     create job_info for current process
     '''
 
-
     with dwetl.database_session() as session:
         job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
         job_info = JobInfoFactory.create_job_info_from_db(session, job_info_table_class)
 
     # compare max processing cycle IDs and pick the largest
     with dwetl.reporting_database_session() as session2:
-        reporting_prcsng_cycle_id_table = dwetl.ReportingBase.classes['fact_ezp_sessns_snap']
+        reporting_fact_table = dwetl.ReportingBase.classes['fact_ezp_sessns_snap']
         # query max processing id in ezproxy fact table
-        reporting_max_prcsng_id = session2.query(func.max(reporting_prcsng_cycle_id_table.dw_prcsng_cycle_id)).scalar()
+        reporting_max_prcsng_id = session2.query(func.max(reporting_fact_table.dw_prcsng_cycle_id)).scalar()
 
     prcsng_cycle_id = job_info['dw_prcsng_cycle']
     print(f'processing cycle id = {prcsng_cycle_id}')
