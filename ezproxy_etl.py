@@ -9,6 +9,7 @@ load_dotenv()
 import dwetl.database_credentials as database_credentials
 import logging
 import sqlalchemy
+from sqlalchemy import func
 from dwetl.job_info import JobInfoFactory, JobInfo
 from dwetl.writer.print_writer import PrintWriter
 from dwetl.writer.sql_alchemy_writer import SqlAlchemyWriter
