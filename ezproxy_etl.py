@@ -51,7 +51,7 @@ def run(input_file):
         job_info = JobInfoFactory.create_job_info_from_db(session, job_info_table_class)
 
     # compare max processing cycle IDs and pick the largest
-    with dwetl.reporting_database_session as session2:
+    with dwetl.reporting_database_session() as session2:
         reporting_prcsng_cycle_id_table = dwetl.ReportingBase.classes['fact_ezp_sessns_snap']
         # query max processing id in ezproxy fact table
         reporting_max_prcsng_id = cls.session2.query(func.max(reporting_prcsng_cycle_id_table.dw_prcsng_cycle_id)).scalar()
@@ -120,7 +120,7 @@ def run(input_file):
 
     # query to find # of rows written to the reporting db during the current process
     with dwetl.reporting_database_session() as session:
-        reporting_fact_table = dwetl.Base.classes['fact_ezp_sessns_snap']
+        reporting_fact_table = dwetl.ReportingBase.classes['fact_ezp_sessns_snap']
         # count number of records with the current process id
         fact_count = session.query(reporting_fact_table).\
             filter(reporting_fact_table.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
