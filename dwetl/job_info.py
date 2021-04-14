@@ -44,7 +44,7 @@ class JobInfoFactory():
         cls.job_version_no = dwetl.version
    
         # determine the processing cycle id by checking if reporting db processing cycle id already exists
-        processing_cycle_query = cls.session.query(table_base_class.dw_prcsng_cycle==reporting_max_prcsng_id)
+        processing_cycle_query = cls.session.query(table_base_class.dw_prcsng_cycle_id==reporting_max_prcsng_id)
         does_exist = clas.session.query(processing_cycle_query.exists()).scalar()
         logger.info(f'Checking the reporting max processing ID of {reporting_max_prcsng_id}...')
         if does_exist:
