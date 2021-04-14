@@ -45,6 +45,7 @@ def load_stage_1(job_info, input_file, logger):
             filter(ezproxy_stg1_table.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
         print(f'\n{input_record_count} records loaded from the TSV to stage 1.')
         logger.info(f'\n{input_record_count} records loaded from the TSV to stage 1.')
+        pdb.set_trace()
 
 
 def load_stage_2(job_info, logger):
