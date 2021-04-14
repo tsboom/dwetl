@@ -43,18 +43,24 @@ class JobInfoFactory():
         cls.job_exectn_id = 1
         cls.job_version_no = dwetl.version
    
-        # determine the processing cycle id by checking if reporting db processing cycle id already exists
+        # determine the processing cycle id by checking if reporting db processing cycle id already exists in the etl db
         processing_cycle_query = cls.session.query(table_base_class.dw_prcsng_cycle_id==reporting_max_prcsng_id)
         does_exist = cls.session.query(processing_cycle_query.exists()).scalar()
         logger.info(f'Checking the reporting max processing ID of {reporting_max_prcsng_id}...')
+
         if does_exist:
-            logger.warning(f"Processing cycle ID was not unique due to a failed run in the ETL db. Incremented the processing cycle ID by 1.")
-            print(f"Processing cycle ID was not unique due to a failed run in the ETL db. Incremented the processing cycle ID by 1.")
-            cls.prcsng_cycle_id = reporting_max_prcsng_id + 1
+            # compare the reporting_max_prcsng_id with the max value in etl db and use a number 1 higher than the max
+            max_prcsng_id = cls.session.query(func.max(table_base_class.dw_prcsng_cycle_id)).scalar() 
+            if max_prcsng_id >= reporting_max_prcsng_id:
+                cls.prcsng_cycle_id = max_prcsng_id + 1
+            else:
+                logger.warning(f"Processing cycle ID was not unique due to a failed run in the ETL db.")
+                print(f"Processing cycle ID was not unique due to a failed run in the ETL db.")
+                cls.prcsng_cycle_id = reporting_max_prcsng_id + 1
         else:
             cls.prcsng_cycle_id = reporting_max_prcsng_id
-            logger.info(f'Processing cycle ID for this job: {cls.prcsng_cycle_id}')
-        print(f'Processing cycle id: {cls.prcsng_cycle_id}')
+            logger.info(f'Processing cycle ID used for this job: {cls.prcsng_cycle_id}')
+        print(f'Processing cycle id used for this job: {cls.prcsng_cycle_id}')
         pdb.set_trace()
 
         row = {
