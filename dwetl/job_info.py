@@ -77,7 +77,7 @@ class JobInfoFactory():
         return JobInfo(cls.prcsng_cycle_id, cls.user_id, cls.job_version_no, cls.job_exectn_id)
 
     @classmethod
-    def create_from_prcsng_cycle_id(cls, prcsng_cycle_id, session, processing_cycle_table):
+    def create_from_prcsng_cycle_id(cls, prcsng_cycle_id):
         user_id =  getpass.getuser()
         job_exectn_id = 1
         job_version_no = dwetl.version
