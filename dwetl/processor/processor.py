@@ -28,6 +28,7 @@ class Processor:
                     self.writer.write_row(processed_row_dict)
 
                 except DWETLException as e:
+                    pdb.set_trace()
                     error = e.error_text
                     # save the dictionary of the problem row if it is available as .params
                     if e.error_row:
@@ -36,7 +37,7 @@ class Processor:
                     '''  
                     write to dw_db_error table only for etl tables which pass in the error_writer, not the reporting fact table
                     '''  
-                    if error_writer:
+                    if error_writer is not '':
                         # Increment dw_error_id value from the table or set as 1 for the first time
                         error_table_base_class = dwetl.Base.classes['dw_db_errors']
                         max_dw_error_id = self.error_writer.session.query(func.max(error_table_base_class.dw_error_id)).scalar()
