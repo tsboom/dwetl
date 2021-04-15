@@ -36,7 +36,7 @@ class Processor:
                     '''  
                     write to dw_db_error table only for etl tables which pass in the error_writer, not the reporting fact table
                     '''  
-                    if error_writer:
+                    if error_writer is not None:
                         # Increment dw_error_id value from the table or set as 1 for the first time
                         error_table_base_class = dwetl.Base.classes['dw_db_errors']
                         max_dw_error_id = self.error_writer.session.query(func.max(error_table_base_class.dw_error_id)).scalar()
