@@ -10,7 +10,7 @@ class Processor:
 
     Subclasses should implement the "job_name" and "process_item" methods.
     """
-    def __init__(self, reader, writer, job_info, logger, error_writer=None):
+    def __init__(self, reader, writer, job_info, logger, error_writer=''):
         self.reader = reader
         self.writer = writer
         self.job_info = job_info
@@ -36,7 +36,7 @@ class Processor:
                     '''  
                     write to dw_db_error table only for etl tables which pass in the error_writer, not the reporting fact table
                     '''  
-                    if error_writer is not None:
+                    if error_writer:
                         # Increment dw_error_id value from the table or set as 1 for the first time
                         error_table_base_class = dwetl.Base.classes['dw_db_errors']
                         max_dw_error_id = self.error_writer.session.query(func.max(error_table_base_class.dw_error_id)).scalar()
