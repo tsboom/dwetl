@@ -3,6 +3,7 @@
 data/*
 logs/*
 venv
+tmp/ezproxy_etl_out
 scripts/credentials.json
 scripts/token_dw.json
 tests/data/reference/
