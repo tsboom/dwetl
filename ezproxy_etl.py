@@ -49,12 +49,10 @@ def run(input_file):
     with dwetl.reporting_database_session() as session2:
         reporting_fact_table = dwetl.ReportingBase.classes['fact_ezp_sessns_snap']
         # query max processing id in ezproxy fact table in the reporting db
-        reporting_prcsng_id = session2.query(func.max(reporting_fact_table.em_create_dw_prcsng_cycle_id)).scalar()
+        reporting_max_prcsng_id = session2.query(func.max(reporting_fact_table.em_create_dw_prcsng_cycle_id)).scalar()
         # increment the processing cycle id by 1 if it starts as None
-        if reporting_prcsng_id == None: 
+        if reporting_max_prcsng_id == None: 
             reporting_max_prcsng_id = 1
-        else: 
-            reporting_max_prcsng_id = reporting_prcsng_id + 1
 
     with dwetl.database_session() as session:
         job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
