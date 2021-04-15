@@ -13,8 +13,8 @@ class EzproxyReportingFactProcessor(Processor):
     This processing step simply appends the job_info to the given
     item, and returns the resulting dictionary.
     """
-    def __init__(self, reader, writer, job_info, logger):
-        super().__init__(reader, writer, job_info, logger)
+    def __init__(self, reader, writer, job_info, logger, error_writer):
+        super().__init__(reader, writer, job_info, logger, error_writer)
         self.invalid_keys = ['_sa_instance_state']
 
     def job_name(self):
@@ -40,5 +40,4 @@ class EzproxyReportingFactProcessor(Processor):
 
         processed_item.update(self.job_info.as_dict('create'))
         processed_item['em_create_tmstmp'] = datetime.datetime.now()
-        print(processed_item)
         return processed_item
