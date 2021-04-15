@@ -111,7 +111,6 @@ def copy_new_facts_to_reporting_db(job_info, logger):
     # query and select records from etl fact table
     with dwetl.database_session() as session:
         reader = SqlAlchemyReader(session, etl_fact_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
-        error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
         session.expunge_all()
        
 
@@ -119,6 +118,6 @@ def copy_new_facts_to_reporting_db(job_info, logger):
     with dwetl.reporting_database_session() as session2:
         reporting_fact_table = dwetl.ReportingBase.classes['fact_ezp_sessns_snap']
         writer = SqlAlchemyWriter(session2, reporting_fact_table)
-        processor = EzproxyReportingFactProcessor(reader, writer, job_info, logger, error_writer)
+        processor = EzproxyReportingFactProcessor(reader, writer, job_info, logger)
         processor.execute()
         

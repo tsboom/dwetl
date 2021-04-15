@@ -34,7 +34,7 @@ class JobInfoFactory():
     # TODO: Need to look closer at where this method is being used. Now that the processing cycle ID
     # is based off of the reporting db instead of the ETL db, we are not calculating the max here, but
     # we pass in the reporting processing cycle id from ezproxy_etl.py, and make sure its unique in the
-    # etl db. If it isn't increment the processing cycle id by 1. 
+    # etl db. If it isn't increment the largest processing cycle id by 1. 
     @classmethod
     def create_job_info_from_reporting_db(cls, session, table_base_class, reporting_max_prcsng_id, logger):
         cls.session = session
