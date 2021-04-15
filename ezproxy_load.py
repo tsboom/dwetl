@@ -115,7 +115,7 @@ def copy_new_facts_to_reporting_db(job_info, logger):
         reader = SqlAlchemyReader(session2, reporting_fact_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
         writer = SqlAlchemyWriter(session2, reporting_fact_table)
         # error_writer = SqlAlchemyWriter(session2, dwetl.Base.classes['dw_db_errors'])
-        error_writer = ''
+        # error_writer = ''
         processor = EzproxyReportingFactProcessor(reader, writer, job_info, logger, error_writer)
         processor.execute()
         

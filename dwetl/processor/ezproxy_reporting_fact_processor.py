@@ -40,4 +40,5 @@ class EzproxyReportingFactProcessor(Processor):
 
         processed_item.update(self.job_info.as_dict('create'))
         processed_item['em_create_tmstmp'] = datetime.datetime.now()
+        print(processed_item)
         return processed_item
