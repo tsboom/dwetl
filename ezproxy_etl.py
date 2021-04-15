@@ -61,7 +61,6 @@ def run(input_file):
         # check to see if the processing cycle id from the reporting db (reporting_max_processing_id)
         # is already in the etl db, if it is, increment it by 1 to make it unique
         job_info = JobInfoFactory.create_job_info_from_reporting_db(session, job_info_table_class, reporting_max_prcsng_id, logger)
-    pdb.set_trace()
 
     '''
     load ezproxy stage 1 

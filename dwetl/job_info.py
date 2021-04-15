@@ -49,7 +49,7 @@ class JobInfoFactory():
         logger.info(f'Checking the reporting max processing ID of {reporting_max_prcsng_id}...')
 
         if does_exist:
-            # compare the reporting_max_prcsng_id with the max value in etl db and use a number 1 higher than the max
+            # compare the reporting_max_prcsng_id with the max value in etl db and use a number 1 higher than the largest max
             max_prcsng_id = cls.session.query(func.max(table_base_class.dw_prcsng_cycle_id)).scalar() 
             if max_prcsng_id >= reporting_max_prcsng_id:
                 cls.prcsng_cycle_id = max_prcsng_id + 1
