@@ -9,6 +9,7 @@ load_dotenv()
 import dwetl.database_credentials as database_credentials
 import logging
 import sqlalchemy
+from sqlalchemy import func
 from dwetl.job_info import JobInfoFactory, JobInfo
 from dwetl.writer.print_writer import PrintWriter
 from dwetl.writer.sql_alchemy_writer import SqlAlchemyWriter
@@ -23,7 +24,7 @@ def run(input_file):
     formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)
 
     time_started = datetime.datetime.now()
     logger.info(f'EzProxy ETL started')
@@ -44,11 +45,20 @@ def run(input_file):
     '''
     create job_info for current process
     '''
+    # Determine processing cycle ID by using the reporting db as the authority
+    with dwetl.reporting_database_session() as session2:
+        reporting_fact_table = dwetl.ReportingBase.classes['fact_ezp_sessns_snap']
+        # query max processing id in ezproxy fact table in the reporting db
+        reporting_max_prcsng_id = session2.query(func.max(reporting_fact_table.em_create_dw_prcsng_cycle_id)).scalar()
+        # increment the processing cycle id by 1 if it starts as None
+        if reporting_max_prcsng_id == None: 
+            reporting_max_prcsng_id = 1
 
     with dwetl.database_session() as session:
         job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
-        job_info = JobInfoFactory.create_job_info_from_db(session, job_info_table_class)
-
+        # check to see if the processing cycle id from the reporting db (reporting_max_processing_id)
+        # is already in the etl db, if it is, increment it by 1 to make it unique
+        job_info = JobInfoFactory.create_job_info_from_reporting_db(session, job_info_table_class, reporting_max_prcsng_id, logger)
 
     '''
     load ezproxy stage 1 
@@ -107,7 +117,7 @@ def run(input_file):
 
     # query to find # of rows written to the reporting db during the current process
     with dwetl.reporting_database_session() as session:
-        reporting_fact_table = dwetl.Base.classes['fact_ezp_sessns_snap']
+        reporting_fact_table = dwetl.ReportingBase.classes['fact_ezp_sessns_snap']
         # count number of records with the current process id
         fact_count = session.query(reporting_fact_table).\
             filter(reporting_fact_table.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
