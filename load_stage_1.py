@@ -67,6 +67,7 @@ def load_stage_1(job_info, input_directory, logger):
             writer = SqlAlchemyWriter(session, dwetl.Base.classes[table])
             error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
             processor = LoadAlephTsv(reader, writer, job_info, logger, error_writer)
+            #pdb.set_trace()		
             processor.execute()
 
 
