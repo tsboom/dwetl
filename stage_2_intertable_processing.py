@@ -51,13 +51,14 @@ def stage_2_intertable_processing(job_info, logger):
             '''
             Preprocessing
             '''
-            preprocessor = Preprocess(reader, writer, job_info, logger, json_config, pk_list)
+            error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
+            preprocessor = Preprocess(reader, writer, job_info, logger, json_config, pk_list, error_writer)
             preprocessor.execute()
 
             '''
             # Data Quality Checks
             # '''
-            data_quality_checker = DataQualityProcessor(reader, writer, job_info, logger, json_config, pk_list)
+            data_quality_checker = DataQualityProcessor(reader, writer, job_info, logger, json_config, pk_list, error_writer)
             data_quality_checker.execute()
 
 

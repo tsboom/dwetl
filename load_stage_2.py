@@ -63,7 +63,8 @@ def load_stage_2(job_info, logger):
             stage2_table_class = dwetl.Base.classes[stage2_table]
             reader = SqlAlchemyReader(session, stage1_table_class, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
             writer = SqlAlchemyWriter(session, stage2_table_class)
-            processor = CopyStage1ToStage2.create(reader, writer, job_info, logger, library)
+            error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
+            processor = CopyStage1ToStage2.create(reader, writer, job_info, logger, library, error_writer)
             processor.execute()
 
 '''
