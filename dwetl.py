@@ -24,7 +24,7 @@ import load_stage_2
 import stage_2_intertable_processing
 
 def run(input_directory):
-    
+
     #create logger
     today = datetime.datetime.now().strftime('%Y%m%d')
     logger = logging.getLogger('dwetl')
@@ -93,11 +93,11 @@ main function for running script from the command line
 '''
 if __name__=='__main__':
     arguments = sys.argv
-
     today = datetime.datetime.now().strftime('%Y%m%d')
-    # input_directory = f'data/{today}/'
-    input_directory = f'data/20191211/'
-
+    #input_directory = f'data/{today}/'
+    #input_directory = f'data/20191211/'
+    incoming_directory = '/apps/dw/incoming/'
+    input_directory = f'/apps/dw/incoming/{today}/'
     # give hint if --help
     if '--help' in arguments:
         print('Usage: ')

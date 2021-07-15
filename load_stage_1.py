@@ -65,7 +65,8 @@ def load_stage_1(job_info, input_directory, logger):
             reader = TsvFileReader(file_path)
             # writer = PrintWriter()
             writer = SqlAlchemyWriter(session, dwetl.Base.classes[table])
-            processor = LoadAlephTsv(reader, writer, job_info, logger)
+            error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
+            processor = LoadAlephTsv(reader, writer, job_info, logger, error_writer)
             processor.execute()
 
 

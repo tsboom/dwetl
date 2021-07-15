@@ -2475,6 +2475,10 @@ CREATE TABLE public.dw_stg_3_dim_bib_rec (
     em_update_dw_job_version_no character varying(20),
     em_update_user_id character varying(20),
     em_update_tmstmp timestamp without time zone
+    oclc_no bigint,
+    z00_flag boolean,
+    z13_flag boolean,
+    z13u_flag boolean
 )
 WITH (autovacuum_enabled='true');
 
@@ -3394,7 +3398,7 @@ ALTER TABLE ONLY public.fact_lbry_item
 
 ALTER TABLE ONLY public.fact_ezp_sessns_snap
     ADD CONSTRAINT indx_fact_ezp_sessns_snap_pk PRIMARY KEY (ezp_sessns_snap_fact_key);
-    
+
 
 
 --
