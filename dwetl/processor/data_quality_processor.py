@@ -75,7 +75,23 @@ class DataQualityProcessor(Processor):
             # skip keys from invalid_keys and keys that aren't 'pp_'
             if not key.startswith('pp_'):
                 continue
+            
+            # if 'pp_' value Mandatory and is empty, raise DWETLException and skip item
+            key_json = json_config[key[3:]]
+            pdb.set_trace()
+            # check if Mandatory
+            mandatory = key_json['transformation_steps'][0]['transformation_info']['source_mandatory']
+            
+            if mandatory == 'Y':
+                try:
+                    # check if value is not empty string or None
+                    if value:
+                        continue
+                except DWETLException as e:
+                    pdb.set_trace() 
+                
 
+            
             # get DQ checks for current key
             dq_list = DataQualityProcessor.get_dq_checks_for_key(key, json_config)
             dq_key = key.replace('pp_', 'dq_')
@@ -84,7 +100,7 @@ class DataQualityProcessor(Processor):
             
             # keep track of dq exception number
             dq_exception_count = 0
-            #pdb.set_trace()
+
             # do DQ checks if exist
             if dq_list:
                 for dq_check in dq_list:

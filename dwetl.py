@@ -93,15 +93,19 @@ main function for running script from the command line
 '''
 if __name__=='__main__':
     arguments = sys.argv
-    today = datetime.datetime.now().strftime('%Y%m%d')
-    #input_directory = f'data/{today}/'
-    #input_directory = f'data/20191211/'
-    incoming_directory = '/apps/dw/incoming/'
-    input_directory = f'/apps/dw/incoming/{today}/'
+    
+    #today = datetime.datetime.now().strftime('%Y%m%d')
+    #input_directory = f'/apps/dw/incoming/{today}/'
+    
+    today = "20191211"
+    input_directory = f'data/incoming/aleph/{today}/'
+
+        
+    
     # give hint if --help
     if '--help' in arguments:
         print('Usage: ')
-        print('\tdwetl.py [data directory]')
+        print('\tdwetl.py [data directory YYYYMMDD]')
         sys.exit(1)
     if len(arguments) == 2:
         input_directory = arguments[1]

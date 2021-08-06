@@ -47,17 +47,19 @@ def stage_2_intertable_processing(job_info, logger):
 
             reader = SqlAlchemyReader(session, stage2_table_class, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
             writer = SqlAlchemyWriter(session, stage2_table_class)
+            error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
 
             '''
             Preprocessing
             '''
-            error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
             preprocessor = Preprocess(reader, writer, job_info, logger, json_config, pk_list, error_writer)
             preprocessor.execute()
+            print('Preprocessing complete.')
 
             '''
-            # Data Quality Checks
-            # '''
+            Data Quality Checks
+            '''
+            print("Checking data quality...")
             data_quality_checker = DataQualityProcessor(reader, writer, job_info, logger, json_config, pk_list, error_writer)
             data_quality_checker.execute()
 
@@ -84,7 +86,7 @@ if __name__=='__main__':
 
     if len(arguments) != 2:
         print('Usage: ')
-        print('\tload_stage_2.py [prcsng_cycle_id]')
+        print('\tstage_2_intertable_processing.py [prcsng_cycle_id]')
         sys.exit(1)
 
     prcsng_cycle_id = arguments[1]
