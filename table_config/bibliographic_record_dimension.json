@@ -120,7 +120,7 @@
                     "source_col_name": "z00_doc_number",
                     "source_data_type": "CHAR(9)",
                     "source_format": "",
-                    "source_mandatory": null,
+                    "source_mandatory": "Y",
                     "aleph_table": "Z00",
                     "action_detailed_instructions": ""
                 }
