@@ -10,7 +10,7 @@ docker run --rm --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres postg
 ```
 
 ```
-docker run --rm --name postgrestest -p 5439:5439 -e POSTGRES_PASSWORD=postgres postgres:11
+docker run --rm --name postgrestest -p 5439:5432 -e POSTGRES_PASSWORD=postgres postgres:11
 ```
 
 2) Connect to the Docker container using a bash shell:
@@ -46,7 +46,7 @@ postgres=# <Ctrl-D>
 
 
 
-## Populate database from a dump
+## Populate database manually from a dump
 
 6) In a separate (non-Docker) terminal, use "docker cp" to copy the database dump file into the "/tmp" directory of the "postgres" container:
 

@@ -25,10 +25,8 @@ class DataQualityProcessor(Processor):
     def get_dq_checks_for_key(cls, key, json_config):
         # get list of DQ check objects from json_config
         try:
-            #key_json = json_config[key[3:]]
-            key_json =json_config['z13_open_date']
+            key_json = json_config[key]
             dq_list = key_json['dataquality_info']
-
             return dq_list
         except:
             return None
@@ -77,11 +75,12 @@ class DataQualityProcessor(Processor):
                 continue
             
             # if 'pp_' value Mandatory and is empty, raise DWETLException and skip item
-            key_json = json_config[key[3:]]
+            clean_key = key[3:]
+            key_json = json_config[clean_key]
 
             # check if Mandatory
             mandatory = key_json['transformation_steps'][0]['transformation_info']['source_mandatory']
-            pdb.set_trace()
+
             if mandatory == 'Y':
                 try:
                     # check if value is not empty string or None
@@ -93,7 +92,7 @@ class DataQualityProcessor(Processor):
 
             
             # get DQ checks for current key
-            dq_list = DataQualityProcessor.get_dq_checks_for_key(key, json_config)
+            dq_list = DataQualityProcessor.get_dq_checks_for_key(clean_key, json_config)
             dq_key = key.replace('pp_', 'dq_')
 
 
