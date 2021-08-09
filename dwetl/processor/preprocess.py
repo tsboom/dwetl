@@ -70,21 +70,7 @@ class Preprocess(Processor):
                 out_dict[key] = val
 
             # find out if the in_ key needs preprocessing
-            need_preprocess = Preprocess.need_preprocess(json_config, key)
-        
-            
-            # check if Mandatory
-            is_mandatory = Preprocess.is_mandatory(json_config, key)
-            
-            if is_mandatory and need_preprocess:
-                try:
-                    # check if value is not empty string or None
-                    if val:
-                        print('try')
-                        continue
-                except DWETLException as e:
-                    print('exception')
-                    pdb.set_trace() 
+            need_preprocess = Preprocess.need_preprocess(json_config, key)            
 
             # convert key name to pp_keyname
             pp_key = key.replace('in_', 'pp_')

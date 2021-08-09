@@ -3,16 +3,24 @@
 * Install Docker v19.03.1 or later.
 * Download a database dump file
 
-1) Use Docker to run a Postgres container:
+1) Use Docker to run a Postgres container for the local etl db and the local test etl db:
 
 ```
 docker run --rm --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgres:11
+```
+
+```
+docker run --rm --name postgrestest -p 5439:5439 -e POSTGRES_PASSWORD=postgres postgres:11
 ```
 
 2) Connect to the Docker container using a bash shell:
 
 ```
 docker exec -it postgres /bin/bash
+```
+
+```
+docker exec -it postgrestest /bin/bash
 ```
 
 3) In the Docker container, create a "usmai_dw" user:
@@ -28,10 +36,10 @@ docker> createuser usmai_dw
 docker> psql -U postgres
 ```
 
-5) In psql, create the "usmai_dw_etl" database, and exit:
+5) In psql, create the "usmai_dw_etl" and "usmai_dw_test_etl" databases, and exit:
 
 ```
-postgres=# CREATE DATABASE usmai_dw_etl;
+postgres=# CREATE DATABASE usmai_dw_test_etl;
 postgres=# CREATE ROLE usmai_dw;
 postgres=# <Ctrl-D>
 ```

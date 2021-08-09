@@ -21,11 +21,10 @@ class Processor:
     def execute(self):
         for row_dict in self.reader:
             processed_row_dict = self.process_item(row_dict)
-        
+            
             if processed_row_dict:
                 try:
                     self.writer.write_row(processed_row_dict)
-
                 except DWETLException as e:
                     error = e.error_text
                     # save the dictionary of the problem row if it is available as .params

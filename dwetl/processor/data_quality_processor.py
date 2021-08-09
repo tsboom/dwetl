@@ -78,10 +78,10 @@ class DataQualityProcessor(Processor):
             
             # if 'pp_' value Mandatory and is empty, raise DWETLException and skip item
             key_json = json_config[key[3:]]
-            pdb.set_trace()
+
             # check if Mandatory
             mandatory = key_json['transformation_steps'][0]['transformation_info']['source_mandatory']
-            
+            pdb.set_trace()
             if mandatory == 'Y':
                 try:
                     # check if value is not empty string or None

@@ -127,7 +127,7 @@
             }
         ]
     },
-    "z00_no_lines ": {
+    "z00_no_lines": {
         "source_col_name": "z00_no_lines ",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",

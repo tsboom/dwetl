@@ -19,6 +19,20 @@ def load_table_config(table_config_path):
     return table_config
 
 
+def preprocess_tables(reader, writer, job_info, logger, json_config, pk_list, error_writer):
+    print('starting preprocessing...')
+    preprocessor = Preprocess(reader, writer, job_info, logger, json_config, pk_list, error_writer)
+    preprocessor.execute()
+    print('Preprocessing complete.')
+    
+def dataquality_check_tables(reader, writer, job_info, logger, json_config, pk_list, error_writer):
+    print('checking data quality...')
+    data_quality_checker = DataQualityProcessor(reader, writer, job_info, logger, json_config, pk_list, error_writer)
+    data_quality_checker.execute()
+    print('data quality checking complete.')
+    
+    
+
 def stage_2_intertable_processing(job_info, logger):
     print("Stage 2 Intertable Processing...")
     logger.info("Stage 2 Intertable Processing...")
@@ -52,27 +66,13 @@ def stage_2_intertable_processing(job_info, logger):
             '''
             Preprocessing
             '''
-            preprocessor = Preprocess(reader, writer, job_info, logger, json_config, pk_list, error_writer)
-            preprocessor.execute()
-            print('Preprocessing complete.')
+            preprocess_tables(reader, writer, job_info, logger, json_config, pk_list, error_writer)
+
 
             '''
             Data Quality Checks
             '''
-            print("Checking data quality...")
-            data_quality_checker = DataQualityProcessor(reader, writer, job_info, logger, json_config, pk_list, error_writer)
-            data_quality_checker.execute()
-
-
-
-
-
-
-
-
-
-
-
+            dataquality_check_tables(reader, writer, job_info, logger, json_config, pk_list, error_writer)
 
 
 

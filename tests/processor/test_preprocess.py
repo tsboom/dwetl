@@ -262,3 +262,66 @@ class TestPreprocess(unittest.TestCase):
         self.assertEqual("0038", results[0]['pp_z00_no_lines'])
         self.assertEqual("001726", results[0]['pp_z00_data_len'])
         self.assertEqual("", results[0]['pp_z00_data'])
+        
+    def test_field_is_mandatory_and_needs_pp_exception_if_missing(self):
+        # test if an error is raised just in case a mandatory field is missing during preprocessing
+        sample_data = [
+            {
+                'db_operation_cd': 'U',
+                'in_z00_data': '',
+                'in_z00_data_len': '001726',
+                'in_z00_doc_number': None,
+                'in_z00_no_lines': '0038',
+                'dw_stg_2_aleph_lbry_name': 'mai01',
+                'em_create_dw_prcsng_cycle_id': '-1',
+            }
+        ]
+        reader = ListReader(sample_data)
+
+        job_info = JobInfo(-1, 'test_user', '1', '1')
+
+        sample_json_config = {'z00_doc_number': {
+            "preprocessing_info": {
+                "pre_or_post_dq": "PRE",
+                "pre_action": "Trim",
+                "pre_detailed_instructions": "Remove leading and trailing spaces"
+            }
+        },
+            'z00_no_lines': {
+                "preprocessing_info": {
+                    "pre_or_post_dq": "N/A",
+                    "pre_action": "N/A",
+                    "pre_detailed_instructions": "N/A"
+                }
+        },
+            'z00_data_len': {
+                "preprocessing_info": {
+                    "pre_or_post_dq": "N/A",
+                    "pre_action": "N/A",
+                    "pre_detailed_instructions": "N/A"
+                }
+        }}
+
+        pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name',
+                   'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
+
+        step = Preprocess(reader, self.writer, job_info, self.logger,
+                          sample_json_config, pk_list, self.error_writer)
+        step.execute()
+        results = step.writer.list
+
+        expected_keys = sorted([
+            'in_z00_doc_number', 'pp_z00_doc_number', 'dw_stg_2_aleph_lbry_name', 'db_operation_cd',
+            'pp_z00_no_lines',
+            'pp_z00_data_len', 'pp_z00_data',
+            'em_update_dw_prcsng_cycle_id', 'em_update_dw_job_exectn_id',
+            'em_update_dw_job_name', 'em_update_dw_job_version_no',
+            'em_update_user_id', 'em_update_tmstmp', 'em_create_dw_prcsng_cycle_id'
+        ])
+        self.assertEqual(True, Preprocess.need_preprocess(
+            sample_json_config, ''))
+        self.assertEqual(expected_keys, sorted(list(results[0].keys())))
+        self.assertEqual(None, results[0]['pp_z00_doc_number'])
+        self.assertEqual("0038", results[0]['pp_z00_no_lines'])
+        self.assertEqual("001726", results[0]['pp_z00_data_len'])
+        self.assertEqual("", results[0]['pp_z00_data'])
