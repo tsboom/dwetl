@@ -151,7 +151,6 @@ class DataQualityProcessor(Processor):
 
                         else:
                             # check for suspend record is True
-
                             dq_exception_count = dq_exception_count + 1
                             out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
 
@@ -164,16 +163,13 @@ class DataQualityProcessor(Processor):
                                 # change suspend record flag
                                 suspend_record_flag = "Y"
                                 out_dict['rm_suspend_rec_flag'] = suspend_record_flag
-                                # increment exception count
-                                #dq_exception_count = dq_exception_count + 1
-
-                                #out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
 
                                 # get suspend record code
                                 suspend_record_code = DataQualityProcessor.get_suspend_record_code(dq_key, data_quality_info)
                                 out_dict['rm_suspend_rec_reason_cd'] = suspend_record_code
 
                             else:
+                                raise DWETLException(e)
                                 logger.error(f'\t{dq_key} failed {data_quality_info.type}. Replacement value is {data_quality_info.replacement_value}.')
                                 # find replacement and use it if needed
                                 out_dict[dq_key] = data_quality_info.replacement_value

@@ -170,6 +170,7 @@ class TestDataQualityProcessor(unittest.TestCase):
 
         z00_pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
         z13_pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'in_z13_rec_key', 'em_create_dw_prcsng_cycle_id']
+        z13u_pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'in_z13u_rec_key', 'em_create_dw_prcsng_cycle_id']
 
 
         data_quality_processor = DataQualityProcessor(reader, writer, job_info, self.logger, json_config, z00_pk_list, self.error_writer)
@@ -177,10 +178,16 @@ class TestDataQualityProcessor(unittest.TestCase):
         z00_results = data_quality_processor.writer.list
 
         # z13
-        reader = ListReader(self.bib_record_dimension_sample_data_z00)
+        reader = ListReader(self.bib_record_dimension_sample_data_z13)
         data_quality_processor = DataQualityProcessor(reader, writer, job_info, self.logger, json_config, z13_pk_list, self.error_writer)
         data_quality_processor.execute()
         z13_results = data_quality_processor.writer.list
+        
+        # z13u
+        reader = ListReader(self.bib_record_dimension_sample_data_z13u)
+        data_quality_processor = DataQualityProcessor(reader, writer, job_info, self.logger, json_config, z13u_pk_list, self.error_writer)
+        data_quality_processor.execute()
+        z13u_results = data_quality_processor.writer.list
 
 
         z00_expected_keys = sorted([
