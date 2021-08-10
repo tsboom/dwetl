@@ -20,7 +20,6 @@ class DataQualityInfo:
 
     def validate(self, data_value):
         if self.function:
-            #pdb.set_trace()
             return self.function(data_value)
         else:
             # Data quality function is None, so just return True

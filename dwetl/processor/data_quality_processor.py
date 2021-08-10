@@ -1,7 +1,7 @@
 from dwetl.processor.processor import Processor
 from dwetl.data_quality_info import DataQualityInfo
 import dwetl.data_quality_utilities as dqu
-from dwetl.exceptions import DWETLException
+from dwetl.exceptions import DataQualityException
 import datetime
 import pdb
 import pprint
@@ -132,7 +132,7 @@ class DataQualityProcessor(Processor):
                                 # find replacement and use it if needed
                             out_dict[dq_key] = data_quality_info.replacement_value
 
-
+                    # all other keys 
                     else:
                         # trim trailing spaces of the value
                         # might cause problems for sublibrary code and collection code
@@ -153,10 +153,10 @@ class DataQualityProcessor(Processor):
                             # check for suspend record is True
                             dq_exception_count = dq_exception_count + 1
                             out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
-
+                            
+                            # suspend the record
                             if data_quality_info.suspend_record:
                                 
-                                logger.error(f'\t{dq_key} with value of {val} failed {data_quality_info.type}. SUSPENDED')
                                 # out_dict for the current dq_ key contains same value.
                                 out_dict[dq_key] = 'SUS'
 
@@ -167,12 +167,29 @@ class DataQualityProcessor(Processor):
                                 # get suspend record code
                                 suspend_record_code = DataQualityProcessor.get_suspend_record_code(dq_key, data_quality_info)
                                 out_dict['rm_suspend_rec_reason_cd'] = suspend_record_code
+                                
+                                # raise and log error exception
+                                error_text = f'SUSPENDED RECORD. {dq_key} with value of {val} failed {data_quality_info.type}.'
+                                error = {
+                                    "error_type": data_quality_info.type,
+                                    "error_text": error_text,
+                                    "error_row": str(item.items())
+                                }
+                                raise DataQualityException(error)
+                                logger.error(error_text)
+                                
 
                             else:
-                                raise DWETLException(e)
-                                logger.error(f'\t{dq_key} failed {data_quality_info.type}. Replacement value is {data_quality_info.replacement_value}.')
                                 # find replacement and use it if needed
                                 out_dict[dq_key] = data_quality_info.replacement_value
+                                error_text = f'FAILED. {dq_key} failed {data_quality_info.type}. Replacement value is {data_quality_info.replacement_value}.'
+                                error = {
+                                    "error_type": data_quality_info.type,
+                                    "error_text": error_text,
+                                    "error_row": str(item.items())
+                                }
+                                raise DataQualityException(error)
+                                logger.error(error_text)
 
             else:
                 # if there are no dq checks, output the pp value to dq
