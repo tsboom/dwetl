@@ -1,6 +1,7 @@
 from dwetl.processor.processor import Processor
 from dwetl.data_quality_info import DataQualityInfo
 import dwetl.data_quality_utilities as dqu
+from dwetl.exceptions import DWETLException
 import datetime
 import pdb
 import pprint
@@ -40,12 +41,22 @@ class DataQualityProcessor(Processor):
             if v == data_quality_info.type:
                 suspend_record_code = k
         return suspend_record_code
-
-
-
-
-    # @classmethod
-    # def write_to_log(cls, )
+        
+    @classmethod
+    def check_mandatory(cls, key, json_config):
+        # check if Mandatory
+        key_json = json_config[key]
+        mandatory = key_json['transformation_steps'][0]['transformation_info']['source_mandatory']
+            
+        if mandatory == 'Y':
+            try:
+                # check if value is not None
+                # an empty string is not None. it is True
+                if value:
+                    pass
+            except DWETLException as e:
+                #TODO: raise exception if key is mandatory but its value is missing
+                pdb.set_trace() 
 
 
     @classmethod
@@ -73,28 +84,18 @@ class DataQualityProcessor(Processor):
             # skip keys from invalid_keys and keys that aren't 'pp_'
             if not key.startswith('pp_'):
                 continue
-            
+
             # if 'pp_' value Mandatory and is empty, raise DWETLException and skip item
             clean_key = key[3:]
             key_json = json_config[clean_key]
 
-            # check if Mandatory
-            mandatory = key_json['transformation_steps'][0]['transformation_info']['source_mandatory']
-
-            if mandatory == 'Y':
-                try:
-                    # check if value is not empty string or None
-                    if value:
-                        continue
-                except DWETLException as e:
-                    pdb.set_trace() 
+            # check if mandatory and raise exception if not
+            DataQualityProcessor.check_mandatory(clean_key, json_config)
                 
-
-            
             # get DQ checks for current key
             dq_list = DataQualityProcessor.get_dq_checks_for_key(clean_key, json_config)
             dq_key = key.replace('pp_', 'dq_')
-
+            
 
             
             # keep track of dq exception number
@@ -104,22 +105,21 @@ class DataQualityProcessor(Processor):
             if dq_list:
                 for dq_check in dq_list:
                     # create DataQualityInfo for each DQ check
-
                     data_quality_info = DataQualityInfo(dq_check)
                     
+                    # TODO: might need clean this up. dealing with having an existing z13_open_date exception
                     if dq_check['type'] == 'Date check' and key != 'pp_z13_open_date':
                         continue
                     elif dq_check['type'] == 'Date check' and key == 'pp_z13_open_date':
-
+                        # clean and trailing spaces
                         val = value.rstrip()
 
                         if dq_exception_count == 1 and data_quality_info.only_if_data_exists:
                             continue
                         is_passing = data_quality_info.validate(val)
-                        #import pdb; pdb.set_trace()
+                        
                         if is_passing:
                             # write value to out_dict because it passes
-
                             out_dict[dq_key] = val
                             out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
 
@@ -177,10 +177,10 @@ class DataQualityProcessor(Processor):
                                 logger.error(f'\t{dq_key} failed {data_quality_info.type}. Replacement value is {data_quality_info.replacement_value}.')
                                 # find replacement and use it if needed
                                 out_dict[dq_key] = data_quality_info.replacement_value
-                    #pdb.set_trace()
+
             else:
                 # if there are no dq checks, output the pp value to dq
-                out_dict[dq_key] = val
+                out_dict[dq_key] = value
         return out_dict
 
 
