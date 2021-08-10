@@ -43,7 +43,7 @@ class DataQualityProcessor(Processor):
         return suspend_record_code
         
     @classmethod
-    def check_mandatory(cls, key, json_config):
+    def check_mandatory(cls, key, value, json_config):
         # check if Mandatory
         key_json = json_config[key]
         mandatory = key_json['transformation_steps'][0]['transformation_info']['source_mandatory']
@@ -90,7 +90,7 @@ class DataQualityProcessor(Processor):
             key_json = json_config[clean_key]
 
             # check if mandatory and raise exception if not
-            DataQualityProcessor.check_mandatory(clean_key, json_config)
+            DataQualityProcessor.check_mandatory(clean_key, value, json_config)
                 
             # get DQ checks for current key
             dq_list = DataQualityProcessor.get_dq_checks_for_key(clean_key, json_config)
