@@ -2,6 +2,7 @@ from dwetl.processor.processor import Processor
 from dwetl.data_quality_info import DataQualityInfo
 import dwetl.data_quality_utilities as dqu
 from dwetl.exceptions import DataQualityException
+import dwetl
 import datetime
 import pdb
 import pprint
@@ -57,8 +58,7 @@ class DataQualityProcessor(Processor):
             except DWETLException as e:
                 #TODO: raise exception if key is mandatory but its value is missing
                 pdb.set_trace() 
-
-
+                
     @classmethod
     def check_data_quality(cls, item, json_config, pk_list, logger):
         """
@@ -150,45 +150,74 @@ class DataQualityProcessor(Processor):
                             out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
 
                         else:
-                            # check for suspend record is True
+                            # handle failing dq check
                             dq_exception_count = dq_exception_count + 1
                             out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
                             
-                            # suspend the record
-                            if data_quality_info.suspend_record:
+                            def handle_failed_dq():
+                                # suspend the record if needed
+                                if data_quality_info.suspend_record:
+                                    
+                                    # out_dict for the current dq_ key contains same value.
+                                    out_dict[dq_key] = 'SUS'
+
+                                    # change suspend record flag
+                                    suspend_record_flag = "Y"
+                                    out_dict['rm_suspend_rec_flag'] = suspend_record_flag
+
+                                    # get suspend record code
+                                    suspend_record_code = DataQualityProcessor.get_suspend_record_code(dq_key, data_quality_info)
+                                    out_dict['rm_suspend_rec_reason_cd'] = suspend_record_code
+                                    
+                                    # raise and log error exception
+                                    error_text = f'SUSPENDED RECORD. {dq_key} with value of {val} failed {data_quality_info.type}.'
+                                    error = {
+                                        "error_type": data_quality_info.type,
+                                        "error_text": error_text,
+                                        "error_row": str(item)
+                                    }
+                                    logger.error(error_text)
+                                    raise DataQualityException(error)
+
+                                else:
+                                    # find replacement and use it if needed
+                                    out_dict[dq_key] = data_quality_info.replacement_value
+                                    error_text = f'FAILED. {dq_key} failed {data_quality_info.type}. Replacement value is {data_quality_info.replacement_value}.'
+                                    error = {
+                                        "error_type": data_quality_info.type,
+                                        "error_text": error_text,
+                                        "error_row": str(item)
+                                    }
+                                    logger.error(error_text)
+                                    raise DataQualityException(error)
+                            
+                            try:
+                                handle_failed_dq()
                                 
-                                # out_dict for the current dq_ key contains same value.
-                                out_dict[dq_key] = 'SUS'
-
-                                # change suspend record flag
-                                suspend_record_flag = "Y"
-                                out_dict['rm_suspend_rec_flag'] = suspend_record_flag
-
-                                # get suspend record code
-                                suspend_record_code = DataQualityProcessor.get_suspend_record_code(dq_key, data_quality_info)
-                                out_dict['rm_suspend_rec_reason_cd'] = suspend_record_code
-                                
-                                # raise and log error exception
-                                error_text = f'SUSPENDED RECORD. {dq_key} with value of {val} failed {data_quality_info.type}.'
-                                error = {
-                                    "error_type": data_quality_info.type,
-                                    "error_text": error_text,
-                                    "error_row": str(item)
-                                }
-                                logger.error(error_text)
-                                raise DataQualityException(error)        
-
-                            else:
-                                # find replacement and use it if needed
-                                out_dict[dq_key] = data_quality_info.replacement_value
-                                error_text = f'FAILED. {dq_key} failed {data_quality_info.type}. Replacement value is {data_quality_info.replacement_value}.'
-                                error = {
-                                    "error_type": data_quality_info.type,
-                                    "error_text": error_text,
-                                    "error_row": str(item)
-                                }
-                                logger.error(error_text)
-                                raise DataQualityException(error)
+                            except DataQualityException as e:
+                                    # Increment dw_error_id value from the table or set as 1 for the first time
+                                    error_table_base_class = dwetl.Base.classes['dw_db_errors']
+                                    max_dw_error_id = self.error_writer.session.query(func.max(error_table_base_class.dw_error_id)).scalar()
+                                    if max_dw_error_id ==  None: 
+                                        dw_error_id = 1
+                                    else:
+                                        dw_error_id = max_dw_error_id + 1
+                                    
+                                    # create error row dictionary that will be added to the error table
+                                    error_row_dict = {
+                                        'dw_error_id': dw_error_id,
+                                        'dw_error_type': e.error_type,
+                                        'dw_error_text': e.error_text,
+                                        'dw_error_row': e.error_row,
+                                        'em_create_dw_prcsng_cycle_id': processed_row_dict['em_create_dw_prcsng_cycle_id'],
+                                        'em_create_dw_job_name': processed_row_dict['em_create_dw_job_name'],
+                                        'em_create_dw_job_version_no': processed_row_dict['em_create_dw_job_version_no'],
+                                        'em_create_user_id': processed_row_dict['em_create_user_id'],
+                                        'em_create_tmstmp': processed_row_dict['em_create_tmstmp'],
+                                        'em_create_dw_job_exectn_id': processed_row_dict['em_create_dw_job_exectn_id']
+                                    }
+                                    # write error to the error table
+                                    error_record = self.error_write
             else:
                 # if there are no dq checks, output the pp value to dq
                 out_dict[dq_key] = value
@@ -196,11 +225,7 @@ class DataQualityProcessor(Processor):
 
 
     def process_item(self, item):
-        try:
-            processed_item = DataQualityProcessor.check_data_quality(item, self.json_config, self.stg2_pk_list, self.logger)
-        except DataQualityException as e:
-            pdb.set_trace()
-            pass
+        processed_item = DataQualityProcessor.check_data_quality(item, self.json_config, self.stg2_pk_list, self.logger)
         processed_item.update(self.job_info.as_dict('update'))
         processed_item['em_update_dw_job_name'] = self.job_name()
         processed_item['em_update_tmstmp'] = datetime.datetime.now()
