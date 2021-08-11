@@ -173,11 +173,10 @@ class DataQualityProcessor(Processor):
                                 error = {
                                     "error_type": data_quality_info.type,
                                     "error_text": error_text,
-                                    "error_row": str(item.items())
+                                    "error_row": str(item)
                                 }
-                                raise DataQualityException(error)
                                 logger.error(error_text)
-                                
+                                raise DataQualityException(error)        
 
                             else:
                                 # find replacement and use it if needed
@@ -186,11 +185,10 @@ class DataQualityProcessor(Processor):
                                 error = {
                                     "error_type": data_quality_info.type,
                                     "error_text": error_text,
-                                    "error_row": str(item.items())
+                                    "error_row": str(item)
                                 }
-                                raise DataQualityException(error)
                                 logger.error(error_text)
-
+                                raise DataQualityException(error)
             else:
                 # if there are no dq checks, output the pp value to dq
                 out_dict[dq_key] = value
@@ -198,7 +196,11 @@ class DataQualityProcessor(Processor):
 
 
     def process_item(self, item):
-        processed_item = DataQualityProcessor.check_data_quality(item, self.json_config, self.stg2_pk_list, self.logger)
+        try:
+            processed_item = DataQualityProcessor.check_data_quality(item, self.json_config, self.stg2_pk_list, self.logger)
+        except DataQualityException as e:
+            pdb.set_trace()
+            pass
         processed_item.update(self.job_info.as_dict('update'))
         processed_item['em_update_dw_job_name'] = self.job_name()
         processed_item['em_update_tmstmp'] = datetime.datetime.now()

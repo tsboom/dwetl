@@ -12,7 +12,7 @@ class DWETLException(Exception):
         
 
     def __str__(self):
-        return f'DWETLException: {self.error_type} {self.error_text}'
+        return f'DWETLException: {self.error_type} {self.error_text}\nFailing Row: {self.error_row}'
         
 class DataQualityException(Exception):
     """
@@ -25,7 +25,7 @@ class DataQualityException(Exception):
         
 
     def __str__(self):
-        return f'DataQualityException: {self.error_type} {self.error_text}'
+        return f'DataQualityException: {self.error_type} {self.error_text}\nFailing Row: {self.error_row}'
 
 
 
