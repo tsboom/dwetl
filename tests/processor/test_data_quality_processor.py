@@ -41,7 +41,35 @@ class TestDataQualityProcessor(unittest.TestCase):
         # test z13_open_date
         key = 'z13_open_date'
         
-        result = DataQualityProcessor.get_dq_checks_for_key(key, self.bib_rec_json_config)
+        item = {
+            'db_operation_cd': 'U',
+            'dw_stg_2_aleph_lbry_name': 'mai01',
+            'em_create_dw_job_exectn_id': 1,
+            'em_create_dw_job_name': 'CopyStage1ToStage2',
+            'em_create_dw_job_version_no': '1.0.0',
+            'em_create_dw_prcsng_cycle_id': 10,
+            'em_create_tmstmp': datetime.datetime(2021, 8, 12, 17, 45, 7, 345693),
+            'em_create_user_id': 'thschone',
+            'em_update_dw_job_exectn_id': 1,
+            'em_update_dw_job_name': 'Preprocessing',
+            'em_update_dw_job_version_no': '1.0.0',
+            'em_update_dw_prcsng_cycle_id': 10,
+            'em_update_tmstmp': datetime.datetime(2021, 8, 12, 17, 46, 2, 823288),
+            'em_update_user_id': 'thschone',
+            'in_z13_author': 'Moreland, Richard S., author',
+            'in_z13_author_code': '     ',
+            'in_z13_call_no': 'I 19.76:2011-1102',
+            'in_z13_call_no_code': 'PST3 ',
+            'in_z13_call_no_key': '',
+            'in_z13_imprint': 'Reston, Virginia : U.S. Department of the Interior, U.S. '
+                           'Geological Survey, 2011',
+            'in_z13_imprint_code': '     ',
+            'in_z13_isbn_issn': '',
+            'in_z13_isbn_issn_code': '     ',
+            'in_z13_open_date': '20190612',
+            }
+        
+        result = DataQualityProcessor.get_dq_checks_for_key(key, self.bib_rec_json_config, item)
         
         expected_result = [{'additional_conditions': '',
               'aleph_library': 'MAI01, MAI39',
@@ -84,14 +112,25 @@ class TestDataQualityProcessor(unittest.TestCase):
               'specific_dq_function_param_1': '',
               'suspend_record': 'No',
               'target_column_name': '',
-              'type': 'Date check'}]
-        
+              'type': 'Date Check'}]
+              
         self.assertEqual(expected_result, result)
         
         # test z13_open_date
         key='z00_doc_number'
         
-        result = DataQualityProcessor.get_dq_checks_for_key(key, self.bib_rec_json_config)
+        item = {
+            'dw_stg_2_aleph_lbry_name': 'mai01',
+            'em_create_dw_job_exectn_id': 1,
+            'pp_z00_data': None,
+            'pp_z00_data_len': None,
+            'pp_z00_doc_number': '         ',
+            'pp_z00_no_lines': None,
+            'rm_dq_check_excptn_cnt': 0,
+            'rm_suspend_rec_flag': 'N',
+            'rm_suspend_rec_reason_cd': None}
+        
+        result = DataQualityProcessor.get_dq_checks_for_key(key, self.bib_rec_json_config, item)
 
         expected_result = [{'additional_conditions': '',
               'aleph_library': 'MAI01,MAI39',
@@ -142,7 +181,18 @@ class TestDataQualityProcessor(unittest.TestCase):
         # test pp_z13u_user_defined_2
         key='z13u_user_defined_2'
         
-        result = DataQualityProcessor.get_dq_checks_for_key(key, self.bib_rec_json_config)
+        item = {
+            'dw_stg_2_aleph_lbry_name': 'mai01',
+            'pp_z13u_user_defined_2': 'ocm00001605',
+            'pp_z13u_user_defined_3': '^^^^^cam^^2200385^^^45^0',
+            'pp_z13u_user_defined_4': '690424s1969^^^^ilu^^^^^^b^^^^001^0^eng^^',
+            'pp_z13u_user_defined_5': '',
+            'pp_z13u_user_defined_6': '',
+            'rm_dq_check_excptn_cnt': 0,
+            'rm_suspend_rec_flag': 'N',
+            'rm_suspend_rec_reason_cd': None}
+        
+        result = DataQualityProcessor.get_dq_checks_for_key(key, self.bib_rec_json_config, item)
         
         expected_result = [{'additional_conditions': '',
               'aleph_library': 'MAI01, MAI39',

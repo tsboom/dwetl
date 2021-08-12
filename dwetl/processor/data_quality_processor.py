@@ -25,12 +25,22 @@ class DataQualityProcessor(Processor):
         return 'DataQualityProcessor'
 
     @classmethod
-    def get_dq_checks_for_key(cls, key, json_config):
-        # get list of DQ check objects from json_config
+    def get_dq_checks_for_key(cls, key, json_config, item):
+        # get list of DQ check objects from json_config 
+        # TODO: need to do only the checks for the right aleph library.
         try:
             key_json = json_config[key]
             dq_list = key_json['dataquality_info']
-            return dq_list
+            aleph_library = item['dw_stg_2_aleph_lbry_name']
+            
+            matching_library_dq_list = []
+            # need to find the dq checks for the current aleph library
+            for dq in dq_list:
+                # sometimes there are more than one library listed
+                libraries = [x.lower() for x in dq['aleph_library'].split(',')]
+                if aleph_library in libraries:
+                    matching_library_dq_list.append(dq)
+            return matching_library_dq_list
         except:
             return None
 
@@ -94,7 +104,7 @@ class DataQualityProcessor(Processor):
             DataQualityProcessor.check_mandatory(clean_key, value, json_config)
                 
             # get DQ checks for current key
-            dq_list = DataQualityProcessor.get_dq_checks_for_key(clean_key, json_config)
+            dq_list = DataQualityProcessor.get_dq_checks_for_key(clean_key, json_config, item)
             dq_key = key.replace('pp_', 'dq_')
             
 
@@ -135,18 +145,17 @@ class DataQualityProcessor(Processor):
                                 # find replacement and use it if needed
                             out_dict[dq_key] = data_quality_info.replacement_value
                             continue
-                    
-                    # all other keys 
 
                     # trim trailing spaces of the value
                     # might cause problems for sublibrary code and collection code
-                    try:
+                    if value:
                         val = value.rstrip()
-                    except:
-                        pdb.set_trace()
+                        # determine if value passes check
+                        is_passing = data_quality_info.validate(val)
+                    else: 
+                        is_passing = False
+                        val = value
                         
-                    # determine if value passes check
-                    is_passing = data_quality_info.validate(val)
                     # if the value has an exception count of 1, it likely has a missing value
                     # skip the check if it has "only if data exists" flag
                     if dq_exception_count == 1 and data_quality_info.only_if_data_exists:
