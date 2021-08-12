@@ -109,8 +109,10 @@ class DataQualityProcessor(Processor):
                     data_quality_info = DataQualityInfo(dq_check)
                     
                     # TODO: might need clean this up. dealing with having an existing z13_open_date exception
+                    # 
                     if dq_check['type'] == 'Date check' and key != 'pp_z13_open_date':
                         continue
+                        
                     elif dq_check['type'] == 'Date check' and key == 'pp_z13_open_date':
                         # clean and trailing spaces
                         val = value.rstrip()
@@ -123,7 +125,7 @@ class DataQualityProcessor(Processor):
                             # write value to out_dict because it passes
                             out_dict[dq_key] = val
                             out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
-
+                            continue
                         else:
 
                             dq_exception_count = dq_exception_count + 1
@@ -132,94 +134,100 @@ class DataQualityProcessor(Processor):
                             logger.error(f'\t{dq_key} failed {data_quality_info.type}. Replacement value is {data_quality_info.replacement_value}.')
                                 # find replacement and use it if needed
                             out_dict[dq_key] = data_quality_info.replacement_value
-
-                    # all other keys 
-                    else:
-                        # trim trailing spaces of the value
-                        # might cause problems for sublibrary code and collection code
-                        val = value.rstrip()
-                        # determine if value passes check
-                        is_passing = data_quality_info.validate(val)
-                        # if the value has an exception count of 1, it likely has a missing value
-                        # skip the check if it has "only if data exists" flag
-                        if dq_exception_count == 1 and data_quality_info.only_if_data_exists:
                             continue
+                    
+                    # all other keys 
 
-                        if is_passing:
-                            # write value to out_dict because it passes
-                            out_dict[dq_key] = val
-                            out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
+                    # trim trailing spaces of the value
+                    # might cause problems for sublibrary code and collection code
+                    try:
+                        val = value.rstrip()
+                    except:
+                        pdb.set_trace()
+                        
+                    # determine if value passes check
+                    is_passing = data_quality_info.validate(val)
+                    # if the value has an exception count of 1, it likely has a missing value
+                    # skip the check if it has "only if data exists" flag
+                    if dq_exception_count == 1 and data_quality_info.only_if_data_exists:
+                        continue
+
+                    if is_passing:
+                        # write value to out_dict because it passes
+                        out_dict[dq_key] = val
+                        out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
+                        continue
+
+                    # handle failing dq check
+                    dq_exception_count = dq_exception_count + 1
+                    out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
+                    
+                    def handle_failed_dq():
+                        # suspend the record if needed
+                        if data_quality_info.suspend_record:
+                            
+                            # out_dict for the current dq_ key contains same value.
+                            out_dict[dq_key] = 'SUS'
+
+                            # change suspend record flag
+                            suspend_record_flag = "Y"
+                            out_dict['rm_suspend_rec_flag'] = suspend_record_flag
+
+                            # get suspend record code
+                            suspend_record_code = DataQualityProcessor.get_suspend_record_code(dq_key, data_quality_info)
+                            out_dict['rm_suspend_rec_reason_cd'] = suspend_record_code
+                            
+                            # raise and log error exception
+                            error_text = f'SUSPENDED RECORD. {dq_key} with value of {val} failed {data_quality_info.type}.'
+                            error = {
+                                "error_type": data_quality_info.type,
+                                "error_text": error_text,
+                                "error_row": str(item)
+                            }
+                            logger.error(error_text)
+                            raise DataQualityException(error)
 
                         else:
-                            # handle failing dq check
-                            dq_exception_count = dq_exception_count + 1
-                            out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
+                            # find replacement and use it if needed
+                            out_dict[dq_key] = data_quality_info.replacement_value
+                            error_text = f'FAILED. {dq_key} failed {data_quality_info.type}. Replacement value is {data_quality_info.replacement_value}.'
+                            error = {
+                                "error_type": data_quality_info.type,
+                                "error_text": error_text,
+                                "error_row": str(item)
+                            }
+                            logger.error(error_text)
+                            raise DataQualityException(error)
+                        
+                    try:
+                        handle_failed_dq()
+                        
+                    except DataQualityException as e:
+                            # Increment dw_error_id value from the table or set as 1 for the first time
+                            error_table_base_class = dwetl.Base.classes['dw_db_errors']
                             
-                            def handle_failed_dq():
-                                # suspend the record if needed
-                                if data_quality_info.suspend_record:
-                                    
-                                    # out_dict for the current dq_ key contains same value.
-                                    out_dict[dq_key] = 'SUS'
-
-                                    # change suspend record flag
-                                    suspend_record_flag = "Y"
-                                    out_dict['rm_suspend_rec_flag'] = suspend_record_flag
-
-                                    # get suspend record code
-                                    suspend_record_code = DataQualityProcessor.get_suspend_record_code(dq_key, data_quality_info)
-                                    out_dict['rm_suspend_rec_reason_cd'] = suspend_record_code
-                                    
-                                    # raise and log error exception
-                                    error_text = f'SUSPENDED RECORD. {dq_key} with value of {val} failed {data_quality_info.type}.'
-                                    error = {
-                                        "error_type": data_quality_info.type,
-                                        "error_text": error_text,
-                                        "error_row": str(item)
-                                    }
-                                    logger.error(error_text)
-                                    raise DataQualityException(error)
-
-                                else:
-                                    # find replacement and use it if needed
-                                    out_dict[dq_key] = data_quality_info.replacement_value
-                                    error_text = f'FAILED. {dq_key} failed {data_quality_info.type}. Replacement value is {data_quality_info.replacement_value}.'
-                                    error = {
-                                        "error_type": data_quality_info.type,
-                                        "error_text": error_text,
-                                        "error_row": str(item)
-                                    }
-                                    logger.error(error_text)
-                                    raise DataQualityException(error)
+                            max_dw_error_id = error_writer.session.query(func.max(error_table_base_class.dw_error_id)).scalar()
+                            if max_dw_error_id ==  None: 
+                                dw_error_id = 1
+                            else:
+                                dw_error_id = max_dw_error_id + 1
                             
-                            try:
-                                handle_failed_dq()
-                                
-                            except DataQualityException as e:
-                                    # Increment dw_error_id value from the table or set as 1 for the first time
-                                    error_table_base_class = dwetl.Base.classes['dw_db_errors']
-                                    
-                                    max_dw_error_id = error_writer.session.query(func.max(error_table_base_class.dw_error_id)).scalar()
-                                    if max_dw_error_id ==  None: 
-                                        dw_error_id = 1
-                                    else:
-                                        dw_error_id = max_dw_error_id + 1
-                                    
-                                    # create error row dictionary that will be added to the error table
-                                    error_row_dict = {
-                                        'dw_error_id': dw_error_id,
-                                        'dw_error_type': e.error_type,
-                                        'dw_error_text': e.error_text,
-                                        'dw_error_row': e.error_row,
-                                        'em_create_dw_prcsng_cycle_id': item['em_create_dw_prcsng_cycle_id'],
-                                        'em_create_dw_job_name': item['em_create_dw_job_name'],
-                                        'em_create_dw_job_version_no': item['em_create_dw_job_version_no'],
-                                        'em_create_user_id': item['em_create_user_id'],
-                                        'em_create_tmstmp': item['em_create_tmstmp'],
-                                        'em_create_dw_job_exectn_id': item['em_create_dw_job_exectn_id']
-                                    }
-                                    # write error to the error table
-                                    error_record = error_writer.write_row(error_row_dict)
+                            # create error row dictionary that will be added to the error table
+                            error_row_dict = {
+                                'dw_error_id': dw_error_id,
+                                'dw_error_type': e.error_type,
+                                'dw_error_text': e.error_text,
+                                'dw_error_row': e.error_row,
+                                'em_create_dw_prcsng_cycle_id': item['em_create_dw_prcsng_cycle_id'],
+                                'em_create_dw_job_name': item['em_create_dw_job_name'],
+                                'em_create_dw_job_version_no': item['em_create_dw_job_version_no'],
+                                'em_create_user_id': item['em_create_user_id'],
+                                'em_create_tmstmp': item['em_create_tmstmp'],
+                                'em_create_dw_job_exectn_id': item['em_create_dw_job_exectn_id'],
+    
+                            }
+                            # write error to the error table
+                            error_record = error_writer.write_row(error_row_dict)
             else:
                 # if there are no dq checks, output the pp value to dq
                 out_dict[dq_key] = value

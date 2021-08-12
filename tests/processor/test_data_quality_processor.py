@@ -207,24 +207,26 @@ class TestDataQualityProcessor(unittest.TestCase):
         z00_results = data_quality_processor.writer.list
         
         z00_expected_keys = sorted([
-            'db_operation_cd', 'dq_z00_data', 'dq_z00_data_len', 'dq_z00_doc_number', 'dq_z00_no_lines', 'dw_stg_2_aleph_lbry_name',
-            'em_update_dw_job_exectn_id', 'em_update_dw_job_name', 'em_update_dw_job_version_no',
-            'em_update_dw_prcsng_cycle_id', 'em_update_tmstmp', 'em_update_user_id',
-            'in_z00_doc_number', 'rm_dq_check_excptn_cnt', 'rm_suspend_rec_flag', 'rm_suspend_rec_reason_cd'
+            'db_operation_cd', 'dq_z00_data', 'dq_z00_data_len', 'dq_z00_doc_number', 
+            'dq_z00_no_lines', 'dw_stg_2_aleph_lbry_name', 'em_create_dw_prcsng_cycle_id', 
+            'em_update_dw_job_exectn_id', 'em_update_dw_job_name', 
+            'em_update_dw_job_version_no', 'em_update_dw_prcsng_cycle_id', 
+            'em_update_tmstmp', 'em_update_user_id', 'in_z00_doc_number', 
+            'rm_dq_check_excptn_cnt', 'rm_suspend_rec_flag', 'rm_suspend_rec_reason_cd'
             ])
 
-        self.assertEqual(z00_expected_keys, sorted(list(z00_results[2].keys())))
+        self.assertEqual(z00_expected_keys, sorted(list(z00_results[1].keys())))
         self.assertEqual('000053939', z00_results[2]['dq_z00_doc_number'])
         
         # test z00_doc_number missing values
-        self.assertEqual("SUS", results[0]['dq_z00_doc_number'])
-        self.assertEqual(1, results[0]['rm_dq_check_excptn_cnt'])
-        self.assertEqual("MIS", results[0]['rm_suspend_rec_reason_cd'])
+        self.assertEqual("SUS", z00_results[0]['dq_z00_doc_number'])
+        self.assertEqual(1, z00_results[0]['rm_dq_check_excptn_cnt'])
+        self.assertEqual("MIS", z00_results[0]['rm_suspend_rec_reason_cd'])
         
         # test z00_doc_number length 
-        self.assertEqual("SUS", results[1]['dq_z00_doc_number'])
-        self.assertEqual(1, results[1]['rm_dq_check_excptn_cnt'])
-        self.assertEqual("LEN", results[1]['rm_suspend_rec_reason_cd'])
+        self.assertEqual("SUS", z00_results[1]['dq_z00_doc_number'])
+        self.assertEqual(1, z00_results[1]['rm_dq_check_excptn_cnt'])
+        self.assertEqual("LEN", z00_results[1]['rm_suspend_rec_reason_cd'])
         
         
         
@@ -259,18 +261,20 @@ class TestDataQualityProcessor(unittest.TestCase):
 
         
 
-        self.assertEqual(None, results[3]['dq_z13_open_date'])
-        self.assertEqual(1, results[3]['rm_dq_check_excptn_cnt'])
-        self.assertEqual("MIS", results[0]['rm_suspend_rec_reason_cd'])
+        self.assertEqual(None, z13_results[0]['dq_z13_open_date'])
+        self.assertEqual(1, z13_results[0]['rm_dq_check_excptn_cnt'])
+        self.assertEqual("MIS", z13_results[0]['rm_suspend_rec_reason_cd'])
 
-        self.assertEqual(None, results[4]['dq_z13_open_date'])
-        self.assertEqual(1, results[4]['rm_dq_check_excptn_cnt'])
+        self.assertEqual(None, z13_results[1]['dq_z13_open_date'])
+        self.assertEqual(1, results[1]['rm_dq_check_excptn_cnt'])
         self.assertEqual("LEN", results[1]['rm_suspend_rec_reason_cd'])
 
 
         self.assertEqual('0049', results[0]['dq_z00_no_lines'])
         self.assertEqual('001970', results[0]['dq_z00_data_len'])
-        self.assertEqual('20130225', results[5]['dq_z13_update_date'])
-        self.assertEqual('1969', results[5]['dq_z13_year'])
+        self.assertEqual('20130222', results[1]['dq_z13_update_date'])
+        self.assertEqual('1969', results[2]['dq_z13_year'])
 
-        self.assertEqual('20021124', results[5]['pp_z13_open_date'])
+        self.assertEqual('20021124', results[2]['pp_z13_open_date'])
+    
+    
