@@ -125,8 +125,8 @@
             }
         ]
     },
-    "z00_no_lines ": {
-        "source_col_name": "z00_no_lines ",
+    "z00_no_lines": {
+        "source_col_name": "z00_no_lines",
         "preprocessing_info": {
             "pre_or_post_dq": "N/A",
             "pre_action": "N/A",
@@ -145,7 +145,7 @@
                     "specific_transform_function": "",
                     "specific_transform_function_param1": "",
                     "specific_transform_function_param2": "",
-                    "source_col_name": "z00_no_lines ",
+                    "source_col_name": "z00_no_lines",
                     "source_data_type": "NUMBER(4)",
                     "source_format": "",
                     "source_mandatory": "N",
