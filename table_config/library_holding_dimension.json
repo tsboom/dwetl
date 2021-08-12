@@ -477,7 +477,7 @@
                 "column_sub_component": "",
                 "column_data_type": "NUMBER(8)",
                 "format": "YYYYMMDD",
-                "type": "Date check",
+                "type": "Date Check",
                 "instructions": "Must be valid aleph date.",
                 "specific_dq_function": "is_valid_aleph_year",
                 "specific_dq_function_param_1": "",
@@ -600,7 +600,7 @@
                 "column_sub_component": "",
                 "column_data_type": "NUMBER(8)",
                 "format": "YYYYMMDD",
-                "type": "Date check",
+                "type": "Date Check",
                 "instructions": "Must be valid aleph date.",
                 "specific_dq_function": "is_valid_aleph_year",
                 "specific_dq_function_param_1": "",
@@ -735,7 +735,7 @@
                 "suspend_record": "No",
                 "exception_memorialization": "Create Exception Record",
                 "exception_message": "Invalid Value",
-                "replacement_value": "\"-I\"",
+                "replacement_value": "-I",
                 "dimension_link_to_record": "N/A"
             }
         ],
