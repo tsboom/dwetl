@@ -126,7 +126,7 @@ bib_rec_sample_data_z13u = [
         "pp_z13u_user_defined_3": "^^^^^nam^^2200241d1^45^0",
         "pp_z13u_user_defined_4": "690424s1969^^^^ilu^^^^^^b^^^^001^0^eng^^",
         "pp_z13u_user_defined_5": "0194-5947",
-        "pp_z13u_user_defined_6":"",
+        "pp_z13u_user_defined_6": "",
         "rm_dq_check_excptn_cnt": 0,
         "rm_suspend_rec_flag": "N",
         "rm_suspend_rec_reason_cd": None,

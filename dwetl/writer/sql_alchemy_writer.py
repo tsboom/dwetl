@@ -51,7 +51,6 @@ class SqlAlchemyWriter(Writer):
                 with self.session.begin_nested():
                     self.session.merge(record)
             except SQLAlchemyError as e: 
-                pdb.set_trace()
                 raise DWETLException(e)
         
         # New record: Add new row if pk list is not found in row

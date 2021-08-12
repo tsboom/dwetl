@@ -1,6 +1,8 @@
 import unittest
+import dwetl
 from dwetl.reader.list_reader import ListReader
 from dwetl.writer.list_writer import ListWriter
+from dwetl.writer.sql_alchemy_writer import SqlAlchemyWriter
 from dwetl.job_info import JobInfo
 from dwetl.data_quality_info import DataQualityInfo
 from dwetl.processor.data_quality_processor import DataQualityProcessor
@@ -21,7 +23,9 @@ class TestDataQualityProcessor(unittest.TestCase):
         cls.bib_record_dimension_sample_data_z13u = bib_record_dimension_sample_data.bib_rec_sample_data_z13u
 
         cls.logger = test_logger.logger
-        cls.error_writer = ListWriter()
+        
+        with dwetl.test_database_session() as session:
+            cls.error_writer= SqlAlchemyWriter(session, dwetl.Base.classes.dw_db_errors)
 
         with open('table_config/bibliographic_record_dimension.json') as json_file:
             cls.bib_rec_json_config = json.load(json_file)

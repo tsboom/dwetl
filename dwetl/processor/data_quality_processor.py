@@ -2,6 +2,7 @@ from dwetl.processor.processor import Processor
 from dwetl.data_quality_info import DataQualityInfo
 import dwetl.data_quality_utilities as dqu
 from dwetl.exceptions import DataQualityException
+from sqlalchemy import func
 import dwetl
 import datetime
 import pdb
@@ -60,7 +61,7 @@ class DataQualityProcessor(Processor):
                 pdb.set_trace() 
                 
     @classmethod
-    def check_data_quality(cls, item, json_config, pk_list, logger):
+    def check_data_quality(cls, item, json_config, pk_list, logger, error_writer):
         """
         Takes values from 'pp_' fields and runs DQ checks, adding replacement
         values if needed.
@@ -197,7 +198,8 @@ class DataQualityProcessor(Processor):
                             except DataQualityException as e:
                                     # Increment dw_error_id value from the table or set as 1 for the first time
                                     error_table_base_class = dwetl.Base.classes['dw_db_errors']
-                                    max_dw_error_id = self.error_writer.session.query(func.max(error_table_base_class.dw_error_id)).scalar()
+                                    
+                                    max_dw_error_id = error_writer.session.query(func.max(error_table_base_class.dw_error_id)).scalar()
                                     if max_dw_error_id ==  None: 
                                         dw_error_id = 1
                                     else:
@@ -209,15 +211,15 @@ class DataQualityProcessor(Processor):
                                         'dw_error_type': e.error_type,
                                         'dw_error_text': e.error_text,
                                         'dw_error_row': e.error_row,
-                                        'em_create_dw_prcsng_cycle_id': processed_row_dict['em_create_dw_prcsng_cycle_id'],
-                                        'em_create_dw_job_name': processed_row_dict['em_create_dw_job_name'],
-                                        'em_create_dw_job_version_no': processed_row_dict['em_create_dw_job_version_no'],
-                                        'em_create_user_id': processed_row_dict['em_create_user_id'],
-                                        'em_create_tmstmp': processed_row_dict['em_create_tmstmp'],
-                                        'em_create_dw_job_exectn_id': processed_row_dict['em_create_dw_job_exectn_id']
+                                        'em_create_dw_prcsng_cycle_id': item['em_create_dw_prcsng_cycle_id'],
+                                        'em_create_dw_job_name': item['em_create_dw_job_name'],
+                                        'em_create_dw_job_version_no': item['em_create_dw_job_version_no'],
+                                        'em_create_user_id': item['em_create_user_id'],
+                                        'em_create_tmstmp': item['em_create_tmstmp'],
+                                        'em_create_dw_job_exectn_id': item['em_create_dw_job_exectn_id']
                                     }
                                     # write error to the error table
-                                    error_record = self.error_write
+                                    error_record = error_writer.write_row(error_row_dict)
             else:
                 # if there are no dq checks, output the pp value to dq
                 out_dict[dq_key] = value
@@ -225,7 +227,7 @@ class DataQualityProcessor(Processor):
 
 
     def process_item(self, item):
-        processed_item = DataQualityProcessor.check_data_quality(item, self.json_config, self.stg2_pk_list, self.logger)
+        processed_item = DataQualityProcessor.check_data_quality(item, self.json_config, self.stg2_pk_list, self.logger, self.error_writer)
         processed_item.update(self.job_info.as_dict('update'))
         processed_item['em_update_dw_job_name'] = self.job_name()
         processed_item['em_update_tmstmp'] = datetime.datetime.now()
