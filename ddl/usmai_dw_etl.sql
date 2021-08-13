@@ -3884,7 +3884,7 @@ CREATE TABLE public.dw_db_errors (
     dw_error_id integer NOT NULL,
     dw_error_type character varying(150) NOT NULL,
     dw_error_text character varying(2000) NOT NULL,
-    dw_error_row character varying(3000) NOT NULL,
+    dw_error_row character varying(5000) NOT NULL,
     em_create_dw_prcsng_cycle_id integer NOT NULL,
     em_create_dw_job_exectn_id integer NOT NULL,
     em_create_dw_job_name character varying(100) NOT NULL,
