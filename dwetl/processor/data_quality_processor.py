@@ -107,7 +107,7 @@ class DataQualityProcessor(Processor):
             dq_list = DataQualityProcessor.get_dq_checks_for_key(clean_key, json_config, item)
             dq_key = key.replace('pp_', 'dq_')
             
-            pdb.set_trace()
+        
             
             # keep track of dq exception number
             dq_exception_count = 0
