@@ -131,26 +131,7 @@ bib_rec_sample_data_z13 = [
     }]
     
 bib_rec_sample_data_z13u = [
-        {
-            "db_operation_cd": "U",
-            "dw_stg_2_aleph_lbry_name": "mai01",
-            "em_create_dw_job_name": "CopyStage1ToStage2",
-            "em_create_dw_prcsng_cycle_id": "1",
-            "em_create_dw_job_version_no": "1.0.0",
-            "em_create_user_id": "dw",
-            "em_create_tmstmp": datetime.datetime.now(),
-            "em_create_dw_job_exectn_id": "1",
-            "in_z13u_rec_key": "000000897",
-            "pp_z13u_user_defined_2": None,
-            "pp_z13u_user_defined_3": "^^^^^nam^^2200241d1^45^0",
-            "pp_z13u_user_defined_4": "690424s1969^^^^ilu^^^^^^b^^^^001^0^eng^^",
-            "pp_z13u_user_defined_5": "0194-5947",
-            "pp_z13u_user_defined_6":"",
-            "rm_dq_check_excptn_cnt": 0,
-            "rm_suspend_rec_flag": "N",
-            "rm_suspend_rec_reason_cd": None,
-        },
-    # 0. z13u normal record
+    # 0. z13u good record
     {
         "db_operation_cd": "U",
         "dw_stg_2_aleph_lbry_name": "mai01",
@@ -170,8 +151,7 @@ bib_rec_sample_data_z13u = [
         "rm_suspend_rec_flag": "N",
         "rm_suspend_rec_reason_cd": None,
     },
-
-    # 1. z13u pp_z13u_user_defined_2 contains wrong format ocm w 9 digits
+    # 1. z13u null user_defined_2
     {
         "db_operation_cd": "U",
         "dw_stg_2_aleph_lbry_name": "mai01",
@@ -182,17 +162,16 @@ bib_rec_sample_data_z13u = [
         "em_create_tmstmp": datetime.datetime.now(),
         "em_create_dw_job_exectn_id": "1",
         "in_z13u_rec_key": "000000897",
-        "pp_z13u_user_defined_2": "ocm000016050",
+        "pp_z13u_user_defined_2": None,
         "pp_z13u_user_defined_3": "^^^^^nam^^2200241d1^45^0",
         "pp_z13u_user_defined_4": "690424s1969^^^^ilu^^^^^^b^^^^001^0^eng^^",
         "pp_z13u_user_defined_5": "0194-5947",
-        "pp_z13u_user_defined_6": "",
+        "pp_z13u_user_defined_6":"",
         "rm_dq_check_excptn_cnt": 0,
         "rm_suspend_rec_flag": "N",
         "rm_suspend_rec_reason_cd": None,
     },
-
-    # 2. z13u pp_z13u_user_defined_2 is empty string
+    # 2. z13u user_defined_2 is empty string
     {
         "db_operation_cd": "U",
         "dw_stg_2_aleph_lbry_name": "mai01",
@@ -211,6 +190,25 @@ bib_rec_sample_data_z13u = [
         "rm_dq_check_excptn_cnt": 0,
         "rm_suspend_rec_flag": "N",
         "rm_suspend_rec_reason_cd": None,
+    },
+    # 3. z13u pp_z13u_user_defined_2 contains wrong format ocm w 9 digits
+    {
+        "db_operation_cd": "U",
+        "dw_stg_2_aleph_lbry_name": "mai01",
+        "em_create_dw_job_name": "CopyStage1ToStage2",
+        "em_create_dw_prcsng_cycle_id": "1",
+        "em_create_dw_job_version_no": "1.0.0",
+        "em_create_user_id": "dw",
+        "em_create_tmstmp": datetime.datetime.now(),
+        "em_create_dw_job_exectn_id": "1",
+        "in_z13u_rec_key": "000000897",
+        "pp_z13u_user_defined_2": "ocm000016050",
+        "pp_z13u_user_defined_3": "^^^^^nam^^2200241d1^45^0",
+        "pp_z13u_user_defined_4": "690424s1969^^^^ilu^^^^^^b^^^^001^0^eng^^",
+        "pp_z13u_user_defined_5": "0194-5947",
+        "pp_z13u_user_defined_6": "",
+        "rm_dq_check_excptn_cnt": 0,
+        "rm_suspend_rec_flag": "N",
+        "rm_suspend_rec_reason_cd": None,
     }
-    # 3. z13u pp_z13u_user_defined_2 is None
 ]
