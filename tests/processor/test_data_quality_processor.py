@@ -394,8 +394,15 @@ class TestDataQualityProcessor(unittest.TestCase):
         self.assertEqual('1969', z13_results[2]['dq_z13_year'])
         self.assertEqual('20021124', z13_results[2]['dq_z13_open_date'])
 
-        # TODO: check z13_update_date
 
+
+
+        # TODO: check z13_update_date
+        self.assertEqual(None, z13_results[3]['dq_z13_update_date'])
+        self.assertEqual(1, z13_results[3]['rm_dq_check_excptn_cnt'])
+
+        self.assertEqual(None, z13_results[4]['dq_z13_update_date'])
+        self.assertEqual(1, z13_results[4]['rm_dq_check_excptn_cnt'])
 
         # z13u
         writer = ListWriter()
