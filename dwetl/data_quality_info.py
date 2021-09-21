@@ -98,4 +98,6 @@ class DataQualityInfo:
             return True
         elif text == 'x':
             return True
+        elif text == 'X':
+            return True
         return False

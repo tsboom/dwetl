@@ -102,13 +102,12 @@ class DataQualityProcessor(Processor):
 
             # check if mandatory and raise exception if not
             DataQualityProcessor.check_mandatory(clean_key, value, json_config)
-                
+
             # get DQ checks for current key
             dq_list = DataQualityProcessor.get_dq_checks_for_key(clean_key, json_config, item)
             dq_key = key.replace('pp_', 'dq_')
             
-        
-            
+    
             # keep track of dq exception number
             dq_exception_count = 0
 
@@ -118,58 +117,35 @@ class DataQualityProcessor(Processor):
                     # create DataQualityInfo for each DQ check
                     data_quality_info = DataQualityInfo(dq_check)
                     
-                    # TODO: might need clean this up. dealing with having an existing z13_open_date exception
-                    # 
-                    if dq_check['type'] == 'Date check' and key != 'pp_z13_open_date':
-                        continue
+                    # if the value has an exception count of 1, it likely has a missing value
+                    # skip the check if it has "only if data exists" flag
+                    if dq_exception_count == 1 and data_quality_info.only_if_data_exists:
+                        break
                         
-                    elif dq_check['type'] == 'Date check' and key == 'pp_z13_open_date':
-                        # clean and trailing spaces
-                        val = value.rstrip()
-
-                        if dq_exception_count == 1 and data_quality_info.only_if_data_exists:
-                            continue
-                        is_passing = data_quality_info.validate(val)
-                        
-                        if is_passing:
-                            # write value to out_dict because it passes
-                            out_dict[dq_key] = val
-                            out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
-                            continue
-                        else:
-
-                            dq_exception_count = dq_exception_count + 1
-                            out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
-
-                            logger.error(f'\t{dq_key} failed {data_quality_info.type}. Replacement value is {data_quality_info.replacement_value}.')
-                                # find replacement and use it if needed
-                            out_dict[dq_key] = data_quality_info.replacement_value
-                            continue
-
                     # trim trailing spaces of the value
                     # might cause problems for sublibrary code and collection code
                     if value:
                         val = value.rstrip()
-                        # determine if value passes check
-                        is_passing = data_quality_info.validate(val)
-                    else: 
-                        is_passing = False
+                    else:
                         val = value
+                    
+                    # if clean_key == 'z13u_user_defined_2':
+                    #     pdb.set_trace()
                         
-                    # if the value has an exception count of 1, it likely has a missing value
-                    # skip the check if it has "only if data exists" flag
-                    if dq_exception_count == 1 and data_quality_info.only_if_data_exists:
-                        continue
+                    # determine if value passes check
+                    is_passing = data_quality_info.validate(val)
+                        
+
 
                     if is_passing:
                         # write value to out_dict because it passes
                         out_dict[dq_key] = val
                         out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
                         continue
-
-                    # handle failing dq check
-                    dq_exception_count = dq_exception_count + 1
-                    out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
+                    else:
+                        # handle failing dq check
+                        dq_exception_count = dq_exception_count + 1
+                        out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
                     
                     def handle_failed_dq():
                         # suspend the record if needed
@@ -199,6 +175,7 @@ class DataQualityProcessor(Processor):
                         else:
                             # find replacement and use it if needed
                             out_dict[dq_key] = data_quality_info.replacement_value
+                        
                             error_text = f'FAILED. {dq_key} failed {data_quality_info.type}. Replacement value is {data_quality_info.replacement_value}.'
                             error = {
                                 "error_type": data_quality_info.type,
@@ -210,6 +187,8 @@ class DataQualityProcessor(Processor):
                         
                     try:
                         handle_failed_dq()
+                        
+                            
                         
                     except DataQualityException as e:
                             # Increment dw_error_id value from the table or set as 1 for the first time
@@ -248,4 +227,8 @@ class DataQualityProcessor(Processor):
         processed_item.update(self.job_info.as_dict('update'))
         processed_item['em_update_dw_job_name'] = self.job_name()
         processed_item['em_update_tmstmp'] = datetime.datetime.now()
+        for key, val in item.items():
+            if key.startswith('in_z13'):
+                pprint.pprint(processed_item)
+                pass
         return processed_item
