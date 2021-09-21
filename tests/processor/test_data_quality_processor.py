@@ -299,19 +299,15 @@ class TestDataQualityProcessor(unittest.TestCase):
 
         self.assertEqual(None, z13_results[0]['dq_z13_open_date'])
         self.assertEqual(1, z13_results[0]['rm_dq_check_excptn_cnt'])
-        self.assertEqual("MIS", z13_results[0]['rm_suspend_rec_reason_cd'])
 
         self.assertEqual(None, z13_results[1]['dq_z13_open_date'])
         self.assertEqual(1, z13_results[1]['rm_dq_check_excptn_cnt'])
-        self.assertEqual("DAT", z13_results[1]['rm_suspend_rec_reason_cd'])
-
-
-        self.assertEqual('0049', z13_results[0]['dq_z00_no_lines'])
-        self.assertEqual('001970', z13_results[0]['dq_z00_data_len'])
         self.assertEqual('20130222', z13_results[1]['dq_z13_update_date'])
+        
         self.assertEqual('1969', z13_results[2]['dq_z13_year'])
-
-        self.assertEqual('20021124', z13_results[2]['pp_z13_open_date'])
+        self.assertEqual('20021124', z13_results[2]['dq_z13_open_date'])
+        
+        # TODO: check z13_open_date
         
         
         # z13u

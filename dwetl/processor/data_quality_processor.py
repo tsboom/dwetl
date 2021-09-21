@@ -69,6 +69,45 @@ class DataQualityProcessor(Processor):
             except DWETLException as e:
                 #TODO: raise exception if key is mandatory but its value is missing
                 pdb.set_trace() 
+    
+    @classmethod
+    def handle_failed_dq(cls, logger, out_dict, data_quality_info, item, dq_key, val):
+        # suspend the record if needed
+        if data_quality_info.suspend_record:
+            
+            # out_dict for the current dq_ key contains same value.
+            out_dict[dq_key] = 'SUS'
+
+            # change suspend record flag
+            suspend_record_flag = "Y"
+            out_dict['rm_suspend_rec_flag'] = suspend_record_flag
+
+            # get suspend record code
+            suspend_record_code = DataQualityProcessor.get_suspend_record_code(dq_key, data_quality_info)
+            out_dict['rm_suspend_rec_reason_cd'] = suspend_record_code
+            
+            # raise and log error exception
+            error_text = f'SUSPENDED RECORD. {dq_key} with value of {val} failed {data_quality_info.type}.'
+            error = {
+                "error_type": data_quality_info.type,
+                "error_text": error_text,
+                "error_row": str(item)
+            }
+            logger.error(error_text)
+            raise DataQualityException(error)
+
+        else:
+            # find replacement and use it if needed
+            out_dict[dq_key] = data_quality_info.replacement_value
+        
+            error_text = f'FAILED. {dq_key} failed {data_quality_info.type}. Replacement value is {data_quality_info.replacement_value}.'
+            error = {
+                "error_type": data_quality_info.type,
+                "error_text": error_text,
+                "error_row": str(item)
+            }
+            logger.error(error_text)
+            raise DataQualityException(error)
                 
     @classmethod
     def check_data_quality(cls, item, json_config, pk_list, logger, error_writer):
@@ -81,6 +120,9 @@ class DataQualityProcessor(Processor):
         # out dict to hold the processed item
         out_dict = {}
         invalid_keys = ['rec_type_cd', 'rec_trigger_key', '_sa_instance_state']
+        
+        # keep track of dq exception number
+        dq_exception_count = 0
 
         for key, value in item.items():
 
@@ -106,10 +148,6 @@ class DataQualityProcessor(Processor):
             # get DQ checks for current key
             dq_list = DataQualityProcessor.get_dq_checks_for_key(clean_key, json_config, item)
             dq_key = key.replace('pp_', 'dq_')
-            
-    
-            # keep track of dq exception number
-            dq_exception_count = 0
 
             # do DQ checks if exist
             if dq_list:
@@ -147,75 +185,37 @@ class DataQualityProcessor(Processor):
                         dq_exception_count = dq_exception_count + 1
                         out_dict['rm_dq_check_excptn_cnt'] = dq_exception_count
                     
-                    def handle_failed_dq():
-                        # suspend the record if needed
-                        if data_quality_info.suspend_record:
-                            
-                            # out_dict for the current dq_ key contains same value.
-                            out_dict[dq_key] = 'SUS'
-
-                            # change suspend record flag
-                            suspend_record_flag = "Y"
-                            out_dict['rm_suspend_rec_flag'] = suspend_record_flag
-
-                            # get suspend record code
-                            suspend_record_code = DataQualityProcessor.get_suspend_record_code(dq_key, data_quality_info)
-                            out_dict['rm_suspend_rec_reason_cd'] = suspend_record_code
-                            
-                            # raise and log error exception
-                            error_text = f'SUSPENDED RECORD. {dq_key} with value of {val} failed {data_quality_info.type}.'
-                            error = {
-                                "error_type": data_quality_info.type,
-                                "error_text": error_text,
-                                "error_row": str(item)
-                            }
-                            logger.error(error_text)
-                            raise DataQualityException(error)
-
-                        else:
-                            # find replacement and use it if needed
-                            out_dict[dq_key] = data_quality_info.replacement_value
+                    
                         
-                            error_text = f'FAILED. {dq_key} failed {data_quality_info.type}. Replacement value is {data_quality_info.replacement_value}.'
-                            error = {
-                                "error_type": data_quality_info.type,
-                                "error_text": error_text,
-                                "error_row": str(item)
-                            }
-                            logger.error(error_text)
-                            raise DataQualityException(error)
-                        
-                    try:
-                        handle_failed_dq()
-                        
-                            
-                        
-                    except DataQualityException as e:
-                            # Increment dw_error_id value from the table or set as 1 for the first time
-                            error_table_base_class = dwetl.Base.classes['dw_db_errors']
-                            
-                            max_dw_error_id = error_writer.session.query(func.max(error_table_base_class.dw_error_id)).scalar()
-                            if max_dw_error_id ==  None: 
-                                dw_error_id = 1
-                            else:
-                                dw_error_id = max_dw_error_id + 1
-                            
-                            # create error row dictionary that will be added to the error table
-                            error_row_dict = {
-                                'dw_error_id': dw_error_id,
-                                'dw_error_type': e.error_type,
-                                'dw_error_text': e.error_text,
-                                'dw_error_row': e.error_row,
-                                'em_create_dw_prcsng_cycle_id': item['em_create_dw_prcsng_cycle_id'],
-                                'em_create_dw_job_name': item['em_create_dw_job_name'],
-                                'em_create_dw_job_version_no': item['em_create_dw_job_version_no'],
-                                'em_create_user_id': item['em_create_user_id'],
-                                'em_create_tmstmp': item['em_create_tmstmp'],
-                                'em_create_dw_job_exectn_id': item['em_create_dw_job_exectn_id'],
-    
-                            }
-                            # write error to the error table
-                            error_record = error_writer.write_row(error_row_dict)
+                        try:
+                            DataQualityProcessor.handle_failed_dq(logger, out_dict, data_quality_info, item, dq_key, val)
+                                
+                        except DataQualityException as e:
+                                # Increment dw_error_id value from the table or set as 1 for the first time
+                                error_table_base_class = dwetl.Base.classes['dw_db_errors']
+                                
+                                max_dw_error_id = error_writer.session.query(func.max(error_table_base_class.dw_error_id)).scalar()
+                                if max_dw_error_id ==  None: 
+                                    dw_error_id = 1
+                                else:
+                                    dw_error_id = max_dw_error_id + 1
+                                
+                                # create error row dictionary that will be added to the error table
+                                error_row_dict = {
+                                    'dw_error_id': dw_error_id,
+                                    'dw_error_type': e.error_type,
+                                    'dw_error_text': e.error_text,
+                                    'dw_error_row': e.error_row,
+                                    'em_create_dw_prcsng_cycle_id': item['em_create_dw_prcsng_cycle_id'],
+                                    'em_create_dw_job_name': item['em_create_dw_job_name'],
+                                    'em_create_dw_job_version_no': item['em_create_dw_job_version_no'],
+                                    'em_create_user_id': item['em_create_user_id'],
+                                    'em_create_tmstmp': item['em_create_tmstmp'],
+                                    'em_create_dw_job_exectn_id': item['em_create_dw_job_exectn_id'],
+        
+                                }
+                                # write error to the error table
+                                error_record = error_writer.write_row(error_row_dict)
             else:
                 # if there are no dq checks, output the pp value to dq
                 out_dict[dq_key] = value
