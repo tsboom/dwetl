@@ -128,8 +128,48 @@ bib_rec_sample_data_z13 = [
         "rm_suspend_rec_flag": "N",
         "rm_suspend_rec_reason_cd": None ,
 
+    },
+# 3. z13_update_date missing value
+    {
+        "db_operation_cd": "U",
+        "dw_stg_2_aleph_lbry_name": "mai01",
+        "em_create_dw_job_name": "CopyStage1ToStage2",
+        "em_create_dw_prcsng_cycle_id": "1",
+        "em_create_dw_job_version_no": "1.0.0",
+        "em_create_user_id": "dw",
+        "em_create_tmstmp": datetime.datetime.now(),
+        "em_create_dw_job_exectn_id": "1",
+        "in_z13_rec_key": "000000897",
+        "pp_z13_author": "Hoover, Dwight W., 1926-",
+        "pp_z13_open_date": "20021124",
+        "pp_z13_title": "Understanding Negro history",
+        "pp_z13_update_date" : "",
+        "pp_z13_year": "1969",
+        "rm_dq_check_excptn_cnt": 0,
+        "rm_suspend_rec_flag": "N",
+        "rm_suspend_rec_reason_cd": None,
+    },
+    # 4. z13_update_date format error
+    {
+        "db_operation_cd":  " U",
+        "dw_stg_2_aleph_lbry_name": "mai01",
+        "em_create_dw_job_name": "CopyStage1ToStage2",
+        "em_create_dw_prcsng_cycle_id": "1",
+        "em_create_dw_job_version_no": "1.0.0",
+        "em_create_user_id": "dw",
+        "em_create_tmstmp": datetime.datetime.now(),
+        "em_create_dw_job_exectn_id": "1",
+        "in_z13_rec_key": "000000897",
+        "pp_z13_author": "Hoover, Dwight W., 1926-",
+        "pp_z13_open_date": "20021124",
+        "pp_z13_title": "Understanding Negro history",
+        "pp_z13_update_date" : "2099v9999",
+        "pp_z13_year": "1969",
+        "rm_dq_check_excptn_cnt": 0,
+        "rm_suspend_rec_flag": "N",
+        "rm_suspend_rec_reason_cd": None ,
     }]
-    
+
 bib_rec_sample_data_z13u = [
         {
             "db_operation_cd": "U",
