@@ -404,6 +404,7 @@ class TestDataQualityProcessor(unittest.TestCase):
         self.assertEqual(None, z13_results[4]['dq_z13_update_date'])
         self.assertEqual(1, z13_results[4]['rm_dq_check_excptn_cnt'])
 
+
         # z13u
         writer = ListWriter()
         reader = ListReader(self.bib_record_dimension_sample_data_z13u)
@@ -412,3 +413,33 @@ class TestDataQualityProcessor(unittest.TestCase):
         data_quality_processor = DataQualityProcessor(reader, writer, job_info, self.logger, json_config, z13u_pk_list, self.error_writer)
         data_quality_processor.execute()
         z13u_results = data_quality_processor.writer.list
+
+        
+        z13u_expected_keys = sorted([
+            'db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'em_create_dw_prcsng_cycle_id', 
+            'in_z13u_rec_key', 'rm_dq_check_excptn_cnt', 'dq_z13u_user_defined_2', 
+            'dq_z13u_user_defined_3', 'dq_z13u_user_defined_4', 'dq_z13u_user_defined_5', 
+            'dq_z13u_user_defined_6', 'em_update_dw_prcsng_cycle_id', 'em_update_user_id', 
+            'em_update_dw_job_exectn_id', 'em_update_dw_job_version_no', 
+            'em_update_dw_job_name', 'em_update_tmstmp'
+        ])
+        
+        self.assertEqual(z13u_expected_keys, sorted(list(z13u_results[0].keys())))
+        self.assertEqual(z13u_expected_keys, sorted(list(z13u_results[1].keys())))
+        
+        # check valid record
+        self.assertEqual("ocm00001605", z13u_results[0]['dq_z13u_user_defined_2'])
+        self.assertEqual(0, z13u_results[0]['rm_dq_check_excptn_cnt'])
+        # check invalid z13u_user_defined_2
+        self.assertEqual("-M", z13u_results[1]['dq_z13u_user_defined_2'])
+        self.assertEqual("-M", z13u_results[2]['dq_z13u_user_defined_2'])
+        self.assertEqual("-I", z13u_results[3]['dq_z13u_user_defined_2'])
+        
+
+
+        
+
+
+        
+    
+

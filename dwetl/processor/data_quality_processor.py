@@ -228,7 +228,7 @@ class DataQualityProcessor(Processor):
         processed_item['em_update_dw_job_name'] = self.job_name()
         processed_item['em_update_tmstmp'] = datetime.datetime.now()
         for key, val in item.items():
-            if key.startswith('in_z13'):
+            if key.startswith('in_z13u'):
                 pprint.pprint(processed_item)
                 pass
         return processed_item
