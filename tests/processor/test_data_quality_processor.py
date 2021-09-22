@@ -403,6 +403,10 @@ class TestDataQualityProcessor(unittest.TestCase):
 
         self.assertEqual(None, z13_results[4]['dq_z13_update_date'])
         self.assertEqual(1, z13_results[4]['rm_dq_check_excptn_cnt'])
+        
+        self.assertEqual(2, z13_results[5]['rm_dq_check_excptn_cnt'])
+        self.assertEqual(None, z13_results[5]['dq_z13_open_date'])
+        self.assertEqual(None, z13_results[5]['dq_z13_update_date'])
 
 
         # z13u

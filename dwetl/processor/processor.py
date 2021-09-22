@@ -50,7 +50,13 @@ class Processor:
                         'em_create_dw_job_version_no': processed_row_dict['em_create_dw_job_version_no'],
                         'em_create_user_id': processed_row_dict['em_create_user_id'],
                         'em_create_tmstmp': processed_row_dict['em_create_tmstmp'],
-                        'em_create_dw_job_exectn_id': processed_row_dict['em_create_dw_job_exectn_id']
+                        'em_create_dw_job_exectn_id': processed_row_dict['em_create_dw_job_exectn_id'],
+                        'em_update_dw_prcsng_cycle_id': processed_row_dict['em_update_dw_prcsng_cycle_id'],
+                        'em_update_dw_job_name': processed_row_dict['em_update_dw_job_name'],
+                        'em_update_dw_job_version_no': processed_row_dict['em_update_dw_job_version_no'],
+                        'em_update_user_id': processed_row_dict['em_update_user_id'],
+                        'em_update_tmstmp': processed_row_dict['em_update_tmstmp'],
+                        'em_update_dw_job_exectn_id': processed_row_dict['em_update_dw_job_exectn_id']
                     }
 
                     # write error to the error table
