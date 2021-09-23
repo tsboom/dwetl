@@ -230,6 +230,12 @@ class DataQualityProcessor(Processor):
                             'em_create_user_id': item['em_create_user_id'],
                             'em_create_tmstmp': item['em_create_tmstmp'],
                             'em_create_dw_job_exectn_id': item['em_create_dw_job_exectn_id'],
+                            'em_update_dw_prcsng_cycle_id': item['em_update_dw_prcsng_cycle_id'],
+                            'em_update_dw_job_name': item['em_update_dw_job_name'],
+                            'em_update_dw_job_version_no': item['em_update_dw_job_version_no'],
+                            'em_update_user_id': item['em_update_user_id'],
+                            'em_update_tmstmp': item['em_update_tmstmp'],
+                            'em_update_dw_job_exectn_id': item['em_update_dw_job_exectn_id'
 
                         }
                         # write error to the error table

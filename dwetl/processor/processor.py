@@ -24,8 +24,13 @@ class Processor:
             
             if processed_row_dict:
                 try:
+                    if 'em_update_dw_job_name' in processed_row_dict:
+                        if processed_row_dict['em_update_dw_job_name'] == 'DataQualityProcessor':
+                            if 'in_z13u_rec_key' in row_dict:
+                                pdb.set_trace()
                     self.writer.write_row(processed_row_dict)
                 except DWETLException as e:
+                    # this will catch SQL Alchemy exceptions
                     error = e.error_text
                     # save the dictionary of the problem row if it is available as .params
                     if e.error_row:
