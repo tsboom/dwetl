@@ -13,7 +13,7 @@ import pdb
 import stage_2_intertable_processing
 import load_stage_1
 from dwetl.processor.load_aleph_tsv import LoadAlephTsv
-from stage_2_intertable_processing import preprocess_tables, dataquality_check_tables
+from stage_2_intertable_processing import stage_2_intertable_processing
 
 class TestBibRecEtl(unittest.TestCase):
     @unittest.skipUnless(database_credentials.test_db_configured(), "Test database is not configured.")
@@ -33,7 +33,6 @@ class TestBibRecEtl(unittest.TestCase):
     def test_preprocessing_pp_values_exist(self):
         
         # currently testing end to end
-        
         with dwetl.test_database_session() as test_session:
             # TODO: we need to add z13 and z13u to these . and mai01 vs mai39
 
@@ -68,7 +67,7 @@ class TestBibRecEtl(unittest.TestCase):
             
 
 
-            stage_2_intertable_processing.preprocess_tables(reader, writer, job_info, logger, json_config, pk_list, error_writer)
+            stage_2_intertable_processing.stage_2_intertable_processing(reader, writer, job_info, logger, json_config, pk_list, error_writer)
             pdb.set_trace()
             
             
