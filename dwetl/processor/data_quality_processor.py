@@ -12,7 +12,7 @@ import pprint
 class DataQualityFailure:
     def __init__(self, out_dict, error):
         self.out_dict = out_dict
-        self.error = error    
+        self.error = error
 
 class DataQualityProcessor(Processor):
 
@@ -112,10 +112,43 @@ class DataQualityProcessor(Processor):
                 "error_row": str(item)
             }
             logger.error(error_text)
+        
         failed_dq = DataQualityFailure(out_dict, error)
         return failed_dq
             
-            
+    @classmethod
+    def write_error(cls, item, error_writer, failed_dq):
+        # Increment dw_error_id value from the table or set as 1 for the first time
+        error_table_base_class = dwetl.Base.classes['dw_db_errors']
+        
+        max_dw_error_id = error_writer.session.query(func.max(error_table_base_class.dw_error_id)).scalar()
+        if max_dw_error_id ==  None: 
+            dw_error_id = 1
+        else:
+            dw_error_id = max_dw_error_id + 1
+        
+        # create error row dictionary that will be added to the error table
+        error_row_dict = {
+            'dw_error_id': dw_error_id,
+            'dw_error_type': failed_dq.error['error_type'],
+            'dw_error_text': failed_dq.error['error_text'],
+            'dw_error_row': failed_dq.error['error_row'],
+            'em_create_dw_prcsng_cycle_id': item['em_create_dw_prcsng_cycle_id'],
+            'em_create_dw_job_name': item['em_create_dw_job_name'],
+            'em_create_dw_job_version_no': item['em_create_dw_job_version_no'],
+            'em_create_user_id': item['em_create_user_id'],
+            'em_create_tmstmp': item['em_create_tmstmp'],
+            'em_create_dw_job_exectn_id': item['em_create_dw_job_exectn_id'],
+            'em_update_dw_prcsng_cycle_id': failed_dq.out_dict['em_update_dw_prcsng_cycle_id'],
+            'em_update_dw_job_name': failed_dq.out_dict['em_update_dw_job_name'],
+            'em_update_dw_job_version_no': failed_dq.out_dict['em_update_dw_job_version_no'],
+            'em_update_user_id': failed_dq.out_dict['em_update_user_id'],
+            'em_update_tmstmp': failed_dq.out_dict['em_update_tmstmp'],
+            'em_update_dw_job_exectn_id': failed_dq.out_dict['em_update_dw_job_exectn_id']
+
+        }
+        # write error to the error table
+        error_record = error_writer.write_row(error_row_dict)
                 
     @classmethod
     def check_data_quality(cls, item, json_config, pk_list, logger, error_writer):
@@ -131,10 +164,13 @@ class DataQualityProcessor(Processor):
         
         # keep track of total dq exception number
         dq_exception_count = 0
+        
+        # key track of failed dq checks 
+        failed_dqs = []
 
         for key, value in item.items():
 
-
+            
             if key in invalid_keys:
                 continue
 
@@ -164,7 +200,7 @@ class DataQualityProcessor(Processor):
             # do DQ checks if exist
             if dq_list:
                 for dq_check in dq_list:
-                    
+                    failed_dq = None
                     # create DataQualityInfo for each DQ check
                     data_quality_info = DataQualityInfo(dq_check)
                     
@@ -205,54 +241,24 @@ class DataQualityProcessor(Processor):
                         
                         # handle out dict
                         out_dict = failed_dq.out_dict
+                        # update list of failed_dqs 
+                        failed_dqs.append(failed_dq)
                         
-                        # Get the error message and write to the error table
-                        error = failed_dq.error
-                        
-                        # Increment dw_error_id value from the table or set as 1 for the first time
-                        error_table_base_class = dwetl.Base.classes['dw_db_errors']
-                        
-                        max_dw_error_id = error_writer.session.query(func.max(error_table_base_class.dw_error_id)).scalar()
-                        if max_dw_error_id ==  None: 
-                            dw_error_id = 1
-                        else:
-                            dw_error_id = max_dw_error_id + 1
-                        
-                        # create error row dictionary that will be added to the error table
-                        error_row_dict = {
-                            'dw_error_id': dw_error_id,
-                            'dw_error_type': error['error_type'],
-                            'dw_error_text': error['error_text'],
-                            'dw_error_row': error['error_row'],
-                            'em_create_dw_prcsng_cycle_id': item['em_create_dw_prcsng_cycle_id'],
-                            'em_create_dw_job_name': item['em_create_dw_job_name'],
-                            'em_create_dw_job_version_no': item['em_create_dw_job_version_no'],
-                            'em_create_user_id': item['em_create_user_id'],
-                            'em_create_tmstmp': item['em_create_tmstmp'],
-                            'em_create_dw_job_exectn_id': item['em_create_dw_job_exectn_id'],
-                            'em_update_dw_prcsng_cycle_id': item['em_update_dw_prcsng_cycle_id'],
-                            'em_update_dw_job_name': item['em_update_dw_job_name'],
-                            'em_update_dw_job_version_no': item['em_update_dw_job_version_no'],
-                            'em_update_user_id': item['em_update_user_id'],
-                            'em_update_tmstmp': item['em_update_tmstmp'],
-                            'em_update_dw_job_exectn_id': item['em_update_dw_job_exectn_id']
-
-                        }
-                        # write error to the error table
-                        error_record = error_writer.write_row(error_row_dict)
-
             else:
                 # if there are no dq checks, output the pp value to dq
                 out_dict[dq_key] = value
-        return out_dict
+        return (out_dict, failed_dqs)
 
 
     def process_item(self, item):
-        processed_item = DataQualityProcessor.check_data_quality(item, self.json_config, self.stg2_pk_list, self.logger, self.error_writer)
+        (processed_item, failed_dqs) = DataQualityProcessor.check_data_quality(item, self.json_config, self.stg2_pk_list, self.logger, self.error_writer)
         processed_item.update(self.job_info.as_dict('update'))
         processed_item['em_update_dw_job_name'] = self.job_name()
         processed_item['em_update_tmstmp'] = datetime.datetime.now()
-        # if 'in_z13u_user_defined_2' in item:
-        #     if item['in_z13u_user_defined_2'] == 'osm00001986':
-        #         pdb.set_trace()
+        # write any errors to error table using the same job name and timestamp as the processed item
+        if failed_dqs:
+            for failed_dq in failed_dqs:
+                failed_dq.error['em_update_dw_job_name'] = processed_item['em_update_dw_job_name']
+                failed_dq.error['em_update_tmstmp'] = processed_item['em_update_tmstmp']
+                DataQualityProcessor.write_error(item, self.error_writer, failed_dq)
         return processed_item
