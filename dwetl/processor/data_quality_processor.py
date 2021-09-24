@@ -235,7 +235,7 @@ class DataQualityProcessor(Processor):
                             'em_update_dw_job_version_no': item['em_update_dw_job_version_no'],
                             'em_update_user_id': item['em_update_user_id'],
                             'em_update_tmstmp': item['em_update_tmstmp'],
-                            'em_update_dw_job_exectn_id': item['em_update_dw_job_exectn_id'
+                            'em_update_dw_job_exectn_id': item['em_update_dw_job_exectn_id']
 
                         }
                         # write error to the error table
