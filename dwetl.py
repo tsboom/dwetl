@@ -94,11 +94,11 @@ main function for running script from the command line
 if __name__=='__main__':
     arguments = sys.argv
     
-    #today = datetime.datetime.now().strftime('%Y%m%d')
-    #input_directory = f'/apps/dw/incoming/{today}/'
+    today = datetime.datetime.now().strftime('%Y%m%d')
+    input_directory = f'/apps/dw/incoming/{today}/'
     
-    today = "20191211"
-    input_directory = f'data/incoming/aleph/{today}/'
+    # today = "20191211"
+    # input_directory = f'data/incoming/aleph/{today}/'
 
         
     
