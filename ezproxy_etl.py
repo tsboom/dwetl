@@ -163,9 +163,9 @@ if __name__=='__main__':
     # otherwise process today's date, put together filename from date 
     filename = f"sessions.log.{day_to_process}"
     data_directory = os.getenv("DATA_DIRECTORY")
-    input_directory = data_directory + 'incoming/ezproxy/'
+    input_directory = data_directory + '/incoming/ezproxy/'
     incoming_input_file = input_directory + filename
-    processed_dir = data_directory + "processed/ezproxy/"
+    processed_dir = data_directory + "/processed/ezproxy/"
     processed_input_file = processed_dir + filename
     if os.path.exists(incoming_input_file):
         print(f'input file: {incoming_input_file}')
