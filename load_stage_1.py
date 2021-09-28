@@ -22,8 +22,8 @@ def load_stage_1(job_info, input_directory, logger):
     '''
 
     ALEPH_TSV_TABLE_MAPPING = {
-        # "mai01_z00_data": "dw_stg_1_mai01_z00",
-        # "mai39_z00_data": "dw_stg_1_mai39_z00",
+        "mai01_z00_data": "dw_stg_1_mai01_z00",
+        "mai39_z00_data": "dw_stg_1_mai39_z00",
         "mai01_z13_data": "dw_stg_1_mai01_z13",
         "mai39_z13_data": "dw_stg_1_mai39_z13",
         "mai01_z13u_data": "dw_stg_1_mai01_z13u",
@@ -59,15 +59,16 @@ def load_stage_1(job_info, input_directory, logger):
 
     for file, table in ALEPH_TSV_TABLE_MAPPING.items():
         file_path = os.path.join(input_directory, file)
-        print(file_path)
+        pdb.set_trace
         logger.info(file_path)
         with dwetl.database_session() as session:
+            #pdb.set_trace()
             reader = TsvFileReader(file_path)
             # writer = PrintWriter()
             writer = SqlAlchemyWriter(session, dwetl.Base.classes[table])
             error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
             processor = LoadAlephTsv(reader, writer, job_info, logger, error_writer)
-            #pdb.set_trace()		
+            #pdb.set_trace()
             processor.execute()
 
 

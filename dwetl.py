@@ -22,6 +22,8 @@ from dwetl.job_info import JobInfoFactory, JobInfo
 import load_stage_1
 import load_stage_2
 import stage_2_intertable_processing
+from dotenv import load_dotenv
+load_dotenv()
 
 def run(input_directory):
 
@@ -51,7 +53,6 @@ def run(input_directory):
     load_stage_1
     '''
     load_stage_1.load_stage_1(job_info, input_directory, logger)
-
     '''
     load_stage_2
     load 'in_' values from stg1 to stg 2 tables
@@ -93,21 +94,19 @@ main function for running script from the command line
 '''
 if __name__=='__main__':
     arguments = sys.argv
-    
-    today = datetime.datetime.now().strftime('%Y%m%d')
-    input_directory = f'/apps/dw/incoming/{today}/'
-    
-    # today = "20191211"
-    # input_directory = f'data/incoming/aleph/{today}/'
 
-        
-    
+    today = datetime.datetime.now().strftime('%Y%m%d')
+    #today = "20201019"
+    data_directory = os.getenv("DATA_DIRECTORY")
+    # input_directory = f'{data_directory}/incoming/aleph/{today}/'
+
+
     # give hint if --help
     if '--help' in arguments:
         print('Usage: ')
         print('\tdwetl.py [data directory YYYYMMDD]')
         sys.exit(1)
     if len(arguments) == 2:
-        input_directory = arguments[1]
-
+        today = arguments[1]
+    input_directory = f'{data_directory}/incoming/{today}/'
     run(input_directory)
