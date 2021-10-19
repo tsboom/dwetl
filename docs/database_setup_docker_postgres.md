@@ -19,10 +19,6 @@ docker run --rm --name postgrestest -p 5439:5432 -e POSTGRES_PASSWORD=postgres p
 docker exec -it postgres /bin/bash
 ```
 
-```
-docker exec -it postgrestest /bin/bash
-```
-
 3) In the Docker container, create a "usmai_dw" user:
 
 ```
