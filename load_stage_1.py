@@ -12,56 +12,91 @@ from dwetl.writer.sql_alchemy_writer import SqlAlchemyWriter
 import dwetl
 import pdb
 
+# ALEPH_TSV_TABLE_MAPPING = {
+#     "mai01_z00_data": "dw_stg_1_mai01_z00",
+#     "mai39_z00_data": "dw_stg_1_mai39_z00",
+#     "mai01_z13_data": "dw_stg_1_mai01_z13",
+#     "mai39_z13_data": "dw_stg_1_mai39_z13",
+#     "mai01_z13u_data": "dw_stg_1_mai01_z13u",
+#     "mai39_z13u_data": "dw_stg_1_mai39_z13u",
+    # "mai60_z00_data": "dw_stg_1_mai60_z00",
+    # "mai60_z13_data": "dw_stg_1_mai60_z13",
+    # "mai60_z13u_data": "dw_stg_1_mai60_z13u",
+    # "mai60_z103_bib_data": "dw_stg_1_mai50_z103_bib",
+    # "mai50_z30_data": "dw_stg_1_mai50_z30",
+    # "mai50_z35_data": "dw_stg_1_mai50_z35",
+    # "mai50_z30_full_data": "dw_stg_1_mai50_z30_full",
+    # "mai50_z103_bib_full_data": "dw_stg_2_lbry_item_z103_bib_full",
+# }
 
-def load_stage_1(job_info, input_directory, logger):
+# Z00_FIELD_TABLE_MAPPING = {
+#     "mai01_z00_field_data": "dw_stg_1_mai01_z00_field",
+#     "mai39_z00_field_data": "dw_stg_1_mai39_z00_field",
+#     "mai60_z00_field_data": "dw_stg_1_mai60_z00_field",
+# }
+#
+# MPF_TABLE_MAPPING = {
+#     "mpf_member-library-dimension.txt": "dw_stg_1_mpf_mbr_lbry",
+#     "mpf_library-entity-dimension.txt": "dw_stg_1_mpf_lbry_entity",
+#     "mpf_library-collection-dimension.txt": "dw_stg_1_mpf_collection",
+#     "mpf_item-status-dimension.txt": "dw_stg_1_mpf_item_status",
+#     "mpf_item-process-status-dimension.txt": "dw_stg_1_mpf_item_prcs_status",
+#     "mpf_material-form-dimension.txt": "dw_stg_1_mpf_matrl_form"
+# }
 
-    print('Loading stage 1...')
-    logger.info('Loading stage 1...')
-    '''
-    file to table mapping
-    '''
+'''
+file to table mapping
+'''
 
-    ALEPH_TSV_TABLE_MAPPING = {
-        "mai01_z00_data": "dw_stg_1_mai01_z00",
-        "mai39_z00_data": "dw_stg_1_mai39_z00",
-        "mai01_z13_data": "dw_stg_1_mai01_z13",
-        "mai39_z13_data": "dw_stg_1_mai39_z13",
-        "mai01_z13u_data": "dw_stg_1_mai01_z13u",
-        "mai39_z13u_data": "dw_stg_1_mai39_z13u",
-        # "mai60_z00_data": "dw_stg_1_mai60_z00",
-        # "mai60_z13_data": "dw_stg_1_mai60_z13",
-        # "mai60_z13u_data": "dw_stg_1_mai60_z13u",
-        # "mai60_z103_bib_data": "dw_stg_1_mai50_z103_bib",
-        # "mai50_z30_data": "dw_stg_1_mai50_z30",
-        # "mai50_z35_data": "dw_stg_1_mai50_z35",
-        # "mai50_z30_full_data": "dw_stg_1_mai50_z30_full",
-        # "mai50_z103_bib_full_data": "dw_stg_2_lbry_item_z103_bib_full",
-    }
-
-    # Z00_FIELD_TABLE_MAPPING = {
+# table_mapping = {'ALEPH_TSV_TABLE_MAPPING': 
+#         {
+#         "mai01_z00_data": "dw_stg_1_mai01_z00",
+#         "mai39_z00_data": "dw_stg_1_mai39_z00",
+#         "mai01_z13_data": "dw_stg_1_mai01_z13",
+#         "mai39_z13_data": "dw_stg_1_mai39_z13",
+#         "mai01_z13u_data": "dw_stg_1_mai01_z13u",
+#         "mai39_z13u_data": "dw_stg_1_mai39_z13u",
+#         # "mai60_z00_data": "dw_stg_1_mai60_z00",
+#         # "mai60_z13_data": "dw_stg_1_mai60_z13",
+#         # "mai60_z13u_data": "dw_stg_1_mai60_z13u",
+#         # "mai60_z103_bib_data": "dw_stg_1_mai50_z103_bib",
+#         # "mai50_z30_data": "dw_stg_1_mai50_z30",
+#         # "mai50_z35_data": "dw_stg_1_mai50_z35",
+#         # "mai50_z30_full_data": "dw_stg_1_mai50_z30_full",
+#         # "mai50_z103_bib_full_data": "dw_stg_2_lbry_item_z103_bib_full",
+#         }}
+    # ,
+    # {'Z00_FIELD_TABLE_MAPPING': {
     #     "mai01_z00_field_data": "dw_stg_1_mai01_z00_field",
     #     "mai39_z00_field_data": "dw_stg_1_mai39_z00_field",
     #     "mai60_z00_field_data": "dw_stg_1_mai60_z00_field",
-    # }
-    #
-    # MPF_TABLE_MAPPING = {
+    # }},
+    # {'MPF_TABLE_MAPPING' = {
     #     "mpf_member-library-dimension.txt": "dw_stg_1_mpf_mbr_lbry",
     #     "mpf_library-entity-dimension.txt": "dw_stg_1_mpf_lbry_entity",
     #     "mpf_library-collection-dimension.txt": "dw_stg_1_mpf_collection",
     #     "mpf_item-status-dimension.txt": "dw_stg_1_mpf_item_status",
     #     "mpf_item-process-status-dimension.txt": "dw_stg_1_mpf_item_prcs_status",
     #     "mpf_material-form-dimension.txt": "dw_stg_1_mpf_matrl_form"
-    # }
+    # }}
+
+
+def load_stage_1(job_info, input_directory, logger, table_mapping, session_creator):
+
+    print('Loading stage 1...')
+    logger.info('Loading stage 1...')
+
+
+    
 
     '''
     load aleph tsv files minus z00_field tables
     '''
 
-    for file, table in ALEPH_TSV_TABLE_MAPPING.items():
+    for file, table in table_mapping['ALEPH_TSV_TABLE_MAPPING'].items():
         file_path = os.path.join(input_directory, file)
-        pdb.set_trace
         logger.info(file_path)
-        with dwetl.database_session() as session:
+        with session_creator() as session:
             #pdb.set_trace()
             reader = TsvFileReader(file_path)
             # writer = PrintWriter()

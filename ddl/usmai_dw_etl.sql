@@ -1484,7 +1484,7 @@ CREATE TABLE public.dw_stg_2_bib_rec_z13u (
     in_z13u_rec_key character(9) NOT NULL,
     in_z13u_user_defined_2 character varying(500),
     pp_z13u_user_defined_2 character varying(500),
-    dq__z13u_user_defined_2 character varying(500),
+    dq_z13u_user_defined_2 character varying(500),
     t1_z13u_user_defined_2__bib_rec_oclc_no character varying(500),
     in_z13u_user_defined_3 character varying(500),
     pp_z13u_user_defined_3 character varying(500),

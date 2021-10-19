@@ -87,11 +87,6 @@ def test_database_session():
     # connect to the database
     connection = engine.connect()
 
-    # begin a non-ORM transaction
-    # Using a transactiom, so that we can rollback, even if there
-    # are session.commit() calls
-    trans = connection.begin()
-
     # bind an individual Session to the connection
     s = sessionmaker()
     test_session = s(bind=connection)
@@ -99,14 +94,13 @@ def test_database_session():
     try:
         # begin a non-ORM transaction
         yield test_session
-        # Never commit as we are just testing
+        # commit to test db
+        test_session.commit()
     except:
         test_session.rollback()
         raise
     finally:
-        # Always rollback
-        test_session.rollback()
-        trans.rollback()
+        test_session.close()
         
         
 @contextmanager

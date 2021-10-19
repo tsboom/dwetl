@@ -17,27 +17,27 @@ def load_table_config(table_config_path):
         table_config = json.load(f)
     return table_config
     
-def stage_2_intertable_processing(job_info, logger):
+def stage_2_intertable_processing(job_info, logger, stg_2_table_config_mapping, db_session_creator):
     print("Stage 2 Intertable Processing...")
     logger.info("Stage 2 Intertable Processing...")
 
-    STG_2_TABLE_CONFIG_MAPPING = {
-        'dw_stg_2_bib_rec_z00': 'bibliographic_record_dimension',
-        'dw_stg_2_bib_rec_z13': 'bibliographic_record_dimension',
-        'dw_stg_2_bib_rec_z13u': 'bibliographic_record_dimension',
-        'dw_stg_2_bib_rec_z00_field': 'bibliographic_record_dimension'
-    }
+    # STG_2_TABLE_CONFIG_MAPPING = {
+    #     'dw_stg_2_bib_rec_z00': 'bibliographic_record_dimension',
+    #     'dw_stg_2_bib_rec_z13': 'bibliographic_record_dimension',
+    #     'dw_stg_2_bib_rec_z13u': 'bibliographic_record_dimension',
+    #     'dw_stg_2_bib_rec_z00_field': 'bibliographic_record_dimension'
+    # }
 
     processing_cycle_id = job_info.prcsng_cycle_id
 
-    for table, dimension in STG_2_TABLE_CONFIG_MAPPING.items():
+    for table, dimension in stg_2_table_config_mapping.items():
         print(table)
         logger.info(table)
         # get json_config for current dimension
         table_config_path = os.path.join('table_config', dimension + '.json')
         json_config = load_table_config(table_config_path)
 
-        with dwetl.database_session() as session:
+        with db_session_creator() as session:
             # gets SA base class for the current table
             stage2_table_class = dwetl.Base.classes[table]
             # gets list of PKs for the current table

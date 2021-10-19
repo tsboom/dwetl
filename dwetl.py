@@ -25,7 +25,7 @@ import stage_2_intertable_processing
 from dotenv import load_dotenv
 load_dotenv()
 
-def run(input_directory):
+def run(input_directory, is_test_run):
 
     #create logger
     today = datetime.datetime.now().strftime('%Y%m%d')
@@ -42,28 +42,29 @@ def run(input_directory):
     '''
     create job_info for current process
     '''
-    with dwetl.database_session() as session:
+    db_session_creator = dwetl.database_session
+    
+    with db_session_creator() as session:
         job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
         job_info = JobInfoFactory.create_job_info_from_db(session, job_info_table_class)
-
 
 
 
     '''
     load_stage_1
     '''
-    load_stage_1.load_stage_1(job_info, input_directory, logger)
+    load_stage_1.load_stage_1(job_info, input_directory, logger, table_mapping, db_session_creator)
     '''
     load_stage_2
     load 'in_' values from stg1 to stg 2 tables
     load 'in_' values
     '''
-    load_stage_2.load_stage_2(job_info, logger)
+    load_stage_2.load_stage_2(job_info, logger, table_mapping, db_session_creator)
 
     '''
     stg 2 intertable processing
     '''
-    stage_2_intertable_processing.stage_2_intertable_processing(job_info, logger)
+    stage_2_intertable_processing.stage_2_intertable_processing(job_info, logger, table_mapping, db_session_creator)
 
 
 
@@ -104,9 +105,11 @@ if __name__=='__main__':
     # give hint if --help
     if '--help' in arguments:
         print('Usage: ')
-        print('\tdwetl.py [data directory YYYYMMDD]')
+        print('\tdwetl.py [YYYYMMDD]')
         sys.exit(1)
     if len(arguments) == 2:
         today = arguments[1]
+        
+    is_test_run = False
     input_directory = f'{data_directory}/incoming/{today}/'
-    run(input_directory)
+    run(input_directory, is_test_run)

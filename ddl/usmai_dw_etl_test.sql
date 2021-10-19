@@ -17,7 +17,7 @@ SET row_security = off;
 
 DROP DATABASE usmai_dw_etl_test;
 --
--- Name: usmai_dw_etl; Type: DATABASE; Schema: -; Owner: postgres
+-- Name: usmai_dw_etl_test; Type: DATABASE; Schema: -; Owner: postgres
 --
 
 CREATE DATABASE usmai_dw_etl_test WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8';
@@ -1484,7 +1484,7 @@ CREATE TABLE public.dw_stg_2_bib_rec_z13u (
     in_z13u_rec_key character(9) NOT NULL,
     in_z13u_user_defined_2 character varying(500),
     pp_z13u_user_defined_2 character varying(500),
-    dq__z13u_user_defined_2 character varying(500),
+    dq_z13u_user_defined_2 character varying(500),
     t1_z13u_user_defined_2__bib_rec_oclc_no character varying(500),
     in_z13u_user_defined_3 character varying(500),
     pp_z13u_user_defined_3 character varying(500),
