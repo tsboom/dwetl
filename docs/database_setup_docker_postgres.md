@@ -36,8 +36,8 @@ docker> createuser usmai_dw
 docker> psql -U postgres
 ```
 
-5) In psql, create the "usmai_dw_etl" and "usmai_dw_test_etl" databases, and exit:
-
+5) In psql for postgres and postgrestest, create the "usmai_dw_etl" and "usmai_dw_etl_test" databases, and exit:
+ex:
 ```
 postgres=# CREATE DATABASE usmai_dw_etl_test;
 postgres=# CREATE ROLE usmai_dw;
