@@ -37,7 +37,12 @@ docker> psql -U postgres
 ```
 
 5) In psql for postgres and postgrestest, create the "usmai_dw_etl" and "usmai_dw_etl_test" databases, and exit:
-ex:
+
+```
+postgres=# CREATE DATABASE usmai_dw_etl;
+postgres=# CREATE ROLE usmai_dw;
+postgres=# <Ctrl-D>
+```
 ```
 postgres=# CREATE DATABASE usmai_dw_etl_test;
 postgres=# CREATE ROLE usmai_dw;
