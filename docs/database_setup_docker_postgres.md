@@ -35,6 +35,9 @@ docker> createuser usmai_dw
 ```
 docker> psql -U postgres
 ```
+```
+docker> psql -U postgrestest
+```
 
 5) In psql for postgres and postgrestest, create the "usmai_dw_etl" and "usmai_dw_etl_test" databases, and exit:
 
