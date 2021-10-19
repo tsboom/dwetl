@@ -1,0 +1,325 @@
+mpf_library-collection-dimension.txt
+usmai_mbr_lbry_cd	item_status_cd	item_status_desc	db_operation_cd	lbry_staff_lms_user_id	db_operation_effective_date
+LN	17	NCIP ILL	I	dwilt	2020-11-05
+SU	49	MakerLab 7-day Loan	I	dwilt	2020-01-31
+UB	07	Leisure Reading - 1st floor	U	dwilt	2020-01-14
+MS	57	Seven Day Loan Laptop	U	dwilt	2019-10-24
+MS	58	Seven Day Loan Cable	I	dwilt	2019-10-24
+MS	59	Seven Day Loan Bag	I	dwilt	2019-10-24
+UB	17	NCIP ILL	I	dwilt	2019-10-09
+BS	02	BSU Users Only	I	dwilt	2019-10-08
+SU	60	Puppet 7-Day Loan	I	dwilt	2019-09-26
+BC	40	ADS Equipment	I	dwilt	2019-09-20
+BC	37	Equip 4 Hours No Fines	I	dwilt	2019-08-27
+BC	34	Equip Four Hour Loan	I	dwilt	2019-08-23
+BC	35	DML Equip	U	dwilt	2019-08-21
+BC	38	Equip 4 Days No Fines	I	dwilt	2019-08-23
+BC	02	Media EQP Holds Allowed 	U	dwilt	2019-08-20
+BC	30	DML Equip Fee High	U	dwilt	2019-08-05
+BC	31	DML Equip Fee Med	U	dwilt	2019-08-05
+BC	32	DML Equip Fee Low	U	dwilt	2019-08-05
+BC	39	DML Equip No Fines	U	dwilt	2019-08-05
+CP	17	NCIP ILL	I	dwilt	2019-07-16
+CP	40	Tool Kits	I	dwilt	2019-05-15
+LN	10	One Day Loan	U	dwilt	2019-04-25
+LN	12	One Month Loan	U	dwilt	2019-04-25
+LN	13	One Week Loan	I	dwilt	2019-04-25
+CP	67	McK Bookable Rm	U	dwilt	2019-03-26
+SU	02	14-Day DVD Loan	U	dwilt	2019-02-27
+SM	11	Equipment - circ desk	D	dwilt	2019-02-12
+CP	28	SG Laptop Power Cord	I	dwilt	2019-02-01
+CP	29	SG Whiteboard Marker Kit	I	dwilt	2019-02-01
+UB	62	Fac-Owned Res - 4 Week Loan	I	dwilt	2019-02-01
+FS	08	Video coll.	I	ddahl	2002-01-01
+FS	09	ILL	I	ddahl	2002-01-01
+FS	10	Popular Reading	I	ddahl	2002-01-01
+FS	11	Locker Rentals	I	ddahl	2002-01-01
+FS	50	One Day Loan	I	ddahl	2002-01-01
+FS	51	One Hour Loan	I	ddahl	2002-01-01
+FS	52	Two Hour Loan	I	ddahl	2002-01-01
+FS	53	Three Hour Loan	I	ddahl	2002-01-01
+FS	54	Accessory Equipment	I	ddahl	2002-01-01
+FS	56	Three Day Loan	I	ddahl	2002-01-01
+FS	57	Seven Day Loan	I	ddahl	2002-01-01
+HS	01	General coll.	I	ddahl	2002-01-01
+HS	03	Non-Circulating	I	ddahl	2002-01-01
+HS	04	Online	I	ddahl	2002-01-01
+HS	05	HS circulation only	I	ddahl	2002-01-01
+HS	15	in house use	I	ddahl	2002-01-01
+HS	50	One Day Loan	I	ddahl	2002-01-01
+HS	51	One Hour Loan	I	ddahl	2002-01-01
+HS	52	Two Hour Loan	I	ddahl	2002-01-01
+HS	53	Three Hour Loan	I	ddahl	2002-01-01
+HS	55	Five Hour Loan	I	ddahl	2002-01-01
+HS	56	Three Day Loan	I	ddahl	2002-01-01
+HS	57	Seven Day Loan	I	ddahl	2002-01-01
+LN	01	General Collection	I	ddahl	2002-01-01
+LN	03	Non-Circulating	I	ddahl	2002-01-01
+LN	04	Online	I	ddahl	2002-01-01
+LN	09	DVD/Video	I	ddahl	2002-01-01
+LN	10	Equipment	I	ddahl	2002-01-01
+LN	11	Recreational Video	I	ddahl	2002-01-01
+LN	12	Equipment Circulating	I	ddahl	2018-11-05
+LN	21	New Faculty  Loan	I	ddahl	2002-01-01
+LN	22	Sabbatical Faculty Loan	I	ddahl	2002-01-01
+LN	50	Overnight Reserves	I	ddahl	2002-01-01
+LN	51	One-Week Reserves	I	ddahl	2002-01-01
+LN	52	In-Library Use Reserves	I	ddahl	2002-01-01
+ML	01	General coll.	I	ddahl	2002-01-01
+ML	02	No holds	I	ddahl	2002-01-01
+ML	03	Non-Circulating	I	ddahl	2002-01-01
+ML	04	Online	I	ddahl	2002-01-01
+ML	05	Audiocassettes	I	ddahl	2002-01-01
+ML	05	Audiocassettes	D	ddahl	2017-08-04
+ML	06	Special 06	I	ddahl	2002-01-01
+ML	06	Special 06	D	ddahl	2017-07-21
+ML	07	Special 07	I	ddahl	2002-01-01
+ML	07	Special 07	D	ddahl	2017-07-21
+ML	08	Special 08	I	ddahl	2002-01-01
+ML	08	Special 08	D	ddahl	2005-02-28
+ML	09	Periodicals	I	ddahl	2002-01-01
+ML	10	Laptops	I	ddahl	2002-01-01
+ML	11	Leisure Book	I	ddahl	2002-01-01
+ML	12	Leisure DVD	I	ddahl	2002-01-01
+ML	13	Equipment	I	ddahl	2002-01-01
+ML	14	Equipment-Law School Only	I	ddahl	2002-01-01
+MS	01	Gener coll.	I	ddahl	2002-01-01
+MS	03	Non-Circulating	I	ddahl	2002-01-01
+MS	04	Online	I	ddahl	2002-01-01
+MS	05	In-house	I	ddahl	2002-01-01
+MS	06	14 Day Loan	I	ddahl	2002-01-01
+MS	09	In-house/No default override	I	ddahl	2002-01-01
+MS	10	One Hour Loan Test	I	ddahl	2002-01-01
+MS	50	One Day Loan	I	ddahl	2002-01-01
+MS	51	One Hour Loan	I	ddahl	2002-01-01
+MS	52	Two Hour Loan	I	ddahl	2002-01-01
+MS	53	Three Hour Loan	I	ddahl	2002-01-01
+MS	54	Four Hour Loan	I	ddahl	2002-01-01
+MS	55	Equil Smart Marker	I	ddahl	2002-01-01
+MS	56	Three Day Loan	I	ddahl	2002-01-01
+MS	57	Seven Day Loan	I	ddahl	2002-01-01
+SM	01	General coll.	I	ddahl	2002-01-01
+SM	03	Non-Circulating	I	ddahl	2002-01-01
+SM	04	Online	I	ddahl	2002-01-01
+SM	05	Three Day Loan	I	ddahl	2002-01-01
+SM	06	"Slides, motion pictures"	I	ddahl	2002-01-01
+SM	06	"Slides, motion pictures"	D	ddahl	2019-01-01
+SM	07	Audio	I	ddahl	2002-01-01
+SM	07	Audio	D	ddahl	2019-01-01
+SM	08	Video archives	I	ddahl	2002-01-01
+SM	08	Video archives	D	ddahl	2019-01-01
+SM	09	CDROM (circing)	I	ddahl	2002-01-01
+SM	09	CDROM (circing)	D	ddahl	2019-01-01
+SM	10	Equipment - media	I	ddahl	2002-01-01
+SM	11	Equipment - circ desk	I	ddahl	2002-01-01
+SM	12	Laptops	I	ddahl	2002-01-01
+SM	13	Reserve (3 hours)	I	ddahl	2002-01-01
+SM	14	Reserve (overnight)	I	ddahl	2002-01-01
+SM	15	Reserve (3 day)	I	ddahl	2002-01-01
+SM	16	ILL (incoming)	I	ddahl	2002-01-01
+SM	50	One Day Loan	I	ddahl	2002-01-01
+SM	51	One Hour Loan	I	ddahl	2002-01-01
+SM	52	Two Hour Loan	I	ddahl	2002-01-01
+SM	53	Six Hour Loan	I	ddahl	2002-01-01
+SM	56	Three Day Loan	I	ddahl	2002-01-01
+SM	57	Seven Day Loan	I	ddahl	2002-01-01
+SM	58	14-Day E-Reader Loan	I	ddahl	2002-01-01
+SU	01	General coll.	I	ddahl	2002-01-01
+SU	02	Reserve coll.	I	ddahl	2002-01-01
+SU	03	Non-Circulating	I	ddahl	2002-01-01
+SU	04	Online	I	ddahl	2002-01-01
+SU	05	ILL	I	ddahl	2002-01-01
+SU	06	Seven Day Loan	I	ddahl	2002-01-01
+SU	07	Two Hour Loan	I	ddahl	2002-01-01
+SU	08	Leisure Reading	I	ddahl	2002-01-01
+SU	09	Audio Book	I	ddahl	2002-01-01
+SU	50	One Day Loan	I	ddahl	2002-01-01
+SU	51	One Hour Loan	I	ddahl	2002-01-01
+SU	52	Two Hour Loan	I	ddahl	2002-01-01
+SU	53	Three Hour Loan	I	ddahl	2002-01-01
+SU	54	28 Day Loan	I	ddahl	2002-01-01
+SU	55	14 Day SU-Curr Res Ctr Loan	I	ddahl	2002-01-01
+SU	56	Three Day Loan	I	ddahl	2002-01-01
+SU	57	Seven Day Loan	I	ddahl	2002-01-01
+SU	58	14 Day Equipment Loan	I	ddahl	2002-01-01
+SU	59	14 Day Tablet Loan	I	ddahl	2002-01-01
+TU	01	General coll.	I	ddahl	2002-01-01
+TU	02	No ship/transit	I	ddahl	2002-01-01
+TU	03	Non-Circulating	I	ddahl	2002-01-01
+TU	04	Online	I	ddahl	2002-01-01
+TU	05	4-Hour Loan (MEDIA)	I	ddahl	2002-01-01
+TU	06	ILL	I	ddahl	2002-01-01
+TU	07	Leisure Reading	I	ddahl	2002-01-01
+TU	08	7-Day Loan (MEDIA)	I	ddahl	2018-11-09
+TU	50	2-Hour Reserves (BOOK)	I	ddahl	2002-01-01
+TU	51	2-Hour Reserves (PHOTOCOPY)	I	ddahl	2002-01-01
+TU	52	4-Hour Reserves (MEDIA)	I	ddahl	2002-01-01
+TU	53	Overnight Reserves	I	ddahl	2002-01-01
+UB	01	General coll.	I	ddahl	2002-01-01
+UB	02	Circulation Desk coll.	U	ddahl	2014-01-17
+UB	02	Reserve coll.	I	ddahl	2002-01-01
+UB	03	Non-Circulating	I	ddahl	2002-01-01
+UB	04	Online	I	ddahl	2002-01-01
+UB	05	ILL	I	ddahl	2002-01-01
+UB	06	Video	I	ddahl	2002-01-01
+UB	07	Leisure Reading - 3rd Floor	I	ddahl	2002-01-01
+UB	49	2 Week Device	I	ddahl	2002-01-01
+UB	50	2 Hour Reserve Books	I	ddahl	2002-01-01
+UB	51	3 Hour Reserve DVDs	I	ddahl	2002-01-01
+UB	52	"4 Hour Reserve LapTop, etc."	I	ddahl	2002-01-01
+UB	53	One Day Loan	I	ddahl	2002-01-01
+UB	54	Seven Day Loan	I	ddahl	2002-01-01
+UB	55	Fac-Owned Res - 2 Hr Loan	I	ddahl	2002-01-01
+UB	56	Fac-Owned Res - 3 Day Loan	I	ddahl	2002-01-01
+UB	57	6 Hour Loan	I	ddahl	2002-01-01
+UB	58	Two Week Loan	I	ddahl	2002-01-01
+UB	59	Fac-Owned Res - 5 Day Loan	I	ddahl	2002-01-01
+UB	60	Fac-Owned Res - 1 Day Loan	I	ddahl	2002-01-01
+UB	61	4 Hour Reserve Cable/Adaptor	I	ddahl	2002-01-01
+UC	01	Regular Loan	I	ddahl	2002-01-01
+UC	02	7 Day Loan	I	ddahl	2002-01-01
+UC	03	Non-Circulating	I	ddahl	2002-01-01
+UC	04	Online	I	ddahl	2002-01-01
+UC	51	Reserves	I	ddahl	2002-01-01
+BC	01	General coll.	I	ddahl	2002-01-01
+BC	02	RCLC coll.	I	ddahl	2002-01-01
+BC	03	Non-Circulating	I	ddahl	2002-01-01
+BC	04	Online	I	ddahl	2002-01-01
+BC	05	ILL	I	ddahl	2002-01-01
+BC	06	Locker Keys	I	ddahl	2002-01-01
+BC	07	CDs	I	ddahl	2002-01-01
+BC	08	Audio	I	ddahl	2002-01-01
+BC	09	Video	I	ddahl	2002-01-01
+BC	10	Faculty Study Room Keys	I	ddahl	2002-01-01
+BC	11	Leisure Reading	I	ddahl	2002-01-01
+BC	12	Staff Equipment	I	ddahl	2002-01-01
+BC	30	Equip1	I	ddahl	2002-01-01
+BC	31	Equip2	I	ddahl	2002-01-01
+BC	32	Equip3	I	ddahl	2002-01-01
+BC	33	Equip One-Day	I	ddahl	2002-01-01
+BC	35	Media Lab Equipment	I	ddahl	2002-01-01
+BC	38	Equip One-Day No Fines	I	ddahl	2002-01-01
+BC	39	Equip No Fines	I	ddahl	2002-01-01
+BC	50	One Day Loan	I	ddahl	2002-01-01
+BC	51	One Hour Loan	I	ddahl	2002-01-01
+BC	52	Two Hour Loan	I	ddahl	2002-01-01
+BC	53	Three Hour Loan	I	ddahl	2002-01-01
+BC	54	Seven Hour Loan	I	ddahl	2002-01-01
+BC	56	Three Day Loan	I	ddahl	2002-01-01
+BC	57	Seven Day Loan	I	ddahl	2002-01-01
+BC	58	RSRSW Fac/Staff Loan	I	ddahl	2002-01-01
+BC	59	RSRSW Stu/Fac/Staff Loan	I	ddahl	2002-01-01
+BL	01	General coll.	I	ddahl	2002-01-01
+BL	02	Restricted	I	ddahl	2002-01-01
+BL	02	Restricted	D	ddahl	2004-05-25
+BL	03	Non-Circulating	I	ddahl	2002-01-01
+BL	04	Online	I	ddahl	2002-01-01
+BL	05	Carrel only	I	ddahl	2002-01-01
+BL	06	Non-Circ No Holds	I	ddahl	2002-01-01
+BL	50	2 hour Reserves	I	ddahl	2002-01-01
+BL	51	4 hour Reserves	I	ddahl	2002-01-01
+BL	52	Locker Key 24-Hour Reserve	I	ddahl	2002-01-01
+BL	53	Laptops	I	ddahl	2002-01-01
+BL	54	Audiobooks	I	ddahl	2002-01-01
+BL	55	Equipment	I	ddahl	2002-01-01
+BS	01	General coll.	I	ddahl	2002-01-01
+BS	03	Non-Circulating	I	ddahl	2002-01-01
+BS	04	Online	I	ddahl	2002-01-01
+BS	05	Media	I	ddahl	2002-01-01
+BS	06	FACRES coll.	I	ddahl	2002-01-01
+BS	54	Four Hour Loan	I	ddahl	2002-01-01
+BS	30	Study Room Keys	I	ddahl	2002-01-01
+BS	50	One Day Loan	I	ddahl	2002-01-01
+BS	51	One Hour Loan	I	ddahl	2002-01-01
+BS	52	Two Hour Loan	I	ddahl	2002-01-01
+BS	53	Three Hour Loan	I	ddahl	2002-01-01
+BS	56	Three Day Loan	I	ddahl	2002-01-01
+BS	57	Seven Day Loan	I	ddahl	2002-01-01
+CE	01	General coll.	I	ddahl	2002-01-01
+CE	03	Non-Circulating	I	ddahl	2002-01-01
+CE	04	Online	I	ddahl	2002-01-01
+CP	01	General coll.	I	ddahl	2002-01-01
+CP	02	Chemistry coll.	I	ddahl	2002-01-01
+CP	02	Chemistry coll.	D	ddahl	2019-01-01
+CP	03	Non-Circulating	I	ddahl	2002-01-01
+CP	04	Online	I	ddahl	2002-01-01
+CP	05	Nonprint media	I	ddahl	2002-01-01
+CP	06	ILL	I	ddahl	2002-01-01
+CP	07	Wallenstein	I	ddahl	2002-01-01
+CP	08	One-Day Loan	I	ddahl	2002-01-01
+CP	09	3-day loan	U	ddahl	2004-07-27
+CP	09	Nonprint 3-day loan	I	ddahl	2002-01-01
+CP	10	Govdocs	I	ddahl	2002-01-01
+CP	11	Reserves	I	ddahl	2002-01-01
+CP	11	Reserves	D	ddahl	2004-07-09
+CP	12	Sound rec paged coll.	I	ddahl	2002-01-01
+CP	13	DVD paged coll.	I	ddahl	2002-01-01
+CP	14	Library Media Services	I	ddahl	2002-01-01
+CP	15	in house use	I	ddahl	2002-01-01
+CP	16	Non-circ;use in McKeldin only	I	ddahl	2018-12-17
+CP	21	SHADYG noncirc	I	ddahl	2002-01-01
+CP	21	MCPS Collection	U	ddahl	2004-03-19
+CP	21	MCPS Collection	D	ddahl	2016-05-11
+CP	22	SHADYG circ	I	ddahl	2002-01-01
+CP	23	SHADYG 14-Day Loan	I	ddahl	2002-01-01
+CP	24	SHADYG Media	I	ddahl	2002-01-01
+CP	25	SHADYG iPad Charger	I	ddahl	2002-01-01
+CP	26	SHADYG Equil Smartmarker	I	ddahl	2002-01-01
+CP	27	SHADYG 360 Camera	I	ddahl	2002-01-01
+CP	30	Accessory Equipment	I	ddahl	2002-01-01
+CP	31	SG Accessory Equipment	I	ddahl	2002-01-01
+CP	32	CP Laptops	I	ddahl	2002-01-01
+CP	33	CP Tablets and Netbooks	I	ddahl	2002-01-01
+CP	34	CP Ebook Readers	I	ddahl	2002-01-01
+CP	35	CP Audio/Visual Equip	I	ddahl	2002-01-01
+CP	36	SG iPads	I	ddahl	2002-01-01
+CP	37	Popular Reading	I	ddahl	2002-01-01
+CP	38	SG Audio Recorder	I	ddahl	2002-01-01
+CP	39	Accessory Equipment 2	I	ddahl	2002-01-01
+CP	50	One Day Loan	I	ddahl	2002-01-01
+CP	51	One Hour Loan	I	ddahl	2002-01-01
+CP	51	One Hour Loan	D	ddahl	2004-07-09
+CP	52	Two Hour Loan	I	ddahl	2002-01-01
+CP	53	SG Laptop Loan	I	ddahl	2002-01-01
+CP	54	Four Hour Loan	I	ddahl	2002-01-01
+CP	55	SG One Button Studio	I	ddahl	2002-01-01
+CP	56	Rec Well Fitness	I	ddahl	2002-01-01
+CP	57	Seven Day Loan	I	ddahl	2002-01-01
+CP	60	McK One Day Loan	I	ddahl	2002-01-01
+CP	61	McK TLC 24 Hr Loan	I	ddahl	2002-01-01
+CP	62	McK Two Hour Loan	I	ddahl	2002-01-01
+CP	63	McK TLC 3 Eight Hr Loan	I	ddahl	2002-01-01
+CP	64	McK Four Hour Loan	I	ddahl	2002-01-01
+CP	65	McK TLC 1 Eight Hr Loan	I	ddahl	2002-01-01
+CP	66	McK TLC 2 Eight Hr Loan	I	ddahl	2002-01-01
+CP	67	McK TLC Study Rm Key	I	ddahl	2002-01-01
+CP	68	McK TLC Health Center	I	ddahl	2002-01-01
+CP	69	McK TLC 0 Eight Hr Loan	I	ddahl	2002-01-01
+CP	70	Suppress in PAC	I	ddahl	2002-01-01
+CS	01	General coll.	I	ddahl	2002-01-01
+CS	02	Restricted coll	I	ddahl	2002-01-01
+CS	03	Non-Circulating	I	ddahl	2002-01-01
+CS	04	Online	I	ddahl	2002-01-01
+CS	05	Audiovisual	I	ddahl	2002-01-01
+CS	06	Thesis coll.	I	ddahl	2002-01-01
+CS	07	Reference	I	ddahl	2002-01-01
+CS	08	Reserves	I	ddahl	2018-10-04
+ES	01	General coll.	I	ddahl	2002-01-01
+ES	02	Restricted coll	I	ddahl	2002-01-01
+ES	03	Non-Circulating	I	ddahl	2002-01-01
+ES	04	Online	I	ddahl	2002-01-01
+ES	05	Periodicals	I	ddahl	2002-01-01
+ES	06	Media Materials	I	ddahl	2002-01-01
+ES	50	One Day Loan	I	ddahl	2002-01-01
+ES	51	One Hour Loan	I	ddahl	2002-01-01
+ES	52	Laptop Checkouts	I	ddahl	2002-01-01
+ES	53	Three Hour Loan	I	ddahl	2002-01-01
+ES	56	Three Day Loan	I	ddahl	2002-01-01
+ES	57	Seven Day Loan	I	ddahl	2002-01-01
+ES	58	Group Study Rm 2 Hr Loan	I	ddahl	2002-01-01
+ES	59	Group Study Rm 3 Hr Loan	I	ddahl	2002-01-01
+FS	01	General coll.	I	ddahl	2002-01-01
+FS	02	Govdocs	I	ddahl	2002-01-01
+FS	03	Non-Circulating	I	ddahl	2002-01-01
+FS	04	Online	I	ddahl	2002-01-01
+FS	06	Restricted mat.	I	ddahl	2002-01-01
