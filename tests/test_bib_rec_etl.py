@@ -226,29 +226,30 @@ class TestBibRecEtl(unittest.TestCase):
                 for item in results.all():
                     for key in item.__dict__.keys():
                         
-
                         if key[:2] == 'dq':
                             # check if pp is there for records with in values
                             in_key = 'in_'+'_'.join(key.split('_')[1:])
                             
                             
                             if in_key == 'in_z00_doc_number':
-                                self.assertEqual(item.__dict__[key], 'SUS')
-                            if in_key == 'in_z13_open_date' or in_key = 'in_z13_update_date':
-                                # if it comes in None, dq should be None
-                                
-                                # query erro table too? 
-                                
-                                # if it comes in a wrong date, dq should be None
-                                
-                                # query error table
-                            if in_key == 'in_z13u_user_defined_2':
-                                
-                            # make sure dq value is not none
-                            if item.__dict__[in_key]:
-    
-                                message = f'Record {pk}, {item.__dict__[pk]}, is missing the DQ value for {key}'
-                                self.assertIsNotNone(item.__dict__[key], message)
+                                # make sure null records are suspended
+                                if item.__dict__[key] == None:
+                                    self.assertEqual(item.__dict__[key], 'SUS')
+                            # if in_key == 'in_z13_open_date' or in_key == 'in_z13_update_date':
+                            #     # if it comes in None, dq should be None
+                            # 
+                            #     # query error table too? 
+                            # 
+                            #     # if it comes in a wrong date, dq should be None
+                            # 
+                            #     # query error table
+                            # if in_key == 'in_z13u_user_defined_2':
+                            # 
+                            # # make sure the pp value equals the dq value for all other fields
+                            # if item.__dict__[in_key]:
+                            #     pp_key = in_key.replace('in_', 'pp_')
+                            #     # message = f'Record {pk}, {item.__dict__[pk]}, is missing the DQ value for {key}'
+                            #     self.assertEqual(item.__dict__[in_key], item.__dict__[pp_key])
     
 
                             
