@@ -55,8 +55,8 @@ postgres=# <Ctrl-D>
 ## Reset the database and test database from invoke
 1) Check your `.env` file to make sure your test database and database credentials are correct. 
 2) Type `invoke --list` to see list of tasks available
-3) Type `invoke database-reset` to reset the configured etl database 
-4) Type `invoke test-database`
+3) Type `invoke database-reset` to reset the configured etl database using the ddl/usmai_dw_etl.sql file. 
+4) Type `invoke test-database-rest` to reset the configured test etl database using the ddl_test.sql file. 
 
 
 ## Populate database manually from a dump
