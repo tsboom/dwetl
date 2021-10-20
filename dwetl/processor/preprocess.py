@@ -58,7 +58,7 @@ class Preprocess(Processor):
         """
 
         out_dict = {}
-        invalid_keys = ['rec_type_cd', 'rec_trigger_key', '_sa_instance_state']
+        invalid_keys = ['rec_type_cd', '_sa_instance_state']
 
         for key, val in item.items():
             # skip invalid keys and dq and t and pp keys

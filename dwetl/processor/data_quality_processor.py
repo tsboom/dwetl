@@ -160,7 +160,7 @@ class DataQualityProcessor(Processor):
         """
         # out dict to hold the processed item
         out_dict = {}
-        invalid_keys = ['rec_type_cd', 'rec_trigger_key', '_sa_instance_state']
+        invalid_keys = ['rec_type_cd', '_sa_instance_state']
         
         # keep track of total dq exception number
         dq_exception_count = 0
@@ -169,7 +169,6 @@ class DataQualityProcessor(Processor):
         failed_dqs = []
 
         for key, value in item.items():
-
             
             if key in invalid_keys:
                 continue
@@ -192,6 +191,8 @@ class DataQualityProcessor(Processor):
             # get DQ checks for current key
             dq_list = DataQualityProcessor.get_dq_checks_for_key(clean_key, json_config, item)
             dq_key = key.replace('pp_', 'dq_')
+            
+
             
             # create dict of dq_key's exceptions 
             current_key_exception_count = {}

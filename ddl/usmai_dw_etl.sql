@@ -1327,6 +1327,7 @@ ALTER TABLE public.dw_stg_2_ezp_sessns_snap OWNER TO usmai_dw;
 CREATE TABLE public.dw_stg_2_bib_rec_z00 (
     db_operation_cd character(1) NOT NULL,
     dw_stg_2_aleph_lbry_name character(5) NOT NULL,
+    rec_trigger_key character(9) NOT NULL,
     in_z00_doc_number character(9) NOT NULL,
     pp_z00_doc_number character(9),
     dq_z00_doc_number character(9),
@@ -3600,7 +3601,7 @@ ALTER TABLE ONLY public.dw_stg_2_ezp_sessns_snap
 --
 
 ALTER TABLE ONLY public.dw_stg_2_bib_rec_z00
-    ADD CONSTRAINT pk_dw_stg_2_bib_rec_z00 PRIMARY KEY (db_operation_cd, dw_stg_2_aleph_lbry_name, in_z00_doc_number, em_create_dw_prcsng_cycle_id);
+    ADD CONSTRAINT pk_dw_stg_2_bib_rec_z00 PRIMARY KEY (db_operation_cd, dw_stg_2_aleph_lbry_name, rec_trigger_key, in_z00_doc_number, em_create_dw_prcsng_cycle_id);
 
 
 --

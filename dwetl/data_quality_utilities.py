@@ -84,12 +84,16 @@ def no_leading_space(input):
 
 # need to make sure null passes missing value data quality
 def is_valid_aleph_date(string_date):
-    string_date_valid = datetime.datetime.strptime(
-        string_date, '%Y%m%d').strftime('%Y%m%d')
-    if string_date == string_date_valid and is_valid_aleph_year(string_date):
-        return True
-    else:
+    try:
+        string_date_valid = datetime.datetime.strptime(
+            string_date, '%Y%m%d').strftime('%Y%m%d')
+        if string_date == string_date_valid and is_valid_aleph_year(string_date):
+            return True
+        else:
+            return False
+    except ValueError:
         return False
+
 
 
 # # checks if hour is valid HHMM format
