@@ -105,7 +105,7 @@ class DataQualityProcessor(Processor):
             # find replacement and use it if needed
             out_dict[dq_key] = data_quality_info.replacement_value
         
-            error_text = f'FAILED. {dq_key} failed {data_quality_info.type}. Replacement value is {data_quality_info.replacement_value}.'
+            error_text = f'FAILED. {dq_key}  with value {val} failed {data_quality_info.type}. Replacement value is {data_quality_info.replacement_value}.'
             error = {
                 "error_type": data_quality_info.type,
                 "error_text": error_text,
@@ -192,7 +192,6 @@ class DataQualityProcessor(Processor):
             dq_list = DataQualityProcessor.get_dq_checks_for_key(clean_key, json_config, item)
             dq_key = key.replace('pp_', 'dq_')
             
-
             
             # create dict of dq_key's exceptions 
             current_key_exception_count = {}
@@ -219,11 +218,8 @@ class DataQualityProcessor(Processor):
                     else:
                         val = value
                     
-                    
-                        
                     # determine if value passes check
                     is_passing = data_quality_info.validate(val)
-                        
                         
                     if is_passing:
                         # write value to out_dict because it passes

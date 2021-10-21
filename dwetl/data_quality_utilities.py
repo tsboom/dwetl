@@ -44,7 +44,7 @@ def no_missing_values(input):
     # check for all zeros nulls, or white spaces
     if input is None:
         output = False
-    elif input is '':
+    elif input == '':
         output = False
     elif input.isspace():
         output = False
@@ -64,6 +64,8 @@ def trim(input):
 
 
 def is_valid_aleph_year(year):
+    if len(year) > 4:
+        return False    
     if isinstance(year, str):
         year=year[:4]
         if year.isdigit() is False:
@@ -85,9 +87,11 @@ def no_leading_space(input):
 # need to make sure null passes missing value data quality
 def is_valid_aleph_date(string_date):
     try:
+        if len(string_date) > 4:
+            year = string_date[:4]
         string_date_valid = datetime.datetime.strptime(
             string_date, '%Y%m%d').strftime('%Y%m%d')
-        if string_date == string_date_valid and is_valid_aleph_year(string_date):
+        if string_date == string_date_valid and is_valid_aleph_year(year):
             return True
         else:
             return False
