@@ -42,6 +42,7 @@ class TestCopyStage1ToStage2(unittest.TestCase):
         self.assertEqual(len(sample_data), len(results))
         expected_keys = [
             'db_operation_cd',
+            'rec_trigger_key',
             'dw_stg_2_aleph_lbry_name',
             'in_z00_doc_number',
             'in_z00_no_lines',
@@ -156,6 +157,7 @@ class TestCopyStage1ToStage2(unittest.TestCase):
         expected_keys = [
             'db_operation_cd',
             'dw_stg_2_aleph_lbry_name',
+            'rec_trigger_key',
             'in_z30_85x_type',
             'in_z30_alpha',
             'in_z30_arrival_date',
@@ -270,6 +272,7 @@ class TestCopyStage1ToStage2(unittest.TestCase):
         expected_keys = [
             'db_operation_cd',
             'dw_stg_2_aleph_lbry_name',
+            'rec_trigger_key',
             'in_z00_doc_number',
             'in_dw_stg_1_marc_rec_field_seq_no',
             'in_z00_marc_rec_field_cd',
