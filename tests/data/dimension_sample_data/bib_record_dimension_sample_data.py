@@ -328,7 +328,7 @@ bib_rec_sample_data_z13u = [
         "em_update_tmstmp": datetime.datetime.now(),
         "em_update_user_id": "dw",
         "in_z13u_rec_key": "000000897",
-        "pp_z13u_user_defined_2": "ocn000016050",
+        "pp_z13u_user_defined_2": "ocn00001605",
         "pp_z13u_user_defined_3": "^^^^^nam^^2200241d1^45^0",
         "pp_z13u_user_defined_4": "690424s1969^^^^ilu^^^^^^b^^^^001^0^eng^^",
         "pp_z13u_user_defined_5": "0194-5947",
