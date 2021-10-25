@@ -100,10 +100,16 @@ main function for running script from the command line
 if __name__=='__main__':
     arguments = sys.argv
 
-    today = datetime.datetime.now().strftime('%Y%m%d')
+    
+    # TODO: for local dev use the following 2 lines
     # today = "20210927"
+    # input_directory = f'{data_directory}/incoming/aleph/{today}/'
+    
+    # in test/prod: DATA_DIRECTORY = '/apps/dw'
+    today = datetime.datetime.now().strftime('%Y%m%d')
     data_directory = os.getenv("DATA_DIRECTORY")
-    input_directory = f'{data_directory}/incoming/aleph/{today}/'
+    input_directory = f'{data_directory}/incoming/{today}/'
+    
 
     is_test_run = False
     # give hint if --help
