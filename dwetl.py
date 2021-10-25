@@ -22,6 +22,7 @@ from dwetl.job_info import JobInfoFactory, JobInfo
 import load_stage_1
 import load_stage_2
 import stage_2_intertable_processing
+import table_mappings
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -42,7 +43,10 @@ def run(input_directory, is_test_run):
     '''
     create job_info for current process
     '''
-    db_session_creator = dwetl.database_session
+    if is_test_run:
+        db_session_creator = dwetl.test_database_session
+    else:
+        db_session_creator = dwetl.database_session
     
     with db_session_creator() as session:
         job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
@@ -53,18 +57,18 @@ def run(input_directory, is_test_run):
     '''
     load_stage_1
     '''
-    load_stage_1.load_stage_1(job_info, input_directory, logger, table_mapping, db_session_creator)
+    load_stage_1.load_stage_1(job_info, input_directory, logger, table_mappings.stg_1_table_mapping, db_session_creator)
     '''
     load_stage_2
     load 'in_' values from stg1 to stg 2 tables
     load 'in_' values
     '''
-    load_stage_2.load_stage_2(job_info, logger, table_mapping, db_session_creator)
+    load_stage_2.load_stage_2(job_info, logger, table_mappings.stg_1_to_stg_2_table_mapping, db_session_creator)
 
     '''
     stg 2 intertable processing
     '''
-    stage_2_intertable_processing.stage_2_intertable_processing(job_info, logger, table_mapping, db_session_creator)
+    stage_2_intertable_processing.stage_2_intertable_processing(job_info, logger, table_mappings.stg_2_table_dim_mapping, db_session_creator)
 
 
 
@@ -97,19 +101,23 @@ if __name__=='__main__':
     arguments = sys.argv
 
     today = datetime.datetime.now().strftime('%Y%m%d')
-    #today = "20201019"
+    # today = "20210927"
     data_directory = os.getenv("DATA_DIRECTORY")
-    # input_directory = f'{data_directory}/incoming/aleph/{today}/'
+    input_directory = f'{data_directory}/incoming/aleph/{today}/'
 
-
+    is_test_run = False
     # give hint if --help
     if '--help' in arguments:
         print('Usage: ')
-        print('\tdwetl.py [YYYYMMDD]')
+        print('\tdwetl.py [YYYYMMDD] [test (if you want to run dwetl with the test db)]')
         sys.exit(1)
     if len(arguments) == 2:
-        today = arguments[1]
-        
-    is_test_run = False
-    input_directory = f'{data_directory}/incoming/{today}/'
+        arg = arguments[1]
+        if arg.isnumeric():
+            arg = today
+        elif arg == 'test':
+            is_test_run = True
+    elif len(arguments) == 3:
+        is_test_run = bool(distutils.util.strtobool(arguments[2]))
+    
     run(input_directory, is_test_run)
