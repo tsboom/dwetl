@@ -89,7 +89,7 @@ class TestBibRecEtl(unittest.TestCase):
             "dw_stg_1_mai39_z00": "dw_stg_2_bib_rec_z00"
         }
         
-        load_stage_2.load_stage_2(cls.job_info, test_input_directory, cls.logger, cls.stage1_to_stage2_table_mapping, cls.db_session_creator)
+        load_stage_2.load_stage_2(cls.job_info, cls.logger, cls.stage1_to_stage2_table_mapping, cls.db_session_creator)
 
         '''
         stg 2 intertable processing
