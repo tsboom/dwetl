@@ -7,9 +7,23 @@ import dwetl
 
 class TestSqlAlchemyReader(unittest.TestCase):
     @unittest.skipUnless(database_credentials.test_db_configured(), "Test database is not configured.")
-    def setUp(self):
+    
+    @classmethod
+    def setUpClass(cls):
         pass
-
+        
+    @classmethod
+    def tearDownClass(cls):
+        with dwetl.test_database_session() as session:
+            table_base_class = dwetl.Base.classes.dw_stg_1_mai01_z00
+            # delete results from test_read_rows_from_table and test_read_rows_from_table_with_multiple_processing_ids
+            first_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id== -1)
+            first_results.delete()
+            
+            second_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id== -2)
+            second_results.delete()
+            session.commit()
+            
     def setup_rows(self, session, base_table_class, rows):
         for row_dict in rows:
             record = base_table_class(**row_dict)
@@ -79,14 +93,15 @@ class TestSqlAlchemyReader(unittest.TestCase):
             rows = [
                 {'rec_type_cd': 'D', 'db_operation_cd': 'U', 'rec_trigger_key': '000205993',
                  'z00_doc_number': '000205993', 'z00_no_lines': '0043', 'z00_data_len': '001583'},
-                {'rec_type_cd': 'D', 'db_operation_cd': 'U', 'rec_trigger_key': '000245526'}
+                {'rec_type_cd': 'D', 'db_operation_cd': 'U', 'rec_trigger_key': '000245526',
+                'z00_doc_number': '000205966', 'z00_no_lines': '0066', 'z00_data_len': '001566'}
             ]
 
             # Use different em_create_dw_prcsng_cycle_ids for each row
             #
             # Using negative processing_cycle_ids so having real data in the
             # tables won't interfere with the tests.
-            self.append_job_info(rows[0], 'em_create_dw_prcsng_cycle_id', -1)
+            self.append_job_info(rows[0], 'em_create_dw_prcsng_cycle_id', -2)
             self.append_job_info(rows[1], 'em_create_dw_prcsng_cycle_id', -2)
 
             self.setup_rows(session, table_base_class, rows)
@@ -96,6 +111,7 @@ class TestSqlAlchemyReader(unittest.TestCase):
             for row in reader:
                 results.append(row)
 
-            # Only the row matching the em_create_dw_prcsng_cycle_id should be returned
-            self.assertEqual(1, len(results))
-            self.assertEqual('000245526', results[0]['rec_trigger_key'])
+            # Two rows should be returned with processing cycle id of -2
+            self.assertEqual(2, len(results))
+            self.assertEqual('000205993', results[0]['rec_trigger_key'])
+            self.assertEqual('000245526', results[1]['rec_trigger_key'])

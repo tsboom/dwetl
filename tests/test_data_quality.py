@@ -84,30 +84,25 @@ class TestDataQualityUtilities(unittest.TestCase):
         #Test that string fails year check
         self.assertFalse(data_quality_utilities.is_valid_aleph_year("mustard"))
 
-    # def test_is_valid_aleph_date():
 
-    # def test_valid_aleph_date_redux(self):
-    #     #Test that function run on stringified date for today returns True
-    #     self.assertTrue(data_quality_utilities.is_valid_aleph_date_redux(datetime.datetime.now().strftime('%Y%m%d')))
-    #
-    #     #Test that invalid dates fail
-    #     self.assertFalse(data_quality_utilities.is_valid_aleph_date_redux("02180101"))
-    #
-    #     # #Test int date
-    #     # self.assertFalse(data_quality_utilities.is_valid_aleph_date_redux(20190101))
-    #
-    #     #Test impossible date
-    #     with self.assertRaises(ValueError):
-    #         data_quality_utilities.is_valid_aleph_date_redux("20190132")
-    #     # This fails but throws a value error, should we plan to handle? Unittest handles with assertRaises, should function act accordingly?
-    #
-    #     #Test impossible date2
-    #     with self.assertRaises(ValueError):
-    #         data_quality_utilities.is_valid_aleph_date_redux("20190229")
+    def test_valid_aleph_date(self):
+        #Test that function run on stringified date for today returns True
+        self.assertTrue(data_quality_utilities.is_valid_aleph_date(datetime.datetime.now().strftime('%Y%m%d')))
+    
+        #Test that invalid dates fail
+        self.assertFalse(data_quality_utilities.is_valid_aleph_date("02180101"))
+    
+        #Test int date
+        self.assertTrue(data_quality_utilities.is_valid_aleph_date(20190101))
+    
+        #Test impossible date
 
-#        with self.assertRaises(TypeError):
-#            data_quality_utilities.is_valid_aleph_date_redux(20180101)
-#        self.assertFalse(data_quality_utilities.is_valid_aleph_date_redux((datetime.datetime.now() + datetime.timedelta(days=1)).strftime('%Y%m%d')))
+        self.assertFalse(data_quality_utilities.is_valid_aleph_date("20190132"))
+        # This fails but throws a value error, should we plan to handle? Unittest handles with assertRaises, should function act accordingly?
+    
+        #Test impossible date2
+        self.assertFalse(data_quality_utilities.is_valid_aleph_date("20190229"))
+            
 
     def test_csv_to_dict(self):
         #Test that output is dict

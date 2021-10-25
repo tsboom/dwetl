@@ -63,9 +63,9 @@ def trim(input):
 # check if valid aleph year (1980 - Present)
 
 
-def is_valid_aleph_year(year):
-    if len(year) > 4:
-        return False    
+def is_valid_aleph_year(year):   
+    if len(str(year)) > 4:
+        return False
     if isinstance(year, str):
         year=year[:4]
         if year.isdigit() is False:
@@ -87,6 +87,7 @@ def no_leading_space(input):
 # need to make sure null passes missing value data quality
 def is_valid_aleph_date(string_date):
     try:
+        string_date = str(string_date)
         if len(string_date) > 4:
             year = string_date[:4]
         string_date_valid = datetime.datetime.strptime(
