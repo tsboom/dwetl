@@ -26,7 +26,7 @@ import table_mappings
 from dotenv import load_dotenv
 load_dotenv()
 
-def run(input_directory, is_test_run):
+def run(input_directory):
 
     #create logger
     today = datetime.datetime.now().strftime('%Y%m%d')
@@ -43,10 +43,11 @@ def run(input_directory, is_test_run):
     '''
     create job_info for current process
     '''
-    if is_test_run:
-        db_session_creator = dwetl.test_database_session
-    else:
-        db_session_creator = dwetl.database_session
+    # if is_test_run:
+    #     db_session_creator = dwetl.test_database_session
+    # else:
+        
+    db_session_creator = dwetl.database_session
     
     with db_session_creator() as session:
         job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
@@ -101,29 +102,24 @@ if __name__=='__main__':
     arguments = sys.argv
 
     
-    # TODO: for local dev use the following 2 lines
-    # today = "20210927"
-    # input_directory = f'{data_directory}/incoming/aleph/{today}/'
+
     
-    # in test/prod: DATA_DIRECTORY = '/apps/dw'
+    #  use these 3 lines on the VM in test/prod:
     today = datetime.datetime.now().strftime('%Y%m%d')
     data_directory = os.getenv("DATA_DIRECTORY")
     input_directory = f'{data_directory}/incoming/{today}/'
     
-
-    is_test_run = False
+    # TODO: for local dev use the following 3 lines
+    # data_directory = os.getenv("DATA_DIRECTORY")
+    # today = "20191204"
+    # input_directory = f'{data_directory}/incoming/aleph/{today}/'
+    
     # give hint if --help
     if '--help' in arguments:
         print('Usage: ')
         print('\tdwetl.py [YYYYMMDD] [test (if you want to run dwetl with the test db)]')
         sys.exit(1)
     if len(arguments) == 2:
-        arg = arguments[1]
-        if arg.isnumeric():
-            arg = today
-        elif arg == 'test':
-            is_test_run = True
-    elif len(arguments) == 3:
-        is_test_run = bool(distutils.util.strtobool(arguments[2]))
+        today = arguments[1]
     
-    run(input_directory, is_test_run)
+    run(input_directory)
