@@ -51,7 +51,7 @@ def load_stage_2(job_info, logger, stage1_to_stage2_table_mapping, db_session_cr
             # count number of records written to stage 2 table
             input_record_count = session.query(stage2_table_class).\
                 filter(stage2_table_class.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
-            print(f'\t\n{input_record_count} records loaded to {tstage2_table}.')
+            print(f'\t\n{input_record_count} records loaded to {stage2_table}.')
             logger.info(f'\t\n{input_record_count} records loaded to {stage2_table}.')
             
     loaded_record_count = loaded_record_count + input_record_count
