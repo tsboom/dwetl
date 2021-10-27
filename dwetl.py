@@ -50,7 +50,7 @@ def run(input_directory):
     
     with db_session_creator() as session:
         job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
-        job_info = JobInfoFactory.create_job_info_from_db(session, job_info_table_class)
+        job_info = JobInfoFactory.create_job_info_from_reporting_db(session, job_info_table_class)
         
     # print processing cycle id
     logger.info(f'processing cycle id: {job_info.prcsng_cycle_id}\n')  

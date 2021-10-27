@@ -50,7 +50,7 @@ class TestBibRecEtl(unittest.TestCase):
         # create job info from test database session
         with cls.db_session_creator() as session:
             job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
-            cls.job_info = JobInfoFactory.create_job_info_from_db(session, job_info_table_class)
+            cls.job_info = JobInfoFactory.create_job_info_from_reporting_db(session, job_info_table_class)
             
         cls.prcsng_cycle_id = cls.job_info.prcsng_cycle_id
         
