@@ -108,15 +108,15 @@ if __name__=='__main__':
     if len(arguments) == 2:
         today = arguments[1]
 
-    # # On the test and prod VM, the data directory is /apps/dw/incoming
-    # # use these 3 lines on the VM in test/prod:
-    # data_directory = os.getenv("DATA_DIRECTORY")
-    # input_directory = f'{data_directory}/incoming/{today}/'
-    
-    # TODO: for local dev use the following 3 lines
+    # On the test and prod VM, the data directory is /apps/dw/incoming
+    # use these 3 lines on the VM in test/prod:
     data_directory = os.getenv("DATA_DIRECTORY")
-    today = "20191204"
-    input_directory = f'{data_directory}/incoming/aleph/{today}/'
+    input_directory = f'{data_directory}/incoming/{today}/'
+    
+    # # TODO: for local dev use the following 3 lines
+    # data_directory = os.getenv("DATA_DIRECTORY")
+    # today = "20191204"
+    # input_directory = f'{data_directory}/incoming/aleph/{today}/'
     
     
     # TODO: move processed file to processed directory
