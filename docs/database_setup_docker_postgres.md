@@ -3,10 +3,14 @@
 * Install Docker v19.03.1 or later.
 * Download a database dump file
 
-1) Use Docker to run a Postgres container:
+1) Use Docker to run a Postgres container for the local etl db and the local test etl db:
 
 ```
 docker run --rm --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgres:11
+```
+
+```
+docker run --rm --name postgrestest -p 5439:5432 -e POSTGRES_PASSWORD=postgres postgres:11
 ```
 
 2) Connect to the Docker container using a bash shell:
@@ -27,18 +31,31 @@ docker> createuser usmai_dw
 ```
 docker> psql -U postgres
 ```
+```
+docker> psql -U postgrestest
+```
 
-5) In psql, create the "usmai_dw_etl" database, and exit:
+5) In psql for postgres and postgrestest, create the "usmai_dw_etl" and "usmai_dw_etl_test" databases, and exit:
 
 ```
 postgres=# CREATE DATABASE usmai_dw_etl;
 postgres=# CREATE ROLE usmai_dw;
 postgres=# <Ctrl-D>
 ```
+```
+postgres=# CREATE DATABASE usmai_dw_etl_test;
+postgres=# CREATE ROLE usmai_dw;
+postgres=# <Ctrl-D>
+```
+
+## Reset the database and test database from invoke
+1) Check your `.env` file to make sure your test database and database credentials are correct. 
+2) Type `invoke --list` to see list of tasks available
+3) Type `invoke database-reset` to reset the configured etl database using the ddl/usmai_dw_etl.sql file. 
+4) Type `invoke test-database-rest` to reset the configured test etl database using the ddl_test.sql file. 
 
 
-
-## Populate database from a dump
+## Populate database manually from a dump
 
 6) In a separate (non-Docker) terminal, use "docker cp" to copy the database dump file into the "/tmp" directory of the "postgres" container:
 

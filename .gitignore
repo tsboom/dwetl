@@ -7,7 +7,9 @@ tmp/ezproxy_etl_out
 scripts/credentials.json
 scripts/token_dw.json
 tests/data/reference/
+tests/logs/*
 **/.DS_Store
 .idea
 .env
 run_ezproxy_etl
+

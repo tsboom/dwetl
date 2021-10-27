@@ -57,7 +57,8 @@ def run(input_file):
     with dwetl.database_session() as session:
         job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
         # check to see if the processing cycle id from the reporting db (reporting_max_processing_id)
-        # is already in the etl db, if it is, increment it by 1 to make it unique
+        # is already in the etl db, if it is, increment it by 1 to make it unique.
+        # if the reporting_max_processing_id is not in the ETL db, use reporting_max_processing_id + 1 so it's unique
         job_info = JobInfoFactory.create_job_info_from_reporting_db(session, job_info_table_class, reporting_max_prcsng_id, logger)
 
     '''
@@ -92,7 +93,7 @@ def run(input_file):
     '''
     move data file to "processed" directory
     '''
-    processed_dir = os.getenv("DATA_DIRECTORY") + "processed/ezproxy/"
+    processed_dir = os.getenv("DATA_DIRECTORY") + "/processed/ezproxy/"
     just_filename = input_file.split('/')[-1]
     try:
         shutil.move(input_file, processed_dir + just_filename)
@@ -173,9 +174,9 @@ if __name__=='__main__':
     # otherwise process today's date, put together filename from date 
     filename = f"sessions.log.{day_to_process}"
     data_directory = os.getenv("DATA_DIRECTORY")
-    input_directory = data_directory + 'incoming/ezproxy/'
+    input_directory = data_directory + '/incoming/ezproxy/'
     incoming_input_file = input_directory + filename
-    processed_dir = data_directory + "processed/ezproxy/"
+    processed_dir = data_directory + "/processed/ezproxy/"
     processed_input_file = processed_dir + filename
     if os.path.exists(incoming_input_file):
         print(f'input file: {incoming_input_file}')
@@ -185,5 +186,5 @@ if __name__=='__main__':
         run(processed_input_file)   
         # Print the message if the file path does not exist
     else:
-        print (f'no data file found for {day_to_process}. Are you sure you provided the date like so? python ezproxy_etl.py YYYYMMDD')
+        print (f'no data file found for {day_to_process}. \nAre you sure you provided the date like so? \nex: python ezproxy_etl.py YYYYMMDD')
 

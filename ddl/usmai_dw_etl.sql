@@ -1327,6 +1327,7 @@ ALTER TABLE public.dw_stg_2_ezp_sessns_snap OWNER TO usmai_dw;
 CREATE TABLE public.dw_stg_2_bib_rec_z00 (
     db_operation_cd character(1) NOT NULL,
     dw_stg_2_aleph_lbry_name character(5) NOT NULL,
+    rec_trigger_key character(9) NOT NULL,
     in_z00_doc_number character(9) NOT NULL,
     pp_z00_doc_number character(9),
     dq_z00_doc_number character(9),
@@ -1484,7 +1485,7 @@ CREATE TABLE public.dw_stg_2_bib_rec_z13u (
     in_z13u_rec_key character(9) NOT NULL,
     in_z13u_user_defined_2 character varying(500),
     pp_z13u_user_defined_2 character varying(500),
-    dq__z13u_user_defined_2 character varying(500),
+    dq_z13u_user_defined_2 character varying(500),
     t1_z13u_user_defined_2__bib_rec_oclc_no character varying(500),
     in_z13u_user_defined_3 character varying(500),
     pp_z13u_user_defined_3 character varying(500),
@@ -3394,7 +3395,7 @@ ALTER TABLE ONLY public.fact_lbry_item
 
 ALTER TABLE ONLY public.fact_ezp_sessns_snap
     ADD CONSTRAINT indx_fact_ezp_sessns_snap_pk PRIMARY KEY (ezp_sessns_snap_fact_key);
-    
+
 
 
 --
@@ -3600,7 +3601,7 @@ ALTER TABLE ONLY public.dw_stg_2_ezp_sessns_snap
 --
 
 ALTER TABLE ONLY public.dw_stg_2_bib_rec_z00
-    ADD CONSTRAINT pk_dw_stg_2_bib_rec_z00 PRIMARY KEY (db_operation_cd, dw_stg_2_aleph_lbry_name, in_z00_doc_number, em_create_dw_prcsng_cycle_id);
+    ADD CONSTRAINT pk_dw_stg_2_bib_rec_z00 PRIMARY KEY (db_operation_cd, dw_stg_2_aleph_lbry_name, rec_trigger_key, in_z00_doc_number, em_create_dw_prcsng_cycle_id);
 
 
 --
@@ -3884,13 +3885,20 @@ CREATE TABLE public.dw_db_errors (
     dw_error_id integer NOT NULL,
     dw_error_type character varying(150) NOT NULL,
     dw_error_text character varying(2000) NOT NULL,
-    dw_error_row character varying(1000) NOT NULL,
+    dw_error_row character varying(5000) NOT NULL,
     em_create_dw_prcsng_cycle_id integer NOT NULL,
     em_create_dw_job_exectn_id integer NOT NULL,
     em_create_dw_job_name character varying(100) NOT NULL,
     em_create_dw_job_version_no character varying(20) NOT NULL,
     em_create_user_id character varying(20) NOT NULL,
-    em_create_tmstmp timestamp without time zone NOT NULL
+    em_create_tmstmp timestamp without time zone NOT NULL,
+    em_update_dw_prcsng_cycle_id integer,
+    em_update_dw_job_exectn_id integer,
+    em_update_dw_job_name character varying(100),
+    em_update_dw_job_version_no character varying(20),
+    em_update_reason_txt character varying(100),
+    em_update_user_id character varying(20),
+    em_update_tmstmp timestamp without time zone
 )
 WITH (autovacuum_enabled='true');
 

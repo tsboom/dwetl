@@ -42,10 +42,6 @@ class TestEzproxyProcessor(unittest.TestCase):
 
         self.assertEqual(expected_result, result)
 
-    # def test_library_dim_lookup_testdb(self):
-    #     with dwetl.test_database_session() as session3:
-
-
 
     def test_clndr_dt_dim_lookup(self):
         result = EzproxyProcessor.clndr_dt_dim_lookup(self.sample_data[0])

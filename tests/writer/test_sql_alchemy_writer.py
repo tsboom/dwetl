@@ -5,12 +5,23 @@ from dwetl.exceptions import DWETLException
 import dwetl.database_credentials as database_credentials
 import datetime
 import dwetl
+from sqlalchemy import func
 import pdb
 
 class TestSqlAlchemyWriter(unittest.TestCase):
     @unittest.skipUnless(database_credentials.test_db_configured(), "Test database is not configured.")
-    def setUp(self):
-        pass
+    
+    @classmethod
+    def setUpClass(cls):
+        
+        with dwetl.test_database_session() as session:
+            table_base_class = dwetl.Base.classes.dw_stg_1_mai01_z00
+            # get max processing cycle id and increment by 1
+            max_prcsng_id = session.query(func.max(table_base_class.em_create_dw_prcsng_cycle_id)).scalar()
+            if max_prcsng_id == None:
+                cls.prcsng_cycle_id = 1
+            else:
+                cls.prcsng_cycle_id = max_prcsng_id + 1
 
     def test_add_row_to_table(self):
         with dwetl.test_database_session() as session:
@@ -19,15 +30,13 @@ class TestSqlAlchemyWriter(unittest.TestCase):
 
             row_dict = {'rec_type_cd': 'D', 'db_operation_cd': 'U', 'rec_trigger_key': '000007520',
                         'z00_doc_number': '000007520', 'z00_no_lines': '0041', 'z00_data_len': '001504'}
-
-            # Using negative processing_cycle_id so having real data in the
-            # tables won't interfere with the tests.
-            processing_cycle_id = -1
+            
+            processing_cycle_id = self.__class__.prcsng_cycle_id
 
             job_info = {
                 'em_create_dw_prcsng_cycle_id': processing_cycle_id,
                 'em_create_dw_job_exectn_id': 1,
-                'em_create_dw_job_name': 'TEST',
+                'em_create_dw_job_name': 'TEST_sql_alchemy_writer',
                 'em_create_dw_job_version_no': '0.0',
                 'em_create_user_id': 'test_user',
                 'em_create_tmstmp': datetime.datetime.now()
@@ -62,14 +71,12 @@ class TestSqlAlchemyWriter(unittest.TestCase):
                     'ezp_sessns_virtual_hosts_cnt': '2384',
                 }
 
-                # Using negative processing_cycle_id so having real data in the
-                # tables won't interfere with the tests.
-                processing_cycle_id = -1
+                processing_cycle_id = self.__class__.prcsng_cycle_id
 
                 job_info = {
                     'em_create_dw_prcsng_cycle_id': processing_cycle_id,
                     'em_create_dw_job_exectn_id': 1,
-                    'em_create_dw_job_name': 'TEST',
+                    'em_create_dw_job_name': 'TEST_sql_alchemy_writer',
                     'em_create_dw_job_version_no': '0.0',
                     'em_create_user_id': 'test_user',
                     'em_create_tmstmp': datetime.datetime.now()
@@ -95,14 +102,12 @@ class TestSqlAlchemyWriter(unittest.TestCase):
                 'ezp_sessns_virtual_hosts_cnt': '2384',
             }
 
-            # Using negative processing_cycle_id so having real data in the
-            # tables won't interfere with the tests.
-            processing_cycle_id = -1
+            processing_cycle_id = self.__class__.prcsng_cycle_id
 
             job_info = {
                 'em_create_dw_prcsng_cycle_id': processing_cycle_id,
                 'em_create_dw_job_exectn_id': 1,
-                'em_create_dw_job_name': 'TEST',
+                'em_create_dw_job_name': 'TEST_sql_alchemy_writer',
                 'em_create_dw_job_version_no': '0.0',
                 'em_create_user_id': 'test_user',
                 'em_create_tmstmp': datetime.datetime.now()
@@ -123,14 +128,12 @@ class TestSqlAlchemyWriter(unittest.TestCase):
                     'ezp_sessns_snap_actv_sessns_cnt': '', # data is empty
                     'ezp_sessns_virtual_hosts_cnt': '2384',
                 }
-                # Using negative processing_cycle_id so having real data in the
-                # tables won't interfere with the tests.
-                processing_cycle_id = -1
+                processing_cycle_id = self.__class__.prcsng_cycle_id
 
                 job_info = {
                     'em_create_dw_prcsng_cycle_id': processing_cycle_id,
                     'em_create_dw_job_exectn_id': 1,
-                    'em_update_dw_job_name': 'TEST',
+                    'em_update_dw_job_name': 'TEST_sql_alchemy_writer',
                     'em_update_dw_job_version_no': '0.0',
                     'em_update_user_id': 'test_user',
                     'em_update_tmstmp': datetime.datetime.now()

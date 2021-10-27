@@ -1,0 +1,185 @@
+H	DW Extract Job Number(work on this)	2021-01-23 03:40:53.577088	data/20210123/mai60_z13u_data
+rec_type_cd	db_operation_cd	rec_trigger_key	z13u_rec_key	z13u_user_defined_1_code	z13u_user_defined_1	z13u_user_defined_2_code	z13u_user_defined_2	z13u_user_defined_3_code	z13u_user_defined_3	z13u_user_defined_4_code	z13u_user_defined_4	z13u_user_defined_5_code	z13u_user_defined_5	z13u_user_defined_6_code	z13u_user_defined_6	z13u_user_defined_7_code	z13u_user_defined_7	z13u_user_defined_8_code	z13u_user_defined_8	z13u_user_defined_9_code	z13u_user_defined_9	z13u_user_defined_10_code	z13u_user_defined_10	z13u_user_defined_11_code	z13u_user_defined_11	z13u_user_defined_12_code	z13u_user_defined_12	z13u_user_defined_13_code	z13u_user_defined_13	z13u_user_defined_14_code	z13u_user_defined_14	z13u_user_defined_15_code	z13u_user_defined_15
+D	U	000134985	000134985	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: no.181(2016:mars)- x: Holdings updated 11/15/2016 BEH; JSTOR update 10/3/19 EB ||					OWN  	BCHOL											
+D	U	000155763	000155763	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: v.7:no.1(1977:Jan.)-v.29:no.2(1988:Mar.),v.30:no.1(1988:July)-v.41:no.2(1994:Mar.),v.42:no.1(1994:July)-v.57:no.2(2002:Mar.),v.61:no.1(2004:Jan.)-v.67:no.1(2007:Jan.),v.87:no.1(2017:Jan.)- x: Holdings updated 1/14/11 LW ||					OWN  	BCHOL											
+D	U	000163394	000163394	852 0	BC-BC	852 0	SPBAF			852 0		852 0					a: v.1(1952)- x: DO NOT STAMP OR STRIP THIS TITLE. SEND TO SPECIAL COLL ||					OWN  	BCHOL											
+D	U	000168326	000168326	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: v.34-35:no.197-206,208(1958:Jan.-Sept.,Dec.),v.36(1959)-v.46(1964),v.48(1965)-v.52(1967),v.53:no.312-316(1967:Aug.-Dec.),v.54(1968)-v.58(1970),v.59:no.347,349-350,352(1970:July,Sept.-Oct.,Dec.),v.60:no.354-357(1971:Feb.-May),v.61(1971)-v.62(1972),v.63:no.371,374-376(1972:July,Oct.-Dec.),v.64(1973)-v.74(1978),v.75:no.439-440,442(1978:Sept.-Oct.,Dec.),v.76:no.443-446(1979:Jan.-Apr.),v.77:no.448(1979:July/Aug.),v.82(1983),v.83:no.491,493-494(1984:Mar.,May-Sept.),v.84(1985)-v.91(1992),v.92:no.570					OWN  	BCHOL											
+D	U	000168422	000168422	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: v.129:no.1-51(1996:Jan. 06-Dec. 21),v.130(1997)-v.132(1999),v.133:no.1-51(2000:Jan. 03-Dec. 18),v.134:no.1-27,29-49(2001:Jan. 01-July 02,July 16-Dec. 17),v.135:no.1-38,40-46(Jan. 07-Oct. 21,Nov. 04-Dec. 16),v.136:no.1-45(2003:Jan. 06-Dec. 15),v.137(2004)-v.139(2006),v.140:no.1-6,8-12(2007:Jan.-June,Aug.-Dec.),v.141(2008)-v.142(2009),v.143:no.1,3-12(2010:Jan.,Mar.-Dec.),v.144(2011)- x: Holdings updated 10/15/14 LW ||					OWN  	BCHOL											
+D	U	000168479	000168479	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: no.421(2016:janv.)- x: Holdings updated 11/10/16 LW;JSTOR update 10/10/19 LW ||					OWN  	BCHOL											
+D	U	000170310	000170310	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: v.1:no.1(1948:May)-v.3:no.3(1950:Mar.),v.3:no.11(1950:Nov.),v.4:no.2-11(1951:Feb.-Nov.),v.5:no.1(1952:Jan.),v.5:no.4(1952:Apr.),v.5:no.6-10(1952:June-Oct.),v.5:no.12(1952:Dec.)-v.8:no.1(1955:Jan.),v.8:no.3-7(1955:Mar.-July),v.8:no.9(1955:Sept.)-v.10:no.5(1957:May),v.10:no.7(1957:July)-v.12:no.10(1959:Oct.),v.12:no.12(1959:Dec.)- x: Holdings updated 9/7/11 LW ||					OWN  	BCHOL											
+D	U	000171872	000171872	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: v.62(1976)- x: Holdings updated 5/25/11 LW ||					OWN  	BCHOL											
+D	U	000171927	000171927	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: v.124(2016)- x: Holdings updated 11/30/2016 BEH; JSTOR update 10/2/19 EB ||					OWN  	BCHOL											
+D	U	000175840	000175840	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: v.20:no.7(1971:Jan.)-v.64:no.6(2015),v.66:no.1(2017)- x: Holdings updated 4/21/11 LW 09/30/14 KSS;Print & Online ordered for 2017 4/5/17 LW ||					OWN  	BCHOL											
+D	U	000175915	000175915	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: v.25:no.98(1986:Nov.)- x: Holdings updated 5/12/11 LW ||					OWN  	BCHOL											
+D	U	000176180	000176180	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: v.1(1948)-v.22(1969),v.24(1971)-v.32(1979),v.36(1983)- ||					OWN  	BCHOL											
+D	U	000177039	000177039	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: v.34:no.1(1983:spring)- x: Holdings updated 5/25/11 LW ||					OWN  	BCHOL											
+D	U	000189517	000189517	852 0	BC-BC	852 0	SCURR			852 0		852 0					a: v.88(2016)- z: Current 3 issues x: Holdings updated 8/12/11 LW ||					OWN  	BCHOL											
+D	U	000240183	000240183	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: v.10(1985)- ||					OWN  	BCHOL											
+D	U	000243901	000243901	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: nos.109-111,115-120(1962),no.145(1965)- ||					OWN  	BCHOL											
+D	U	000280327	000280327	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: v.32:no.3(1995:Nov.)-v.49(2012),v.50:no.4(2012:Dec.),v.50:no.6(2013:Feb.)-v.52:no.3(2014:Nov.),v.52:no.6(2015:Feb.)-v.58:no.4(2020:Dec.) x: FREE, SHELVE IN SERIALS BACK STACKS ||					OWN  	BCHOL											
+D	U	000333205	000333205	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: v.10:no.1(1986:winter)- x: Holdings updated 12/16/11 LW ||					OWN  	BCHOL											
+D	U	000343509	000343509	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: no.600/601(2001:enero)-no.615(2002:sept.),no.617(2002:nov.)-no.620(2003:feb.),no.622(2003:abr.),no.630(2003:dic.)-no.631(2004:enero) z: new ser. no.1(2004:marzo),no.11-22(2005:enero-dic.),no.35-45(2007:enero-nov.),no.47(2008:enero)-no.68(2009:oct.),no.70(2009:dic.)-no.73(2010:marzo),no:75-79(2010:mayo-sept.),no.81(2010:nov.)- x: Holdings updated 12/15/11 LW ||					OWN  	BCHOL											
+D	U	000380198	000380198	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: v.1:no.1-2(1987),v.2(1988)-v.4(1989),v.5:no.1-3(1991),v.6(1992)-v.20(2006),v.21:no.1,3-4(2007),v.22(2008)-v.23(2009),v.24:no.1-3(2010),v.25(2011)-v.30:no.3(2016:fall),v.31:no.1(2017:spring)-v.34:no.3(2020:autumn) x: Holdings updated 4/1/15 LW ||					OWN  	BCHOL											
+D	U	000408834	000408834	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: v.8(1993)-v.15(2000),v.16:no.1-2,4(2001:Jan./Mar.-Apr./June,Oct./Dec.),v.17(2002)-v.24(2009),v.25:no.1,3-6(2010:Jan./Feb.,May/June-Nov./Dec.),v.26(2011)- x: Holdings updated 3/14/16 LW ||					OWN  	BCHOL											
+D	U	000608191	000608191	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: no.21(2003)- x: Holdings updated 3/3/16 LW ||					OWN  	BCHOL											
+D	U	001604897	001604897	852  	BS-BS	852  	PERIO			852  		852  					a: v.1-2(MAY 1967-MAY 1969),v.4-53(JUN.1970-DEC.2020), v.54- (JAN.2021- ) ||					OWN  	BSHOL											
+D	U	001608582	001608582	852  	BS-BS	852  	PERBJ			852  		852  					a: v.1-55(MAR.1966-DEC.2020) ||					OWN  	BSHOL											
+D	U	001609403	001609403	852  	BS-BS	852  	PERIO			852  		852  					a: v.1-97(OCT.1900-MAY 1997), v.98-111(JAN.1999-DEC.2011), v.112-120(JAN.2012-DEC.2020) ||					OWN  	BSHOL											
+D	U	001609545	001609545	852  	BS-BS	852  	PERIO			852  		852  					a: v.46-48(JAN.1953-DEC.1955), v.50-62(JAN.1957-DEC.1969), v.64-98(JAN.1971-AUG.2005), v.101-113(AUG.2007-Dec.2020) ||					OWN  	BSHOL											
+D	U	001609628	001609628	852  	BS-BS	852  	PERIO			852  		852  					a: v.4-39(FALL 1968-DEC.-2004), v.41-55(JAN.2006-DEC.2020) ||					OWN  	BSHOL											
+D	U	001609756	001609756	852  	BS-BS	852  	PERIO			852  		852  					a: v.42-68(JAN.1978-OCT.2004), v.71-84(JAN.2007-NOV.2020), v.85- (JAN.2021- ) ||					OWN  	BSHOL											
+D	U	001609764	001609764	852  	BS-BS	852  	PERIO			852  		852  					a: v.1-14(MAR.1950-DEC.1963),v.17-34(MAR.1965-DEC.1983),v.37-71(JAN.1986-DEC.2020),v.72- (Jan./Feb.2021- ) ||					OWN  	BSHOL											
+D	U	001609939	001609939	852  	BS-BS	852  	PERIO			852  		852  					a: v.7-54(APR.1973-Dec.2020) ||					OWN  	BSHOL											
+D	U	001611768	001611768	852  	BS-BS	852  	PERIO			852  		852  					a: v.7-57(SPRG.1970-Wntr.2020) ||					OWN  	BSHOL											
+D	U	001617156	001617156	852  	BS-BS	852  	PERIO			852  		852  					a: v.23-42(JAN.2001-NOV.2020), v.43- (Jan.2021- ) ||					OWN  	BSHOL											
+D	U	001622398	001622398	852  	BS-BS	852  	PERIO			852  		852  					a: v.22-23(JUN.1984-JUL.1985), v.30-42(JUN.1992-DEC.2004), v.44-58(JAN.2006-DEC.2020), v.59- (Jan.2021- ) ||					OWN  	BSHOL											
+D	U	001632165	001632165	852  	BS-BS	852  	PERIO			852  		852  					a: v.1-32(MAR.1989-NOV.2020), v.33- (JAN.2021- ) ||					OWN  	BSHOL											
+D	U	004209422	004209422	852  	SU-SU	852  	PER			852  		852  					a: HARDCOPY: Latest 6 years z: ONLINE: Click on Find It button. ||					OWN  	SUHOL											
+D	U	004211801	004211801	852 2	SU-SU	852 2	PER			852 2		852 2					a: HARDCOPY: v.3- (1974- ) ||					OWN  	SUHOL											
+D	U	004212131	004212131	852  	SU-SU	852  	PER			852  		852  					a: HARDCOPY: v.1- (1975- ) ||					OWN  	SUHOL											
+D	U	004215028	004215028	852  	SU-SU	852  	PER			852  		852  					a: HARDCOPY:v. 139- (1994- ) ||					OWN  	SUHOL											
+D	U	004267670	004267670	852  	SU-SU	852  	PER			852  		852  					a: HARDCOPY: v.19:no.2- (2002:Apr.- ) ||					OWN  	SUHOL											
+D	U	004272513	004272513	852  	SU-SU	852  	PER			852  		852  					a: HARDCOPY: v.35- (1985- ) ||					OWN  	SUHOL											
+D	U	004672255	004672255																					DEL  	Y									
+D	U	004672259	004672259																					DEL  	Y									
+D	U	004672262	004672262																					DEL  	Y									
+D	U	004672264	004672264																					DEL  	Y									
+D	U	004722162	004722162																					DEL  	Y									
+D	U	004722163	004722163																					DEL  	Y									
+D	U	004722169	004722169																					DEL  	Y									
+D	U	004722171	004722171																					DEL  	Y									
+D	U	004722176	004722176																					DEL  	Y									
+D	U	004722177	004722177																					DEL  	Y									
+D	U	004722181	004722181																					DEL  	Y									
+D	U	004722185	004722185																					DEL  	Y									
+D	U	004722190	004722190																					DEL  	Y									
+D	U	004722193	004722193																					DEL  	Y									
+D	U	004722196	004722196																					DEL  	Y									
+D	U	004722203	004722203																					DEL  	Y									
+D	U	004722207	004722207																					DEL  	Y									
+D	U	004722214	004722214																					DEL  	Y									
+D	U	004722215	004722215																					DEL  	Y									
+D	U	004722217	004722217																					DEL  	Y									
+D	U	004722224	004722224																					DEL  	Y									
+D	U	004722227	004722227																					DEL  	Y									
+D	U	005728582	005728582	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: v.20(2004)- x: Holdings updated 7/11/14 LW ||					OWN  	BCHOL											
+D	U	005769961	005769961	852  	HS-HS	852  	ONLNE			852  		852  					z: Click on Find It. x: Via Elsevier ScienceDirect. ||					OWN  	HSHOL											
+D	U	008216636	008216636																					DEL  	Y									
+D	U	008216647	008216647																					DEL  	Y									
+D	U	008216691	008216691																					DEL  	Y									
+D	U	008299224	008299224	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: v.43(2012)-v.44(2013),v.45:no.1-2(2014:spring-summer),v.46(2015)- x: Holdings updated 9/29/15 LW ||					OWN  	BCHOL											
+D	U	008503434	008503434	8520 	BS-BS	8520 	CLREF			8520 		8520 					a: v.34-41(JAN.2013-DEC.2020), v.42#1- (Jan.2021- ) ||					OWN  	BSHOL											
+D	U	008528747	008528747	8520 	BS-BS	8520 	PERIO			8520 		8520 					a: v.116-123(JAN./FEB.2013-Nov./Dec.2020), v.124- (Jan./Feb.2021- ) ||					OWN  	BSHOL											
+D	U	009108119	009108119																					DEL  	Y									
+D	U	009167095	009167095	852  	BS-BS	852  	CLREF			852  		852  					a: v.20-46(APR.2014-DEC.2020) ||					OWN  	BSHOL											
+D	U	009849302	009849302	8520 	BS-BS	8520 	ESWWW			8520 		8520 					a: v.1#1- (Jan.1960- ) z: E-Journals: Click to Find It ||					OWN  	BSHOL											
+D	U	010399049	010399049	852  	HS-HS	852  	ONLNE			852  		852  					z: Click on Find It. x: Via ScienceDirect Freedom Collection (OA). ||					OWN  	HSHOL											
+D	U	010702886	010702886	8528 	LNDL	8528 	PER			8528 		8528 					a: v.8 (1984)-v.31 (2007) ||					OWN  	LNHOL											
+D	U	010703130	010703130	8528 	LNDL	8528 	PER			8528 		8528 					a: v.61 (1980)-v.71 (1990) ; v.91 (2010)-v.94 (2013) unbound ||					OWN  	LNHOL											
+D	U	010703904	010703904	8528 	LNDL	8528 	PER			8528 		8528 					a: v.7 (1936)-v.44 (1954) ||a: v.71 (1968)-v.76 (1970) ||					OWN  	LNHOL											
+D	U	011259928	011259928	852 0	BC-BC	852 0	SSTCK			852 0		852 0					a: v.26:no.2(2017:spring)- x: Holdings updated 3/23/17 LW ||					OWN  	BCHOL											
+D	U	012929408	012929408	8520 	BS-BS	8520 	PERIO			8520 		8520 					a: v.1#1/2(Jan.-Apr.2020)-v.1#3/4(May-Aug.2020) ||					OWN  	BSHOL											
+D	U	013004652	013004652																					DEL  	Y									
+D	I	013021043	013021043	852  	HS-HS	852  	ONLNE			852  		852  					z: Click on Find It. x: Via Elsevier ScienceDirect (OA). ||					OWN  	HSHOL											
+D	I	013021044	013021044	852  	HS-HS	852  	ONLNE			852  		852  					z: Click on Find It. x: Via Elsevier ScienceDirect. ||					OWN  	HSHOL											
+D	I	013021045	013021045	8523 	CPMCK	8523 	GVSU			8523 		8523 										OWN  	CPHOL											
+D	I	013021046	013021046	8523 	CPMCK	8523 	GVSU			8523 		8523 										OWN  	CPHOL											
+D	I	013021047	013021047	8523 	CPMCK	8523 	GVSU			8523 		8523 										OWN  	CPHOL											
+D	I	013021048	013021048	8523 	CPMCK	8523 	GVSU			8523 		8523 										OWN  	CPHOL											
+D	I	013021049	013021049	8523 	CPMCK	8523 	GVSU			8523 		8523 										OWN  	CPHOL											
+D	I	013021050	013021050	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021051	013021051	8520 	BS-BS	8520 	PERMF			8520 		8520 					a: v.38-43 Sept.1997-Feb.2003, v.46 Spt.2005-Apr.2006, v49-50 Oct.2008-Feb.2011 ||					OWN  	BSHOL											
+D	I	013021052	013021052	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021053	013021053	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021054	013021054	8520 	BS-BS	8520 	ESWWW			8520 		8520 					a: v.41#1- (Sprg.2004- ) z: E-Journals: Click to Find It ||					OWN  	BSHOL											
+D	I	013021055	013021055	8520 	FS-FA	8520 	STACK			8520 		8520 										OWN  	FSHOL											
+D	I	013021056	013021056	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021057	013021057	852  	HS-HS	852  	ONLNE			852  		852  					z: Click on Find It. x: Via Elsevier ScienceDirect. ||					OWN  	HSHOL											
+D	I	013021058	013021058	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021059	013021059	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021060	013021060	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021061	013021061	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021062	013021062	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021063	013021063																			OWN  	SS											
+D	I	013021064	013021064																			OWN  	SS											
+D	I	013021065	013021065	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021066	013021066																			OWN  	SS											
+D	I	013021067	013021067																			OWN  	SS											
+D	I	013021068	013021068																					DEL  	Y									
+D	I	013021069	013021069																					DEL  	Y									
+D	I	013021070	013021070																			OWN  	SS											
+D	I	013021071	013021071	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021072	013021072	8520 	ES-ES	8520 	SPCOL			8520 		8520 																						
+D	I	013021073	013021073	8520 	SM-SM	8520 	CMDC			8520 		8520 										OWN  	SMHOL											
+D	I	013021074	013021074																			OWN  	SS											
+D	I	013021075	013021075																			OWN  	SS											
+D	I	013021076	013021076																			OWN  	SS											
+D	I	013021077	013021077	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021078	013021078																			OWN  	SS											
+D	I	013021079	013021079																			OWN  	SS											
+D	I	013021080	013021080	8520 	BS-BS	8520 	ESWWW			8520 		8520 					a: v.47#1- (Jan./Feb./Mar.2012- ) z: E-Journals: Click to Find It ||					OWN  	BSHOL											
+D	I	013021081	013021081	8520 	BS-BS	8520 	PERMF			8520 		8520 					a: v.6-12(Fall 1970-Sumr.1977, v.32-39(Jan1997-Dec.2004), v.41-45(Jan.2006-Dec.2010) ||					OWN  	BSHOL											
+D	I	013021082	013021082	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021083	013021083																			OWN  	SS											
+D	I	013021084	013021084																			OWN  	SS											
+D	I	013021085	013021085																			OWN  	SS											
+D	I	013021086	013021086																			OWN  	SS											
+D	I	013021087	013021087																			OWN  	SS											
+D	I	013021088	013021088	8520 	ES-ES	8520 	SPCOL			8520 		8520 										OWN  	ESHOL											
+D	I	013021089	013021089																			OWN  	SS											
+D	I	013021090	013021090																			OWN  	SS											
+D	I	013021091	013021091																			OWN  	SS											
+D	I	013021092	013021092																			OWN  	SS											
+D	I	013021093	013021093																			OWN  	SS											
+D	I	013021094	013021094																					DEL  	Y									
+D	I	013021095	013021095																			OWN  	SS											
+D	I	013021096	013021096																			OWN  	SS											
+D	I	013021097	013021097																					DEL  	Y									
+D	I	013021098	013021098																			OWN  	SS											
+D	I	013021099	013021099																			OWN  	SS											
+D	I	013021100	013021100	8520 	FS-FA	8520 	STACK			8520 		8520 										OWN  	FSHOL											
+D	I	013021101	013021101																					DEL  	Y									
+D	I	013021102	013021102	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021103	013021103	8520 	ES-ES	8520 	SPCOL			8520 		8520 										OWN  	ESHOL											
+D	I	013021104	013021104	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021105	013021105	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021106	013021106	8520 	ES-ES	8520 	SPCOL			8520 		8520 										OWN  	ESHOL											
+D	I	013021107	013021107	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021108	013021108	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021109	013021109	8520 	ES-ES	8520 	SPCOL			8520 		8520 										OWN  	ESHOL											
+D	I	013021110	013021110	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021111	013021111	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021112	013021112	8520 	SU-SU	8520 	WWWJN			8520 		8520 					a: ONLINE: Click on Find It button ||					OWN  	SUHOL											
+D	I	013021113	013021113	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021114	013021114	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021115	013021115	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021116	013021116	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021117	013021117	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021118	013021118	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021119	013021119	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021120	013021120	8520 	BC-BC	8520 	WWW			8520 		8520 	Click on Find It button									OWN  	BCHOL											
+D	I	013021121	013021121	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021122	013021122	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021123	013021123	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021124	013021124	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021125	013021125	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021126	013021126	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021127	013021127	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021128	013021128	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021129	013021129	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021130	013021130	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021131	013021131	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021132	013021132	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021133	013021133	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021134	013021134	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021135	013021135	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021136	013021136	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021137	013021137	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021138	013021138	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021139	013021139	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021140	013021140	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021141	013021141	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021142	013021142	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021143	013021143	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+D	I	013021144	013021144	8520 	CPNET	8520 	EBWWW			8520 		8520 										OWN  	CPHOL											
+T	2021-01-23 03:40:54.746434	182

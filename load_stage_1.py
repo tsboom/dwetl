@@ -13,61 +13,52 @@ import dwetl
 import pdb
 
 
-def load_stage_1(job_info, input_directory, logger):
+
+
+def load_stage_1(job_info, input_directory, logger, table_mapping, session_creator):
 
     print('Loading stage 1...')
     logger.info('Loading stage 1...')
-    '''
-    file to table mapping
-    '''
 
-    ALEPH_TSV_TABLE_MAPPING = {
-        "mai01_z00_data": "dw_stg_1_mai01_z00",
-        "mai39_z00_data": "dw_stg_1_mai39_z00",
-        "mai01_z13_data": "dw_stg_1_mai01_z13",
-        "mai39_z13_data": "dw_stg_1_mai39_z13",
-        "mai01_z13u_data": "dw_stg_1_mai01_z13u",
-        "mai39_z13u_data": "dw_stg_1_mai39_z13u",
-        # "mai60_z00_data": "dw_stg_1_mai60_z00",
-        # "mai60_z13_data": "dw_stg_1_mai60_z13",
-        # "mai60_z13u_data": "dw_stg_1_mai60_z13u",
-        # "mai60_z103_bib_data": "dw_stg_1_mai50_z103_bib",
-        # "mai50_z30_data": "dw_stg_1_mai50_z30",
-        # "mai50_z35_data": "dw_stg_1_mai50_z35",
-        # "mai50_z30_full_data": "dw_stg_1_mai50_z30_full",
-        # "mai50_z103_bib_full_data": "dw_stg_2_lbry_item_z103_bib_full",
-    }
 
-    # Z00_FIELD_TABLE_MAPPING = {
-    #     "mai01_z00_field_data": "dw_stg_1_mai01_z00_field",
-    #     "mai39_z00_field_data": "dw_stg_1_mai39_z00_field",
-    #     "mai60_z00_field_data": "dw_stg_1_mai60_z00_field",
-    # }
-    #
-    # MPF_TABLE_MAPPING = {
-    #     "mpf_member-library-dimension.txt": "dw_stg_1_mpf_mbr_lbry",
-    #     "mpf_library-entity-dimension.txt": "dw_stg_1_mpf_lbry_entity",
-    #     "mpf_library-collection-dimension.txt": "dw_stg_1_mpf_collection",
-    #     "mpf_item-status-dimension.txt": "dw_stg_1_mpf_item_status",
-    #     "mpf_item-process-status-dimension.txt": "dw_stg_1_mpf_item_prcs_status",
-    #     "mpf_material-form-dimension.txt": "dw_stg_1_mpf_matrl_form"
-    # }
+    
 
     '''
     load aleph tsv files minus z00_field tables
     '''
-
-    for file, table in ALEPH_TSV_TABLE_MAPPING.items():
+    loaded_record_count = 0
+    
+    # loop through files and load stage 1 tables
+    for file, table in table_mapping['ALEPH_TSV_TABLE_MAPPING'].items():
         file_path = os.path.join(input_directory, file)
-        print(file_path)
         logger.info(file_path)
-        with dwetl.database_session() as session:
+        with session_creator() as session:
             reader = TsvFileReader(file_path)
-            # writer = PrintWriter()
-            writer = SqlAlchemyWriter(session, dwetl.Base.classes[table])
-            processor = LoadAlephTsv(reader, writer, job_info, logger)
+            stg_1_table_base_class = dwetl.Base.classes[table]
+            writer = SqlAlchemyWriter(session, stg_1_table_base_class)
+            error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
+            processor = LoadAlephTsv(reader, writer, job_info, logger, error_writer)
             processor.execute()
-
+            
+            # count number records read from TSV and how many written to stage 1 table
+            input_record_count = session.query(stg_1_table_base_class).\
+                filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
+            print(f'\t\n{input_record_count} records loaded to {table}.')
+            logger.info(f'\t\n{input_record_count} records loaded to {table}.')
+            
+            loaded_record_count = loaded_record_count + input_record_count
+            
+    # exit DWETL if no records are loaded 
+    print(f'Total records loaded in stage 1: {loaded_record_count}\n')
+    logger.info(f'Total records loaded in stage 1: {loaded_record_count}\n')
+    if loaded_record_count == 0:
+        print('No records were loaded. Please check your input files and directory paths.')
+        print('Quitting DWETL.\n-----\n')
+        logger.error('No records were loaded. Please check your input files and directory paths.\nQuitting DWETL.\n-----\n')
+        quit()
+            
+            
+            
 
 
     # '''
