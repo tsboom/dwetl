@@ -54,7 +54,8 @@ def load_stage_2(job_info, logger, stage1_to_stage2_table_mapping, db_session_cr
             print(f'\t\n{input_record_count} records loaded to {stage2_table}.')
             logger.info(f'\t\n{input_record_count} records loaded to {stage2_table}.')
             
-    loaded_record_count = loaded_record_count + input_record_count
+        loaded_record_count = loaded_record_count + input_record_count
+        
     print(f'Total records loaded to stage 2: {loaded_record_count}\n')
     logger.info(f'Total records loaded in stage 2: {loaded_record_count}\n')
     
