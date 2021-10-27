@@ -41,7 +41,7 @@ def run(input_directory):
     logger.info(f'DWETL.py started')
     logger.info(f'input directory: {input_directory}')  
     print(f'DWETL.py started')
-    print(f'input directory: {input_directory}\n') 
+    print(f'input directory: {input_directory}') 
     '''
     create job_info for current process
     '''
@@ -51,8 +51,10 @@ def run(input_directory):
     with db_session_creator() as session:
         job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
         job_info = JobInfoFactory.create_job_info_from_db(session, job_info_table_class)
-
-
+        
+    # print processing cycle id
+    logger.info(f'processing cycle id: {job_info.prcsng_cycle_id}\n')  
+    print(f'processing cycle id: {job_info.prcsng_cycle_id}\n')
 
     '''
     load_stage_1
