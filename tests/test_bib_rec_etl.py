@@ -17,6 +17,7 @@ import load_stage_1
 import load_stage_2
 from dwetl.processor.load_aleph_tsv import LoadAlephTsv
 from sqlalchemy.inspection import inspect
+from sqlalchemy import func
 
 
 
@@ -52,7 +53,7 @@ class TestBibRecEtl(unittest.TestCase):
         with dwetl.reporting_database_session() as session2:
             reporting_dim_table = dwetl.ReportingBase.classes['dim_bib_rec']
             # query max processing id in ezproxy fact table in the reporting db
-            reporting_max_prcsng_id = session2.query(func.max(rreporting_dim_table.em_create_dw_prcsng_cycle_id)).scalar()
+            reporting_max_prcsng_id = session2.query(func.max(reporting_dim_table.em_create_dw_prcsng_cycle_id)).scalar()
             # increment the processing cycle id by 1 if it starts as None
             if reporting_max_prcsng_id == None: 
                 reporting_max_prcsng_id = 1
