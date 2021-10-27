@@ -110,7 +110,6 @@ if __name__=='__main__':
     # use these 3 lines on the VM in test/prod:
     data_directory = os.getenv("DATA_DIRECTORY")
     input_directory = f'{data_directory}/incoming/{today}/'
-    pdb.set_trace()
     
     # # TODO: for local dev use the following 3 lines
     # data_directory = os.getenv("DATA_DIRECTORY")

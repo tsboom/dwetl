@@ -33,9 +33,7 @@ def load_stage_1(job_info, input_directory, logger, table_mapping, session_creat
         file_path = os.path.join(input_directory, file)
         logger.info(file_path)
         with session_creator() as session:
-            #pdb.set_trace()
             reader = TsvFileReader(file_path)
-            # writer = PrintWriter()
             stg_1_table_base_class = dwetl.Base.classes[table]
             writer = SqlAlchemyWriter(session, stg_1_table_base_class)
             error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
@@ -45,8 +43,8 @@ def load_stage_1(job_info, input_directory, logger, table_mapping, session_creat
             # count number records read from TSV and how many written to stage 1 table
             input_record_count = session.query(stg_1_table_base_class).\
                 filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
-            print(f'\t\n{input_record_count} records loaded from the TSV to stage 1 {table}.\n')
-            logger.info(f'\t\n{input_record_count} records loaded from the TSV to stage 1 {table}.\n')
+            print(f'\t\n{input_record_count} records loaded from the TSV to stage 1 {table}.')
+            logger.info(f'\t\n{input_record_count} records loaded from the TSV to stage 1 {table}.')
             
             loaded_record_count = loaded_record_count + input_record_count
             
