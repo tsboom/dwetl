@@ -51,10 +51,12 @@ def load_stage_1(job_info, input_directory, logger, table_mapping, session_creat
             loaded_record_count = loaded_record_count + input_record_count
             
     # exit DWETL if no records are loaded 
+    print(f'Total records loaded: {loaded_record_count}\n')
+    logger.info(f'Total records loaded: {loaded_record_count}\n')
     if loaded_record_count == 0:
         print('No records were loaded. Please check your input files and directory paths.')
-        print('Quitting DWETL.')
-        logger.error('No records were loaded. Please check your input files and directory paths.\nQuitting DWETL.')
+        print('Quitting DWETL.\n-----\n')
+        logger.error('No records were loaded. Please check your input files and directory paths.\nQuitting DWETL.\n-----\n')
         quit()
             
             
