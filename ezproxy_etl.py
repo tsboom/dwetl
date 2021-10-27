@@ -186,5 +186,5 @@ if __name__=='__main__':
         run(processed_input_file)   
         # Print the message if the file path does not exist
     else:
-        print (f'no data file found for {day_to_process}. Are you sure you provided the date like so? python ezproxy_etl.py YYYYMMDD')
+        print (f'no data file found for {day_to_process}. \nAre you sure you provided the date like so? \nex: python ezproxy_etl.py YYYYMMDD')
 

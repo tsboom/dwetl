@@ -105,6 +105,8 @@ def load_fact_table(job_info, logger):
         processor.execute()
 
 def copy_new_facts_to_reporting_db(job_info, logger):
+    print('\n\nEZProxy copying to reporting db...')
+    logger.info('EZProxy copying to reporting db...')
     etl_fact_table = dwetl.Base.classes['fact_ezp_sessns_snap']
     processing_cycle_id = job_info.prcsng_cycle_id
 

@@ -40,6 +40,8 @@ def run(input_directory):
     time_started = datetime.datetime.now()
     logger.info(f'DWETL.py started')
     logger.info(f'input directory: {input_directory}')  
+    print(f'DWETL.py started')
+    print(f'input directory: {input_directory}\n') 
     '''
     create job_info for current process
     '''
@@ -115,7 +117,7 @@ if __name__=='__main__':
     # data_directory = os.getenv("DATA_DIRECTORY")
     # today = "20191204"
     # input_directory = f'{data_directory}/incoming/aleph/{today}/'
-    
+    # 
     
     # TODO: move processed file to processed directory
     # and when an already processed file is run, use the processed input directory

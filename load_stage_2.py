@@ -26,12 +26,13 @@ def aleph_library(table_name):
 
 def load_stage_2(job_info, logger, stage1_to_stage2_table_mapping, db_session_creator):
 
-    print('Loading stage 2...')
-    logger.info('Loading stage 2...')
-
-
+    print('Loading stage 2...\n')
+    logger.info('Loading stage 2...\n')
 
     processing_cycle_id = job_info.prcsng_cycle_id
+    
+    loaded_record_count = 0
+    
     for stage1_table, stage2_table in stage1_to_stage2_table_mapping.items():
         print(stage1_table)
         logger.info(stage1_table)
@@ -46,6 +47,18 @@ def load_stage_2(job_info, logger, stage1_to_stage2_table_mapping, db_session_cr
             error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
             processor = CopyStage1ToStage2.create(reader, writer, job_info, logger, library, error_writer)
             processor.execute()
+            
+            # count number of records written to stage 2 table
+            input_record_count = session.query(stage2_table_class).\
+                filter(stage2_table_class.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
+            print(f'\t\n{input_record_count} records loaded to {tstage2_table}.')
+            logger.info(f'\t\n{input_record_count} records loaded to {stage2_table}.')
+            
+    loaded_record_count = loaded_record_count + input_record_count
+    print(f'Total records loaded to stage 2: {loaded_record_count}\n')
+    logger.info(f'Total records loaded in stage 2: {loaded_record_count}\n')
+    
+            
 
 '''
 main function for running script from the command line

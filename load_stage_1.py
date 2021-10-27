@@ -43,14 +43,14 @@ def load_stage_1(job_info, input_directory, logger, table_mapping, session_creat
             # count number records read from TSV and how many written to stage 1 table
             input_record_count = session.query(stg_1_table_base_class).\
                 filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
-            print(f'\t\n{input_record_count} records loaded from the TSV to stage 1 {table}.')
-            logger.info(f'\t\n{input_record_count} records loaded from the TSV to stage 1 {table}.')
+            print(f'\t\n{input_record_count} records loaded to {table}.')
+            logger.info(f'\t\n{input_record_count} records loaded to {table}.')
             
             loaded_record_count = loaded_record_count + input_record_count
             
     # exit DWETL if no records are loaded 
-    print(f'Total records loaded: {loaded_record_count}\n')
-    logger.info(f'Total records loaded: {loaded_record_count}\n')
+    print(f'Total records loaded in stage 1: {loaded_record_count}\n')
+    logger.info(f'Total records loaded in stage 1: {loaded_record_count}\n')
     if loaded_record_count == 0:
         print('No records were loaded. Please check your input files and directory paths.')
         print('Quitting DWETL.\n-----\n')
