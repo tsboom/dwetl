@@ -26,7 +26,7 @@ def load_stage_1(job_info, input_directory, logger, table_mapping, session_creat
     '''
     load aleph tsv files minus z00_field tables
     '''
-
+    loaded_record_count = 0
     for file, table in table_mapping['ALEPH_TSV_TABLE_MAPPING'].items():
         file_path = os.path.join(input_directory, file)
         logger.info(file_path)
@@ -46,7 +46,17 @@ def load_stage_1(job_info, input_directory, logger, table_mapping, session_creat
             print(f'\t\n{input_record_count} records loaded from the TSV to stage 1 {table}.\n')
             logger.info(f'\t\n{input_record_count} records loaded from the TSV to stage 1 {table}.\n')
             
-
+            loaded_record_count = loaded_record_count + input_record_count
+            
+        # exit DWETL if no records are loaded 
+        if loaded_record_count == 0:
+            print('No records were loaded. Please check your input files and directory paths.')
+            print('Quitting DWETL.')
+            logger.error('No records were loaded. Please check your input files and directory paths.\nQuitting DWETL.')
+            quit()
+            
+            
+            
 
 
     # '''
