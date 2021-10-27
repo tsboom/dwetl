@@ -43,9 +43,6 @@ def run(input_directory):
     '''
     create job_info for current process
     '''
-    # if is_test_run:
-    #     db_session_creator = dwetl.test_database_session
-    # else:
         
     db_session_creator = dwetl.database_session
     

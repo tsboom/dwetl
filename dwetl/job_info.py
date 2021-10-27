@@ -74,7 +74,8 @@ class JobInfoFactory():
                 print(f"Processing cycle ID was not unique due to a previous failed run in the ETL db.")
                 cls.prcsng_cycle_id = reporting_max_prcsng_id + 1
         else:
-            cls.prcsng_cycle_id = reporting_max_prcsng_id
+            # if the reporting processing cycle id doesn't exist in the etl db, use the reporting max + 1 so it's unique
+            cls.prcsng_cycle_id = reporting_max_prcsng_id + 1
         logger.info(f'Unique processing cycle ID used for this job: {cls.prcsng_cycle_id}')    
         print(f'Unique processing cycle ID used for this job: {cls.prcsng_cycle_id}')
 
