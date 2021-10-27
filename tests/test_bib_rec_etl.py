@@ -46,11 +46,21 @@ class TestBibRecEtl(unittest.TestCase):
         test_input_directory = 'tests/data/incoming_test/aleph/20210123'
         
         cls.db_session_creator = dwetl.test_database_session
+        
+        # find max processing cycle id of the reporting fact table for bib rec
+        # Determine processing cycle ID by using the reporting db as the authority
+        with dwetl.reporting_database_session() as session2:
+            reporting_dim_table = dwetl.ReportingBase.classes['dim_bib_rec']
+            # query max processing id in ezproxy fact table in the reporting db
+            reporting_max_prcsng_id = session2.query(func.max(rreporting_dim_table.em_create_dw_prcsng_cycle_id)).scalar()
+            # increment the processing cycle id by 1 if it starts as None
+            if reporting_max_prcsng_id == None: 
+                reporting_max_prcsng_id = 1
 
         # create job info from test database session
         with cls.db_session_creator() as session:
             job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
-            cls.job_info = JobInfoFactory.create_job_info_from_reporting_db(session, job_info_table_class)
+            cls.job_info = JobInfoFactory.create_job_info_from_reporting_db(session, job_info_table_class, reporting_max_prcsng_id, cls.logger)
             
         cls.prcsng_cycle_id = cls.job_info.prcsng_cycle_id
         
