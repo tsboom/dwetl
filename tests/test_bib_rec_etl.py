@@ -38,8 +38,6 @@ class TestBibRecEtl(unittest.TestCase):
 
         cls.logger = test_logger.logger
 
-        bib_rec_sample_data = []
-        bib_rec_sample_data.append({'mai'})
         with open('table_config/bibliographic_record_dimension.json') as json_file:
             cls.bib_rec_json_config = json.load(json_file)
 
@@ -53,7 +51,7 @@ class TestBibRecEtl(unittest.TestCase):
         with cls.db_session_creator() as session:
             job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
             cls.job_info = JobInfoFactory.create_job_info_from_db(session, job_info_table_class)
-
+            
         cls.prcsng_cycle_id = cls.job_info.prcsng_cycle_id
         
         cls.stg_1_table_mapping = {

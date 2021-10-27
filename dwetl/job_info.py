@@ -30,7 +30,23 @@ class JobInfoFactory():
     '''
     builds job info objects
     '''
+    # create job_info using max processing cycle id + 1 of any table
+    @classmethod
+    def create_job_info_from_db(cls, session, table_base_class):
+        cls.session = session
+        cls.table_base_class = table_base_class
+        max_prcsng_id = cls.session.query(func.max(table_base_class.dw_prcsng_cycle_id)).scalar()
+        if max_prcsng_id == None:
+            cls.prcsng_cycle_id = 1
+        else:
+            cls.prcsng_cycle_id = max_prcsng_id + 1
+        cls.user_id = getpass.getuser()
+        cls.job_exectn_id = 1
+        cls.job_version_no = dwetl.version
+        
+        return JobInfo(cls.prcsng_cycle_id, cls.user_id, cls.job_version_no, cls.job_exectn_id)
 
+        
     # TODO: Need to look closer at where this method is being used. Now that the processing cycle ID
     # is based off of the reporting db instead of the ETL db, we are not calculating the max here, but
     # we pass in the reporting processing cycle id from ezproxy_etl.py, and make sure its unique in the

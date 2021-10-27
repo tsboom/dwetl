@@ -60,8 +60,8 @@ class Processor:
                         'em_update_dw_job_exectn_id': processed_row_dict['em_update_dw_job_exectn_id']
                     }
 
-                        # write error to the error table
-                        error_record = self.error_writer.write_row(error_row_dict)
+                    # write error to the error table
+                    error_record = self.error_writer.write_row(error_row_dict)
 
                     # log error
                     self.logger.info(f'{e.error_type} found')
