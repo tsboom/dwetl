@@ -31,12 +31,14 @@ def load_stage_2(job_info, logger, stage1_to_stage2_table_mapping, db_session_cr
 
     processing_cycle_id = job_info.prcsng_cycle_id
     
+    # set of unique stage 2 tables to assist with counting totals
+    stage2_table_list = set()
+    # count up values from stage 2 tables 
     loaded_record_count = 0
     
     for stage1_table, stage2_table in stage1_to_stage2_table_mapping.items():
-        print(stage1_table)
-        logger.info(stage1_table)
-        
+        # create set of unique stage 2 values
+        stage2_table_list.add(stage2_table)
         library = aleph_library(stage1_table)
 
         with db_session_creator() as session:
@@ -48,17 +50,18 @@ def load_stage_2(job_info, logger, stage1_to_stage2_table_mapping, db_session_cr
             processor = CopyStage1ToStage2.create(reader, writer, job_info, logger, library, error_writer)
             processor.execute()
             
-            # count number of records written to stage 2 table
-            input_record_count = session.query(stage2_table_class).\
-                filter(stage2_table_class.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
-            print(f'\t\n{input_record_count} records loaded to {stage2_table}.')
-            logger.info(f'\t\n{input_record_count} records loaded to {stage2_table}.')
-            
-        loaded_record_count = loaded_record_count + input_record_count
-        
-    print(f'Total records loaded to stage 2: {loaded_record_count}\n')
-    logger.info(f'Total records loaded in stage 2: {loaded_record_count}\n')
+    # count up records in stg 2 tables
+    with db_session_creator() as session: 
+        for table in stage2_table_list: 
+            stage2_table_class = dwetl.Base.classes[table]
+            stg_2_count = session.query(stage2_table_class).filter(stage2_table_class.em_create_dw_prcsng_cycle_id==job_info.prcsng_cycle_id).count()
+            loaded_record_count = loaded_record_count + stg_2_count
     
+    logger.info(f'Total number of records loaded in stage 2: {loaded_record_count}\n')
+    print(f'Total number of records loaded in stage 2: {loaded_record_count}\n')
+            
+
+            
             
 
 '''
