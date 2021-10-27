@@ -43,9 +43,6 @@ class JobInfoFactory():
         cls.user_id = getpass.getuser()
         cls.job_exectn_id = 1
         cls.job_version_no = dwetl.version
-    
-        logger.info(f'Unique processing cycle ID used for this job: {cls.prcsng_cycle_id}')    
-        print(f'Unique processing cycle ID used for this job: {cls.prcsng_cycle_id}')
 
         row = {
             'dw_prcsng_cycle_id': cls.prcsng_cycle_id,
