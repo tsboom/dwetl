@@ -50,6 +50,11 @@ def run(input_directory):
     
     with db_session_creator() as session:
         job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
+        # TODO: should we get the processing cycle id from the max of the reporting db final table
+        # like we do in ezproxy_etl?
+        # This would ensure we don't use the same processing cycle id twice. 
+        # We had some issues in test when reseting the etl db, the processing cycle ids go back to 1. 
+        # in dw-etl-test, if ezproxy_etl is run first, then the db_prcsng_cycle table has the accurate processing cycle id based on the reporting max. 
         job_info = JobInfoFactory.create_job_info_from_db(session, job_info_table_class)
         
     # print processing cycle id
