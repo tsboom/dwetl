@@ -57,7 +57,8 @@ def run(input_file):
     with dwetl.database_session() as session:
         job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
         # check to see if the processing cycle id from the reporting db (reporting_max_processing_id)
-        # is already in the etl db, if it is, increment it by 1 to make it unique
+        # is already in the etl db, if it is, increment it by 1 to make it unique.
+        # if the reporting_max_processing_id is not in the ETL db, use reporting_max_processing_id + 1 so it's unique
         job_info = JobInfoFactory.create_job_info_from_reporting_db(session, job_info_table_class, reporting_max_prcsng_id, logger)
 
     '''
@@ -92,7 +93,7 @@ def run(input_file):
     '''
     move data file to "processed" directory
     '''
-    processed_dir = os.getenv("DATA_DIRECTORY") + "processed/ezproxy/"
+    processed_dir = os.getenv("DATA_DIRECTORY") + "/processed/ezproxy/"
     just_filename = input_file.split('/')[-1]
     try:
         shutil.move(input_file, processed_dir + just_filename)

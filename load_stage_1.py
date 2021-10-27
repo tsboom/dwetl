@@ -34,10 +34,18 @@ def load_stage_1(job_info, input_directory, logger, table_mapping, session_creat
             #pdb.set_trace()
             reader = TsvFileReader(file_path)
             # writer = PrintWriter()
-            writer = SqlAlchemyWriter(session, dwetl.Base.classes[table])
+            stg_1_table_base_class = dwetl.Base.classes[table]
+            writer = SqlAlchemyWriter(session, stg_1_table_base_class)
             error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
             processor = LoadAlephTsv(reader, writer, job_info, logger, error_writer)
             processor.execute()
+            
+            # count number records read from TSV and how many written to stage 1 table
+            input_record_count = session.query(stg_1_table_base_class).\
+                filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
+            print(f'\t\n{input_record_count} records loaded from the TSV to stage 1 {table}.\n')
+            logger.info(f'\t\n{input_record_count} records loaded from the TSV to stage 1 {table}.\n')
+            
 
 
 

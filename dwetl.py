@@ -35,11 +35,11 @@ def run(input_directory):
     formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)
 
     time_started = datetime.datetime.now()
     logger.info(f'DWETL.py started')
-
+    logger.info(f'input directory: {input_directory}')  
     '''
     create job_info for current process
     '''
@@ -97,20 +97,7 @@ main function for running script from the command line
 '''
 if __name__=='__main__':
     arguments = sys.argv
-
-    
-
-    
-    #  use these 3 lines on the VM in test/prod:
     today = datetime.datetime.now().strftime('%Y%m%d')
-    data_directory = os.getenv("DATA_DIRECTORY")
-    input_directory = f'{data_directory}/incoming/{today}/'
-    
-    # TODO: for local dev use the following 3 lines
-    # data_directory = os.getenv("DATA_DIRECTORY")
-    # today = "20191204"
-    # input_directory = f'{data_directory}/incoming/aleph/{today}/'
-    
     # give hint if --help
     if '--help' in arguments:
         print('Usage: ')
@@ -118,5 +105,18 @@ if __name__=='__main__':
         sys.exit(1)
     if len(arguments) == 2:
         today = arguments[1]
+
     
+    # use these 3 lines on the VM in test/prod:
+    data_directory = os.getenv("DATA_DIRECTORY")
+    input_directory = f'{data_directory}/incoming/{today}/'
+    
+    # # TODO: for local dev use the following 3 lines
+    # data_directory = os.getenv("DATA_DIRECTORY")
+    # today = "20191204"
+    # input_directory = f'{data_directory}/incoming/aleph/{today}/'
+    
+    
+    # TODO: move processed file to processed directory
+    # and when an already processed file is run, use the processed input directory
     run(input_directory)
