@@ -44,8 +44,22 @@ class JobInfoFactory():
         cls.job_exectn_id = 1
         cls.job_version_no = dwetl.version
     
+        logger.info(f'Unique processing cycle ID used for this job: {cls.prcsng_cycle_id}')    
+        print(f'Unique processing cycle ID used for this job: {cls.prcsng_cycle_id}')
+
+        row = {
+            'dw_prcsng_cycle_id': cls.prcsng_cycle_id,
+            'dw_prcsng_cycle_planned_dt': datetime.datetime.now(),
+            'dw_prcsng_cycle_stat_type_cd': '',
+            'dw_prcsng_cycle_freq_type_cd': '',
+            'dw_prcsng_cycle_exectn_start_tmstmp': datetime.datetime.now(),
+            'em_create_tmstmp': datetime.datetime.now(),
+            'em_create_user_id': cls.user_id
+        }
+
+        record = cls.table_base_class(**row)
+        cls.session.add(record)
         return JobInfo(cls.prcsng_cycle_id, cls.user_id, cls.job_version_no, cls.job_exectn_id)
-    
     
     # TODO: Need to look closer at where this method is being used. Now that the processing cycle ID
     # is based off of the reporting db instead of the ETL db, we are not calculating the max here, but
