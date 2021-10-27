@@ -1,0 +1,14 @@
+#! /bin/bash
+# enter python virtual environment
+cd /apps/dwetl
+source venv/bin/activate; 
+OUTFILE=/apps/dwetl/tmp/ezproxy_etl_out
+python ezproxy_etl.py > $OUTFILE 2>&1
+RECORDS_COUNT=$(tail -3 $OUTFILE | head -1)
+SUCCESS=$(grep Completed $OUTFILE)
+if [[ "$SUCCESS" != "" ]]; then
+SUBJECT="TEST ezproxy_etl Completed $RECORDS_COUNT records"
+else
+SUBJECT="TEST exproxy_etl FAILED"
+fi
+mail -s "$SUBJECT" thschone@umd.edu < $OUTFILE

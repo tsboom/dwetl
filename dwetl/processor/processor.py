@@ -10,7 +10,7 @@ class Processor:
 
     Subclasses should implement the "job_name" and "process_item" methods.
     """
-    def __init__(self, reader, writer, job_info, logger, error_writer):
+    def __init__(self, reader, writer, job_info, logger, error_writer=None):
         self.reader = reader
         self.writer = writer
         self.job_info = job_info
@@ -21,7 +21,7 @@ class Processor:
     def execute(self):
         for row_dict in self.reader:
             processed_row_dict = self.process_item(row_dict)
-            
+
             if processed_row_dict:
                 try:
                     self.writer.write_row(processed_row_dict)
@@ -60,8 +60,8 @@ class Processor:
                         'em_update_dw_job_exectn_id': processed_row_dict['em_update_dw_job_exectn_id']
                     }
 
-                    # write error to the error table
-                    error_record = self.error_writer.write_row(error_row_dict)
+                        # write error to the error table
+                        error_record = self.error_writer.write_row(error_row_dict)
 
                     # log error
                     self.logger.info(f'{e.error_type} found')

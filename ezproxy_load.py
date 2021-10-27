@@ -40,11 +40,13 @@ def load_stage_1(job_info, input_file, logger):
 
         # count number of rows written to stage one
         ezproxy_stg1_table = dwetl.Base.classes['dw_stg_1_ezp_sessns_snap']
+
         # count number of records with the current process id
         input_record_count = session.query(ezproxy_stg1_table).\
             filter(ezproxy_stg1_table.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
         print(f'\n{input_record_count} records loaded from the TSV to stage 1.')
         logger.info(f'\n{input_record_count} records loaded from the TSV to stage 1.')
+        
 
 
 def load_stage_2(job_info, logger):
@@ -106,12 +108,16 @@ def copy_new_facts_to_reporting_db(job_info, logger):
     etl_fact_table = dwetl.Base.classes['fact_ezp_sessns_snap']
     processing_cycle_id = job_info.prcsng_cycle_id
 
+    # query and select records from etl fact table
+    with dwetl.database_session() as session:
+        reader = SqlAlchemyReader(session, etl_fact_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
+        session.expunge_all()
+       
+
     # insert records into reporting db ezp fact table
     with dwetl.reporting_database_session() as session2:
         reporting_fact_table = dwetl.ReportingBase.classes['fact_ezp_sessns_snap']
-        reader = SqlAlchemyReader(session2, reporting_fact_table, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
         writer = SqlAlchemyWriter(session2, reporting_fact_table)
-        error_writer = SqlAlchemyWriter(session2, dwetl.Base.classes['dw_db_errors'])
-        processor = EzproxyReportingFactProcessor(reader, writer, job_info, logger, error_writer)
+        processor = EzproxyReportingFactProcessor(reader, writer, job_info, logger)
         processor.execute()
         

@@ -12,7 +12,7 @@ import pdb
 
 
 class TestEzproxyFactProcessor(unittest.TestCase):
-    maxDif= None
+    maxDiff= None
     @classmethod
     def setUpClass(cls):
         cls.logger = test_logger.logger
