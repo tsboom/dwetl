@@ -3,6 +3,9 @@ import sys
 from dotenv import load_dotenv
 load_dotenv()
 
+def configured_host():
+    # the current host name configured in .env
+    return os.getenv("CONFIGURED_HOST")
 
 def db_settings():
     # The username to use in connecting to the database
@@ -57,6 +60,32 @@ def test_db_settings():
                 f'postgresql+psycopg2://{test_db_user}:{test_db_password}@{test_db_host_name}:{test_db_port}/{test_db_name}'
         }
     return test_database_settings
+
+
+def reporting_db_settings():
+    # The username to use in connecting to the database
+    reporting_db_user = os.getenv("REPORTING_DB_USER")
+    # The password to use in connecting to the database
+    reporting_db_password = os.getenv("REPORTING_DB_PASSWORD")
+    # The name of the database
+    reporting_db_name = os.getenv("REPORTING_DB_NAME")
+    # The hostname/IP address of the Postgres server
+    reporting_db_host_name = os.getenv("REPORTING_DB_HOST_NAME")
+    # The port to use to connect to the Postgres server
+    reporting_db_port = os.getenv("REPORTING_DB_PORT")
+
+    reporting_database_settings = None
+    if reporting_db_user and reporting_db_password and reporting_db_host_name and reporting_db_port and reporting_db_name:
+        reporting_database_settings = {
+            'REPORTING_DB_USER': reporting_db_user,
+            'REPORTING_DB_PASSWORD': reporting_db_password,
+            'REPORTING_DB_NAME': reporting_db_name,
+            'REPORTING_DB_HOST_NAME': reporting_db_host_name,
+            'REPORTING_DB_PORT': reporting_db_port,
+            'REPORTING_DB_CONNECTION_STRING':
+                f'postgresql+psycopg2://{reporting_db_user}:{reporting_db_password}@{reporting_db_host_name}:{reporting_db_port}/{reporting_db_name}'
+        }
+    return reporting_database_settings
 
 
 def test_db_configured():

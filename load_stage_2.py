@@ -23,48 +23,46 @@ def aleph_library(table_name):
     return library
 
 
-def load_stage_2(job_info, logger):
 
-    print('Loading stage 2...')
-    logger.info('Loading stage 2...')
+def load_stage_2(job_info, logger, stage1_to_stage2_table_mapping, db_session_creator):
 
-    stage1_to_stage2_table_mappings = {
-        "dw_stg_1_mai39_z13": "dw_stg_2_bib_rec_z13",
-        'dw_stg_1_mai01_z13': "dw_stg_2_bib_rec_z13",
-        "dw_stg_1_mai01_z13u": "dw_stg_2_bib_rec_z13u",
-        "dw_stg_1_mai01_z00": "dw_stg_2_bib_rec_z00",
-        "dw_stg_1_mai39_z00": "dw_stg_2_bib_rec_z00",
-        "dw_stg_1_mai39_z13u": "dw_stg_2_bib_rec_z13u",
-        # "dw_stg_1_mai60_z00": "dw_stg_2_lbry_holding_z00",
-        # "dw_stg_1_mai60_z13": "dw_stg_2_lbry_holding_z13",
-        # "dw_stg_1_mai60_z13u": "dw_stg_2_lbry_holding_z13u",
-        # "dw_stg_1_mai50_z30": "dw_stg_2_lbry_item_z30",
-        # "dw_stg_1_mai50_z35": "dw_stg_2_lbry_item_event_z35",
-        # "dw_stg_1_mai01_z00_field": "dw_stg_2_bib_rec_z00_field",
-        # "dw_stg_1_mai39_z00_field": "dw_stg_2_bib_rec_z00_field",
-        # "dw_stg_1_mai60_z00_field": "dw_stg_2_lbry_holding_z00_field",
-        # "dw_stg_1_mpf_mbr_lbry": "dw_stg_2_mpf_mbr_lbry",
-        # "dw_stg_1_mpf_lbry_entity": "dw_stg_2_mpf_lbry_entity",
-        # "dw_stg_1_mpf_collection": "dw_stg_2_mpf_collection",
-        # "dw_stg_1_mpf_item_status": "dw_stg_2_mpf_item_status",
-        # "dw_stg_1_mpf_item_prcs_status": "dw_stg_2_mpf_item_prcs_status",
-        # "dw_stg_1_mpf_matrl_form": "dw_stg_2_mpf_matrl_form"
-    }
+    print('Loading stage 2...\n')
+    logger.info('Loading stage 2...\n')
 
     processing_cycle_id = job_info.prcsng_cycle_id
-    for stage1_table, stage2_table in stage1_to_stage2_table_mappings.items():
-        print(stage1_table)
-        logger.info(stage1_table)
-        
+    
+    # set of unique stage 2 tables to assist with counting totals
+    stage2_table_list = set()
+    # count up values from stage 2 tables 
+    loaded_record_count = 0
+    
+    for stage1_table, stage2_table in stage1_to_stage2_table_mapping.items():
+        # create set of unique stage 2 values
+        stage2_table_list.add(stage2_table)
         library = aleph_library(stage1_table)
 
-        with dwetl.database_session() as session:
+        with db_session_creator() as session:
             stage1_table_class = dwetl.Base.classes[stage1_table]
             stage2_table_class = dwetl.Base.classes[stage2_table]
             reader = SqlAlchemyReader(session, stage1_table_class, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
             writer = SqlAlchemyWriter(session, stage2_table_class)
-            processor = CopyStage1ToStage2.create(reader, writer, job_info, logger, library)
+            error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
+            processor = CopyStage1ToStage2.create(reader, writer, job_info, logger, library, error_writer)
             processor.execute()
+            
+    # count up records in stg 2 tables
+    with db_session_creator() as session: 
+        for table in stage2_table_list: 
+            stage2_table_class = dwetl.Base.classes[table]
+            stg_2_count = session.query(stage2_table_class).filter(stage2_table_class.em_create_dw_prcsng_cycle_id==job_info.prcsng_cycle_id).count()
+            loaded_record_count = loaded_record_count + stg_2_count
+    
+    logger.info(f'Total number of records loaded in stage 2: {loaded_record_count}\n')
+    print(f'Total number of records loaded in stage 2: {loaded_record_count}\n')
+            
+
+            
+            
 
 '''
 main function for running script from the command line

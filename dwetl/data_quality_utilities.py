@@ -2,7 +2,7 @@ import datetime
 import os
 import csv
 import pdb
-
+import pprint
 # use pdb.set_trace() to set a breakpoint
 
 '''
@@ -14,7 +14,9 @@ def is_mandatory(input):
 
 # checks if numeric only
 def is_numeric(input):
-    if input.isnumeric() is True:
+    #pdb.set_trace()
+    #if input.isnumeric() is True:
+    if input.isdigit() is True:
         return True
     else:
         return False
@@ -42,7 +44,7 @@ def no_missing_values(input):
     # check for all zeros nulls, or white spaces
     if input is None:
         output = False
-    elif input is '':
+    elif input == '':
         output = False
     elif input.isspace():
         output = False
@@ -61,9 +63,16 @@ def trim(input):
 # check if valid aleph year (1980 - Present)
 
 
-def is_valid_aleph_year(year):
+def is_valid_aleph_year(year):   
+    if len(str(year)) > 4:
+        return False
+    if isinstance(year, str):
+        year=year[:4]
+        if year.isdigit() is False:
+            return False
     current_year = datetime.datetime.now().year
-    if year not in range(1980, current_year+1):
+    if int(year)<1980 or int(year)>current_year:
+    #if year not in range(1980, current_year+1):
         return False
     else:
         return True
@@ -77,12 +86,19 @@ def no_leading_space(input):
 
 # need to make sure null passes missing value data quality
 def is_valid_aleph_date(string_date):
-    string_date_valid = datetime.datetime.strptime(
-        string_date, '%Y%m%d').strftime('%Y%m%d')
-    if string_date == string_date_valid and is_valid_aleph_year(string_date):
-        return True
-    else:
+    try:
+        string_date = str(string_date)
+        if len(string_date) > 4:
+            year = string_date[:4]
+        string_date_valid = datetime.datetime.strptime(
+            string_date, '%Y%m%d').strftime('%Y%m%d')
+        if string_date == string_date_valid and is_valid_aleph_year(year):
+            return True
+        else:
+            return False
+    except ValueError:
         return False
+
 
 
 # # checks if hour is valid HHMM format

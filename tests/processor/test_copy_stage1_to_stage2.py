@@ -10,6 +10,7 @@ class TestCopyStage1ToStage2(unittest.TestCase):
         self.writer = ListWriter()
         self.job_info = JobInfoFactory.create_from_prcsng_cycle_id(-1)
         self.logger = None
+        self.error_writer = ListWriter()
 
     def test_copy_mai01_z00_stage1_to_stage2(self):
         sample_data = [
@@ -34,13 +35,14 @@ class TestCopyStage1ToStage2(unittest.TestCase):
 
         aleph_library = 'mai01'
         reader = ListReader(sample_data)
-        processor = CopyStage1ToStage2.create(reader, self.writer, self.job_info, self.logger, aleph_library)
+        processor = CopyStage1ToStage2(reader, self.writer, self.job_info, self.logger, aleph_library, self.error_writer)
         processor.execute()
         results = self.writer.list
 
         self.assertEqual(len(sample_data), len(results))
         expected_keys = [
             'db_operation_cd',
+            'rec_trigger_key',
             'dw_stg_2_aleph_lbry_name',
             'in_z00_doc_number',
             'in_z00_no_lines',
@@ -147,7 +149,7 @@ class TestCopyStage1ToStage2(unittest.TestCase):
 
         aleph_library = 'mai50'
         reader = ListReader(sample_data)
-        processor = CopyStage1ToStage2.create(reader, self.writer, self.job_info, self.logger, aleph_library)
+        processor = CopyStage1ToStage2(reader, self.writer, self.job_info, self.logger, aleph_library, self.error_writer)
         processor.execute()
         results = self.writer.list
 
@@ -155,6 +157,7 @@ class TestCopyStage1ToStage2(unittest.TestCase):
         expected_keys = [
             'db_operation_cd',
             'dw_stg_2_aleph_lbry_name',
+            'rec_trigger_key',
             'in_z30_85x_type',
             'in_z30_alpha',
             'in_z30_arrival_date',
@@ -261,7 +264,7 @@ class TestCopyStage1ToStage2(unittest.TestCase):
 
         aleph_library = 'mai60'
         reader = ListReader(sample_data)
-        processor = CopyStage1ToStage2.create(reader, self.writer, self.job_info, self.logger, aleph_library)
+        processor = CopyStage1ToStage2(reader, self.writer, self.job_info, self.logger, aleph_library, self.error_writer)
         processor.execute()
         results = self.writer.list
 
@@ -269,6 +272,7 @@ class TestCopyStage1ToStage2(unittest.TestCase):
         expected_keys = [
             'db_operation_cd',
             'dw_stg_2_aleph_lbry_name',
+            'rec_trigger_key',
             'in_z00_doc_number',
             'in_dw_stg_1_marc_rec_field_seq_no',
             'in_z00_marc_rec_field_cd',
@@ -300,7 +304,7 @@ class TestCopyStage1ToStage2(unittest.TestCase):
         aleph_library= 'mai50'
 
         reader = ListReader(sample_data)
-        processor = CopyStage1ToStage2.create(reader, self.writer, self.job_info, self.logger, aleph_library)
+        processor = CopyStage1ToStage2(reader, self.writer, self.job_info, self.logger, aleph_library, self.error_writer)
         processor.execute()
         results = self.writer.list
 

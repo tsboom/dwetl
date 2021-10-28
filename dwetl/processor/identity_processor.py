@@ -8,12 +8,8 @@ class IdentityProcessor(Processor):
 
     This class is primarily intended for testing.
     """
-    def __init__(self, reader, writer, job_info, logger):
-        super().__init__(reader, writer, job_info, logger)
-
-    @classmethod
-    def create(cls, reader, writer, job_info, logger):
-        return IdentityProcessor(reader, writer, job_info, logger)
+    def __init__(self, reader, writer, job_info, logger, error_writer):
+        super().__init__(reader, writer, job_info, logger, error_writer)
 
     def job_name(self):
         return 'IdentityProcessor'

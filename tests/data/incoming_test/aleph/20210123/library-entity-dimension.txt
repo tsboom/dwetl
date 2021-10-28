@@ -1,0 +1,97 @@
+mpf_library_entity_dimension.txt
+lbry_entity_cd	lbry_entity_name	db_operation_cd	lbry_staff_lms_user_id	db_operation_effective_date
+BL-CS	UB Law Library Curbside Pickup	I	dwilt	2020-09-18
+ML-CS	Law Library Curbside Pick-Up	I	dwilt	2020-08-21
+SU-CS	SU Curbside Pickup	I	dwilt	2020-07-08
+CPCRB	UMCP Curbside Pickup	I	dwilt	2020-07-27
+UC-SF	UMGC Adelphi	U	hhanson	2019-09-30
+UC-LG	UMGC Academic Center at Largo	U	hhanson	2019-09-30
+UC-EL	UMGC Electronic Resources	U	hhanson	2019-09-30
+UC-DE	UMGC-UMGC Patrons Only	U	hhanson	2019-09-30
+CPNMS	UMCP McKeldin Library Media	U	dwilt	2019-08-29
+CPPG	UMCP Hornbake Library Prange	D	dwilt	2019-03-13
+CPCHM	UMCP Chemistry	D	ddahl	2018-10-09
+BC-MC	UMBC IMC	D	ddahl	2018-05-21
+BC-RC	UMBC ALRC/RCLC	D	ddahl	2018-01-18
+CPENG	UMCP STEM Library	U	ddahl	2018-01-18
+CPOSS	UMCP Severn Library	U	ddahl	2016-09-28
+LNDL 	Loyola Notre Dame Library	I	ddahl	2016-09-08
+SU-SU	SU Guerrieri Academic Commons	U	ddahl	2016-08-08
+CE-IM	"CES, Inst of Marine Env Tech"	I	ddahl	2016-06-24
+CPBCT	UMCP HBK Maryland Room	U	ddahl	2016-01-29
+TU-NE	TU Northeastern	I	ddahl	2014-09-02
+CPDEL	UMCP Department Delivery	I	ddahl	2013-09-19
+UC-AB	UMUC Admin Bldg - Fac/Stf Only	D	ddahl	2013-05-31
+UC-AN	UMUC Annapolis Center	D	ddahl	2013-05-31
+UC-DO	UMUC Distance Ed - Overseas	D	ddahl	2013-05-31
+UC-DS	UMUC Dorsey Station	D	ddahl	2013-05-31
+UC-MA	UMUC Mannheim	D	ddahl	2013-05-31
+UC-PG	UMUC PG Metro - Fac/Staff Only	D	ddahl	2013-05-31
+UC-WC	UMUC Waldorf Center	D	ddahl	2013-05-31
+CE-SE	"CES, SESYNC Center"	I	ddahl	2013-05-10
+SU-CR	SU Curriculum Resource Center	I	ddahl	2012-09-07
+CPMAU	UMCP Lucille Maurer Library	D	ddahl	2012-06-13
+UC-AB	UMUC Admin Bldg - Fac/Stf Only	I	ddahl	2012-03-30
+UC-PG	UMUC PG Metro - Fac/Staff Only	I	ddahl	2012-03-30
+TU-TM	Towson University	U	ddahl	2011-01-03
+CPMCP	MCPS Delivery	I	ddahl	2010-10-19
+UC-HD	UMUC Heidelberg	D	ddahl	2009-07-28
+UC-YO	UMUC Yokota	D	ddahl	2009-07-28
+BC-MC	UMBC IMC	I	ddahl	2009-03-11
+UC-DO	UMUC Distance Ed - Overseas	I	ddahl	2008-08-14
+CPSG 	Shady Grove Library	U	ddahl	2008-05-14
+CPPG 	UMCP Hornbake Library Prange	I	ddahl	2007-11-26
+CPCIS	UMCP CLIS Wasserman Library	D	ddahl	2006-05-26
+FS-FH	USM Hagerstown	U	ddahl	2005-08-31
+CPTRA	UMCP Flotsam	D	ddahl	2004-08-10
+BC-BC	UMBC Library	I	ddahl	2002-09-30
+BC-RC	UMBC ALRC/RCLC	I	ddahl	2002-09-30
+BL-BL	UB Law Library	I	ddahl	2002-09-30
+BS-BS	Bowie State University	I	ddahl	2002-09-30
+CE-AL	"CES, Appalachian Lab"	I	ddahl	2002-09-30
+CE-CB	"CES, Chesapeake"	I	ddahl	2002-09-30
+CE-HP	"CES, Horn Point"	I	ddahl	2002-09-30
+CE-WW	"CES, Online"	I	ddahl	2002-09-30
+CPARC	UMCP Architecture Library	I	ddahl	2002-09-30
+CPART	UMCP Art Library	I	ddahl	2002-09-30
+CPBCT	UMCP HBK Broadcasting Archives	I	ddahl	2002-09-30
+CPCHM	UMCP Chemistry	I	ddahl	2002-09-30
+CPCIS	UMCP CLIS Wasserman Library	I	ddahl	2002-09-30
+CPEIC	UMCP Electronic Info Center	I	ddahl	2002-09-30
+CPENG	UMCP EPSL	I	ddahl	2002-09-30
+CPMAU	UMCP Lucille Maurer Library	I	ddahl	2002-09-30
+CPMCK	UMCP McKeldin Library	I	ddahl	2002-09-30
+CPNET	UMCP Online Resources	I	ddahl	2002-09-30
+CPNMS	UMCP HBK Library Media Srvs	I	ddahl	2002-09-30
+CPOSS	UMCP Off-site Shelving	I	ddahl	2002-09-30
+CPPAL	UMCP Performing Arts Library	I	ddahl	2002-09-30
+CPSG 	UMCP Shady Grove	I	ddahl	2002-09-30
+CPSPE	UMCP HBK Maryland Room	I	ddahl	2002-09-30
+CPTRA	UMCP Flotsam	I	ddahl	2002-09-30
+CS-CS	Coppin State University	I	ddahl	2002-09-30
+ES-ES	UM Eastern Shore	I	ddahl	2002-09-30
+FS-FA	Frostburg State University	I	ddahl	2002-09-30
+FS-FH	FSU Hagerstown	I	ddahl	2002-09-30
+HS-HS	Health Sciences	I	ddahl	2002-09-30
+LN-CO	Loyola - Columbia	I	ddahl	2016-09-08
+LN-TI	Loyola - Timonium	I	ddahl	2016-09-08
+ML-ML	Thurgood Marshall Law Library	I	ddahl	2002-09-30
+MS-MS	Morgan State University	I	ddahl	2002-09-30
+SM-SM	St. Marys	I	ddahl	2002-09-30
+SU-NC	SU Nabb Research Center	I	ddahl	2002-09-30
+SU-SU	SU Blackwell Library	I	ddahl	2002-09-30
+SU-WM	SU Ward Museum of Wildfowl Art	I	ddahl	2002-09-30
+TU-TI	"Towson University, ILL"	I	ddahl	2002-09-30
+TU-TM	"Towson University, Media"	I	ddahl	2002-09-30
+TU-TU	Towson University	I	ddahl	2002-09-30
+UB-UB	University of Baltimore	I	ddahl	2002-09-30
+UC-AN	UMUC Annapolis Center	I	ddahl	2002-09-30
+UC-DE	UMUC-UMUC Patrons Only	I	ddahl	2002-09-30
+UC-DS	UMUC Dorsey Station	I	ddahl	2002-09-30
+UC-EL	UMUC Electronic Resources	I	ddahl	2002-09-30
+UC-HD	UMUC Heidelberg	I	ddahl	2002-09-30
+UC-LG	UMUC Academic Center at Largo	I	ddahl	2002-09-30
+UC-MA	UMUC Mannheim	I	ddahl	2002-09-30
+UC-SF	UMUC Adelphi	I	ddahl	2002-09-30
+UC-WC	UMUC Waldorf Center	I	ddahl	2002-09-30
+UC-YO	UMUC Yokota	I	ddahl	2002-09-30

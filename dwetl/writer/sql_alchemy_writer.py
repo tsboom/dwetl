@@ -1,6 +1,8 @@
-from sqlalchemy import exc
+from sqlalchemy.exc import SQLAlchemyError
 from dwetl.writer.writer import Writer
+from dwetl.exceptions import DWETLException
 import pdb
+import dwetl
 
 
 class SqlAlchemyWriter(Writer):
@@ -15,43 +17,48 @@ class SqlAlchemyWriter(Writer):
         """
         self.session = session
         self.table_base_class = table_base_class
+        
 
     def write_row(self, row_dict):
-        try:
-            # check to see if row_dict contains uneeded columns
-            # some values are in stage 2, but do not move forward in ETL
-            # ex: in_z13_call_no in dw_stg_2_bib_rec_z13
-            relevant_row_dict = {}
-            for key, val in row_dict.items():
-                columns = self.table_base_class.__table__.columns.keys()
-                if key in columns:
-                    #pdb.set_trace()
-                    relevant_row_dict[key] = val
+        # check to see if row_dict contains uneeded columns
+        # some values are in stage 2, but do not move forward in ETL
+        # ex: in_z13_call_no in dw_stg_2_bib_rec_z13
+        relevant_row_dict = {}
+        for key, val in row_dict.items():
+            columns = self.table_base_class.__table__.columns.keys()
+            if key in columns:
+                relevant_row_dict[key] = val
+        record = self.table_base_class(**relevant_row_dict)
 
-            record = self.table_base_class(**relevant_row_dict)
+        # get list of primary keys from table_base_class
+        pk_list = []
+        pk_values = self.table_base_class.__table__.primary_key.columns.values()
+        for i, key in enumerate(pk_values):
+            pk_list.append(pk_values[i].name)
 
-
-            # get list of primary keys from table_base_class
-            pk_list = []
-            pk_values = self.table_base_class.__table__.primary_key.columns.values()
-            for i, key in enumerate(pk_values):
-                # index = pk_values.index(key)
-                pk_list.append(pk_values[i].name)
-
-            # check to see if list of pks are in the row_dict
-            for pk in pk_list:
-                in_dict = False
-                if pk in row_dict:
-                    in_dict = True
-                else:
-                    in_dict = False
-
-            # Update the row if PK list is found in row
-            if in_dict == True:
-                self.session.merge(record)
+        # check to see if list of pks are in the row_dict
+        for pk in pk_list:
+            in_dict = False
+            if pk in row_dict:
+                in_dict = True
             else:
-            # Add new row if PK list is not found in row
-                self.session.add(record)
+                in_dict = False
 
-        except exc.SQLAlchemyError as e:
-            self.session.rollback()
+
+        # Update the row if PK list is found in row
+        if in_dict == True:
+            try:
+                with self.session.begin_nested():
+                    self.session.merge(record)
+            except SQLAlchemyError as e: 
+                raise DWETLException(e)
+        
+        # New record: Add new row if pk list is not found in row
+        else: 
+            try:
+                with self.session.begin_nested():
+                    self.session.add(record)
+            except SQLAlchemyError as e:
+                raise DWETLException(e)
+            
+            

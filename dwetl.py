@@ -22,9 +22,12 @@ from dwetl.job_info import JobInfoFactory, JobInfo
 import load_stage_1
 import load_stage_2
 import stage_2_intertable_processing
+import table_mappings
+from dotenv import load_dotenv
+load_dotenv()
 
 def run(input_directory):
-    
+
     #create logger
     today = datetime.datetime.now().strftime('%Y%m%d')
     logger = logging.getLogger('dwetl')
@@ -32,37 +35,47 @@ def run(input_directory):
     formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)
 
     time_started = datetime.datetime.now()
     logger.info(f'DWETL.py started')
-
+    logger.info(f'input directory: {input_directory}')  
+    print(f'DWETL.py started')
+    print(f'input directory: {input_directory}') 
     '''
     create job_info for current process
     '''
-    with dwetl.database_session() as session:
+        
+    db_session_creator = dwetl.database_session
+    
+    with db_session_creator() as session:
         job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
+        # TODO: should we get the processing cycle id from the max of the reporting db final table
+        # like we do in ezproxy_etl?
+        # This would ensure we don't use the same processing cycle id twice. 
+        # We had some issues in test when reseting the etl db, the processing cycle ids go back to 1. 
+        # in dw-etl-test, if ezproxy_etl is run first, then the db_prcsng_cycle table has the accurate processing cycle id based on the reporting max. 
         job_info = JobInfoFactory.create_job_info_from_db(session, job_info_table_class)
-
-
-
+        
+    # print processing cycle id
+    logger.info(f'processing cycle id: {job_info.prcsng_cycle_id}\n')  
+    print(f'processing cycle id: {job_info.prcsng_cycle_id}\n')
 
     '''
     load_stage_1
     '''
-    load_stage_1.load_stage_1(job_info, input_directory, logger)
-
+    load_stage_1.load_stage_1(job_info, input_directory, logger, table_mappings.stg_1_table_mapping, db_session_creator)
     '''
     load_stage_2
     load 'in_' values from stg1 to stg 2 tables
     load 'in_' values
     '''
-    load_stage_2.load_stage_2(job_info, logger)
+    load_stage_2.load_stage_2(job_info, logger, table_mappings.stg_1_to_stg_2_table_mapping, db_session_creator)
 
     '''
     stg 2 intertable processing
     '''
-    stage_2_intertable_processing.stage_2_intertable_processing(job_info, logger)
+    stage_2_intertable_processing.stage_2_intertable_processing(job_info, logger, table_mappings.stg_2_table_dim_mapping, db_session_creator)
 
 
 
@@ -93,17 +106,26 @@ main function for running script from the command line
 '''
 if __name__=='__main__':
     arguments = sys.argv
-
     today = datetime.datetime.now().strftime('%Y%m%d')
-    # input_directory = f'data/{today}/'
-    input_directory = f'data/20191211/'
-
     # give hint if --help
     if '--help' in arguments:
         print('Usage: ')
-        print('\tdwetl.py [data directory]')
+        print('\tdwetl.py [YYYYMMDD] [test (if you want to run dwetl with the test db)]')
         sys.exit(1)
     if len(arguments) == 2:
-        input_directory = arguments[1]
+        today = arguments[1]
 
+    # On the test and prod VM, the data directory is /apps/dw/incoming
+    # use these 3 lines on the VM in test/prod:
+    data_directory = os.getenv("DATA_DIRECTORY")
+    input_directory = f'{data_directory}/incoming/{today}/'
+    
+    # # TODO: for local dev use the following 3 lines
+    # data_directory = os.getenv("DATA_DIRECTORY")
+    # today = "20191204"
+    # input_directory = f'{data_directory}/incoming/aleph/{today}/'
+    
+    
+    # TODO: move processed file to processed directory
+    # and when an already processed file is run, use the processed input directory
     run(input_directory)

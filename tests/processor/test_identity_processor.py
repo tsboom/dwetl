@@ -6,6 +6,7 @@ from dwetl.processor.identity_processor import IdentityProcessor
 
 
 class TestIdentityProcessor(unittest.TestCase):
+    # TODO: is this class necessary?
     def test_identity_processor(self):
         sample_data = [
             {'rec_type_cd': 'D', 'db_operation_cd': 'U', 'rec_trigger_key': '000007520' },
@@ -29,8 +30,9 @@ class TestIdentityProcessor(unittest.TestCase):
         }
 
         logger = None
+        error_writer = ListWriter()
 
-        step = IdentityProcessor(reader, writer, job_info, logger)
+        step = IdentityProcessor(reader, writer, job_info, logger, error_writer)
 
         step.execute()
 

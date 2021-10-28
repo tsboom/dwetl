@@ -1265,6 +1265,61 @@ WITH (autovacuum_enabled='true');
 
 ALTER TABLE public.dw_stg_1_mpf_mbr_lbry OWNER TO usmai_dw;
 
+
+--
+-- Name: dw_stg_1_ezp_sessns_snap; Type: TABLE; Schema: public; Owner: usmai_dw
+--
+
+CREATE TABLE public.dw_stg_1_ezp_sessns_snap (
+    mbr_lbry_cd character varying(2) NOT NULL,
+    ezp_sessns_snap_tmstmp character varying(13) NOT NULL,
+    ezp_sessns_snap_actv_sessns_cnt integer NOT NULL,
+    ezp_sessns_virtual_hosts_cnt integer NOT NULL,
+    em_create_dw_prcsng_cycle_id integer NOT NULL,
+    em_create_dw_job_exectn_id integer NOT NULL,
+    em_create_dw_job_name character varying(100) NOT NULL,
+    em_create_dw_job_version_no character varying(20) NOT NULL,
+    em_create_user_id character varying(20) NOT NULL,
+    em_create_tmstmp timestamp without time zone NOT NULL
+)
+WITH (autovacuum_enabled='true');
+
+
+ALTER TABLE public.dw_stg_1_ezp_sessns_snap OWNER TO usmai_dw;
+
+--
+-- Name: dw_stg_2_ezp_sessns_snap; Type: TABLE; Schema: public; Owner: usmai_dw
+--
+
+CREATE TABLE public.dw_stg_2_ezp_sessns_snap (
+    in_mbr_lbry_cd character varying(2) NOT NULL,
+    t1_mbr_lbry_cd__ezp_sessns_snap_mbr_lbry_dim_key character varying(2),
+    in_ezp_sessns_snap_tmstmp character varying(13) NOT NULL,
+    t1_ezp_sessns_snap_tmstmp__ezp_sessns_snap_clndr_dt_dim_key bigint,
+    t2_ezp_sessns_snap_tmstmp__ezp_sessns_snap_tmstmp timestamp without time zone,
+    t3_ezp_sessns_snap_tmstmp__ezp_sessns_snap_time_of_day_dim_key integer,
+    in_ezp_sessns_snap_actv_sessns_cnt integer NOT NULL,
+    t1_ezp_sessns_snap_actv_sessns_cnt integer,
+    in_ezp_sessns_virtual_hosts_cnt integer NOT NULL,
+    em_create_dw_prcsng_cycle_id integer NOT NULL,
+    em_create_dw_job_exectn_id integer NOT NULL,
+    em_create_dw_job_name character varying(100) NOT NULL,
+    em_create_dw_job_version_no character varying(20) NOT NULL,
+    em_create_user_id character varying(20) NOT NULL,
+    em_create_tmstmp timestamp without time zone NOT NULL,
+    em_update_dw_prcsng_cycle_id integer,
+    em_update_dw_job_exectn_id integer,
+    em_update_dw_job_name character varying(100),
+    em_update_dw_job_version_no character varying(20),
+    em_update_user_id character varying(20),
+    em_update_tmstmp timestamp without time zone
+)
+WITH (autovacuum_enabled='true');
+
+
+ALTER TABLE public.dw_stg_2_ezp_sessns_snap OWNER TO usmai_dw;
+
+
 --
 -- Name: dw_stg_2_bib_rec_z00; Type: TABLE; Schema: public; Owner: usmai_dw
 --
@@ -1272,6 +1327,7 @@ ALTER TABLE public.dw_stg_1_mpf_mbr_lbry OWNER TO usmai_dw;
 CREATE TABLE public.dw_stg_2_bib_rec_z00 (
     db_operation_cd character(1) NOT NULL,
     dw_stg_2_aleph_lbry_name character(5) NOT NULL,
+    rec_trigger_key character(9) NOT NULL,
     in_z00_doc_number character(9) NOT NULL,
     pp_z00_doc_number character(9),
     dq_z00_doc_number character(9),
@@ -1429,7 +1485,7 @@ CREATE TABLE public.dw_stg_2_bib_rec_z13u (
     in_z13u_rec_key character(9) NOT NULL,
     in_z13u_user_defined_2 character varying(500),
     pp_z13u_user_defined_2 character varying(500),
-    dq__z13u_user_defined_2 character varying(500),
+    dq_z13u_user_defined_2 character varying(500),
     t1_z13u_user_defined_2__bib_rec_oclc_no character varying(500),
     in_z13u_user_defined_3 character varying(500),
     pp_z13u_user_defined_3 character varying(500),
@@ -3048,6 +3104,38 @@ WITH (autovacuum_enabled='true');
 
 ALTER TABLE public.fact_lbry_item OWNER TO usmai_dw;
 
+
+--
+-- Name: fact_ezp_sessns_snap; Type: TABLE; Schema: public; Owner: usmai_dw
+--
+
+CREATE TABLE public.fact_ezp_sessns_snap (
+    ezp_sessns_snap_clndr_dt_dim_key bigint NOT NULL,
+    ezp_sessns_snap_mbr_lbry_dim_key bigint NOT NULL,
+    ezp_sessns_snap_time_of_day_dim_key bigint NOT NULL,
+    ezp_sessns_snap_tmstmp timestamp without time zone NOT NULL,
+    ezp_sessns_snap_actv_sessns_cnt int NOT NULL,
+    ezp_sessns_snap_fact_key bigint NOT NULL,
+    em_create_dw_prcsng_cycle_id integer NOT NULL,
+    em_create_dw_job_exectn_id integer NOT NULL,
+    em_create_dw_job_name character varying(100) NOT NULL,
+    em_create_dw_job_version_no character varying(20) NOT NULL,
+    em_create_user_id character varying(20) NOT NULL,
+    em_create_tmstmp timestamp without time zone NOT NULL,
+    em_update_dw_prcsng_cycle_id integer,
+    em_update_dw_job_exectn_id integer,
+    em_update_dw_job_name character varying(100),
+    em_update_dw_job_version_no character varying(20),
+    em_update_reason_txt character varying(100),
+    em_update_user_id character varying(20),
+    em_update_tmstmp timestamp without time zone
+)
+WITH (autovacuum_enabled='true');
+
+
+ALTER TABLE public.fact_ezp_sessns_snap OWNER TO usmai_dw;
+
+
 --
 -- Name: out_bib_rec_marc_rec_field; Type: TABLE; Schema: public; Owner: usmai_dw
 --
@@ -3301,6 +3389,14 @@ ALTER TABLE ONLY public.dw_stg_3_dim_usmai_mbr_lbry
 ALTER TABLE ONLY public.fact_lbry_item
     ADD CONSTRAINT indx_fact_lbry_item_pk PRIMARY KEY (lbry_item_fact_key);
 
+--
+-- Name: fact_ezp_sessns_snap fact_ezp_sessns_snap_pk; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
+--
+
+ALTER TABLE ONLY public.fact_ezp_sessns_snap
+    ADD CONSTRAINT indx_fact_ezp_sessns_snap_pk PRIMARY KEY (ezp_sessns_snap_fact_key);
+
+
 
 --
 -- Name: out_bib_rec_marc_rec_field out_bib_rec_marc_rec_field_pk; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
@@ -3485,13 +3581,27 @@ ALTER TABLE ONLY public.dw_stg_1_mpf_matrl_form
 ALTER TABLE ONLY public.dw_stg_1_mpf_mbr_lbry
     ADD CONSTRAINT pk_dw_stg_1_mpf_mbr_lbry PRIMARY KEY (db_operation_cd, usmai_mbr_lbry_cd, em_create_dw_prcsng_cycle_id);
 
+--
+-- Name: dw_stg_1_ezp_sessns_snap pk_dw_stg_1_ezp_sessns_snap; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
+--
+
+ALTER TABLE ONLY public.dw_stg_1_ezp_sessns_snap
+    ADD CONSTRAINT pk_stg_1_ezp_sessns_snap PRIMARY KEY (mbr_lbry_cd, ezp_sessns_snap_tmstmp, em_create_dw_prcsng_cycle_id);
+
+--
+-- Name: dw_stg_2_ezp_sessns_snap pk_dw_stg_2_ezp_sessns_snap; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
+--
+
+ALTER TABLE ONLY public.dw_stg_2_ezp_sessns_snap
+    ADD CONSTRAINT pk_stg_2_ezp_sessns_snap PRIMARY KEY (in_mbr_lbry_cd, in_ezp_sessns_snap_tmstmp, em_create_dw_prcsng_cycle_id);
+
 
 --
 -- Name: dw_stg_2_bib_rec_z00 pk_dw_stg_2_bib_rec_z00; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
 --
 
 ALTER TABLE ONLY public.dw_stg_2_bib_rec_z00
-    ADD CONSTRAINT pk_dw_stg_2_bib_rec_z00 PRIMARY KEY (db_operation_cd, dw_stg_2_aleph_lbry_name, in_z00_doc_number, em_create_dw_prcsng_cycle_id);
+    ADD CONSTRAINT pk_dw_stg_2_bib_rec_z00 PRIMARY KEY (db_operation_cd, dw_stg_2_aleph_lbry_name, rec_trigger_key, in_z00_doc_number, em_create_dw_prcsng_cycle_id);
 
 
 --
@@ -3762,6 +3872,47 @@ CREATE INDEX indx_fact_lbry_item_prcs_status ON public.fact_lbry_item USING btre
 --
 
 CREATE INDEX indx_fact_lbry_item_status ON public.fact_lbry_item USING btree (lbry_item_status_dim_key);
+
+
+
+
+
+--
+-- Name: dw_db_errors; Type: TABLE; Schema: public; Owner: usmai_dw
+--
+
+CREATE TABLE public.dw_db_errors (
+    dw_error_id integer NOT NULL,
+    dw_error_type character varying(150) NOT NULL,
+    dw_error_text character varying(2000) NOT NULL,
+    dw_error_row character varying(5000) NOT NULL,
+    em_create_dw_prcsng_cycle_id integer NOT NULL,
+    em_create_dw_job_exectn_id integer NOT NULL,
+    em_create_dw_job_name character varying(100) NOT NULL,
+    em_create_dw_job_version_no character varying(20) NOT NULL,
+    em_create_user_id character varying(20) NOT NULL,
+    em_create_tmstmp timestamp without time zone NOT NULL,
+    em_update_dw_prcsng_cycle_id integer,
+    em_update_dw_job_exectn_id integer,
+    em_update_dw_job_name character varying(100),
+    em_update_dw_job_version_no character varying(20),
+    em_update_reason_txt character varying(100),
+    em_update_user_id character varying(20),
+    em_update_tmstmp timestamp without time zone
+)
+WITH (autovacuum_enabled='true');
+
+
+ALTER TABLE public.dw_db_errors OWNER TO usmai_dw;
+
+
+--
+-- Name: dw_dw_db_errors error_id; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
+--
+
+ALTER TABLE ONLY public.dw_db_errors
+    ADD CONSTRAINT pk_dw_db_errors PRIMARY KEY (dw_error_id, em_create_dw_prcsng_cycle_id);
+
 
 
 --
