@@ -10,8 +10,8 @@ class TransformationProcessor(Processor):
     Processor for running transform functions
     '''
     
-    def __init__(self, reader, writer, job_info, logger, json_config, pk_list):
-        super().__init__(reader, writer, job_info, logger)
+    def __init__(self, reader, writer, job_info, logger, json_config, pk_list, error_writer):
+        super().__init__(reader, writer, job_info, logger, error_writer)
         self.json_config = json_config
         self.stg2_pk_list = pk_list
         
@@ -75,7 +75,7 @@ class TransformationProcessor(Processor):
                     
                     # run transformation 
                     transform_result = transformation_info.transform(val)
-                    pdb.set_trace()
+
                     # form the column name to write to for t1_sourcecolumn_targetcolumn, t2...
                     target_column = transformation_info.target_col_name
                     source_column = transformation_info.source_col_name

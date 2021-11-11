@@ -1,6 +1,8 @@
 import unittest
+import dwetl
 from dwetl.reader.list_reader import ListReader
 from dwetl.writer.list_writer import ListWriter
+from dwetl.writer.sql_alchemy_writer import SqlAlchemyWriter
 from dwetl.job_info import JobInfo
 from dwetl.transformation_info import TransformationInfo
 from dwetl.processor.transformation_processor import TransformationProcessor
@@ -18,12 +20,18 @@ class TestTransformationProcessor(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
 
-        cls.bib_record_dimension_sample_data = bib_record_dimension_sample_data.bib_rec_sample_data
+        cls.bib_record_dimension_sample_data_z00 = bib_record_dimension_sample_data.bib_rec_sample_data_z00
+        cls.bib_record_dimension_sample_data_z13 = bib_record_dimension_sample_data.bib_rec_sample_data_z13
+        cls.bib_record_dimension_sample_data_z13u = bib_record_dimension_sample_data.bib_rec_sample_data_z13u
 
         cls.logger = test_logger.logger
 
         with open('table_config/bibliographic_record_dimension.json') as json_file:
             cls.bib_rec_sample_json_config = json.load(json_file)
+            
+        with dwetl.test_database_session() as session:
+            cls.error_writer= SqlAlchemyWriter(session, dwetl.Base.classes.dw_db_errors)
+
 
     def test_get_transformations_for_key(self):
         key = 'dq_z00_doc_number'
@@ -60,13 +68,13 @@ class TestTransformationProcessor(unittest.TestCase):
     def test_transform_bib_rec_z00(self):
 
         # dq check the sample data first before transforming
-        reader = ListReader(self.bib_record_dimension_sample_data)
+        reader = ListReader(self.bib_record_dimension_sample_data_z00)
         writer = ListWriter()
         job_info = JobInfo(-1, 'test_user', '1', '1')
         pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name',
                    'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
         data_quality_processor = DataQualityProcessor(
-            reader, writer, job_info, self.logger, self.bib_rec_sample_json_config, pk_list)
+            reader, writer, job_info, self.logger, self.bib_rec_sample_json_config, pk_list, self.error_writer)
         data_quality_processor.execute()
         bib_rec_dq_results = data_quality_processor.writer.list
         
@@ -83,7 +91,7 @@ class TestTransformationProcessor(unittest.TestCase):
                    'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
 
         transformation_processor = TransformationProcessor(
-            reader, writer, job_info, self.logger, self.bib_rec_sample_json_config, pk_list)
+            reader, writer, job_info, self.logger, self.bib_rec_sample_json_config, pk_list, self.error_writer)
 
 
         transformation_processor.execute()
@@ -113,13 +121,13 @@ class TestTransformationProcessor(unittest.TestCase):
     def test_transform_bib_rec_z13u(self):
         
         # dq check the sample data first before transforming
-        reader = ListReader(self.bib_record_dimension_sample_data)
+        reader = ListReader(self.bib_record_dimension_sample_data_z13u)
         writer = ListWriter()
         job_info = JobInfo(-1, 'test_user', '1', '1')
         pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name',
                    'in_z13u_rec_key', 'em_create_dw_prcsng_cycle_id']
         data_quality_processor = DataQualityProcessor(
-            reader, writer, job_info, self.logger, self.bib_rec_sample_json_config, pk_list)
+            reader, writer, job_info, self.logger, self.bib_rec_sample_json_config, pk_list, self.error_writer)
         data_quality_processor.execute()
         bib_rec_dq_results = data_quality_processor.writer.list
         
@@ -134,13 +142,11 @@ class TestTransformationProcessor(unittest.TestCase):
                    'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
 
         transformation_processor = TransformationProcessor(
-            reader, writer, job_info, self.logger, self.bib_rec_sample_json_config, pk_list)
+            reader, writer, job_info, self.logger, self.bib_rec_sample_json_config, pk_list, self.error_writer)
 
 
         transformation_processor.execute()
         results = transformation_processor.writer.list
-        
-        pdb.set_trace()
 
         expected_keys = sorted([
             'db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'em_update_dw_job_exectn_id', 'em_update_dw_job_name',
