@@ -17,7 +17,7 @@ def load_table_config(table_config_path):
     with open(table_config_path) as f:
         table_config = json.load(f)
     return table_config
-    
+
 def stage_2_intertable_processing(job_info, logger, stg_2_table_config_mapping, db_session_creator):
     print("Stage 2 Intertable Processing...")
     logger.info("Stage 2 Intertable Processing...")
@@ -58,15 +58,15 @@ def stage_2_intertable_processing(job_info, logger, stg_2_table_config_mapping, 
             data_quality_checker = DataQualityProcessor(reader, writer, job_info, logger, json_config, pk_list, error_writer)
             data_quality_checker.execute()
             print('data quality checking complete.')
-            
+
             '''
             Transformations
             '''
             print("... transformations")
             logger.info("... transformations")
-            transformation_processor = TransformationProcessor(reader, writer, job_info, logger, json_config, pk_list)
-            transformation_processor.execute()
-    
+            transformation_processor = TransformationProcessor(reader, writer, job_info, logger, json_config, pk_list, error_writer)
+            #transformation_processor.execute()
+
 
 '''
 main function for running script from the command line
