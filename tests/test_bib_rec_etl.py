@@ -245,7 +245,7 @@ class TestBibRecEtl(unittest.TestCase):
                     for key in item.__dict__.keys():
                         # create message for later to print when tests fail
                         message = f'Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} test.'
-                        import pdb; pdb.set_trace()
+                        #import pdb; pdb.set_trace()
                         if key[:2] == 'dq':
                             # check dq values and special cases
                             in_key = 'in_'+'_'.join(key.split('_')[1:])
@@ -293,7 +293,7 @@ class TestBibRecEtl(unittest.TestCase):
                             # for all other values make sure the pp value equals the dq value
                             self.assertEqual(pp_value, dq_value, message)
 
-    def test_bib_rec_stage_2_tr(self):
+    def test_bib_rec_stage_2_t(self):
         # check to see if dq values are written
         with dwetl.test_database_session() as session:
 
@@ -315,8 +315,7 @@ class TestBibRecEtl(unittest.TestCase):
                     for key in item.__dict__.keys():
                         # create message for later to print when tests fail
                         message = f'Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} test.'
-                        import pdb; pdb.set_trace()
-                        if key[:2] == 'dq':
+                        if key[:2] == 't_':
                             # check dq values and special cases
                             in_key = 'in_'+'_'.join(key.split('_')[1:])
                             pp_key = in_key.replace('in_', 'pp_')

@@ -5,6 +5,14 @@ import datetime
 import pdb
 import pprint
 
+
+# utility class to hold dq failure info
+class TransformationFailure:
+    def __init__(self, out_dict, error):
+        self.out_dict = out_dict
+        self.error = error
+
+
 class TransformationProcessor(Processor):
     '''
     Processor for running transform functions

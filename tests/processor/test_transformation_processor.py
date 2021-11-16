@@ -150,11 +150,6 @@ class TestTransformationProcessor(unittest.TestCase):
 
         transformation_processor.execute()
         results = transformation_processor.writer.list
-<<<<<<< HEAD
-
-        pdb.set_trace()
-=======
->>>>>>> 3ad60b502cb9b0e43882f72c0ecba9821ca91181
 
         expected_keys = sorted([
             'db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'em_update_dw_job_exectn_id', 'em_update_dw_job_name',
