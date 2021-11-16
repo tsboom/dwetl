@@ -5,6 +5,14 @@ import datetime
 import pdb
 import pprint
 
+
+# utility class to hold dq failure info
+class TransformationFailure:
+    def __init__(self, out_dict, error):
+        self.out_dict = out_dict
+        self.error = error
+
+
 class TransformationProcessor(Processor):
     '''
     Processor for running transform functions
@@ -59,7 +67,7 @@ class TransformationProcessor(Processor):
                 # dont' do anything for suspended records
                 continue
 
-            # get transformations for current key
+            # get list of transformations for current key
             transform_steps = TransformationProcessor.get_transformations_for_key(key, json_config)
 
             # transform

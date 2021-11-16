@@ -7,7 +7,7 @@ specific transform functions that are used in more than one dimension
 
 # substring based on start and end index
 def substring(field, start, end):
-    output = field.value[int(start):int(end)]
+    output = field[int(start):int(end)]
     return output
 
 # return 'Standard'
@@ -41,12 +41,12 @@ def issn_code_022(field):
 
 # source field Z13U_USER_DEFINED_2
 def remove_ocm_ocn_on(field):
-    if field.value[0:3] == "ocm":
-        return field.value[3:]
-    elif field.value[0:3] == "ocn":
-        return field.value[3:]
-    elif field.value[0:2] == "on":
-        return field.value[2:]
+    if field[0:3] == "ocm":
+        return field[3:]
+    elif field[0:3] == "ocn":
+        return field[3:]
+    elif field[0:2] == "on":
+        return field[2:]
 
 
 
@@ -56,7 +56,7 @@ def remove_ocm_ocn_on(field):
 # LBRY_HOLDING_DISPLAY_SUPPRESSED_FLAG
 # BIB_REC_DISPLAY_SUPPRESSED_FLAG
 def is_suppressed(field):
-    if "SUPPRESSED" in field.value.upper():
+    if "SUPPRESSED" in field.upper():
         return "Y"
     else:
         return "N"
@@ -67,21 +67,21 @@ def is_suppressed(field):
 # BIB_REC_CIRCULATION_CREATED_FLAG
 # BIB_REC_PROVISIONAL_STATUS_FLAG
 def is_acq_created(field):
-    if "ACQ-CREATED" in field.value.upper():
+    if "ACQ-CREATED" in field.upper():
         return 'Y'
     else:
         return 'N'
 #^^^ not sure what 'N' conditions should be, but I tested 'not-acq-created' and it passed. I imagine it is the same with the other check functions. Just a thought...
 
 def is_circ_created(field):
-    if "CIRC-CREATED" in field.value.upper():
+    if "CIRC-CREATED" in field.upper():
         return 'Y'
     else:
         return 'N'
 
 
 def is_provisional(field):
-    if "PROVISIONAL" in field.value.upper():
+    if "PROVISIONAL" in field.upper():
         return 'Y'
     else:
         return 'N'
@@ -93,7 +93,7 @@ def sub_look_up(field, ref, start=0, end=None):
     with open(ref, 'r') as f:
         lookup_table = csv.reader(f)
         for (key,value) in lookup_table:
-            if field.value[start:end] in key:
+            if field[start:end] in key:
                 return value
 #^^^ what substring will we be checking against, I'm not clear.
 

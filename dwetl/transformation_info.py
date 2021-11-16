@@ -1,4 +1,4 @@
-import dwetl.data_quality_utilities as dqu
+import dwetl.specific_transform_functions as transform_functions
 from functools import partial
 import pdb
 
@@ -52,7 +52,7 @@ class TransformationInfo:
             actual_params = None
 
         try:
-            f = getattr(dqu, function_name)
+            f = getattr(transform_functions, function_name)
             if actual_params is not None:
                 # Note: partial works if is_valid_length arguments are reversed
                 # return partial(f, *actual_params)
@@ -62,4 +62,4 @@ class TransformationInfo:
             else:
                 return f
         except AttributeError:
-            print(f"function_name '{function_name}' is not a valid data quality action")
+            print(f"function_name '{function_name}' is not a valid transform action")

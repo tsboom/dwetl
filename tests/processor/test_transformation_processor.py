@@ -102,7 +102,7 @@ class TestTransformationProcessor(unittest.TestCase):
 
         expected_keys = sorted([
             'db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'em_update_dw_job_exectn_id', 'em_update_dw_job_name',
-            'em_update_dw_job_version_no', 'em_update_dw_prcsng_cycle_id', 'em_update_tmstmp', 'em_update_user_id',
+            'em_update_dw_job_version_no', 'em_create_dw_prcsng_cycle_id','em_update_dw_prcsng_cycle_id', 'em_update_tmstmp', 'em_update_user_id',
             'in_z00_doc_number'
         ])
 
@@ -111,14 +111,16 @@ class TestTransformationProcessor(unittest.TestCase):
 
         self.assertEqual('TransformationProcessor', results[0]['em_update_dw_job_name'])
 
+        # test first item from sample data 
+        self.assertEqual
+        
+        
         # the third item in results has successful transforms
         self.assertEqual('', results[2]['t1_z00_data__bib_rec_marc_rec_data_cntnt_txt'])
         self.assertEqual('001970',results[2]['t1_z00_data_len__bib_rec_marc_rec_data_cntnt_len_cnt'] )
         self.assertEqual('000053939', results[2]['t1_z00_doc_number__bib_rec_source_system_id'])
 
-        # # fourth index sample data item tests z13_open_date date format
-        # self.assertEqual(None, results[3]['t1_z13_open_date__bib_rec_create_dt'])
-        # self.assertEqual(None, results[4]['t1_z13_open_date__bib_rec_create_dt'])
+
 
 
     def test_transform_bib_rec_z13u(self):
@@ -133,7 +135,6 @@ class TestTransformationProcessor(unittest.TestCase):
             reader, writer, job_info, self.logger, self.bib_rec_sample_json_config, pk_list, self.error_writer)
         data_quality_processor.execute()
         bib_rec_dq_results = data_quality_processor.writer.list
-
 
         # do the transformation process using the bib_rec_dq_results
         reader = ListReader(bib_rec_dq_results)
@@ -152,21 +153,53 @@ class TestTransformationProcessor(unittest.TestCase):
         results = transformation_processor.writer.list
 
         expected_keys = sorted([
-            'db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'em_update_dw_job_exectn_id', 'em_update_dw_job_name',
-            'em_update_dw_job_version_no', 'em_update_dw_prcsng_cycle_id', 'em_update_tmstmp', 'em_update_user_id',
-            'in_z00_doc_number'
+            'db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'em_create_dw_prcsng_cycle_id', 
+            't1_z13u_user_defined_2__bib_rec_oclc_no', 't1_z13u_user_defined_3__bib_rec_marc_rec_leader_field_txt', 
+            't2_z13u_user_defined_3__bib_rec_type_cd', 't3_z13u_user_defined_3__bib_rec_type_desc', 
+            't4_z13u_user_defined_3__bib_rec_bib_lvl_cd', 't5_z13u_user_defined_3__bib_rec_bib_lvl_desc', 
+            't6_z13u_user_defined_3__bib_rec_encoding_lvl_cd', 't7_z13u_user_defined_3__bib_rec_encoding_lvl_desc', 
+            't1_z13u_user_defined_4__bib_rec_marc_rec_008_field_txt', 't2_z13u_user_defined_4__bib_rec_language_cd', 
+            't1_z13u_user_defined_5__bib_rec_issn', 't1_z13u_user_defined_6__bib_rec_display_suppressed_flag', 
+            't2_z13u_user_defined_6__bib_rec_acquisition_created_flag', 
+            't3_z13u_user_defined_6__bib_rec_circulation_created_flag', 
+            't4_z13u_user_defined_6__bib_rec_provisional_status_flag', 
+            'em_update_dw_prcsng_cycle_id', 'em_update_user_id', 
+            'em_update_dw_job_exectn_id', 'em_update_dw_job_version_no', 
+            'em_update_dw_job_name', 'em_update_tmstmp'
         ])
-        #
-        # self.assertEqual(expected_keys, sorted(list(results[0].keys())))
-        # self.assertEqual(expected_keys, sorted(list(results[1].keys())))
-        #
-        # self.assertEqual('TransformationProcessor', results[0]['em_update_dw_job_name'])
-        #
-        # # the third item in results has successful transforms
+
+        # make sure expected keys are in the results for an item
+        self.assertEqual(expected_keys, sorted(list(results[0].keys())))
+        self.assertEqual('TransformationProcessor', results[0]['em_update_dw_job_name'])
+        
+        # check each transformation for items in results
+        # first item
+        self.assertEqual('00001605', results[0]['t1_z13u_user_defined_2__bib_rec_oclc_no'])
+        #TODO: ask david if these are right expected results 
+        self.assertEqual('a', results[0]['t1_z13u_user_defined_3__bib_rec_marc_rec_leader_field_txt'])
+        self.assertEqual('m', results[0]['t2_z13u_user_defined_3__bib_rec_type_cd'])
+        self.assertEqual('m', results[0]['t3_z13u_user_defined_3__bib_rec_bib_lvl_cd'])
+        self.assertEqual('m', results[0]['t4_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
+
+        
+        # t3_z13u_user_defined_3__bib_rec_bib_lvl_cd
+        # t4_z13u_user_defined_3__bib_rec_encoding_lvl_cd
+        # 
+        # 
+        # t1_z13u_user_defined_4__bib_rec_marc_rec_008_field_txt
+        # t2_z13u_user_defined_4__bib_rec_language_cd
+        # 
+        # t1_z13u_user_defined_5__bib_rec_issn
+        # 
+        # t1_z13u_user_defined_6__bib_rec_display_suppressed_flag
+        # t2_z13u_user_defined_6__bib_rec_acquisition_created_flag
+        # t3_z13u_user_defined_6__bib_rec_circulation_created_flag
+        # t4_z13u_user_defined_6__bib_rec_provisional_status_flag
+        # 
         # self.assertEqual('', results[2]['t1_z00_data__bib_rec_marc_rec_data_cntnt_txt'])
         # self.assertEqual('001970',results[2]['t1_z00_data_len__bib_rec_marc_rec_data_cntnt_len_cnt'] )
         # self.assertEqual('000053939', results[2]['t1_z00_doc_number__bib_rec_source_system_id'])
-
+        # 
         # # fourth index sample data item tests z13_open_date date format
         # self.assertEqual(None, results[3]['t1_z13_open_date__bib_rec_create_dt'])
         # self.assertEqual(None, results[4]['t1_z13_open_date__bib_rec_create_dt'])
