@@ -27,14 +27,15 @@ class TestTransformationProcessor(unittest.TestCase):
 
         cls.logger = test_logger.logger
         with dwetl.test_database_session() as session:
-            cls.error_writer= SqlAlchemyWriter(session, dwetl.Base.classes.dw_db_errors)
+            cls.error_writer = SqlAlchemyWriter(
+                session, dwetl.Base.classes.dw_db_errors)
 
         with open('table_config/bibliographic_record_dimension.json') as json_file:
             cls.bib_rec_sample_json_config = json.load(json_file)
 
         with dwetl.test_database_session() as session:
-            cls.error_writer= SqlAlchemyWriter(session, dwetl.Base.classes.dw_db_errors)
-
+            cls.error_writer = SqlAlchemyWriter(
+                session, dwetl.Base.classes.dw_db_errors)
 
     def test_get_transformations_for_key(self):
         key = 'dq_z00_doc_number'
@@ -65,6 +66,125 @@ class TestTransformationProcessor(unittest.TestCase):
                 }
             }
         ]
+        self.assertEqual(expected_result, result)
+
+        # test z13u_user_defined_3
+        key = 'dq_z13u_user_defined_3'
+        result = TransformationProcessor.get_transformations_for_key(
+            key, json_config)
+
+        expected_result = [{'target_attribute': '- Bibliographic Record MARC Record Leader Field Text',
+          'target_col_name': 'bib_rec_marc_rec_leader_field_txt',
+          'target_data_type': 'VarChar(50)',
+          'transformation_info': {'action_detailed_instructions': '',
+                                  'action_specific': 'As-is',
+                                  'aleph_table': 'Z13U',
+                                  'chg_proc_type': '1',
+                                  'source_col_name': 'z13u_user_defined_3',
+                                  'source_data_type': 'VARCHAR2(500)',
+                                  'source_format': '',
+                                  'source_mandatory': 'N',
+                                  'specific_transform_function': '',
+                                  'specific_transform_function_param1': '',
+                                  'specific_transform_function_param2': '',
+                                  'transform_action': 'Move'}},
+         {'target_attribute': '- Bibliographic Record Type Code',
+          'target_col_name': 'bib_rec_type_cd',
+          'target_data_type': 'Character(1)',
+          'transformation_info': {'action_detailed_instructions': 'substr(z13u_user_defined_3,7,1)',
+                                  'action_specific': 'Sub-String',
+                                  'aleph_table': 'Z13U',
+                                  'chg_proc_type': '1',
+                                  'source_col_name': 'z13u_user_defined_3',
+                                  'source_data_type': 'VARCHAR2(500)',
+                                  'source_format': '',
+                                  'source_mandatory': 'N',
+                                  'specific_transform_function': 'substring',
+                                  'specific_transform_function_param1': '6',
+                                  'specific_transform_function_param2': '7',
+                                  'transform_action': 'Move'}},
+         {'target_attribute': '- Bibliographic Record Type Description',
+          'target_col_name': 'bib_rec_type_desc',
+          'target_data_type': 'VarChar(100)',
+          'transformation_info': {'action_detailed_instructions': 'Look up description '
+                                                                  'based on '
+                                                                  'substr(z13u_user_defined_3,7,1)',
+                                  'action_specific': 'Related Value',
+                                  'aleph_table': 'Lookup (record_type_code.csv)',
+                                  'chg_proc_type': 'N/A',
+                                  'source_col_name': 'z13u_user_defined_3',
+                                  'source_data_type': 'N/A',
+                                  'source_format': 'N/A',
+                                  'source_mandatory': 'N',
+                                  'specific_transform_function': '',
+                                  'specific_transform_function_param1': '',
+                                  'specific_transform_function_param2': '',
+                                  'transform_action': 'Lookup'}},
+         {'target_attribute': '- Bibliographic Record Bibliographic Level Code',
+          'target_col_name': 'bib_rec_bib_lvl_cd',
+          'target_data_type': 'Character(1)',
+          'transformation_info': {'action_detailed_instructions': 'substr(z13u_user_defined_3,8,1)',
+                                  'action_specific': 'Sub-String',
+                                  'aleph_table': 'Z13U',
+                                  'chg_proc_type': '1',
+                                  'source_col_name': 'z13u_user_defined_3',
+                                  'source_data_type': 'VARCHAR2(500)',
+                                  'source_format': '',
+                                  'source_mandatory': 'N',
+                                  'specific_transform_function': 'substring',
+                                  'specific_transform_function_param1': '7',
+                                  'specific_transform_function_param2': '8',
+                                  'transform_action': 'Move'}},
+         {'target_attribute': '- Bibliographic Record Bibliographic Level Description',
+          'target_col_name': 'bib_rec_bib_lvl_desc',
+          'target_data_type': 'VarChar(100)',
+          'transformation_info': {'action_detailed_instructions': 'Look up description '
+                                                                  'based on '
+                                                                  'substr(z13u_user_defined_3,8,1)',
+                                  'action_specific': 'Related Value',
+                                  'aleph_table': 'Lookup (bibliographic_level.csv)',
+                                  'chg_proc_type': 'N/A',
+                                  'source_col_name': 'z13u_user_defined_3',
+                                  'source_data_type': 'N/A',
+                                  'source_format': 'N/A',
+                                  'source_mandatory': 'N',
+                                  'specific_transform_function': '',
+                                  'specific_transform_function_param1': '',
+                                  'specific_transform_function_param2': '',
+                                  'transform_action': 'Lookup'}},
+         {'target_attribute': '- Bibliographic Record Encoding Level Code',
+          'target_col_name': 'bib_rec_encoding_lvl_cd',
+          'target_data_type': 'Character(1)',
+          'transformation_info': {'action_detailed_instructions': 'substr(z13u_user_defined_3,18,1)',
+                                  'action_specific': 'Sub-String',
+                                  'aleph_table': 'Z13U',
+                                  'chg_proc_type': '1',
+                                  'source_col_name': 'z13u_user_defined_3',
+                                  'source_data_type': 'VARCHAR2(500)',
+                                  'source_format': '',
+                                  'source_mandatory': 'N',
+                                  'specific_transform_function': 'substring',
+                                  'specific_transform_function_param1': '17',
+                                  'specific_transform_function_param2': '18',
+                                  'transform_action': 'Move'}},
+         {'target_attribute': '- Bibliographic Record Encoding Level Description',
+          'target_col_name': 'bib_rec_encoding_lvl_desc',
+          'target_data_type': 'VarChar(150)',
+          'transformation_info': {'action_detailed_instructions': 'Look up description '
+                                                                  'based on '
+                                                                  'substr(z13u_user_defined_3,18,1)',
+                                  'action_specific': 'Related Value',
+                                  'aleph_table': 'Lookup (encoding_level.csv)',
+                                  'chg_proc_type': 'N/A',
+                                  'source_col_name': 'z13u_user_defined_3',
+                                  'source_data_type': 'N/A',
+                                  'source_format': 'N/A',
+                                  'source_mandatory': 'N',
+                                  'specific_transform_function': '',
+                                  'specific_transform_function_param1': '',
+                                  'specific_transform_function_param2': '',
+                                  'transform_action': 'Lookup'}}]
+        
         self.assertEqual(expected_result, result)
 
 
@@ -175,11 +295,15 @@ class TestTransformationProcessor(unittest.TestCase):
         # check each transformation for items in results
         # first item
         self.assertEqual('00001605', results[0]['t1_z13u_user_defined_2__bib_rec_oclc_no'])
-        #TODO: ask david if these are right expected results 
-        self.assertEqual('a', results[0]['t1_z13u_user_defined_3__bib_rec_marc_rec_leader_field_txt'])
-        self.assertEqual('m', results[0]['t2_z13u_user_defined_3__bib_rec_type_cd'])
-        self.assertEqual('m', results[0]['t3_z13u_user_defined_3__bib_rec_bib_lvl_cd'])
-        self.assertEqual('m', results[0]['t4_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
+        # TODO: ask david if these are right expected results for user defined 3
+        self.assertEqual('^^^^^nam^^2200241d1^45^0', results[0]['t1_z13u_user_defined_3__bib_rec_marc_rec_leader_field_txt'])
+        self.assertEqual('a', results[0]['t2_z13u_user_defined_3__bib_rec_type_cd'])
+        self.assertEqual('Language material', results[0]['t3_z13u_user_defined_3__bib_rec_type_desc'])
+        self.assertEqual('m', results[0]['t4_z13u_user_defined_3__bib_rec_bib_lvl_cd'])
+        self.assertEqual('Monograph/Item', results[0]['t5_z13u_user_defined_3__bib_rec_bib_lvl_desc'])
+        self.assertEqual('1', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
+        self.assertEqual('Full-level, material not examined.', results[0]['t7_z13u_user_defined_3__bib_rec_encoding_lvl_desc'])
+
 
         
         # t3_z13u_user_defined_3__bib_rec_bib_lvl_cd
