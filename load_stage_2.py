@@ -57,8 +57,8 @@ def load_stage_2(job_info, logger, stage1_to_stage2_table_mapping, db_session_cr
             stg_2_count = session.query(stage2_table_class).filter(stage2_table_class.em_create_dw_prcsng_cycle_id==job_info.prcsng_cycle_id).count()
             loaded_record_count = loaded_record_count + stg_2_count
     
-    logger.info(f'Total number of records loaded in stage 2: {loaded_record_count}\n')
-    print(f'Total number of records loaded in stage 2: {loaded_record_count}\n')
+    logger.info(f'Total records loaded in stage 2: {loaded_record_count}\n')
+    print(f'Total records loaded in stage 2: {loaded_record_count}\n')
             
 
             
