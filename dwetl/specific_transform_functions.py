@@ -1,5 +1,6 @@
 import pdb
 import csv
+import dwetl
 
 '''
 specific transform functions that are used in more than one dimension
@@ -59,6 +60,28 @@ def lookup_record_type(value):
         lookup_table = csv.reader(f)
         for key, value in lookup_table: 
             if key == record_type_code:
+                return value
+                
+# source value z13u_user_defined_3, translate bib level to description
+def lookup_bibliographic_level(value):
+    # first take substring from index 7-8
+    bib_level = value[7:8]
+    # translate bibliographic level code to description 
+    with open('lookup_tables/bibliographic_level.csv', 'r') as f:
+        lookup_table = csv.reader(f)
+        for key, value in lookup_table: 
+            if key == bib_level:
+                return value
+                
+# source value z13u_user_defined_3, translate encoding level to description
+def lookup_encoding_level(value):
+    # first take substring from index 7-8
+    encoding_level = value[17:18]
+    # translate bibliographic level code to description 
+    with open('lookup_tables/encoding_level.csv', 'r') as f:
+        lookup_table = csv.reader(f)
+        for key, value in lookup_table:
+            if key == encoding_level:
                 return value
                 
 
