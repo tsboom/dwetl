@@ -61,7 +61,7 @@ class TransformationProcessor(Processor):
 
             # get transformations for current key
             transform_steps = TransformationProcessor.get_transformations_for_key(key, json_config)
-            import pdb; pdb.set_trace()
+
             # transform
             if transform_steps:
                 for transformation in transform_steps:
