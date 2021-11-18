@@ -80,7 +80,7 @@ class TransformationProcessor(Processor):
                     # get index of current transformation (for t1, t2, etc)
                     index = transform_steps.index(transformation)
                     transform_number = index + 1
-
+                    
                     # run transformation
                     transform_result = transformation_info.transform(val)
 
@@ -92,7 +92,6 @@ class TransformationProcessor(Processor):
 
                     # write to outdict
                     out_dict[transform_column_name] = transform_result
-
         return out_dict
 
 

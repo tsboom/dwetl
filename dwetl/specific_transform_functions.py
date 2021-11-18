@@ -58,7 +58,7 @@ def lookup_record_type(value):
     # translate record type code to description 
     with open('lookup_tables/record_type_code.csv', 'r') as f:
         lookup_table = csv.reader(f)
-        for key, value in lookup_table: 
+        for key, value in lookup_table:
             if key == record_type_code:
                 return value
                 
