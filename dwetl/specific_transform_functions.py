@@ -26,16 +26,16 @@ bibliographic record dimension transform functions
 
 # # source value Z13_ISBN_ISSN using optional_isbn_code
 def isbn_code_020(value):
-    if value.isbn_issn_code == '020':
-        isbn_issn = value.value
+    if value[0:3] == '020':
+        isbn_issn = value
     else:
         # Alex says "treat as empty value" not sure if this is empty string or None
         isbn_issn = ''
     return isbn_issn
 
 def issn_code_022(value):
-    if value.isbn_issn_code == '022':
-        isbn_issn = value.value
+    if value[0:3] == '022':
+        isbn_issn = value
     else:
         isbn_issn = ''
     return isbn_issn
@@ -49,7 +49,6 @@ def remove_ocm_ocn_on(value):
         return value[3:]
     elif value[0:2] == "on":
         return value[2:]
-
 
 # source value z13u_user_defined_3, translate record type to record description
 def lookup_record_type(value):
