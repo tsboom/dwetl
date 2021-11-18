@@ -184,7 +184,7 @@ class TestTransformationProcessor(unittest.TestCase):
                                   'specific_transform_function_param1': '',
                                   'specific_transform_function_param2': '',
                                   'transform_action': 'Lookup'}}]
-        
+
         self.assertEqual(expected_result, result)
 
 
@@ -231,10 +231,10 @@ class TestTransformationProcessor(unittest.TestCase):
 
         self.assertEqual('TransformationProcessor', results[0]['em_update_dw_job_name'])
 
-        # test first item from sample data 
+        # test first item from sample data
         self.assertEqual
-        
-        
+
+
         # the third item in results has successful transforms
         self.assertEqual('', results[2]['t1_z00_data__bib_rec_marc_rec_data_cntnt_txt'])
         self.assertEqual('001970',results[2]['t1_z00_data_len__bib_rec_marc_rec_data_cntnt_len_cnt'] )
@@ -273,25 +273,25 @@ class TestTransformationProcessor(unittest.TestCase):
         results = transformation_processor.writer.list
 
         expected_keys = sorted([
-            'db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'em_create_dw_prcsng_cycle_id', 
-            't1_z13u_user_defined_2__bib_rec_oclc_no', 't1_z13u_user_defined_3__bib_rec_marc_rec_leader_field_txt', 
-            't2_z13u_user_defined_3__bib_rec_type_cd', 't3_z13u_user_defined_3__bib_rec_type_desc', 
-            't4_z13u_user_defined_3__bib_rec_bib_lvl_cd', 't5_z13u_user_defined_3__bib_rec_bib_lvl_desc', 
-            't6_z13u_user_defined_3__bib_rec_encoding_lvl_cd', 't7_z13u_user_defined_3__bib_rec_encoding_lvl_desc', 
-            't1_z13u_user_defined_4__bib_rec_marc_rec_008_field_txt', 't2_z13u_user_defined_4__bib_rec_language_cd', 
-            't1_z13u_user_defined_5__bib_rec_issn', 't1_z13u_user_defined_6__bib_rec_display_suppressed_flag', 
-            't2_z13u_user_defined_6__bib_rec_acquisition_created_flag', 
-            't3_z13u_user_defined_6__bib_rec_circulation_created_flag', 
-            't4_z13u_user_defined_6__bib_rec_provisional_status_flag', 
-            'em_update_dw_prcsng_cycle_id', 'em_update_user_id', 
-            'em_update_dw_job_exectn_id', 'em_update_dw_job_version_no', 
+            'db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'em_create_dw_prcsng_cycle_id',
+            't1_z13u_user_defined_2__bib_rec_oclc_no', 't1_z13u_user_defined_3__bib_rec_marc_rec_leader_field_txt',
+            't2_z13u_user_defined_3__bib_rec_type_cd', 't3_z13u_user_defined_3__bib_rec_type_desc',
+            't4_z13u_user_defined_3__bib_rec_bib_lvl_cd', 't5_z13u_user_defined_3__bib_rec_bib_lvl_desc',
+            't6_z13u_user_defined_3__bib_rec_encoding_lvl_cd', 't7_z13u_user_defined_3__bib_rec_encoding_lvl_desc',
+            't1_z13u_user_defined_4__bib_rec_marc_rec_008_field_txt', 't2_z13u_user_defined_4__bib_rec_language_cd',
+            't1_z13u_user_defined_5__bib_rec_issn', 't1_z13u_user_defined_6__bib_rec_display_suppressed_flag',
+            't2_z13u_user_defined_6__bib_rec_acquisition_created_flag',
+            't3_z13u_user_defined_6__bib_rec_circulation_created_flag',
+            't4_z13u_user_defined_6__bib_rec_provisional_status_flag',
+            'em_update_dw_prcsng_cycle_id', 'em_update_user_id',
+            'em_update_dw_job_exectn_id', 'em_update_dw_job_version_no',
             'em_update_dw_job_name', 'em_update_tmstmp'
         ])
 
         # make sure expected keys are in the results for an item
         self.assertEqual(expected_keys, sorted(list(results[0].keys())))
         self.assertEqual('TransformationProcessor', results[0]['em_update_dw_job_name'])
-        
+
         # check each transformation for items in results
         # first item
         self.assertEqual('00001605', results[0]['t1_z13u_user_defined_2__bib_rec_oclc_no'])
@@ -301,29 +301,60 @@ class TestTransformationProcessor(unittest.TestCase):
         self.assertEqual('Language material', results[0]['t3_z13u_user_defined_3__bib_rec_type_desc'])
         self.assertEqual('m', results[0]['t4_z13u_user_defined_3__bib_rec_bib_lvl_cd'])
         self.assertEqual('Monograph/Item', results[0]['t5_z13u_user_defined_3__bib_rec_bib_lvl_desc'])
+
         # self.assertEqual('d', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
         # self.assertEqual('Full-level, material not examined.', results[0]['t7_z13u_user_defined_3__bib_rec_encoding_lvl_desc'])
 
 
-        
+
+        self.assertEqual('', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
+        self.assertEqual('Full-level by authorized national bibliographic agencies and libraries participating in PCC (BIBCO and CONSER).', results[0]['t7_z13u_user_defined_3__bib_rec_encoding_lvl_desc'])
+        self.assertEqual('1', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
+        self.assertEqual('Full-level, material not examined.', results[0]['t7_z13u_user_defined_3__bib_rec_encoding_lvl_desc'])
+        self.assertEqual('2', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
+        self.assertEqual('Less-than-full level, material not examined.', results[0]['t7_z13u_user_defined_3__bib_rec_encoding_lvl_desc'])
+        self.assertEqual('3', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
+        self.assertEqual('Abbreviated level.', results[0]['t7_z13u_user_defined_3__bib_rec_encoding_lvl_desc'])
+        self.assertEqual('4', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
+        self.assertEqual('Core-level.', results[0]['t7_z13u_user_defined_3__bib_rec_encoding_lvl_desc'])
+        self.assertEqual('5', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
+        self.assertEqual('Partial (preliminary) level.', results[0]['t7_z13u_user_defined_3__bib_rec_encoding_lvl_desc'])
+        self.assertEqual('7', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
+        self.assertEqual('Minimal-level.', results[0]['t7_z13u_user_defined_3__bib_rec_encoding_lvl_desc'])
+        self.assertEqual('8', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
+        self.assertEqual('Prepublication level.', results[0]['t7_z13u_user_defined_3__bib_rec_encoding_lvl_desc'])
+        self.assertEqual('I', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
+        self.assertEqual('Full-level input by OCLC participants.', results[0]['t3_z13u_user_defined_3__bib_rec_type_desc'])
+        self.assertEqual('K', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
+        self.assertEqual('Minimal-level input by OCLC participants.', results[0]['t3_z13u_user_defined_3__bib_rec_type_desc'])
+        self.assertEqual('L', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
+        self.assertEqual('Added from a batch process.', results[0]['t3_z13u_user_defined_3__bib_rec_type_desc'])
+        self.assertEqual('M', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
+        self.assertEqual('Added from a batch process.', results[0]['t3_z13u_user_defined_3__bib_rec_type_desc'])
+        self.assertEqual('J', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
+        self.assertEqual('Deleted record.', results[0]['t3_z13u_user_defined_3__bib_rec_type_desc'])
+        self.assertEqual('u', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
+        self.assertEqual('Unknown', results[0]['t3_z13u_user_defined_3__bib_rec_type_desc'])
+        self.assertEqual('z', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
+        self.assertEqual('Not applicable', results[0]['t3_z13u_user_defined_3__bib_rec_type_desc'])
         # t3_z13u_user_defined_3__bib_rec_bib_lvl_cd
         # t4_z13u_user_defined_3__bib_rec_encoding_lvl_cd
-        # 
-        # 
+        #
+        #
         # t1_z13u_user_defined_4__bib_rec_marc_rec_008_field_txt
         # t2_z13u_user_defined_4__bib_rec_language_cd
-        # 
+        #
         # t1_z13u_user_defined_5__bib_rec_issn
-        # 
+        #
         # t1_z13u_user_defined_6__bib_rec_display_suppressed_flag
         # t2_z13u_user_defined_6__bib_rec_acquisition_created_flag
         # t3_z13u_user_defined_6__bib_rec_circulation_created_flag
         # t4_z13u_user_defined_6__bib_rec_provisional_status_flag
-        # 
+        #
         # self.assertEqual('', results[2]['t1_z00_data__bib_rec_marc_rec_data_cntnt_txt'])
         # self.assertEqual('001970',results[2]['t1_z00_data_len__bib_rec_marc_rec_data_cntnt_len_cnt'] )
         # self.assertEqual('000053939', results[2]['t1_z00_doc_number__bib_rec_source_system_id'])
-        # 
+        #
         # # fourth index sample data item tests z13_open_date date format
         # self.assertEqual(None, results[3]['t1_z13_open_date__bib_rec_create_dt'])
         # self.assertEqual(None, results[4]['t1_z13_open_date__bib_rec_create_dt'])
