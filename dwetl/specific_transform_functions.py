@@ -75,14 +75,21 @@ def lookup_bibliographic_level(value):
                 
 # source value z13u_user_defined_3, translate encoding level to description
 def lookup_encoding_level(value):
-    # first take substring from index 7-8
+    # first take substring from index 17-18
     encoding_level = value[17:18]
     # translate bibliographic level code to description 
     with open('lookup_tables/encoding_level.csv', 'r') as f:
         lookup_table = csv.reader(f)
         for key, value in lookup_table:
             if key == encoding_level:
-                return value
+                result = value
+                break
+        if result:
+            return value
+        else: 
+            return "Invalid"
+        
+            
                 
 
     
