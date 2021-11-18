@@ -26,16 +26,16 @@ bibliographic record dimension transform functions
 
 # # source value Z13_ISBN_ISSN using optional_isbn_code
 def isbn_code_020(value):
-    if value.isbn_issn_code == '020':
-        isbn_issn = value.value
+    if value[0:3] == '020':
+        isbn_issn = value
     else:
         # Alex says "treat as empty value" not sure if this is empty string or None
         isbn_issn = ''
     return isbn_issn
 
 def issn_code_022(value):
-    if value.isbn_issn_code == '022':
-        isbn_issn = value.value
+    if value[0:3] == '022':
+        isbn_issn = value
     else:
         isbn_issn = ''
     return isbn_issn
@@ -49,51 +49,47 @@ def remove_ocm_ocn_on(value):
         return value[3:]
     elif value[0:2] == "on":
         return value[2:]
-        
 
 # source value z13u_user_defined_3, translate record type to record description
 def lookup_record_type(value):
     # first take substring from index 6-7
     record_type_code = value[6:7]
-    # translate record type code to description 
+    # translate record type code to description
     with open('lookup_tables/record_type_code.csv', 'r') as f:
         lookup_table = csv.reader(f)
         for key, value in lookup_table:
             if key == record_type_code:
                 return value
-                
+
 # source value z13u_user_defined_3, translate bib level to description
 def lookup_bibliographic_level(value):
     # first take substring from index 7-8
     bib_level = value[7:8]
-    # translate bibliographic level code to description 
+    # translate bibliographic level code to description
     with open('lookup_tables/bibliographic_level.csv', 'r') as f:
         lookup_table = csv.reader(f)
-        for key, value in lookup_table: 
+        for key, value in lookup_table:
             if key == bib_level:
                 return value
-                
+
 # source value z13u_user_defined_3, translate encoding level to description
 def lookup_encoding_level(value):
     # first take substring from index 17-18
     encoding_level = value[17:18]
-    # translate bibliographic level code to description 
+    # translate bibliographic level code to description
     with open('lookup_tables/encoding_level.csv', 'r') as f:
         lookup_table = csv.reader(f)
         for key, value in lookup_table:
             if key == encoding_level:
-                result = value
-                break
-        if result:
-            return value
-        else: 
+                return value
+        else:
             return "Invalid"
-        
-            
-                
 
-    
-    
+
+
+
+
+
 
 
 

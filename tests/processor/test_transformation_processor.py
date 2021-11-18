@@ -219,7 +219,7 @@ class TestTransformationProcessor(unittest.TestCase):
 
         transformation_processor.execute()
         results = transformation_processor.writer.list
-
+        pdb.set_trace()
         expected_keys = sorted([
             'db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'em_update_dw_job_exectn_id', 'em_update_dw_job_name',
             'em_update_dw_job_version_no', 'em_create_dw_prcsng_cycle_id','em_update_dw_prcsng_cycle_id', 'em_update_tmstmp', 'em_update_user_id',
@@ -271,7 +271,7 @@ class TestTransformationProcessor(unittest.TestCase):
 
         transformation_processor.execute()
         results = transformation_processor.writer.list
-
+        pdb.set_trace()
         expected_keys = sorted([
             'db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'em_create_dw_prcsng_cycle_id',
             't1_z13u_user_defined_2__bib_rec_oclc_no', 't1_z13u_user_defined_3__bib_rec_marc_rec_leader_field_txt',
@@ -303,9 +303,10 @@ class TestTransformationProcessor(unittest.TestCase):
         self.assertEqual('Monograph/Item', results[0]['t5_z13u_user_defined_3__bib_rec_bib_lvl_desc'])
         self.assertEqual('d', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
         self.assertEqual('Invalid', results[0]['t7_z13u_user_defined_3__bib_rec_encoding_lvl_desc'])
+        self.assertEqual('Invalid', results[0]['t7_z13u_user_defined_3__bib_rec_encoding_lvl_desc'])
 
 
-        # 
+        #
         # self.assertEqual('^', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
         # self.assertEqual('Full-level by authorized national bibliographic agencies and libraries participating in PCC (BIBCO and CONSER).', results[0]['t7_z13u_user_defined_3__bib_rec_encoding_lvl_desc'])
         # self.assertEqual('1', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
