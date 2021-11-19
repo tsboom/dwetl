@@ -102,7 +102,7 @@ class TestBibRecEtl(unittest.TestCase):
         load_stage_2.load_stage_2(cls.job_info, cls.logger, cls.stage1_to_stage2_table_mapping, cls.db_session_creator)
 
         '''
-        stg 2 intertable processing
+        stg 2 intertable processing (PP, DQ, T)
         '''
         cls.stg_2_table_config_mapping = {
             'dw_stg_2_bib_rec_z00': 'bibliographic_record_dimension',
@@ -244,7 +244,7 @@ class TestBibRecEtl(unittest.TestCase):
 
                     for key in item.__dict__.keys():
                         # create message for later to print when tests fail
-                        message = f'Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} test.'
+                        message = f'Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} DQ test.'
 
                         #import pdb; pdb.set_trace()
                         if key[:2] == 'dq':
@@ -294,26 +294,28 @@ class TestBibRecEtl(unittest.TestCase):
                             # for all other values make sure the pp value equals the dq value
                             self.assertEqual(pp_value, dq_value, message)
 
-    # def test_bib_rec_stage_2_t(self):
-    #     # check to see if dq values are written
-    #     with dwetl.test_database_session() as session:
-    # 
-    #         prcsng_cycle_id = self.__class__.prcsng_cycle_id
-    # 
-    #         # check if the DQ values are written
-    #         for stg_2_table, dimension in self.__class__.stg_2_table_config_mapping.items():
-    #             stg_2_table_base_class = dwetl.Base.classes[stg_2_table]
-    #             error_table_base_class = dwetl.Base.classes['dw_db_errors']
-    # 
-    #             results = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
-    # 
-    #             # get unique ID from pk of the table
-    #             pk = stg_2_table_base_class.__table__.primary_key.columns.values()[2].name
-    # 
-    # 
-    #             for item in results.all():
-    # 
-    #                 for key in item.__dict__.keys():
-    #                     # create message for later to print when tests fail
-    #                     message = f'Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} test.'
-    #                     if key[:2] == 't_':
+    def test_bib_rec_stage_2_t(self):
+        # check to see if T values are written
+        with dwetl.test_database_session() as session:
+    
+            prcsng_cycle_id = self.__class__.prcsng_cycle_id
+    
+            # check if the DQ values are written
+            for stg_2_table, dimension in self.__class__.stg_2_table_config_mapping.items():
+                stg_2_table_base_class = dwetl.Base.classes[stg_2_table]
+                error_table_base_class = dwetl.Base.classes['dw_db_errors']
+    
+                results = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
+    
+                # get unique ID from pk of the table
+                pk = stg_2_table_base_class.__table__.primary_key.columns.values()[2].name
+    
+                for item in results.all():
+                    pdb.set_trace()
+                    for key in item.__dict__.keys():
+                        # create message for later to print when tests fail
+                        message = f'Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} transformation test.'
+                        if key[:2] == 't_':
+                            pdb.set_trace()
+                            # check T values and special cases 
+                            dq_key = 'in_'+'_'.join(key.split('_')[1:])

@@ -1,4 +1,4 @@
-import dwetl.specific_transform_functions as transform_functions
+import dwetl.specific_transform_functions as specific_transform_functions
 from functools import partial
 import pdb
 
@@ -52,7 +52,8 @@ class TransformationInfo:
             actual_params = None
 
         try:
-            f = getattr(transform_functions, function_name)
+            f = getattr(specific_transform_functions, function_name)
+            
             if actual_params is not None:
                 # Note: partial works if is_valid_length arguments are reversed
                 # return partial(f, *actual_params)
