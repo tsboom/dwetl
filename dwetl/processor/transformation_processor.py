@@ -83,7 +83,7 @@ class TransformationProcessor(Processor):
                     
                     # run transformation
                     transform_result = transformation_info.transform(val)
-
+                    
                     # form the column name to write to for t1_source_column__target_column, t2...
                     target_column = transformation_info.target_col_name
                     source_column = transformation_info.source_col_name
