@@ -116,7 +116,7 @@ if __name__=='__main__':
         today = arguments[1]
 
     # On the test and prod VM, the data directory is /apps/dw/incoming
-    # use these 3 lines on the VM in test/prod:
+    # use these 2 lines on the VM in test/prod:
     data_directory = os.getenv("DATA_DIRECTORY")
     input_directory = f'{data_directory}/incoming/{today}/'
     

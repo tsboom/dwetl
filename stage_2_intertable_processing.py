@@ -49,7 +49,7 @@ def stage_2_intertable_processing(job_info, logger, stg_2_table_config_mapping, 
             print('starting preprocessing...')
             preprocessor = Preprocess(reader, writer, job_info, logger, json_config, pk_list, error_writer)
             preprocessor.execute()
-            print('Preprocessing complete.')
+            print('Preprocessing completed.')
 
             '''
             Data Quality Checks
@@ -57,15 +57,16 @@ def stage_2_intertable_processing(job_info, logger, stg_2_table_config_mapping, 
             print('checking data quality...')
             data_quality_checker = DataQualityProcessor(reader, writer, job_info, logger, json_config, pk_list, error_writer)
             data_quality_checker.execute()
-            print('data quality checking complete.')
+            print('Data quality checks completed.')
 
             '''
             Transformations
             '''
-            print("... transformations")
-            logger.info("... transformations")
+            print("transforming...")
+            logger.info("transforming...")
             transformation_processor = TransformationProcessor(reader, writer, job_info, logger, json_config, pk_list, error_writer)
-            #transformation_processor.execute()
+            transformation_processor.execute()
+            print('Transformations completed.')
 
 
 '''
