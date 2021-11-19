@@ -197,7 +197,8 @@ class TestTransformationProcessor(unittest.TestCase):
         pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name',
                    'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
         data_quality_processor = DataQualityProcessor(
-            reader, writer, job_info, self.logger, self.bib_rec_sample_json_config, pk_list, self.error_writer)
+            reader, writer, job_info, self.logger,
+            self.bib_rec_sample_json_config, pk_list, self.error_writer)
         data_quality_processor.execute()
         bib_rec_dq_results = data_quality_processor.writer.list
 
@@ -215,11 +216,21 @@ class TestTransformationProcessor(unittest.TestCase):
                    'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
 
         transformation_processor = TransformationProcessor(
-            reader, writer, job_info, self.logger, self.bib_rec_sample_json_config, pk_list, self.error_writer)
+            reader, writer, job_info, self.logger,
+            self.bib_rec_sample_json_config, pk_list, self.error_writer)
 
 
         transformation_processor.execute()
         results = transformation_processor.writer.list
+
+        suspended_expected_keys = sorted([
+            'db_operation_cd', 'dw_stg_2_aleph_lbry_name',
+            'em_update_dw_job_exectn_id', 'em_update_dw_job_name',
+            'em_update_dw_job_version_no', 'em_create_dw_prcsng_cycle_id',
+            'em_update_dw_prcsng_cycle_id', 'em_update_tmstmp',
+            'em_update_user_id',
+            'in_z00_doc_number',
+        ])
 
 
         expected_keys = sorted([
@@ -232,25 +243,30 @@ class TestTransformationProcessor(unittest.TestCase):
             't1_z00_no_lines__bib_rec_marc_rec_field_cnt'
         ])
 
-        self.assertEqual(expected_keys, sorted(list(results[0].keys())))
-        self.assertEqual(expected_keys, sorted(list(results[1].keys())))
+        self.assertEqual(suspended_expected_keys, sorted(list(results[0].keys())))
+        self.assertEqual(suspended_expected_keys, sorted(list(results[1].keys())))
         self.assertEqual(expected_keys, sorted(list(results[2].keys())))
 
 
         # test first item from sample data
-        self.assertEqual('SUS', results[0]['t1_z00_doc_number__bib_rec_source_system_id'])
-        self.assertEqual('001970', results[0]['t1_z00_data_len__bib_rec_marc_rec_data_cntnt_len_cnt'])
-        self.assertEqual('', results[0]['t1_z00_data__bib_rec_marc_rec_data_cntnt_txt'])
-        self.assertEqual('0049', results[0]['t1_z00_no_lines__bib_rec_marc_rec_field_cnt'])
+        self.assertRaises(KeyError, lambda: results[0]['t1_z00_doc_number__bib_rec_source_system_id'])
+        self.assertRaises(KeyError, lambda: results[0]['t1_z00_data_len__bib_rec_marc_rec_data_cntnt_len_cnt'])
+        self.assertRaises(KeyError, lambda: results[0]['t1_z00_no_lines__bib_rec_marc_rec_field_cnt'])
+        self.assertRaises(KeyError, lambda: results[0]['t1_z00_doc_number__bib_rec_source_system_id'])
         self.assertEqual('TransformationProcessor', results[0]['em_update_dw_job_name'])
 
+        # test second suspended item
+        self.assertRaises(KeyError, lambda: results[1]['t1_z00_doc_number__bib_rec_source_system_id'])
+        self.assertRaises(KeyError, lambda: results[1]['t1_z00_data_len__bib_rec_marc_rec_data_cntnt_len_cnt'])
+        self.assertRaises(KeyError, lambda: results[1]['t1_z00_no_lines__bib_rec_marc_rec_field_cnt'])
+        self.assertRaises(KeyError, lambda: results[1]['t1_z00_doc_number__bib_rec_source_system_id'])
+        self.assertEqual('TransformationProcessor', results[1]['em_update_dw_job_name'])
+
         # test different cases in other items
-        self.assertEqual('SUS', results[1]['t1_z00_doc_number__bib_rec_source_system_id'])
         self.assertEqual('000053939', results[2]['t1_z00_doc_number__bib_rec_source_system_id'])
         self.assertEqual('', results[2]['t1_z00_data__bib_rec_marc_rec_data_cntnt_txt'])
         self.assertEqual('001970',results[2]['t1_z00_data_len__bib_rec_marc_rec_data_cntnt_len_cnt'] )
         self.assertEqual('TransformationProcessor', results[2]['em_update_dw_job_name'])
-        self.assertEqual('TransformationProcessor', results[1]['em_update_dw_job_name'])
 
 
     def test_transform_bib_rec_z13(self):
@@ -281,6 +297,7 @@ class TestTransformationProcessor(unittest.TestCase):
 
         transformation_processor.execute()
         results = transformation_processor.writer.list
+
 
         expected_keys = sorted([
             'db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'em_create_dw_prcsng_cycle_id',

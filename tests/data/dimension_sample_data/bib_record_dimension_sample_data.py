@@ -99,7 +99,7 @@ bib_rec_sample_data_z13 = [
         "pp_z13_author": "Hoover, Dwight W., 1926-",
         "pp_z13_open_date": "",
         "pp_z13_title": "Understanding Negro history",
-        "pp_z13_update_date" : "20130221",
+        "pp_z13_update_date": "20130221",
         "pp_z13_year": "1969",
         "pp_z13_imprint": "New York : Time-Life Books, 1970",
         "pp_z13_isbn_issn_code":"020",
