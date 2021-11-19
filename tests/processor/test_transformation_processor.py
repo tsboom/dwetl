@@ -39,12 +39,12 @@ class TestTransformationProcessor(unittest.TestCase):
 
     # def test_get_transformations_for_key(self):
     #     key = 'dq_z00_doc_number'
-    # 
+    #
     #     json_config = self.bib_rec_sample_json_config
-    # 
+    #
     #     result = TransformationProcessor.get_transformations_for_key(
     #         key, json_config)
-    # 
+    #
     #     expected_result = [
     #         {
     #             "target_col_name": "bib_rec_source_system_id",
@@ -67,12 +67,12 @@ class TestTransformationProcessor(unittest.TestCase):
     #         }
     #     ]
     #     self.assertEqual(expected_result, result)
-    # 
+    #
     #     # test z13u_user_defined_3
     #     key = 'dq_z13u_user_defined_3'
     #     result = TransformationProcessor.get_transformations_for_key(
     #         key, json_config)
-    # 
+    #
     #     expected_result = [{'target_attribute': '- Bibliographic Record MARC Record Leader Field Text',
     #       'target_col_name': 'bib_rec_marc_rec_leader_field_txt',
     #       'target_data_type': 'VarChar(50)',
@@ -184,7 +184,7 @@ class TestTransformationProcessor(unittest.TestCase):
     #                               'specific_transform_function_param1': '',
     #                               'specific_transform_function_param2': '',
     #                               'transform_action': 'Lookup'}}]
-    # 
+    #
     #     self.assertEqual(expected_result, result)
 
 
@@ -225,9 +225,9 @@ class TestTransformationProcessor(unittest.TestCase):
         expected_keys = sorted([
             'db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'em_update_dw_job_exectn_id', 'em_update_dw_job_name',
             'em_update_dw_job_version_no', 'em_create_dw_prcsng_cycle_id','em_update_dw_prcsng_cycle_id', 'em_update_tmstmp', 'em_update_user_id',
-            'in_z00_doc_number', 
+            'in_z00_doc_number',
             't1_z00_data__bib_rec_marc_rec_data_cntnt_txt',
-            't1_z00_data_len__bib_rec_marc_rec_data_cntnt_len_cnt', 
+            't1_z00_data_len__bib_rec_marc_rec_data_cntnt_len_cnt',
             't1_z00_doc_number__bib_rec_source_system_id',
             't1_z00_no_lines__bib_rec_marc_rec_field_cnt'
         ])
@@ -301,6 +301,12 @@ class TestTransformationProcessor(unittest.TestCase):
         # make sure expected keys are in the results for an item
         self.assertEqual(expected_keys, sorted(list(results[0].keys())))
         self.assertEqual('TransformationProcessor', results[0]['em_update_dw_job_name'])
+        self.assertEqual('1969', results[0]['t1_z13_year__bib_rec_publication_yr_no'])
+        self.assertEqual('20130221', results[0]['t1_z13_update_date__bib_rec_update_dt'])
+        self.assertEqual('Hoover, Dwight W., 1926-', results[0]['t1_z13_author__bib_rec_author_name'])
+        self.assertEqual(None, results[0]['t2_z13_isbn_issn__bib_rec_all_associated_issns_txt'])
+        self.assertEqual('020', results[0]['t1_z13_isbn_issn_code__bib_rec_isbn_issn_source_cd'])
+        self.assertEqual(None, results[5]['t1_z13_isbn_issn_code__bib_rec_isbn_issn_source_cd'])
 
 
 
@@ -356,7 +362,7 @@ class TestTransformationProcessor(unittest.TestCase):
         self.assertEqual('TransformationProcessor', results[0]['em_update_dw_job_name'])
 
         # check each transformation for items in results
-        # first item in sample data 
+        # first item in sample data
         self.assertEqual('00001605', results[0]['t1_z13u_user_defined_2__bib_rec_oclc_no'])
         # TODO: ask david if these are right expected results for user defined 3
         self.assertEqual('^^^^^nam^^2200241d1^45^0', results[0]['t1_z13u_user_defined_3__bib_rec_marc_rec_leader_field_txt'])
@@ -366,19 +372,12 @@ class TestTransformationProcessor(unittest.TestCase):
         self.assertEqual('Monograph/Item', results[0]['t5_z13u_user_defined_3__bib_rec_bib_lvl_desc'])
         self.assertEqual('d', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
         self.assertEqual('Invalid', results[0]['t7_z13u_user_defined_3__bib_rec_encoding_lvl_desc'])
-        
+
         # second item missing user_defined_2
         self.assertEqual('-M', results[1]['t1_z13u_user_defined_2__bib_rec_oclc_no'])
-        
+
         # third item z13u user_defined_2 is empty string
         self.assertEqual('-M', results[2]['t1_z13u_user_defined_2__bib_rec_oclc_no'])
-        
+
         # fourth z13u pp_z13u_user_defined_2 contains wrong format
         self.assertEqual('-I', results[3]['t1_z13u_user_defined_2__bib_rec_oclc_no'])
-        
-        
-
-
-
-
-
