@@ -246,7 +246,6 @@ class TestBibRecEtl(unittest.TestCase):
                         # create message for later to print when tests fail
                         message = f'Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} DQ test.'
 
-                        #import pdb; pdb.set_trace()
                         if key[:2] == 'dq':
                             # check dq values and special cases
                             in_key = 'in_'+'_'.join(key.split('_')[1:])
@@ -300,7 +299,7 @@ class TestBibRecEtl(unittest.TestCase):
     
             prcsng_cycle_id = self.__class__.prcsng_cycle_id
     
-            # check if the DQ values are written
+            # check if the T values are written by querying the stage 2 table
             for stg_2_table, dimension in self.__class__.stg_2_table_config_mapping.items():
                 stg_2_table_base_class = dwetl.Base.classes[stg_2_table]
                 error_table_base_class = dwetl.Base.classes['dw_db_errors']
