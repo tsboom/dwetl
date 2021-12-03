@@ -312,23 +312,28 @@ class TestBibRecEtl(unittest.TestCase):
 
                 for item in results.all():
                     for key in item.__dict__.keys():
+                        dq_key = 'dq_'+'_'.join(key.split('_')[1:])
+                        dq_value = item.__dict__[dq_key]
+                        
                         # create message for later to print when tests fail
                         if key[:1] == 't':
                             message = f'Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} transformation test.'
-                            dq_key = 'dq_'+'_'.join(key.split('_')[1:])
-                            #in_key = 'pp_'+'_'.join(key.split('_')[1:])
-                            #pp_key = in_key.replace('in_', 'pp_')
-                            import pdb; pdb.set_trace()
-                            dq_value = item.__dict__[dq_key]
 
-
+                            t_value = item.__dict__[key]
+                            pdb.set_trace()
+                            # #in_key = 'pp_'+'_'.join(key.split('_')[1:])
+                            # #pp_key = in_key.replace('in_', 'pp_')
+                            # import pdb; pdb.set_trace()
+                            
+                            
+                            
                             import pdb; pdb.set_trace()
                             if in_key == 'pp_z13_isbn_issn_code':
                                 pdb.set_trace()
                                 # if date comes in None, dq should be None
                                 t_check_result = dwetl.specific_transform_functions.isbn_code_020(pp_value)
                                 self.assertEqual(dq_value, None, message)
-
+                            
                                 # if it comes in a wrong date, dq should be None
                             if in_key == 'pp_z13_open_date':
                                 pdb.set_trace()
@@ -336,6 +341,6 @@ class TestBibRecEtl(unittest.TestCase):
                                 t_check_result = dwetl.specific_transform_functions.isbn_code_020(pp_value)
                             if in_ley== 'pp_z13u_user_defined_2':
                                 t_check_result = dwetl.specific_transform_functions.remove_ocm_ocn_on(pp_value)
-
+                            
                             if in_ley== 'pp_z13u_user_defined_3':
                                 t_check_result = dwetl.specific_transform_functions.lookup_record_type(pp_value)
