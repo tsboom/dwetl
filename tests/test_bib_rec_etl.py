@@ -253,16 +253,16 @@ class TestBibRecEtl(unittest.TestCase):
                             pp_key = in_key.replace('in_', 'pp_')
                             dq_value = item.__dict__[key]
                             pp_value = item.__dict__[pp_key]
-
                             if in_key == 'in_z00_doc_number':
                                 # make sure missing  are suspended
                                 if dq_value == None or dq_value.isspace():
                                     self.assertEqual(dq_value, 'SUS', message)
+                                    #pdb.set_trace()
                                 continue
                             if in_key == 'in_z13_open_date' or in_key == 'in_z13_update_date':
                                 # if date comes in None, dq should be None
                                 dq_check_result = dwetl.data_quality_utilities.no_missing_values(pp_value)
-
+                                #pdb.set_trace()
                                 if dq_check_result == False:
                                     self.assertEqual(dq_value, None, message)
                                     continue
@@ -297,25 +297,48 @@ class TestBibRecEtl(unittest.TestCase):
     def test_bib_rec_stage_2_t(self):
         # check to see if T values are written
         with dwetl.test_database_session() as session:
-    
+
             prcsng_cycle_id = self.__class__.prcsng_cycle_id
-    
+
             # check if the DQ values are written
             for stg_2_table, dimension in self.__class__.stg_2_table_config_mapping.items():
                 stg_2_table_base_class = dwetl.Base.classes[stg_2_table]
                 error_table_base_class = dwetl.Base.classes['dw_db_errors']
-    
+
                 results = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
-    
+
                 # get unique ID from pk of the table
                 pk = stg_2_table_base_class.__table__.primary_key.columns.values()[2].name
-    
+
                 for item in results.all():
-                    pdb.set_trace()
                     for key in item.__dict__.keys():
                         # create message for later to print when tests fail
                         message = f'Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} transformation test.'
-                        if key[:2] == 't_':
-                            pdb.set_trace()
-                            # check T values and special cases 
-                            dq_key = 'in_'+'_'.join(key.split('_')[1:])
+                        if key[:1] == 't':
+                            t_value = item.__dict__[key]
+                            dq_key = 'dq_'+'_'.join(key.split('_')[1:])
+                            #dq_key = in_key.replace('t1', 'dq_')
+                            #pdb.set_trace()
+                            #dq_value = item.__dict__[dq_key]
+                            # check T values and special cases
+                            in_key = 'pp_'+'_'.join(key.split('_')[1:])
+                            import pdb; pdb.set_trace()
+                            if in_key == 'pp_z13_isbn_issn_code':
+                                pdb.set_trace()
+                                # if date comes in None, dq should be None
+                                t_check_result = dwetl.specific_transform_functions.isbn_code_020(pp_value)
+                                import pdb; pdb.set_trace()
+                                if dq_check_result == False:
+                                    self.assertEqual(dq_value, None, message)
+                                    continue
+                                # if it comes in a wrong date, dq should be None
+                            if in_key == 'pp_z13_open_date':
+                                pdb.set_trace()
+                                # if date comes in None, dq should be None
+                                t_check_result = dwetl.specific_transform_functions.isbn_code_020(pp_value)
+                                import pdb; pdb.set_trace()
+                            if in_ley== 'pp_z13u_user_defined_2'
+                                t_check_result = dwetl.specific_transform_functions.remove_ocm_ocn_on(pp_value)
+
+                            if in_ley== 'pp_z13u_user_defined_3'
+                                t_check_result = dwetl.specific_transform_functions.lookup_record_type(pp_value)
