@@ -322,15 +322,18 @@ class TestBibRecEtl(unittest.TestCase):
                             #dq_value = item.__dict__[dq_key]
                             # check T values and special cases
                             in_key = 'pp_'+'_'.join(key.split('_')[1:])
+                            pp_key = in_key.replace('in_', 'pp_')
+                            pp_value = item.__dict__[pp_key]
+
+
                             import pdb; pdb.set_trace()
                             if in_key == 'pp_z13_isbn_issn_code':
                                 pdb.set_trace()
                                 # if date comes in None, dq should be None
                                 t_check_result = dwetl.specific_transform_functions.isbn_code_020(pp_value)
                                 import pdb; pdb.set_trace()
-                                if dq_check_result == False:
                                     self.assertEqual(dq_value, None, message)
-                                    continue
+
                                 # if it comes in a wrong date, dq should be None
                             if in_key == 'pp_z13_open_date':
                                 pdb.set_trace()
