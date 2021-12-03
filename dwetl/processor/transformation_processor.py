@@ -59,9 +59,11 @@ class TransformationProcessor(Processor):
             # add the pks to the out_dict so the row can be inserted later
             if key in pk_list:
                 out_dict[key] = val
-            # preserve create meta data
+                
+            # preserve create job metadata
             if key.startswith('em_create'):
                 out_dict[key] = val
+                
             # only process dq values to transform them. skip keys from invalid_keys and keys that aren't 'dq_'
             if not key.startswith('dq_'):
                 continue
