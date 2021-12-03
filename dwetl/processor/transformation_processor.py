@@ -47,6 +47,10 @@ class TransformationProcessor(Processor):
         out_dict = {}
         invalid_keys = ['rec_type_cd', 'rec_trigger_key', '_sa_instance_state']
 
+        # *special casee for bib_rec z13* capture isbn_issn_code for processing isbn_issn later
+        isbn_issn_code = None
+        
+        
         # transform keys and vals within current item
         for key, val in item.items():
 
@@ -58,7 +62,7 @@ class TransformationProcessor(Processor):
             if key in pk_list:
                 out_dict[key] = val
 
-            # only process dq values. skip keys from invalid_keys and keys that aren't 'dq_'
+            # only process dq values to transform them. skip keys from invalid_keys and keys that aren't 'dq_'
             if not key.startswith('dq_'):
                 continue
 
@@ -81,14 +85,27 @@ class TransformationProcessor(Processor):
                     index = transform_steps.index(transformation)
                     transform_number = index + 1
                     
-                    # run transformation
-                    transform_result = transformation_info.transform(val)
-                    
                     # form the column name to write to for t1_source_column__target_column, t2...
                     target_column = transformation_info.target_col_name
                     source_column = transformation_info.source_col_name
 
                     transform_column_name = f"t{transform_number}_{source_column}__{target_column}"
+                    
+                    # *special case z13 issn code 
+                    # TODO: what happens if the keys are not run in order isbn_issn_code -> isbn_issn
+                    if key == 'dq_z13_isbn_issn_code':
+                        # save the isbn issn code and go to the next key
+                        isbn_issn_code = val
+                        transform_result = transformation_info.transform(val)
+                    if key == 'dq_z13_isbn_issn':
+                        if isbn_issn_code and transform_column_name=='t1_z13_isbn_issn__bib_rec_isbn_txt':
+                            transform_result = specific_transform_functions.isbn_code_020(isbn_issn_code, val)
+    
+                        if isbn_issn_code and transform_column_name=='t2_z13_isbn_issn__bib_rec_all_associated_issns_txt':
+                            transform_result = specific_transform_functions.issn_code_022(isbn_issn_code, val)
+                    else: 
+                        # run transformation
+                        transform_result = transformation_info.transform(val)
 
                     # write to outdict
                     out_dict[transform_column_name] = transform_result

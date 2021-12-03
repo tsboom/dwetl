@@ -25,20 +25,20 @@ bibliographic record dimension transform functions
 '''
 
 # # source value Z13_ISBN_ISSN using optional_isbn_code
-def isbn_code_020(value):
-    if value[0:3] == '020':
-        isbn_issn = value
+def isbn_code_020(code, value):
+    if code[0:3] == '020':
+        isbn = value
     else:
         # TODO: Alex says "treat as empty value" not sure if this is empty string or None
-        isbn_issn = None
-    return isbn_issn
+        isbn = None
+    return isbn
 
-def issn_code_022(value):
-    if value[0:3] == '022':
-        isbn_issn = value
+def issn_code_022(code, value):
+    if code[0:3] == '022':
+        issn = value
     else:
-        isbn_issn = None
-    return isbn_issn
+        issn = None
+    return issn
 
 
 # source value Z13U_USER_DEFINED_2
