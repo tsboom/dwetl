@@ -1,7 +1,7 @@
 
-# DW ETL
+# DWETL Data Warehouse ETL
 
-Dwetl is a python program which handles the Extract Transform and Load of incremental data from Aleph tables into the UMD CLAS Data Warehouse used for reporting.
+Dwetl is a python program which handles the Extract Transform and Load of incremental data from Aleph tables and other csv sources into the UMD USMAI Data Warehouse used for querying and generating reports.
 
 This application reads several TSV files representing different tables in Aleph, and combines this data into  data warehouse dimensions after data is processed and organized in a different granularity.
 
@@ -59,29 +59,21 @@ See [Tasks](docs/tasks.md) for more information about the available tasks.
 
 ## Running the application
 
-To run the entire ETL process, use  `python run.py` from inside of your dwetl directory.
+To run the entire ETL process, enter the virtual environment `source vemv/bin/activate`. Make sure your `.env` file is using the right credentials for your environment. Run  `python run.py` from inside of your dwetl directory to start Dwetl. 
 
 ### Project overview
 
 These steps correlate with [Alex's high level ETL diagram](https://drive.google.com/drive/folders/1z2UkgnvhqQJioESxjUPkUpInaKnBoo3t), and also with the dwetl program. They will need to be refined some more, as Tiffany typed these up from some old notes, but they might be missing details.
 
 
-- **Step 1**. Read tab-separated files into a file-equivalent (Stage 1) table in pgcommon dev.
+- **Step 1**. Read tab-separated files into a file-equivalent (Stage 1) table in the usmai_dw_etl database. 
 
   - *loadstg1.py*
 - **Step 2.** Write fields and values from stg 1 into the "IN_" fields in stg 2 tables.
 
   - *loadstg2.py*
 - **Step 3.** Populate Stage 2 tables with preprocessing, data quality checks, and transform results.
-- *TransformField.py* - class to hold value of pp, dq, and transforms,
-  - *table_transform.py*
-
-  - Preprocess fields, write result to field object
-    - Data quality checks on fields, write results of field object.
-      - *data_quality_specific_functions.py*
-      - *data_quality_utilities.py*
-    - Transform field, write result to field object
-      - *specific_transform_functions.py*
+- - - 
   - Write field values  to corresponding PP, DQ, and T1, T2, T3... rows and columns in the Stage 2 table.
 - **Step 4.** intertable processing on the Library Item Event Z35 stage 2 table. Make sure that the Library Item ID is unique and if so, add Last Loan, Last Renew, and Last Return details to the Library Item Z30 stage 2 table.
 - **Step 5.** Grab final value of fields from Stage 2 tables and put into the Stg 3 Dimension tables.
@@ -117,7 +109,7 @@ Commonly used readers are:
 * TsvFileReader - reads tab-separated data line-by-line from a file
 * SqlAlchemyReader - reads a database table row-by-row.
 
-The "ListReader" is commonly used for unit testing, in place of the
+The "ListReader" is commonly used for unit testing using lists, in place of the
 "TsvFileReader" or "SqlAlchemyReader".
 
 ### Processors
@@ -154,13 +146,14 @@ Tests are located in the `dwetl/tests` directory. They are written in Unittest b
 
 `pytest` from the root directory to run all tests.
 `pytest tests/{FILE_NAME}` to run tests from one file.
+`pytest tests/{reader, writer, processor}` to run all tests from a test subdirectory
 `pytest tests/{reader, writer, processor}/{FILE_NAME}` runs the tests for a Reader, Writer, or Processor. 
 
 
 
 ## Built With
 
-* [SQLAlchemy](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
+* [SQLAlchemy](http://www.dropwizard.io/1.0.2/docs/) - The web framework used for the Postgres database ORM
 
 
 
