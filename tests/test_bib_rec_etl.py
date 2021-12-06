@@ -319,16 +319,16 @@ class TestBibRecEtl(unittest.TestCase):
                             orig_key = key.split('__')[0][3:]
                             dq_key = 'dq_'+ orig_key
                             dq_value = item.__dict__[dq_key]
-
+                            
                             # create message for later to print when tests fail
-                            message = f'Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} transformation test.'
+                            message = f"""Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} transformation test. The dq_value is: {dq_value}
+                                Problem Row: {item.__dict__}"""
 
                             t_value = item.__dict__[key]
 
                             # skip suspended records 
                             # TODO: is this the best way? I noticed SUS has a variable amount of characters depending on the source column. 
-                            if dq_value and str(dq_value).startswith('SUS'):
-                                # dont' do anything
+                            if item.__dict__['rm_suspend_rec_flag'] == 'Y':
                                 continue
 
                             # test Z13
@@ -377,19 +377,19 @@ class TestBibRecEtl(unittest.TestCase):
                                 # uses substring method with params
                                 t_check_result = dwetl.specific_transform_functions.lookup_encoding_level(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
-                            
-                            #
 
                             if key == 't1_z13u_user_defined_4__bib_rec_marc_rec_008_field_txt':
                                 self.assertEqual(dq_value, t_value, message)
                             if key == 't2_z13u_user_defined_4__bib_rec_language_cd':
                                 # uses substring
                                 t_check_result = dwetl.specific_transform_functions.substring(dq_value, 35,38)
+                                # TODO: the db converts '' to three spaces because of the ddl data type on this field?
+                                if t_check_result == '':
+                                    t_check_result = '   '
                                 self.assertEqual(t_check_result, t_value, message)
                             if key == 't1_z13u_user_defined_5__bib_rec_issn':
-                                # move as is
                                 self.assertEqual(dq_value, t_value, message)
-                            # z13u_user_defined_6
+                            # # z13u_user_defined_6
                             if key == 't1_z13u_user_defined_6__bib_rec_display_suppressed_flag':
                                 t_check_result = dwetl.specific_transform_functions.is_suppressed(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
@@ -402,9 +402,8 @@ class TestBibRecEtl(unittest.TestCase):
                             if key == 't4_z13u_user_defined_6__bib_rec_provisional_status_flag':
                                 t_check_result = dwetl.specific_transform_functions.is_provisional(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
-                            
-
 
                             # all other items are moved as-is during transformations (like all z00s)
                             print(dq_key)
-                            self.assertEqual(dq_value, t_value)
+                            self.assertEqual(dq_value, t_value, message)
+
