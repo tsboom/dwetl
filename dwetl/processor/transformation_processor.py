@@ -110,6 +110,10 @@ class TransformationProcessor(Processor):
 
                     # write to outdict
                     out_dict[transform_column_name] = transform_result
+            else: 
+                # for all keys without transformation steps, move the dq value over as-is
+                pdb.set_trace()
+                out_dict[transform_column_name] = val
         return out_dict
 
 
