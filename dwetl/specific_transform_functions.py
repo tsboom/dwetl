@@ -30,14 +30,14 @@ def isbn_code_020(code, value):
         isbn = value
     else:
         # TODO: Alex says "treat as empty value" not sure if this is empty string or None
-        isbn = None
+        isbn = ''
     return isbn
 
 def issn_code_022(code, value):
     if code[0:3] == '022':
         issn = value
     else:
-        issn = None
+        issn = ''
     return issn
 
 
