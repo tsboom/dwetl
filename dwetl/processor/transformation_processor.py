@@ -91,7 +91,10 @@ class TransformationProcessor(Processor):
                     source_column = transformation_info.source_col_name
 
                     transform_column_name = f"t{transform_number}_{source_column}__{target_column}"
-
+                    
+                    # default transform result with no specific transform functions (move as-is) 
+                    transform_result = val
+                    
                     # *special case z13 issn code
                     # TODO: what happens if the keys are not run in order isbn_issn_code -> isbn_issn
                     if key == 'dq_z13_isbn_issn_code':
@@ -108,12 +111,9 @@ class TransformationProcessor(Processor):
                         # run transformation
                         transform_result = transformation_info.transform(val)
 
-                    # write to outdict
+                    # write result to outdict
                     out_dict[transform_column_name] = transform_result
-            else: 
-                # for all keys without transformation steps, move the dq value over as-is
-                pdb.set_trace()
-                out_dict[transform_column_name] = val
+
         return out_dict
 
 

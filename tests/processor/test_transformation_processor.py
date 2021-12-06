@@ -268,9 +268,9 @@ class TestTransformationProcessor(unittest.TestCase):
         self.assertEqual('001970',results[2]['t1_z00_data_len__bib_rec_marc_rec_data_cntnt_len_cnt'] )
         self.assertEqual('TransformationProcessor', results[2]['em_update_dw_job_name'])
 
-
+    
     def test_transform_bib_rec_z13(self):
-
+    
         # dq check the sample data first before transforming
         reader = ListReader(self.bib_record_dimension_sample_data_z13)
         writer = ListWriter()
@@ -281,24 +281,23 @@ class TestTransformationProcessor(unittest.TestCase):
             reader, writer, job_info, self.logger, self.bib_rec_sample_json_config, pk_list, self.error_writer)
         data_quality_processor.execute()
         bib_rec_dq_results = data_quality_processor.writer.list
-
+    
         # do the transformation process using the bib_rec_dq_results
         reader = ListReader(bib_rec_dq_results)
         writer = ListWriter()
-
+    
         job_info = job_info = JobInfo(-1, 'test_user', '1', '1')
-
+    
         pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name',
                    'in_z13_rec_key']
-
+    
         transformation_processor = TransformationProcessor(
             reader, writer, job_info, self.logger, self.bib_rec_sample_json_config, pk_list, self.error_writer)
-
-
+    
+    
         transformation_processor.execute()
         results = transformation_processor.writer.list
-        # pdb.set_trace()
-
+    
         expected_keys = sorted([
             'db_operation_cd', 'dw_stg_2_aleph_lbry_name',
             't1_z13_year__bib_rec_publication_yr_no',
@@ -312,27 +311,27 @@ class TestTransformationProcessor(unittest.TestCase):
             't2_z13_isbn_issn__bib_rec_all_associated_issns_txt',
             'em_update_dw_prcsng_cycle_id', 'em_update_user_id',
             'em_update_dw_job_exectn_id', 'em_update_dw_job_version_no',
-            'em_update_dw_job_name', 'em_update_tmstmp'
+            'em_update_dw_job_name', 'em_update_tmstmp', 'em_create_dw_prcsng_cycle_id'
         ])
-
+    
         # make sure expected keys are in the results for an item
         self.assertEqual(expected_keys, sorted(list(results[0].keys())))
         self.assertEqual('TransformationProcessor', results[0]['em_update_dw_job_name'])
         self.assertEqual('1969', results[0]['t1_z13_year__bib_rec_publication_yr_no'])
         self.assertEqual('20130221', results[0]['t1_z13_update_date__bib_rec_update_dt'])
         self.assertEqual('Hoover, Dwight W., 1926-', results[0]['t1_z13_author__bib_rec_author_name'])
-        self.assertEqual(None, results[0]['t2_z13_isbn_issn__bib_rec_all_associated_issns_txt'])
+        self.assertEqual('', results[0]['t2_z13_isbn_issn__bib_rec_all_associated_issns_txt'])
         self.assertEqual('020', results[0]['t1_z13_isbn_issn_code__bib_rec_isbn_issn_source_cd'])
-        
+    
         self.assertEqual('020', results[5]['t1_z13_isbn_issn_code__bib_rec_isbn_issn_source_cd'])
         self.assertEqual(None, results[6]['t1_z13_isbn_issn_code__bib_rec_isbn_issn_source_cd'])
-
-
-
-
-
+    
+    
+    
+    
+    
     def test_transform_bib_rec_z13u(self):
-
+    
         # dq check the sample data first before transforming
         reader = ListReader(self.bib_record_dimension_sample_data_z13u)
         writer = ListWriter()
@@ -343,23 +342,23 @@ class TestTransformationProcessor(unittest.TestCase):
             reader, writer, job_info, self.logger, self.bib_rec_sample_json_config, pk_list, self.error_writer)
         data_quality_processor.execute()
         bib_rec_dq_results = data_quality_processor.writer.list
-
+    
         # do the transformation process using the bib_rec_dq_results
         reader = ListReader(bib_rec_dq_results)
         writer = ListWriter()
-
+    
         job_info = job_info = JobInfo(-1, 'test_user', '1', '1')
-
+    
         pk_list = ['db_operation_cd', 'dw_stg_2_aleph_lbry_name',
                    'in_z00_doc_number', 'em_create_dw_prcsng_cycle_id']
-
+    
         transformation_processor = TransformationProcessor(
             reader, writer, job_info, self.logger, self.bib_rec_sample_json_config, pk_list, self.error_writer)
-
-
+    
+    
         transformation_processor.execute()
         results = transformation_processor.writer.list
-
+    
         expected_keys = sorted([
             'db_operation_cd', 'dw_stg_2_aleph_lbry_name', 'em_create_dw_prcsng_cycle_id',
             't1_z13u_user_defined_2__bib_rec_oclc_no', 't1_z13u_user_defined_3__bib_rec_marc_rec_leader_field_txt',
@@ -375,11 +374,11 @@ class TestTransformationProcessor(unittest.TestCase):
             'em_update_dw_job_exectn_id', 'em_update_dw_job_version_no',
             'em_update_dw_job_name', 'em_update_tmstmp'
         ])
-
+    
         # make sure expected keys are in the results for an item
         self.assertEqual(expected_keys, sorted(list(results[0].keys())))
         self.assertEqual('TransformationProcessor', results[0]['em_update_dw_job_name'])
-
+    
         # check each transformation for items in results
         # first item in sample data
         self.assertEqual('00001605', results[0]['t1_z13u_user_defined_2__bib_rec_oclc_no'])
@@ -391,12 +390,12 @@ class TestTransformationProcessor(unittest.TestCase):
         self.assertEqual('Monograph/Item', results[0]['t5_z13u_user_defined_3__bib_rec_bib_lvl_desc'])
         self.assertEqual('d', results[0]['t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd'])
         self.assertEqual('Invalid', results[0]['t7_z13u_user_defined_3__bib_rec_encoding_lvl_desc'])
-
+    
         # second item missing user_defined_2
         self.assertEqual('-M', results[1]['t1_z13u_user_defined_2__bib_rec_oclc_no'])
-
+    
         # third item z13u user_defined_2 is empty string
         self.assertEqual('-M', results[2]['t1_z13u_user_defined_2__bib_rec_oclc_no'])
-
+    
         # fourth z13u pp_z13u_user_defined_2 contains wrong format
         self.assertEqual('-I', results[3]['t1_z13u_user_defined_2__bib_rec_oclc_no'])
