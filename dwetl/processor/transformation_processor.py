@@ -45,11 +45,11 @@ class TransformationProcessor(Processor):
 
         # out dict to hold the transformed item info
         out_dict = {}
-        invalid_keys = ['rec_type_cd', 'rec_trigger_key', '_sa_instance_state']
+        invalid_keys = ['rec_type_cd', '_sa_instance_state']
 
         # *special casee for bib_rec z13* capture isbn_issn_code for processing isbn_issn later
         isbn_issn_code = None
-        pprint.pprint(item)
+        
 
         # transform keys and vals within current item
         for key, val in item.items():
@@ -113,7 +113,6 @@ class TransformationProcessor(Processor):
 
                     # write result to outdict
                     out_dict[transform_column_name] = transform_result
-
         return out_dict
 
 
@@ -123,4 +122,5 @@ class TransformationProcessor(Processor):
         processed_item.update(self.job_info.as_dict('update'))
         processed_item['em_update_dw_job_name'] = self.job_name()
         processed_item['em_update_tmstmp'] = datetime.datetime.now()
+        pprint.pprint(processed_item)
         return processed_item

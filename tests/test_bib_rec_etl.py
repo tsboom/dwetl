@@ -307,13 +307,13 @@ class TestBibRecEtl(unittest.TestCase):
                 error_table_base_class = dwetl.Base.classes['dw_db_errors']
 
                 results = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
-
+                
                 # get unique ID from pk of the table
                 pk = stg_2_table_base_class.__table__.primary_key.columns.values()[2].name
 
                 for item in results.all():
                     for key in item.__dict__.keys():
-
+                        
                         # test only the transform keys against their dq value from stage 2
                         if key[:1] == 't':
                             orig_key = key.split('__')[0][3:]
@@ -325,11 +325,13 @@ class TestBibRecEtl(unittest.TestCase):
 
                             t_value = item.__dict__[key]
 
+                            # skip suspended records 
+                            # TODO: is this the best way? I noticed SUS has a variable amount of characters depending on the source column. 
+                            if dq_value and str(dq_value).startswith('SUS'):
+                                # dont' do anything
+                                continue
 
-                            # check z00 transforms (none use specific functions
-
-
-                            # check special transform cases for bib rec
+                            # test Z13
                             # save isbn_issn_code dq value for the transformation aftewards (isbn_txt, and associated issns)
                             if key == 't1_z13_isbn_issn_code__bib_rec_isbn_txt':
                                 code = item.__dict__['dq_z13_isbn_issn_code']
@@ -343,7 +345,8 @@ class TestBibRecEtl(unittest.TestCase):
                                 dq_value = item.__dict__['dq_z13_isbn_issn']
                                 t_check_result = dwetl.specific_transform_functions.isbn_code_022(code, dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
-
+                            
+                            # test z13u user defined 2-6
                             if key == 't1_z13u_user_defined_2__bib_rec_oclc_no':
                                 t_check_result = dwetl.specific_transform_functions.remove_ocm_ocn_on(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
@@ -374,21 +377,19 @@ class TestBibRecEtl(unittest.TestCase):
                                 # uses substring method with params
                                 t_check_result = dwetl.specific_transform_functions.lookup_encoding_level(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
+                            
+                            #
 
-
-
-                            # #
                             if key == 't1_z13u_user_defined_4__bib_rec_marc_rec_008_field_txt':
-                                t_check_result = dwetl.specific_transform_functions.remove_ocm_ocn_on(dq_value)
-                                self.assertEqual(t_check_result, t_value, message)
+                                self.assertEqual(dq_value, t_value, message)
                             if key == 't2_z13u_user_defined_4__bib_rec_language_cd':
                                 # uses substring
-                                t_check_result = dwetl.specific_transform_functions.remove_ocm_ocn_on(dq_value)
+                                t_check_result = dwetl.specific_transform_functions.substring(dq_value, 35,38)
                                 self.assertEqual(t_check_result, t_value, message)
                             if key == 't1_z13u_user_defined_5__bib_rec_issn':
-                                t_check_result = dwetl.specific_transform_functions.remove_ocm_ocn_on(dq_value)
-                                self.assertEqual(t_check_result, t_value, message)
-                            # # z13u_user_defined_6
+                                # move as is
+                                self.assertEqual(dq_value, t_value, message)
+                            # z13u_user_defined_6
                             if key == 't1_z13u_user_defined_6__bib_rec_display_suppressed_flag':
                                 t_check_result = dwetl.specific_transform_functions.is_suppressed(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
@@ -401,17 +402,9 @@ class TestBibRecEtl(unittest.TestCase):
                             if key == 't4_z13u_user_defined_6__bib_rec_provisional_status_flag':
                                 t_check_result = dwetl.specific_transform_functions.is_provisional(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
-                            #
-                            #
-                            #
-                            # if orig_key== 'z13u_user_defined_3':
-                            #     t_check_result = dwetl.specific_transform_functions.lookup_record_type(dq_value)
-                            #     self.assertEqual(t_check_result, t_value, message)
-                            #
+                            
 
 
-
-                            else:
-                                # all other items are moved as-is during transformations (like all z00s)
-                                print(dq_key)
-                                self.assertEqual(dq_value, t_value)
+                            # all other items are moved as-is during transformations (like all z00s)
+                            print(dq_key)
+                            self.assertEqual(dq_value, t_value)
