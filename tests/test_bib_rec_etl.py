@@ -313,22 +313,22 @@ class TestBibRecEtl(unittest.TestCase):
 
                 for item in results.all():
                     for key in item.__dict__.keys():
-    
+
                         # test only the transform keys against their dq value from stage 2
                         if key[:1] == 't':
                             orig_key = key.split('__')[0][3:]
                             dq_key = 'dq_'+ orig_key
                             dq_value = item.__dict__[dq_key]
-                            
+
                             # create message for later to print when tests fail
                             message = f'Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} transformation test.'
 
                             t_value = item.__dict__[key]
-                            
-                            
+
+
                             # check z00 transforms (none use specific functions
 
-                            
+
                             # check special transform cases for bib rec
                             # save isbn_issn_code dq value for the transformation aftewards (isbn_txt, and associated issns)
                             if key == 't1_z13_isbn_issn_code__bib_rec_isbn_txt':
@@ -343,7 +343,7 @@ class TestBibRecEtl(unittest.TestCase):
                                 dq_value = item.__dict__['dq_z13_isbn_issn']
                                 t_check_result = dwetl.specific_transform_functions.isbn_code_022(code, dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
-                            
+
                             if key == 't1_z13u_user_defined_2__bib_rec_oclc_no':
                                 t_check_result = dwetl.specific_transform_functions.remove_ocm_ocn_on(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
@@ -354,7 +354,7 @@ class TestBibRecEtl(unittest.TestCase):
                             if key == 't2_z13u_user_defined_3__bib_rec_type_cd':
                                 t_check_result = dwetl.specific_transform_functions.substring(dq_value, 6, 7)
                                 self.assertEqual(t_check_result, t_value, message)
-                            
+
                             if key == 't3_z13u_user_defined_3__bib_rec_bib_type_desc':
                                 t_check_result = dwetl.specific_transform_functions.lookup_record_type(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
@@ -374,44 +374,43 @@ class TestBibRecEtl(unittest.TestCase):
                                 # uses substring method with params
                                 t_check_result = dwetl.specific_transform_functions.lookup_encoding_level(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
-                                                                                    
-                                                        
-                            
-                            # 
-                            # if key == 't1_z13u_user_defined_4__bib_rec_marc_rec_008_field_txt':
-                            #     t_check_result = dwetl.specific_transform_functions.remove_ocm_ocn_on(dq_value)
-                            #     self.assertEqual(t_check_result, t_value, message)
-                            # if key == 't2_z13u_user_defined_4__bib_rec_language_cd':
-                            #     # uses substring
-                            #     t_check_result = 
-                            #     self.assertEqual(t_check_result, t_value, message)
-                            # 
-                            # if key == 't1_z13u_user_defined_5__bib_rec_issn':
-                            #     t_check_result = dwetl.specific_transform_functions.remove_ocm_ocn_on(dq_value)
-                            #     self.assertEqual(t_check_result, t_value, message)
+
+
+
+                            # #
+                            if key == 't1_z13u_user_defined_4__bib_rec_marc_rec_008_field_txt':
+                                t_check_result = dwetl.specific_transform_functions.remove_ocm_ocn_on(dq_value)
+                                self.assertEqual(t_check_result, t_value, message)
+                            if key == 't2_z13u_user_defined_4__bib_rec_language_cd':
+                                # uses substring
+                                t_check_result = dwetl.specific_transform_functions.remove_ocm_ocn_on(dq_value)
+                                self.assertEqual(t_check_result, t_value, message)
+                            if key == 't1_z13u_user_defined_5__bib_rec_issn':
+                                t_check_result = dwetl.specific_transform_functions.remove_ocm_ocn_on(dq_value)
+                                self.assertEqual(t_check_result, t_value, message)
                             # # z13u_user_defined_6
-                            # if key == 't1_z13u_user_defined_6__bib_rec_display_suppressed_flag':
-                            #     t_check_result = dwetl.specific_transform_functions.is_suppressed(dq_value)
-                            #     self.assertEqual(t_check_result, t_value, message)    
-                            # if key == 't2_z13u_user_defined_6__bib_rec_acquisition_created_flag':
-                            #     t_check_result = dwetl.specific_transform_functions.is_acq_created(dq_value)
-                            #     self.assertEqual(t_check_result, t_value, message)    
-                            # if key == 't3_z13u_user_defined_6__bib_rec_circulation_created_flag':
-                            #     t_check_result = dwetl.specific_transform_functions.is_circ_created(dq_value)
-                            #     self.assertEqual(t_check_result, t_value, message)
-                            # if key == 't4_z13u_user_defined_6__bib_rec_provisional_status_flag':
-                            #     t_check_result = dwetl.specific_transform_functions.is_provisional(dq_value)
-                            #     self.assertEqual(t_check_result, t_value, message)
-                            # 
-                            # 
-                            # 
+                            if key == 't1_z13u_user_defined_6__bib_rec_display_suppressed_flag':
+                                t_check_result = dwetl.specific_transform_functions.is_suppressed(dq_value)
+                                self.assertEqual(t_check_result, t_value, message)
+                            if key == 't2_z13u_user_defined_6__bib_rec_acquisition_created_flag':
+                                t_check_result = dwetl.specific_transform_functions.is_acq_created(dq_value)
+                                self.assertEqual(t_check_result, t_value, message)
+                            if key == 't3_z13u_user_defined_6__bib_rec_circulation_created_flag':
+                                t_check_result = dwetl.specific_transform_functions.is_circ_created(dq_value)
+                                self.assertEqual(t_check_result, t_value, message)
+                            if key == 't4_z13u_user_defined_6__bib_rec_provisional_status_flag':
+                                t_check_result = dwetl.specific_transform_functions.is_provisional(dq_value)
+                                self.assertEqual(t_check_result, t_value, message)
+                            #
+                            #
+                            #
                             # if orig_key== 'z13u_user_defined_3':
                             #     t_check_result = dwetl.specific_transform_functions.lookup_record_type(dq_value)
                             #     self.assertEqual(t_check_result, t_value, message)
-                            # 
-                            
-                            
-                            
+                            #
+
+
+
                             else:
                                 # all other items are moved as-is during transformations (like all z00s)
                                 print(dq_key)
