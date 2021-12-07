@@ -1496,7 +1496,7 @@ CREATE TABLE public.dw_stg_2_bib_rec_z13u (
     t4_z13u_user_defined_3__bib_rec_bib_lvl_cd character(1),
     t5_z13u_user_defined_3__bib_rec_bib_lvl_desc character varying(500),
     t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd character(1),
-    t7_z13u_user_defined_3__bib_rec_encoding_level_desc character varying(500),
+    t7_z13u_user_defined_3__bib_rec_encoding_lvl_desc character varying(500),
     in_z13u_user_defined_4 character varying(500),
     pp_z13u_user_defined_4 character varying(500),
     dq_z13u_user_defined_4 character varying(500),

@@ -333,7 +333,8 @@ class TestBibRecEtl(unittest.TestCase):
                             if item.__dict__['rm_suspend_rec_flag'] == 'Y':
                                 continue
 
-                            # test Z13
+
+                            # Check all keys with specific transform functions
                             # save isbn_issn_code dq value for the transformation aftewards (isbn_txt, and associated issns)
                             if key == 't1_z13_isbn_issn_code__bib_rec_isbn_txt':
                                 code = item.__dict__['dq_z13_isbn_issn_code']
@@ -366,7 +367,7 @@ class TestBibRecEtl(unittest.TestCase):
                                 t_check_result = dwetl.specific_transform_functions.substring(dq_value, 6, 7)
                                 self.assertEqual(t_check_result, t_value, message)
 
-                            elif key == 't3_z13u_user_defined_3__bib_rec_bib_type_desc':
+                            elif key == 't3_z13u_user_defined_3__bib_rec_type_desc':
                                 t_check_result = dwetl.specific_transform_functions.lookup_record_type(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
                             elif key == 't4_z13u_user_defined_3__bib_rec_bib_lvl_cd':
@@ -383,7 +384,6 @@ class TestBibRecEtl(unittest.TestCase):
                                 self.assertEqual(t_check_result, t_value, message)
                             elif key == 't7_z13u_user_defined_3__bib_rec_encoding_lvl_desc':
                                 # uses substring method with params
-                                pdb.set_trace()
                                 t_check_result = dwetl.specific_transform_functions.lookup_encoding_level(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
 
