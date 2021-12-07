@@ -339,71 +339,79 @@ class TestBibRecEtl(unittest.TestCase):
                                 # the t_value in the db should match the transformed field result
                                 t_check_result = dwetl.specific_transform_functions.isbn_code_020(code, dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
-
-                            if key == 't2_z13_isbn_issn_code__bib_rec_all_associated_issns_txt':
+                                
+                            elif key == 't2_z13_isbn_issn_code__bib_rec_all_associated_issns_txt':
                                 code = item.__dict__['dq_z13_isbn_issn_code']
                                 dq_value = item.__dict__['dq_z13_isbn_issn']
                                 t_check_result = dwetl.specific_transform_functions.isbn_code_022(code, dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
-                            
+                                
                             # test z13u user defined 2-6
-                            if key == 't1_z13u_user_defined_2__bib_rec_oclc_no':
+                            elif key == 't1_z13u_user_defined_2__bib_rec_oclc_no':
                                 t_check_result = dwetl.specific_transform_functions.remove_ocm_ocn_on(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
 
-                            if key == 't1_z13u_user_defined_3__bib_rec_marc_rec_leader_field_txt':
+                            elif key == 't1_z13u_user_defined_3__bib_rec_marc_rec_leader_field_txt':
                                 # first transformation moves user_defined_3 as-is
                                 self.assertEqual(dq_value, t_value, message)
-                            if key == 't2_z13u_user_defined_3__bib_rec_type_cd':
+                            elif key == 't2_z13u_user_defined_3__bib_rec_type_cd':
                                 t_check_result = dwetl.specific_transform_functions.substring(dq_value, 6, 7)
                                 self.assertEqual(t_check_result, t_value, message)
 
-                            if key == 't3_z13u_user_defined_3__bib_rec_bib_type_desc':
+                            elif key == 't3_z13u_user_defined_3__bib_rec_bib_type_desc':
                                 t_check_result = dwetl.specific_transform_functions.lookup_record_type(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
-                            if key == 't4_z13u_user_defined_3__bib_rec_bib_lvl_cd':
+                            elif key == 't4_z13u_user_defined_3__bib_rec_bib_lvl_cd':
                                 # uses substring method with params
                                 t_check_result = dwetl.specific_transform_functions.substring(dq_value, 7, 8)
                                 self.assertEqual(t_check_result, t_value, message)
-                            if key == 't5_z13u_user_defined_3__bib_rec_bib_lvl_desc':
+                            elif key == 't5_z13u_user_defined_3__bib_rec_bib_lvl_desc':
                                 # uses substring method with params
                                 t_check_result = dwetl.specific_transform_functions.lookup_bibliographic_level(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
-                            if key == 't6_z13u_user_defined_3__bib_rec_encoding_lvl_cd':
+                            elif key == 't6_z13u_user_defined_3__bib_rec_encoding_lvl_cd':
                                 # uses substring method with params
                                 t_check_result = dwetl.specific_transform_functions.substring(dq_value, 17, 18)
                                 self.assertEqual(t_check_result, t_value, message)
-                            if key == 't7_z13u_user_defined_3__bib_rec_encoding_lvl_desc':
+                            elif key == 't7_z13u_user_defined_3__bib_rec_encoding_lvl_desc':
                                 # uses substring method with params
+                                pdb.set_trace()
                                 t_check_result = dwetl.specific_transform_functions.lookup_encoding_level(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
 
-                            if key == 't1_z13u_user_defined_4__bib_rec_marc_rec_008_field_txt':
+                            elif key == 't1_z13u_user_defined_4__bib_rec_marc_rec_008_field_txt':
                                 self.assertEqual(dq_value, t_value, message)
-                            if key == 't2_z13u_user_defined_4__bib_rec_language_cd':
+                            elif key == 't2_z13u_user_defined_4__bib_rec_language_cd':
                                 # uses substring
                                 t_check_result = dwetl.specific_transform_functions.substring(dq_value, 35,38)
                                 # TODO: the db converts '' to three spaces because of the ddl data type on this field?
                                 if t_check_result == '':
                                     t_check_result = '   '
                                 self.assertEqual(t_check_result, t_value, message)
-                            if key == 't1_z13u_user_defined_5__bib_rec_issn':
+                            elif key == 't1_z13u_user_defined_5__bib_rec_issn':
                                 self.assertEqual(dq_value, t_value, message)
                             # # z13u_user_defined_6
-                            if key == 't1_z13u_user_defined_6__bib_rec_display_suppressed_flag':
+                            elif key == 't1_z13u_user_defined_6__bib_rec_display_suppressed_flag':
                                 t_check_result = dwetl.specific_transform_functions.is_suppressed(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
-                            if key == 't2_z13u_user_defined_6__bib_rec_acquisition_created_flag':
+                            elif key == 't2_z13u_user_defined_6__bib_rec_acquisition_created_flag':
                                 t_check_result = dwetl.specific_transform_functions.is_acq_created(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
-                            if key == 't3_z13u_user_defined_6__bib_rec_circulation_created_flag':
+                            elif key == 't3_z13u_user_defined_6__bib_rec_circulation_created_flag':
                                 t_check_result = dwetl.specific_transform_functions.is_circ_created(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
-                            if key == 't4_z13u_user_defined_6__bib_rec_provisional_status_flag':
+                            elif key == 't4_z13u_user_defined_6__bib_rec_provisional_status_flag':
                                 t_check_result = dwetl.specific_transform_functions.is_provisional(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
 
-                            # all other items are moved as-is during transformations (like all z00s)
-                            print(dq_key)
-                            self.assertEqual(dq_value, t_value, message)
+                            else:
+                                # all other items are moved as-is during transformations (like all z00s)
+                                # because the transformation columns someimes have more specific types than the dq values, 
+                                # compare types of t and dq and convert dq_value to t_type if necessary
+                                if type(dq_value) is not type(t_value):
+                                    if isinstance(t_value, int):
+                                        dq_value = int(dq_value)
+                                    if isinstance(t_value, datetime.date):
+                                        dq_value = datetime.datetime.strptime(dq_value, '%Y%m%d').date()
+                                self.assertEqual(dq_value, t_value, message)
 
