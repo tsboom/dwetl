@@ -45,8 +45,8 @@ class TestBibRecEtl(unittest.TestCase):
 
         # run ETL using sample data and write to the test postgres database (usmai_dw_etl_test)
         # currently testing end to end
-        cls.test_input_directory = 'tests/data/incoming_test/aleph/20210123'
-        #cls.test_input_directory = 'tests/data/incoming_test/aleph/20191008'
+        #cls.test_input_directory = 'tests/data/incoming_test/aleph/20210123'
+        cls.test_input_directory = 'tests/data/incoming_test/aleph/20190919'
 
         cls.db_session_creator = dwetl.test_database_session
 
@@ -324,13 +324,13 @@ class TestBibRecEtl(unittest.TestCase):
                             dq_key = 'dq_'+ orig_key
                             dq_value = item.__dict__[dq_key]
                             
-                    
-
-                            # create message for later to print when tests fail
-                            message = f"""Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} transformation test. The dq_value is: {dq_value}
-                                Problem Row: {item.__dict__}"""
-
+                            item_dict = item.__dict__
+                            sorted_row = {k: item_dict[k] for k in sorted(item_dict)}
+                        
                             t_value = item.__dict__[key]
+                            # create message for later to print when tests fail
+                            message = f"""Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} transformation test. The T value is: {t_value}. The dq_value is: {dq_value}.
+                                Problem Row: {sorted_row}"""
 
                             # skip suspended records 
                             # TODO: is this the best way? I noticed SUS has a variable amount of characters depending on the source column. 
@@ -340,24 +340,18 @@ class TestBibRecEtl(unittest.TestCase):
 
                             # Check all keys with specific transform functions
                             # save isbn_issn_code dq value for the transformation aftewards (isbn_txt, and associated issns)
-                            if key == 't1_z13_isbn_issn_code__bib_rec_isbn_txt':
+                            if key == 't1_z13_isbn_issn__bib_rec_isbn_txt':
                                 code = item.__dict__['dq_z13_isbn_issn_code']
                                 dq_value = item.__dict__['dq_z13_isbn_issn']
                                 # the t_value in the db should match the transformed field result (assuming it starts with 020
                                 t_check_result = dwetl.specific_transform_functions.isbn_code_020(code, dq_value)
-                                if dq_value.startswith('020'):
-                                    self.assertEqual(t_check_result, t_value, message)
-                                else:
-                                    self.assertNotEquals(t_check_result, t_value, message)
+                                self.assertEqual(t_check_result, t_value, message)
                                 
-                            elif key == 't2_z13_isbn_issn_code__bib_rec_all_associated_issns_txt':
+                            elif key == 't2_z13_isbn_issn__bib_rec_all_associated_issns_txt':
                                 code = item.__dict__['dq_z13_isbn_issn_code']
                                 dq_value = item.__dict__['dq_z13_isbn_issn']
-                                t_check_result = dwetl.specific_transform_functions.isbn_code_022(code, dq_value)
-                                if dq_value.startswith('022'):
-                                    self.assertEqual(t_check_result, t_value, message)
-                                else: 
-                                    self.assertNotEqual(t_check_result, t_value, message)
+                                t_check_result = dwetl.specific_transform_functions.issn_code_022(code, dq_value)
+                                self.assertEqual(t_check_result, t_value, message)
                                 
                             # test z13u user defined 2-6
                             elif key == 't1_z13u_user_defined_2__bib_rec_oclc_no':
