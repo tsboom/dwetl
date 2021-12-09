@@ -45,7 +45,8 @@ class TestBibRecEtl(unittest.TestCase):
 
         # run ETL using sample data and write to the test postgres database (usmai_dw_etl_test)
         # currently testing end to end
-        test_input_directory = 'tests/data/incoming_test/aleph/20210123'
+        cls.test_input_directory = 'tests/data/incoming_test/aleph/20210123'
+        #cls.test_input_directory = 'tests/data/incoming_test/aleph/20191008'
 
         cls.db_session_creator = dwetl.test_database_session
 
@@ -86,7 +87,7 @@ class TestBibRecEtl(unittest.TestCase):
         '''
         load_stage_1
         '''
-        load_stage_1.load_stage_1(cls.job_info, test_input_directory, cls.logger, cls.stg_1_table_mapping, cls.db_session_creator)
+        load_stage_1.load_stage_1(cls.job_info, cls.test_input_directory, cls.logger, cls.stg_1_table_mapping, cls.db_session_creator)
 
         '''
         load_stage_2
@@ -149,11 +150,14 @@ class TestBibRecEtl(unittest.TestCase):
             for file, table in self.__class__.stg_1_table_mapping['ALEPH_TSV_TABLE_MAPPING'].items():
                 table_base_class = dwetl.Base.classes[table]
                 # compare count of input records to records written
-                tsv_rows = sum(1 for line in open(f'tests/data/incoming_test/aleph/20210123/{file}'))
+                #tsv_rows = sum(1 for line in open(f'tests/data/incoming_test/aleph/20210123/{file}'))
+                tsv_rows = sum(1 for line in open(f'{self.__class__.test_input_directory}/{file}'))
                 if tsv_rows == 0:
                     input_record_count = 0
                 else:
-                    input_record_count = sum(1 for line in open(f'tests/data/incoming_test/aleph/20210123/{file}'))- 3 #metadata rows
+                    #input_record_count = sum(1 for line in open(f'tests/data/incoming_test/aleph/20210123/{file}'))- 3 #metadata rows
+                    input_record_count = sum(1 for line in open(f'{self.__class__.test_input_directory}/{file}'))- 3 #metadata rows
+
                 stg_1_row_count = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
                 # TODO: log test failure reasons
                 self.assertEqual(input_record_count, stg_1_row_count)

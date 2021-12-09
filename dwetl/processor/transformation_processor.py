@@ -122,5 +122,4 @@ class TransformationProcessor(Processor):
         processed_item.update(self.job_info.as_dict('update'))
         processed_item['em_update_dw_job_name'] = self.job_name()
         processed_item['em_update_tmstmp'] = datetime.datetime.now()
-        pprint.pprint(processed_item)
         return processed_item
