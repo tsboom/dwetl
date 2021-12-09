@@ -46,7 +46,7 @@ class TestBibRecEtl(unittest.TestCase):
         # run ETL using sample data and write to the test postgres database (usmai_dw_etl_test)
         # currently testing end to end
         #cls.test_input_directory = 'tests/data/incoming_test/aleph/20210123'
-        cls.test_input_directory = 'tests/data/incoming_test/aleph/20190919'
+        cls.test_input_directory = 'tests/data/incoming_test/aleph/20191209'
 
         cls.db_session_creator = dwetl.test_database_session
 
@@ -341,6 +341,7 @@ class TestBibRecEtl(unittest.TestCase):
                             # Check all keys with specific transform functions
                             # save isbn_issn_code dq value for the transformation aftewards (isbn_txt, and associated issns)
                             if key == 't1_z13_isbn_issn__bib_rec_isbn_txt':
+                                pdb.set_trace()
                                 code = item.__dict__['dq_z13_isbn_issn_code']
                                 dq_value = item.__dict__['dq_z13_isbn_issn']
                                 # the t_value in the db should match the transformed field result (assuming it starts with 020

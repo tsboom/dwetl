@@ -26,7 +26,7 @@ bibliographic record dimension transform functions
 
 # # source value Z13_ISBN_ISSN using optional_isbn_code
 def isbn_code_020(code, value):
-    if code[0:3] == '020':
+    if code and code[0:3] == '020':
         isbn = value
     else:
         # TODO: Alex says "treat as empty value" not sure if this is empty string or None
@@ -34,7 +34,7 @@ def isbn_code_020(code, value):
     return isbn
 
 def issn_code_022(code, value):
-    if code[0:3] == '022':
+    if code and code[0:3] == '022':
         issn = value
     else:
         issn = ''

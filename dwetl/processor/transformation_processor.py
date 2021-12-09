@@ -102,11 +102,11 @@ class TransformationProcessor(Processor):
                         isbn_issn_code = val
                         transform_result = transformation_info.transform(val)
                     if key == 'dq_z13_isbn_issn':
-                        if isbn_issn_code and transform_column_name=='t1_z13_isbn_issn__bib_rec_isbn_txt':
+                        if transform_column_name=='t1_z13_isbn_issn__bib_rec_isbn_txt':
                             transform_result = specific_transform_functions.isbn_code_020(isbn_issn_code, val)
-
-                        if isbn_issn_code and transform_column_name=='t2_z13_isbn_issn__bib_rec_all_associated_issns_txt':
+                        if transform_column_name=='t2_z13_isbn_issn__bib_rec_all_associated_issns_txt':
                             transform_result = specific_transform_functions.issn_code_022(isbn_issn_code, val)
+                        
                     else:
                         # run transformation
                         transform_result = transformation_info.transform(val)

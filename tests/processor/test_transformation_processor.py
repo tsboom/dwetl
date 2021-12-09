@@ -324,11 +324,20 @@ class TestTransformationProcessor(unittest.TestCase):
         self.assertEqual('020', results[0]['t1_z13_isbn_issn_code__bib_rec_isbn_issn_source_cd'])
     
         self.assertEqual('020', results[5]['t1_z13_isbn_issn_code__bib_rec_isbn_issn_source_cd'])
+        self.assertEqual('9789811580710', results[5]['t1_z13_isbn_issn__bib_rec_isbn_txt'])
+        
         self.assertEqual(None, results[6]['t1_z13_isbn_issn_code__bib_rec_isbn_issn_source_cd'])
-    
-    
-    
-    
+        self.assertEqual('', results[6]['t1_z13_isbn_issn__bib_rec_isbn_txt'])
+        self.assertEqual('', results[6]['t2_z13_isbn_issn__bib_rec_all_associated_issns_txt'])
+        self.assertEqual('', results[7]['t1_z13_isbn_issn_code__bib_rec_isbn_issn_source_cd'])
+        self.assertEqual('', results[7]['t1_z13_isbn_issn__bib_rec_isbn_txt'])
+        self.assertEqual('', results[7]['t2_z13_isbn_issn__bib_rec_all_associated_issns_txt'])
+        self.assertEqual('022', results[8]['t1_z13_isbn_issn_code__bib_rec_isbn_issn_source_cd'])
+        self.assertEqual('', results[8]['t1_z13_isbn_issn__bib_rec_isbn_txt'])
+        self.assertEqual('0255-08570', results[8]['t2_z13_isbn_issn__bib_rec_all_associated_issns_txt'])
+        self.assertEqual('033', results[9]['t1_z13_isbn_issn_code__bib_rec_isbn_issn_source_cd'])
+        self.assertEqual('', results[9]['t1_z13_isbn_issn__bib_rec_isbn_txt'])
+        self.assertEqual('', results[9]['t2_z13_isbn_issn__bib_rec_all_associated_issns_txt'])
     
     def test_transform_bib_rec_z13u(self):
     
