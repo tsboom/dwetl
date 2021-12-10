@@ -46,7 +46,7 @@ class TestBibRecEtl(unittest.TestCase):
         # run ETL using sample data and write to the test postgres database (usmai_dw_etl_test)
         # currently testing end to end
         #cls.test_input_directory = 'tests/data/incoming_test/aleph/20210123'
-        cls.test_input_directory = 'tests/data/incoming_test/aleph/20191209'
+        cls.test_input_directory = 'tests/data/incoming_test/aleph/20190919'
 
         cls.db_session_creator = dwetl.test_database_session
 
@@ -114,31 +114,31 @@ class TestBibRecEtl(unittest.TestCase):
         }
         stage_2_intertable_processing.stage_2_intertable_processing(cls.job_info, cls.logger, cls.stg_2_table_config_mapping, cls.db_session_creator)
 
-    @classmethod
-    def tearDownClass(cls):
-        # when tests are over, delete all the data from these bib rec tests
-        with dwetl.test_database_session() as session:
-            prcsng_cycle_id = cls.prcsng_cycle_id
-
-            # iterate over stage 1 tables and delete records with the current processing cycle id
-            for file, table in cls.stg_1_table_mapping['ALEPH_TSV_TABLE_MAPPING'].items():
-                table_base_class = dwetl.Base.classes[table]
-                stg_1_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
-                stg_1_results.delete()
-
-            # iterate over stage 2 tables and delete all records added in this test file
-            for stg_2_table, dimension in cls.stg_2_table_config_mapping.items():
-                table_base_class = dwetl.Base.classes[stg_2_table]
-                stg_2_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
-                stg_2_results.delete()
-
-            # delete errors from error table
-            table_base_class = dwetl.Base.classes['dw_db_errors']
-            error_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
-            error_results.delete()
-
-            # commit all changes
-            session.commit()
+    # @classmethod
+    # def tearDownClass(cls):
+    #     # when tests are over, delete all the data from these bib rec tests
+    #     with dwetl.test_database_session() as session:
+    #         prcsng_cycle_id = cls.prcsng_cycle_id
+    # 
+    #         # iterate over stage 1 tables and delete records with the current processing cycle id
+    #         for file, table in cls.stg_1_table_mapping['ALEPH_TSV_TABLE_MAPPING'].items():
+    #             table_base_class = dwetl.Base.classes[table]
+    #             stg_1_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
+    #             stg_1_results.delete()
+    # 
+    #         # iterate over stage 2 tables and delete all records added in this test file
+    #         for stg_2_table, dimension in cls.stg_2_table_config_mapping.items():
+    #             table_base_class = dwetl.Base.classes[stg_2_table]
+    #             stg_2_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
+    #             stg_2_results.delete()
+    # 
+    #         # delete errors from error table
+    #         table_base_class = dwetl.Base.classes['dw_db_errors']
+    #         error_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
+    #         error_results.delete()
+    # 
+    #         # commit all changes
+    #         session.commit()
     def test_bib_rec_stage_1(self):
         # check to see if same amount of values from 20210123 in z00, z13, z13u
         # were written to the stage 1 table.
@@ -251,7 +251,6 @@ class TestBibRecEtl(unittest.TestCase):
                         # create message for later to print when tests fail
                         message = f'Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} DQ test.'
 
-                        #import pdb; pdb.set_trace()
                         if key[:2] == 'dq':
                             # check dq values and special cases
                             in_key = 'in_'+'_'.join(key.split('_')[1:])
@@ -262,12 +261,10 @@ class TestBibRecEtl(unittest.TestCase):
                                 # make sure missing  are suspended
                                 if dq_value == None or dq_value.isspace():
                                     self.assertEqual(dq_value, 'SUS', message)
-                                    #pdb.set_trace()
                                 continue
                             if in_key == 'in_z13_open_date' or in_key == 'in_z13_update_date':
                                 # if date comes in None, dq should be None
                                 dq_check_result = dwetl.data_quality_utilities.no_missing_values(pp_value)
-                                #pdb.set_trace()
                                 if dq_check_result == False:
                                     self.assertEqual(dq_value, None, message)
                                     continue
@@ -341,7 +338,6 @@ class TestBibRecEtl(unittest.TestCase):
                             # Check all keys with specific transform functions
                             # save isbn_issn_code dq value for the transformation aftewards (isbn_txt, and associated issns)
                             if key == 't1_z13_isbn_issn__bib_rec_isbn_txt':
-                                pdb.set_trace()
                                 code = item.__dict__['dq_z13_isbn_issn_code']
                                 dq_value = item.__dict__['dq_z13_isbn_issn']
                                 # the t_value in the db should match the transformed field result (assuming it starts with 020
