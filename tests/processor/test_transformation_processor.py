@@ -339,8 +339,8 @@ class TestTransformationProcessor(unittest.TestCase):
         self.assertEqual('', results[9]['t1_z13_isbn_issn__bib_rec_isbn_txt'])
         self.assertEqual('', results[9]['t2_z13_isbn_issn__bib_rec_all_associated_issns_txt'])
         self.assertEqual('0220', results[10]['t1_z13_isbn_issn_code__bib_rec_isbn_issn_source_cd'])
-        self.assertEqual('0255-08570', results[10]['t1_z13_isbn_issn__bib_rec_isbn_txt'])
-        self.assertEqual('', results[10]['t2_z13_isbn_issn__bib_rec_all_associated_issns_txt'])
+        self.assertEqual('0255-08570', results[10]['t2_z13_isbn_issn__bib_rec_all_associated_issns_txt'])
+        self.assertEqual('', results[10]['t1_z13_isbn_issn__bib_rec_isbn_txt'])
     
     def test_transform_bib_rec_z13u(self):
     

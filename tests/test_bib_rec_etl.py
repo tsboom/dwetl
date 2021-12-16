@@ -114,31 +114,31 @@ class TestBibRecEtl(unittest.TestCase):
         }
         stage_2_intertable_processing.stage_2_intertable_processing(cls.job_info, cls.logger, cls.stg_2_table_config_mapping, cls.db_session_creator)
 
-    # @classmethod
-    # def tearDownClass(cls):
-    #     # when tests are over, delete all the data from these bib rec tests
-    #     with dwetl.test_database_session() as session:
-    #         prcsng_cycle_id = cls.prcsng_cycle_id
-    # 
-    #         # iterate over stage 1 tables and delete records with the current processing cycle id
-    #         for file, table in cls.stg_1_table_mapping['ALEPH_TSV_TABLE_MAPPING'].items():
-    #             table_base_class = dwetl.Base.classes[table]
-    #             stg_1_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
-    #             stg_1_results.delete()
-    # 
-    #         # iterate over stage 2 tables and delete all records added in this test file
-    #         for stg_2_table, dimension in cls.stg_2_table_config_mapping.items():
-    #             table_base_class = dwetl.Base.classes[stg_2_table]
-    #             stg_2_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
-    #             stg_2_results.delete()
-    # 
-    #         # delete errors from error table
-    #         table_base_class = dwetl.Base.classes['dw_db_errors']
-    #         error_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
-    #         error_results.delete()
-    # 
-    #         # commit all changes
-    #         session.commit()
+    @classmethod
+    def tearDownClass(cls):
+        # when tests are over, delete all the data from these bib rec tests
+        with dwetl.test_database_session() as session:
+            prcsng_cycle_id = cls.prcsng_cycle_id
+    
+            # iterate over stage 1 tables and delete records with the current processing cycle id
+            for file, table in cls.stg_1_table_mapping['ALEPH_TSV_TABLE_MAPPING'].items():
+                table_base_class = dwetl.Base.classes[table]
+                stg_1_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
+                stg_1_results.delete()
+    
+            # iterate over stage 2 tables and delete all records added in this test file
+            for stg_2_table, dimension in cls.stg_2_table_config_mapping.items():
+                table_base_class = dwetl.Base.classes[stg_2_table]
+                stg_2_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
+                stg_2_results.delete()
+    
+            # delete errors from error table
+            table_base_class = dwetl.Base.classes['dw_db_errors']
+            error_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
+            error_results.delete()
+    
+            # commit all changes
+            session.commit()
     def test_bib_rec_stage_1(self):
         # check to see if same amount of values from 20210123 in z00, z13, z13u
         # were written to the stage 1 table.
