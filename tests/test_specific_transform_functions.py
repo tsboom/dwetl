@@ -11,13 +11,13 @@ class TestSpecificTransformFunctions(unittest.TestCase):
 
     def test_isbn_code_020(self):
         #test isbn_issn check function
-        self.assertEqual(specific_transform_functions.isbn_code_020('020177091921X'),'020177091921X')
-        self.assertEqual(specific_transform_functions.isbn_code_020('0021177091921X'),'')
+        self.assertEqual(specific_transform_functions.isbn_code_020('020', '020177091921X'),'020177091921X')
+        self.assertEqual(specific_transform_functions.isbn_code_020('002', '0021177091921X'),'')
 
     def test_isbn_code_022(self):
         #test isbn_issn check function
-        self.assertEqual(specific_transform_functions.issn_code_022('022177091921X'),'022177091921X')
-        self.assertEqual(specific_transform_functions.issn_code_022('0021177^^091921X'),'')
+        self.assertEqual(specific_transform_functions.issn_code_022('022','022177091921X'),'022177091921X')
+        self.assertEqual(specific_transform_functions.issn_code_022('002', '0021177^^091921X'),'')
 
     def test_remove_ocm_ocn_on(self):
         self.assertEqual(specific_transform_functions.remove_ocm_ocn_on('ocn748578120'),'748578120')

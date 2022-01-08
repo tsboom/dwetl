@@ -387,7 +387,7 @@ class TestBibRecEtl(unittest.TestCase):
                             elif key == 't2_z13u_user_defined_4__bib_rec_language_cd':
                                 # uses substring
                                 t_check_result = dwetl.specific_transform_functions.substring(dq_value, 35,38)
-                                # TODO: the db converts '' to three spaces because of the ddl data type on this field?
+                                # the db converts '' to three spaces because of the ddl data type on this field
                                 if t_check_result == '':
                                     t_check_result = '   '
                                 self.assertEqual(t_check_result, t_value, message)
