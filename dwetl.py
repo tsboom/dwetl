@@ -49,7 +49,10 @@ def run(input_directory):
     db_session_creator = dwetl.database_session
     
     with db_session_creator() as session:
-        job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
+        try: 
+            job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
+        except KeyError as e: 
+            sys.exit("dw_prcsng_cycle was not found. The database probably didn't have any tables in it. If you're developing locally, did you initialize the database and reset it?")
         # TODO: should we get the processing cycle id from the max of the reporting db final table
         # like we do in ezproxy_etl?
         # This would ensure we don't use the same processing cycle id twice. 
@@ -121,7 +124,7 @@ if __name__=='__main__':
     input_directory = f'{data_directory}/incoming/{today}/'
     
     # TODO: for local dev uncomment the following
-    #data_directory = os.getenv("DATA_DIRECTORY")
+    # data_directory = os.getenv("DATA_DIRECTORY")
     # today = "20191204" # tiff's local test date
     # #today = "20191211" # nima's local test date
     # input_directory = f'{data_directory}/incoming/aleph/{today}/'
