@@ -109,8 +109,7 @@ class TestBibRecEtl(unittest.TestCase):
         cls.stg_2_table_config_mapping = {
             'dw_stg_2_bib_rec_z00': 'bibliographic_record_dimension',
             'dw_stg_2_bib_rec_z13': 'bibliographic_record_dimension',
-            'dw_stg_2_bib_rec_z13u': 'bibliographic_record_dimension',
-            'dw_stg_2_bib_rec_z00_field': 'bibliographic_record_dimension'
+            'dw_stg_2_bib_rec_z13u': 'bibliographic_record_dimension'
         }
         stage_2_intertable_processing.stage_2_intertable_processing(cls.job_info, cls.logger, cls.stg_2_table_config_mapping, cls.db_session_creator)
 
@@ -139,162 +138,162 @@ class TestBibRecEtl(unittest.TestCase):
     
             # commit all changes
             session.commit()
-    def test_bib_rec_stage_1(self):
-        # check to see if same amount of values from 20210123 in z00, z13, z13u
-        # were written to the stage 1 table.
-        with dwetl.test_database_session() as session:
-
-            prcsng_cycle_id = self.__class__.prcsng_cycle_id
-
-            # iterate over stage 1 tables and compare input rows in file to rows in stg 1 tables
-            for file, table in self.__class__.stg_1_table_mapping['ALEPH_TSV_TABLE_MAPPING'].items():
-                table_base_class = dwetl.Base.classes[table]
-                # compare count of input records to records written
-                #tsv_rows = sum(1 for line in open(f'tests/data/incoming_test/aleph/20210123/{file}'))
-                tsv_rows = sum(1 for line in open(f'{self.__class__.test_input_directory}/{file}'))
-                if tsv_rows == 0:
-                    input_record_count = 0
-                else:
-                    #input_record_count = sum(1 for line in open(f'tests/data/incoming_test/aleph/20210123/{file}'))- 3 #metadata rows
-                    input_record_count = sum(1 for line in open(f'{self.__class__.test_input_directory}/{file}'))- 3 #metadata rows
-
-                stg_1_row_count = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
-                # TODO: log test failure reasons
-                self.assertEqual(input_record_count, stg_1_row_count)
-
-    def test_bib_rec_stage_2_load_stage_2(self):
-        # check to see if stage 2 tables contain the correct amount of records combined from stage 1 aleph libraries
-        with dwetl.test_database_session() as session:
-
-            prcsng_cycle_id = self.__class__.prcsng_cycle_id
-
-            # capture total records for stage 2 combining diff aleph libraries into aleph tables (z00, z13, z13u)
-            # example: {'dw_stg_2_bib_rec_z13': 344}
-            stg_2_aleph_table_totals_expected = {}
-
-            # because there are multiple stg 1 tables combining into stg 2 it's helpful to keep track of
-            # the previous aleph table and previous total
-            prev_aleph_table = None
-            prev_aleph_table_total = 0
-            # iterate over stg 1, stg 2 tables to compare records written per table
-            for stg_1_table, stg_2_table in self.__class__.stage1_to_stage2_table_mapping.items():
-                stg_1_table_base_class = dwetl.Base.classes[stg_1_table]
-                stg_2_table_base_class = dwetl.Base.classes[stg_2_table]
-                # query number of records in stg 2 and stge 2
-                stg_1_count = session.query(stg_1_table_base_class).filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
-                # stg 2 contains the totals from 2 stage 1 tables since they are combined per aleph table.
-                stg_2_count = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
-
-                # we should only count the totals of the combined stage 1 tables
-                if prev_aleph_table:
-                    # add to the totals expected dict per stg 2 table
-                    if stg_2_table == prev_aleph_table:
-                        stg_2_aleph_table_totals_expected[stg_2_table]  = stg_2_aleph_table_totals_expected[stg_2_table] + stg_1_count
-                        self.assertEqual(stg_2_aleph_table_totals_expected[stg_2_table], stg_2_count)
-                        prev_aleph_table = None
-                    else:
-                        # if the loop encounters a new table reset the prev_aleph_table
-                        prev_aleph_table = None
-                else:
-                    # keep track of the first stg_2 total
-                    prev_aleph_table = stg_2_table
-                    stg_2_aleph_table_totals_expected[stg_2_table] = stg_1_count
-                    self.assertEqual(stg_2_aleph_table_totals_expected[stg_2_table], stg_1_count)
-                # TODO log test failures
-
-    def test_bib_rec_stage_2_pp(self):
-        # check to see if pp values are written
-        with dwetl.test_database_session() as session:
-
-            prcsng_cycle_id = self.__class__.prcsng_cycle_id
-
-            # choose a few random IDs and check if the PP values are written
-            for stg_2_table, dimension in self.__class__.stg_2_table_config_mapping.items():
-                stg_2_table_base_class = dwetl.Base.classes[stg_2_table]
-
-                results = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
-
-                # get unique ID from pk of the table
-                pk = stg_2_table_base_class.__table__.primary_key.columns.values()[2].name
-
-                for item in results.all():
-                    for key in item.__dict__.keys():
-                        if key[:2] == 'pp':
-                            # check if pp is there for records with in values
-                            in_key = 'in_'+'_'.join(key.split('_')[1:])
-
-                            # make sure pp value is not none
-                            if item.__dict__[in_key]:
-                                message = f'Record {pk}: {item.__dict__[pk]} is missing the PP value for {item.__dict__[key]}'
-                                self.assertIsNotNone(item.__dict__[key], message)
-
-    def test_bib_rec_stage_2_dq(self):
-        # check to see if dq values are written
-        with dwetl.test_database_session() as session:
-
-            prcsng_cycle_id = self.__class__.prcsng_cycle_id
-
-            # check if the DQ values are written
-            for stg_2_table, dimension in self.__class__.stg_2_table_config_mapping.items():
-                stg_2_table_base_class = dwetl.Base.classes[stg_2_table]
-                error_table_base_class = dwetl.Base.classes['dw_db_errors']
-
-                results = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
-
-                # get unique ID from pk of the table
-                pk = stg_2_table_base_class.__table__.primary_key.columns.values()[2].name
-
-
-                for item in results.all():
-
-                    for key in item.__dict__.keys():
-                        # create message for later to print when tests fail
-                        message = f'Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} DQ test.'
-
-                        if key[:2] == 'dq':
-                            # check dq values and special cases
-                            in_key = 'in_'+'_'.join(key.split('_')[1:])
-                            pp_key = in_key.replace('in_', 'pp_')
-                            dq_value = item.__dict__[key]
-                            pp_value = item.__dict__[pp_key]
-                            if in_key == 'in_z00_doc_number':
-                                # make sure missing  are suspended
-                                if dq_value == None or dq_value.isspace():
-                                    self.assertEqual(dq_value, 'SUS', message)
-                                continue
-                            if in_key == 'in_z13_open_date' or in_key == 'in_z13_update_date':
-                                # if date comes in None, dq should be None
-                                dq_check_result = dwetl.data_quality_utilities.no_missing_values(pp_value)
-                                if dq_check_result == False:
-                                    self.assertEqual(dq_value, None, message)
-                                    continue
-                                # if it comes in a wrong date, dq should be None
-                                dq_check_result = dwetl.data_quality_utilities.is_valid_aleph_date(pp_value)
-
-                                if dq_check_result == False:
-                                    self.assertEqual(dq_value, None, message)
-                                continue
-                            if in_key == 'in_z13u_user_defined_2':
-                                # if it comes in None, dq should be '-M'
-                                if pp_value == None:
-                                    self.assertEqual(dq_value, '-M', message)
-                                    break
-                                # if the value is invalid, dq should be '-I'
-                                dq_check_result = dwetl.data_quality_utilities.dq_z13u_user_defined_2(pp_value)
-                                if dq_check_result is False:
-                                    self.assertEqual(dq_value, '-I', message)
-                                continue
-
-                            if in_key =='in_z00_no_lines' or in_key =='in_z00_data_len':
-                                if pp_value:
-                                    # ignore leading zeros
-                                    pp_val_int = int(pp_value.lstrip('0'))
-                                    # remove leading zeros and compare with dq value
-                                    self.assertEqual(pp_val_int, dq_value)
-                                continue
-
-                            # for all other values make sure the pp value equals the dq value
-                            self.assertEqual(pp_value, dq_value, message)
+    # def test_bib_rec_stage_1(self):
+    #     # check to see if same amount of values from 20210123 in z00, z13, z13u
+    #     # were written to the stage 1 table.
+    #     with dwetl.test_database_session() as session:
+    # 
+    #         prcsng_cycle_id = self.__class__.prcsng_cycle_id
+    # 
+    #         # iterate over stage 1 tables and compare input rows in file to rows in stg 1 tables
+    #         for file, table in self.__class__.stg_1_table_mapping['ALEPH_TSV_TABLE_MAPPING'].items():
+    #             table_base_class = dwetl.Base.classes[table]
+    #             # compare count of input records to records written
+    #             #tsv_rows = sum(1 for line in open(f'tests/data/incoming_test/aleph/20210123/{file}'))
+    #             tsv_rows = sum(1 for line in open(f'{self.__class__.test_input_directory}/{file}'))
+    #             if tsv_rows == 0:
+    #                 input_record_count = 0
+    #             else:
+    #                 #input_record_count = sum(1 for line in open(f'tests/data/incoming_test/aleph/20210123/{file}'))- 3 #metadata rows
+    #                 input_record_count = sum(1 for line in open(f'{self.__class__.test_input_directory}/{file}'))- 3 #metadata rows
+    # 
+    #             stg_1_row_count = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
+    #             # TODO: log test failure reasons
+    #             self.assertEqual(input_record_count, stg_1_row_count)
+    # 
+    # def test_bib_rec_stage_2_load_stage_2(self):
+    #     # check to see if stage 2 tables contain the correct amount of records combined from stage 1 aleph libraries
+    #     with dwetl.test_database_session() as session:
+    # 
+    #         prcsng_cycle_id = self.__class__.prcsng_cycle_id
+    # 
+    #         # capture total records for stage 2 combining diff aleph libraries into aleph tables (z00, z13, z13u)
+    #         # example: {'dw_stg_2_bib_rec_z13': 344}
+    #         stg_2_aleph_table_totals_expected = {}
+    # 
+    #         # because there are multiple stg 1 tables combining into stg 2 it's helpful to keep track of
+    #         # the previous aleph table and previous total
+    #         prev_aleph_table = None
+    #         prev_aleph_table_total = 0
+    #         # iterate over stg 1, stg 2 tables to compare records written per table
+    #         for stg_1_table, stg_2_table in self.__class__.stage1_to_stage2_table_mapping.items():
+    #             stg_1_table_base_class = dwetl.Base.classes[stg_1_table]
+    #             stg_2_table_base_class = dwetl.Base.classes[stg_2_table]
+    #             # query number of records in stg 2 and stge 2
+    #             stg_1_count = session.query(stg_1_table_base_class).filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
+    #             # stg 2 contains the totals from 2 stage 1 tables since they are combined per aleph table.
+    #             stg_2_count = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
+    # 
+    #             # we should only count the totals of the combined stage 1 tables
+    #             if prev_aleph_table:
+    #                 # add to the totals expected dict per stg 2 table
+    #                 if stg_2_table == prev_aleph_table:
+    #                     stg_2_aleph_table_totals_expected[stg_2_table]  = stg_2_aleph_table_totals_expected[stg_2_table] + stg_1_count
+    #                     self.assertEqual(stg_2_aleph_table_totals_expected[stg_2_table], stg_2_count)
+    #                     prev_aleph_table = None
+    #                 else:
+    #                     # if the loop encounters a new table reset the prev_aleph_table
+    #                     prev_aleph_table = None
+    #             else:
+    #                 # keep track of the first stg_2 total
+    #                 prev_aleph_table = stg_2_table
+    #                 stg_2_aleph_table_totals_expected[stg_2_table] = stg_1_count
+    #                 self.assertEqual(stg_2_aleph_table_totals_expected[stg_2_table], stg_1_count)
+    #             # TODO log test failures
+    # 
+    # def test_bib_rec_stage_2_pp(self):
+    #     # check to see if pp values are written
+    #     with dwetl.test_database_session() as session:
+    # 
+    #         prcsng_cycle_id = self.__class__.prcsng_cycle_id
+    # 
+    #         # choose a few random IDs and check if the PP values are written
+    #         for stg_2_table, dimension in self.__class__.stg_2_table_config_mapping.items():
+    #             stg_2_table_base_class = dwetl.Base.classes[stg_2_table]
+    # 
+    #             results = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
+    # 
+    #             # get unique ID from pk of the table
+    #             pk = stg_2_table_base_class.__table__.primary_key.columns.values()[2].name
+    # 
+    #             for item in results.all():
+    #                 for key in item.__dict__.keys():
+    #                     if key[:2] == 'pp':
+    #                         # check if pp is there for records with in values
+    #                         in_key = 'in_'+'_'.join(key.split('_')[1:])
+    # 
+    #                         # make sure pp value is not none
+    #                         if item.__dict__[in_key]:
+    #                             message = f'Record {pk}: {item.__dict__[pk]} is missing the PP value for {item.__dict__[key]}'
+    #                             self.assertIsNotNone(item.__dict__[key], message)
+    # 
+    # def test_bib_rec_stage_2_dq(self):
+    #     # check to see if dq values are written
+    #     with dwetl.test_database_session() as session:
+    # 
+    #         prcsng_cycle_id = self.__class__.prcsng_cycle_id
+    # 
+    #         # check if the DQ values are written
+    #         for stg_2_table, dimension in self.__class__.stg_2_table_config_mapping.items():
+    #             stg_2_table_base_class = dwetl.Base.classes[stg_2_table]
+    #             error_table_base_class = dwetl.Base.classes['dw_db_errors']
+    # 
+    #             results = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
+    # 
+    #             # get unique ID from pk of the table
+    #             pk = stg_2_table_base_class.__table__.primary_key.columns.values()[2].name
+    # 
+    # 
+    #             for item in results.all():
+    # 
+    #                 for key in item.__dict__.keys():
+    #                     # create message for later to print when tests fail
+    #                     message = f'Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} DQ test.'
+    # 
+    #                     if key[:2] == 'dq':
+    #                         # check dq values and special cases
+    #                         in_key = 'in_'+'_'.join(key.split('_')[1:])
+    #                         pp_key = in_key.replace('in_', 'pp_')
+    #                         dq_value = item.__dict__[key]
+    #                         pp_value = item.__dict__[pp_key]
+    #                         if in_key == 'in_z00_doc_number':
+    #                             # make sure missing  are suspended
+    #                             if dq_value == None or dq_value.isspace():
+    #                                 self.assertEqual(dq_value, 'SUS', message)
+    #                             continue
+    #                         if in_key == 'in_z13_open_date' or in_key == 'in_z13_update_date':
+    #                             # if date comes in None, dq should be None
+    #                             dq_check_result = dwetl.data_quality_utilities.no_missing_values(pp_value)
+    #                             if dq_check_result == False:
+    #                                 self.assertEqual(dq_value, None, message)
+    #                                 continue
+    #                             # if it comes in a wrong date, dq should be None
+    #                             dq_check_result = dwetl.data_quality_utilities.is_valid_aleph_date(pp_value)
+    # 
+    #                             if dq_check_result == False:
+    #                                 self.assertEqual(dq_value, None, message)
+    #                             continue
+    #                         if in_key == 'in_z13u_user_defined_2':
+    #                             # if it comes in None, dq should be '-M'
+    #                             if pp_value == None:
+    #                                 self.assertEqual(dq_value, '-M', message)
+    #                                 break
+    #                             # if the value is invalid, dq should be '-I'
+    #                             dq_check_result = dwetl.data_quality_utilities.dq_z13u_user_defined_2(pp_value)
+    #                             if dq_check_result is False:
+    #                                 self.assertEqual(dq_value, '-I', message)
+    #                             continue
+    # 
+    #                         if in_key =='in_z00_no_lines' or in_key =='in_z00_data_len':
+    #                             if pp_value:
+    #                                 # ignore leading zeros
+    #                                 pp_val_int = int(pp_value.lstrip('0'))
+    #                                 # remove leading zeros and compare with dq value
+    #                                 self.assertEqual(pp_val_int, dq_value)
+    #                             continue
+    # 
+    #                         # for all other values make sure the pp value equals the dq value
+    #                         self.assertEqual(pp_value, dq_value, message)
 
     def test_bib_rec_stage_2_t(self):
         # check to see if T values are written
@@ -334,7 +333,7 @@ class TestBibRecEtl(unittest.TestCase):
                             if item.__dict__['rm_suspend_rec_flag'] == 'Y':
                                 continue
 
-
+                            
                             # Check all keys with specific transform functions
                             # save isbn_issn_code dq value for the transformation aftewards (isbn_txt, and associated issns)
                             if key == 't1_z13_isbn_issn__bib_rec_isbn_txt':
@@ -342,13 +341,19 @@ class TestBibRecEtl(unittest.TestCase):
                                 dq_value = item.__dict__['dq_z13_isbn_issn']
                                 # the t_value in the db should match the transformed field result (assuming it starts with 020
                                 t_check_result = dwetl.specific_transform_functions.isbn_code_020(code, dq_value)
-                                self.assertEqual(t_check_result, t_value, message)
+                                # create message for later to print when tests fail
+                                isbn_message = f"""Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} transformation test. The T value is: {t_value}. The isbn code is: {code}. The dq_value is: {dq_value}.
+                                    Problem Row: {sorted_row}"""
+                                self.assertEqual(t_check_result, t_value, isbn_message)
                                 
                             elif key == 't2_z13_isbn_issn__bib_rec_all_associated_issns_txt':
                                 code = item.__dict__['dq_z13_isbn_issn_code']
-                                dq_value = item.__dict__['dq_z13_isbn_issn']
+                                dq_value = item.__dict__['dq_z13_isbn_issn']    
                                 t_check_result = dwetl.specific_transform_functions.issn_code_022(code, dq_value)
-                                self.assertEqual(t_check_result, t_value, message)
+                                # create message for later to print when tests fail
+                                issn_message = f"""Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} transformation test. The T value is: {t_value}. The issn code is: {code}. The dq_value is: {dq_value}.
+                                    Problem Row: {sorted_row}"""
+                                self.assertEqual(t_check_result, t_value, issn_message)
                                 
                             # test z13u user defined 2-6
                             elif key == 't1_z13u_user_defined_2__bib_rec_oclc_no':

@@ -4,6 +4,7 @@ import dwetl.specific_transform_functions as specific_transform_functions
 import datetime
 import pdb
 import pprint
+from collections import OrderedDict
 
 
 # utility class to hold dq failure info
@@ -50,9 +51,11 @@ class TransformationProcessor(Processor):
         # *special casee for bib_rec z13* capture isbn_issn_code for processing isbn_issn later
         isbn_issn_code = None
         
-
+        # sort the item by key to make sure keys come in order during processing (important duiring z13 ISBN ISSN processing)
+        sorted_item = dict(OrderedDict(sorted(item.items(), key = lambda t: t[0])))
+        
         # transform keys and vals within current item
-        for key, val in item.items():
+        for key, val in sorted_item.items():
             # skip invalid keys
             if key in invalid_keys:
                 continue
@@ -96,7 +99,8 @@ class TransformationProcessor(Processor):
                     transform_result = val
                     
                     # *special case z13 issn code
-                    # TODO: what happens if the keys are not run in order isbn_issn_code -> isbn_issn
+                    # the item was sorted into sorted_item to make sure the keys come in ABC order.
+                    
                     if key == 'dq_z13_isbn_issn_code':
                         # save the isbn issn code and go to the next key
                         isbn_issn_code = val
