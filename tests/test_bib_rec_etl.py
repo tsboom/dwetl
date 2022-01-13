@@ -47,6 +47,8 @@ class TestBibRecEtl(unittest.TestCase):
         # currently testing end to end
         cls.test_input_directory = 'tests/data/incoming_test/aleph/20210123'
         #cls.test_input_directory = 'tests/data/incoming_test/aleph/20190919'
+        # on the vm
+        #cls.test_input_directory = '/apps/dw/incoming/20220113'
 
         cls.db_session_creator = dwetl.test_database_session
 
@@ -352,7 +354,7 @@ class TestBibRecEtl(unittest.TestCase):
                                 t_check_result = dwetl.specific_transform_functions.issn_code_022(code, dq_value)
                                 # create message for later to print when tests fail
                                 issn_message = f"""Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} transformation test. The T value is: {t_value}. The issn code is: {code}. The dq_value is: {dq_value}.
-                                    Problem Row: {sorted_row}"""
+                                    Problem Row: {sorted_row}"""git stat
                                 self.assertEqual(t_check_result, t_value, issn_message)
                                 
                             # test z13u user defined 2-6
