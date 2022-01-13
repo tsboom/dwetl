@@ -19,16 +19,16 @@ def load_table_config(table_config_path):
     return table_config
 
 def stage_2_intertable_processing(job_info, logger, stg_2_table_config_mapping, db_session_creator):
-    print("Stage 2 Intertable Processing...")
-    logger.info("Stage 2 Intertable Processing...")
+    print("\nStage 2 Intertable Processing...")
+    logger.info("\nStage 2 Intertable Processing...")
 
 
 
     processing_cycle_id = job_info.prcsng_cycle_id
 
     for table, dimension in stg_2_table_config_mapping.items():
-        print(table)
-        logger.info(table)
+        print('\n'+table)
+        logger.info('\n'+table)
         # get json_config for current dimension
         table_config_path = os.path.join('table_config', dimension + '.json')
         json_config = load_table_config(table_config_path)
@@ -46,27 +46,32 @@ def stage_2_intertable_processing(job_info, logger, stg_2_table_config_mapping, 
             '''
             Preprocessing
             '''
-            print('starting preprocessing...')
+            print('\nstarting preprocessing...')
+            logger.info('\nstarting preprocessing...')
             preprocessor = Preprocess(reader, writer, job_info, logger, json_config, pk_list, error_writer)
             preprocessor.execute()
-            print('Preprocessing completed.')
+            print('preprocessing completed.')
+            logger.info('preprocessing completed.')
 
             '''
             Data Quality Checks
             '''
-            print('checking data quality...')
+            print('\nchecking data quality...')
+            logger.info('\nchecking data quality...')
             data_quality_checker = DataQualityProcessor(reader, writer, job_info, logger, json_config, pk_list, error_writer)
             data_quality_checker.execute()
-            print('Data quality checks completed.')
+            print('data quality checks completed.')
+            logger.info('data quality checks completed.')
 
             '''
             Transformations
             '''
-            print("transforming...")
+            print("\ntransforming...")
             logger.info("transforming...")
             transformation_processor = TransformationProcessor(reader, writer, job_info, logger, json_config, pk_list, error_writer)
             transformation_processor.execute()
-            print('Transformations completed.')
+            print('transformations completed.')
+            logger.info('transformations completed.')
 
 
 '''

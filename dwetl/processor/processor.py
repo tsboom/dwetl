@@ -66,6 +66,7 @@ class Processor:
 
                     # log error
                     self.logger.info(f'{e.error_type} found')
+                    self.logger.info(f'Problem row:\n{error_row}')
                     print(f'\n{e.error_type} found: {error}')
                     print(f'Problem row:\n{error_row}')
 
