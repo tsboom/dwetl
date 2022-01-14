@@ -48,7 +48,7 @@ class TestBibRecEtl(unittest.TestCase):
         #cls.test_input_directory = 'tests/data/incoming_test/aleph/20210123'
         #cls.test_input_directory = 'tests/data/incoming_test/aleph/20190919'
         # Uncomment the code below on the vm
-        #cls.test_input_directory = '/apps/dw/incoming/20220113'
+        cls.test_input_directory = '/apps/dw/incoming/20220113'
 
         cls.db_session_creator = dwetl.test_database_session
 
