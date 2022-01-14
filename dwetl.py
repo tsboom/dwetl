@@ -120,14 +120,14 @@ if __name__=='__main__':
 
     # On the test and prod VM, the data directory is /apps/dw/incoming
     # uncomment these 2 lines on the VM in test/prod:
-    data_directory = os.getenv("DATA_DIRECTORY")
-    input_directory = f'{data_directory}/incoming/{today}/'
+    # data_directory = os.getenv("DATA_DIRECTORY")
+    # input_directory = f'{data_directory}/incoming/{today}/'
     
     # TODO: for local dev uncomment the following
-    # data_directory = os.getenv("DATA_DIRECTORY")
-    # today = "20191204" # tiff's local test date
-    # #today = "20191211" # nima's local test date
-    # input_directory = f'{data_directory}/incoming/aleph/{today}/'
+    data_directory = os.getenv("DATA_DIRECTORY")
+    today = "20191204" # tiff's local test date
+    #today = "20191211" # nima's local test date
+    input_directory = f'{data_directory}/incoming/aleph/{today}/'
     
     
     # TODO: move processed file to processed directory

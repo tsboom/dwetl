@@ -36,6 +36,22 @@ class TransformationProcessor(Processor):
             return transform_steps
         except:
             return None
+            
+    @classmethod
+    def reorder_item(cls, item):
+        # this method makes sure that dq_z13_isbn_issn_code appears before the ISSN/ISBN in the item 
+        sorted_item = {}
+        for key, val in item.items():
+            if 'dq_z13_isbn_issn_code' in item.keys():
+                if key == 'dq_z13_isbn_issn_code':
+                    sorted_item[key] = val
+                if key == 'dq_z13_isbn_issn':
+                    sorted_item[key] = val
+                else:
+                    sorted_item[key] = val
+            else: 
+                    sorted_item[key] = val              
+        return sorted_item
 
     @classmethod
     def transform_item(cls, item, json_config, pk_list, logger):
@@ -51,9 +67,11 @@ class TransformationProcessor(Processor):
         # *special casee for bib_rec z13* capture isbn_issn_code for processing isbn_issn later
         isbn_issn_code = None
         
-        # sort the item by key to make sure keys come in order during processing (important duiring z13 ISBN ISSN processing)
-        sorted_item = dict(OrderedDict(sorted(item.items(), key = lambda t: t[0])))
+        # make sure the item dict has ISBN/ISSN code coming in before the ISBN/ISSN (important for z13)
+        sorted_item = cls.reorder_item(item)
         
+        # if item['in_z13_rec_key'] == "006203470":
+        #     pdb.set_trace()
         # transform keys and vals within current item
         for key, val in sorted_item.items():
             # skip invalid keys
@@ -63,7 +81,7 @@ class TransformationProcessor(Processor):
             if key in pk_list:
                 out_dict[key] = val
                 
-            # preserve create job metadata
+            # preserve create job metadatapyteswt 
             if key.startswith('em_create'):
                 out_dict[key] = val
                 

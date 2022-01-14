@@ -301,7 +301,7 @@ class TestTransformationProcessor(unittest.TestCase):
         
             transformation_processor.execute()
             results = transformation_processor.writer.list
-        
+
             expected_keys = sorted([
                 'db_operation_cd', 'dw_stg_2_aleph_lbry_name',
                 't1_z13_year__bib_rec_publication_yr_no',
