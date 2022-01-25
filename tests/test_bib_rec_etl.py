@@ -109,9 +109,9 @@ class TestBibRecEtl(unittest.TestCase):
         stg 2 intertable processing (PP, DQ, T)
         '''
         cls.stg_2_table_config_mapping = {
-            # 'dw_stg_2_bib_rec_z00': 'bibliographic_record_dimension',
-            'dw_stg_2_bib_rec_z13': 'bibliographic_record_dimension'
-            #'dw_stg_2_bib_rec_z13u': 'bibliographic_record_dimension'
+            'dw_stg_2_bib_rec_z00': 'bibliographic_record_dimension',
+            'dw_stg_2_bib_rec_z13': 'bibliographic_record_dimension',
+            'dw_stg_2_bib_rec_z13u': 'bibliographic_record_dimension'
         }
         stage_2_intertable_processing.stage_2_intertable_processing(cls.job_info, cls.logger, cls.stg_2_table_config_mapping, cls.db_session_creator)
 
