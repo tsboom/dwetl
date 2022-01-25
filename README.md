@@ -10,37 +10,55 @@ This application reads several TSV files representing different tables in Aleph,
 
 Prerequisites: Python 3.7, pip, virtualenv
 
-Start by cloning the repo and unzipping it into your /apps/git directory, or wherever your UMD Libraries repos are stored on your local machine.
-
-Go into the repo's root directory.
-
-`cd dwetl`
-
-Create a virtualenv called venv using Python 3.
-
-`virtualenv venv`
-
-Enter your virtual environment and check to see if `python --version` shows python 3.7.
-
-`source venv/bin/activate`
-
-Make sure your python version is Python 3.7. If it isn't, delete that venv directory and create a new one.
-
-`python3 -m venv venv`
 
 
-Make sure when you are inside your virtual environment `(venv)` should show up in your terminal on the left-hand side, and your python --version should be Python 3.
+1. **Download DWETL and install the requirements into a virtualeenv.** 
 
-`pip install -r requirements.txt`
+   Start by cloning the repo and unzipping it into your /apps/git directory, or wherever your UMD Libraries repos are stored on your local machine.
 
-If you get an error about psycopg2, you will need to make sure you have postgresql installed.
-You can do it with homebrew `brew install postgresql` and try installing the requirements again.
+   Go into the repo's root directory.	`cd dwetl`
 
-Copy the "env_example" file to ".env" and edit the .env file with your environment information:
+   Create a virtualenv called venv using Python 3. `virtualenv venv`
 
-`cp env_example .env`
+   Activate your virtual environment. `source venv/bin/activate` You will see (venv) appear in the left side of your command line prompt, showing that you are in the virtual environment. 
 
-Setup the database. See [Database Setup](docs/database_setup.md) in docs.
+   Check to see if `python --version` is 3.7. 
+
+   If it's not python 3, delete that venv directory and create a new one like this `python3 -m venv venv`
+
+   Install the requiremeents. `pip install -r requirements.txt`
+
+   If you get an error about psycopg2, you will need to make sure you have postgresql installed.
+   You can do it with homebrew `brew install postgresql` and try installing the requirements again.
+
+2. **Set up your environment**
+
+   Copy the "env_example" file to ".env" and edit the .env file with your environment information:
+
+   `cp env_example .env`
+
+   Edit the .env file and enter 
+
+3. ** Set up the DWETL, test DWETL, and reporting databases**
+
+   1. Setup the database. See [Database Setup](docs/database_setup.md) in docs.
+
+4. 
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
 
 See [Database Usage](docs/database_usage.md) for information about
 programmatically accessing to the database.

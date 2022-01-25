@@ -6,11 +6,12 @@ This document describes how to setup and configure the a database for
 use by the application. For information about programmatically accessing
 the database, see [Database Usage](database_usage.md).
  
-There are three ways to setup the database for use in development:
+There are two ways to setup the database for use in development:
 
-* Use the pgcommondev server
 * [Docker Postgres container](database_setup_docker_postgres.md)
 * [Local Postgres installation](database_setup_local_postgres.md)
+
+For the reporting databse (used for looking up data), an SSH tunnel to dw-db-test is used during development. 
 
 The `.env` file, in conjunction with the `config/database_credentials.py` file,
 provides the database connection information.
@@ -30,7 +31,7 @@ In production, only the "application" database settings should be configured.
 The DDL for the entire database is located in the "ddl" directory and named
 "usmai_dw_etl.sql".
 
-The DDL in the "usmai_dw_etl.sql" file was generated using the following
+The DDL in the "usmai_dw_etl.sql" file was originally generated using the following
 command:
 
 ```
@@ -39,6 +40,8 @@ command:
 
 The "usmai_dw_etl.sql" file should be updated whenever there is a change to the
 database schema.
+
+There is also a "usmai_dw_etl_test.sql" file used to generate the test database. This was copied from "usmai_dw_etl.sql".
 
 To recreate the database from the "usmai_dw_etl.sql",  run the following
 command:
@@ -50,7 +53,11 @@ command:
 > invoke database-reset
 ```
 
-### Database Migrations
+To 
+
+### Database Migrations 
+
+This section describe how `dwetl/ddl/migrations` files were used early on to track changes to the database. We don't use it now and instead are tracking changes to usmai_dw_etl.sql and usmai_dw_etl_test.sql the ddl file using git. 
 
 To set up the etl database with all tables and fields from pgcommondev, but no data. In the dwetl/ddl directory there are postgres dump files for generating the clean database. The first file was generated from pgcommondev using the following command:
 
@@ -104,26 +111,31 @@ where \<USERNAME> is your username, and \<DATABASE_DUMP_FILENAME> is the name of
 scp jsmith@pgcommondev.lib.umd.edu:/nfsdbbackup/pgsql/dump-usmai_dw_etl9.custom.Tuesday-pm .
 ```
 
-## Using pgcommondev for development
+## Using dw-db-test for development to look into the test reporting database. 
 
-**Note:** Changes made to the pgcommondev.lib.umd.edu server will be visible to all users of that server, so it is not recommended when doing local development that might result in destructive changes to the database.
 
-To connect to Postgres running on pgcommondev, it is recommended that an SSH tunnel be used so that you can work on this project from any IP address.
+To connect to the reporting database running on dw-db-test.lib.umd.edu, it is recommended that an SSH tunnel be used so that you can work on this project from any IP address.
 
 To start an SSH tunnel to port 3333, open a terminal window and type:
 
-`ssh -L 3333:pgcommondev.lib.umd.edu:5439 <your username>@pgcommondev.lib.umd.edu`
+`ssh -L 3333:dw-db-test.lib.umd.edu:5432 thschone@dw-db-test.lib.umd.edu`
 
 Enter your username and password and leave this tunnel open in your terminal window.
 
-In the "config/database_credentials.py" file the following properties can be used:
+In the .env file the following properties can be used for the repoting database:
 
 ```
-DB_USER = 'usmai_dw'
-DB_PASSWORD = '<USMAI_DW_USER_PASSWORD>'
-DB_NAME = 'usmai_dw_etl'
-DB_HOST_NAME= '127.0.0.1'
-DB_PORT= '3333'
+# The username to use in connecting to the database
+REPORTING_DB_USER=usmai_dw
+# The password to use in connecting to the database
+REPORTING_DB_PASSWORD=<password>
+# The name of the database
+REPORTING_DB_NAME=usmai_dw_reporting
+# The hostname/IP address of the Postgres server
+#REPORTING_DB_HOST_NAME=dw-db-test.lib.umd.edu
+REPORTING_DB_HOST_NAME=localhost
+# The port to use to connect to the Postgres server
+REPORTING_DB_PORT=3333
 ```
 
-where \<USMAI_DW_USER_PASSWORD> is the password for the "usmai_dw" Postgres user.
+where <password> is the password for the "usmai_dw" Postgres user on dw-db-test.

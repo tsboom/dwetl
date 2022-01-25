@@ -102,4 +102,4 @@ rm_dq_check_exception_cnt
 
 Sunsetting a record
 
-- change current record flag from Y to N, change effetive to date
+- change current record flag from Y to N, change effective to date

@@ -32,7 +32,7 @@ Both the "dwetl .database_session" and "dwetl.test_database_session" are used
 in the same way:
 
 ```
-import dweetl
+import dwetl
 
 ...
 
