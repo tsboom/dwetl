@@ -70,7 +70,7 @@ def stage_2_intertable_processing(job_info, logger, stg_2_table_config_mapping, 
             logger.info("transforming...")
             transformation_processor = TransformationProcessor(reader, writer, job_info, logger, json_config, pk_list, error_writer)
             transformation_processor.execute()
-            print('transformations completed.')
+            print('Transformations Completed.')
             logger.info('transformations completed.')
 
 
