@@ -76,7 +76,7 @@ def run(input_directory):
     load_stage_2.load_stage_2(job_info, logger, table_mappings.stg_1_to_stg_2_table_mapping, db_session_creator)
 
     '''
-    stg 2 intertable processing
+    stg 2 intertable processing DQ and T
     '''
     stage_2_intertable_processing.stage_2_intertable_processing(job_info, logger, table_mappings.stg_2_table_dim_mapping, db_session_creator)
 
@@ -117,17 +117,13 @@ if __name__=='__main__':
         sys.exit(1)
     if len(arguments) == 2:
         today = arguments[1]
-
-    # On the test and prod VM, the data directory is /apps/dw/incoming
-    # uncomment these 2 lines on the VM in test/prod:
-    data_directory = os.getenv("DATA_DIRECTORY")
-    input_directory = f'{data_directory}/incoming/{today}/'
     
-    # TODO: for local dev uncomment the following
-    # data_directory = os.getenv("DATA_DIRECTORY")
-    # today = "20191204" # tiff's local test date
-    # #today = "20191211" # nima's local test date
-    # input_directory = f'{data_directory}/incoming/aleph/{today}/'
+    # TODO: for local dev uncomment the following today to test only one date
+    today = "20191204" # tiff's local test date
+    #today = "20191211" # nima's local test date
+
+    # get input directory from .env file. 
+    input_directory = os.getenv("INPUT_DIRECTORY")+f"/{today}"
     
     
     # TODO: move processed file to processed directory

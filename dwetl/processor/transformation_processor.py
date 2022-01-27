@@ -41,16 +41,17 @@ class TransformationProcessor(Processor):
     def reorder_item(cls, item):
         # this method makes sure that dq_z13_isbn_issn_code appears before the ISSN/ISBN in the item 
         sorted_item = {}
-        for key, val in item.items():
-            if 'dq_z13_isbn_issn_code' in item.keys():
+        if 'dq_z13_isbn_issn_code' in item.keys():
+            for key, val in item.items():
                 if key == 'dq_z13_isbn_issn_code':
-                    sorted_item[key] = val
-                if key == 'dq_z13_isbn_issn':
-                    sorted_item[key] = val
+                    isbn_dict = {'dq_z13_isbn_issn_code': val}
                 else:
                     sorted_item[key] = val
-            else: 
-                    sorted_item[key] = val              
+            sorted_item = {**isbn_dict, **sorted_item}
+        else: 
+            # for all other keys, the default order is fine
+            for key, val in item.items():
+                sorted_item[key] = val              
         return sorted_item
 
     @classmethod
@@ -70,8 +71,6 @@ class TransformationProcessor(Processor):
         # make sure the item dict has ISBN/ISSN code coming in before the ISBN/ISSN (important for z13)
         sorted_item = cls.reorder_item(item)
         
-        # if item['in_z13_rec_key'] == "006203470":
-        #     pdb.set_trace()
         # transform keys and vals within current item
         for key, val in sorted_item.items():
             # skip invalid keys
@@ -117,8 +116,7 @@ class TransformationProcessor(Processor):
                     transform_result = val
                     
                     # *special case z13 issn code
-                    # the item was sorted into sorted_item to make sure the keys come in ABC order.
-                    
+                    # the item was sorted into sorted_item to make sure that dq_z13_isbn_issn_code is transformed before dq_z13_isbn_issn
                     if key == 'dq_z13_isbn_issn_code':
                         # save the isbn issn code and go to the next key
                         isbn_issn_code = val

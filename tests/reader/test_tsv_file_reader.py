@@ -10,18 +10,23 @@ class TestTsvFileReader(unittest.TestCase):
             'field1\tfield2\tfield3',
             'A\tB\tC',
             'One\tTwo\tThree',
+            'test\ttwo\t\"quotes\":blah',
             'T\tFooter'
         ]
 
         expected_line1 = {'field1': 'A', 'field2': 'B', 'field3': 'C'}
         expected_line2 = {'field1': 'One', 'field2': 'Two', 'field3': 'Three'}
+        expected_line3 = {'field1': 'test', 'field2': 'two', 'field3': '"quotes":blah'}
 
         with TemporaryTestFile(lines) as tempFilePath:
             tsv_file_reader = TsvFileReader(tempFilePath)
             line1 = next(iter(tsv_file_reader))
             line2 = next(iter(tsv_file_reader))
+            line3 = next(iter(tsv_file_reader))
             self.assertEqual(expected_line1, line1)
             self.assertEqual(expected_line2, line2)
+            self.assertEqual(expected_line3, line3)
+
 
     def test_simple_tsv_with_incomplete_row(self):
         lines = [
