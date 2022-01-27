@@ -109,22 +109,34 @@ main function for running script from the command line
 '''
 if __name__=='__main__':
     arguments = sys.argv
-    today = datetime.datetime.now().strftime('%Y%m%d')
+    today = datetime.datetime.now()
+    yesterday = today - datetime.timedelta(days=1)
+    day_to_process = yesterday.strftime('%Y%m%d')
+
     # give hint if --help
     if '--help' in arguments:
         print('Usage: ')
         print('\tdwetl.py [YYYYMMDD] [test (if you want to run dwetl with the test db)]')
         sys.exit(1)
     if len(arguments) == 2:
-        today = arguments[1]
+        day_to_process  = arguments[1]
     
     # TODO: for local dev uncomment the following today to test only one date
-    #today = "20191204" # tiff's local test date
-    #today = "20191211" # nima's local test date
+    #day_to_process = "20191204" # tiff's local test date
+    #day_to_process  = "20191211" # nima's local test date
 
     # get input directory from .env file. 
-    input_directory = os.getenv("INPUT_DIRECTORY")+f"/{today}"
+    input_directory = os.getenv("INPUT_DIRECTORY")+f"/{day_to_process}"
     
+    # if os.path.exists(incoming_input_file):
+    #     print(f'input file: {incoming_input_file}')
+    #     run(incoming_input_file)
+    # elif os.path.exists(processed_input_file):
+    #     print(f'input file: {processed_input_file}')
+    #     run(processed_input_file)   
+    #     # Print the message if the file path does not exist
+    # else:
+    #     print (f'no data file found for {day_to_process}. \nAre you sure you provided the date like so? \nex: python ezproxy_etl.py YYYYMMDD')
     
     # TODO: move processed file to processed directory
     # and when an already processed file is run, use the processed input directory
