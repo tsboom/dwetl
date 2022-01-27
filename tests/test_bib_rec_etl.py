@@ -45,10 +45,10 @@ class TestBibRecEtl(unittest.TestCase):
 
         # run ETL using sample data and write to the test postgres database (usmai_dw_etl_test)
         # currently testing end to end
-        #cls.test_input_directory = 'tests/data/incoming_test/aleph/20210123'
-        #cls.test_input_directory = 'tests/data/incoming_test/aleph/20190919'
-        # Uncomment the code below on the vm
-        cls.test_input_directory = '/apps/dw/incoming/20220113'
+        cls.test_input_directory = 'tests/data/incoming_test/aleph/20210123'
+        #cls.test_input_directory = 'tests/data/incoming_test/aleph/20220113'
+        # Uncomment the code below on the vm to test an input directory
+        #cls.test_input_directory = '/apps/dw/incoming/20220113'
 
         cls.db_session_creator = dwetl.test_database_session
 
@@ -110,8 +110,8 @@ class TestBibRecEtl(unittest.TestCase):
         '''
         cls.stg_2_table_config_mapping = {
             'dw_stg_2_bib_rec_z00': 'bibliographic_record_dimension',
-            'dw_stg_2_bib_rec_z13': 'bibliographic_record_dimension',
-            'dw_stg_2_bib_rec_z13u': 'bibliographic_record_dimension'
+            'dw_stg_2_bib_rec_z13u': 'bibliographic_record_dimension',
+            'dw_stg_2_bib_rec_z13': 'bibliographic_record_dimension'
         }
         stage_2_intertable_processing.stage_2_intertable_processing(cls.job_info, cls.logger, cls.stg_2_table_config_mapping, cls.db_session_creator)
 
@@ -313,6 +313,7 @@ class TestBibRecEtl(unittest.TestCase):
                 # get unique ID from pk of the table
                 pk = stg_2_table_base_class.__table__.primary_key.columns.values()[2].name
 
+                # iterate over each item from results query and check the t_values against the expected values from stage 2 and specific transform functions
                 for item in results.all():
                     for key in item.__dict__.keys():
                         
@@ -325,6 +326,7 @@ class TestBibRecEtl(unittest.TestCase):
                             item_dict = item.__dict__
                             sorted_row = {k: item_dict[k] for k in sorted(item_dict)}
                         
+                            # t_value holds the t value written in the database after transformations
                             t_value = item.__dict__[key]
                             # create message for later to print when tests fail
                             message = f"""Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} transformation test. The T value is: {t_value}. The dq_value is: {dq_value}.
@@ -338,27 +340,10 @@ class TestBibRecEtl(unittest.TestCase):
                             
                             # Check all keys with specific transform functions
                             # save isbn_issn_code dq value for the transformation aftewards (isbn_txt, and associated issns)
-                            if key == 't1_z13_isbn_issn__bib_rec_isbn_txt':
-                                code = item.__dict__['dq_z13_isbn_issn_code']
-                                dq_value = item.__dict__['dq_z13_isbn_issn']
-                                # the t_value in the db should match the transformed field result (assuming it starts with 020
-                                t_check_result = dwetl.specific_transform_functions.isbn_code_020(code, dq_value)
-                                # create message for later to print when tests fail
-                                isbn_message = f"""Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} transformation test. The T value is: {t_value}. The isbn code is: {code}. The dq_value is: {dq_value}.
-                                    Problem Row: {sorted_row}"""
-                                self.assertEqual(t_check_result, t_value, isbn_message)
-                                
-                            elif key == 't2_z13_isbn_issn__bib_rec_all_associated_issns_txt':
-                                code = item.__dict__['dq_z13_isbn_issn_code']
-                                dq_value = item.__dict__['dq_z13_isbn_issn']    
-                                t_check_result = dwetl.specific_transform_functions.issn_code_022(code, dq_value)
-                                # create message for later to print when tests fail
-                                issn_message = f"""Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} transformation test. The T value is: {t_value}. The issn code is: {code}. The dq_value is: {dq_value}.
-                                    Problem Row: {sorted_row}"""
-                                self.assertEqual(t_check_result, t_value, issn_message)
+                           
                                 
                             # test z13u user defined 2-6
-                            elif key == 't1_z13u_user_defined_2__bib_rec_oclc_no':
+                            if key == 't1_z13u_user_defined_2__bib_rec_oclc_no':
                                 t_check_result = dwetl.specific_transform_functions.remove_ocm_ocn_on(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
 
@@ -413,6 +398,27 @@ class TestBibRecEtl(unittest.TestCase):
                             elif key == 't4_z13u_user_defined_6__bib_rec_provisional_status_flag':
                                 t_check_result = dwetl.specific_transform_functions.is_provisional(dq_value)
                                 self.assertEqual(t_check_result, t_value, message)
+
+
+                            # the following isbn/issn related keys are different because they rely on the z13_isbn_issn_code    
+                            elif key == 't1_z13_isbn_issn__bib_rec_isbn_txt':
+                                code = item.__dict__['dq_z13_isbn_issn_code']
+                                dq_value = item.__dict__['dq_z13_isbn_issn']
+                                # the t_value in the db should match the transformed field result (assuming it starts with 020
+                                t_check_result = dwetl.specific_transform_functions.isbn_code_020(code, dq_value)
+                                # create message for later to print when tests fail
+                                isbn_message = f"""Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} transformation test. The T value is: {t_value}. The isbn code is: {code}. The dq_value is: {dq_value}.
+                                    Problem Row: {sorted_row}"""
+                                self.assertEqual(t_check_result, t_value, isbn_message)
+                                
+                            elif key == 't2_z13_isbn_issn__bib_rec_all_associated_issns_txt':
+                                code = item.__dict__['dq_z13_isbn_issn_code']
+                                dq_value = item.__dict__['dq_z13_isbn_issn']    
+                                t_check_result = dwetl.specific_transform_functions.issn_code_022(code, dq_value)
+                                # create message for later to print when tests fail
+                                issn_message = f"""Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} transformation test. The T value is: {t_value}. The issn code is: {code}. The dq_value is: {dq_value}.
+                                    Problem Row: {sorted_row}"""
+                                self.assertEqual(t_check_result, t_value, issn_message)
 
                             else:
                                 # all other items are moved as-is during transformations (like all z00s)

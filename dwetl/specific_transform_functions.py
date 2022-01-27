@@ -24,7 +24,7 @@ def output_standard(value):
 bibliographic record dimension transform functions
 '''
 
-# # source value Z13_ISBN_ISSN using optional_isbn_code
+# if code is 020, the isbn value is isbn
 def isbn_code_020(code, value):
     if code and code[0:3].startswith('020'):
         isbn = value
@@ -33,6 +33,7 @@ def isbn_code_020(code, value):
         isbn = ''
     return isbn
 
+# if code is 022, isbn_issn value is the issn
 def issn_code_022(code, value):
     if code and code[0:3].startswith('022'):
         issn = value
