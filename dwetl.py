@@ -119,7 +119,7 @@ if __name__=='__main__':
         today = arguments[1]
     
     # TODO: for local dev uncomment the following today to test only one date
-    today = "20191204" # tiff's local test date
+    #today = "20191204" # tiff's local test date
     #today = "20191211" # nima's local test date
 
     # get input directory from .env file. 
