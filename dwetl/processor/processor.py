@@ -35,12 +35,13 @@ class Processor:
                     # Increment dw_error_id value from the table or set as 1 for the first time
                     error_table_base_class = dwetl.Base.classes['dw_db_errors']
                     max_dw_error_id = self.error_writer.session.query(func.max(error_table_base_class.dw_error_id)).scalar()
-                    if max_dw_error_id ==  None: 
+                    if max_dw_error_id ==  None:
                         dw_error_id = 1
                     else:
                         dw_error_id = max_dw_error_id + 1
-                    
+
                     # create error row dictionary that will be added to the error table
+                    #import pdb; pdb.set_trace()
                     error_row_dict = {
                         'dw_error_id': dw_error_id,
                         'dw_error_type': e.error_type,
@@ -65,6 +66,7 @@ class Processor:
 
                     # log error
                     self.logger.info(f'{e.error_type} found')
+                    self.logger.info(f'Problem row:\n{error_row}')
                     print(f'\n{e.error_type} found: {error}')
                     print(f'Problem row:\n{error_row}')
 

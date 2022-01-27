@@ -20,7 +20,8 @@ class TsvFileReader:
         """
         self.file_path = file_path
         self.fd = open(self.file_path)
-        self.reader = csv.reader(self.fd, delimiter='\t')
+        self.reader = csv.reader(self.fd, delimiter='\t', quoting=csv.QUOTE_NONE)
+        #self.reader = csv.reader(self.fd, delimiter='\t')
         # check if file is empty
         if os.stat(self.file_path).st_size is not 0:
             # Skip first two header lines
