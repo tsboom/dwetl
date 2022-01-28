@@ -86,7 +86,7 @@ These steps correlate with [Alex's high level ETL diagram](https://drive.google.
 - **Step 4.** intertable processing on the Library Item Event Z35 stage 2 table. Make sure that the Library Item ID is unique and if so, add Last Loan, Last Renew, and Last Return details to the Library Item Z30 stage 2 table.
 - **Step 5.** Grab final value of fields from Stage 2 tables and put into the Stg 3 Dimension tables.
 
-  - Pay special attention to z13, z00, z13u because we might get an updated record for z00 but not z13 or z13u. Even though z13 and z13u are blank, they should not override the reporting databases's values with blank information.
+  - Pay special attention to z13, z00, z13u  record alignment because we might get an updated record for z00 but not z13 or z13u. Even though z13 and z13u are blank, they should not override the reporting databases's values with blank information.
 - **Step 6** Assess processing readiness for Stage 3 tables
 	- **6a**. If there's an "I" in stage 3, and the dimension's natural key already has that record, suspend if there is no sunsetted record with a matching key.
 	- **6b.** If there is a "D" in stage 3, check to see if the key exists. If the effective-to date is less than today, the deleted key was re-added.
