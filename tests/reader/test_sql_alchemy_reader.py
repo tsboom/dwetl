@@ -22,6 +22,7 @@ class TestSqlAlchemyReader(unittest.TestCase):
             
             second_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id== -2)
             second_results.delete()
+            
             session.commit()
             
     def setup_rows(self, session, base_table_class, rows):
@@ -47,7 +48,7 @@ class TestSqlAlchemyReader(unittest.TestCase):
 
             # Use negative processing cycle id, so any actual data in the tables
             # won't interfere with the tests.
-            processing_cycle_id = -1
+            processing_cycle_id = -3
             reader = SqlAlchemyReader(session, table_base_class, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
 
             results = []
