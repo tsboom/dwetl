@@ -72,7 +72,7 @@ def update_db_ddl(c):
     db_name = db_settings['DB_NAME']
     pg_password=f'PGPASSWORD={db_password} '
 
-    psql_cmd = f'pg_dump -U {db_user} -h {db_host} -p {db_port} -d {db_name} -Fp --create --clean --schema-only -f ddl/usmai_dw_etl.sql'
+    psql_cmd = f'pg_dump -U {db_user} -h {db_host} -p {db_port} {db_name} -Fp --create --clean --schema-only -f ddl/usmai_dw_etl.sql'
     if c.run(pg_password + psql_cmd):
         print('-----------')
         print('Updated usmai_dw_etl.sql')
