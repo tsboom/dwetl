@@ -35,7 +35,7 @@ ADD COLUMN em_update_tmstmp timestamp without time zone;
 
 
 -- dropping this empty table because it needs a new NOT NULL column and its PK modified. 
-DROP TABLE dw_stg_2_bib_rec_z00
+DROP TABLE dw_stg_2_bib_rec_z00;
 
 CREATE TABLE public.dw_stg_2_bib_rec_z00 (
     db_operation_cd character(1) NOT NULL,
