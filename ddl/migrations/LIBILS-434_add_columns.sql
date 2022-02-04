@@ -24,7 +24,7 @@ ADD COLUMN rec_trigger_key character(9) NOT NULL;
 
 ALTER TABLE dw_db_errors
 -- need to write test for this in end to end 
-ALTER COLUMN dw_error_row TYPE character varying(5000)
+ALTER COLUMN dw_error_row TYPE character varying(5000),
 ADD COLUMN em_update_dw_prcsng_cycle_id integer,	
 ADD COLUMN em_update_dw_job_exectn_id integer,	
 ADD COLUMN em_update_dw_job_name character varying(100),	
