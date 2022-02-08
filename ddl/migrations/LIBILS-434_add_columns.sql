@@ -7,12 +7,14 @@ ALTER TABLE dw_stg_2_bib_rec_z13u
 ADD COLUMN t3_z13u_user_defined_3__bib_rec_type_desc character varying(500);
 
 ALTER TABLE dw_stg_2_bib_rec_z13u
+DROP COLUMN t3_z13u_user_defined_3__bib_rec_bib_lvl_cd,
 ADD COLUMN t4_z13u_user_defined_3__bib_rec_bib_lvl_cd character(1);
 
 ALTER TABLE dw_stg_2_bib_rec_z13u
 ADD COLUMN t5_z13u_user_defined_3__bib_rec_bib_lvl_desc character varying(500);
 
 ALTER TABLE dw_stg_2_bib_rec_z13u
+DROP COLUMN t4_z13u_user_defined_3__bib_rec_encoding_lvl_cd,
 ADD COLUMN t6_z13u_user_defined_3__bib_rec_encoding_lvl_cdc character(1);
 
 ALTER TABLE dw_stg_2_bib_rec_z13u
