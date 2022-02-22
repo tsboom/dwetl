@@ -36,9 +36,7 @@ Questions:
 
 ## Execution metadata
 
--  We are only using the DW_PRCSNG_CYCLE table
-- Not populating dw_processing_cycle_job, or dw_prcsng_cycle_job_exectn tables because it is too complicated for the moment. Need to focus on getting ETL working first. 
-- 
+-  Execution metadata 
 
 
 
@@ -80,14 +78,14 @@ Questions:
   - em_update_user_id
   - em_update_tmstmp
 
--  Do not do PP, DQ for Deletes
+-  Do not do PP, DQ for records with "D" for Delete
 - Data quality checking: 
   - When a DQ check fails, no other DQ checks are run
-  - We aren't looking at the Order in the Sheet
+  - We aren't looking at the Order of DQ checks listed in the Star Schema Specifications spreadsheet. 
   
 ### Suspend Records after failed DQ checks
 - When a record fails a DQ check, and needs to be suspended. There are no replacement values. 
-- report record that suspended in the log and write an email
+- report record that suspended in the log and send the log in the nightly email. 
 - write execution metadata with suspend rec flag (Y or N) and reason code (3 chars)
 
 
@@ -100,6 +98,6 @@ rm_dq_check_exception_cnt
 
 
 
-Sunsetting a record
+### Sunsetting a record
 
 - change current record flag from Y to N, change effective to date

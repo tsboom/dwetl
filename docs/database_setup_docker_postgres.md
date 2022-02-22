@@ -47,7 +47,20 @@ postgres=# CREATE ROLE usmai_dw;
 postgres=# <Ctrl-D>
 ```
 
+**Notes:** 
+
+The docker container running postgres terminal shell must be kept open for the DWETL databases to be running. Keep note of the ports used to include that information in your `.env` configuration. 
+
+If you want to use the dw-db-test.lib.umd.edu databases locally for testing, you can use an SSH tunnel from your local machine to the VM databases if your IP address is added to whitelist in the `pg_hba.conf` of the dw-db postgres instance. 
+
+Example SSH tunnel command: 
+
+`ssh -L 3333:dw-db-test.lib.umd.edu:5432 thschone@dw-db-test.lib.umd.edu`
+
+
+
 ## Reset the database and test database from invoke
+
 1) Check your `.env` file to make sure your test database and database credentials are correct. 
 2) Type `invoke --list` to see list of tasks available
 3) Type `invoke database-reset` to reset the configured etl database using the ddl/usmai_dw_etl.sql file. 
