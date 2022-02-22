@@ -223,7 +223,7 @@ Tests also depend on test data within `dwetl/tests/data`
 
 #### Testing scopes
 
-- Tests for other scripts are located in `dwetl/tests`. 
+- Unit tests for DWETL loading steps are located in `dwetl/tests`. 
 - Unit tests for each reader, writer, and processor are located in `tests` in `reader`, `writer`, and `processor`. These tests are quick and use dictionaries to imitate reading and processing rows from the ETL database. 
 - An end-to-end DWETL test per dimension is done within `dwetl/tests` ie: `test_bib_rec_etl.py`.  These tests use the test database and write to the various stage tables. 
 
