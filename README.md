@@ -61,7 +61,9 @@ To see the list of available tasks, run:
 
 ## Running the application
 
-To run the entire ETL process, use  `python dwetl.py` from inside of your dwetl directory. `dwetl.py` will try to run yesterday's date. To configure data directory and database settings for the run of dwetl, modify the `.env` file per your local environment. 
+To run the entire Aleph tables and MPF files ETL process, use  `python dwetl.py` from inside of your dwetl directory. `dwetl.py` will try to run yesterday's date for Aleph processing. To configure data directory and database settings for the run of dwetl, modify the `.env` file per your local environment. 
+
+EZProxy processing is run with `python ezproxy_etl.py`. 
 
 DWETL.py and the tests depend on having an ETL database and ETL test database set up, and also need a connection to the reporting database in order to do lookups for some steps. 
 
@@ -73,17 +75,29 @@ Example:
 
 ## DWETL Architecture overview
 
-DWETL at the highest level is a Python application which reads a set of daily TSV files from an Integrated Library System, and processes the columns in each table according to a set of specifications in a Google Sheet to finally copy cleaned column data into a Data Warehouse. The original TSV files have columns that are checked for data quality errors, and are transformed into new formats and new column names. While most columns from the TSV files are moved as-is into their new columns, many columns need extra analysis and processing. The requirements for each column that is transformed are laid out in the `DW - LIBRARY ITEM Star Schema Specifications` . 
+DWETL at the highest level is a Python application which reads a set of daily TSV files from an Integrated Library System, and processes the columns in each table according to a set of specifications in a Google Sheet to finally copy cleaned column data into a Data Warehouse. The original TSV files have columns that are checked for data quality errors, and are transformed into new formats and new column names. While most columns from the TSV files are moved as-is into their new columns, many columns need extra analysis and processing. The requirements for each column that is transformed are laid out in the DW - LIBRARY ITEM Star Schema Specifications  [Google Sheet](https://docs.google.com/spreadsheets/d/1QyEk0qAUjplpEXPQsAHHJ4avxOWqyJWkW6LIzxQB64Y/edit#gid=1813469208).
 
-[Google Sheet]: https://docs.google.com/spreadsheets/d/1QyEk0qAUjplpEXPQsAHHJ4avxOWqyJWkW6LIzxQB64Y/edit#gid=1813469208
+This sheet is converted into JSON format within `dwetl/table_config` for each dimension, and this JSON is referenced during the ETL process. The Data Warehouse CLAS uses is accessible in Jasperreports Server, which allows self-service report generation from the reporting database (usmai_dw_reporting). 
 
-This sheet is converted into JSON format within `dwetl/table_config` for each dimension, and this JSON is referenced during the ETL process. The Data Warehouse CLAS uses is accessible in Jasperreports Server, which allows self-service report generation from the reporting database. 
-
-1. TSV tables are loaded into Stage 1 tables which are just all the original data put into columns in the database per table. Stage 1 tables are also called File-equivalent tables, and serve the purpose of being a record of the data that was in the Aleph extract in database form so that it can be easily accessed and queried. 
+1. TSV tables are loaded into Stage 1 tables which are just all the original data put into columns in the database per table. Stage 1 tables are also called "File-equivalent tables", and serve the purpose of being a record of the data that was in the Aleph extract in database form so that it can be easily accessed and queried. 
 2. Stage 1 tables are combined if needed and copied over to Stage 2 tables. 
-3. Stage 2 tables are written to during the Preprocessing, Data Quality checks, and Transformation process. The final values are the Transformation values, which are then copied over to the dimension tables in the ETL database, and finally the reporting database after checking for the most recent data. 
+3. Stage 2 tables are written to during the Preprocessing, Data Quality checks, and Transformation process. The final values are the Transformation values, which are then copied over to the Stage 3 dimension tables. 
+3. Final values from the stage 3 tables are copied over to the reporting database. DWETL determines the current record based on looking things up in the reporting database. 
 
-**Databases:** 
+
+
+**Data sources**
+
+DWETL processes three different kinds of data sources in TSV form. 
+
+1. Aleph files
+   - These files are large and have complex requirements. The majority of DWETL logic deals with these 
+2. MPF files
+   - These are manually maintained files within Aleph. Copies of these files are located in `dwetl/data` for development. 
+3. EZ Proxy files
+   - EzProxy TSVs are simple and are processed using `ezproxy_processor.py`, `ezp_fact_processor.py`, and `ezproxy_reporting_fact_processor.py` and run with `ezproxy_etl.py`. 
+
+**Databases**
 
 The production databases are on the dw-db VM. Test databases on the dw-db-test VM. Local development usually uses local docker instances of the etl and test databases. 
 

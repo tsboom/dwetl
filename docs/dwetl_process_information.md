@@ -1,4 +1,3 @@
-Detailed information
 # Information about the steps of dwetl project
 
 ## Data Quality checks
