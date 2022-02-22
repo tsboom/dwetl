@@ -99,7 +99,7 @@ DWETL processes three different kinds of data sources in TSV form.
 
 **Databases**
 
-The production databases are on the dw-db VM. Test databases on the dw-db-test VM. Local development usually uses local docker instances of the etl and test databases. 
+The production databases are on the dw-db VM. Test databases on the dw-db-test VM. Local development usually uses local docker instances of the etl and test databases.
 
 - usmai_dw_etl 
   - stores data from the ETL process starting with stage 1 tables and ending in the dimension tables. 
@@ -108,11 +108,13 @@ The production databases are on the dw-db VM. Test databases on the dw-db-test V
 - usmai_dw_reporting
   - This is the current data warehouse database that is used by Jasperreports Server. It is used for lookups during ETL to ensure the latest data is preserved, and older records are sunsetted. 
 
-
+ See [Database Setup](docs/database_setup.md) in docs. 
 
 ### ETL steps detailed overview
 
-Note: This is just another general overview of the ETL steps, but please do not use these as a complete specifications for the steps in ETL. For that, use the "Detail File Process Flow" from Lucid Chart, and the more detailed specifications documents provided by Alex in the USMAI Data Warehouse shared Google Drive. 
+Note: This is just another general overview of the ETL steps, but please do not use these as a complete specifications for the steps in ETL. For that, use the "Detail File Process Flow" from Lucid Chart, and the more detailed specifications documents provided by Alex in the USMAI Data Warehouse shared Google Drive.  CLAS Data Warehouse directory in Google Drive containing detailed specifications documentation: [Data Warehouse](https://drive.google.com/drive/folders/10DqR4S1fcY3Z81zK4ZsRZWGLP6z5I6fd?usp=sharing). (You must be in CLAS to see this.)
+
+In `dwetl/docs/diagrams`, there is a helpful PDF ` USMAI Data Warehouse ETL Design (2019.02.28) - Detail File Process Flow.pdf` containing a detailed diagram showing all steps of ETL and the files and tables that are changing.
 
 
 - **Step 1**. Read tab-separated files into a file-equivalent (Stage 1) table in pgcommon dev.
@@ -171,12 +173,11 @@ In this application, a reader will typically provide a single Dictionary object 
 
 A processor converts data from the reader into data appropriate for the writer.
 
-In this application, a processor will typically get a single Dictionary object
-from the reader for each line/row, and then modify that Dictionary object, and
-passing it to the writer.
+In this application, a processor will typically get a single Dictionary object from the reader for each line/row, and then modify that Dictionary object, and passing it to the writer.
 
-A processor will typically operate on one row/line at a time, and iterate
-through all the rows/lines using a "for" loop.
+A processor will typically operate on one row/line at a time, and iterate through all the rows/lines using a "for" loop.
+
+Processors contain the 'meat' of the code that changes the data values in the ETL process. Unique data processing flows such as the MPF files and Ezproxy files have their own processors. 
 
 Processors - `dwetl/dwetl/processor`
 
@@ -184,6 +185,7 @@ Processors - `dwetl/dwetl/processor`
 - copy_stage_1_to_stage2.py
 - data_quality_processor.py
 - ezproxy_fact_processor.py
+- ezproxy_reporting_fact_processor.py
 - load_aleph_tsv.py
 - load_mpf_tsv.py
 - load_z00_field_tsv.py
@@ -194,10 +196,7 @@ Processors - `dwetl/dwetl/processor`
 
 A writer sends data to some output.
 
-In this application, a writer will typically receive a single Dictionary
-object for each line/row in the data source. When used with SQLAlchemy, the
-Dictionary object is equivalent to the row in the database table being
-written to.
+In this application, a writer will typically receive a single Dictionary object for each line/row in the data source. When used with SQLAlchemy, the Dictionary object is equivalent to the row in the database table being written to.
 
 A commonly used writer is "SqlAlchemyWriter", which writes the data to a
 particular database table.
