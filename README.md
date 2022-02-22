@@ -181,7 +181,7 @@ Processors contain the 'meat' of the code that changes the data values in the ET
 
 Processors - `dwetl/dwetl/processor`
 
-- Superclass: processor.py
+- Superclass: `processor.py`
 - copy_stage_1_to_stage2.py
 - data_quality_processor.py
 - ezproxy_fact_processor.py
@@ -206,7 +206,7 @@ The "ListWriter" is commonly used for unit testing, in place of the
 
 Writers - `dwetl/dwetl/writer`
 
-- Superclass: writer.py
+- Superclass: `writer.py`
 
 ## Testing
 
