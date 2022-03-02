@@ -144,7 +144,7 @@ They should not override the reporting databases's values with blank information
 - **Step 7**. If U type 1 update: update every existing dimension record associated with that business key
 - **Step 8.** If U type 2: sunset previous record, insert new dimension record
 - **Step 8c**. Process Deletes
-- **Step 8d.** Process I and U field records. If getting I and U for dw_stg_3_bib_rec_field_outrigger, delete what is there and replace checks. If you don't find the bib_rec_id in fields, then sunset that record. After this step, all dimensions will be loaded and processed.
+- **Step 8d.** Process I and U field records. After this step, all dimensions will be loaded and processed.
 - **Step 9**. Intertable Fact Processing. Dw_stg_2_lbry_item_z30_full gets holding collection id, bib rec id. source lbry_item_holding_loc_collection_cd.
 - **Step 10.** Create fact table using surrogate key from each dimension. The fact table links all dimensions together. Using natural keys, populate the fact table with surrogate keys.
 
@@ -164,11 +164,16 @@ In this application, a reader will typically provide a single Dictionary object 
 
 * Readers - `dwetl/dwetl/reader`
   - Ezproxy reader
+  
   - list reader
+  
   - mpf file reader
+  
   - sql alchemy reader
+  
   - tsv file reader
-  - z00 field reader
+  
+    
 
 ### Processors
 
@@ -189,7 +194,6 @@ Processors - `dwetl/dwetl/processor`
 - ezproxy_reporting_fact_processor.py
 - load_aleph_tsv.py
 - load_mpf_tsv.py
-- load_z00_field_tsv.py
 - preprocess.py
 - transformation_processor.py
 
