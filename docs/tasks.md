@@ -36,17 +36,10 @@ Drops the application database, and restores an empty database using the
 This task also terminates all active sessions to the database (this is
 needed to actually drop the database).
 
-### sheets-to-json
-
-Generates the JSON files in the "table_config/" subdirectory from the Google
-Sheets document.
-
-This task will prompt for OAuth authorization, if needed.
-
-### test-database-teset
+### test-database-reset
 
 Drops the test database, and restores an empty database using the
-"ddl/usmai_dw_etl.sql" file.
+"ddl/usmai_dw_etl_test.sql" file.
 
 **Note:** If, as is commonly the case in local development, the "application"
 and "test" database are the same database, this command would also drop and
@@ -54,6 +47,12 @@ restore the application database.
 
 This task also terminates all active sessions to the database (this is
 needed to actually drop the database).
+
+### sheets-to-json
+
+Generates the JSON files for Aleph tables from the Star Schema Specifications Google Sheet in the "table_config/" subdirectory.
+
+This task will prompt for OAuth authorization, if needed.
 
 ### run-migration
 

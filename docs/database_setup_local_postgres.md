@@ -1,6 +1,6 @@
 # Local Postgres Setup
 
-* Install Postgres v9.5.16 or later.
+* Install Postgres v10 or later.
 * Download a database dump file
 
 The following assumes that a "postgres" user exists for communicating with Postgres (which should be the default when installing Postgres):
