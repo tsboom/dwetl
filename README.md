@@ -114,7 +114,7 @@ The production databases are on the dw-db VM. Test databases on the dw-db-test V
 
 Note: This is just another general overview of the ETL steps, but please do not use these as a complete specifications for the steps in ETL. For that, use the "Detail File Process Flow" from Lucid Chart, and the more detailed specifications documents provided by Alex in the USMAI Data Warehouse shared Google Drive.  CLAS Data Warehouse directory in Google Drive containing detailed specifications documentation: [Data Warehouse](https://drive.google.com/drive/folders/10DqR4S1fcY3Z81zK4ZsRZWGLP6z5I6fd?usp=sharing). (You must be in CLAS to see this.)
 
-In `dwetl/docs/diagrams`, there is a helpful PDF ` USMAI Data Warehouse ETL Design (2019.02.28) - Detail File Process Flow.pdf` containing a detailed diagram showing all steps of ETL and the files and tables that are changing.
+In `dwetl/docs/diagrams`, there is a helpful PDF ` USMAI Data Warehouse ETL Design - Datail Fil Process Flow` containing a detailed diagram showing all steps of ETL and the files and tables that are changing. This document was updated in February 2022. 
 
 
 - **Step 1**. Read tab-separated files into a file-equivalent (Stage 1) table in pgcommon dev.
