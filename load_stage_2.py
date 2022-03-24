@@ -53,6 +53,7 @@ def load_stage_2(job_info, logger, stage1_to_stage2_table_mapping, db_session_cr
     # count up records in stg 2 tables
     with db_session_creator() as session: 
         for table in stage2_table_list: 
+            pdb.set_trace()
             stage2_table_class = dwetl.Base.classes[table]
             stg_2_count = session.query(stage2_table_class).filter(stage2_table_class.em_create_dw_prcsng_cycle_id==job_info.prcsng_cycle_id).count()
             loaded_record_count = loaded_record_count + stg_2_count
