@@ -42,8 +42,6 @@ def load_stage_2(job_info, logger, stage1_to_stage2_table_mapping, db_session_cr
         library = aleph_library(stage1_table)
 
         with db_session_creator() as session:
-            if stage2_table == 'dw_stg_2_lbry_item_fact_z30_full':
-                pdb.set_trace()
             stage1_table_class = dwetl.Base.classes[stage1_table]
             stage2_table_class = dwetl.Base.classes[stage2_table]
             reader = SqlAlchemyReader(session, stage1_table_class, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
@@ -55,9 +53,10 @@ def load_stage_2(job_info, logger, stage1_to_stage2_table_mapping, db_session_cr
     # count up records in stg 2 tables
     with db_session_creator() as session: 
         for table in stage2_table_list: 
-            pdb.set_trace()
             stage2_table_class = dwetl.Base.classes[table]
             stg_2_count = session.query(stage2_table_class).filter(stage2_table_class.em_create_dw_prcsng_cycle_id==job_info.prcsng_cycle_id).count()
+            print(f'\t\n{stg_2_count} records loaded to {table}.')
+            logger.info(f'\t\n{stg_2_count} records loaded to {table}.')
             loaded_record_count = loaded_record_count + stg_2_count
     
     logger.info(f'Total records loaded in stage 2: {loaded_record_count}\n')
