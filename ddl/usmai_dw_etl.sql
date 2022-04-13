@@ -790,29 +790,6 @@ WITH (autovacuum_enabled='true');
 
 ALTER TABLE public.dw_stg_1_mai39_z13u OWNER TO usmai_dw;
 
---
--- Name: dw_stg_1_mai50_z103_bib; Type: TABLE; Schema: public; Owner: usmai_dw
---
-
-CREATE TABLE public.dw_stg_1_mai50_z103_bib (
-    rec_type_cd character(1) NOT NULL,
-    db_operation_cd character(1) NOT NULL,
-    rec_trigger_key character(9) NOT NULL,
-    source character(9),
-    dest character(9),
-    dest_lib character(5),
-    dest_docnum character(9),
-    em_create_dw_prcsng_cycle_id integer NOT NULL,
-    em_create_dw_job_exectn_id integer NOT NULL,
-    em_create_dw_job_name character varying(100) NOT NULL,
-    em_create_dw_job_version_no character varying(20) NOT NULL,
-    em_create_user_id character varying(20) NOT NULL,
-    em_create_tmstmp timestamp without time zone NOT NULL
-)
-WITH (autovacuum_enabled='true');
-
-
-ALTER TABLE public.dw_stg_1_mai50_z103_bib OWNER TO usmai_dw;
 
 --
 -- Name: dw_stg_1_mai50_z103_bib_full; Type: TABLE; Schema: public; Owner: usmai_dw
@@ -1857,30 +1834,6 @@ WITH (autovacuum_enabled='true');
 ALTER TABLE public.dw_stg_2_lbry_item_event_z35 OWNER TO usmai_dw;
 
 --
--- Name: dw_stg_2_lbry_item_fact_z103_bib_full; Type: TABLE; Schema: public; Owner: usmai_dw
---
-
-CREATE TABLE public.dw_stg_2_lbry_item_fact_z103_bib_full (
-    rec_type_cd character(1) NOT NULL,
-    db_operation_cd character(1) NOT NULL,
-    rec_trigger_key character(9) NOT NULL,
-    source character(9),
-    dest character(9),
-    dest_lib character(5),
-    dest_docnum character(9),
-    em_create_dw_prcsng_cycle_id integer NOT NULL,
-    em_create_dw_job_exectn_id integer NOT NULL,
-    em_create_dw_job_name character varying(100) NOT NULL,
-    em_create_dw_job_version_no character varying(20) NOT NULL,
-    em_create_user_id character varying(20) NOT NULL,
-    em_create_tmstmp timestamp without time zone NOT NULL
-)
-WITH (autovacuum_enabled='true');
-
-
-ALTER TABLE public.dw_stg_2_lbry_item_fact_z103_bib_full OWNER TO usmai_dw;
-
---
 -- Name: dw_stg_2_lbry_item_fact_z30_full; Type: TABLE; Schema: public; Owner: usmai_dw
 --
 
@@ -1909,12 +1862,13 @@ WITH (autovacuum_enabled='true');
 ALTER TABLE public.dw_stg_2_lbry_item_fact_z30_full OWNER TO usmai_dw;
 
 --
--- Name: dw_stg_2_lbry_item_z103_bib; Type: TABLE; Schema: public; Owner: usmai_dw
+-- Name: dw_stg_2_lbry_item_fact_z103_bib_full; Type: TABLE; Schema: public; Owner: usmai_dw
 --
 
-CREATE TABLE public.dw_stg_2_lbry_item_z103_bib (
+CREATE TABLE public.dw_stg_2_lbry_item_fact_z103_bib_full (
+    rec_type_cd character(1) NOT NULL,
     db_operation_cd character(1) NOT NULL,
-    dw_stg_2_aleph_lbry_name character(5) NOT NULL,
+    rec_trigger_key character(15) NOT NULL,
     in_source character(9),
     in_dest character(9),
     in_dest_lib character(5),
@@ -1938,7 +1892,7 @@ CREATE TABLE public.dw_stg_2_lbry_item_z103_bib (
 WITH (autovacuum_enabled='true');
 
 
-ALTER TABLE public.dw_stg_2_lbry_item_z103_bib OWNER TO usmai_dw;
+ALTER TABLE public.dw_stg_2_lbry_item_fact_z103_bib_full OWNER TO usmai_dw;
 
 --
 -- Name: dw_stg_2_lbry_item_z30; Type: TABLE; Schema: public; Owner: usmai_dw
@@ -3499,13 +3453,6 @@ ALTER TABLE ONLY public.dw_stg_1_mai39_z13u
     ADD CONSTRAINT pk_dw_stg_1_mai39_z13u PRIMARY KEY (db_operation_cd, rec_trigger_key, em_create_dw_prcsng_cycle_id);
 
 
---
--- Name: dw_stg_1_mai50_z103_bib pk_dw_stg_1_mai50_z103_bib; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
---
-
-ALTER TABLE ONLY public.dw_stg_1_mai50_z103_bib
-    ADD CONSTRAINT pk_dw_stg_1_mai50_z103_bib PRIMARY KEY (db_operation_cd, rec_trigger_key, em_create_dw_prcsng_cycle_id);
-
 
 --
 -- Name: dw_stg_1_mai50_z103_bib_full pk_dw_stg_1_mai50_z103_bib_full; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
@@ -3719,13 +3666,6 @@ ALTER TABLE ONLY public.dw_stg_2_lbry_item_fact_z30_full
 ALTER TABLE ONLY public.dw_stg_2_lbry_item_fact_z103_bib_full
     ADD CONSTRAINT pk_dw_stg_2_lbry_item_fact_z103_bib_full PRIMARY KEY (db_operation_cd, rec_trigger_key, em_create_dw_prcsng_cycle_id);
 
-
---
--- Name: dw_stg_2_lbry_item_z103_bib pk_dw_stg_2_lbry_item_z103_bib; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
---
-
-ALTER TABLE ONLY public.dw_stg_2_lbry_item_z103_bib
-    ADD CONSTRAINT pk_dw_stg_2_lbry_item_z103_bib PRIMARY KEY (em_create_dw_prcsng_cycle_id);
 
 
 --
