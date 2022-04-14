@@ -105,7 +105,7 @@ class TestLoadStage2(unittest.TestCase):
                 stg_1_results.delete()
     
             # iterate over stage 2 tables and delete all records added in this test file
-            for stg_2_table, dimension in cls.stg_2_table_config_mapping.items():
+            for stg_1_table, stg_2_table in cls.cls.stg_1_to_stg_2_table_mapping.items():
                 table_base_class = dwetl.Base.classes[stg_2_table]
                 stg_2_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
                 stg_2_results.delete()
