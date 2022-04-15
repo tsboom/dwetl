@@ -41,13 +41,12 @@ class CopyStage1ToStage2(Processor):
                 new_key = 'in_' + key
 
             processed_item[new_key] = value
-            
+
         # Update metadata
         if self.aleph_library:
             processed_item['dw_stg_2_aleph_lbry_name'] = self.aleph_library
 
         processed_item['em_create_dw_job_name'] = self.job_name()
-
         processed_item.update(self.job_info.as_dict('create'))
         processed_item['em_create_tmstmp'] = datetime.datetime.now()
         return processed_item
