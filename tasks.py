@@ -60,6 +60,27 @@ def run_migration(c, sql_file):
         print('An error has occurred')
 
 @task
+def run_test_migration(c, sql_file):
+    """
+    runs sql file for test db migration
+    """
+    db_settings = dwetl.database_credentials.test_db_settings()
+    db_user = db_settings['TEST_DB_USER']
+    db_host = db_settings['TEST_DB_HOST_NAME']
+    db_port = db_settings['TEST_DB_PORT']
+    db_password = db_settings['TEST_DB_PASSWORD']
+    db_name = db_settings['TEST_DB_NAME']
+    pg_password=f'TEST_PGPASSWORD={db_password} '
+
+    psql_cmd = f'psql -U {db_user} -h {db_host} -p {db_port} -d {db_name} -f {sql_file}'
+    if c.run(pg_password + psql_cmd):
+        print('-----------')
+        print('SQL migration successful.')
+    else:
+        raise Exception()
+        print('An error has occurred')
+
+@task
 def update_db_ddl(c):
     """
     Creates a ddl from the entire db in usmai_dw_etl.sql
