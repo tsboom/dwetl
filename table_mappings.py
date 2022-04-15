@@ -60,7 +60,7 @@ stg_1_to_stg_2_table_mapping = {
 '''
 table mapping for stage 2 intertable processing into dimension tables
 '''
-
+# add more dimensions here eventually 
 stg_2_table_dim_mapping = {
         'dw_stg_2_bib_rec_z00': 'bibliographic_record_dimension',
         'dw_stg_2_bib_rec_z13': 'bibliographic_record_dimension',
