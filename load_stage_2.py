@@ -43,6 +43,7 @@ def load_stage_2(job_info, logger, stage1_to_stage2_table_mapping, db_session_cr
         library = aleph_library(stage1_table)
 
         with db_session_creator() as session:
+            pdb.set_trace()
             stage1_table_class = dwetl.Base.classes[stage1_table]
             stage2_table_class = dwetl.Base.classes[stage2_table]
             reader = SqlAlchemyReader(session, stage1_table_class, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
