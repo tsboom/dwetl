@@ -104,7 +104,7 @@ def update_db_ddl(c):
 # Task helper function
 def reset_database(context, db_host, db_name, db_port, db_user, db_password):
     pg_password=f'PGPASSWORD={db_password} '
-    psql_cmd = f'psql -U postgres -d postgres --host={db_host} --port={db_port}'
+    psql_cmd = f'psql -U {db_user} -d postgres --host={db_host} --port={db_port}'
 
     ask_for_confirmation = True
     if (db_host == 'localhost' or db_host == '127.0.0.1') and db_port == '5432':
