@@ -41,11 +41,12 @@ class TestLoadStage2(unittest.TestCase):
             # "mai39_z13_data": "dw_stg_1_mai39_z13",
             # "mai01_z13u_data": "dw_stg_1_mai01_z13u",
             # "mai39_z13u_data": "dw_stg_1_mai39_z13u",
-            "mai60_z00_full_data": "dw_stg_1_mai60_z00",
-            "mai60_z13_data": "dw_stg_1_mai60_z13",
-            "mai60_z13u_data": "dw_stg_1_mai60_z13u",
-            "mai60_z103_bib_data": "dw_stg_1_mai60_z103_bib",
+            # "mai60_z00_full_data": "dw_stg_1_mai60_z00",
+            # "mai60_z13_data": "dw_stg_1_mai60_z13",
+            # "mai60_z13u_data": "dw_stg_1_mai60_z13u",
+            # "mai60_z103_bib_data": "dw_stg_1_mai60_z103_bib",
             "mai50_z30_data": "dw_stg_1_mai50_z30",
+            "mai50_z30_data": "dw_stg_1_mai50_z30_full",
             "mai50_z35_data": "dw_stg_1_mai50_z35",
             "mai50_z103_bib_data": "dw_stg_1_mai50_z103_bib_full"
             },
@@ -67,11 +68,11 @@ class TestLoadStage2(unittest.TestCase):
         # 'dw_stg_1_mai01_z13': "dw_stg_2_bib_rec_z13",
         # "dw_stg_1_mai01_z13u": "dw_stg_2_bib_rec_z13u",
         # "dw_stg_1_mai39_z13u": "dw_stg_2_bib_rec_z13u",
-        "dw_stg_1_mai60_z00": "dw_stg_2_lbry_holding_z00",
-        "dw_stg_1_mai60_z13": "dw_stg_2_lbry_holding_z13",
-        "dw_stg_1_mai60_z13u": "dw_stg_2_lbry_holding_z13u",
-        "dw_stg_1_mai50_z30": "dw_stg_2_lbry_item_z30",
-        "dw_stg_1_mai50_z35": "dw_stg_2_lbry_item_event_z35",
+        # "dw_stg_1_mai60_z00": "dw_stg_2_lbry_holding_z00",
+        # "dw_stg_1_mai60_z13": "dw_stg_2_lbry_holding_z13",
+        # "dw_stg_1_mai60_z13u": "dw_stg_2_lbry_holding_z13u",
+        # "dw_stg_1_mai50_z30": "dw_stg_2_lbry_item_z30",
+        # "dw_stg_1_mai50_z35": "dw_stg_2_lbry_item_event_z35",
         "dw_stg_1_mai50_z30_full": "dw_stg_2_lbry_item_fact_z30_full",
         "dw_stg_1_mai50_z103_bib_full": "dw_stg_2_lbry_item_fact_z103_bib_full",
         # "dw_stg_1_mpf_mbr_lbry": "dw_stg_2_mpf_mbr_lbry",
@@ -158,6 +159,32 @@ class TestLoadStage2(unittest.TestCase):
                     prev_aleph_table = stg_2_table
                     stg_2_aleph_table_totals_expected[stg_2_table] = stg_1_count
                     self.assertEqual(stg_2_aleph_table_totals_expected[stg_2_table], stg_1_count)
-                # TODO log test failures
+    
+    def test_load_lbry_item_fact_z30_full(self):              
+        # dw_stg_2_lbry_item_fact_z30_full has data that comes from: 
+        # TSV mai50_z30_data -> dw_stg_1_mai50_z30_full -> dw_stg_2_lbry_item_fact_z30_full
+
+        
+       
+         with dwetl.test_database_session() as session:
+
+            stg_1_table = "dw_stg_1_mai50_z30_full"
+            stg_2_table = "dw_stg_2_lbry_item_fact_z30_full"
+    
+            prcsng_cycle_id = self.__class__.prcsng_cycle_id
+            stg_1_table_base_class = dwetl.Base.classes[stg_1_table]
+            stg_1_count = session.query(stg_1_table_base_class).filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
+            # tsv has 1143 records
+            # test if load stage one has 1143 records
+            self.assertEqual(stg_1_count, 1143)
+
+            # test if load stage 2 is loaded too 
+            stg_2_table_base_class = dwetl.Base.classes[stg_2_table]
+            stg_2_count = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
+            self.assertEqual(stg_1_count, stg_2_count)
+
+    
+
+     
     
 
