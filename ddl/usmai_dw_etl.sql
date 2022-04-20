@@ -16,6 +16,8 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+\connect usmai_dw_etl
+
 DROP DATABASE usmai_dw_etl;
 --
 -- Name: usmai_dw_etl; Type: DATABASE; Schema: -; Owner: usmai_dw
@@ -26,7 +28,7 @@ CREATE DATABASE usmai_dw_etl WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLL
 
 ALTER DATABASE usmai_dw_etl OWNER TO usmai_dw;
 
-\connect usmai_dw_etl
+
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
