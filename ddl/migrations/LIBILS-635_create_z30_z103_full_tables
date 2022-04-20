@@ -1,6 +1,6 @@
 --
 -- Summary of LIBILS-635 db changes: 
--- added PK to dw_stg_2_lbry_item_fact_z30_full
+-- dropped and created and added PK to dw_stg_2_lbry_item_fact_z30_full
 -- dropped incorrectly named dw_stg_1_mai50_z103_bib. We are using dw_stg_1_mai50_z103_bib_full
 -- dropped and created dw_stg_2_lbry_item_fact_z103_bib_full with correct column names and PK
 
@@ -8,10 +8,36 @@
 --
 -- Name: dw_stg_2_lbry_item_fact_z30_full pk_dw_stg_2_lbry_item_fact_z30_full; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
 --
+DROP TABLE dw_stg_2_lbry_item_fact_z30_full;
+--
+-- Name: dw_stg_2_lbry_item_fact_z30_full; Type: TABLE; Schema: public; Owner: usmai_dw
+--
 
+CREATE TABLE public.dw_stg_2_lbry_item_fact_z30_full (
+    rec_type_cd character(1) NOT NULL,
+    db_operation_cd character(1) NOT NULL,
+    rec_trigger_key character(15) NOT NULL,
+    z30_sub_library character(5),
+    z30_collection character(5),
+    z30_material character(5),
+    z30_item_status character(2),
+    z30_item_process_status character(2),
+    z30_open_date character varying(8),
+    z30_order_number character varying(30),
+    z30_no_loans character varying(3),
+    em_create_dw_prcsng_cycle_id integer NOT NULL,
+    em_create_dw_job_exectn_id integer NOT NULL,
+    em_create_dw_job_name character varying(100) NOT NULL,
+    em_create_dw_job_version_no character varying(20) NOT NULL,
+    em_create_user_id character varying(20) NOT NULL,
+    em_create_tmstmp timestamp without time zone NOT NULL
+)
+WITH (autovacuum_enabled='true');
+
+
+ALTER TABLE public.dw_stg_2_lbry_item_fact_z30_full OWNER TO usmai_dw;
 ALTER TABLE ONLY public.dw_stg_2_lbry_item_fact_z30_full
     ADD CONSTRAINT pk_dw_stg_2_lbry_item_fact_z30_full PRIMARY KEY (db_operation_cd, rec_trigger_key, em_create_dw_prcsng_cycle_id);
-
 
 
 --
