@@ -31,19 +31,18 @@ def load_stage_2(job_info, logger, stage1_to_stage2_table_mapping, db_session_cr
     logger.info('Loading stage 2...\n')
 
     processing_cycle_id = job_info.prcsng_cycle_id
-    
+
     # set of unique stage 2 tables to assist with counting totals
     stage2_table_list = set()
-    # count up values from stage 2 tables 
+    # count up values from stage 2 tables
     loaded_record_count = 0
-    
+
     for stage1_table, stage2_table in stage1_to_stage2_table_mapping.items():
         # create set of unique stage 2 values
         stage2_table_list.add(stage2_table)
         library = aleph_library(stage1_table)
 
         with db_session_creator() as session:
-            pdb.set_trace()
             stage1_table_class = dwetl.Base.classes[stage1_table]
             stage2_table_class = dwetl.Base.classes[stage2_table]
             reader = SqlAlchemyReader(session, stage1_table_class, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
@@ -51,22 +50,22 @@ def load_stage_2(job_info, logger, stage1_to_stage2_table_mapping, db_session_cr
             error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
             processor = CopyStage1ToStage2.create(reader, writer, job_info, logger, library, error_writer)
             processor.execute()
-            
+
     # count up records in stg 2 tables
-    with db_session_creator() as session: 
-        for table in stage2_table_list: 
+    with db_session_creator() as session:
+        for table in stage2_table_list:
             stage2_table_class = dwetl.Base.classes[table]
             stg_2_count = session.query(stage2_table_class).filter(stage2_table_class.em_create_dw_prcsng_cycle_id==job_info.prcsng_cycle_id).count()
             print(f'\t\n{stg_2_count} records loaded to {table}.')
             logger.info(f'\t\n{stg_2_count} records loaded to {table}.')
             loaded_record_count = loaded_record_count + stg_2_count
-    
+
     logger.info(f'Total records loaded in stage 2: {loaded_record_count}\n')
     print(f'Total records loaded in stage 2: {loaded_record_count}\n')
-            
 
-            
-            
+
+
+
 
 '''
 main function for running script from the command line
