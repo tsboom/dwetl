@@ -122,19 +122,19 @@ def reset_database(context, db_host, db_name, db_port, db_user, db_password):
     print('-----------')
     print('Terminating sessions and dropping database')
 
-    # if db_name == 'usmai_dw_etl_test':
-    #     terminate_sessions = psql_cmd + ' -f ddl/drop_db_test.sql'
-    # else:
-    #     terminate_sessions = psql_cmd + ' -f ddl/drop_db.sql'
+    if db_name == 'usmai_dw_etl_test':
+        terminate_sessions = psql_cmd + ' -f ddl/drop_db_test.sql'
+    else:
+        terminate_sessions = psql_cmd + ' -f ddl/drop_db.sql'
 
-    # print('\t' + terminate_sessions)
+    print('\t' + terminate_sessions)
 
-    # if context.run(pg_password + terminate_sessions):
-    #     print('-----------')
-    #     print('Sessions terminated')
-    # else:
-    #     raise Exception()
-    #     print('An error has occurred')
+    if context.run(pg_password + terminate_sessions):
+        print('-----------')
+        print('Sessions terminated')
+    else:
+        raise Exception()
+        print('An error has occurred')
 
 
     # If resetting the test dabase,
