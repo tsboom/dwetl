@@ -16,6 +16,7 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+
 DROP DATABASE IF EXISTS usmai_dw_etl_test;
 --
 -- Name: usmai_dw_etl_test; Type: DATABASE; Schema: -; Owner: usmai_dw
