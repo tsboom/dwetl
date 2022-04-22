@@ -3,7 +3,7 @@
 table mapping for load_stage_1
 '''
 
-stg_1_table_mapping = {'ALEPH_TSV_TABLE_MAPPING': 
+stg_1_table_mapping = {'ALEPH_TSV_TABLE_MAPPING':
         {
         "mai01_z00_data": "dw_stg_1_mai01_z00",
         "mai39_z00_data": "dw_stg_1_mai39_z00",
@@ -16,6 +16,7 @@ stg_1_table_mapping = {'ALEPH_TSV_TABLE_MAPPING':
         "mai60_z13u_data": "dw_stg_1_mai60_z13u",
         "mai60_z103_bib_data": "dw_stg_1_mai60_z103_bib",
         "mai50_z30_data": "dw_stg_1_mai50_z30",
+        "mai50_z30_data": "dw_stg_1_mai50_z30_full",
         "mai50_z35_data": "dw_stg_1_mai50_z35",
         "mai50_z103_bib_data": "dw_stg_1_mai50_z103_bib_full"
         },
@@ -29,8 +30,8 @@ stg_1_table_mapping = {'ALEPH_TSV_TABLE_MAPPING':
         #     "mpf_material-form-dimension.txt": "dw_stg_1_mpf_matrl_form"
         # }
         }
-        
-        
+
+
 '''
 table mapping for load_stage_2
 '''
@@ -60,7 +61,7 @@ stg_1_to_stg_2_table_mapping = {
 '''
 table mapping for stage 2 intertable processing into dimension tables
 '''
-# add more dimensions here eventually 
+# add more dimensions here eventually
 stg_2_table_dim_mapping = {
         'dw_stg_2_bib_rec_z00': 'bibliographic_record_dimension',
         'dw_stg_2_bib_rec_z13': 'bibliographic_record_dimension',
