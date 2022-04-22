@@ -16,7 +16,7 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-DROP DATABASE usmai_dw_etl_test;
+DROP DATABASE IF EXISTS usmai_dw_etl_test;
 --
 -- Name: usmai_dw_etl_test; Type: DATABASE; Schema: -; Owner: usmai_dw
 --
@@ -3949,13 +3949,9 @@ CREATE INDEX indx_fact_lbry_item_status ON public.fact_lbry_item USING btree (lb
 -- Name: SCHEMA public; Type: ACL; Schema: -; Owner: usmai_dw
 --
 
-REVOKE ALL ON SCHEMA public FROM postgres;
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-GRANT ALL ON SCHEMA public TO usmai_dw;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
 -- PostgreSQL database dump complete
 --
-
