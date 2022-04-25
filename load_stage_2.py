@@ -44,6 +44,9 @@ def load_stage_2(job_info, logger, stage1_to_stage2_table_mapping, db_session_cr
 
         with db_session_creator() as session:
             stage1_table_class = dwetl.Base.classes[stage1_table]
+            stg_1_count = session.query(stage1_table_class).filter(stage2_table_class.em_create_dw_prcsng_cycle_id==job_info.prcsng_cycle_id).count()
+            print(f'\t\n{stg_1_count} records loaded to {stage1_table}.')
+            logger.info(f'\t\n{stg_1_count} records loaded to {stage1_table}.')
             stage2_table_class = dwetl.Base.classes[stage2_table]
             reader = SqlAlchemyReader(session, stage1_table_class, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
             writer = SqlAlchemyWriter(session, stage2_table_class)
