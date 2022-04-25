@@ -13,9 +13,10 @@ from dwetl.job_info import JobInfo
 import load_stage_1
 import load_stage_2
 from dwetl.processor.load_aleph_tsv import LoadAlephTsv
+import pdb
 
 class TestLoadStage2(unittest.TestCase):
-    # this test is commented out because it takes a really long time. I think test_bib_rec_etl.py 
+    # this test is commented out because it takes a really long time. I think test_bib_rec_etl.py
     # and other per dimension end-to-end tests are more useful. This one was helpful during development.
     maxDiff= None
     @classmethod
@@ -33,7 +34,7 @@ class TestLoadStage2(unittest.TestCase):
 
         cls.prcsng_cycle_id = cls.job_info.prcsng_cycle_id
 
-        cls.stg_1_table_mapping = {'ALEPH_TSV_TABLE_MAPPING': 
+        cls.stg_1_table_mapping = {'ALEPH_TSV_TABLE_MAPPING':
             {
             "mai01_z00_data": "dw_stg_1_mai01_z00",
             "mai39_z00_data": "dw_stg_1_mai39_z00",
@@ -98,39 +99,39 @@ class TestLoadStage2(unittest.TestCase):
         # when tests are over, delete all the data from these tests
         with dwetl.test_database_session() as session:
             prcsng_cycle_id = cls.prcsng_cycle_id
-    
+
             # iterate over stage 1 tables and delete records with the current processing cycle id
             for file, table in cls.stg_1_table_mapping['ALEPH_TSV_TABLE_MAPPING'].items():
                 table_base_class = dwetl.Base.classes[table]
                 stg_1_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
                 stg_1_results.delete()
-    
+
             # iterate over stage 2 tables and delete all records added in this test file
             for stg_1_table, stg_2_table in cls.stg_1_to_stg_2_table_mapping.items():
                 table_base_class = dwetl.Base.classes[stg_2_table]
                 stg_2_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
                 stg_2_results.delete()
-    
+
             # delete errors from error table
             table_base_class = dwetl.Base.classes['dw_db_errors']
             error_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
             error_results.delete()
-    
+
             # commit all changes
             session.commit()
 
 
-        
+
     def test_load_stage_2(self):
          # check to see if stage 2 tables contain the correct amount of records combined from stage 1 aleph libraries
         with dwetl.test_database_session() as session:
-    
+
             prcsng_cycle_id = self.__class__.prcsng_cycle_id
-    
+
             # capture total records for stage 2 combining diff aleph libraries into aleph tables (z00, z13, z13u)
             # example: {'dw_stg_2_bib_rec_z13': 344}
             stg_2_aleph_table_totals_expected = {}
-    
+
             # because there are multiple stg 1 tables combining into stg 2 it's helpful to keep track of
             # the previous aleph table and previous total
             prev_aleph_table = None
@@ -143,7 +144,7 @@ class TestLoadStage2(unittest.TestCase):
                 stg_1_count = session.query(stg_1_table_base_class).filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
                 # stg 2 contains the totals from 2 stage 1 tables since they are combined per aleph table.
                 stg_2_count = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
-    
+
                 # we should only count the totals of the combined stage 1 tables
                 if prev_aleph_table:
                     # add to the totals expected dict per stg 2 table
@@ -159,18 +160,18 @@ class TestLoadStage2(unittest.TestCase):
                     prev_aleph_table = stg_2_table
                     stg_2_aleph_table_totals_expected[stg_2_table] = stg_1_count
                     self.assertEqual(stg_2_aleph_table_totals_expected[stg_2_table], stg_1_count)
-    
-    def test_load_lbry_item_fact_z30_full(self):              
-        # dw_stg_2_lbry_item_fact_z30_full has data that comes from: 
+
+    def test_load_lbry_item_fact_z30_full(self):
+        # dw_stg_2_lbry_item_fact_z30_full has data that comes from:
         # TSV mai50_z30_data -> dw_stg_1_mai50_z30_full -> dw_stg_2_lbry_item_fact_z30_full
 
-        
-       
+
+
          with dwetl.test_database_session() as session:
 
             stg_1_table = "dw_stg_1_mai50_z30_full"
             stg_2_table = "dw_stg_2_lbry_item_fact_z30_full"
-    
+
             prcsng_cycle_id = self.__class__.prcsng_cycle_id
             stg_1_table_base_class = dwetl.Base.classes[stg_1_table]
             stg_1_count = session.query(stg_1_table_base_class).filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
@@ -178,13 +179,17 @@ class TestLoadStage2(unittest.TestCase):
             # test if load stage one has 1143 records
             self.assertEqual(stg_1_count, 1143)
 
-            # test if load stage 2 is loaded too 
+            # test if load stage 2 is loaded too
             stg_2_table_base_class = dwetl.Base.classes[stg_2_table]
             stg_2_count = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
             self.assertEqual(stg_1_count, stg_2_count)
 
-    
 
-     
-    
-
+            # check dw_stg_1_mai50_z30 load to stg 2
+            stg_1_table = "dw_stg_1_mai50_z30"
+            stg_2_table = "dw_stg_2_lbry_item_z30"
+            stg_1_count = session.query(stg_1_table_base_class).filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
+            self.assertEqual(stg_1_count, 1143)
+            tg_2_table_base_class = dwetl.Base.classes[stg_2_table]
+            stg_2_count = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
+            self.assertEqual(stg_1_count, stg_2_count)
