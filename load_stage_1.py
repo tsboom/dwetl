@@ -44,8 +44,8 @@ def load_stage_1(job_info, input_directory, logger, table_mapping, session_creat
             tsv_record_count = reader.record_count
             stage_1_record_count = session.query(stg_1_table_base_class).\
                 filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
-            print(f'\t\n{tsv_record_count} records in {file} TSV. {stage_1_record_count} records loaded to {table}.')
-            logger.info(f'\t\n{tsv_record_count} records in  {file} TSV. {stage_1_record_count} records loaded to {table}.')
+            print(f'\t\n{tsv_record_count} records in {file} TSV. \n{stage_1_record_count} records loaded to {table}.')
+            logger.info(f'\t\n{tsv_record_count} records in  {file} TSV. \n{stage_1_record_count} records loaded to {table}.')
 
             loaded_record_count = loaded_record_count + stage_1_record_count
 
