@@ -143,13 +143,15 @@ class TestLoadStage2(unittest.TestCase):
 
     def test_load_lbry_item_fact_z30(self):
 
-        prcsng_cycle_id = self.__class__.prcsng_cycle_id
-        stg_1_table_base_class = dwetl.Base.classes[stg_1_table]
-         with dwetl.test_database_session() as session:
+        with dwetl.test_database_session() as session:
+
+            prcsng_cycle_id = self.__class__.prcsng_cycle_id
+
 
             # check dw_stg_1_mai50_z30 load to stg 2
             stg_1_table = "dw_stg_1_mai50_z30"
             stg_2_table = "dw_stg_2_lbry_item_z30"
+            stg_1_table_base_class = dwetl.Base.classes[stg_1_table]
             stg_1_count = session.query(stg_1_table_base_class).filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
             self.assertEqual(stg_1_count, 1143)
             tg_2_table_base_class = dwetl.Base.classes[stg_2_table]
