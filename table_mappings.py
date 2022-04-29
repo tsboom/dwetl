@@ -16,7 +16,8 @@ stg_1_table_mapping = {'ALEPH_TSV_TABLE_MAPPING':
         "mai60_z13u_data": "dw_stg_1_mai60_z13u",
         "mai60_z103_bib_data": "dw_stg_1_mai60_z103_bib",
         "mai50_z30_data": "dw_stg_1_mai50_z30",
-        "mai50_z30_data": "dw_stg_1_mai50_z30_full",
+        #this full data is not implemented yet. It will be important in fact table creation.
+        #"mai50_z30_full_data": "dw_stg_1_mai50_z30_full",
         "mai50_z35_data": "dw_stg_1_mai50_z35",
         "mai50_z103_bib_data": "dw_stg_1_mai50_z103_bib_full"
         },
