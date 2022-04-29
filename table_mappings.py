@@ -49,7 +49,7 @@ stg_1_to_stg_2_table_mapping = {
     "dw_stg_1_mai60_z13u": "dw_stg_2_lbry_holding_z13u",
     "dw_stg_1_mai50_z30": "dw_stg_2_lbry_item_z30",
     "dw_stg_1_mai50_z35": "dw_stg_2_lbry_item_event_z35",
-    "dw_stg_1_mai50_z30_full": "dw_stg_2_lbry_item_fact_z30_full",
+    #"dw_stg_1_mai50_z30_full": "dw_stg_2_lbry_item_fact_z30_full",
     "dw_stg_1_mai50_z103_bib_full": "dw_stg_2_lbry_item_fact_z103_bib_full",
     # "dw_stg_1_mpf_mbr_lbry": "dw_stg_2_mpf_mbr_lbry",
     # "dw_stg_1_mpf_lbry_entity": "dw_stg_2_mpf_lbry_entity",
