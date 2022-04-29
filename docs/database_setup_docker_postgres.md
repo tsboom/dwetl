@@ -15,9 +15,13 @@ docker run --rm --name postgrestest -p 5439:5432 -e POSTGRES_PASSWORD=postgres p
 
 2) Connect to the Docker container using a bash shell:
 
+Open a shell of the postgres container at port 5432
 ```
 docker exec -it postgres /bin/bash
 ```
+
+In another window, open a shell of the postgrestest container at port 5439
+
 ```
 docker exec -it postgrestest /bin/bash
 ```
@@ -26,6 +30,8 @@ docker exec -it postgrestest /bin/bash
 ```
 docker> su - postgres
 docker> createuser usmai_dw
+docker> mkdir pgdata
+docker> chown -R postgres:root pgdata
 ```
 
 4) In the both docker containers, run "psql":
@@ -37,12 +43,15 @@ docker> psql -U postgres
 5) In psql for postgres and postgrestest, create the "usmai_dw_etl" and "usmai_dw_etl_test" databases, and exit:
 
 ```
-postgres=# CREATE DATABASE usmai_dw_etl;
+postgres=# CREATE TABLESPACE usmai_dw location '/pgdata';
+postgres=# CREATE DATABASE usmai_dw_etl OWNER usmai_dw TABLESPACE usmai_dw;
+;
 postgres=# CREATE ROLE usmai_dw;
 postgres=# <Ctrl-D>
 ```
 ```
-postgres=# CREATE DATABASE usmai_dw_etl_test;
+postgres=# CREATE TABLESPACE usmai_dw location '/pgdata';
+postgres=# CREATE DATABASE usmai_dw_etl_test OWNER usmai_dw TABLESPACE usmai_dw;;
 postgres=# CREATE ROLE usmai_dw;
 postgres=# <Ctrl-D>
 ```

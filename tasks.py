@@ -60,6 +60,27 @@ def run_migration(c, sql_file):
         print('An error has occurred')
 
 @task
+def run_test_migration(c, sql_file):
+    """
+    runs sql file for test db migration
+    """
+    test_db_settings = dwetl.database_credentials.test_db_settings()
+    db_user = test_db_settings['TEST_DB_USER']
+    db_name = test_db_settings['TEST_DB_NAME']
+    db_host = test_db_settings['TEST_DB_HOST_NAME']
+    db_port = test_db_settings['TEST_DB_PORT']
+    db_password = test_db_settings['TEST_DB_PASSWORD']
+    pg_password=f'PGPASSWORD={db_password} '
+
+    psql_cmd = f'psql -U {db_user} -h {db_host} -p {db_port} -d {db_name} -f {sql_file}'
+    if c.run(pg_password + psql_cmd):
+        print('-----------')
+        print('SQL migration successful.')
+    else:
+        raise Exception()
+        print('An error has occurred')
+
+@task
 def update_db_ddl(c):
     """
     Creates a ddl from the entire db in usmai_dw_etl.sql
@@ -100,12 +121,12 @@ def reset_database(context, db_host, db_name, db_port, db_user, db_password):
     print(f'Resetting {db_name} database at {db_host}:{db_port}')
     print('-----------')
     print('Terminating sessions and dropping database')
-    
+
     if db_name == 'usmai_dw_etl_test':
         terminate_sessions = psql_cmd + ' -f ddl/drop_db_test.sql'
-    else: 
+    else:
         terminate_sessions = psql_cmd + ' -f ddl/drop_db.sql'
-        
+
     print('\t' + terminate_sessions)
 
     if context.run(pg_password + terminate_sessions):
@@ -114,16 +135,16 @@ def reset_database(context, db_host, db_name, db_port, db_user, db_password):
     else:
         raise Exception()
         print('An error has occurred')
-    
-    
+
+
     # If resetting the test dabase,
-    # create a test db DDL from the usmai_dw_etl.sql to keep it up to date. 
+    # create a test db DDL from the usmai_dw_etl.sql to keep it up to date.
     if db_name == 'usmai_dw_etl_test':
         print('Creating database from usmai_dw_etl_test.sql DDL')
         load_ddl = psql_cmd + ' -f ddl/usmai_dw_etl_test.sql'
-    else: 
+    else:
         load_ddl = psql_cmd + ' -f ddl/usmai_dw_etl.sql'
-        
+
     print(load_ddl)
     if context.run(pg_password + load_ddl):
         print('-----------')
