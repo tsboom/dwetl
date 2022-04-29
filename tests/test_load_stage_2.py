@@ -154,6 +154,6 @@ class TestLoadStage2(unittest.TestCase):
             stg_1_table_base_class = dwetl.Base.classes[stg_1_table]
             stg_1_count = session.query(stg_1_table_base_class).filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
             self.assertEqual(stg_1_count, 1143)
-            tg_2_table_base_class = dwetl.Base.classes[stg_2_table]
+            stg_2_table_base_class = dwetl.Base.classes[stg_2_table]
             stg_2_count = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
             self.assertEqual(stg_1_count, stg_2_count)
