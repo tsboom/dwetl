@@ -65,12 +65,12 @@ def run_test_migration(c, sql_file):
     runs sql file for test db migration
     """
     test_db_settings = dwetl.database_credentials.test_db_settings()
-    test_db_user = test_db_settings['TEST_DB_USER']
-    test_db_name = test_db_settings['TEST_DB_NAME']
-    test_db_host = test_db_settings['TEST_DB_HOST_NAME']
-    test_db_port = test_db_settings['TEST_DB_PORT']
-    test_db_password = test_db_settings['TEST_DB_PASSWORD']
-    pg_password=f'PGPASSWORD={test_db_password} '
+    db_user = test_db_settings['TEST_DB_USER']
+    db_name = test_db_settings['TEST_DB_NAME']
+    db_host = test_db_settings['TEST_DB_HOST_NAME']
+    db_port = test_db_settings['TEST_DB_PORT']
+    db_password = test_db_settings['TEST_DB_PASSWORD']
+    pg_password=f'PGPASSWORD={db_password} '
 
     psql_cmd = f'psql -U {db_user} -h {db_host} -p {db_port} -d {db_name} -f {sql_file}'
     if c.run(pg_password + psql_cmd):
