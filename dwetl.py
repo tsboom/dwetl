@@ -39,29 +39,29 @@ def run(input_directory):
 
     time_started = datetime.datetime.now()
     logger.info(f'DWETL.py started')
-    logger.info(f'input directory: {input_directory}')  
+    logger.info(f'input directory: {input_directory}')
     print(f'DWETL.py started')
-    print(f'input directory: {input_directory}') 
+    print(f'input directory: {input_directory}')
     '''
     create job_info for current process
     '''
-        
+
     db_session_creator = dwetl.database_session
-    
+
     with db_session_creator() as session:
-        try: 
+        try:
             job_info_table_class = dwetl.Base.classes['dw_prcsng_cycle']
-        except KeyError as e: 
+        except KeyError as e:
             sys.exit("dw_prcsng_cycle was not found. The database probably didn't have any tables in it. If you're developing locally, did you initialize the database and reset it?")
         # TODO: should we get the processing cycle id from the max of the reporting db final table
         # like we do in ezproxy_etl?
-        # This would ensure we don't use the same processing cycle id twice. 
-        # We had some issues in test when reseting the etl db, the processing cycle ids go back to 1. 
-        # in dw-etl-test, if ezproxy_etl is run first, then the db_prcsng_cycle table has the accurate processing cycle id based on the reporting max. 
+        # This would ensure we don't use the same processing cycle id twice.
+        # We had some issues in test when reseting the etl db, the processing cycle ids go back to 1.
+        # in dw-etl-test, if ezproxy_etl is run first, then the db_prcsng_cycle table has the accurate processing cycle id based on the reporting max.
         job_info = JobInfoFactory.create_job_info_from_db(session, job_info_table_class)
-        
+
     # print processing cycle id
-    logger.info(f'processing cycle id: {job_info.prcsng_cycle_id}\n')  
+    logger.info(f'processing cycle id: {job_info.prcsng_cycle_id}\n')
     print(f'processing cycle id: {job_info.prcsng_cycle_id}\n')
 
     '''
@@ -120,24 +120,24 @@ if __name__=='__main__':
         sys.exit(1)
     if len(arguments) == 2:
         day_to_process  = arguments[1]
-    
+
     # TODO: for local dev uncomment the following today to test only one date
     #day_to_process = "20191204" # tiff's local test date
     #day_to_process  = "20191211" # nima's local test date
-
-    # get input directory from .env file. 
-    input_directory = os.getenv("INPUT_DIRECTORY")+f"/{day_to_process}"
-    
+    day_to_process  = "20200121"
+    # get input directory from .env file.
+    #input_directory = os.getenv("INPUT_DIRECTORY")+f"/{day_to_process}"
+    input_directory = "/Users/nasadi1/apps/git/dwetl/data/20200121"
     # if os.path.exists(incoming_input_file):
     #     print(f'input file: {incoming_input_file}')
     #     run(incoming_input_file)
     # elif os.path.exists(processed_input_file):
     #     print(f'input file: {processed_input_file}')
-    #     run(processed_input_file)   
+    #     run(processed_input_file)
     #     # Print the message if the file path does not exist
     # else:
     #     print (f'no data file found for {day_to_process}. \nAre you sure you provided the date like so? \nex: python ezproxy_etl.py YYYYMMDD')
-    
+
     # TODO: move processed file to processed directory
     # and when an already processed file is run, use the processed input directory
     run(input_directory)

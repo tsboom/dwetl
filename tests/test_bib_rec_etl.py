@@ -100,7 +100,12 @@ class TestBibRecEtl(unittest.TestCase):
             "dw_stg_1_mai01_z13u": "dw_stg_2_bib_rec_z13u",
             "dw_stg_1_mai39_z13u": "dw_stg_2_bib_rec_z13u",
             "dw_stg_1_mai01_z00": "dw_stg_2_bib_rec_z00",
-            "dw_stg_1_mai39_z00": "dw_stg_2_bib_rec_z00"
+            "dw_stg_1_mai39_z00": "dw_stg_2_bib_rec_z00",
+            "dw_stg_1_mpf_mbr_lbry": "dw_stg_2_mbr_lbry" ,
+            "dw_stg_1_mpf_lbry_entity":"dw_stg_2_lbry_entity",
+            "dw_stg_1_mpf_collection":"dw_stg_2_collection",
+            "dw_stg_1_mpf_item_status":"dw_stg_2_item_status",
+            "dw_stg_1_mpf_item_prcs_status":"dw_stg_2_item_status"
         }
 
         load_stage_2.load_stage_2(cls.job_info, cls.logger, cls.stage1_to_stage2_table_mapping, cls.db_session_creator)
@@ -120,33 +125,33 @@ class TestBibRecEtl(unittest.TestCase):
         # when tests are over, delete all the data from these bib rec tests
         with dwetl.test_database_session() as session:
             prcsng_cycle_id = cls.prcsng_cycle_id
-    
+
             # iterate over stage 1 tables and delete records with the current processing cycle id
             for file, table in cls.stg_1_table_mapping['ALEPH_TSV_TABLE_MAPPING'].items():
                 table_base_class = dwetl.Base.classes[table]
                 stg_1_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
                 stg_1_results.delete()
-    
+
             # iterate over stage 2 tables and delete all records added in this test file
             for stg_2_table, dimension in cls.stg_2_table_config_mapping.items():
                 table_base_class = dwetl.Base.classes[stg_2_table]
                 stg_2_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
                 stg_2_results.delete()
-    
+
             # delete errors from error table
             table_base_class = dwetl.Base.classes['dw_db_errors']
             error_results = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
             error_results.delete()
-    
+
             # commit all changes
             session.commit()
     def test_bib_rec_stage_1(self):
         # check to see if same amount of values from 20210123 in z00, z13, z13u
         # were written to the stage 1 table.
         with dwetl.test_database_session() as session:
-    
+
             prcsng_cycle_id = self.__class__.prcsng_cycle_id
-    
+
             # iterate over stage 1 tables and compare input rows in file to rows in stg 1 tables
             for file, table in self.__class__.stg_1_table_mapping['ALEPH_TSV_TABLE_MAPPING'].items():
                 table_base_class = dwetl.Base.classes[table]
@@ -158,21 +163,21 @@ class TestBibRecEtl(unittest.TestCase):
                 else:
                     #input_record_count = sum(1 for line in open(f'tests/data/incoming_test/aleph/20210123/{file}'))- 3 #metadata rows
                     input_record_count = sum(1 for line in open(f'{self.__class__.test_input_directory}/{file}'))- 3 #metadata rows
-    
+
                 stg_1_row_count = session.query(table_base_class).filter(table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
                 # TODO: log test failure reasons
                 self.assertEqual(input_record_count, stg_1_row_count)
-    
+
     def test_bib_rec_stage_2_load_stage_2(self):
         # check to see if stage 2 tables contain the correct amount of records combined from stage 1 aleph libraries
         with dwetl.test_database_session() as session:
-    
+
             prcsng_cycle_id = self.__class__.prcsng_cycle_id
-    
+
             # capture total records for stage 2 combining diff aleph libraries into aleph tables (z00, z13, z13u)
             # example: {'dw_stg_2_bib_rec_z13': 344}
             stg_2_aleph_table_totals_expected = {}
-    
+
             # because there are multiple stg 1 tables combining into stg 2 it's helpful to keep track of
             # the previous aleph table and previous total
             prev_aleph_table = None
@@ -185,7 +190,7 @@ class TestBibRecEtl(unittest.TestCase):
                 stg_1_count = session.query(stg_1_table_base_class).filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
                 # stg 2 contains the totals from 2 stage 1 tables since they are combined per aleph table.
                 stg_2_count = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
-    
+
                 # we should only count the totals of the combined stage 1 tables
                 if prev_aleph_table:
                     # add to the totals expected dict per stg 2 table
@@ -202,56 +207,56 @@ class TestBibRecEtl(unittest.TestCase):
                     stg_2_aleph_table_totals_expected[stg_2_table] = stg_1_count
                     self.assertEqual(stg_2_aleph_table_totals_expected[stg_2_table], stg_1_count)
                 # TODO log test failures
-    
+
     def test_bib_rec_stage_2_pp(self):
         # check to see if pp values are written
         with dwetl.test_database_session() as session:
-    
+
             prcsng_cycle_id = self.__class__.prcsng_cycle_id
-    
+
             # choose a few random IDs and check if the PP values are written
             for stg_2_table, dimension in self.__class__.stg_2_table_config_mapping.items():
                 stg_2_table_base_class = dwetl.Base.classes[stg_2_table]
-    
+
                 results = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
-    
+
                 # get unique ID from pk of the table
                 pk = stg_2_table_base_class.__table__.primary_key.columns.values()[2].name
-    
+
                 for item in results.all():
                     for key in item.__dict__.keys():
                         if key[:2] == 'pp':
                             # check if pp is there for records with in values
                             in_key = 'in_'+'_'.join(key.split('_')[1:])
-    
+
                             # make sure pp value is not none
                             if item.__dict__[in_key]:
                                 message = f'Record {pk}: {item.__dict__[pk]} is missing the PP value for {item.__dict__[key]}'
                                 self.assertIsNotNone(item.__dict__[key], message)
-    
+
     def test_bib_rec_stage_2_dq(self):
         # check to see if dq values are written
         with dwetl.test_database_session() as session:
-    
+
             prcsng_cycle_id = self.__class__.prcsng_cycle_id
-    
+
             # check if the DQ values are written
             for stg_2_table, dimension in self.__class__.stg_2_table_config_mapping.items():
                 stg_2_table_base_class = dwetl.Base.classes[stg_2_table]
                 error_table_base_class = dwetl.Base.classes['dw_db_errors']
-    
+
                 results = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
-    
+
                 # get unique ID from pk of the table
                 pk = stg_2_table_base_class.__table__.primary_key.columns.values()[2].name
-    
-    
+
+
                 for item in results.all():
-    
+
                     for key in item.__dict__.keys():
                         # create message for later to print when tests fail
                         message = f'Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} DQ test.'
-    
+
                         if key[:2] == 'dq':
                             # check dq values and special cases
                             in_key = 'in_'+'_'.join(key.split('_')[1:])
@@ -271,7 +276,7 @@ class TestBibRecEtl(unittest.TestCase):
                                     continue
                                 # if it comes in a wrong date, dq should be None
                                 dq_check_result = dwetl.data_quality_utilities.is_valid_aleph_date(pp_value)
-    
+
                                 if dq_check_result == False:
                                     self.assertEqual(dq_value, None, message)
                                 continue
@@ -285,7 +290,7 @@ class TestBibRecEtl(unittest.TestCase):
                                 if dq_check_result is False:
                                     self.assertEqual(dq_value, '-I', message)
                                 continue
-    
+
                             if in_key =='in_z00_no_lines' or in_key =='in_z00_data_len':
                                 if pp_value:
                                     # ignore leading zeros
@@ -293,7 +298,7 @@ class TestBibRecEtl(unittest.TestCase):
                                     # remove leading zeros and compare with dq value
                                     self.assertEqual(pp_val_int, dq_value)
                                 continue
-    
+
                             # for all other values make sure the pp value equals the dq value
                             self.assertEqual(pp_value, dq_value, message)
 
@@ -309,39 +314,39 @@ class TestBibRecEtl(unittest.TestCase):
                 error_table_base_class = dwetl.Base.classes['dw_db_errors']
 
                 results = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id)
-                
+
                 # get unique ID from pk of the table
                 pk = stg_2_table_base_class.__table__.primary_key.columns.values()[2].name
 
                 # iterate over each item from results query and check the t_values against the expected values from stage 2 and specific transform functions
                 for item in results.all():
                     for key in item.__dict__.keys():
-                        
+
                         # test only the transform keys against their dq value from stage 2
                         if key[:1] == 't':
                             orig_key = key.split('__')[0][3:]
                             dq_key = 'dq_'+ orig_key
                             dq_value = item.__dict__[dq_key]
-                            
+
                             item_dict = item.__dict__
                             sorted_row = {k: item_dict[k] for k in sorted(item_dict)}
-                        
+
                             # t_value holds the t value written in the database after transformations
                             t_value = item.__dict__[key]
                             # create message for later to print when tests fail
                             message = f"""Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} transformation test. The T value is: {t_value}. The dq_value is: {dq_value}.
                                 Problem Row: {sorted_row}"""
 
-                            # skip suspended records 
-                            # TODO: is this the best way? I noticed SUS has a variable amount of characters depending on the source column. 
+                            # skip suspended records
+                            # TODO: is this the best way? I noticed SUS has a variable amount of characters depending on the source column.
                             if item.__dict__['rm_suspend_rec_flag'] == 'Y':
                                 continue
 
-                            
+
                             # Check all keys with specific transform functions
                             # save isbn_issn_code dq value for the transformation aftewards (isbn_txt, and associated issns)
-                           
-                                
+
+
                             # test z13u user defined 2-6
                             if key == 't1_z13u_user_defined_2__bib_rec_oclc_no':
                                 t_check_result = dwetl.specific_transform_functions.remove_ocm_ocn_on(dq_value)
@@ -400,7 +405,7 @@ class TestBibRecEtl(unittest.TestCase):
                                 self.assertEqual(t_check_result, t_value, message)
 
 
-                            # the following isbn/issn related keys are different because they rely on the z13_isbn_issn_code    
+                            # the following isbn/issn related keys are different because they rely on the z13_isbn_issn_code
                             elif key == 't1_z13_isbn_issn__bib_rec_isbn_txt':
                                 code = item.__dict__['dq_z13_isbn_issn_code']
                                 dq_value = item.__dict__['dq_z13_isbn_issn']
@@ -410,10 +415,10 @@ class TestBibRecEtl(unittest.TestCase):
                                 isbn_message = f"""Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} transformation test. The T value is: {t_value}. The isbn code is: {code}. The dq_value is: {dq_value}.
                                     Problem Row: {sorted_row}"""
                                 self.assertEqual(t_check_result, t_value, isbn_message)
-                                
+
                             elif key == 't2_z13_isbn_issn__bib_rec_all_associated_issns_txt':
                                 code = item.__dict__['dq_z13_isbn_issn_code']
-                                dq_value = item.__dict__['dq_z13_isbn_issn']    
+                                dq_value = item.__dict__['dq_z13_isbn_issn']
                                 t_check_result = dwetl.specific_transform_functions.issn_code_022(code, dq_value)
                                 # create message for later to print when tests fail
                                 issn_message = f"""Record ({pk}: {item.__dict__[pk]}) in {stg_2_table} fails the {key} transformation test. The T value is: {t_value}. The issn code is: {code}. The dq_value is: {dq_value}.
@@ -422,7 +427,7 @@ class TestBibRecEtl(unittest.TestCase):
 
                             else:
                                 # all other items are moved as-is during transformations (like all z00s)
-                                # because the transformation columns someimes have more specific types than the dq values, 
+                                # because the transformation columns someimes have more specific types than the dq values,
                                 # compare types of t and dq and convert dq_value to t_type if necessary
                                 if type(dq_value) is not type(t_value):
                                     if isinstance(t_value, int):
@@ -430,4 +435,3 @@ class TestBibRecEtl(unittest.TestCase):
                                     if isinstance(t_value, datetime.date):
                                         dq_value = datetime.datetime.strptime(dq_value, '%Y%m%d').date()
                                 self.assertEqual(dq_value, t_value, message)
-

@@ -3,6 +3,7 @@ import os
 import sys
 from dwetl.job_info import JobInfoFactory, JobInfo
 from dwetl.reader.tsv_file_reader import TsvFileReader
+from dwetl.reader.mpf_file_reader import MpfFileReader
 from dwetl.reader.z00_field_reader import Z00FieldReader
 from dwetl.writer.print_writer import PrintWriter
 from dwetl.processor.load_aleph_tsv import LoadAlephTsv
@@ -21,13 +22,13 @@ def load_stage_1(job_info, input_directory, logger, table_mapping, session_creat
     logger.info('Loading stage 1...')
 
 
-    
+
 
     '''
     load aleph tsv files minus z00_field tables
     '''
     loaded_record_count = 0
-    
+
     # loop through files and load stage 1 tables
     for file, table in table_mapping['ALEPH_TSV_TABLE_MAPPING'].items():
         file_path = os.path.join(input_directory, file)
@@ -39,16 +40,16 @@ def load_stage_1(job_info, input_directory, logger, table_mapping, session_creat
             error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
             processor = LoadAlephTsv(reader, writer, job_info, logger, error_writer)
             processor.execute()
-            
+
             # count number records read from TSV and how many written to stage 1 table
             input_record_count = session.query(stg_1_table_base_class).\
                 filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
             print(f'\t\n{input_record_count} records loaded to {table}.')
             logger.info(f'\t\n{input_record_count} records loaded to {table}.')
-            
+
             loaded_record_count = loaded_record_count + input_record_count
-            
-    # exit DWETL if no records are loaded 
+
+    # exit DWETL if no records are loaded
     print(f'\nTotal records loaded in stage 1: {loaded_record_count}\n')
     logger.info(f'\nTotal records loaded in stage 1: {loaded_record_count}\n')
     if loaded_record_count == 0:
@@ -56,9 +57,42 @@ def load_stage_1(job_info, input_directory, logger, table_mapping, session_creat
         print('\nQuitting DWETL.\n-----\n')
         logger.error('\nNo records were loaded. Please check your input files and directory paths.\nQuitting DWETL.\n-----\n')
         quit()
-            
-            
-            
+
+
+
+
+
+
+    for file, table in table_mapping['MPF_TABLE_MAPPING'].items():
+        file_path = os.path.join(input_directory, file)
+        logger.info(file_path)
+        with session_creator() as session:
+            reader = TsvFileReader(file_path)
+            stg_1_table_base_class = dwetl.Base.classes[table]
+            writer = SqlAlchemyWriter(session, stg_1_table_base_class)
+            error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
+            processor = LoadMpfTsv(reader, writer, job_info, logger, error_writer)
+            processor.execute()
+
+            # count number records read from TSV and how many written to stage 1 table
+            input_record_count = session.query(stg_1_table_base_class).\
+                filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
+            print(f'\t\n{input_record_count} records loaded to {table}.')
+            logger.info(f'\t\n{input_record_count} records loaded to {table}.')
+
+            loaded_record_count = loaded_record_count + input_record_count
+
+    # exit DWETL if no records are loaded
+    print(f'\nTotal records loaded in stage 1: {loaded_record_count}\n')
+    logger.info(f'\nTotal records loaded in stage 1: {loaded_record_count}\n')
+    if loaded_record_count == 0:
+        print('\nNo records were loaded. Please check your input files and directory paths.')
+        print('\nQuitting DWETL.\n-----\n')
+        logger.error('\nNo records were loaded. Please check your input files and directory paths.\nQuitting DWETL.\n-----\n')
+        quit()
+
+
+
 
 
     # '''
