@@ -5,12 +5,13 @@ table mapping for load_stage_1
 
 stg_1_table_mapping = {'ALEPH_TSV_TABLE_MAPPING':
         {
-        "mai01_z00_data": "dw_stg_1_mai01_z00",
-        "mai39_z00_data": "dw_stg_1_mai39_z00",
-        "mai01_z13_data": "dw_stg_1_mai01_z13",
-        "mai39_z13_data": "dw_stg_1_mai39_z13",
-        "mai01_z13u_data": "dw_stg_1_mai01_z13u",
-        "mai39_z13u_data": "dw_stg_1_mai39_z13u"
+        # "mai01_z00_data": "dw_stg_1_mai01_z00",
+        # "mai39_z00_data": "dw_stg_1_mai39_z00",
+        # "mai01_z13_data": "dw_stg_1_mai01_z13",
+        # "mai39_z13_data": "dw_stg_1_mai39_z13",
+        # "mai01_z13u_data": "dw_stg_1_mai01_z13u",
+        # "mai39_z13u_data": "dw_stg_1_mai39_z13u"
+
         # "mai60_z00_data": "dw_stg_1_mai60_z00",
         # "mai60_z13_data": "dw_stg_1_mai60_z13",
         # "mai60_z13u_data": "dw_stg_1_mai60_z13u",
@@ -42,12 +43,13 @@ table mapping for load_stage_2
 '''
 
 stg_1_to_stg_2_table_mapping = {
-    "dw_stg_1_mai39_z13": "dw_stg_2_bib_rec_z13",
-    'dw_stg_1_mai01_z13': "dw_stg_2_bib_rec_z13",
-    "dw_stg_1_mai01_z13u": "dw_stg_2_bib_rec_z13u",
-    "dw_stg_1_mai01_z00": "dw_stg_2_bib_rec_z00",
-    "dw_stg_1_mai39_z00": "dw_stg_2_bib_rec_z00",
-    "dw_stg_1_mai39_z13u": "dw_stg_2_bib_rec_z13u",
+    # "dw_stg_1_mai39_z13": "dw_stg_2_bib_rec_z13",
+    # 'dw_stg_1_mai01_z13': "dw_stg_2_bib_rec_z13",
+    # "dw_stg_1_mai01_z13u": "dw_stg_2_bib_rec_z13u",
+    # "dw_stg_1_mai01_z00": "dw_stg_2_bib_rec_z00",
+    # "dw_stg_1_mai39_z00": "dw_stg_2_bib_rec_z00",
+    # "dw_stg_1_mai39_z13u": "dw_stg_2_bib_rec_z13u",
+
     # "dw_stg_1_mai60_z00": "dw_stg_2_lbry_holding_z00",
     # "dw_stg_1_mai60_z13": "dw_stg_2_lbry_holding_z13",
     # "dw_stg_1_mai60_z13u": "dw_stg_2_lbry_holding_z13u",
