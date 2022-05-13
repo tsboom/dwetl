@@ -3,6 +3,7 @@ from dwetl.reader.list_reader import ListReader
 from dwetl.writer.list_writer import ListWriter
 from dwetl.processor.copy_stage1_to_stage2 import CopyStage1ToStage2
 from dwetl.job_info import JobInfoFactory
+import pdb
 
 
 class TestCopyStage1ToStage2(unittest.TestCase):
@@ -43,6 +44,7 @@ class TestCopyStage1ToStage2(unittest.TestCase):
         expected_keys = [
             'db_operation_cd',
             'rec_trigger_key',
+            'rec_type_cd',
             'dw_stg_2_aleph_lbry_name',
             'in_z00_doc_number',
             'in_z00_no_lines',
@@ -158,6 +160,7 @@ class TestCopyStage1ToStage2(unittest.TestCase):
             'db_operation_cd',
             'dw_stg_2_aleph_lbry_name',
             'rec_trigger_key',
+            'rec_type_cd',
             'in_z30_85x_type',
             'in_z30_alpha',
             'in_z30_arrival_date',
@@ -267,12 +270,12 @@ class TestCopyStage1ToStage2(unittest.TestCase):
         processor = CopyStage1ToStage2(reader, self.writer, self.job_info, self.logger, aleph_library, self.error_writer)
         processor.execute()
         results = self.writer.list
-
         self.assertEqual(len(sample_data), len(results))
         expected_keys = [
             'db_operation_cd',
             'dw_stg_2_aleph_lbry_name',
             'rec_trigger_key',
+            'rec_type_cd',
             'in_z00_doc_number',
             'in_dw_stg_1_marc_rec_field_seq_no',
             'in_z00_marc_rec_field_cd',
@@ -294,12 +297,21 @@ class TestCopyStage1ToStage2(unittest.TestCase):
         self.assertEqual('HO', results[0]['in_z00_marc_rec_field_txt'])
         self.assertEqual(processor.job_name(), results[0]['em_create_dw_job_name'])
 
+
     def test_mai50_z35_event_type_not_in_list(self):
         sample_data = [
-                { 'z35_event_type': '01',
+                { 'z35_event_type': '01', #bad
                 'z35_rec_key': '003891145'},
                 { 'z35_event_type': '82',
                 'z35_rec_key': '004893642'},
+                  { 'z35_event_type': '83', #bad
+                'z35_rec_key': '003891146'},
+                { 'z35_event_type': '53', #bad
+                'z35_rec_key': '004893647'},
+                  { 'z35_event_type': '52',
+                'z35_rec_key': '003891148'},
+                { 'z35_event_type': '91',
+                'z35_rec_key': '004893649'},
             ]
         aleph_library= 'mai50'
 
@@ -308,5 +320,6 @@ class TestCopyStage1ToStage2(unittest.TestCase):
         processor.execute()
         results = self.writer.list
 
-        self.assertEqual(1, len(results))
+        self.assertEqual(3, len(results))
         self.assertEqual('004893642', results[0]['in_z35_rec_key'])
+        self.assertEqual('004893649', results[2]['in_z35_rec_key'])
