@@ -15,4 +15,4 @@ FROM pg_stat_activity
 WHERE datname = 'usmai_dw_etl';
 
 -- DROP the usmai_dw_etl database
-DROP DATABASE usmai_dw_etl
+DROP DATABASE IF EXISTS usmai_dw_etl;

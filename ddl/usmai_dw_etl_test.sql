@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.14
--- Dumped by pg_dump version 11.14
+-- Dumped from database version 11.15
+-- Dumped by pg_dump version 11.15
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -16,7 +16,8 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-DROP DATABASE usmai_dw_etl_test;
+
+DROP DATABASE IF EXISTS usmai_dw_etl_test;
 --
 -- Name: usmai_dw_etl_test; Type: DATABASE; Schema: -; Owner: usmai_dw
 --
@@ -1091,6 +1092,30 @@ WITH (autovacuum_enabled='true');
 ALTER TABLE public.dw_stg_1_mai60_z00_field OWNER TO usmai_dw;
 
 --
+-- Name: dw_stg_1_mai60_z103_bib; Type: TABLE; Schema: public; Owner: usmai_dw
+--
+
+CREATE TABLE public.dw_stg_1_mai60_z103_bib (
+    rec_type_cd character(1) NOT NULL,
+    db_operation_cd character(1) NOT NULL,
+    rec_trigger_key character(9) NOT NULL,
+    source character(9),
+    dest character(9),
+    dest_lib character(5),
+    dest_docnum character(9),
+    em_create_dw_prcsng_cycle_id integer NOT NULL,
+    em_create_dw_job_exectn_id integer NOT NULL,
+    em_create_dw_job_name character varying(100) NOT NULL,
+    em_create_dw_job_version_no character varying(20) NOT NULL,
+    em_create_user_id character varying(20) NOT NULL,
+    em_create_tmstmp timestamp without time zone NOT NULL
+)
+WITH (autovacuum_enabled='true');
+
+
+ALTER TABLE public.dw_stg_1_mai60_z103_bib OWNER TO usmai_dw;
+
+--
 -- Name: dw_stg_1_mai60_z13; Type: TABLE; Schema: public; Owner: usmai_dw
 --
 
@@ -1488,8 +1513,11 @@ CREATE TABLE public.dw_stg_2_bib_rec_z13u (
     dq_z13u_user_defined_3 character varying(500),
     t1_z13u_user_defined_3__bib_rec_marc_rec_leader_field_txt character varying(500),
     t2_z13u_user_defined_3__bib_rec_type_cd character(1),
-    t3_z13u_user_defined_3__bib_rec_bib_lvl_cd character(1),
-    t4_z13u_user_defined_3__bib_rec_encoding_lvl_cd character(1),
+    t3_z13u_user_defined_3__bib_rec_type_desc character varying(500),
+    t4_z13u_user_defined_3__bib_rec_bib_lvl_cd character(1),
+    t5_z13u_user_defined_3__bib_rec_bib_lvl_desc character varying(500),
+    t6_z13u_user_defined_3__bib_rec_encoding_lvl_cd character(1),
+    t7_z13u_user_defined_3__bib_rec_encoding_lvl_desc character varying(500),
     in_z13u_user_defined_4 character varying(500),
     pp_z13u_user_defined_4 character varying(500),
     dq_z13u_user_defined_4 character varying(500),
@@ -1545,12 +1573,7 @@ CREATE TABLE public.dw_stg_2_bib_rec_z13u (
     em_update_dw_job_name character varying(100),
     em_update_dw_job_version_no character varying(20),
     em_update_user_id character varying(20),
-    em_update_tmstmp timestamp without time zone,
-    t3_z13u_user_defined_3__bib_rec_type_desc character varying(500),
-    t4_z13u_user_defined_3__bib_rec_bib_lvl_cd character(1),
-    t5_z13u_user_defined_3__bib_rec_bib_lvl_desc character varying(500),
-    t6_z13u_user_defined_3__bib_rec_encoding_lvl_cdc character(1),
-    t7_z13u_user_defined_3__bib_rec_encoding_lvl_desc character varying(500)
+    em_update_tmstmp timestamp without time zone
 )
 WITH (autovacuum_enabled='true');
 
@@ -3558,6 +3581,14 @@ ALTER TABLE ONLY public.dw_stg_1_mai60_z00
 
 
 --
+-- Name: dw_stg_1_mai60_z103_bib pk_dw_stg_1_mai60_z103_bib; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
+--
+
+ALTER TABLE ONLY public.dw_stg_1_mai60_z103_bib
+    ADD CONSTRAINT pk_dw_stg_1_mai60_z103_bib PRIMARY KEY (db_operation_cd, rec_trigger_key, em_create_dw_prcsng_cycle_id);
+
+
+--
 -- Name: dw_stg_1_mai60_z13 pk_dw_stg_1_mai60_z13; Type: CONSTRAINT; Schema: public; Owner: usmai_dw
 --
 
@@ -3919,13 +3950,9 @@ CREATE INDEX indx_fact_lbry_item_status ON public.fact_lbry_item USING btree (lb
 -- Name: SCHEMA public; Type: ACL; Schema: -; Owner: usmai_dw
 --
 
-REVOKE ALL ON SCHEMA public FROM postgres;
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-GRANT ALL ON SCHEMA public TO usmai_dw;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
 -- PostgreSQL database dump complete
 --
-

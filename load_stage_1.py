@@ -3,7 +3,6 @@ import os
 import sys
 from dwetl.job_info import JobInfoFactory, JobInfo
 from dwetl.reader.tsv_file_reader import TsvFileReader
-from dwetl.reader.mpf_file_reader import MpfFileReader
 from dwetl.reader.z00_field_reader import Z00FieldReader
 from dwetl.writer.print_writer import PrintWriter
 from dwetl.processor.load_aleph_tsv import LoadAlephTsv
@@ -42,12 +41,13 @@ def load_stage_1(job_info, input_directory, logger, table_mapping, session_creat
             processor.execute()
 
             # count number records read from TSV and how many written to stage 1 table
-            input_record_count = session.query(stg_1_table_base_class).\
+            tsv_record_count = reader.record_count
+            stage_1_record_count = session.query(stg_1_table_base_class).\
                 filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
-            print(f'\t\n{input_record_count} records loaded to {table}.')
-            logger.info(f'\t\n{input_record_count} records loaded to {table}.')
+            print(f'\t\n{tsv_record_count} records in {file} TSV. \n{stage_1_record_count} records loaded to {table}.')
+            logger.info(f'\t\n{tsv_record_count} records in  {file} TSV. \n{stage_1_record_count} records loaded to {table}.')
 
-            loaded_record_count = loaded_record_count + input_record_count
+            loaded_record_count = loaded_record_count + stage_1_record_count
 
     # exit DWETL if no records are loaded
     print(f'\nTotal records loaded in stage 1: {loaded_record_count}\n')
@@ -58,78 +58,22 @@ def load_stage_1(job_info, input_directory, logger, table_mapping, session_creat
         logger.error('\nNo records were loaded. Please check your input files and directory paths.\nQuitting DWETL.\n-----\n')
         quit()
 
-
-
-
-
-
-    for file, table in table_mapping['MPF_TABLE_MAPPING'].items():
-        file_path = os.path.join(input_directory, file)
-        logger.info(file_path)
-        with session_creator() as session:
-            reader = TsvFileReader(file_path)
-            stg_1_table_base_class = dwetl.Base.classes[table]
-            writer = SqlAlchemyWriter(session, stg_1_table_base_class)
-            error_writer = SqlAlchemyWriter(session, dwetl.Base.classes['dw_db_errors'])
-            processor = LoadMpfTsv(reader, writer, job_info, logger, error_writer)
-            processor.execute()
-
-            # count number records read from TSV and how many written to stage 1 table
-            input_record_count = session.query(stg_1_table_base_class).\
-                filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
-            print(f'\t\n{input_record_count} records loaded to {table}.')
-            logger.info(f'\t\n{input_record_count} records loaded to {table}.')
-
-            loaded_record_count = loaded_record_count + input_record_count
-
-    # exit DWETL if no records are loaded
-    print(f'\nTotal records loaded in stage 1: {loaded_record_count}\n')
-    logger.info(f'\nTotal records loaded in stage 1: {loaded_record_count}\n')
-    if loaded_record_count == 0:
-        print('\nNo records were loaded. Please check your input files and directory paths.')
-        print('\nQuitting DWETL.\n-----\n')
-        logger.error('\nNo records were loaded. Please check your input files and directory paths.\nQuitting DWETL.\n-----\n')
-        quit()
-
-
-
-
-
-    # '''
-    # load z00 field files
-    # '''
-    # for file, table in Z00_FIELD_TABLE_MAPPING.items():
-    #     file_path = os.path.join(input_directory, file)
-    #     if os.path.exists(file_path):
-    #         print(file_path)
-    #         with dwetl.database_session() as session:
-    #             reader = Z00FieldReader(file_path)
-    #             # writer = PrintWriter()
-    #             writer = SqlAlchemyWriter(session, dwetl.Base.classes[table])
-    #             logger = None
-    #             processor = LoadZ00FieldTsv(reader, writer, job_info, logger)
-    #             processor.execute()
-    #     else:
-    #         print(file_path + ' does not exist.')
-    #
-    #
-    #
     # '''
     # load mpf tsv files
     # '''
     #
-    # for file, table in MPF_TABLE_MAPPING.items():
-    #     file_path = os.path.join(input_directory, file)
-    #     print(file_path)
-    #     with dwetl.database_session() as session:
-    #         # reader = TsvFileReader('data/20190920/mai50_z30_full_data')
-    #         reader = TsvFileReader(file_path)
-    #         #writer = PrintWriter()
-    #         writer = SqlAlchemyWriter(session, dwetl.Base.classes[table])
-    #         logger = None
-    #         processor = LoadMpfTsv(reader, writer, job_info, logger)
-    #
-    #         processor.execute()
+    for file, table in MPF_TABLE_MAPPING.items():
+        file_path = os.path.join(input_directory, file)
+        print(file_path)
+        with dwetl.database_session() as session:
+            # reader = TsvFileReader('data/20190920/mai50_z30_full_data')
+            reader = TsvFileReader(file_path)
+            #writer = PrintWriter()
+            writer = SqlAlchemyWriter(session, dwetl.Base.classes[table])
+            logger = None
+            processor = LoadMpfTsv(reader, writer, job_info, logger)
+
+            processor.execute()
 
 '''
 main function for running script from the command line

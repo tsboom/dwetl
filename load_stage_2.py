@@ -6,6 +6,7 @@ import dwetl
 import sys
 import re
 import pdb
+import pprint
 
 
 def aleph_library(table_name):
@@ -45,6 +46,7 @@ def load_stage_2(job_info, logger, stage1_to_stage2_table_mapping, db_session_cr
 
         with db_session_creator() as session:
             stage1_table_class = dwetl.Base.classes[stage1_table]
+            stg_1_count = session.query(stage1_table_class).filter(stage1_table_class.em_create_dw_prcsng_cycle_id==job_info.prcsng_cycle_id).count()
             stage2_table_class = dwetl.Base.classes[stage2_table]
             reader = SqlAlchemyReader(session, stage1_table_class, 'em_create_dw_prcsng_cycle_id', processing_cycle_id)
             writer = SqlAlchemyWriter(session, stage2_table_class)
@@ -57,6 +59,8 @@ def load_stage_2(job_info, logger, stage1_to_stage2_table_mapping, db_session_cr
         for table in stage2_table_list:
             stage2_table_class = dwetl.Base.classes[table]
             stg_2_count = session.query(stage2_table_class).filter(stage2_table_class.em_create_dw_prcsng_cycle_id==job_info.prcsng_cycle_id).count()
+            print(f'\t\n{stg_2_count} records loaded to {table}.')
+            logger.info(f'\t\n{stg_2_count} records loaded to {table}.')
             loaded_record_count = loaded_record_count + stg_2_count
 
     logger.info(f'Total records loaded in stage 2: {loaded_record_count}\n')
