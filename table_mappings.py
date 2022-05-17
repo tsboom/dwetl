@@ -18,7 +18,7 @@ stg_1_table_mapping = {'ALEPH_TSV_TABLE_MAPPING':
         "mai50_z30_data": "dw_stg_1_mai50_z30",
         "mai50_z35_data": "dw_stg_1_mai50_z35",
         "mai50_z30_full_data": "dw_stg_1_mai50_z30_full",
-        "mai50_z103_bib_full_data": "dw_stg_2_lbry_item_z103_bib_full",
+        "mai50_z103_bib_full_data": "dw_stg_1_mai50_z103_bib_full_data"
         }
         ,
         'Z00_FIELD_TABLE_MAPPING': {
