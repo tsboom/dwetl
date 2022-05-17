@@ -42,7 +42,7 @@ class CopyStage1ToStage2(Processor):
                 new_key = 'in_' + key
 
             processed_item[new_key] = value
-        pdb.set_trace()
+
         # Update metadata
         if self.aleph_library:
             processed_item['dw_stg_2_aleph_lbry_name'] = self.aleph_library
