@@ -62,7 +62,7 @@ def load_stage_1(job_info, input_directory, logger, table_mapping, session_creat
     # load mpf tsv files
     # '''
     #
-    for file, table in  table_mapping['MPF_TABLE_MAPPING'].items():
+    for file, table in table_mapping['MPF_TABLE_MAPPING'].items():
         file_path = os.path.join(input_directory, file)
         print(file_path)
         with dwetl.database_session() as session:
