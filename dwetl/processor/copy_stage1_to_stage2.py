@@ -14,7 +14,7 @@ class CopyStage1ToStage2(Processor):
     def __init__(self, reader, writer, job_info, logger, aleph_library, error_writer):
         super().__init__(reader, writer, job_info, logger, error_writer)
         self.aleph_library = aleph_library
-        self.invalid_keys = ['_sa_instance_state', 'usmai_mbr_lbry_mbrshp_type_cd']
+        self.invalid_keys = ['_sa_instance_state']
         self.valid_mai50_z35_event_type =['50', '52', '54', '56', '91', '58', '61', '82', '62', '63', '64']
     @classmethod
     def create(cls, reader, writer, job_info, logger, aleph_library, error_writer):
@@ -25,6 +25,7 @@ class CopyStage1ToStage2(Processor):
 
     def process_item(self, item):
         processed_item = {}
+        #pdb.set_trace()
         if 'z35_event_type' in item.keys() and item['z35_event_type'] not in self.valid_mai50_z35_event_type:
             return None
 
