@@ -43,16 +43,13 @@ docker> psql -U postgres
 5) In psql for postgres and postgrestest, create the "usmai_dw_etl" and "usmai_dw_etl_test" databases, and exit:
 
 ```
-postgres=# CREATE TABLESPACE usmai_dw location '/pgdata';
+postgres=# CREATE TABLESPACE usmai_dw location '/var/lib/postgresql/pgdata';
 postgres=# CREATE DATABASE usmai_dw_etl OWNER usmai_dw TABLESPACE usmai_dw;
-;
-postgres=# CREATE ROLE usmai_dw;
 postgres=# <Ctrl-D>
 ```
 ```
-postgres=# CREATE TABLESPACE usmai_dw location '/pgdata';
+postgres=# CREATE TABLESPACE usmai_dw location '/var/lib/postgresql/pgdata';
 postgres=# CREATE DATABASE usmai_dw_etl_test OWNER usmai_dw TABLESPACE usmai_dw;;
-postgres=# CREATE ROLE usmai_dw;
 postgres=# <Ctrl-D>
 ```
 
