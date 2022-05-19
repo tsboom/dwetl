@@ -1,0 +1,111 @@
+mpf_material-form-dimension.txt
+matrl_form_cd	matrl_form_name	db_operation_cd	lbry_staff_lms_user_id	db_operation_effective_date
+KEY  	Key	I	ddahl	2017-11-09
+MPLYR	Pre-loaded media player	I	ddahl	2012-08-28
+BLRAY	Blu-ray disc	I	ddahl	2012-02-24
+4318	Object Code for BNA	D	ddahl	2007-07-10
+SER  	Serial	D	ddahl	2006-08-25
+SRU  	"Serial, Unbound"	D	ddahl	2006-08-25
+VC1/2	Video cassette  VHS	D	ddahl	2006-08-25
+VTAPE	Videotape	D	ddahl	2006-08-25
+PERBD	"Periodical, Bound"	D	ddahl	2006-05-25
+PERUB	"Periodical, Unbound"	D	ddahl	2006-05-25
+NEWSP	Newspaper	D	ddahl	2006-05-25
+PRUB 	Unbound periodicals(obsolete )	D	ddahl	2004-11-19
+REFRS	"Items in Ref, Reserv(obsolete)"	D	ddahl	2004-11-19
+SUPER	Superceded material	D	ddahl	2004-11-19
+ATD  	Digital audio tape	D	ddahl	2004-08-10
+F35  	"Motion picture film, 35mm"	D	ddahl	2004-08-10
+NONE 	None	D	ddahl	2004-08-10
+SCRPR	Projection screen	D	ddahl	2004-08-10
+SLPRA	Slide projection accessories	D	ddahl	2004-08-10
+TEC  	Technical Report	D	ddahl	2004-08-10
+VBETA	Video cassette beta	D	ddahl	2004-08-10
+VDPLY	Video disc play/rec	D	ddahl	2004-08-10
+IHS  	In House Use	I	ddahl	2004-06-30
+4318	Object Code for BNA	I	ddahl	2002-01-01
+ACD  	"Compact disc, audio"	I	ddahl	2002-01-01
+ARCV 	Archives	I	ddahl	2002-01-01
+ART  	Art or Art reproduction	I	ddahl	2002-01-01
+ATD  	Digital audio tape	I	ddahl	2002-01-01
+AUC  	Audio cassette	I	ddahl	2002-01-01
+AUT  	Audiotape (reel to reel	I	ddahl	2002-01-01
+BOOK 	Book	I	ddahl	2002-01-01
+BRIEF	Brief	I	ddahl	2002-01-01
+CDISK	Computer disk	I	ddahl	2002-01-01
+CDROM	CD ROM	I	ddahl	2002-01-01
+CHART	Chart	I	ddahl	2002-01-01
+CODE 	Code	I	ddahl	2002-01-01
+CON  	Continuation	I	ddahl	2002-01-01
+CRMAT	Curriculum material	I	ddahl	2002-01-01
+DVD  	DVD (video)	I	ddahl	2002-01-01
+DVDRM	DVD-ROM	I	ddahl	2002-01-01
+EAD  	Encoded Archival Finding Aids	I	ddahl	2002-01-01
+EBOOK	Electronic book	I	ddahl	2002-01-01
+EDBAS	Electronic database	I	ddahl	2002-01-01
+EJRN 	Electronic journal	I	ddahl	2002-01-01
+EQP  	Equipment	I	ddahl	2002-01-01
+F16  	"Motion picture film, 16mm"	I	ddahl	2002-01-01
+F35  	"Motion picture film, 35mm"	I	ddahl	2002-01-01
+FILM 	Motion picture film	I	ddahl	2002-01-01
+FLCRD	Flashcard	I	ddahl	2002-01-01
+FLOOP	Filmloop	I	ddahl	2002-01-01
+FSTRP	Filmstrip	I	ddahl	2002-01-01
+GAME 	Game	I	ddahl	2002-01-01
+GOV  	Government Document	I	ddahl	2002-01-01
+GOVB 	"Government Document, Book"	I	ddahl	2002-01-01
+GOVS 	"Government Document, Serial"	I	ddahl	2002-01-01
+ISSBD	Bound Issue	I	ddahl	2002-01-01
+ISSUE	Issues	I	ddahl	2002-01-01
+KIT  	Kit	I	ddahl	2002-01-01
+LAPC 	Laptop	I	ddahl	2002-01-01
+MAP  	Map	I	ddahl	2002-01-01
+MBOOK	Microbook	I	ddahl	2002-01-01
+MCARD	Microcard	I	ddahl	2002-01-01
+MEDIA	Media	I	ddahl	2002-01-01
+MEMOR	Memorabilia	I	ddahl	2002-01-01
+MFICH	Microfiche	I	ddahl	2002-01-01
+MFILM	Microfilm	I	ddahl	2002-01-01
+MFORM	Microform	I	ddahl	2002-01-01
+MODEL	Model	I	ddahl	2002-01-01
+MPRNT	Microprint	I	ddahl	2002-01-01
+MSS  	Manuscript	I	ddahl	2002-01-01
+NEWSP	Newspaper	I	ddahl	2002-01-01
+NONE 	None	I	ddahl	2002-01-01
+OPINO	Opinion	I	ddahl	2002-01-01
+PAMPH	Pamphlet	I	ddahl	2002-01-01
+PER  	Periodical	I	ddahl	2002-01-01
+PERBD	"Periodical, Bound"	I	ddahl	2002-01-01
+PERUB	"Periodical, Unbound"	I	ddahl	2002-01-01
+PHONO	Phonograph record	I	ddahl	2002-01-01
+PHOTO	Photograph	I	ddahl	2002-01-01
+POSTR	Poster	I	ddahl	2002-01-01
+PRUB 	Unbound periodicals(obsolete )	I	ddahl	2002-01-01
+RARE 	Rare book	I	ddahl	2002-01-01
+REALA	Realia	I	ddahl	2002-01-01
+RECST	Record set with other items	I	ddahl	2002-01-01
+REFRS	"Items in Ref, Reserv(obsolete)"	I	ddahl	2002-01-01
+REPT 	"Reporter, Brief, Slip"	I	ddahl	2002-01-01
+RESER	Course Reserves	I	ddahl	2002-01-01
+SCORE	Musical score	I	ddahl	2002-01-01
+SCRPR	Projection screen	I	ddahl	2002-01-01
+SER  	Serial	I	ddahl	2002-01-01
+SFTWR	Software	I	ddahl	2002-01-01
+SLIDE	Slide	I	ddahl	2002-01-01
+SLPRA	Slide projection accessories	I	ddahl	2002-01-01
+SRU  	"Serial, Unbound"	I	ddahl	2002-01-01
+STPRT	Study print	I	ddahl	2002-01-01
+SUPER	Superceded material	I	ddahl	2002-01-01
+TEC  	Technical Report	I	ddahl	2002-01-01
+THES 	Thesis/Dissertation	I	ddahl	2002-01-01
+TRNSP	Transparencies	I	ddahl	2002-01-01
+VBETA	Video cassette beta	I	ddahl	2002-01-01
+VC1/2	Video cassette  VHS	I	ddahl	2002-01-01
+VC3/4	Video cassette	I	ddahl	2002-01-01
+VCASS	Video cassette	I	ddahl	2002-01-01
+VDISC	Videodisc	I	ddahl	2002-01-01
+VDPLY	Video disc play/rec	I	ddahl	2002-01-01
+VFILE	Vertical file	I	ddahl	2002-01-01
+VTAPE	Videotape	I	ddahl	2002-01-01
+WWW  	Web electronic resource	I	ddahl	2002-01-01
+XXX  	Unknown material type	I	ddahl	2002-01-01

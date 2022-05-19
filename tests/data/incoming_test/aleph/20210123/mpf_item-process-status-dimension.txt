@@ -1,0 +1,474 @@
+mpf_item-process-status-dimension.txt
+usmai_mbr_lbry_cd	item_prcs_status_cd	item_prcs_status_public_desc	item_prcs_status_internal_desc	db_operation_cd	lbry_staff_lms_user_id	db_operation_effective_date
+CS	WI	withdrawn	Withdrawn	I	lseguin	2022-03-10
+BC	CU	currently unavailable	currently unavailable	I	lseguin	2021-12-17
+BC	WA	withdrawn	Shared Print item withdrawn for allowed reason	D	lseguin	2021-08-02
+BS	WA	withdrawn	Shared Print item withdrawn for allowed reason	D	lseguin	2021-08-02
+CE	WA	withdrawn	Shared Print item withdrawn for allowed reason	D	lseguin	2021-08-02
+CS	WA	withdrawn	Shared Print item withdrawn for allowed reason	D	lseguin	2021-08-02
+ES	WA	withdrawn	Shared Print item withdrawn for allowed reason	D	lseguin	2021-08-02
+FS	WA	withdrawn	Shared Print item withdrawn for allowed reason	D	lseguin	2021-08-02
+LN	WA	withdrawn	Shared Print item withdrawn for allowed reason	D	lseguin	2021-08-02
+MS	WA	withdrawn	Shared Print item withdrawn for allowed reason	D	lseguin	2021-08-02
+SM	WA	withdrawn	Shared Print item withdrawn for allowed reason	D	lseguin	2021-08-02
+SU	WA	withdrawn	Shared Print item withdrawn for allowed reason	D	lseguin	2021-08-02
+TU	WA	withdrawn	Shared Print item withdrawn for allowed reason	D	lseguin	2021-08-02
+UB	WA	withdrawn	Shared Print item withdrawn for allowed reason	D	lseguin	2021-08-02
+UC	WA	withdrawn	Shared Print item withdrawn for allowed reason	D	lseguin	2021-08-02
+CP	EA	currently unavailable	HathiTrust Emergency Access	D	lseguin	2021-08-02
+CP	EA	currently unavailable	HathiTrust Emergency Access	I	lseguin	2020-07-17
+BC	BD	being repaired	Sent for repair	I	lseguin	2019-09-20
+BC	WA	withdrawn	Shared Print item withdrawn for allowed reason	I	lseguin	2019-06-18
+BS	WA	withdrawn	Shared Print item withdrawn for allowed reason	I	lseguin	2019-06-18
+CE	WA	withdrawn	Shared Print item withdrawn for allowed reason	I	lseguin	2019-06-18
+CS	WA	withdrawn	Shared Print item withdrawn for allowed reason	I	lseguin	2019-06-18
+ES	WA	withdrawn	Shared Print item withdrawn for allowed reason	I	lseguin	2019-06-18
+FS	WA	withdrawn	Shared Print item withdrawn for allowed reason	I	lseguin	2019-06-18
+LN	WA	withdrawn	Shared Print item withdrawn for allowed reason	I	lseguin	2019-06-18
+MS	WA	withdrawn	Shared Print item withdrawn for allowed reason	I	lseguin	2019-06-18
+SM	WA	withdrawn	Shared Print item withdrawn for allowed reason	I	lseguin	2019-06-18
+SU	WA	withdrawn	Shared Print item withdrawn for allowed reason	I	lseguin	2019-06-18
+TU	WA	withdrawn	Shared Print item withdrawn for allowed reason	I	lseguin	2019-06-18
+UB	WA	withdrawn	Shared Print item withdrawn for allowed reason	I	lseguin	2019-06-18
+UC	WA	withdrawn	Shared Print item withdrawn for allowed reason	I	lseguin	2019-06-18
+UB	AQ	Acq & Discovery Dept	In Acquisitions	I	lseguin	2019-05-16
+MS	PP	lost	Patron Purge	U	lseguin	2019-04-18
+TU	OD	3rd Floor Display	On display (auto-clear)	I	lseguin	2019-04-03
+TU	RT	Shared Print Retention	Shared Print Retention	D	lseguin	2019-02-25
+SU	RT	Shared Print Retention	Shared Print Retention	D	lseguin	2019-02-25
+UB	OD	1st Floor Display	On display (auto-clear)	I	lseguin	2019-02-25
+UB	NB	New Books KIOSK 1st floor	New Book (auto-clear)	U	lseguin	2019-02-25
+CP	KI	Shelve with Kiosk on Return	Shelve with Kiosk on Return	I	ddahl	2018-10-03
+SU	RT	Shared Print Retention	Shared Print Retention	I	ddahl	2018-08-13
+TU	RT	Shared Print Retention	Shared Print Retention	I	ddahl	2018-07-27
+BC	MH	Missing Hold	Missing hold	I	ddahl	2018-05-16
+BL	MH	Missing Hold	Missing hold	I	ddahl	2018-05-16
+BS	MH	Missing Hold	Missing hold	I	ddahl	2018-05-16
+CE	MH	Missing Hold	Missing hold	I	ddahl	2018-05-16
+CP	MH	Missing Hold	Missing hold	I	ddahl	2018-05-16
+ES	MH	Missing Hold	Missing hold	I	ddahl	2018-05-16
+FS	MH	Missing Hold	Missing hold	I	ddahl	2018-05-16
+HS	MH	Missing Hold	Missing hold	I	ddahl	2018-05-16
+LN	MH	Missing Hold	Missing hold	I	ddahl	2018-05-16
+ML	MH	Missing Hold	Missing hold	I	ddahl	2018-05-16
+MS	MH	Missing Hold	Missing hold	I	ddahl	2018-05-16
+SM	MH	Missing Hold	Missing hold	I	ddahl	2018-05-16
+SU	MH	Missing Hold	Missing hold	I	ddahl	2018-05-16
+TU	MH	Missing Hold	Missing hold	I	ddahl	2018-05-16
+UB	MH	Missing Hold	Missing hold	I	ddahl	2018-05-16
+UC	MH	Missing Hold	Missing hold	I	ddahl	2018-05-16
+CP	RE	Shelve with Reserves on Return	Shelve with Reserves on Return	I	ddahl	2017-07-11
+CP	HT	withdrawn (HT)	Potential future e-access	U	lseguin	2017-05-25
+LN	AQ	in process	In Acquisitions	I	ddahl	2016-12-19
+LN	AR	in process	Arrearage	I	ddahl	2016-12-19
+LN	BD	being repaired	Sent for repair	I	ddahl	2016-12-19
+LN	BM	being repaired	Brittle materials	I	ddahl	2016-12-19
+LN	BX	being repaired	To be boxed	I	ddahl	2016-12-19
+LN	CA	cancelled	Cancelled	I	ddahl	2016-12-19
+LN	CL	claimed	Claimed	I	ddahl	2016-12-19
+ML	CL	claimed	Claimed	I	ddahl	2017-01-01
+LN	CM	in process	Cat. Maintenance	I	ddahl	2016-12-19
+LN	CO	being repaired	Conservation	I	ddahl	2016-12-19
+LN	CT	in process	Cataloging	I	ddahl	2016-12-19
+LN	CU	currently unavailable	Currently unavailable	I	ddahl	2016-12-19
+LN	DA	at bindery	Deacidification	I	ddahl	2016-12-19
+LN	DB	"digitized, brittle"	"Digitized, brittle"	I	ddahl	2016-12-19
+LN	DW	damaged withdrawn	Damaged wdrawn	I	ddahl	2016-12-19
+LN	EX	not arrived	Expected	I	ddahl	2016-12-19
+LN	IP	in process	In process	I	ddahl	2016-12-19
+LN	LB	in process	Labeling	I	ddahl	2016-12-19
+LN	LR	lost	"Long overdue, replaced"	I	ddahl	2016-12-19
+LN	MI	lost	Missing	I	ddahl	2016-12-19
+LN	MR	"missing, replaced"	"Missing, replaced"	I	ddahl	2016-12-19
+LN	NA	not arrived	Not arrived	I	ddahl	2016-12-19
+LN	NP	not published	Not published	I	ddahl	2016-12-19
+LN	NR	not received	Not received	I	ddahl	2016-12-19
+LN	OI	on order	Order initiation	I	ddahl	2016-12-19
+LN	OR	on order	On order	I	ddahl	2016-12-19
+LN	PA	Patron Driven Acquisitions	Patron Driven Acquisitions	I	ddahl	2016-12-19
+LN	PD	issue delayed	Publication delayed	I	ddahl	2016-12-19
+LN	PP	lost - patron purge	Patron Purge	I	ddahl	2016-12-19
+LN	PR	being repaired	Preservation	I	ddahl	2016-12-19
+LN	RC	Send to Cataloging upon return	Send to Cataloging upon return	I	ddahl	2016-12-19
+LN	RM	reported missing	"Missing, searched"	I	ddahl	2016-12-19
+LN	RO	on order	Replacement ordered	I	ddahl	2016-12-19
+LN	SB	at bindery	Sent to binder	I	ddahl	2016-12-19
+LN	SC	in process	Original Cataloging	I	ddahl	2016-12-19
+LN	SD	being digitized	Sent for digitizing	I	ddahl	2016-12-19
+LN	SM	being microfilmed	Sent for microfilming	I	ddahl	2016-12-19
+LN	SP	suppressed	Suppressed	I	ddahl	2016-12-19
+LN	TW	to be withdrawn	To be withdrawn	I	ddahl	2016-12-19
+LN	TX	Internal Transfer	Internal Transfer	I	ddahl	2016-12-19
+LN	WI	withdrawn	Withdrawn	I	ddahl	2016-12-19
+LN	XX	exclude from reports	Exclude from reports	I	ddahl	2016-12-19
+CE	CU	currently unavailable	Currently unavailable	I	ddahl	2016-11-15
+SU	CU	currently unavailable	Currently unavailable	I	ddahl	2016-07-07
+UB	LP	Lost and paid	Lost and paid	I	ddahl	2016-03-11
+CP	YY	Mark for Report	Mark for report	I	ddahl	2015-10-21
+CP	BX	being repaired	To be boxed	I	ddahl	2015-02-18
+CP	DB	"digitized, brittle"	"Digitized, brittle"	I	ddahl	2014-11-20
+BL	CU	currently unavailable	Currently unavailable	I	ddahl	2014-11-13
+BL	SB	at bindery	Sent to binder	I	ddahl	2014-11-13
+UB	RP	patron replaced	Patron replaced	I	ddahl	2014-02-25
+UB	LR	"long overdue, replaced"	"Long overdue, replaced"	I	ddahl	2014-02-06
+UB	MR	"missing, replaced"	"Missing, replaced"	I	ddahl	2014-02-04
+BL	PA	Patron Driven Acquisitions	Patron Driven Acquisitions	I	ddahl	2013-11-07
+ML	PA	Patron Driven Acquisitions	Patron Driven Acquisitions	I	ddahl	2013-11-07
+BS	PA	Patron Driven Acquisitions	Patron Driven Acquisitions	I	ddahl	2013-08-13
+CE	PA	Patron Driven Acquisitions	Patron Driven Acquisitions	I	ddahl	2013-08-13
+CS	PA	Patron Driven Acquisitions	Patron Driven Acquisitions	I	ddahl	2013-08-13
+ES	PA	Patron Driven Acquisitions	Patron Driven Acquisitions	I	ddahl	2013-08-13
+FS	PA	Patron Driven Acquisitions	Patron Driven Acquisitions	I	ddahl	2013-08-13
+MS	PA	Patron Driven Acquisitions	Patron Driven Acquisitions	I	ddahl	2013-08-13
+SM	PA	Patron Driven Acquisitions	Patron Driven Acquisitions	I	ddahl	2013-08-13
+SU	PA	Patron Driven Acquisitions	Patron Driven Acquisitions	I	ddahl	2013-08-13
+UB	PA	Patron Driven Acquisitions	Patron Driven Acquisitions	I	ddahl	2013-08-13
+UB	WI	withdrawn	Withdrawn	I	ddahl	2013-05-13
+TU	PA	Patron Driven Acquisitions	Patron Driven Acquisitions	I	ddahl	2013-03-05
+CP	HT	Potential future e-access	Potential future e-access	U	lseguin	2012-11-15
+CP	HT	Hathi Trust	Potential future e-access	I	ddahl	2012-01-19
+BC	PA	Patron Driven Acquisitions	Patron Driven Acquisitions	I	ddahl	2011-10-31
+HS	PA	Patron Driven Acquisitions	Patron Driven Acquisitions	I	ddahl	2011-10-31
+UB	NB	New Books KIOSK 1st floor	New Book	I	ddahl	2011-10-27
+BL	SD	being digitized	Sent for digitizing	I	ddahl	2011-08-02
+CP	SD	being digitized	Sent for digitizing	I	ddahl	2011-08-02
+CP	TW	to be withdrawn	To be withdrawn	I	ddahl	2010-08-19
+BC	PP	lost - patron purge	Patron Purge	I	ddahl	2009-03-13
+BL	PP	lost - patron purge	Patron Purge	I	ddahl	2009-03-13
+BS	PP	lost - patron purge	Patron Purge	I	ddahl	2009-03-13
+CE	PP	lost - patron purge	Patron Purge	I	ddahl	2009-03-13
+CP	PP	lost - patron purge	Patron Purge	I	ddahl	2009-03-13
+CS	PP	lost - patron purge	Patron Purge	I	ddahl	2009-03-13
+ES	PP	lost - patron purge	Patron Purge	I	ddahl	2009-03-13
+FS	PP	lost - patron purge	Patron Purge	I	ddahl	2009-03-13
+HS	PP	lost - patron purge	Patron Purge	I	ddahl	2009-03-13
+ML	PP	lost - patron purge	Patron Purge	I	ddahl	2009-03-13
+MS	PP	lost - patron purge	Patron Purge	I	ddahl	2009-03-13
+SM	PP	lost - patron purge	Patron Purge	I	ddahl	2009-03-13
+SU	PP	lost - patron purge	Patron Purge	I	ddahl	2009-03-13
+TU	PP	lost - patron purge	Patron Purge	I	ddahl	2009-03-13
+UB	PP	lost - patron purge	Patron Purge	I	ddahl	2009-03-13
+UC	PP	lost - patron purge	Patron Purge	I	ddahl	2009-03-13
+SU	WI	withdrawn	Withdrawn	I	ddahl	2009-03-13
+ES	WI	withdrawn	Withdrawn	I	ddahl	2007-09-24
+HS	TW	to be withdrawn	To be withdrawn	I	ddahl	2006-07-27
+SM	XX	exclude from reports	Exclude from reports	I	ddahl	2006-06-13
+HS	XX	exclude from reports	Exclude from reports	I	ddahl	2005-11-07
+CP	AQ	in process	In Acquisitions	I	ddahl	2005-08-05
+CP	TX	Internal Transfer	Internal Transfer	I	ddahl	2005-08-05
+TU	LP	lost and paid	Lost and paid	I	ddahl	2005-07-22
+SU	NE	not expected	Not expected	I	ddahl	2005-07-22
+HS	DW	damaged wdrawn	Damaged wdrawn	I	ddahl	2005-05-20
+UC	CT	in process	Cataloging	I	ddahl	2003-08-03
+UC	LB	in process	Labeling	I	ddahl	2003-08-03
+HS	RV	arrived	Received	I	ddahl	2003-08-03
+UC	SC	in process	Original Cataloging	I	ddahl	2003-08-03
+BS	DW	damaged wdrawn	Damaged wdrawn	I	ddahl	2003-05-30
+CP	NR	not received	Not received	I	ddahl	2003-05-30
+BS	WI	withdrawn	Withdrawn	I	ddahl	2003-05-30
+BL	RM	reported missing	"Missing, searched"	I	ddahl	2003-01-09
+BS	RM	reported missing	"Missing, searched"	I	ddahl	2003-01-09
+CE	RM	reported missing	"Missing, searched"	I	ddahl	2003-01-09
+ES	RM	reported missing	"Missing, searched"	I	ddahl	2003-01-09
+ML	RM	reported missing	"Missing, searched"	I	ddahl	2003-01-09
+MS	RM	reported missing	"Missing, searched"	I	ddahl	2003-01-09
+UB	RM	reported missing	"Missing, searched"	I	ddahl	2003-01-09
+UC	RM	reported missing	"Missing, searched"	I	ddahl	2003-01-09
+BL	MI	lost	Missing	I	ddahl	2002-09-19
+BS	MI	lost	Missing	I	ddahl	2002-09-19
+CP	MI	lost	Missing	I	ddahl	2002-09-19
+CS	MI	lost	Missing	I	ddahl	2002-09-19
+ES	MI	lost	Missing	I	ddahl	2002-09-19
+FS	MI	lost	Missing	I	ddahl	2002-09-19
+HS	MI	lost	Missing	I	ddahl	2002-09-19
+ML	MI	lost	Missing	I	ddahl	2002-09-19
+MS	MI	lost	Missing	I	ddahl	2002-09-19
+SM	MI	lost	Missing	I	ddahl	2002-09-19
+SU	MI	lost	Missing	I	ddahl	2002-09-19
+TU	MI	lost	Missing	I	ddahl	2002-09-19
+UB	MI	lost	Missing	I	ddahl	2002-09-19
+UC	MI	lost	Missing	I	ddahl	2002-09-19
+CP	RM	reported missing	"Missing, searched"	I	ddahl	2002-09-19
+CS	RM	reported missing	"Missing, searched"	I	ddahl	2002-09-19
+FS	RM	reported missing	"Missing, searched"	I	ddahl	2002-09-19
+HS	RM	reported missing	"Missing, searched"	I	ddahl	2002-09-19
+SM	RM	reported missing	"Missing, searched"	I	ddahl	2002-09-19
+SU	RM	reported missing	"Missing, searched"	I	ddahl	2002-09-19
+TU	RM	reported missing	"Missing, searched"	I	ddahl	2002-09-19
+BC	EX	expected	Expected	I	ddahl	2002-09-12
+BL	EX	expected	Expected	I	ddahl	2002-09-12
+BS	EX	not arrived	Expected	I	ddahl	2002-09-12
+CE	EX	expected	Expected	I	ddahl	2002-09-12
+CP	EX	not arrived	Expected	I	ddahl	2002-09-12
+CS	EX	not arrived	Expected	I	ddahl	2002-09-12
+ES	EX	not arrived	Expected	I	ddahl	2002-09-12
+FS	EX	expected	Expected	I	ddahl	2002-09-12
+HS	EX	expected	Expected	I	ddahl	2002-09-12
+ML	EX	expected	Expected	I	ddahl	2002-09-12
+MS	EX	expected	Expected	I	ddahl	2002-09-12
+SM	EX	expected	Expected	I	ddahl	2002-09-12
+SU	EX	expected	Expected	I	ddahl	2002-09-12
+TU	EX	expected	Expected	I	ddahl	2002-09-12
+UB	EX	expected	Expected	I	ddahl	2002-09-12
+UC	EX	expected	Expected	I	ddahl	2002-09-12
+CE	MI	lost	Missing	I	ddahl	2002-09-12
+BC	MI	lost	Missing	I	ddahl	2002-08-06
+BC	SP	suppressed	Suppressed	I	ddahl	2002-06-10
+BL	SP	suppressed	Suppressed	I	ddahl	2002-06-10
+BS	SP	suppressed	Suppressed	I	ddahl	2002-06-10
+CE	SP	suppressed	Suppressed	I	ddahl	2002-06-10
+CP	SP	suppressed	Suppressed	I	ddahl	2002-06-10
+CS	SP	suppressed	Suppressed	I	ddahl	2002-06-10
+ES	SP	suppressed	Suppressed	I	ddahl	2002-06-10
+FS	SP	suppressed	Suppressed	I	ddahl	2002-06-10
+HS	SP	suppressed	Suppressed	I	ddahl	2002-06-10
+ML	SP	suppressed	Suppressed	I	ddahl	2002-06-10
+MS	SP	suppressed	Suppressed	I	ddahl	2002-06-10
+SM	SP	suppressed	Suppressed	I	ddahl	2002-06-10
+SU	SP	suppressed	Suppressed	I	ddahl	2002-06-10
+TU	SP	suppressed	Suppressed	I	ddahl	2002-06-10
+UB	SP	suppressed	Suppressed	I	ddahl	2002-06-10
+UC	SP	suppressed	Suppressed	I	ddahl	2002-06-10
+UC	--	Not in process	Not in process	I	ddahl	2002-01-01
+UB	--	Not in process	Not in process	I	ddahl	2002-01-01
+TU	--	Not in process	Not in process	I	ddahl	2002-01-01
+SU	--	Not in process	Not in process	I	ddahl	2002-01-01
+SM	--	Not in process	Not in process	I	ddahl	2002-01-01
+MS	--	Not in process	Not in process	I	ddahl	2002-01-01
+ML	--	Not in process	Not in process	I	ddahl	2002-01-01
+LN	--	Not in process	Not in process	I	ddahl	2002-01-01
+HS	--	Not in process	Not in process	I	ddahl	2002-01-01
+FS	--	Not in process	Not in process	I	ddahl	2002-01-01
+ES	--	Not in process	Not in process	I	ddahl	2002-01-01
+CS	--	Not in process	Not in process	I	ddahl	2002-01-01
+CP	--	Not in process	Not in process	I	ddahl	2002-01-01
+CE	--	Not in process	Not in process	I	ddahl	2002-01-01
+BS	--	Not in process	Not in process	I	ddahl	2002-01-01
+BL	--	Not in process	Not in process	I	ddahl	2002-01-01
+BC	--	Not in process	Not in process	I	ddahl	2002-01-01
+BC	AR	in process	Arrearage	I	ddahl	2002-01-01
+CP	AR	in process	Arrearage	I	ddahl	2002-01-01
+MS	AR	in process	Arrearage	I	ddahl	2002-01-01
+TU	AR	in process	Arrearage	I	ddahl	2002-01-01
+BL	BD	being repaired	Sent for repair	I	ddahl	2002-01-01
+BS	BD	sent for repair	Sent for repair	I	ddahl	2002-01-01
+CE	BD	being repaired	Sent for repair	I	ddahl	2002-01-01
+CS	BD	being repaired	Sent for repair	I	ddahl	2002-01-01
+ES	BD	sent for repair	Sent for repair	I	ddahl	2002-01-01
+FS	BD	being repaired	Sent for repair	I	lseguin	2002-01-01
+SM	BD	being repaired	Sent for repair	I	ddahl	2002-01-01
+SU	BD	being repaired	Sent for repair	I	ddahl	2002-01-01
+TU	BD	being repaired	Sent for repair	I	ddahl	2002-01-01
+UC	BD	being repaired	Sent for repair	I	ddahl	2002-01-01
+CP	BM	being repaired	Brittle materials	I	ddahl	2002-01-01
+MS	BM	being repaired	Brittle materials	I	ddahl	2002-01-01
+BS	BP	to be bound	Binding	I	ddahl	2002-01-01
+ES	BP	to be bound	Binding	I	ddahl	2002-01-01
+SM	BP	binding	Binding	I	ddahl	2002-01-01
+TU	BP	binding	Binding	I	ddahl	2002-01-01
+BC	CA	cancelled	Cancelled	I	ddahl	2002-01-01
+BL	CA	cancelled	Cancelled	I	ddahl	2002-01-01
+BS	CA	cancelled	Cancelled	I	ddahl	2002-01-01
+CE	CA	cancelled	Cancelled	I	ddahl	2002-01-01
+CP	CA	cancelled	Cancelled	I	ddahl	2002-01-01
+ES	CA	cancelled	Cancelled	I	ddahl	2002-01-01
+FS	CA	cancelled	Cancelled	I	ddahl	2002-01-01
+HS	CA	cancelled	Cancelled	I	ddahl	2002-01-01
+ML	CA	cancelled	Cancelled	I	ddahl	2002-01-01
+MS	CA	cancelled	Cancelled	I	ddahl	2002-01-01
+SM	CA	cancelled	Cancelled	I	ddahl	2002-01-01
+SU	CA	cancelled	Cancelled	I	ddahl	2002-01-01
+TU	CA	cancelled	Cancelled	I	ddahl	2002-01-01
+UB	CA	cancelled	Cancelled	I	ddahl	2002-01-01
+UC	CA	cancelled	Cancelled	I	ddahl	2002-01-01
+BC	CL	claimed	Claimed	I	ddahl	2002-01-01
+BL	CL	claimed	Claimed	I	ddahl	2002-01-01
+BS	CL	claimed	Claimed	I	ddahl	2002-01-01
+CE	CL	claimed	Claimed	I	ddahl	2002-01-01
+CP	CL	claimed	Claimed	I	ddahl	2002-01-01
+CS	CL	claimed	Claimed	I	ddahl	2002-01-01
+ES	CL	claimed	Claimed	I	ddahl	2002-01-01
+FS	CL	claimed	Claimed	I	ddahl	2002-01-01
+HS	CL	claimed	Claimed	I	ddahl	2002-01-01
+MS	CL	claimed	Claimed	I	ddahl	2002-01-01
+SM	CL	claimed	Claimed	I	ddahl	2002-01-01
+SU	CL	claimed	Claimed	I	ddahl	2002-01-01
+TU	CL	claimed	Claimed	I	ddahl	2002-01-01
+UB	CL	claimed	Claimed	I	ddahl	2002-01-01
+UC	CL	claimed	Claimed	I	ddahl	2002-01-01
+BC	CM	in process	Cat. Maintenance	I	ddahl	2002-01-01
+BL	CM	in process	Cat. Maintenance	I	lseguin	2002-01-01
+CP	CM	in process	Cat. Maintenance	I	ddahl	2002-01-01
+HS	CM	in process	Cat. Maintenance	I	ddahl	2002-01-01
+ML	CM	in process	Cat. Maintenance	I	ddahl	2002-01-01
+MS	CM	in process	Cat. Maintenance	I	ddahl	2002-01-01
+CP	CO	being repaired	Conservation	I	ddahl	2002-01-01
+MS	CO	being repaired	Conservation	I	ddahl	2002-01-01
+BL	CT	in process	Cataloging	I	ddahl	2002-01-01
+BS	CT	cataloguing	Cataloging	I	ddahl	2002-01-01
+CP	CT	in process	Cataloging	I	ddahl	2002-01-01
+CS	CT	in process	Cataloging	I	lseguin	2002-01-01
+ES	CT	cataloguing	Cataloging	I	ddahl	2002-01-01
+HS	CT	in process	Cataloging	I	ddahl	2002-01-01
+SM	CT	in process	Cataloging	I	ddahl	2002-01-01
+SU	CT	in process	Cataloging	I	ddahl	2002-01-01
+TU	CT	in process	Cataloging	I	ddahl	2002-01-01
+UB	CT	in process	Cataloging	I	ddahl	2002-01-01
+CP	CU	currently unavailable	Currently unavailable	I	ddahl	2002-01-01
+ES	CU	currently unavailable	Currently unavailable	I	ddahl	2002-01-01
+TU	CU	currently unavailable	Currently unavailable	I	ddahl	2002-01-01
+CP	DA	at bindery	Deacidification	I	ddahl	2002-01-01
+BC	DW	damaged wdrawn	Damaged wdrawn	I	ddahl	2002-01-01
+CP	DW	damaged withdrawn	Damaged wdrawn	I	ddahl	2002-01-01
+MS	DW	damaged wdrawn	Damaged wdrawn	I	ddahl	2002-01-01
+SM	DW	damaged wdrawn	Damaged wdrawn	I	ddahl	2002-01-01
+TU	DW	damaged wdrawn	Damaged wdrawn	I	ddahl	2002-01-01
+UB	DW	damaged wdrawn	Damaged wdrawn	I	ddahl	2002-01-01
+HS	H1	on order	HS  On order	I	ddahl	2002-01-01
+HS	H2	arrived	HS  Arrived	I	ddahl	2002-01-01
+HS	H3	return to cat.	HS  Return to Cat.	I	ddahl	2002-01-01
+BC	IP	in process	In process	I	ddahl	2002-01-01
+BL	IP	in process	In process	I	ddahl	2002-01-01
+BS	IP	in process	In process	I	ddahl	2002-01-01
+CE	IP	in process	In process	I	ddahl	2002-01-01
+CP	IP	in process	In process	I	ddahl	2002-01-01
+CS	IP	in process	In process	I	ddahl	2002-01-01
+ES	IP	in process	In process	I	ddahl	2002-01-01
+FS	IP	in process	In process	I	ddahl	2002-01-01
+HS	IP	in process	In process	I	ddahl	2002-01-01
+ML	IP	in process	In process	I	ddahl	2002-01-01
+MS	IP	in process	In process	I	ddahl	2002-01-01
+SM	IP	in process	In process	I	ddahl	2002-01-01
+SU	IP	in process	In process	I	ddahl	2002-01-01
+TU	IP	in process	In process	I	ddahl	2002-01-01
+UB	IP	in process	In process	I	ddahl	2002-01-01
+UC	IP	in process	In process	I	ddahl	2002-01-01
+CP	LB	in process	Labeling	I	ddahl	2002-01-01
+BC	LP	lost and paid	Lost and paid	I	lseguin	2002-01-01
+CE	LP	lost and paid	Lost and paid	I	ddahl	2002-01-01
+MS	LP	lost and paid	Lost and paid	I	ddahl	2002-01-01
+SU	LP	lost and paid	Lost and paid	I	ddahl	2002-01-01
+BC	NA	not arrived	Not arrived	I	ddahl	2002-01-01
+BL	NA	not arrived	Not arrived	I	ddahl	2002-01-01
+BS	NA	not arrived	Not arrived	I	ddahl	2002-01-01
+CE	NA	not arrived	Not arrived	I	ddahl	2002-01-01
+CP	NA	not arrived	Not arrived	I	ddahl	2002-01-01
+CS	NA	not arrived	Not arrived	I	ddahl	2002-01-01
+ES	NA	not arrived	Not arrived	I	ddahl	2002-01-01
+FS	NA	not arrived	Not arrived	I	ddahl	2002-01-01
+HS	NA	not arrived	Not arrived	I	ddahl	2002-01-01
+ML	NA	not arrived	Not arrived	I	ddahl	2002-01-01
+MS	NA	not arrived	Not arrived	I	ddahl	2002-01-01
+SM	NA	not arrived	Not arrived	I	ddahl	2002-01-01
+SU	NA	not arrived	Not arrived	I	ddahl	2002-01-01
+TU	NA	not arrived	Not arrived	I	ddahl	2002-01-01
+UB	NA	not arrived	Not arrived	I	ddahl	2002-01-01
+UC	NA	not arrived	Not arrived	I	ddahl	2002-01-01
+BC	NE	not expected	Not expected	I	ddahl	2002-01-01
+MS	NE	not expected	Not expected	I	ddahl	2002-01-01
+BC	NP	not published	Not published	I	ddahl	2002-01-01
+BL	NP	not published	Not published	I	ddahl	2002-01-01
+BS	NP	not published	Not published	I	ddahl	2002-01-01
+CE	NP	not published	Not published	I	ddahl	2002-01-01
+CP	NP	not published	Not published	I	ddahl	2002-01-01
+CS	NP	not published	Not published	I	ddahl	2002-01-01
+ES	NP	not published	Not published	I	ddahl	2002-01-01
+FS	NP	not published	Not published	I	ddahl	2002-01-01
+HS	NP	not published	Not published	I	ddahl	2002-01-01
+SM	NP	not published	Not published	I	ddahl	2002-01-01
+TU	NP	not published	Not published	I	ddahl	2002-01-01
+UC	NP	not published	Not published	I	ddahl	2002-01-01
+BL	NR	not received	Not received	I	ddahl	2002-01-01
+ML	NR	not received	Not received	I	ddahl	2002-01-01
+MS	NR	not received	Not received	I	ddahl	2002-01-01
+BC	OI	on order	Order initiation	I	ddahl	2002-01-01
+BL	OI	on order	Order initiation	I	ddahl	2002-01-01
+BS	OI	on order	Order initiation	I	ddahl	2002-01-01
+CE	OI	on order	Order initiation	I	ddahl	2002-01-01
+CP	OI	on order	Order initiation	I	ddahl	2002-01-01
+CS	OI	on order	Order initiation	I	ddahl	2002-01-01
+ES	OI	on order	Order initiation	I	ddahl	2002-01-01
+FS	OI	on order	Order initiation	I	ddahl	2002-01-01
+HS	OI	on order	Order initiation	I	ddahl	2002-01-01
+ML	OI	on order	Order initiation	I	ddahl	2002-01-01
+MS	OI	on order	Order initiation	I	ddahl	2002-01-01
+SM	OI	on order	Order initiation	I	ddahl	2002-01-01
+SU	OI	on order	Order initiation	I	ddahl	2002-01-01
+TU	OI	on order	Order initiation	I	ddahl	2002-01-01
+UB	OI	on order	Order initiation	I	ddahl	2002-01-01
+UC	OI	on order	Order initiation	I	ddahl	2002-01-01
+BC	OR	on order	On order	I	ddahl	2002-01-01
+BL	OR	on order	On order	I	ddahl	2002-01-01
+BS	OR	on order	On order	I	ddahl	2002-01-01
+CE	OR	on order	On order	I	ddahl	2002-01-01
+CP	OR	on order	On order	I	ddahl	2002-01-01
+CS	OR	on order	On order	I	ddahl	2002-01-01
+ES	OR	on order	On order	I	ddahl	2002-01-01
+FS	OR	on order	On order	I	ddahl	2002-01-01
+HS	OR	on order	On order	I	ddahl	2002-01-01
+ML	OR	on order	On order	I	ddahl	2002-01-01
+MS	OR	on order	On order	I	ddahl	2002-01-01
+SM	OR	on order	On order	I	ddahl	2002-01-01
+SU	OR	on order	On order	I	ddahl	2002-01-01
+TU	OR	on order	On order	I	ddahl	2002-01-01
+UB	OR	on order	On order	I	ddahl	2002-01-01
+UC	OR	on order	On order	I	ddahl	2002-01-01
+BC	PD	issue delayed	Publication delayed	I	ddahl	2002-01-01
+BL	PD	issue delayed	Publication delayed	I	ddahl	2002-01-01
+CP	PD	issue delayed	Publication delayed	I	ddahl	2002-01-01
+CS	PD	issue delayed	Publication delayed	I	ddahl	2002-01-01
+FS	PD	issue delayed	Publication delayed	I	ddahl	2002-01-01
+HS	PD	issue delayed	Publication delayed	I	ddahl	2002-01-01
+ML	PD	issue delayed	Publication delayed	I	ddahl	2002-01-01
+MS	PD	issue delayed	Publication delayed	I	ddahl	2002-01-01
+SM	PD	issue delayed	Publication delayed	I	ddahl	2002-01-01
+TU	PD	issue delayed	Publication delayed	I	ddahl	2002-01-01
+CP	PR	being repaired	Preservation	I	ddahl	2002-01-01
+MS	PR	being repaired	Preservation	I	ddahl	2002-01-01
+BC	RM	reported missing	"Missing, searched"	I	ddahl	2002-01-01
+BC	RO	on order	Replacement ordered	I	ddahl	2002-01-01
+BL	RO	on order	Replacement ordered	I	ddahl	2002-01-01
+CP	RO	on order	Replacement ordered	I	ddahl	2002-01-01
+CS	RO	on order	Replacement ordered	I	ddahl	2002-01-01
+ML	RO	on order	Replacement ordered	I	ddahl	2002-01-01
+MS	RO	on order	Replacement ordered	I	ddahl	2002-01-01
+SU	RO	on order	Replacement ordered	I	ddahl	2002-01-01
+BC	RS	in process	Replacement shelf	I	ddahl	2002-01-01
+SM	RS	in process	Replacement shelf	I	ddahl	2002-01-01
+BC	RV	in process	Received	I	ddahl	2002-01-01
+BS	RV	in process	Received	I	ddahl	2002-01-01
+ES	RV	in process	Received	I	ddahl	2002-01-01
+MS	RV	in process	Received	I	ddahl	2002-01-01
+BC	SB	at bindery	Sent to binder	I	ddahl	2002-01-01
+BS	SB	sent to binding	Sent to binder	I	ddahl	2002-01-01
+CE	SB	at bindery	Sent to binder	I	ddahl	2002-01-01
+CP	SB	at bindery	Sent to binder	I	ddahl	2002-01-01
+CS	SB	sent to binding	Sent to binder	I	ddahl	2002-01-01
+ES	SB	sent to binding	Sent to binder	I	ddahl	2002-01-01
+FS	SB	at bindery	Sent to binder	I	ddahl	2002-01-01
+HS	SB	at bindery	Sent to binder	I	ddahl	2002-01-01
+ML	SB	at bindery	Sent to binder	I	ddahl	2002-01-01
+SM	SB	at bindery	Sent to binder	I	ddahl	2002-01-01
+SU	SB	at bindery	Sent to binder	I	ddahl	2002-01-01
+TU	SB	at bindery	Sent to binder	I	ddahl	2002-01-01
+UB	SB	at bindery	Sent to binder	I	ddahl	2002-01-01
+UC	SB	at bindery	Sent to binder	I	ddahl	2002-01-01
+CP	SC	in process	Original Cataloging	I	ddahl	2002-01-01
+CP	SM	being microfilmed	Sent for microfilming	I	ddahl	2002-01-01
+ES	SM	being microfilmed	Sent for microfilming	I	ddahl	2002-01-01
+FS	SM	being microfilmed	Sent for microfilming	I	ddahl	2002-01-01
+BC	TW	to be withdrawn	To be withdrawn	I	ddahl	2002-01-01
+MS	TW	in process	To be withdrawn	I	ddahl	2002-01-01
+SM	TW	to be withdrawn	To be withdrawn	I	ddahl	2002-01-01
+TU	TW	in process	To be withdrawn	I	ddahl	2002-01-01
+BC	WI	withdrawn	Withdrawn	I	ddahl	2002-01-01
+BL	WI	withdrawn	Withdrawn	I	ddahl	2002-01-01
+CE	WI	withdrawn	Withdrawn	I	ddahl	2002-01-01
+CP	WI	withdrawn	Withdrawn	I	ddahl	2002-01-01
+FS	WI	withdrawn	Withdrawn	I	ddahl	2002-01-01
+HS	WI	withdrawn	Withdrawn	I	ddahl	2002-01-01
+MS	WI	in process	Withdrawn	I	ddahl	2002-01-01
+SM	WI	withdrawn	Withdrawn	I	ddahl	2002-01-01
+TU	WI	withdrawn	Withdrawn	I	ddahl	2002-01-01
+UC	WI	withdrawn	Withdrawn	I	ddahl	2002-01-01
+CP	XX	exclude from reports	Exclude from reports	I	ddahl	2002-01-01

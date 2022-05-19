@@ -1,0 +1,1301 @@
+library-collection-dimension.txt
+collection_cd	lbry_entity_cd	collection_name	db_operation_cd	lbry_staff_lms_user_id	db_operation_effective_date
+CRCNB	SU-SU	Circulation Desk, Curriculum Nonbook	D	dwilt	2022-04-27
+CRLES	SU-SU	Circulation Desk, LesCallette Nonbook	D	dwilt	2022-04-27
+CRMD	SU-SU	Circulation Desk, Maryland Nonbook	D	dwilt	2022-04-27
+FITBC	SU-SU	Fitbit Charge	D	dwilt	2022-04-27
+FITBF	SU-SU	Fitbit Flex	D	dwilt	2022-04-27
+FITBS	SU-SU	Fitbit Surge	D	dwilt	2022-04-27
+IPADM	SU-SU	iPad mini	D	dwilt	2022-04-27
+IPADP	SU-SU	iPad Pro	D	dwilt	2022-04-27
+IPOD	SU-SU	iPod Touch	D	dwilt	2022-04-27
+MDNBK	SU-SU	Circulation Desk, Maryland Nonbook	D	dwilt	2022-04-27
+MKRSP	SU-SU	Maker Space Collection	D	dwilt	2022-04-27
+REFNB	SU-SU	Circulation Desk, Reference Nonbook	D	dwilt	2022-04-27
+CASS	SU-SU	Cassette	D	dwilt	2022-04-26
+IPADK	SU-ML	iPad Pro Keyboard	I	dwilt	2022-04-18
+TABLT	SU-ML	Tablet	I	lseguin	2022-04-15
+MLEQP	SU-ML	Equipment	I	lseguin	2022-04-15
+IPDPP	SU-ML	iPad Pencil	I	lseguin	2022-04-15
+CHARG	SU-ML	Charger	I	lseguin	2022-04-15
+DATAS	TU-TU	Data Studio Reference Collection - 2nd floor	U	lseguin	2022-04-04
+REFQT	TU-TU	Stacks - Oversize	U	lseguin	2022-04-04
+REFFL	TU-TU	Stacks - Oversize	U	lseguin	2022-04-04
+REF	TU-TU	Stacks	U	lseguin	2022-04-04
+IPADA	SU-SU	iPad	U	dwilt	2022-02-15
+CALCT	SU-SU	Calculator	I	lseguin	2022-01-14
+POEMS	TU-TU	Baltimore Poetry Library at TU - 2nd floor	I	lseguin	2021-11-05
+LRV	TU-TM	Leisure Viewing | Request at Circ Desk 3rd floor	U	hhanson	2021-09-03
+SPCCM	UB-UB	Special Collections CWM	D	hhanson	2021-08-11
+LDENN	BL-BL	Lyle Denniston Collection	I	hhanson	2021-07-09
+RESTX	TU-TU	Textbook Reserves | Request at TU Circulation Desk	I	hhanson	2021-06-29
+MDPER	SU-SU	Maryland Documents Periodicals	I	hhanson	2021-06-08
+STJOH	SU-CR	St John Musical Instrument Collection	I	hhanson	2021-04-08
+EBOOK	CS-CS	CSEbooks	I	hhanson	2021-03-11
+CRES	BS-BS	Course Reserve	U	hhanson	2021-02-05
+FCLTY	BS-BS	Faculty Resources	U	hhanson	2021-02-05
+SPCPB	TU-TU	Special Collections - 5th floor	D	hhanson	2021-02-05
+SPCTO	TU-TU	Special Collections - Towson University Publications - Oversize - 5th floor	D	hhanson	2021-02-05
+STC	TU-TU	STC	D	hhanson	2021-02-05
+STCDV	TU-TU	STC DVD	D	hhanson	2021-02-05
+STCJV	TU-TU	STC Juvenile	D	hhanson	2021-02-05
+STCQT	TU-TU	STC Quarto	D	hhanson	2021-02-05
+STCRC	TU-TU	STC Record	D	hhanson	2021-02-05
+STCVC	TU-TU	STC Video Cassette	D	hhanson	2021-02-05
+TWR	TU-TU	TOWSON ROOM	D	hhanson	2021-02-05
+TWRFC	TU-TU	TOWSON ROOM Fiction	D	hhanson	2021-02-05
+TWRFL	TU-TU	TOWSON ROOM Folio	D	hhanson	2021-02-05
+TWRJV	TU-TU	TOWSON ROOM Juvenile	D	hhanson	2021-02-05
+TWRQT	TU-TU	TOWSRM Quarto	D	hhanson	2021-02-05
+TWRRC	TU-TU	TOWSRM Record	D	hhanson	2021-02-05
+SPHWD	BC-BC	Special Collections - Howard (Maryland history)	D	hhanson	2020-10-02
+SPCOS	BC-BC	Coslet-Sapienza Fantasy and Science Fiction Fanzines	I	hanson	2020-09-18
+NCIP	LNDL	Loyola-Notre Dame Library Interlibrary Loan	I	hhanson	2020-07-30
+TEXTB	SU-SU	Textbooks on reserve	I	hhanson	2020-06-24
+NRCFA	SU-NC	Nabb Research Center Finding Aids	I	hhanson	2020-04-24
+USDFL	SU-SU	United States Documents File	D	hhanson	2020-04-14
+RDREF	FS-FA	Ready Reference - 3rd Floor Service Desk	I	hhanson	2020-02-17
+DATAS	TU-TU	Data Studio Reference Collection - 3rd floor	I	hhanson	2020-02-17
+PER	TU-TU	Current Periodicals and Newspapers	U	hhanson	2020-02-07
+PER	TU-TU	Current Periodicals and Newspapers - 3rd Floor Back Wall	U	hhanson	2020-01-28
+LERE	UB-UB	Leisure Reading - 1st floor	U	hhanson	2020-01-14
+PERB	UB-UB	Browsing Periodicals - 1st floor	U	hhanson	2020-01-14
+MLEQP	SU-SU	MakerLab Equipment	I	hhanson	2020-01-10
+COH	HS-HS	5th Floor Stacks	U	hhanson	2019-12-13
+LACT	HS-HS	Lactation Room Collection	I	hhanson	2019-12-13
+EYBPD	LNDL	Electronic Book	D	hhanson	2019-12-03
+EPSYC	LNDL	Electronic Book	D	hhanson	2019-12-03
+EKNPD	LNDL	Streaming Media	D	hhanson	2019-12-03
+EKNP	LNDL	Streaming Media	D	hhanson	2019-12-03
+EFOD	LNDL	Streaming Media	D	hhanson	2019-12-03
+ECAMB	LNDL	Electronic Book	D	hhanson	2019-12-03
+EBSCO	LNDL	Electronic Book	D	hhanson	2019-12-03
+EBRAR	LNDL	Electronic Book	D	hhanson	2019-12-03
+FACEX	LNDL	Faculty Publication Exhibit	D	hhanson	2019-10-25
+EXNEW	LNDL	Recently Purchased Books	D	hhanson	2019-10-25
+SPDSP	MS-MS	Staff Picks Display	D	hhanson	2019-10-25
+GIFT	MS-MS	MS Gift Items	D	hhanson	2019-10-25
+DMSAU	MS-MS	Davis Morgan State Author	D	hhanson	2019-10-25
+BLAST	UB-UB	Academic Success - 2nd floor	U	hhanson	2019-10-25
+NCIP	UB-UB	University of Baltimore Interlibrary Loan	I	hhanson	2019-10-14
+CRNBK	SU-SU	Circulation Desk Nonbook	D	hhanson	2019-10-11
+CCC	HS-HS	5th Floor Stacks	U	hhanson	2019-08-29
+MSTCK	BC-BC	Media Stacks / Request to Pick-up at Home Library	U	hhanson	2019-08-19
+MMGSR	MS-MS	Multimedia Graduate Study Room	I	hhanson	2019-08-09
+MMLT	MS-MS	Multimedia laptop	I	hhanson	2019-08-01
+ESERL	TU-TU	E-Serials	U	hhanson	2019-07-23
+NCIP	CPMCK	College Park Interlibrary Loan	I	dwilt	2019-07-16
+INDEX	CPPAL	Index Shelf	I	hhanson	2019-06-24
+CITL	SM-SM	Center for Inclusive Teaching & Learning	I	hhanson	2019-05-14
+LJ	BL-BL	Law Journal Offices	I	hhanson	2019-04-19
+BIONF	HS-HS	Bioinformatics Office	I	lseguin	2019-03-29
+ONLOF	HS-HS	Online Office	D	hhanson	2019-03-22
+ELL	BC-BC	English Language Learning	I	hhanson	2019-03-07
+NEW	FS-FA	New Arrivals - 3rd floor	U	hhanson	2019-03-01
+POPLR	FS-FA	Popular Reading - 3rd floor	U	hhanson	2019-03-01
+SPOVR	LNDL	Special Collections Oversize	I	lseguin	2019-02-15
+SPCF	LNDL	Special Collections Flat Oversize	I	lseguin	2019-02-15
+REFTS	HS-HS	Ref Test - Information Desk	U	dwilt	2019-02-08
+BLAST	UB-UB	Academic Success - Lower level	I	hhanson	2019-02-04
+HALCR	SU-CR	History of American Literacy Collection Rare	I	hhanson	2019-02-04
+HALC	SU-CR	History of American Literacy Collection	I	hhanson	2019-02-04
+SR2	LNDL	Seminar Room -- 2nd level	I	hhanson	2019-01-09
+GEN	CPCHM	General Collection	D	ddahl	2018-10-09
+ASCEQ	CPCHM	Circulating Equipment	D	hhanson	2018-10-09
+CRPER	CPCHM	Current Periodicals	D	hhanson	2018-10-09
+DESK	CPCHM	Desk	D	hhanson	2018-10-09
+MCARD	CPCHM	Microcard - HELD IN MCKELDIN	D	hhanson	2018-10-09
+MFICH	CPCHM	Microfiche - HELD IN MCKELDIN	D	hhanson	2018-10-09
+MFILM	CPCHM	Microfilm	D	hhanson	2018-10-09
+PER	CPCHM	Periodical Stacks	D	hhanson	2018-10-09
+REF	CPCHM	Reference	D	hhanson	2018-10-09
+RES	CPCHM	Course Reserves	D	hhanson	2018-10-09
+STACK	CPCHM	Stacks	D	hhanson	2018-10-09
+RML	HS-HS	Regional Medical Library: Ask at Circulation Desk	D	ddahl	2018-12-20
+LRV	TU-TM	Leisure Viewing 2nd floor 	I	ddahl	2018-11-07
+PKISK	CPARC	Pop-up Kiosk	I	ddahl	2018-10-01
+PKISK	CPART	Pop-up Kiosk	I	ddahl	2018-10-01
+PKISK	CPMCK	Pop-up Kiosk	I	ddahl	2018-10-01
+BBB	BS-BS	Bulldog Book Bank	I	ddahl	2018-09-13
+ENTPR	BS-BS	Entrepreneurship Corner	I	ddahl	2018-09-13
+MDSTK	CPOSS	Special Collections - Marylandia	I	ddahl	2018-09-13
+NTLSK	CPOSS	Special Collections - National Trust Library	I	ddahl	2018-09-13
+HOLED	SU-CR	Holocaust Education	I	ddahl	2018-07-26
+NEWB	SU-CR	Newbery Award	I	ddahl	2018-07-26
+ARCHV	LNDL	Archives	I	ddahl	2016-09-08
+ART	LNDL	Stacks -- 2nd level	I	ddahl	2016-09-08
+DATAB	LNDL	Online Database	I	ddahl	2016-09-08
+DIGEQ	LNDL	Digital Equipment	I	ddahl	2016-09-08
+EBLDD	LNDL	Electronic Book	I	ddahl	2016-09-08
+EBOOK	LNDL	Electronic Book	I	ddahl	2016-09-08
+EBRAR	LNDL	Electronic Book	I	ddahl	2016-09-08
+EBSCO	LNDL	Electronic Book	I	ddahl	2016-09-08
+ECAMB	LNDL	Electronic Book	I	ddahl	2016-09-08
+EFOD	LNDL	Streaming Media	I	ddahl	2016-09-08
+EJOUR	LNDL	Electronic Journal	I	ddahl	2016-09-08
+EKNP	LNDL	Streaming Media	I	ddahl	2016-09-08
+EKNPD	LNDL	Streaming Media	I	ddahl	2016-09-08
+EMED	LNDL	Streaming Media	I	ddahl	2016-09-08
+EOA	LNDL	Free Online Full Text	I	ddahl	2016-09-08
+EPSYC	LNDL	Electronic Book	I	ddahl	2016-09-08
+ETD	LNDL	Electronic Theses and Dissertations	I	ddahl	2016-09-08
+EX	LNDL	Exhibit	I	ddahl	2016-09-08
+EXNEW	LNDL	Recently Purchased Books	I	ddahl	2016-09-08
+EYBPD	LNDL	Electronic Book	I	ddahl	2016-09-08
+FACEX	LNDL	Faculty Publication Exhibit	I	ddahl	2016-09-08
+FACOL	LNDL	Faculty Publication Collection	I	ddahl	2016-09-08
+HLT	LNDL	Stacks -- 3rd level	I	ddahl	2016-09-08
+ILL	LNDL	Interlibrary Loan	I	ddahl	2016-09-08
+INOVT	LNDL	Innovation Space	I	ddahl	2016-09-08
+JUV	LNDL	Juvenile Stacks -- 2nd level	I	ddahl	2016-09-08
+LOYAH	LNDL	Apprentice House Collection	I	ddahl	2016-09-08
+MEDFT	LNDL	Media Collection	I	ddahl	2016-09-08
+MEDIA	LNDL	Media Collection	I	ddahl	2016-09-08
+MEDVA	LNDL	Media Collection	I	ddahl	2016-09-08
+MFORM	LNDL	Microform	I	ddahl	2016-09-08
+OVR	LNDL	Oversized	I	ddahl	2016-09-08
+PER	LNDL	Periodicals	I	ddahl	2016-09-08
+RF	LNDL	Reference	I	ddahl	2016-09-08
+RFHLT	LNDL	Health Science Reference -- 3rd level	I	ddahl	2016-09-08
+RFOFF	LNDL	Office Reference	I	ddahl	2016-09-08
+RFOVR	LNDL	Oversized Reference	I	ddahl	2016-09-08
+RV	LNDL	Reserves -- Main level	I	ddahl	2016-09-08
+RVIEW	LNDL	Review	I	ddahl	2016-09-08
+RVMED	LNDL	Media Reserves -- Main level	I	ddahl	2016-09-08
+RVPC	LNDL	Personal Copy Reserves	I	ddahl	2016-09-08
+SPCOL	LNDL	Special Collections	I	ddahl	2016-09-08
+STACK	LNDL	Stacks	I	ddahl	2016-09-08
+TD	LNDL	Theses and Dissertations	I	ddahl	2016-09-08
+WDRWN	LNDL	Withdrawn	I	ddahl	2016-09-08
+JUV	TU-NE	Juvenile 	I	ddahl	2014-09-02
+JUVBB	TU-NE	Juvenile Big Books 	I	ddahl	2014-09-02
+JVBIO	TU-NE	Juvenile Biography 	I	ddahl	2014-09-02
+JVFIC	TU-NE	Juvenile Fiction 	I	ddahl	2014-09-02
+MEDRV	TU-NE	Reserves - Media 	I	ddahl	2014-09-02
+REF	TU-NE	Reference 	I	ddahl	2014-09-02
+RES	TU-NE	Reserves - Books 	I	ddahl	2014-09-02
+RESBK	TU-NE	Reserves - Books 	I	ddahl	2014-09-02
+RESMD	TU-NE	Reserves - Media 	I	ddahl	2014-09-02
+STACK	TU-NE	Stacks 	I	ddahl	2014-09-02
+CAL	SU-CR	Caldecott	I	ddahl	2012-09-07
+CRMAT	SU-CR	Curriculum Material	I	ddahl	2012-09-07
+E	SU-CR	Easy	I	ddahl	2012-09-07
+ENV	SU-CR	Environmental	I	ddahl	2012-09-07
+EQUIP	SU-CR	Equipment	I	ddahl	2012-09-07
+FORLA	SU-CR	Foreign Language	I	ddahl	2012-09-07
+HF	SU-CR	Historical Fiction	I	ddahl	2012-09-07
+INT	SU-CR	International	I	ddahl	2012-09-07
+MD	SU-CR	Maryland	I	ddahl	2012-09-07
+MEDIA	SU-CR	Media	I	ddahl	2012-09-07
+OVS	SU-CR	Oversize	I	ddahl	2012-09-07
+PUPET	SU-CR	Puppets	I	ddahl	2012-09-07
+REF	SU-CR	Reference	I	ddahl	2012-09-07
+STACK	SU-CR	General	I	ddahl	2012-09-07
+PGDOC	CPPG	Documents	I	ddahl	2007-11-26
+PGREF	CPPG	Reference	I	ddahl	2007-11-26
+PGSTK	CPPG	Stacks	I	ddahl	2007-11-26
+CHILD	BC-BC	Stacks - Children's Science Collection	I	ddahl	2002-09-30
+DCCDR	BC-BC	Government Documents - CDROMS	I	ddahl	2002-09-30
+DCDSK	BC-BC	Government Documents - Disks	I	ddahl	2002-09-30
+DCFED	BC-BC	Government Documents - Federal	I	ddahl	2002-09-30
+DCMFH	BC-BC	Government Documents - Microfiche	I	ddahl	2002-09-30
+DCSTE	BC-BC	Government Documents - Maryland State	I	ddahl	2002-09-30
+DCSTR	BC-BC	Government Documents - Remote Storage	I	ddahl	2002-09-30
+DCWWW	BC-BC	Government Documents - Access via WWW	I	ddahl	2002-09-30
+DMLEQ	BC-BC	Digital Media Lab Equipment	I	ddahl	2002-09-30
+DOCLL	BC-BC	Government Documents - Lower Level	I	ddahl	2002-09-30
+DOCMP	BC-BC	Government Documents - Maps	I	ddahl	2002-09-30
+EBLDD	BC-BC	Online Resources	I	ddahl	2002-09-30
+FOLIO	BC-BC	Stacks - Folio	I	ddahl	2002-09-30
+GEN	BC-BC	General Collection	I	ddahl	2002-09-30
+ILL	BC-BC	Interlibrary Loan Unit	I	ddahl	2002-09-30
+KEY	BC-BC	Key	I	ddahl	2002-09-30
+LL	BC-BC	Stacks - Lower Level	I	ddahl	2002-09-30
+LRD	BC-BC	Leisure Reading	I	ddahl	2002-09-30
+MDEQP	BC-BC	Circulating Media Equipment	I	ddahl	2002-09-30
+MDESK	BC-BC	Media Desk	I	ddahl	2002-09-30
+MDL	BC-BC	Maryland Digital Library	I	ddahl	2002-09-30
+MRSRV	BC-BC	Media Reserves	I	ddahl	2002-09-30
+MSTCK	BC-BC	Media Stacks	I	ddahl	2002-09-30
+MWWW	BC-BC	Streaming Media	I	ddahl	2002-09-30
+NLWWW	BC-BC	NetLibrary eBooks	I	ddahl	2002-09-30
+REF	BC-BC	Reference	I	ddahl	2002-09-30
+REFLL	BC-BC	Reference - Lower Level	I	ddahl	2002-09-30
+RESTR	BC-BC	Stacks - Restricted Use Materials	I	ddahl	2002-09-30
+RFATS	BC-BC	Reference - Atlases	I	ddahl	2002-09-30
+RFIND	BC-BC	Reference - Indexes	I	ddahl	2002-09-30
+RFMAP	BC-BC	Reference - Maps	I	ddahl	2002-09-30
+RFMFM	BC-BC	Reference - Microform	I	ddahl	2002-09-30
+RFRDY	BC-BC	Reference - Ready Reference	I	ddahl	2002-09-30
+RFSTR	BC-BC	Reference - Remote Storage	I	ddahl	2002-09-30
+RFWWW	BC-BC	Reference E-Books	I	ddahl	2002-09-30
+RSRV	BC-BC	Reserves	I	ddahl	2002-09-30
+SCURR	BC-BC	Serials - Current Display	I	ddahl	2002-09-30
+SDESK	BC-BC	Serials Desk	I	ddahl	2002-09-30
+SERLL	BC-BC	Serials - Lower Level	I	ddahl	2002-09-30
+SLIDE	BC-BC	Slide Library	I	ddahl	2002-09-30
+SMFM	BC-BC	Serials - Microform	I	ddahl	2002-09-30
+SNEW	BC-BC	Serials - Newspapers	I	ddahl	2002-09-30
+SPAMD	BC-BC	"Special Collections - Adventure, Mystery and Detective Pulps"	I	ddahl	2002-09-30
+SPAPC	BC-BC	Special Collections - Alternative Press Center	I	ddahl	2002-09-30
+SPARC	BC-BC	Special Collections - UMBC University Archives	I	ddahl	2002-09-30
+SPARN	BC-BC	Special Collections - Arnold (Maryland history)	I	ddahl	2002-09-30
+SPASM	BC-BC	Special Collections - American Society for Microbiology	I	ddahl	2002-09-30
+SPBAF	BC-BC	Special Collections - Bafford (Photography books and serials)	I	ddahl	2002-09-30
+SPBSA	BC-BC	Special Collections - Center for Biological Sciences Archives	I	ddahl	2002-09-30
+SPCLL	BC-BC	Special Collections - Lower Level Storage	I	ddahl	2002-09-30
+SPCOM	BC-BC	Special Collections - Comic Book Collection	I	ddahl	2002-09-30
+SPFAC	BC-BC	Special Collections - UMBC Faculty/Staff Publications	I	ddahl	2002-09-30
+SPGEN	BC-BC	Special Collections - General (Rare Books)	I	ddahl	2002-09-30
+SPHIG	BC-BC	Special Collections - Higgins (Fluxus and Intermedia artists)	I	ddahl	2002-09-30
+SPHWD	BC-BC	Special Collections - Howard (Maryland history)	I	ddahl	2002-09-30
+SPMKL	BC-BC	Special Collections - Merkle (English literature and graphic satire)	I	ddahl	2002-09-30
+SPMSS	BC-BC	Special Collections - Manuscripts	I	ddahl	2002-09-30
+SPNDL	BC-BC	Special Collections - Needle (Utopian thought and radical literature)	I	ddahl	2002-09-30
+SPNEW	BC-BC	Special Collections - Rare Newspapers	I	ddahl	2002-09-30
+SPPAR	BC-BC	Special Collections - Parapsychology (Parapsychology books and serials)	I	ddahl	2002-09-30
+SPPHO	BC-BC	Special Collections - Photographs	I	ddahl	2002-09-30
+SPRSF	BC-BC	Special Collections - Rosenfeld (Science fiction)	I	ddahl	2002-09-30
+SPSCH	BC-BC	Special Collections - Schlenger (American women in literature)	I	ddahl	2002-09-30
+SPSTR	BC-BC	Special Collections - Remote Storage	I	ddahl	2002-09-30
+SSTCK	BC-BC	Serials Stacks	I	ddahl	2002-09-30
+SSTR	BC-BC	Serials - Remote Storage	I	ddahl	2002-09-30
+STACK	BC-BC	Stacks	I	ddahl	2002-09-30
+STAFF	BC-BC	Staff Collection	I	ddahl	2002-09-30
+STCKS	BC-BC	Stacks - Remote Storage	I	ddahl	2002-09-30
+TS	BC-BC	Place a Request to Obtain	I	ddahl	2002-09-30
+UNKWN	BC-BC	Unknown	I	ddahl	2002-09-30
+WWW	BC-BC	Online Resources	I	ddahl	2002-09-30
+GEN	BC-RC	General Collection	I	ddahl	2002-09-30
+ALR	BL-BL	ALR	I	ddahl	2002-09-30
+CICL	BL-BL	Center for International & Comparative Law	I	ddahl	2002-09-30
+CLINC	BL-BL	Clinic	I	ddahl	2002-09-30
+COMAR	BL-BL	Comar Documents	I	ddahl	2002-09-30
+COURS	BL-BL	Reading Room Reserves	I	ddahl	2002-09-30
+EBLDD	BL-BL	EBL Ebooks	I	ddahl	2002-09-30
+FAC	BL-BL	Faculty	I	ddahl	2002-09-30
+FED	BL-BL	Federal	I	ddahl	2002-09-30
+GEN	BL-BL	General Collection	I	ddahl	2002-09-30
+GVDOC	BL-BL	Government Documents	I	ddahl	2002-09-30
+GVWEB	BL-BL	Online Government Documents	I	ddahl	2002-09-30
+INTL	BL-BL	International Law	I	ddahl	2002-09-30
+IP	BL-BL	Intellectual Property	I	ddahl	2002-09-30
+MD	BL-BL	Maryland	I	ddahl	2002-09-30
+MFORM	BL-BL	Microform	I	ddahl	2002-09-30
+MINMD	BL-BL	Reading Room Reserves	I	ddahl	2002-09-30
+MISC	BL-BL	Miscellaneous	I	ddahl	2002-09-30
+NATRP	BL-BL	National Reporter	I	ddahl	2002-09-30
+NLWWW	BL-BL	NetLibrary eBooks	I	ddahl	2002-09-30
+ONLNE	BL-BL	Online	I	ddahl	2002-09-30
+PER	BL-BL	Periodicals	I	ddahl	2002-09-30
+REF	BL-BL	Reading Room Reserves	I	ddahl	2002-09-30
+RESRV	BL-BL	Reading Room Reserves	I	ddahl	2002-09-30
+STACK	BL-BL	Stacks	I	ddahl	2002-09-30
+STATE	BL-BL	State	I	ddahl	2002-09-30
+STOR	BL-BL	Storage	I	ddahl	2002-09-30
+TAX	BL-BL	Tax	I	ddahl	2002-09-30
+TS	BL-BL	Technical Services	I	ddahl	2002-09-30
+UKCAN	BL-BL	UK/CAN	I	ddahl	2002-09-30
+ARSPC	BS-BS	University Archive Special Collection	I	ddahl	2002-09-30
+BSNET	BS-BS	Online Resources	I	ddahl	2002-09-30
+CLKIT	BS-BS	Curriculum Laboratory Kit	I	ddahl	2002-09-30
+CLREF	BS-BS	Curriculum Laboratory Reference 	I	ddahl	2002-09-30
+CRES	BS-BS	Course Reserves	I	ddahl	2002-09-30
+CURLB	BS-BS	Curriculum Laboratory	I	ddahl	2002-09-30
+EBLDD	BS-BS	Online Resources	I	ddahl	2002-09-30
+ESWWW	BS-BS	World Wide Web	I	ddahl	2002-09-30
+FCLTY	BS-BS	Faculty	I	ddahl	2002-09-30
+GEN	BS-BS	General Collection	I	ddahl	2002-09-30
+HUMRI	BS-BS	Human Rights Collection	I	ddahl	2002-09-30
+LEIRD	BS-BS	Leisure Reading	I	ddahl	2002-09-30
+MDWWW	BS-BS	Maryland Digital Library	I	ddahl	2002-09-30
+MEDIA	BS-BS	Media	I	ddahl	2002-09-30
+NLWWW	BS-BS	NetLibrary eBooks	I	ddahl	2002-09-30
+OVRSZ	BS-BS	Oversized	I	ddahl	2002-09-30
+PERBJ	BS-BS	Bound Journal Collection	I	ddahl	2002-09-30
+PERFI	BS-BS	Periodical Microfiche	I	ddahl	2002-09-30
+PERIO	BS-BS	Periodical Stacks	I	ddahl	2002-09-30
+PERMF	BS-BS	Periodical Microfilm	I	ddahl	2002-09-30
+REF	BS-BS	Reference	I	ddahl	2002-09-30
+REFDK	BS-BS	Reference Desk	I	ddahl	2002-09-30
+RES	BS-BS	Reserves	I	ddahl	2002-09-30
+SPCMD	BS-BS	Special Collections Maryland	I	ddahl	2002-09-30
+SPECL	BS-BS	Special Collections	I	ddahl	2002-09-30
+STACK	BS-BS	General Stacks	I	ddahl	2002-09-30
+STAFF	BS-BS	Staff Collection	I	ddahl	2002-09-30
+UNKWN	BS-BS	Unknown	I	ddahl	2002-09-30
+ARCHV	CE-CB	Archives	I	ddahl	2002-09-30
+CEOSS	CE-CB	Offsite Storage	I	ddahl	2002-09-30
+DOC	CE-CB	Documents	I	ddahl	2002-09-30
+MD	CE-CB	Maryland Documents	I	ddahl	2002-09-30
+NLWWW	CE-CB	NetLibrary eBooks	I	ddahl	2002-09-30
+PERD	CE-CB	Periodicals	I	ddahl	2002-09-30
+REF	CE-CB	Reference	I	ddahl	2002-09-30
+STACK	CE-CB	Stacks 	I	ddahl	2002-09-30
+THSIS	CE-CB	Thesis/Dissertation	I	ddahl	2002-09-30
+UNKWN	CE-CB	Unknown	I	ddahl	2002-09-30
+ARCHV	CE-HP	Archives	I	ddahl	2002-09-30
+MD	CE-HP	Maryland Documents	I	ddahl	2002-09-30
+PERD	CE-HP	Periodicals	I	ddahl	2002-09-30
+REF	CE-HP	Reference	I	ddahl	2002-09-30
+STACK	CE-HP	Stacks	I	ddahl	2002-09-30
+STOR	CE-HP	Storage	I	ddahl	2002-09-30
+WWW	CE-HP	World Wide Web	I	ddahl	2002-09-30
+EBLDD	CE-WW	EBook	I	ddahl	2002-09-30
+GVWWW	CE-WW	Government Documents Online	I	ddahl	2002-09-30
+NLWWW	CE-WW	NetLibrary eBooks	I	ddahl	2002-09-30
+WWW	CE-WW	World Wide Web	I	ddahl	2002-09-30
+ASCEQ	CPARC	Circulating Equipment	I	ddahl	2002-09-30
+ATLAS	CPARC	Atlas	I	ddahl	2002-09-30
+AUTOM	CPARC	"Available on Selected PCs, Ask at the Desk"	I	ddahl	2002-09-30
+CRPER	CPARC	Current Periodicals	I	ddahl	2002-09-30
+DESK	CPARC	Desk	I	ddahl	2002-09-30
+FOLIO	CPARC	Folio	I	ddahl	2002-09-30
+GEN	CPARC	General Collection	I	ddahl	2002-09-30
+LKISK	CPARC	Library Kiosk	I	ddahl	2002-09-30
+OVRSZ	CPARC	Oversize	I	ddahl	2002-09-30
+PER	CPARC	Periodical Stacks	I	ddahl	2002-09-30
+REF	CPARC	Reference	I	ddahl	2002-09-30
+RES	CPARC	Course Reserves	I	ddahl	2002-09-30
+RESPS	CPARC	Personal Copy Course Reserves	I	ddahl	2002-09-30
+SCFLT	CPARC	Spec Collections Shelved Flat	I	ddahl	2002-09-30
+SCFOL	CPARC	Spec Collections Folio	I	ddahl	2002-09-30
+SCOVR	CPARC	Spec Collections Oversize	I	ddahl	2002-09-30
+SCSTK	CPARC	Spec Collections Stacks	I	ddahl	2002-09-30
+SKISK	CPARC	Studio Kiosk; ask at the circulation desk	I	ddahl	2002-09-30
+STACK	CPARC	Stacks	I	ddahl	2002-09-30
+THSIS	CPARC	Thesis 	I	ddahl	2002-09-30
+WFFOL	CPARC	"Spec Collections, World's Fair Folio"	I	ddahl	2002-09-30
+WFOVR	CPARC	"Spec Collections, World's Fair Oversize"	I	ddahl	2002-09-30
+WFSTK	CPARC	"Spec Collections, World's Fair Stack"	I	ddahl	2002-09-30
+ASCEQ	CPART	Circulating Equipment	I	ddahl	2002-09-30
+AUTOM	CPART	"Available on Selected PCs, Ask at the Desk"	I	ddahl	2002-09-30
+CRPER	CPART	Current Periodicals	I	ddahl	2002-09-30
+DESK	CPART	Desk	I	ddahl	2002-09-30
+FOLIO	CPART	Folio	I	ddahl	2002-09-30
+GEN	CPART	General Collection	I	ddahl	2002-09-30
+LKISK	CPART	Library Kiosk	I	ddahl	2002-09-30
+MFICH	CPART	Microfiche - HELD IN MCKELDIN	I	ddahl	2002-09-30
+MFILM	CPART	Microfilm - HELD IN MCKELDIN	I	ddahl	2002-09-30
+OVRSZ	CPART	Oversize	I	ddahl	2002-09-30
+REF	CPART	Reference	I	ddahl	2002-09-30
+RES	CPART	Course Reserves	I	ddahl	2002-09-30
+RESPS	CPART	Personal Copy Course Reserves   	I	ddahl	2002-09-30
+SKISK	CPART	Studio Kiosk; ask at the circulation desk	I	ddahl	2002-09-30
+STACK	CPART	Stacks  	I	ddahl	2002-09-30
+FOLIO	CPBCT	Special Collections in Mass Media and Culture Folio	I	ddahl	2002-09-30
+GEN	CPBCT	General Collection	I	ddahl	2002-09-30
+LAAU	CPBCT	Special Collections in Mass Media and Culture Audio  	I	ddahl	2002-09-30
+LACRP	CPBCT	Special Collections in Mass Media and Culture Corporate Records      	I	ddahl	2002-09-30
+LADSK	CPBCT	Special Collections in Mass Media and Culture Desk	I	ddahl	2002-09-30
+LAJOU	CPBCT	Special Collections in Mass Media and Culture Journals       	I	ddahl	2002-09-30
+LAMI	CPBCT	Special Collections in Mass Media and Culture Moving Image   	I	ddahl	2002-09-30
+LAMSS	CPBCT	Special Collections in Mass Media and Culture Manuscripts    	I	ddahl	2002-09-30
+LAREF	CPBCT	Special Collections in Mass Media and Culture Reference      	I	ddahl	2002-09-30
+LAVID	CPBCT	Special Collections in Mass Media and Culture Video	I	ddahl	2002-09-30
+NBAU	CPBCT	Special Collections in Mass Media and Culture Audio	I	ddahl	2002-09-30
+NBCRP	CPBCT	Special Collections in Mass Media and Culture Corporate Records	I	ddahl	2002-09-30
+NBMI	CPBCT	Special Collections in Mass Media and Culture Moving Image	I	ddahl	2002-09-30
+NBMSS	CPBCT	Special Collections in Mass Media and Culture Manuscripts	I	ddahl	2002-09-30
+PAMPH	CPBCT	Special Collections in Mass Media and Culture Pamphlets	I	ddahl	2002-09-30
+STACK	CPBCT	Special Collections in Mass Media and Culture Stacks	I	ddahl	2002-09-30
+ASCEQ	CPCHM	Circulating Equipment	I	ddahl	2002-09-30
+CRPER	CPCHM	Current Periodicals     	I	ddahl	2002-09-30
+DESK	CPCHM	Desk    	I	ddahl	2002-09-30
+GEN	CPCHM	General Collection	I	ddahl	2002-09-30
+MCARD	CPCHM	Microcard - HELD IN MCKELDIN	I	ddahl	2002-09-30
+MFICH	CPCHM	Microfiche - HELD IN MCKELDIN	I	ddahl	2002-09-30
+MFILM	CPCHM	Microfilm       	I	ddahl	2002-09-30
+PER	CPCHM	Periodical Stacks       	I	ddahl	2002-09-30
+REF	CPCHM	Reference       	I	ddahl	2002-09-30
+RES	CPCHM	Course Reserves 	I	ddahl	2002-09-30
+STACK	CPCHM	Stacks  	I	ddahl	2002-09-30
+GEN	CPCIS	General Collection	I	ddahl	2002-09-30
+AUTOM	CPEIC	"Available on Selected PCs, Ask at the Desk    "	I	ddahl	2002-09-30
+ASCEQ	CPENG	Circulating Equipment	I	ddahl	2002-09-30
+CIRC	CPENG	Circulation Desk        	I	ddahl	2002-09-30
+CRPER	CPENG	Current Periodicals     	I	ddahl	2002-09-30
+GEN	CPENG	General Collection	I	ddahl	2002-09-30
+HOLD1	CPENG	Ask Library staff for assistance       	I	ddahl	2002-09-30
+HOLD2	CPENG	Place a Request to Obtain  	I	ddahl	2002-09-30
+HOLD3	CPENG	Ask Library staff for assistance       	I	ddahl	2002-09-30
+INDEX	CPENG	"Index Room, 2nd floor"	I	ddahl	2002-09-30
+MFICH	CPENG	Microfiche - HELD IN MCKELDIN	I	ddahl	2002-09-30
+MFILM	CPENG	Microfilm - HELD IN MCKELDIN	I	ddahl	2002-09-30
+OVRSZ	CPENG	Oversize	I	ddahl	2002-09-30
+PER	CPENG	Periodical Stacks       	I	ddahl	2002-09-30
+REF	CPENG	Reference       	I	ddahl	2002-09-30
+RES	CPENG	Course Reserves 	I	ddahl	2002-09-30
+STACK	CPENG	Stacks  	I	ddahl	2002-09-30
+TECRP	CPENG	Technical Reports Center        	I	ddahl	2002-09-30
+ACQ	CPMCK	Acquisitions Department 	I	ddahl	2002-09-30
+ADAPT	CPMCK	Adaptive Technology Room        	I	ddahl	2002-09-30
+ASCEQ	CPMCK	Circulating Equipment	I	ddahl	2002-09-30
+BIBL	CPMCK	Stacks	I	ddahl	2002-09-30
+CAT	CPMCK	Cataloging Department	I	ddahl	2002-09-30
+CRPER	CPMCK	Periodicals Rm - Current Periodicals	I	ddahl	2002-09-30
+EACFO	CPMCK	East Asia Chinese Language Folio        	I	ddahl	2002-09-30
+EACPE	CPMCK	East Asia Chinese Language Periodicals  	I	ddahl	2002-09-30
+EACRE	CPMCK	East Asia Chinese Language Reference    	I	ddahl	2002-09-30
+EACST	CPMCK	East Asia Chinese Language Stacks       	I	ddahl	2002-09-30
+EADSK	CPMCK	East Asia Desk  	I	ddahl	2002-09-30
+EAHOL	CPMCK	East Asia Desk - Ask Staff for Assistance       	I	ddahl	2002-09-30
+EAJFO	CPMCK	East Asia Japanese Language Folio       	I	ddahl	2002-09-30
+EAJPE	CPMCK	East Asia Japanese Language Periodicals	I	ddahl	2002-09-30
+EAJRE	CPMCK	East Asia Japanese Language Reference   	I	ddahl	2002-09-30
+EAJST	CPMCK	East Asia Japanese Language Stacks      	I	ddahl	2002-09-30
+EAKFO	CPMCK	East Asia Korean Language Folio 	I	ddahl	2002-09-30
+EAKPE	CPMCK	East Asia Korean Language Periodicals	I	ddahl	2002-09-30
+EAKRE	CPMCK	East Asia Korean Language Reference     	I	ddahl	2002-09-30
+EAKST	CPMCK	East Asia Korean Language Stacks        	I	ddahl	2002-09-30
+EAMFC	CPMCK	East Asia Microfiche    	I	ddahl	2002-09-30
+EAOVR	CPMCK	East Asia Oversize      	I	ddahl	2002-09-30
+EARAR	CPMCK	East Asia Rare Materials - Ask Staff for Assistance     	I	ddahl	2002-09-30
+EAWRE	CPMCK	East Asia West Reference        	I	ddahl	2002-09-30
+ETICA	CPMCK	ETIC Collection/McK SIRS Office	I	ddahl	2002-09-30
+ETICD	CPMCK	ETIC Collection/McK SIRS Office	I	ddahl	2002-09-30
+FOLIO	CPMCK	Folio	I	ddahl	2002-09-30
+GEN	CPMCK	General Collection	I	ddahl	2002-09-30
+GVATL	CPMCK	US Government Information Atlas      	I	ddahl	2002-09-30
+GVCPR	CPMCK	US Government Information Current Periodicals	I	ddahl	2002-09-30
+GVFOL	CPMCK	"US Government Information Folio, Ask at desk      "	I	ddahl	2002-09-30
+GVLAB	CPMCK	US Government Information Computer Lab	I	ddahl	2002-09-30
+GVMAP	CPMCK	US Government Information Maps       	I	ddahl	2002-09-30
+GVMED	CPMCK	US Government Information Media	I	ddahl	2002-09-30
+GVMFC	CPMCK	US Government Information Microfiche 	I	ddahl	2002-09-30
+GVMFM	CPMCK	US Government Information Microfilm  	I	ddahl	2002-09-30
+GVOVR	CPMCK	"US Government Information Oversize, Ask at desk   "	I	ddahl	2002-09-30
+GVPOS	CPMCK	US Government Information Posters	I	ddahl	2002-09-30
+GVRAR	CPMCK	"US Government Information Rare, Ask at desk     "	I	ddahl	2002-09-30
+GVREF	CPMCK	US Government Information Reference  	I	ddahl	2002-09-30
+GVSTK	CPMCK	"US Government Information LC Stacks, Ask at desk  "	I	ddahl	2002-09-30
+GVSU	CPMCK	US Government Information SU Docs    	I	ddahl	2002-09-30
+ILL	CPMCK	Interlibrary Loan               	I	ddahl	2002-09-30
+ITD	CPMCK	ITD Equipment Loan	I	ddahl	2002-09-30
+JUV	CPMCK	Juvenile	I	ddahl	2002-09-30
+JUVAW	CPMCK	Juvenile Award	I	ddahl	2002-09-30
+LCRL	CPMCK	Learning Curriculum Resource Library	I	ddahl	2002-09-30
+OVRSZ	CPMCK	Oversize Collection; Place a Request to Obtain 	I	ddahl	2002-09-30
+PER	CPMCK	Periodical Stacks	I	ddahl	2002-09-30
+PMCRD	CPMCK	Periodicals Rm - Microcard      	I	ddahl	2002-09-30
+PMEAI	CPMCK	Periodicals Rm - Microprint	I	ddahl	2002-09-30
+PMFC	CPMCK	Periodicals Rm - Microfiche     	I	ddahl	2002-09-30
+PMFM	CPMCK	Periodicals Rm - Microfilm      	I	ddahl	2002-09-30
+PMPRT	CPMCK	Periodicals Rm - Microprint     	I	ddahl	2002-09-30
+POP	CPMCK	Popular Reading	I	ddahl	2002-09-30
+PRES	CPMCK	Preservation Department	I	ddahl	2002-09-30
+RDREF	CPMCK	"Reference, Ready Reference    "	I	ddahl	2002-09-30
+REATL	CPMCK	Reference Atlas 	I	ddahl	2002-09-30
+REBIO	CPMCK	Reference Biography Shelves     	I	ddahl	2002-09-30
+RECDR	CPMCK	Reference CD-ROMs on PCs        	I	ddahl	2002-09-30
+RECON	CPMCK	Reference Controversial Issues  	I	ddahl	2002-09-30
+REDK	CPMCK	Reference Desk  	I	ddahl	2002-09-30
+REMED	CPMCK	Reference Desk Media Cabinet    	I	ddahl	2002-09-30
+REMIC	CPMCK	Reference Microform Manuals	I	ddahl	2002-09-30
+REOVR	CPMCK	Reference Oversize      	I	ddahl	2002-09-30
+RES	CPMCK	Course Reserves	I	ddahl	2002-09-30
+RESPC	CPMCK	"Course Reserves, Personal Copy"	I	ddahl	2002-09-30
+RESTK	CPMCK	Reference Stacks	I	ddahl	2002-09-30
+RETBL	CPMCK	Reference Index Table 	I	ddahl	2002-09-30
+STACK	CPMCK	Stacks  	I	ddahl	2002-09-30
+THSIS	CPMCK	Thesis  	I	ddahl	2002-09-30
+UNKWN	CPMCK	Suppress	I	ddahl	2002-09-30
+CPWWW	CPNET	Digital Collections	I	ddahl	2002-09-30
+EBWWW	CPNET	World Wide Web Accessible	I	ddahl	2002-09-30
+GEN	CPNET	General Collection	I	ddahl	2002-09-30
+GVWWW	CPNET	World Wide Web Accessible       	I	ddahl	2002-09-30
+NLWWW	CPNET	World Wide Web Accessible	I	ddahl	2002-09-30
+WWW	CPNET	World Wide Web Accessible	I	ddahl	2002-09-30
+ASCEQ	CPNMS	Circulating Equipment	I	ddahl	2002-09-30
+DEAUD	CPNMS	Audiocassette	I	ddahl	2002-09-30
+DEBLU	CPNMS	Blu-ray	I	ddahl	2002-09-30
+DECD	CPNMS	Compact Disk	I	ddahl	2002-09-30
+DEDVD	CPNMS	DVD	I	ddahl	2002-09-30
+DEFLM	CPNMS	16mm Film	I	ddahl	2002-09-30
+DEFMS	CPNMS	Filmstrip	I	ddahl	2002-09-30
+DESLD	CPNMS	Slides   	I	ddahl	2002-09-30
+DEVDD	CPNMS	Laserdisc        	I	ddahl	2002-09-30
+DEVDU	CPNMS	U-matic Videocassette 	I	ddahl	2002-09-30
+DEVDV	CPNMS	VHS Videocassette        	I	ddahl	2002-09-30
+EQUIP	CPNMS	Equipment        	I	ddahl	2002-09-30
+FLMST	CPNMS	16mm Film - Storage	I	ddahl	2002-09-30
+FLMVS	CPNMS	"16mm Film Storage, VS"	I	ddahl	2002-09-30
+GEN	CPNMS	General Collection	I	ddahl	2002-09-30
+LDST	CPNMS	Laserdisc - Storage	I	ddahl	2002-09-30
+RESVV	CPNMS	Reserves	I	ddahl	2002-09-30
+UMAST	CPNMS	U-Matic Videocassette - Storage	I	ddahl	2002-09-30
+VHSST	CPNMS	VHS Videocassette - Storage	I	ddahl	2002-09-30
+CICSR	CPOSS	.	I	ddahl	2002-09-30
+DARK	CPOSS	.	I	ddahl	2002-09-30
+EAOVR	CPOSS	Offsite East Asia Oversize	I	ddahl	2002-09-30
+HATHI	CPOSS	.	I	ddahl	2002-09-30
+HBHOL	CPOSS	Place a Request to Obtain (HBK)	I	ddahl	2002-09-30
+HOLD	CPOSS	Offsite General Collection	I	ddahl	2002-09-30
+LBRMF	CPOSS	Special Collections - Labor Microfilm	I	ddahl	2002-09-30
+MDMFM	CPOSS	Special Collections - Maryland Microfilm	I	ddahl	2002-09-30
+MDTHS	CPOSS	University Archives - Theses & Dissertations	I	ddahl	2002-09-30
+MFORM	CPOSS	Offsite Microform	I	ddahl	2002-09-30
+OVRSZ	CPOSS	Offsite Oversize	I	ddahl	2002-09-30
+ASCEQ	CPPAL	Circulating Equipment	I	ddahl	2002-09-30
+AUTOM	CPPAL	"Available on Selected PCs, Ask at the Desk    "	I	ddahl	2002-09-30
+CRPER	CPPAL	Current Periodicals	I	ddahl	2002-09-30
+FOLIO	CPPAL	Folio   	I	ddahl	2002-09-30
+GEN	CPPAL	General Collection	I	ddahl	2002-09-30
+HENSN	CPPAL	Henson Collection	I	ddahl	2002-09-30
+IPAM	CPPAL	"IPAM: books in the Lowens Room; other materials, ask at the circulation desk"	I	ddahl	2002-09-30
+KOSTL	CPPAL	"Kostelanetz, Ask at the Desk  "	I	ddahl	2002-09-30
+MDMUS	CPPAL	"Lowens Special Collections Room, Maryland Sheet Music "	I	ddahl	2002-09-30
+MENC	CPPAL	"Lowens Special Collections Room,  MENC Archives"	I	ddahl	2002-09-30
+MFICH	CPPAL	"Microfiche, Ask at the Desk "	I	ddahl	2002-09-30
+MFILM	CPPAL	"Microfilm, Ask at the Desk    "	I	ddahl	2002-09-30
+MINI	CPPAL	Miniature Scores	I	ddahl	2002-09-30
+NEWBK	CPPAL	New Books	I	ddahl	2002-09-30
+OVRSZ	CPPAL	Oversize        	I	ddahl	2002-09-30
+RAR	CPPAL	"Lowens Special Collections Room, Rare Stacks  "	I	ddahl	2002-09-30
+RDREF	CPPAL	Paged Collections Room: ask at the circulation desk 	I	ddahl	2002-09-30
+REF	CPPAL	Reference       	I	ddahl	2002-09-30
+RES	CPPAL	Course Reserves 	I	ddahl	2002-09-30
+SCPA	CPPAL	Lowens Special Collections Room	I	ddahl	2002-09-30
+STACK	CPPAL	Stacks	I	ddahl	2002-09-30
+VRTFL	CPPAL	Vertical File	I	ddahl	2002-09-30
+WALLN	CPPAL	"Wallenstein, Ask at the Desk"	I	ddahl	2002-09-30
+ASCEQ	CPSG	Circulating Equipment	I	ddahl	2002-09-30
+CRPER	CPSG	Current Periodicals     	I	ddahl	2002-09-30
+GEN	CPSG	General Collection	I	ddahl	2002-09-30
+JUV	CPSG	Children	I	ddahl	2002-09-30
+MEDIA	CPSG	Media Collection	I	ddahl	2002-09-30
+MFICH	CPSG	Microfiche	I	ddahl	2002-09-30
+PER	CPSG	Periodical Stacks	I	ddahl	2002-09-30
+PLMFM	CPSG	Microfilm	I	ddahl	2002-09-30
+PLPER	CPSG	Periodical Stacks	I	ddahl	2002-09-30
+REF	CPSG	Reference	I	ddahl	2002-09-30
+RES	CPSG	Course Reserves	I	ddahl	2002-09-30
+STACK	CPSG	Stacks	I	ddahl	2002-09-30
+ARHMS	CPSPE	"Archives, Historical Manuscripts"	I	ddahl	2002-09-30
+ARLMS	CPSPE	"Archives, Literary Manuscripts"	I	ddahl	2002-09-30
+ARMMS	CPSPE	"Archives, Maryland Manuscripts"	I	ddahl	2002-09-30
+ARREF	CPSPE	"Archives, Reference"	I	ddahl	2002-09-30
+ARUNV	CPSPE	"Archives, University Publications"	I	ddahl	2002-09-30
+ARURG	CPSPE	"Archives, University Records"	I	ddahl	2002-09-30
+BARNS	CPSPE	Barnes	I	ddahl	2002-09-30
+GEN	CPSPE	General Collection	I	ddahl	2002-09-30
+KAPFL	CPSPE	KA Porter Folio	I	ddahl	2002-09-30
+KAPOV	CPSPE	KA Porter Oversize	I	ddahl	2002-09-30
+KAPSK	CPSPE	KA Porter Stacks	I	ddahl	2002-09-30
+MDFOL	CPSPE	Maryland Folio	I	ddahl	2002-09-30
+MDMAP	CPSPE	Maryland Maps	I	ddahl	2002-09-30
+MDMFC	CPSPE	Maryland Microfiche	I	ddahl	2002-09-30
+MDMFM	CPSPE	Maryland Microfilm	I	ddahl	2002-09-30
+MDOVR	CPSPE	Maryland Oversize	I	ddahl	2002-09-30
+MDRAF	CPSPE	Maryland Rare Folio	I	ddahl	2002-09-30
+MDRAO	CPSPE	Maryland Rare Oversize	I	ddahl	2002-09-30
+MDRAR	CPSPE	Maryland Rare Stacks	I	ddahl	2002-09-30
+MDREF	CPSPE	Maryland Reference	I	ddahl	2002-09-30
+MDSTK	CPSPE	Maryland Stacks	I	ddahl	2002-09-30
+MDTHS	CPSPE	Maryland Thesis	I	ddahl	2002-09-30
+NTLAV	CPSPE	National Trust Library Audio-visual Collection	I	ddahl	2002-09-30
+NTLFL	CPSPE	National Trust Library Folio	I	ddahl	2002-09-30
+NTLMF	CPSPE	National Trust Library Microfiche	I	ddahl	2002-09-30
+NTLML	CPSPE	National Trust Library Microfilm	I	ddahl	2002-09-30
+NTLOV	CPSPE	National Trust Library Oversize	I	ddahl	2002-09-30
+NTLPR	CPSPE	National Trust Library Periodicals Stacks	I	ddahl	2002-09-30
+NTLSC	CPSPE	National Trust Library Serial Cabinet	I	ddahl	2002-09-30
+NTLSK	CPSPE	National Trust Library Stacks	I	ddahl	2002-09-30
+NTLTH	CPSPE	National Trust Library Thesis	I	ddahl	2002-09-30
+NTLVF	CPSPE	National Trust Library Vertical File	I	ddahl	2002-09-30
+PGDOC	CPSPE	Prange Documents	I	ddahl	2002-09-30
+PGREF	CPSPE	Prange Reference	I	ddahl	2002-09-30
+PGSTK	CPSPE	Prange Stacks	I	ddahl	2002-09-30
+RAFOL	CPSPE	Rare Folio	I	ddahl	2002-09-30
+RAOVR	CPSPE	Rare Oversize	I	ddahl	2002-09-30
+RASTK	CPSPE	Rare Stacks	I	ddahl	2002-09-30
+SPCFO	CPSPE	Special Collections Folio	I	ddahl	2002-09-30
+SPCOV	CPSPE	Special Collections Oversize	I	ddahl	2002-09-30
+SPCSK	CPSPE	Special Collections Stacks	I	ddahl	2002-09-30
+SPNEW	CPSPE	Special Collections Original Newspapers	I	ddahl	2002-09-30
+SPREF	CPSPE	Special Collections Reference	I	ddahl	2002-09-30
+ADVSA	CS-CS	Audio-Visual American	I	ddahl	2002-09-30
+ADVSS	CS-CS	Audia-Visual Stacks	I	ddahl	2002-09-30
+AFRO	CS-CS	AFRO	I	ddahl	2002-09-30
+AFROA	CS-CS	Afro-American	I	ddahl	2002-09-30
+AUDVS	CS-CS	Audio-Visual	I	ddahl	2002-09-30
+CRLBJ	CS-CS	Curriculum lab Juvenile	I	ddahl	2002-09-30
+CURLB	CS-CS	Curriculum Lab	I	ddahl	2002-09-30
+EBLDD	CS-CS	Ebook	I	ddahl	2002-09-30
+GEN	CS-CS	General Collection	I	ddahl	2002-09-30
+JUV	CS-CS	Juvenile	I	ddahl	2002-09-30
+JUVRF	CS-CS	Juvenile Reference	I	ddahl	2002-09-30
+MD	CS-CS	Maryland	I	ddahl	2002-09-30
+MDAFR	CS-CS	Maryland Afro	I	ddahl	2002-09-30
+MDAMR	CS-CS	Maryland American	I	ddahl	2002-09-30
+MDJUV	CS-CS	Maryland Juvenile	I	ddahl	2002-09-30
+MDSTK	CS-CS	Maryland Stacks	I	ddahl	2002-09-30
+MDWWW	CS-CS	Maryland Digital Library	I	ddahl	2002-09-30
+NLWWW	CS-CS	NetLibrary eBooks	I	ddahl	2002-09-30
+PER	CS-CS	Periodicals	I	ddahl	2002-09-30
+REF	CS-CS	Reference	I	ddahl	2002-09-30
+REFTH	CS-CS	Master Thesis Reference	I	ddahl	2002-09-30
+STACK	CS-CS	Stacks	I	ddahl	2002-09-30
+STHRF	CS-CS	Reference Stacks	I	ddahl	2002-09-30
+STKAM	CS-CS	American Stacks	I	ddahl	2002-09-30
+STKGN	CS-CS	General Stacks	I	ddahl	2002-09-30
+STKJV	CS-CS	Juvenile Stacks	I	ddahl	2002-09-30
+STKTH	CS-CS	Master Thesis Stacks	I	ddahl	2002-09-30
+ABSIN	ES-ES	Abstracts and Indexes	I	ddahl	2002-09-30
+BLACK	ES-ES	Black	I	ddahl	2002-09-30
+CLOSD	ES-ES	Closed Reference	I	ddahl	2002-09-30
+CRBKS	ES-ES	Community Resource Books	I	ddahl	2002-09-30
+EBLDD	ES-ES	FDLibrary e-books	I	ddahl	2002-09-30
+EBOOK	ES-ES	Electronic Book	I	ddahl	2002-09-30
+ESILL	ES-ES	Interlibrary Loan	I	ddahl	2002-09-30
+ESIT	ES-ES	IT Equipment	I	ddahl	2002-09-30
+GEN	ES-ES	General Collection	I	ddahl	2002-09-30
+GSTDY	ES-ES	Group Study Room	I	ddahl	2002-09-30
+GVDOC	ES-ES	Government Documents	I	ddahl	2002-09-30
+GVWWW	ES-ES	Web Government Documents	I	ddahl	2002-09-30
+JUV	ES-ES	Juvenile	I	ddahl	2002-09-30
+LEISR	ES-ES	Leisure Reading	I	ddahl	2002-09-30
+MBOOK	ES-ES	Microbook	I	ddahl	2002-09-30
+MDES	ES-ES	Maryland Eastern Shore	I	ddahl	2002-09-30
+MDWWW	ES-ES	Maryland Digital Library	I	ddahl	2002-09-30
+MEDIA	ES-ES	Media Dept.	I	ddahl	2002-09-30
+MFORM	ES-ES	Microform	I	ddahl	2002-09-30
+NLWWW	ES-ES	NetLibrary eBooks	I	ddahl	2002-09-30
+NTWWW	ES-ES	Network World Wide Web	I	ddahl	2002-09-30
+ONLRE	ES-ES	Online Resources	I	ddahl	2002-09-30
+PHMIC	ES-ES	Pharmacy Information Center	I	ddahl	2002-09-30
+RARE	ES-ES	Rare Books	I	ddahl	2002-09-30
+REF	ES-ES	Reference	I	ddahl	2002-09-30
+REFMD	ES-ES	Reference Maryland	I	ddahl	2002-09-30
+RESRV	ES-ES	Reserves	I	ddahl	2002-09-30
+SERIL	ES-ES	Serials	I	ddahl	2002-09-30
+SPBLK	ES-ES	Special Collections Black	I	ddahl	2002-09-30
+SPCMD	ES-ES	Special Collections Maryland Eastern Shore	I	ddahl	2002-09-30
+SPCOL	ES-ES	Special Collections	I	ddahl	2002-09-30
+STACK	ES-ES	Stacks	I	ddahl	2002-09-30
+UNKWN	ES-ES	Unknown	I	ddahl	2002-09-30
+ARART	FS-FA	Archives Artwork	I	ddahl	2002-09-30
+ARCDR	FS-FA	Archives CDROM	I	ddahl	2002-09-30
+ARCH	FS-FA	Archives	I	ddahl	2002-09-30
+ARDSK	FS-FA	Archives Floppy Disk	I	ddahl	2002-09-30
+ARFOL	FS-FA	Archives Folio	I	ddahl	2002-09-30
+ARMAP	FS-FA	Archives Map	I	ddahl	2002-09-30
+ARMFM	FS-FA	Archives Microfilm	I	ddahl	2002-09-30
+ARMP	FS-FA	Archives Motion Picture	I	ddahl	2002-09-30
+ARMSS	FS-FA	Archives Manuscript	I	ddahl	2002-09-30
+AROVS	FS-FA	Archives Oversize	I	ddahl	2002-09-30
+ARPAM	FS-FA	Archives Pamphlet	I	ddahl	2002-09-30
+ARPER	FS-FA	Archives Periodical	I	ddahl	2002-09-30
+ARPHO	FS-FA	Archives Photograph	I	ddahl	2002-09-30
+ARPOS	FS-FA	Archives Poster	I	ddahl	2002-09-30
+ARREA	FS-FA	Archives Realia	I	ddahl	2002-09-30
+ARREF	FS-FA	Archives Reference	I	ddahl	2002-09-30
+ARRGP	FS-FA	Archives Record Group	I	ddahl	2002-09-30
+ARSDR	FS-FA	Archives Sound Recording	I	ddahl	2002-09-30
+ARSLI	FS-FA	Archives Slide	I	ddahl	2002-09-30
+ARVID	FS-FA	Archives Video	I	ddahl	2002-09-30
+CD	FS-FA	Media Audio CD	I	ddahl	2002-09-30
+CDROM	FS-FA	Media CDROM	I	ddahl	2002-09-30
+DVD	FS-FA	Media DVD	I	ddahl	2002-09-30
+EBLDD	FS-FA	E-books	I	ddahl	2002-09-30
+EQUIP	FS-FA	Accessory Equipment	I	ddahl	2002-09-30
+FLMST	FS-FA	Media Filmstrip	I	ddahl	2002-09-30
+FLSHC	FS-FA	Media Flashcard	I	ddahl	2002-09-30
+FSUAD	FS-FA	Frostburg Achievements Display	I	ddahl	2002-09-30
+GAME	FS-FA	Media Game	I	ddahl	2002-09-30
+GDCDR	FS-FA	Government Documents CDROM	I	ddahl	2002-09-30
+GDDSK	FS-FA	Government Documents Floppy Disk	I	ddahl	2002-09-30
+GDDVD	FS-FA	Government Documents DVD	I	ddahl	2002-09-30
+GDMAP	FS-FA	Government Documents Map	I	ddahl	2002-09-30
+GDMFC	FS-FA	Government Documents Microfiche	I	ddahl	2002-09-30
+GDONL	FS-FA	Government Documents Online	I	ddahl	2002-09-30
+GDOVS	FS-FA	Government Documents Oversize	I	ddahl	2002-09-30
+GDPER	FS-FA	Government Documents Periodicals	I	ddahl	2002-09-30
+GDPST	FS-FA	Government Documents Poster	I	ddahl	2002-09-30
+GEN	FS-FA	General Collection	I	ddahl	2002-09-30
+GOVDC	FS-FA	Government Documents	I	ddahl	2002-09-30
+IND	FS-FA	Index	I	ddahl	2002-09-30
+JUV	FS-FA	Juvenile	I	ddahl	2002-09-30
+JVOVS	FS-FA	Juvenile Oversize	I	ddahl	2002-09-30
+JVPER	FS-FA	Juvenile Periodical	I	ddahl	2002-09-30
+JVREF	FS-FA	Juvenile Reference	I	ddahl	2002-09-30
+KIT	FS-FA	Media Kit	I	ddahl	2002-09-30
+MAP	FS-FA	Map	I	ddahl	2002-09-30
+MCRO3	FS-FA	Media Micro3	I	ddahl	2002-09-30
+MCRO4	FS-FA	Media Micro4	I	ddahl	2002-09-30
+MCRO5	FS-FA	Media Micro5	I	ddahl	2002-09-30
+MDWWW	FS-FA	Maryland Digital Library	I	ddahl	2002-09-30
+MFILM	FS-FA	Media Microfilm	I	ddahl	2002-09-30
+MODEL	FS-FA	Media Model	I	ddahl	2002-09-30
+MP	FS-FA	Media Motion Picture	I	ddahl	2002-09-30
+NEW	FS-FA	New Arrivals	I	ddahl	2002-09-30
+NLWWW	FS-FA	E-books	I	ddahl	2002-09-30
+NTWWW	FS-FA	Online Resources	I	ddahl	2002-09-30
+ONLNE	FS-FA	Online	I	ddahl	2002-09-30
+PER	FS-FA	Periodical	I	ddahl	2002-09-30
+PHOTO	FS-FA	Media Photograph	I	ddahl	2002-09-30
+POPLR	FS-FA	Popular Reading	I	ddahl	2002-09-30
+POSTR	FS-FA	Media Poster	I	ddahl	2002-09-30
+PRCDR	FS-FA	Periodical CDROM	I	ddahl	2002-09-30
+PRINT	FS-FA	Media Print	I	ddahl	2002-09-30
+REF	FS-FA	Reference	I	ddahl	2002-09-30
+RESRV	FS-FA	Reserves	I	ddahl	2002-09-30
+RFATL	FS-FA	Reference Atlas Case	I	ddahl	2002-09-30
+RFCDR	FS-FA	Reference CDROM	I	ddahl	2002-09-30
+RFDVD	FS-FA	Reference DVD	I	ddahl	2002-09-30
+RFOVS	FS-FA	Reference Oversize	I	ddahl	2002-09-30
+RSCD	FS-FA	Reserves Audio CD	I	ddahl	2002-09-30
+RSDVD	FS-FA	Reserves DVD	I	ddahl	2002-09-30
+RSMED	FS-FA	Reserves Media	I	ddahl	2002-09-30
+RSPER	FS-FA	Reserves Periodical	I	ddahl	2002-09-30
+RSPHO	FS-FA	Reserves Photocopy	I	ddahl	2002-09-30
+RSSDR	FS-FA	Reserves Sound Recording	I	ddahl	2002-09-30
+RSVID	FS-FA	Reserves Video	I	ddahl	2002-09-30
+SCART	FS-FA	Special Collections Artwork	I	ddahl	2002-09-30
+SCCD	FS-FA	Special Collections Audio CD	I	ddahl	2002-09-30
+SCCDR	FS-FA	Special Collections CDROM	I	ddahl	2002-09-30
+SCFOL	FS-FA	Special Collections Folio	I	ddahl	2002-09-30
+SCGAM	FS-FA	Special Collections Game	I	ddahl	2002-09-30
+SCMAP	FS-FA	Special Collections Map	I	ddahl	2002-09-30
+SCMP	FS-FA	Special Collections Motion Picture	I	ddahl	2002-09-30
+SCMSS	FS-FA	Special Collections Manuscript	I	ddahl	2002-09-30
+SCOVS	FS-FA	Special Collections Oversize	I	ddahl	2002-09-30
+SCPAM	FS-FA	Special Collections Pamphlet	I	ddahl	2002-09-30
+SCPER	FS-FA	Special Collections Periodical	I	ddahl	2002-09-30
+SCPHO	FS-FA	Special Collections Photograph	I	ddahl	2002-09-30
+SCPOS	FS-FA	Special Collections Poster	I	ddahl	2002-09-30
+SCRBR	FS-FA	Special Collections Rare Book Room	I	ddahl	2002-09-30
+SCREL	FS-FA	Special Collections Realia	I	ddahl	2002-09-30
+SCSDR	FS-FA	Special Collections Sound Recording	I	ddahl	2002-09-30
+SCSLI	FS-FA	Special Collections Slide	I	ddahl	2002-09-30
+SCTPR	FS-FA	Special Collections Tape Recording	I	ddahl	2002-09-30
+SCVID	FS-FA	Special Collections Video	I	ddahl	2002-09-30
+SLIDE	FS-FA	Media Slide	I	ddahl	2002-09-30
+SNDRC	FS-FA	Media Sound Recording	I	ddahl	2002-09-30
+SPECL	FS-FA	Special Collections	I	ddahl	2002-09-30
+SPRNT	FS-FA	Media Study Print	I	ddahl	2002-09-30
+STACK	FS-FA	Stacks	I	ddahl	2002-09-30
+STOVS	FS-FA	Stacks Oversize	I	ddahl	2002-09-30
+TAPER	FS-FA	Media Tape Recording	I	ddahl	2002-09-30
+TMC	FS-FA	Teacher Material Collection	I	ddahl	2002-09-30
+TRNSP	FS-FA	Media Transparency	I	ddahl	2002-09-30
+UNKWN	FS-FA	Unknown	I	ddahl	2002-09-30
+VIDEO	FS-FA	Media Video	I	ddahl	2002-09-30
+HGJUV	FS-FH	Juvenile	I	ddahl	2002-09-30
+HGLRC	FS-FH	Leisure Reading	I	ddahl	2002-09-30
+HGOVS	FS-FH	Oversize	I	ddahl	2002-09-30
+HGPER	FS-FH	Periodical	I	ddahl	2002-09-30
+HGREF	FS-FH	Reference	I	ddahl	2002-09-30
+HGST	FS-FH	Stacks	I	ddahl	2002-09-30
+HGVID	FS-FH	Video	I	ddahl	2002-09-30
+HGWWW	FS-FH	Electronic Resource	I	ddahl	2002-09-30
+ADMIN	HS-HS	Administrative Office	I	ddahl	2002-09-30
+CATS	HS-HS	CATS Dept.	I	ddahl	2002-09-30
+CCC	HS-HS	Stacks	I	ddahl	2002-09-30
+CCCM	HS-HS	Media: Check at Circulation Desk	I	ddahl	2002-09-30
+CLODT	HS-HS	Closed Stacks Dissertations/Theses: Ask at Circulation Desk	I	ddahl	2002-09-30
+CLOVB	HS-HS	Closed Stacks Oversize Books: Ask at Circulation Desk	I	ddahl	2002-09-30
+CLSTK	HS-HS	Closed Stacks: Ask at Circulation Desk 	I	ddahl	2002-09-30
+COH	HS-HS	Stacks	I	ddahl	2002-09-30
+COLDT	HS-HS	Collection Development Dept.	I	ddahl	2002-09-30
+CRCDT	HS-HS	Circulation Dept.	I	ddahl	2002-09-30
+CTGDT	HS-HS	Cataloging Dept.	I	ddahl	2002-09-30
+EBLDD	HS-HS	Online Resources	I	ddahl	2002-09-30
+GEN	HS-HS	General Collection	I	ddahl	2002-09-30
+GRMED	HS-HS	Graphic Medicine	I	ddahl	2002-09-30
+HSTCD	HS-HS	Historical-Cordell	I	ddahl	2002-09-30
+HSTCM	HS-HS	Historical-Campus	I	ddahl	2002-09-30
+HSTCR	HS-HS	Historical-Crawford	I	ddahl	2002-09-30
+HSTFR	HS-HS	Historical-Ferencz	I	ddahl	2002-09-30
+HSTGR	HS-HS	Historical-Grieves	I	ddahl	2002-09-30
+HSTKD	HS-HS	Historical-Kendall	I	ddahl	2002-09-30
+HSTMC	HS-HS	Historical-Misc	I	ddahl	2002-09-30
+HSTNR	HS-HS	Historical-Nursing	I	ddahl	2002-09-30
+HSTOF	HS-HS	Historical-Office	I	ddahl	2002-09-30
+HSTPH	HS-HS	Historical-Pharmacy	I	ddahl	2002-09-30
+HSTSW	HS-HS	Historical-Soc. Work	I	ddahl	2002-09-30
+HSTWW	HS-HS	Historical-Woodward	I	ddahl	2002-09-30
+JOURN	HS-HS	Journal Collection	I	ddahl	2002-09-30
+LEISR	HS-HS	Leisure Reading	I	ddahl	2002-09-30
+MEDIA	HS-HS	Media: Check at Circulation Desk	I	ddahl	2002-09-30
+NLWWW	HS-HS	Online Resource	I	ddahl	2002-09-30
+ONLNE	HS-HS	Online Resource	I	ddahl	2002-09-30
+ONLOF	HS-HS	Online Office	I	ddahl	2002-09-30
+OVRBK	HS-HS	Oversize Books	I	ddahl	2002-09-30
+OVRJR	HS-HS	Oversize Journals	I	ddahl	2002-09-30
+REF	HS-HS	Reference Collection	I	ddahl	2002-09-30
+REFDK	HS-HS	Reference Desk	I	ddahl	2002-09-30
+REFIN	HS-HS	Reference Indexes	I	ddahl	2002-09-30
+REFTS	HS-HS	Ref Test Collection	I	ddahl	2002-09-30
+RSDT	HS-HS	Resource Sharing Dept.	I	ddahl	2002-09-30
+RSRVE	HS-HS	Reserve Desk	I	ddahl	2002-09-30
+STACK	HS-HS	5th Floor Stacks	I	ddahl	2002-09-30
+STOR	HS-HS	Storage	I	ddahl	2002-09-30
+RML	HS-HS	Regional Medical Library: Ask at Circulation Desk	I	ddahl	2002-09-30
+GEN	LNDL	General Collection	I	ddahl	2016-09-08
+ADMOF	ML-ML	Library Office	I	ddahl	2002-09-30
+BAR	ML-ML	Bar Prep	I	ddahl	2002-09-30
+CAREE	ML-ML	Career Services	I	ddahl	2002-09-30
+CLINC	ML-ML	Clinic	I	ddahl	2002-09-30
+CMSTR	ML-ML	Compact Storage	I	ddahl	2002-09-30
+COMST	ML-ML	Compact Stacks	I	ddahl	2002-09-30
+CRSRD	ML-ML	Course Reading	I	ddahl	2002-09-30
+DESK	ML-ML	Desk	I	ddahl	2002-09-30
+DSPLY	ML-ML	Display	I	ddahl	2002-09-30
+EBLDD	ML-ML	EBL eBooks	I	ddahl	2002-09-30
+EBOOK	ML-ML	eBooks	I	ddahl	2002-09-30
+FACLT	ML-ML	Faculty Library	I	ddahl	2002-09-30
+GEN	ML-ML	General Collection	I	ddahl	2002-09-30
+GENRL	ML-ML	General Stacks	I	ddahl	2002-09-30
+GOVST	ML-ML	Government Documents Stacks	I	ddahl	2002-09-30
+HSLST	ML-ML	Health Sciences Storage	I	ddahl	2002-09-30
+INDEX	ML-ML	Index - Level one	I	ddahl	2002-09-30
+INSRP	ML-ML	Institutional Repository	I	ddahl	2002-09-30
+LEISR	ML-ML	Leisure	I	ddahl	2002-09-30
+MDL	ML-ML	Md. Digital Library	I	ddahl	2002-09-30
+MDREF	ML-ML	Maryland Reference	I	ddahl	2002-09-30
+MEDIA	ML-ML	Media	I	ddahl	2002-09-30
+MEDST	ML-ML	Media Stacks	I	ddahl	2002-09-30
+MFCHE	ML-ML	Media Microfiche	I	ddahl	2002-09-30
+MFILM	ML-ML	Media Microfilm	I	ddahl	2002-09-30
+MOML	ML-ML	Making of Modern Law	I	ddahl	2002-09-30
+NLWWW	ML-ML	NetLibrary eBooks	I	ddahl	2002-09-30
+ONLNE	ML-ML	Internet Resource	I	ddahl	2002-09-30
+PEROD	ML-ML	Periodicals Stacks	I	ddahl	2002-09-30
+RDGRM	ML-ML	Reading Room	I	ddahl	2002-09-30
+REFER	ML-ML	Reference Stacks	I	ddahl	2002-09-30
+RESOF	ML-ML	Research Office	I	ddahl	2002-09-30
+RESRV	ML-ML	Reserves	I	ddahl	2002-09-30
+SPCST	ML-ML	Special Collections Stacks	I	ddahl	2002-09-30
+SPECL	ML-ML	Special Collections Brune	I	ddahl	2002-09-30
+STACK	ML-ML	Stacks	I	ddahl	2002-09-30
+SUPMD	ML-ML	Superseded Maryland Codes	I	ddahl	2002-09-30
+TS	ML-ML	Technical Services	I	ddahl	2002-09-30
+UNKWN	ML-ML	Unknown	I	ddahl	2002-09-30
+VIDEO	ML-ML	Media Video	I	ddahl	2002-09-30
+WRCTR	ML-ML	Writing Center	I	ddahl	2002-09-30
+DADVD	MS-MS	Davis Room DVD	I	ddahl	2002-09-30
+DAVDS	MS-MS	Davis Room Dissertation	I	ddahl	2002-09-30
+DAVIS	MS-MS	Davis	I	ddahl	2002-09-30
+DAVJV	MS-MS	Davis Room Juvenile	I	ddahl	2002-09-30
+DAVRB	MS-MS	Davis Room Rare Book	I	ddahl	2002-09-30
+DAVSE	MS-MS	Davis Room Serials	I	ddahl	2002-09-30
+DAVST	MS-MS	Davis Room Storage	I	ddahl	2002-09-30
+DAVTS	MS-MS	Davis Room Thesis	I	ddahl	2002-09-30
+DMSAU	MS-MS	Davis Morgan State Author	I	ddahl	2002-09-30
+EBLDD	MS-MS	Internet/WWW	I	ddahl	2002-09-30
+EJ	MS-MS	Electronic Journals and Indexes                        	I	ddahl	2002-09-30
+FOLIO	MS-MS	Folio	I	ddahl	2002-09-30
+GEN	MS-MS	General Collection	I	ddahl	2002-09-30
+GIFT	MS-MS	MS Gift Items	I	ddahl	2002-09-30
+GVDOC	MS-MS	Government Documents	I	ddahl	2002-09-30
+GVREF	MS-MS	Government Documents Reference	I	ddahl	2002-09-30
+GVSER	MS-MS	Government Documents Serials	I	ddahl	2002-09-30
+JUV	MS-MS	Juvenile Collection                                   	I	ddahl	2002-09-30
+MDDOC	MS-MS	Maryland/ Baltimore Document Collection               	I	ddahl	2002-09-30
+MICRO	MS-MS	Microforms	I	ddahl	2002-09-30
+MM	MS-MS	Multimedia                                            	I	ddahl	2002-09-30
+MMAMT	MS-MS	Multimedia African American Microfilm Thesis          	I	ddahl	2002-09-30
+MMART	MS-MS	Multimedia Art Print                                  	I	ddahl	2002-09-30
+MMCD	MS-MS	Multimedia Compact Disk                               	I	ddahl	2002-09-30
+MMCDR	MS-MS	Multimedia CD ROM                                     	I	ddahl	2002-09-30
+MMCS	MS-MS	Multimedia Computer Software                          	I	ddahl	2002-09-30
+MMDVA	MS-MS	Multimedia DVD Audio                                  	I	ddahl	2002-09-30
+MMDVD	MS-MS	Multimedia DVD                                        	I	ddahl	2002-09-30
+MMDVR	MS-MS	Multimedia DVD ROM                                    	I	ddahl	2002-09-30
+MMFIC	MS-MS	Multimedia Microfiche                                 	I	ddahl	2002-09-30
+MMFIL	MS-MS	Multimedia Microfilm                                  	I	ddahl	2002-09-30
+MMFST	MS-MS	Multimedia Filmstrip                                  	I	ddahl	2002-09-30
+MMMAP	MS-MS	Multimedia Map                                        	I	ddahl	2002-09-30
+MMSC	MS-MS	Multimedia Sound Cassette                             	I	ddahl	2002-09-30
+MMSLI	MS-MS	Multimedia Slide                                      	I	ddahl	2002-09-30
+MMSR	MS-MS	Multimedia Sound Record                               	I	ddahl	2002-09-30
+MMVDC	MS-MS	Multimedia Videocassette                              	I	ddahl	2002-09-30
+NEWBK	MS-MS	New Book Room	I	ddahl	2002-09-30
+NLWWW	MS-MS	NetLibrary eBooks	I	ddahl	2002-09-30
+ONLNE	MS-MS	Internet/WWW	I	ddahl	2002-09-30
+OVRSZ	MS-MS	Oversize                                              	I	ddahl	2002-09-30
+PER	MS-MS	Periodical Collection                                 	I	ddahl	2002-09-30
+PERCD	MS-MS	Periodical Collection/Circulation Desk                	I	ddahl	2002-09-30
+REF	MS-MS	Reference Collection                                  	I	ddahl	2002-09-30
+REFAT	MS-MS	Reference Atlas Case                                  	I	ddahl	2002-09-30
+REFBI	MS-MS	Reference Biography                                   	I	ddahl	2002-09-30
+REFDK	MS-MS	Reference Desk                                        	I	ddahl	2002-09-30
+RESRV	MS-MS	Reserves                                              	I	ddahl	2002-09-30
+SC	MS-MS	Special Collections                                   	I	ddahl	2002-09-30
+SCJUV	MS-MS	Special Collections Juvenile                          	I	ddahl	2002-09-30
+SCMT	MS-MS	Special Collections Morgan Thesis                     	I	ddahl	2002-09-30
+SCORE	MS-MS	Score                                                 	I	ddahl	2002-09-30
+SCPER	MS-MS	Special Collections Periodical                        	I	ddahl	2002-09-30
+SCRAR	MS-MS	Special Collections Rare Book                         	I	ddahl	2002-09-30
+SPDSP	MS-MS	Staff Picks Display	I	ddahl	2002-09-30
+STACK	MS-MS	Stacks	I	ddahl	2002-09-30
+TRANS	MS-MS	Transportation Research Board Full Collection	I	ddahl	2002-09-30
+UNKWN	MS-MS	Unknown                                                	I	ddahl	2002-09-30
+USD	MS-MS	U.S. Document                                         	I	ddahl	2002-09-30
+USDAT	MS-MS	U.S. Document Atlas                                   	I	ddahl	2002-09-30
+USDCD	MS-MS	U.S. Document CD ROM                                  	I	ddahl	2002-09-30
+USDDV	MS-MS	U.S. Document DVD                                     	I	ddahl	2002-09-30
+USDFD	MS-MS	U.S. Document Floppy Disk                             	I	ddahl	2002-09-30
+USDKT	MS-MS	U.S. Document Kit/Packet                              	I	ddahl	2002-09-30
+USDLC	MS-MS	U.S. Document Library of Congress Classification      	I	ddahl	2002-09-30
+USDMF	MS-MS	U.S. Document Microfiche                              	I	ddahl	2002-09-30
+USDMP	MS-MS	U.S. Document Map                                     	I	ddahl	2002-09-30
+USDPO	MS-MS	U.S. Document Poster                                  	I	ddahl	2002-09-30
+USDRF	MS-MS	U.S. Document Ready Reference                         	I	ddahl	2002-09-30
+USDSR	MS-MS	U.S. Document Serial                                  	I	ddahl	2002-09-30
+USDVC	MS-MS	U.S. Document Videocassette                           	I	ddahl	2002-09-30
+USDWW	MS-MS	U.S. Document World Wide Web                          	I	ddahl	2002-09-30
+VIDST	MS-MS	Video - Streaming	I	ddahl	2002-09-30
+WWW	MS-MS	INTERNET/WWW	I	ddahl	2002-09-30
+CATL	SM-SM	Atlas Case	I	ddahl	2002-09-30
+CBKC	SM-SM	Stacks      	I	ddahl	2002-09-30
+CBRP	SM-SM	Popular Reading	I	ddahl	2002-09-30
+CILL	SM-SM	Non-SMCM Item	I	ddahl	2002-09-30
+CMAP	SM-SM	Map Case	I	ddahl	2002-09-30
+CMCD	SM-SM	Applied Multimedia Center	I	ddahl	2002-09-30
+CMDC	SM-SM	Maryland	I	ddahl	2002-09-30
+CMDO	SM-SM	Maryland Oversize	I	ddahl	2002-09-30
+CMFD	SM-SM	Microfilm Cabinet (Maryland)	I	ddahl	2002-09-30
+CMFG	SM-SM	Microfilm Cabinet (General)	I	ddahl	2002-09-30
+CMFI	SM-SM	Microfilm Cabinet (Ref/Index)	I	ddahl	2002-09-30
+CMFN	SM-SM	Microfilm Cabinet (Newspaper)	I	ddahl	2002-09-30
+CMFP	SM-SM	Periodicals Microfilm	I	ddahl	2002-09-30
+CMFR	SM-SM	Microfilm Cabinet (Reference)	I	ddahl	2002-09-30
+CMPC	SM-SM	Motion Picture (at Circ-Desk)	I	ddahl	2002-09-30
+CMUC	SM-SM	Music Collection (at Circ-Desk)	I	ddahl	2002-09-30
+CNBC	SM-SM	New Books Collection	I	ddahl	2002-09-30
+CNEW	SM-SM	Newspaper Display	I	ddahl	2002-09-30
+COLR	SM-SM	Online Resources	I	ddahl	2002-09-30
+COVC	SM-SM	Oversize	I	ddahl	2002-09-30
+CPER	SM-SM	Periodicals	I	ddahl	2002-09-30
+CRDY	SM-SM	Ready Reference	I	ddahl	2002-09-30
+CRES	SM-SM	On Reserve	I	ddahl	2002-09-30
+CRFI	SM-SM	Reference/Index	I	ddahl	2002-09-30
+CRFR	SM-SM	Reference	I	ddahl	2002-09-30
+CSCO	SM-SM	Scores (File Cabinet)	I	ddahl	2002-09-30
+CSPC	SM-SM	Special Collections	I	ddahl	2002-09-30
+CSPD	SM-SM	Board Room	I	ddahl	2002-09-30
+CSPO	SM-SM	Special Collections Oversize	I	ddahl	2002-09-30
+CSPX	SM-SM	Archives	I	ddahl	2002-09-30
+CVBL	SM-SM	Blu-ray Collection	I	ddahl	2002-09-30
+CVDC	SM-SM	Videocassette (at Circ-Desk)	I	ddahl	2002-09-30
+CVDV	SM-SM	DVD Collection	I	ddahl	2002-09-30
+CXAV	SM-SM	Media Center Archives	I	ddahl	2002-09-30
+CZAC	SM-SM	General A/V (at Circ-Desk)	I	ddahl	2002-09-30
+EBLDD	SM-SM	Online Resources	I	ddahl	2002-09-30
+ECIR	SM-SM	Equipment (at Circ-Desk)	I	ddahl	2002-09-30
+EMED	SM-SM	Equipment (Media Center)    	I	ddahl	2002-09-30
+GEN	SM-SM	General Collection	I	ddahl	2002-09-30
+NLWWW	SM-SM	Online Resources	I	ddahl	2002-09-30
+GEN	SU-CR	General Collection	I	ddahl	2012-09-07
+FAC	SU-NC	SU Faculty Authors Collection	I	ddahl	2002-09-30
+GEN	SU-NC	General Collection	I	ddahl	2002-09-30
+LOBBY	SU-NC	Lobby Cards	I	ddahl	2002-09-30
+MCFLM	SU-NC	Microfilm	I	ddahl	2002-09-30
+MD	SU-NC	Maryland Special Collection	I	ddahl	2002-09-30
+MFCHE	SU-NC	Microfiche	I	ddahl	2002-09-30
+NRCAF	SU-NC	Artifacts	I	ddahl	2002-09-30
+NRCAR	SU-NC	Archives	I	ddahl	2002-09-30
+NRCCD	SU-NC	Nabb CD Collection	I	ddahl	2002-09-30
+NRCDR	SU-NC	Dryden Collection	I	ddahl	2002-09-30
+NRCFK	SU-NC	Folklore	I	ddahl	2002-09-30
+NRCMF	SU-NC	Microfilm	I	ddahl	2002-09-30
+NRCMN	SU-NC	Main Collection	I	ddahl	2002-09-30
+NRCMP	SU-NC	Maps	I	ddahl	2002-09-30
+NRCNA	SU-NC	Native American Collection	I	ddahl	2002-09-30
+NRCPA	SU-NC	Pamphlet Collection	I	ddahl	2002-09-30
+NRCPH	SU-NC	Photographs	I	ddahl	2002-09-30
+NRCPR	SU-NC	Periodicals	I	ddahl	2002-09-30
+NRCRB	SU-NC	Rare Book Collection	I	ddahl	2002-09-30
+NRCST	SU-NC	Storage	I	ddahl	2002-09-30
+NRCTD	SU-NC	Theses & Dissertations	I	ddahl	2002-09-30
+PRBOK	SU-NC	Press Books Special Collection	I	ddahl	2002-09-30
+PRKIT	SU-NC	Press Kits Special Collection	I	ddahl	2002-09-30
+RARE	SU-NC	Rare Books Special Collections	I	ddahl	2002-09-30
+SPCOL	SU-NC	Special Collections	I	ddahl	2002-09-30
+SUA	SU-NC	Salisbury University Archives	I	ddahl	2002-09-30
+USDMF	SU-NC	United States Documents Microfiche	I	ddahl	2002-09-30
+USDMP	SU-NC	United States Documents Map	I	ddahl	2002-09-30
+VLT	SU-NC	Vault Storage	I	ddahl	2002-09-30
+ADAPT	SU-SU	Adapters	I	ddahl	2002-09-30
+AUDBK	SU-SU	Audio Books	I	ddahl	2002-09-30
+CASS	SU-SU	Cassette	I	ddahl	2002-09-30
+CD	SU-SU	CD audio	I	ddahl	2002-09-30
+CDROM	SU-SU	CDROM computer file	I	ddahl	2002-09-30
+CHARG	SU-SU	Charger	I	ddahl	2002-09-30
+CRCNB	SU-SU	"Circulation Desk, Curriculum Nonbook"	I	ddahl	2002-09-30
+CRDSK	SU-SU	Circulation Desk	I	ddahl	2002-09-30
+CRLES	SU-SU	"Circulation Desk, LesCallette Nonbook"	I	ddahl	2002-09-30
+CRMD	SU-SU	"Circulation Desk, Maryland Nonbook"	I	ddahl	2002-09-30
+CRNBK	SU-SU	Circulation Desk Nonbook	I	ddahl	2002-09-30
+CTDPT	SU-SU	Cataloging Department	I	ddahl	2002-09-30
+CURR	SU-SU	Curriculum Books	I	ddahl	2002-09-30
+CURRN	SU-SU	Curriculum Nonbook Stacks	I	ddahl	2002-09-30
+DKRWW	SU-SU	Desk Reference	I	ddahl	2002-09-30
+DSKNB	SU-SU	Desk Reference	I	ddahl	2002-09-30
+DSKRF	SU-SU	Desk Reference	I	ddahl	2002-09-30
+DVD	SU-SU	DVD	I	ddahl	2002-09-30
+DVDGN	SU-SU	General DVD Collection	I	ddahl	2002-09-30
+EAIEO	SU-SU	Early American Imprints (Evans) Online	I	ddahl	2002-09-30
+EBLDD	SU-SU	World Wide Web	I	ddahl	2002-09-30
+ELIC	SU-SU	English Language Institute Collection	I	ddahl	2002-09-30
+FITBC	SU-SU	Fitbit Charge	I	ddahl	2002-09-30
+FITBF	SU-SU	Fitbit Flex	I	ddahl	2002-09-30
+FITBS	SU-SU	Fitbit Surge	I	ddahl	2002-09-30
+FLMST	SU-SU	Film Studies Reserve Collection	I	ddahl	2002-09-30
+FOLIO	SU-SU	Folio Books	I	ddahl	2002-09-30
+FRAUD	SU-SU	Fraud Permanent Reserve	I	ddahl	2002-09-30
+GAMES	SU-SU	Games	I	ddahl	2002-09-30
+GEN	SU-SU	General Collection	I	ddahl	2002-09-30
+INABS	SU-SU	Indexes and Abstracts	I	ddahl	2002-09-30
+INTFC	SU-SU	International Film Collection	I	ddahl	2002-09-30
+IPADA	SU-SU	iPad Air	I	ddahl	2002-09-30
+IPADK	SU-SU	iPad Pro Keyboard	I	ddahl	2002-09-30
+IPADM	SU-SU	iPad mini	I	ddahl	2002-09-30
+IPADP	SU-SU	iPad Pro	I	ddahl	2002-09-30
+IPDPP	SU-SU	iPad Pro Pencil	I	ddahl	2002-09-30
+IPOD	SU-SU	iPod Touch	I	ddahl	2002-09-30
+JUV	SU-SU	Juvenile	I	ddahl	2002-09-30
+KIT	SU-SU	Kit	I	ddahl	2002-09-30
+LAPTP	SU-SU	Laptop Computer	I	ddahl	2002-09-30
+LEISR	SU-SU	Leisure Reading	I	ddahl	2002-09-30
+LES	SU-SU	Lescallette Special Collection	I	ddahl	2002-09-30
+LESRF	SU-SU	Lescallette Reference Special Collection	I	ddahl	2002-09-30
+MCARD	SU-SU	Microcard	I	ddahl	2002-09-30
+MDDCS	SU-SU	Maryland State Documents Stacks	I	ddahl	2002-09-30
+MDDME	SU-SU	Maryland State Documents Media	I	ddahl	2002-09-30
+MDDOL	SU-SU	Maryland Documents Online	I	ddahl	2002-09-30
+MDL	SU-SU	Maryland Digital Library	I	ddahl	2002-09-30
+MDNBK	SU-SU	"Circulation Desk, Maryland Nonbook"	I	ddahl	2002-09-30
+MKRSP	SU-SU	Maker Space Collection	I	ddahl	2002-09-30
+MONCD	SU-SU	Monographic Material on CD	I	ddahl	2002-09-30
+MSOFT	SU-SU	Software	I	ddahl	2002-09-30
+MUSIC	SU-SU	Music CD Collection	I	ddahl	2002-09-30
+MWWW	SU-SU	Streaming Media	I	ddahl	2002-09-30
+NLWWW	SU-SU	World Wide Web	I	ddahl	2002-09-30
+OFFIC	SU-SU	Director's Office	I	ddahl	2002-09-30
+PER	SU-SU	Periodicals	I	ddahl	2002-09-30
+RECRD	SU-SU	Sound Recordings	I	ddahl	2002-09-30
+REF	SU-SU	Reference	I	ddahl	2002-09-30
+REFAC	SU-SU	Accounting Reference 	I	ddahl	2002-09-30
+REFAR	SU-SU	Reference Archives	I	ddahl	2002-09-30
+REFNB	SU-SU	"Circulation Desk, Reference Nonbook"	I	ddahl	2002-09-30
+REFRD	SU-SU	Ready Reference	I	ddahl	2002-09-30
+REFWW	SU-SU	Reference	I	ddahl	2002-09-30
+RESNB	SU-SU	Reserves Nonbook	I	ddahl	2002-09-30
+RESRV	SU-SU	Reserves	I	ddahl	2002-09-30
+SCORE	SU-SU	Music Scores	I	ddahl	2002-09-30
+STACK	SU-SU	Stacks	I	ddahl	2002-09-30
+STKNB	SU-SU	Stacks Nonbook	I	ddahl	2002-09-30
+STKRF	SU-SU	Stacks Reference	I	ddahl	2002-09-30
+STOR	SU-SU	Storage	I	ddahl	2002-09-30
+STORP	SU-SU	Storage Periodicals	I	ddahl	2002-09-30
+STORR	SU-SU	Storage Reference	I	ddahl	2002-09-30
+STORT	SU-SU	Storage Masters Thesis	I	ddahl	2002-09-30
+STORW	SU-SU	Storage	I	ddahl	2002-09-30
+STWWT	SU-SU	Stacks	I	ddahl	2002-09-30
+TABLT	SU-SU	Tablet	I	ddahl	2002-09-30
+UNKWN	SU-SU	Unknown	I	ddahl	2002-09-30
+USDCD	SU-SU	United States Documents CDROM	I	ddahl	2002-09-30
+USDDK	SU-SU	United States Documents Disk	I	ddahl	2002-09-30
+USDFL	SU-SU	United States Documents File	I	ddahl	2002-09-30
+USDNB	SU-SU	United States Documents Nonbook	I	ddahl	2002-09-30
+USDOL	SU-SU	United States Documents Online	I	ddahl	2002-09-30
+USDRF	SU-SU	United States Documents Reference	I	ddahl	2002-09-30
+USDST	SU-SU	United States Documents Stacks	I	ddahl	2002-09-30
+USDVD	SU-SU	United States Documents DVD	I	ddahl	2002-09-30
+VIDCA	SU-SU	Videocassette	I	ddahl	2002-09-30
+WORDS	SU-SU	Spoken Language CD Collection	I	ddahl	2002-09-30
+WWW	SU-SU	World Wide Web	I	ddahl	2002-09-30
+WWWBK	SU-SU	E-Books	I	ddahl	2002-09-30
+WWWJN	SU-SU	E-Journals	I	ddahl	2002-09-30
+WARD	SU-WM	Stacks	I	ddahl	2002-09-30
+GEN	TU-NE	General Collection	I	ddahl	2014-09-02
+ILL	TU-TI	Interlibrary Loan	I	ddahl	2002-09-30
+GEN	TU-TM	General Collection	I	ddahl	2002-09-30
+MEDAV	TU-TM	AV Pack 	I	ddahl	2002-09-30
+MEDBM	TU-TM	Book+Media 	I	ddahl	2002-09-30
+MEDCD	TU-TM	CD-ROM 	I	ddahl	2002-09-30
+MEDCS	TU-TM	Cassette 	I	ddahl	2002-09-30
+MEDDV	TU-TM	DVD 	I	ddahl	2002-09-30
+MEDFM	TU-TM	Film Reels 	I	ddahl	2002-09-30
+MEDIA	TU-TM	Media Resource Services	I	ddahl	2002-09-30
+MEDMC	TU-TM	Meriwether CD 	I	ddahl	2002-09-30
+MEDML	TU-TM	Record 	I	ddahl	2002-09-30
+MEDRC	TU-TM	Audio CD 	I	ddahl	2002-09-30
+MEDRD	TU-TM	Record 	I	ddahl	2002-09-30
+MEDRM	TU-TM	DVD-ROM 	I	ddahl	2002-09-30
+MEDRS	TU-TM	Record Set 	I	ddahl	2002-09-30
+MEDRV	TU-TM	Media Reserves 	I	ddahl	2002-09-30
+MEDSW	TU-TM	Software 	I	ddahl	2002-09-30
+MEDVC	TU-TM	VHS Video 	I	ddahl	2002-09-30
+RESMD	TU-TM	Faculty Media Reserves 	I	ddahl	2002-09-30
+ACQ	TU-TU	Acquisitions	I	ddahl	2002-09-30
+BHOVR	TU-TU	BHI Meyerhoff Collection - Oversize - 2nd floor	I	ddahl	2002-09-30
+BHPER	TU-TU	BHI Meyerhoff Collection - 2nd floor	I	ddahl	2002-09-30
+BHPOV	TU-TU	BHI Meyerhoff Collection - Oversize - 2nd floor	I	ddahl	2002-09-30
+BHREF	TU-TU	BHI Meyerhoff Collection - Reference - 2nd floor	I	ddahl	2002-09-30
+BHSTK	TU-TU	BHI Meyerhoff Collection - 2nd floor	I	ddahl	2002-09-30
+BIBL	TU-TU	BIBL	I	ddahl	2002-09-30
+CJ411	TU-TU	Legacy Collection - Juvenile - CK 411 - Ask at Circulation Desk for assistance	I	ddahl	2002-09-30
+CK411	TU-TU	Legacy Collection - CK 411 - Ask at Circulation Desk for assistance	I	ddahl	2002-09-30
+CLJUV	TU-TU	Closed Stacks Juvenile	I	ddahl	2002-09-30
+CLQTR	TU-TU	Closed Stacks Quarto	I	ddahl	2002-09-30
+CLSKF	TU-TU	Closed Stacks Folio	I	ddahl	2002-09-30
+CLSTK	TU-TU	Closed Stacks	I	ddahl	2002-09-30
+COFS	TU-TU	Course Study	I	ddahl	2002-09-30
+CTDPT	TU-TU	Cataloging Department	I	ddahl	2002-09-30
+CURMT	TU-TU	Curriculum Materials	I	ddahl	2002-09-30
+DCOLL	TU-TU	Cook Library Digital Collections	I	ddahl	2002-09-30
+EBLDD	TU-TU	E-Books	I	ddahl	2002-09-30
+EBOOK	TU-TU	E-Books	I	ddahl	2002-09-30
+EJOUR	TU-TU	E-Journals	I	ddahl	2002-09-30
+ESERL	TU-TU	E-Books	I	ddahl	2002-09-30
+GEN	TU-TU	General Collection	I	ddahl	2002-09-30
+GVDOC	TU-TU	Stacks	I	ddahl	2002-09-30
+GVSER	TU-TU	Stacks	I	ddahl	2002-09-30
+GVWWW	TU-TU	Online Government Documents	I	ddahl	2002-09-30
+JUV	TU-TU	Juvenile - 4th floor	I	ddahl	2002-09-30
+JUVBB	TU-TU	Juvenile Big Books - 4th floor	I	ddahl	2002-09-30
+JVBIO	TU-TU	Juvenile Biography - 4th floor	I	ddahl	2002-09-30
+JVFIC	TU-TU	Juvenile Fiction - 4th floor	I	ddahl	2002-09-30
+LRD	TU-TU	Leisure Reading	I	ddahl	2002-09-30
+MDL	TU-TU	Maryland Digital Library	I	ddahl	2002-09-30
+MFCHE	TU-TU	Microfiche	I	ddahl	2002-09-30
+MFILM	TU-TU	Microfilm	I	ddahl	2002-09-30
+NETWK	TU-TU	Network	I	ddahl	2002-09-30
+NLWWW	TU-TU	E-Books	I	ddahl	2002-09-30
+PER	TU-TU	Periodicals	I	ddahl	2002-09-30
+PERBD	TU-TU	Bound Periodicals	I	ddahl	2002-09-30
+PERCD	TU-TU	Periodicals CDROM	I	ddahl	2002-09-30
+PERCR	TU-TU	Periodicals Microcard	I	ddahl	2002-09-30
+PERMF	TU-TU	Periodicals Microfiche	I	ddahl	2002-09-30
+PERML	TU-TU	Periodicals Microfilm	I	ddahl	2002-09-30
+PERPT	TU-TU	Periodicals Department	I	ddahl	2002-09-30
+PERUB	TU-TU	Unbound Periodicals	I	ddahl	2002-09-30
+PRDMF	TU-TU	Government Documents Microfiche - 2nd floor	I	ddahl	2002-09-30
+PRDML	TU-TU	Periodicals Documents Microfilm	I	ddahl	2002-09-30
+RBC	TU-TU	RBC	I	ddahl	2002-09-30
+REF	TU-TU	Reference	I	ddahl	2002-09-30
+REFCD	TU-TU	Reference CDROM	I	ddahl	2002-09-30
+REFEB	TU-TU	Reference E-Books	I	ddahl	2002-09-30
+REFFL	TU-TU	Reference Folio	I	ddahl	2002-09-30
+REFMP	TU-TU	Reference Maps	I	ddahl	2002-09-30
+REFQT	TU-TU	Reference Quarto	I	ddahl	2002-09-30
+REFSW	TU-TU	Reference Software	I	ddahl	2002-09-30
+RES	TU-TU	Reserves 	I	ddahl	2002-09-30
+RESBK	TU-TU	Reserves 	I	ddahl	2002-09-30
+RESCD	TU-TU	Reserves CDROM 	I	ddahl	2002-09-30
+RESCL	TU-TU	Juvenile Award Books - Caldecott - 4th floor	I	ddahl	2002-09-30
+RESFL	TU-TU	Reserves Folio 	I	ddahl	2002-09-30
+RESKG	TU-TU	Juvenile Award Books - Coretta S. King - 4th floor	I	ddahl	2002-09-30
+RESNB	TU-TU	Juvenile Award Books - Newbery - 4th floor	I	ddahl	2002-09-30
+RESPC	TU-TU	Reserves Photocopy  	I	ddahl	2002-09-30
+RESQT	TU-TU	Reserves Quarto 	I	ddahl	2002-09-30
+SPBHO	TU-TU	Special Collections - BHI Meyerhoff - Oversize - 5th floor	I	ddahl	2002-09-30
+SPBHP	TU-TU	Special Collections - BHI Meyerhoff - 5th floor	I	ddahl	2002-09-30
+SPBHR	TU-TU	Special Collections - BHI Meyerhoff - Rare Books - 5th floor	I	ddahl	2002-09-30
+SPBHS	TU-TU	Special Collections - BHI Meyerhoff - 5th floor	I	ddahl	2002-09-30
+SPBHV	TU-TU	Special Collections - BHI Holocaust Survivor Video Testimonies - 5th floor	I	ddahl	2002-09-30
+SPBOR	TU-TU	Special Collections - BHI Meyerhoff - Rare Books - Oversize - 5th floor	I	ddahl	2002-09-30
+SPBRF	TU-TU	Special Collections - BHI Meyerhoff - Rare Folio Books - 5th floor	I	ddahl	2002-09-30
+SPBRM	TU-TU	Special Collections - BHI Meyerhoff - Rare Miniature Books - 5th floor	I	ddahl	2002-09-30
+SPCAL	TU-TU	Special Collections - TU Alumni Publications - 5th floor	I	ddahl	2002-09-30
+SPCAM	TU-TU	Special Collections - Archives & Manuscripts - 5th floor	I	ddahl	2002-09-30
+SPCAO	TU-TU	Special Collections - TU Alumni Publications - Oversize - 5th floor	I	ddahl	2002-09-30
+SPCFO	TU-TU	Special Collections - TU Faculty & Staff Publications - Oversize - 5th floor	I	ddahl	2002-09-30
+SPCFP	TU-TU	Special Collections - TU Faculty & Staff Publications - 5th floor	I	ddahl	2002-09-30
+SPCJV	TU-TU	Special Collections - Juvenile - 5th floor	I	ddahl	2002-09-30
+SPCMD	TU-TU	Special Collections - Media - 5th floor	I	ddahl	2002-09-30
+SPCOL	TU-TU	Special Collections - 5th floor	I	ddahl	2002-09-30
+SPCOV	TU-TU	Special Collections - Oversize - 5th floor	I	ddahl	2002-09-30
+SPCPB	TU-TU	Special Collections - 5th floor	I	ddahl	2002-09-30
+SPCRA	TU-TU	Special Collections - Rare Books - 5th floor	I	ddahl	2002-09-30
+SPCTO	TU-TU	Special Collections - Towson University Publications - Oversize - 5th floor	I	ddahl	2002-09-30
+SPCTU	TU-TU	Special Collections - Towson University Publications - 5th floor	I	ddahl	2002-09-30
+SPREF	TU-TU	Special Collections - Reference - 5th floor	I	ddahl	2002-09-30
+STACK	TU-TU	Stacks	I	ddahl	2002-09-30
+STAUD	TU-TU	Streaming Audio	I	ddahl	2002-09-30
+STC	TU-TU	STC	I	ddahl	2002-09-30
+STCDV	TU-TU	STC DVD	I	ddahl	2002-09-30
+STCJV	TU-TU	STC Juvenile	I	ddahl	2002-09-30
+STCQT	TU-TU	STC Quarto	I	ddahl	2002-09-30
+STCRC	TU-TU	STC Record	I	ddahl	2002-09-30
+STCVC	TU-TU	STC Video Cassette	I	ddahl	2002-09-30
+STKFL	TU-TU	Stacks Folio	I	ddahl	2002-09-30
+STKOV	TU-TU	Stacks - Oversize Books	I	ddahl	2002-09-30
+STKPE	TU-TU	Stacks	I	ddahl	2002-09-30
+STKPO	TU-TU	Stacks - Oversize Periodicals	I	ddahl	2002-09-30
+STKQT	TU-TU	Stacks Quarto	I	ddahl	2002-09-30
+STKRB	TU-TU	Stacks Resource Book	I	ddahl	2002-09-30
+STVID	TU-TU	Streaming Video	I	ddahl	2002-09-30
+TEXT	TU-TU	Textbook	I	ddahl	2002-09-30
+THSBH	TU-TU	BHU Theses/Dissertations: Ask at Archives Desk 	I	ddahl	2002-09-30
+THSTU	TU-TU	TU Theses/Dissertations: Ask at Archives Desk	I	ddahl	2002-09-30
+TWR	TU-TU	TOWSON ROOM	I	ddahl	2002-09-30
+TWRFC	TU-TU	TOWSON ROOM Fiction	I	ddahl	2002-09-30
+TWRFL	TU-TU	TOWSON ROOM Folio	I	ddahl	2002-09-30
+TWRJV	TU-TU	TOWSON ROOM Juvenile	I	ddahl	2002-09-30
+TWRQT	TU-TU	TOWSRM Quarto	I	ddahl	2002-09-30
+TWRRC	TU-TU	TOWSRM Record	I	ddahl	2002-09-30
+UNKWN	TU-TU	Unknown	I	ddahl	2002-09-30
+WWW	TU-TU	World Wide Web	I	ddahl	2002-09-30
+CIRC	UB-UB	Information Desk - 1st floor	I	ddahl	2002-09-30
+DOC	UB-UB	Government Documents - 4th floor	I	ddahl	2002-09-30
+DOCFM	UB-UB	Government Documents Microfilm	I	ddahl	2002-09-30
+DOCMF	UB-UB	Government Documents Microfiche	I	ddahl	2002-09-30
+DOCWW	UB-UB	Online Government Documents	I	ddahl	2002-09-30
+EBLDD	UB-UB	E-books	I	ddahl	2002-09-30
+GAME	UB-UB	Games - Lower level	I	ddahl	2002-09-30
+GAMEC	UB-UB	Game Consoles - Lower level	I	ddahl	2002-09-30
+GEN	UB-UB	General Collection	I	ddahl	2002-09-30
+LERE	UB-UB	Leisure Reading - 3rd floor	I	ddahl	2002-09-30
+MDL	UB-UB	Maryland Digital Library	I	ddahl	2002-09-30
+MFORM	UB-UB	Microforms - Off site storage	I	ddahl	2002-09-30
+MMFCH	UB-UB	Microfiche - Off site storage	I	ddahl	2002-09-30
+MMFLM	UB-UB	Microfilm - Off site storage	I	ddahl	2002-09-30
+NLWWW	UB-UB	E-books	I	ddahl	2002-09-30
+PER	UB-UB	Periodicals - 2nd floor	I	ddahl	2002-09-30
+PERB	UB-UB	Browsing Periodicals - 2nd floor	I	ddahl	2002-09-30
+PERE	UB-UB	E-journals	I	ddahl	2002-09-30
+POEMS	UB-UB	Poetry Library - LAP Building RM 303	I	ddahl	2002-09-30
+REF	UB-UB	Reference - 1st floor	I	ddahl	2002-09-30
+REFMF	UB-UB	Reference Microfiche	I	ddahl	2002-09-30
+REFWW	UB-UB	E-books	I	ddahl	2002-09-30
+RES	UB-UB	Reserves - 1st floor	I	ddahl	2002-09-30
+SPC	UB-UB	Special Collections	I	ddahl	2002-09-30
+SPC46	UB-UB	Special Collections LOC046	I	ddahl	2002-09-30
+SPCAR	UB-UB	Special Collections UBARCH	I	ddahl	2002-09-30
+SPCC	UB-UB	Special Collections	I	ddahl	2002-09-30
+SPCCF	UB-UB	Special Collections CWFOL	I	ddahl	2002-09-30
+SPCCG	UB-UB	Special Collections American Clan Gregor	I	ddahl	2002-09-30
+SPCCM	UB-UB	Special Collections CWM	I	ddahl	2002-09-30
+SPCCW	UB-UB	Special Collections CW	I	ddahl	2002-09-30
+SPCGF	UB-UB	Special Collections American Clan Gregor Folio	I	ddahl	2002-09-30
+SPCJ	UB-UB	Special Collections Jazz	I	ddahl	2002-09-30
+SPCJF	UB-UB	Special Collections Jazz Folio	I	ddahl	2002-09-30
+SPCJV	UB-UB	Special Collections Jazz Video	I	ddahl	2002-09-30
+SPCPL	UB-UB	Special Collections Pullen	I	ddahl	2002-09-30
+SPMFA	UB-UB	Special Collections MFA Collection	I	ddahl	2002-09-30
+STACK	UB-UB	Stacks - 4th floor	I	ddahl	2002-09-30
+STKFL	UB-UB	Stacks Folio - 4th floor	I	ddahl	2002-09-30
+STKMF	UB-UB	Stacks Microfiche	I	ddahl	2002-09-30
+STKWW	UB-UB	E-books	I	ddahl	2002-09-30
+STOR	UB-UB	Stored	I	ddahl	2002-09-30
+THES	UB-UB	Theses and Dissertations - 4th floor	I	ddahl	2002-09-30
+TS	UB-UB	Acquisition & Discovery Services - 4th floor	I	ddahl	2002-09-30
+UNKWN	UB-UB	Unknown	I	ddahl	2002-09-30
+VIDEO	UB-UB	Video - 2nd floor	I	ddahl	2002-09-30
+VIDST	UB-UB	Video - Streaming	I	ddahl	2002-09-30
+GOV	UC-EL	Government Documents Online	I	ddahl	2002-09-30
+NLWWW	UC-EL	eBook Collection (EBSCOhost)	I	ddahl	2002-09-30
+BEHAN	UC-LG	Neil Behan Special Collection	I	ddahl	2002-09-30
+DISS	UC-LG	Dissertations	I	ddahl	2002-09-30
+REF	UC-LG	Reference	I	ddahl	2002-09-30
+SER	UC-LG	Serials	I	ddahl	2002-09-30
+STACK	UC-LG	Stacks	I	ddahl	2002-09-30
+STAFF	UC-LG	Staff Collection	I	ddahl	2002-09-30
+MCNAM	UC-SF	Harriet McNamee Collection	I	ddahl	2002-09-30
+SHEP	UC-SF	Joseph Sheppard Collection	I	ddahl	2002-09-30
+STEEL	UC-SF	Robert Steel Collection	I	ddahl	2002-09-30
