@@ -70,10 +70,30 @@ def load_stage_1(job_info, input_directory, logger, table_mapping, session_creat
             reader = TsvFileReader(file_path)
             #writer = PrintWriter()
             writer = SqlAlchemyWriter(session, dwetl.Base.classes[table])
-            logger = None
+            stg_1_table_base_class = dwetl.Base.classes[table]
             processor = LoadMpfTsv(reader, writer, job_info, logger, error_writer)
 
             processor.execute()
+
+            # count number records read from TSV and how many written to stage 1 table
+            tsv_record_count = reader.record_count
+            stage_1_record_count = session.query(stg_1_table_base_class).\
+                filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id == job_info.prcsng_cycle_id).count()
+            print(f'\t\n{tsv_record_count} records in {file} TSV. \n{stage_1_record_count} records loaded to {table}.')
+            logger.info(f'\t\n{tsv_record_count} records in  {file} TSV. \n{stage_1_record_count} records loaded to {table}.')
+
+            loaded_record_count = loaded_record_count + stage_1_record_count
+
+    # exit DWETL if no records are loaded
+    print(f'\nTotal records loaded in stage 1: {loaded_record_count}\n')
+    logger.info(f'\nTotal records loaded in stage 1: {loaded_record_count}\n')
+    if loaded_record_count == 0:
+        print('\nNo records were loaded. Please check your input files and directory paths.')
+        print('\nQuitting DWETL.\n-----\n')
+        logger.error('\nNo records were loaded. Please check your input files and directory paths.\nQuitting DWETL.\n-----\n')
+        quit()
+
+
 
 '''
 main function for running script from the command line
