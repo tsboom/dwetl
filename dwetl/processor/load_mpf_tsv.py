@@ -29,6 +29,7 @@ class LoadMpfTsv(Processor):
         return usmai_mbr_lbry_cd
 
     def process_item(self, item):
+        # TODO: Not sure if we are using this usmai_mbr_lbry_cd or why we need it
         if 'lbry_entity_cd' in item:
             lbry_entity_cd = item['lbry_entity_cd']
             usmai_mbr_lbry_cd = LoadMpfTsv.usmai_mbr_lbry_cd(lbry_entity_cd)
