@@ -78,7 +78,8 @@ class TestBibRecEtl(unittest.TestCase):
                 "mai39_z13_data": "dw_stg_1_mai39_z13",
                 "mai01_z13u_data": "dw_stg_1_mai01_z13u",
                 "mai39_z13u_data": "dw_stg_1_mai39_z13u"
-                }
+                },
+            "MPF_TABLE_MAPPING": {}
             }
 
 

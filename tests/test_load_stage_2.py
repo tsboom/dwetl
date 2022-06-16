@@ -157,3 +157,25 @@ class TestLoadStage2(unittest.TestCase):
             stg_2_table_base_class = dwetl.Base.classes[stg_2_table]
             stg_2_count = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
             self.assertEqual(stg_1_count, stg_2_count)
+
+
+    def test_load_mpf_files(self):
+        #  testing loading stage 1 and 2 for MPF files:
+
+         with dwetl.test_database_session() as session:
+            stg_1_table = "dw_stg_1_mpf_item_prcs_status"
+            stg_2_table = "dw_stg_2_mpf_item_prcs_status"
+
+            prcsng_cycle_id = self.__class__.prcsng_cycle_id
+            stg_1_table_base_class = dwetl.Base.classes[stg_1_table]
+            stg_1_count = session.query(stg_1_table_base_class).filter(stg_1_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
+            # Test stage 1 incoming mpf file has 472 records
+
+            self.assertEqual(stg_1_count, 472)
+
+            # test if load stage 2 is loaded too
+            stg_2_table_base_class = dwetl.Base.classes[stg_2_table]
+            stg_2_count = session.query(stg_2_table_base_class).filter(stg_2_table_base_class.em_create_dw_prcsng_cycle_id==prcsng_cycle_id).count()
+            #self.assertEqual(stg_1_count, stg_2_count)
+            # z30 full is not loaded
+            self.assertEqual(stg_1_count, stg_2_count)

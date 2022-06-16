@@ -1,0 +1,20 @@
+mpf_member-library-dimension.txt
+usmai_mbr_lbry_cd	usmai_mbr_lbry_name	usmai_mbr_lbry_mbrshp_type_cd	db_operation_cd	lbry_staff_lms_user_id	db_operation_effective_date
+UC	University of Maryland Global Campus	USM	U	hhanson	2019-09-30
+LN	Loyola - Notre Dame Library	Affiliated	I	ddahl	2016-07-01
+MS	Morgan State University	Affiliated	I	ddahl	2002-07-01
+SM	St. Mary's College of Maryland	Affiliated	I	ddahl	2002-07-01
+BS	Bowie State University	USM	I	ddahl	1988-01-01
+CE	Center for Environmental Science	USM	I	ddahl	1988-01-01
+CS	Coppin State University	USM	I	ddahl	1988-01-01
+FS	Frostburg State University	USM	I	ddahl	1988-01-01
+SU	Salisbury University	USM	I	ddahl	1988-01-01
+TU	Towson University	USM	I	ddahl	1988-01-01
+UB	University of Baltimore	USM	I	ddahl	1988-01-01
+BL	University of Baltimore Law Library	USM	I	ddahl	1988-01-01
+HS	University of Maryland Health Sciences and Human Services Library	USM	I	ddahl	1988-01-01
+UC	University of Maryland University College	USM	I	ddahl	1988-01-01
+BC	"University of Maryland, Baltimore County (UMBC)"	USM	I	ddahl	1980-01-01
+CP	"University of Maryland, College Park"	USM	I	ddahl	1980-01-01
+ES	"University of Maryland, Eastern Shore"	USM	I	ddahl	1980-01-01
+ML	University of Maryland Law Library	USM	I	ddahl	1980-01-01
