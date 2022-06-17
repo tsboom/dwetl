@@ -18,6 +18,7 @@ SET row_security = off;
 
 
 DROP DATABASE IF EXISTS usmai_dw_etl_test;
+
 --
 -- Name: usmai_dw_etl_test; Type: DATABASE; Schema: -; Owner: usmai_dw
 --
@@ -841,6 +842,7 @@ WITH (autovacuum_enabled='true');
 
 
 ALTER TABLE public.dw_stg_1_mai39_z13u OWNER TO usmai_dw;
+
 
 --
 -- Name: dw_stg_1_mai50_z103_bib_full; Type: TABLE; Schema: public; Owner: usmai_dw
